@@ -1,0 +1,82 @@
+fileFormatVersion: 1
+guid: ffb3959b6c250464c91026cd534f8e68
+SubstanceImporter:
+  importerVersion: 1
+  materials:
+    metal_plate_008:
+      prototypeName: metal_plate_008
+      shaderName: 
+      inputs:
+        $outputsize:
+          scalar: 9 9 0 0
+        Light_Angle:
+          scalar: 0.125 0 0 0
+        Metal_Color:
+          scalar: 0.3725 0.3607 0.3529 0
+        Metal_Rust_Drips:
+          scalar: 1 0 0 0
+        Paint_Color:
+          scalar: 0.8352 0.4509 0.3568 0
+        Peeling:
+          scalar: 0.5 0 0 0
+        Rivet_Rust_Drips:
+          scalar: 1 0 0 0
+        Rust:
+          scalar: 0.5 0 0 0
+        Rust_Color:
+          scalar: 0.2863 0.1686 0.102 0
+        Relief_Balance:
+          scalar: 32 0 0 0
+        Normal:
+          scalar: 0.5 0 0 0
+        Emboss:
+          scalar: 0.5 0 0 0
+        Saturation:
+          scalar: 0.5 0 0 0
+        Luminosity:
+          scalar: 0.5 0 0 0
+      informations:
+        offset: 0 0
+        scale: 1 1
+        flags: 1
+      properties: {}
+      textures:
+        metal_plate_008_Diffuse:
+          alphaSource: 5
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        metal_plate_008_Specular:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        metal_plate_008_Normal:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        metal_plate_008_Bump:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        metal_plate_008_Displacement:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        metal_plate_008_Height:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        metal_plate_008_Gloss:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+      buildSettings:
+        '':
+          maxTextureSize: 512
+          textureFormat: 0

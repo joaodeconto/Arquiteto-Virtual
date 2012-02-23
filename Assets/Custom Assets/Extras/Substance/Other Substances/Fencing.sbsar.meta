@@ -1,0 +1,74 @@
+fileFormatVersion: 1
+guid: 548aab56b81481e4782658f339c3b939
+SubstanceImporter:
+  importerVersion: 1
+  materials:
+    Fencing:
+      prototypeName: Fencing
+      shaderName: 
+      inputs:
+        $outputsize:
+          scalar: 9 9 0 0
+        Grid_Density:
+          scalar: 0.2 0 0 0
+        Pattern_Morph:
+          scalar: 0.2 0 0 0
+        Wire_Thickness:
+          scalar: 0.1 0 0 0
+        Relief_Balance:
+          scalar: 32 0 0 0
+        Normal:
+          scalar: 0.5 0 0 0
+        Emboss:
+          scalar: 5 0 0 0
+        Angle:
+          scalar: 0.125 0 0 0
+        Saturation:
+          scalar: 0.5 0 0 0
+        Luminosity:
+          scalar: 0.5 0 0 0
+      informations:
+        offset: 0 0
+        scale: 1 1
+        flags: 1
+      properties: {}
+      textures:
+        Fencing_Diffuse:
+          alphaSource: 5
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Fencing_Specular:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Fencing_Normal:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Fencing_Bump:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Fencing_Displacement:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Fencing_Height:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Fencing_Opacity:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+      buildSettings:
+        '':
+          maxTextureSize: 512
+          textureFormat: 0

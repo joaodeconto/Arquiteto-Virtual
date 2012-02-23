@@ -1,0 +1,76 @@
+fileFormatVersion: 1
+guid: 036bc13753e6f3d46b2072367e431230
+SubstanceImporter:
+  importerVersion: 1
+  materials:
+    metal_floor_003:
+      prototypeName: metal_floor_003
+      shaderName: 
+      inputs:
+        $outputsize:
+          scalar: 9 9 0 0
+        Base_Color:
+          scalar: 0.4352 0.4117 0.3921 0
+        Drips_Angle:
+          scalar: 0.75 0 0 0
+        Light_Angle:
+          scalar: 0.125 0 0 0
+        Patterns_Scale:
+          scalar: 6 0 0 0
+        Rust_leaks:
+          scalar: 0.5 0 0 0
+        Relief_Balance:
+          scalar: 32 0 0 0
+        Normal:
+          scalar: 0.5 0 0 0
+        Emboss:
+          scalar: 0.5 0 0 0
+        Saturation:
+          scalar: 0.5 0 0 0
+        Luminosity:
+          scalar: 0.5 0 0 0
+      informations:
+        offset: 0 0
+        scale: 1 1
+        flags: 1
+      properties: {}
+      textures:
+        metal_floor_003_Diffuse:
+          alphaSource: 5
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        metal_floor_003_Specular:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        metal_floor_003_Normal:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        metal_floor_003_Bump:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        metal_floor_003_Displacement:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        metal_floor_003_Height:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        metal_floor_003_Gloss:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+      buildSettings:
+        '':
+          maxTextureSize: 512
+          textureFormat: 0

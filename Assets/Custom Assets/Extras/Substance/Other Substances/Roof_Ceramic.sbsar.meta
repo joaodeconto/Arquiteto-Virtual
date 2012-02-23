@@ -1,0 +1,77 @@
+fileFormatVersion: 1
+guid: f8ff91a8f6b325548bfe33b48c207466
+SubstanceImporter:
+  importerVersion: 1
+  materials:
+    Roof_Ceramic:
+      prototypeName: Roof_Ceramic
+      shaderName: 
+      inputs:
+        $outputsize:
+          scalar: 9 9 0 0
+        Dirt:
+          scalar: 0.25 0 0 0
+        Dirt_Spread:
+          scalar: 0.25 0 0 0
+        Shadow:
+          scalar: 0.5 0 0 0
+        Shadow_Blur:
+          scalar: 5 0 0 0
+        Tile_Overlap:
+          scalar: 0.2 0 0 0
+        Tile_X:
+          scalar: 8 0 0 0
+        Tile_Y:
+          scalar: 8 0 0 0
+        Relief_Balance:
+          scalar: 32 0 0 0
+        Normal:
+          scalar: 0.5 0 0 0
+        Emboss:
+          scalar: 5 0 0 0
+        Angle:
+          scalar: 0.125 0 0 0
+        Saturation:
+          scalar: 0.5 0 0 0
+        Luminosity:
+          scalar: 0.5 0 0 0
+      informations:
+        offset: 0 0
+        scale: 1 1
+        flags: 1
+      properties: {}
+      textures:
+        Roof_Ceramic_Diffuse:
+          alphaSource: 5
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Roof_Ceramic_Specular:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Roof_Ceramic_Normal:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Roof_Ceramic_Bump:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Roof_Ceramic_Displacement:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Roof_Ceramic_Height:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+      buildSettings:
+        '':
+          maxTextureSize: 512
+          textureFormat: 0

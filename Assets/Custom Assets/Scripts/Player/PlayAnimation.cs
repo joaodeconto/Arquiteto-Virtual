@@ -1,0 +1,48 @@
+using UnityEngine;
+using System.Collections;
+
+public class PlayAnimation : MonoBehaviour {
+
+	// Use this for initialization
+	void Start () {
+	
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		if (Input.GetMouseButtonUp(0)) {
+			Transform cam = GetComponentInChildren<Camera>().transform;
+			RaycastHit hit;
+			if (Physics.Raycast(cam.position, cam.forward, out hit)) {
+				if (hit.transform.tag == "Movel" ||
+					hit.transform.tag == "MovelSelecionado") {
+					
+					InformacoesMovel movel = hit.transform.GetComponentInChildren<InformacoesMovel>();
+					Animation[] animacoes = hit.transform.GetComponentsInChildren<Animation>();
+					foreach (Animation animacao in animacoes) {
+						if (animacao.isPlaying)
+							return;
+					}
+					foreach (Animation animacao in animacoes) {
+						if (animacao.clip != null) {
+							if (movel.portas == Portas.FECHADAS) {
+								animacao[animacao.clip.name].speed = 1;
+								animacao[animacao.clip.name].time = 0;
+								animacao.Play();
+							}
+							else {
+								animacao[animacao.clip.name].speed = -1;
+								animacao[animacao.clip.name].time = animacao[animacao.clip.name].length;
+								animacao.Play();
+							}
+						}
+					}
+					if (movel.portas == Portas.FECHADAS)
+						movel.portas = Portas.ABERTAS;
+					else
+						movel.portas = Portas.FECHADAS;
+				}
+			}
+		}
+	}
+}

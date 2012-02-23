@@ -1,0 +1,67 @@
+fileFormatVersion: 1
+guid: 0c7a4f0bf75f1894c865a2d572262d77
+SubstanceImporter:
+  importerVersion: 1
+  materials:
+    Kevlar_Carbon_Fiber:
+      prototypeName: Kevlar_Carbon_Fiber
+      shaderName: 
+      inputs:
+        $outputsize:
+          scalar: 9 9 0 0
+        Rounding:
+          scalar: 0.75 0 0 0
+        Stripes_Spec:
+          scalar: 0.5 0 0 0
+        Relief_Balance:
+          scalar: 32 0 0 0
+        Normal:
+          scalar: 0.5 0 0 0
+        Emboss:
+          scalar: 5 0 0 0
+        Angle:
+          scalar: 0.125 0 0 0
+        Saturation:
+          scalar: 0.5 0 0 0
+        Luminosity:
+          scalar: 0.5 0 0 0
+      informations:
+        offset: 0 0
+        scale: 1 1
+        flags: 1
+      properties: {}
+      textures:
+        Kevlar_Carbon_Fiber_Diffuse:
+          alphaSource: 5
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Kevlar_Carbon_Fiber_Specular:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Kevlar_Carbon_Fiber_Normal:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Kevlar_Carbon_Fiber_Bump:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Kevlar_Carbon_Fiber_Displacement:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Kevlar_Carbon_Fiber_Height:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+      buildSettings:
+        '':
+          maxTextureSize: 512
+          textureFormat: 0

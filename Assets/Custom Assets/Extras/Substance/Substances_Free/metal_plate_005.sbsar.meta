@@ -1,0 +1,78 @@
+fileFormatVersion: 1
+guid: 4adc798f0c2c6b94faa597c6c74e8438
+SubstanceImporter:
+  importerVersion: 1
+  materials:
+    metal_plate_005:
+      prototypeName: metal_plate_005
+      shaderName: 
+      inputs:
+        $outputsize:
+          scalar: 9 9 0 0
+        Copper_Color:
+          scalar: 0.52 0.28 0.2 0
+        Dirtiness:
+          scalar: 0.3 0 0 0
+        Holes_Amount:
+          scalar: 0.5 0 0 0
+        Light_Angle:
+          scalar: 0.125 0 0 0
+        Tiles_Amount:
+          scalar: 1 0 0 0
+        Verdigris_Color:
+          scalar: 0.28 0.45 0.4 0
+        Relief_Balance:
+          scalar: 32 0 0 0
+        Normal:
+          scalar: 0.5 0 0 0
+        Emboss:
+          scalar: 0.5 0 0 0
+        Saturation:
+          scalar: 0.5 0 0 0
+        Luminosity:
+          scalar: 0.5 0 0 0
+      informations:
+        offset: 0 0
+        scale: 1 1
+        flags: 1
+      properties: {}
+      textures:
+        metal_plate_005_Diffuse:
+          alphaSource: 5
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        metal_plate_005_Specular:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        metal_plate_005_Normal:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        metal_plate_005_Bump:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        metal_plate_005_Displacement:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        metal_plate_005_Height:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        metal_plate_005_Gloss:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+      buildSettings:
+        '':
+          maxTextureSize: 512
+          textureFormat: 0

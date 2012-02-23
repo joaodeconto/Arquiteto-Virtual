@@ -1,0 +1,70 @@
+fileFormatVersion: 1
+guid: fe6d897456c8b7440b5484807e3b472c
+SubstanceImporter:
+  importerVersion: 1
+  materials:
+    Dry_Ground_01:
+      prototypeName: Dry_Ground_01
+      shaderName: 
+      inputs:
+        $outputsize:
+          scalar: 9 9 0 0
+        Age:
+          scalar: 1 0 0 0
+        Crack_Size:
+          scalar: 0.5 0 0 0
+        Relief_Balance:
+          scalar: 32 0 0 0
+        Normal:
+          scalar: 0.5 0 0 0
+        Emboss:
+          scalar: 5 0 0 0
+        Angle:
+          scalar: 0.125 0 0 0
+        Saturation:
+          scalar: 0.5 0 0 0
+        Luminosity:
+          scalar: 0.5 0 0 0
+      informations:
+        offset: 0 0
+        scale: 1 1
+        flags: 1
+      properties:
+        _Shininess: 0.03
+        _Color: 1 1 1 1
+        _SpecColor: 0.5 0.5 0.5 1
+      textures:
+        Dry_Ground_01_Diffuse:
+          alphaSource: 5
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Dry_Ground_01_Specular:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Dry_Ground_01_Normal:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Dry_Ground_01_Bump:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Dry_Ground_01_Displacement:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Dry_Ground_01_Height:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+      buildSettings:
+        '':
+          maxTextureSize: 512
+          textureFormat: 0

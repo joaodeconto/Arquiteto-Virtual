@@ -1,0 +1,69 @@
+fileFormatVersion: 1
+guid: 34d2def1ca0db2e42a90172d23ede940
+SubstanceImporter:
+  importerVersion: 1
+  materials:
+    Wood_Planks_01:
+      prototypeName: Wood_Planks_01
+      shaderName: 
+      inputs:
+        $outputsize:
+          scalar: 9 9 0 0
+        Boards:
+          scalar: 5 0 0 0
+        Sharpen:
+          scalar: 0.5 0 0 0
+        Wood_Grain:
+          scalar: 0.5 0 0 0
+        Relief_Balance:
+          scalar: 32 0 0 0
+        Normal:
+          scalar: 0.5 0 0 0
+        Emboss:
+          scalar: 5 0 0 0
+        Angle:
+          scalar: 0.125 0 0 0
+        Saturation:
+          scalar: 0.5 0 0 0
+        Luminosity:
+          scalar: 0.5 0 0 0
+      informations:
+        offset: 0 0
+        scale: 10 10
+        flags: 1
+      properties: {}
+      textures:
+        Wood_Planks_01_Diffuse:
+          alphaSource: 5
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Wood_Planks_01_Specular:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Wood_Planks_01_Normal:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Wood_Planks_01_Bump:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Wood_Planks_01_Displacement:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Wood_Planks_01_Height:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+      buildSettings:
+        '':
+          maxTextureSize: 512
+          textureFormat: 0

@@ -1,0 +1,75 @@
+fileFormatVersion: 1
+guid: 8234330868e0bf448bcae130a4da125e
+SubstanceImporter:
+  importerVersion: 1
+  materials:
+    Grass_01:
+      prototypeName: Grass_01
+      shaderName: 
+      inputs:
+        $outputsize:
+          scalar: 9 9 0 0
+        Blade_Lenght:
+          scalar: 0.5 0 0 0
+        Blade_Orientation:
+          scalar: 0.125 0 0 0
+        Blade_Randomness:
+          scalar: 0.2 0 0 0
+        Blade_Width:
+          scalar: 1 0 0 0
+        Grass_Amount:
+          scalar: 0.65 0 0 0
+        Grass_Tiling:
+          scalar: 2 0 0 0
+        Relief_Balance:
+          scalar: 32 0 0 0
+        Normal:
+          scalar: 0.5 0 0 0
+        Emboss:
+          scalar: 5 0 0 0
+        Angle:
+          scalar: 0.125 0 0 0
+        Saturation:
+          scalar: 0.5 0 0 0
+        Luminosity:
+          scalar: 0.5 0 0 0
+      informations:
+        offset: 0 0
+        scale: 1 1
+        flags: 1
+      properties: {}
+      textures:
+        Grass_01_Diffuse:
+          alphaSource: 5
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Grass_01_Specular:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Grass_01_Normal:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Grass_01_Bump:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Grass_01_Displacement:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Grass_01_Height:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+      buildSettings:
+        '':
+          maxTextureSize: 512
+          textureFormat: 0

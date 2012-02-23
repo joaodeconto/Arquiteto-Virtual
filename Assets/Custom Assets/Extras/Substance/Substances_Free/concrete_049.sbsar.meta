@@ -1,0 +1,81 @@
+fileFormatVersion: 1
+guid: 367e5b5841f63fa48a02e2e5c102b385
+SubstanceImporter:
+  importerVersion: 1
+  materials:
+    concrete_049:
+      prototypeName: concrete_049
+      shaderName: 
+      inputs:
+        $outputsize:
+          scalar: 9 9 0 0
+        Cracks:
+          scalar: 0.5 0 0 0
+        Dirtiness:
+          scalar: 0.5 0 0 0
+        First_Layer_Color:
+          scalar: 0.6941 0.6039 0.4902 0
+        Light_Angle:
+          scalar: 0.125 0 0 0
+        Metal_Frame_Color:
+          scalar: 0.1176 0.0784 0.0196 0
+        Peeling:
+          scalar: 0.25 0 0 0
+        Rust:
+          scalar: 1 0 0 0
+        Rust_Color:
+          scalar: 0.3882 0.2006 0.0627 0
+        Second_Layer_Color:
+          scalar: 0.3922 0.3412 0.2667 0
+        Top_Frame:
+          scalar: 1 0 0 0
+        Relief_Balance:
+          scalar: 32 0 0 0
+        Normal:
+          scalar: 0.5 0 0 0
+        Emboss:
+          scalar: 0.5 0 0 0
+        Saturation:
+          scalar: 0.5 0 0 0
+        Luminosity:
+          scalar: 0.5 0 0 0
+      informations:
+        offset: 0 0
+        scale: 1 1
+        flags: 1
+      properties: {}
+      textures:
+        concrete_049_Diffuse:
+          alphaSource: 5
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        concrete_049_Specular:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        concrete_049_Normal:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        concrete_049_Bump:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        concrete_049_Displacement:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        concrete_049_Height:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+      buildSettings:
+        '':
+          maxTextureSize: 512
+          textureFormat: 0

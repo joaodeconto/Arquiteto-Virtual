@@ -1,0 +1,67 @@
+fileFormatVersion: 1
+guid: c3894485b37f9e04595b0c2f7642979a
+SubstanceImporter:
+  importerVersion: 1
+  materials:
+    Marble_Wall_01:
+      prototypeName: Marble_Wall_01
+      shaderName: 
+      inputs:
+        $outputsize:
+          scalar: 9 9 0 0
+        Tile_X:
+          scalar: 3 0 0 0
+        Tile_Y:
+          scalar: 6 0 0 0
+        Relief_Balance:
+          scalar: 32 0 0 0
+        Normal:
+          scalar: 0.5 0 0 0
+        Emboss:
+          scalar: 5 0 0 0
+        Angle:
+          scalar: 0.125 0 0 0
+        Saturation:
+          scalar: 0.5 0 0 0
+        Luminosity:
+          scalar: 0.5 0 0 0
+      informations:
+        offset: 0 0
+        scale: 1 1
+        flags: 1
+      properties: {}
+      textures:
+        Marble_Wall_01_Diffuse:
+          alphaSource: 5
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Marble_Wall_01_Specular:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Marble_Wall_01_Normal:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Marble_Wall_01_Bump:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Marble_Wall_01_Displacement:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Marble_Wall_01_Height:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+      buildSettings:
+        '':
+          maxTextureSize: 512
+          textureFormat: 0

@@ -1,0 +1,10 @@
+//HEADER_EXPORT_MEL
+startAttrPreset("substance"); 
+blendAttr "dyn_Diffuse_Sharpen" 0.362;
+blendAttr "dyn_Normal_Strength" 5.469;
+blendAttr "dyn_Normal_Fine_Smoothing" 0;
+blendAttr "dyn_Normal_Large_Smoothing" 0.728;
+blendAttr "dyn_Specular_Sharpen" 1;
+blendAttr "dyn_Diffuse_Neutralize" 1;
+blendAttr "dyn_Normal_Shape_Recognition" 0.771;
+endAttrPreset();

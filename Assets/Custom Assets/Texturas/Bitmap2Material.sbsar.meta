@@ -1,0 +1,110 @@
+fileFormatVersion: 1
+guid: a724c522ed57bc94d80e444ffa82498c
+SubstanceImporter:
+  importerVersion: 1
+  materials:
+    Bitmap2Material:
+      prototypeName: Bitmap2Material
+      shaderName: Bumped Specular
+      inputs:
+        Input:
+          texture: {fileID: 2800000, guid: 2ff1f96b3552dbf42a9ca2e87c650a04, type: 1}
+        $randomseed:
+          scalar: 7767 0 0 0
+        $outputsize:
+          scalar: 8 8 0 0
+        Ratio:
+          scalar: 1 1 0 0
+        Diffuse_Sharpen:
+          scalar: 0.1 0 0 0
+        Normal_Strength:
+          scalar: 5 0 0 0
+        Normal_Fine_Smoothing:
+          scalar: 0.5 0 0 0
+        Normal_Large_Smoothing:
+          scalar: 0.7 0 0 0
+        Normal_Shape_Recognition:
+          scalar: 1 0 0 0
+        Recognition_Angle:
+          scalar: 0.125 0 0 0
+        Specular_Diffuse_Influence:
+          scalar: 0.2 0 0 0
+        Specular_Saturation:
+          scalar: 0.5 0 0 0
+        Specular_Sharpen:
+          scalar: 0.1 0 0 0
+        Specular_Levels_In:
+          scalar: 0.3 0.6 0.81 0
+        Specular_Levels_Out:
+          scalar: 0 1 0 0
+        HeightMap_Balance:
+          scalar: 32 0 0 0
+        HeightMap_AutoLevel:
+          scalar: 1 0 0 0
+        HeightMap_Levels:
+          scalar: 0 1 0 0
+        AO_Spread:
+          scalar: 0.5 0 0 0
+        AO_Light_Angle:
+          scalar: 0.125 0 0 0
+      informations:
+        offset: 0 0
+        scale: 1 1
+        flags: 1
+      properties:
+        _Shininess: 0.03
+        _Color: 1 1 1 1
+        _SpecColor: 0.5 0.5 0.5 1
+        _MainTex:
+          texture: {fileID: -86491109, guid: a724c522ed57bc94d80e444ffa82498c, type: 1}
+          offset: 0 0
+          scale: 1 1
+        _BumpMap:
+          texture: {fileID: -1577246934, guid: a724c522ed57bc94d80e444ffa82498c, type: 1}
+          offset: 0 0
+          scale: 1 1
+      textures:
+        Bitmap2Material_Diffuse:
+          alphaSource: 5
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Bitmap2Material_Specular:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Bitmap2Material_Normal:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Bitmap2Material_Bump:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Bitmap2Material_Displacement:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Bitmap2Material_Height:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Bitmap2Material_Opacity:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Bitmap2Material_AmbientOcclusion:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+      buildSettings:
+        '':
+          maxTextureSize: 512
+          textureFormat: 0

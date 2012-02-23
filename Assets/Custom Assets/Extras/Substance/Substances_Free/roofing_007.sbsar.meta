@@ -1,0 +1,76 @@
+fileFormatVersion: 1
+guid: d70a26c13e3818642ba62774443962e2
+SubstanceImporter:
+  importerVersion: 1
+  materials:
+    roofing_007:
+      prototypeName: roofing_007
+      shaderName: 
+      inputs:
+        $outputsize:
+          scalar: 9 9 0 0
+        Color:
+          scalar: 0.6118 0.5451 0.4275 0
+        Dirtiness:
+          scalar: 1 0 0 0
+        Light_Angle:
+          scalar: 0.125 0 0 0
+        Roof_Border:
+          scalar: 1 0 0 0
+        Tiles_Amount:
+          scalar: 15 18 0 0
+        Relief_Balance:
+          scalar: 32 0 0 0
+        Normal:
+          scalar: 0.5 0 0 0
+        Emboss:
+          scalar: 0.5 0 0 0
+        Saturation:
+          scalar: 0.5 0 0 0
+        Luminosity:
+          scalar: 0.5 0 0 0
+      informations:
+        offset: 0 0
+        scale: 1 1
+        flags: 1
+      properties: {}
+      textures:
+        roofing_007_Diffuse:
+          alphaSource: 5
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        roofing_007_Specular:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        roofing_007_Normal:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        roofing_007_Bump:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        roofing_007_Displacement:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        roofing_007_Height:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        roofing_007_Opacity:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+      buildSettings:
+        '':
+          maxTextureSize: 512
+          textureFormat: 0

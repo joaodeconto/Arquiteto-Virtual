@@ -1,0 +1,134 @@
+fileFormatVersion: 1
+guid: a45225b7120e9c24c903e3d2ba482b6d
+SubstanceImporter:
+  importerVersion: 1
+  materials:
+    Ceramic_01:
+      prototypeName: Ceramic_01
+      shaderName: Bumped Specular
+      inputs:
+        $outputsize:
+          scalar: 9 9 0 0
+        Tile_X:
+          scalar: 4 0 0 0
+        Tile_Y:
+          scalar: 4 0 0 0
+        Relief_Balance:
+          scalar: 18.6735 0 0 0
+        Normal:
+          scalar: 0.290488 0 0 0
+        Angle:
+          scalar: 0.125 0 0 0
+        Hue_Shift:
+          scalar: 0.81491 0 0 0
+        Saturation:
+          scalar: 0.181234 0 0 0
+        Luminosity:
+          scalar: 0.628535 0 0 0
+      informations:
+        offset: 0 0
+        scale: 1 1
+        flags: 1
+      properties:
+        _Shininess: 0.078125
+        _EmissionLM: 0
+        _Color: 1 1 1 1
+        _SpecColor: 0.5 0.5 0.5 1
+        _Emission: 0 0 0 0
+      textures:
+        Ceramic_01_Diffuse:
+          alphaSource: 5
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Ceramic_01_Specular:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Ceramic_01_Normal:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Ceramic_01_Bump:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Ceramic_01_Displacement:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Ceramic_01_Height:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+      buildSettings:
+        '':
+          maxTextureSize: 512
+          textureFormat: 0
+    Ceramic_01_1:
+      prototypeName: Ceramic_01
+      shaderName: 
+      inputs:
+        $outputsize:
+          scalar: 9 9 0 0
+        Tile_X:
+          scalar: 4 0 0 0
+        Tile_Y:
+          scalar: 4 0 0 0
+        Relief_Balance:
+          scalar: 32 0 0 0
+        Normal:
+          scalar: 0.5 0 0 0
+        Emboss:
+          scalar: 5 0 0 0
+        Angle:
+          scalar: 0.125 0 0 0
+        Saturation:
+          scalar: 0.5 0 0 0
+        Luminosity:
+          scalar: 0.5 0 0 0
+      informations:
+        offset: 0 0
+        scale: 1 1
+        flags: 1
+      properties: {}
+      textures:
+        Ceramic_01_1_Diffuse:
+          alphaSource: 5
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Ceramic_01_1_Specular:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Ceramic_01_1_Normal:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Ceramic_01_1_Bump:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Ceramic_01_1_Displacement:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Ceramic_01_1_Height:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+      buildSettings:
+        '':
+          maxTextureSize: 512
+          textureFormat: 0

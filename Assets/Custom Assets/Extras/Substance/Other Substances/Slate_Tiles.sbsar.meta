@@ -1,0 +1,71 @@
+fileFormatVersion: 1
+guid: a4c0c6193dbb72c44b599bb9b56bc039
+SubstanceImporter:
+  importerVersion: 1
+  materials:
+    Slate_Tiles:
+      prototypeName: Slate_Tiles
+      shaderName: 
+      inputs:
+        $outputsize:
+          scalar: 9 9 0 0
+        Age:
+          scalar: 0.5 0 0 0
+        Tile_X:
+          scalar: 8 0 0 0
+        Tile_Y:
+          scalar: 16 0 0 0
+        Relief_Balance:
+          scalar: 32 0 0 0
+        Normal:
+          scalar: 0.5 0 0 0
+        Emboss:
+          scalar: 5 0 0 0
+        Angle:
+          scalar: 0.125 0 0 0
+        Hue_Shift:
+          scalar: 0.5 0 0 0
+        Saturation:
+          scalar: 0.5 0 0 0
+        Luminosity:
+          scalar: 0.5 0 0 0
+      informations:
+        offset: 0 0
+        scale: 1 1
+        flags: 1
+      properties: {}
+      textures:
+        Slate_Tiles_Diffuse:
+          alphaSource: 5
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Slate_Tiles_Specular:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Slate_Tiles_Normal:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Slate_Tiles_Bump:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Slate_Tiles_Displacement:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Slate_Tiles_Height:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+      buildSettings:
+        '':
+          maxTextureSize: 512
+          textureFormat: 0

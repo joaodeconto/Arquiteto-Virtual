@@ -1,0 +1,71 @@
+fileFormatVersion: 1
+guid: c9a9a98ff0022594b91acb052ef7a97c
+SubstanceImporter:
+  importerVersion: 1
+  materials:
+    Checker:
+      prototypeName: Checker
+      shaderName: 
+      inputs:
+        $outputsize:
+          scalar: 9 9 0 0
+        Disparities:
+          scalar: 0.5 0 0 0
+        Scratches:
+          scalar: 0.5 0 0 0
+        Swipe_Stains:
+          scalar: 0.5 0 0 0
+        Tile_Density:
+          scalar: 8 0 0 0
+        Relief_Balance:
+          scalar: 32 0 0 0
+        Normal:
+          scalar: 0.5 0 0 0
+        Emboss:
+          scalar: 5 0 0 0
+        Angle:
+          scalar: 0.125 0 0 0
+        Saturation:
+          scalar: 0.5 0 0 0
+        Luminosity:
+          scalar: 0.5 0 0 0
+      informations:
+        offset: 0 0
+        scale: 1 1
+        flags: 1
+      properties: {}
+      textures:
+        Checker_Diffuse:
+          alphaSource: 5
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Checker_Specular:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Checker_Normal:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Checker_Bump:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Checker_Displacement:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Checker_Height:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+      buildSettings:
+        '':
+          maxTextureSize: 512
+          textureFormat: 0

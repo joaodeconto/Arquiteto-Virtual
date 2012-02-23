@@ -1,0 +1,36 @@
+fileFormatVersion: 1
+guid: e43f440ca7a19f24aaa0ce4833f696ff
+SubstanceImporter:
+  importerVersion: 1
+  materials:
+    Electric_Liquid:
+      prototypeName: Electric_Liquid
+      shaderName: 
+      inputs:
+        $outputsize:
+          scalar: 9 9 0 0
+        Glow_Intensity:
+          scalar: 0.5 0 0 0
+        Glow_Size:
+          scalar: 1 0 0 0
+        Liquid_Color:
+          scalar: 0.34 0.5 0.74 0
+        Saturation:
+          scalar: 0.5 0 0 0
+        Luminosity:
+          scalar: 0.5 0 0 0
+      informations:
+        offset: 0 0
+        scale: 1 1
+        flags: 1
+      properties: {}
+      textures:
+        Electric_Liquid_Emissive:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+      buildSettings:
+        '':
+          maxTextureSize: 512
+          textureFormat: 0

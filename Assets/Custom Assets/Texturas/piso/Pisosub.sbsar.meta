@@ -1,0 +1,50 @@
+fileFormatVersion: 1
+guid: 585267b58317f53488f76ab41648eddf
+SubstanceImporter:
+  importerVersion: 1
+  materials:
+    Bitmap_to_Material_Advanced:
+      prototypeName: Bitmap_to_Material_Advanced
+      shaderName: 
+      inputs:
+        $randomseed:
+          scalar: 5886 0 0 0
+        $outputsize:
+          scalar: 8 8 0 0
+        $pixelsize:
+          scalar: 1 1 0 0
+      informations:
+        offset: 0 0
+        scale: 1 1
+        flags: 1
+      properties: {}
+      textures:
+        Bitmap_to_Material_Advanced_Height:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Bitmap_to_Material_Advanced_Normal:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Bitmap_to_Material_Advanced_Diffuse:
+          alphaSource: 1
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Bitmap_to_Material_Advanced_Specular:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+        Bitmap_to_Material_Advanced_Ambient:
+          alphaSource: 0
+          filterMode: 1
+          aniso: 1
+          wrapMode: 0
+      buildSettings:
+        '':
+          maxTextureSize: 512
+          textureFormat: 0

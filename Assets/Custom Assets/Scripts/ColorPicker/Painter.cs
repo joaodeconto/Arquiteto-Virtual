@@ -51,7 +51,7 @@ public class Painter: MonoBehaviour {
 	
 	void  OnGUI (){
 		GUI.depth = 1;
-		if (Input.GetMouseButtonDown(0)) {
+		if (MouseUtils.MouseButtonDoubleClickDown(0, 0.3f)) {
 			if (!MouseUtils.MouseClickedInArea(guiCatalogo.wndAccordMain) &&
 			    !MouseUtils.MouseClickedInArea(guiCamera.wndOpenMenu) &&
 			    !MouseUtils.MouseClickedInArea(guiDescription.window)) {

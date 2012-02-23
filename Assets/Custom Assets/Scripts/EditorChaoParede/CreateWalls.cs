@@ -113,8 +113,10 @@ public class CreateWalls : MonoBehaviour
 	void Update ()
 	{
 		if (currentGuiMenu == MethodEditionGUI) {
-			CreateGround ();
-			DestroyOneBlockGround ();
+			if (!MouseUtils.MouseClickedInArea(wndBackground)) {
+				CreateGround ();
+				DestroyOneBlockGround ();
+			}
 			MovCamera ();
 		}
 	}
@@ -534,17 +536,22 @@ public class CreateWalls : MonoBehaviour
 				    (direcoesAceitas[0] && diagonaisAceitas[1]) || 
 				    (diagonaisAceitas[0] && direcoesAceitas[1])) {
 					bParede95 = true;
-					Vector3 posicaoQuina;
-					GameObject novaQuina;
+					Vector3 posicaoQuina, posicaoQuinaVazio;
+					GameObject novaQuina, quinaVazio;
 					posicaoQuina = piso.transform.position + new Vector3 (0.5f, 0, 0.5f);
+					posicaoQuinaVazio = posicaoQuina + new Vector3 (-0.25f, 0, -0.25f);
 					if (!SamePosition("Parede", posicaoQuina)) {
 						novaQuina = Instantiate (quina, posicaoQuina, quina.transform.rotation) as GameObject;
+						quinaVazio = new GameObject("QuinaVazio");
+						quinaVazio.transform.position = posicaoQuinaVazio;
 						if (diagonaisAceitas[0] && direcoesAceitas[1]) {
 							novaQuina.transform.parent = parentParedes.parentWallRight;
+							quinaVazio.transform.parent = parentParedes.parentWallRight;
 							novaQuina.transform.eulerAngles += new Vector3 (0, 270.0f, 0);
 						}
 						else {
 							novaQuina.transform.parent = parentParedes.parentWallFront;
+							quinaVazio.transform.parent = parentParedes.parentWallFront;
 							novaQuina.transform.eulerAngles += new Vector3 (0, 180.0f, 0);
 						}
 					}
@@ -556,17 +563,22 @@ public class CreateWalls : MonoBehaviour
 				    (direcoesAceitas[0] && diagonaisAceitas[2]) || 
 				    (diagonaisAceitas[0] && direcoesAceitas[2])) {
 					bParede95 = true;
-					Vector3 posicaoQuina;
-					GameObject novaQuina;
+					Vector3 posicaoQuina, posicaoQuinaVazio;
+					GameObject novaQuina, quinaVazio;
 					posicaoQuina = piso.transform.position + new Vector3 (-0.5f, 0, 0.5f);
+					posicaoQuinaVazio = posicaoQuina + new Vector3 (0.25f, 0, -0.25f);
 					if (!SamePosition("Parede", posicaoQuina)) {
 						novaQuina = Instantiate (quina, posicaoQuina, quina.transform.rotation) as GameObject;
+						quinaVazio = new GameObject("QuinaVazio");
+						quinaVazio.transform.position = posicaoQuinaVazio;
 						if (diagonaisAceitas[0] && direcoesAceitas[2]) {
 							novaQuina.transform.parent = parentParedes.parentWallLeft;
+							quinaVazio.transform.parent = parentParedes.parentWallLeft;
 							novaQuina.transform.eulerAngles += new Vector3 (0, 90.0f, 0);
 						}
 						else {
 							novaQuina.transform.parent = parentParedes.parentWallFront;
+							quinaVazio.transform.parent = parentParedes.parentWallFront;
 							novaQuina.transform.eulerAngles += new Vector3 (0, 180.0f, 0);
 						}
 					}
@@ -578,17 +590,22 @@ public class CreateWalls : MonoBehaviour
 				    (direcoesAceitas[3] && diagonaisAceitas[1]) || 
 				    (diagonaisAceitas[3] && direcoesAceitas[1])) {
 					bParede95 = true;
-					Vector3 posicaoQuina;
-					GameObject novaQuina;
+					Vector3 posicaoQuina, posicaoQuinaVazio;
+					GameObject novaQuina, quinaVazio;
 					posicaoQuina = piso.transform.position + new Vector3 (0.5f, 0, -0.5f);
+					posicaoQuinaVazio = posicaoQuina + new Vector3 (-0.25f, 0, 0.25f);
 					if (!SamePosition("Parede", posicaoQuina)) {
 						novaQuina = Instantiate (quina, posicaoQuina, quina.transform.rotation) as GameObject;
+						quinaVazio = new GameObject("QuinaVazio");
+						quinaVazio.transform.position = posicaoQuinaVazio;
 						if (diagonaisAceitas[3] && direcoesAceitas[1]) {
 							novaQuina.transform.parent = parentParedes.parentWallRight;
+							quinaVazio.transform.parent = parentParedes.parentWallRight;
 							novaQuina.transform.eulerAngles += new Vector3 (0, 270.0f, 0);
 						}
 						else {
 							novaQuina.transform.parent = parentParedes.parentWallBack;
+							quinaVazio.transform.parent = parentParedes.parentWallBack;
 							novaQuina.transform.eulerAngles = new Vector3 (0, 0, 0);
 						}
 					}
@@ -600,17 +617,22 @@ public class CreateWalls : MonoBehaviour
 				    (direcoesAceitas[3] && diagonaisAceitas[2]) || 
 				    (diagonaisAceitas[3] && direcoesAceitas[2])) {
 					bParede95 = true;
-					Vector3 posicaoQuina;
-					GameObject novaQuina;
+					Vector3 posicaoQuina, posicaoQuinaVazio;
+					GameObject novaQuina, quinaVazio;
 					posicaoQuina = piso.transform.position + new Vector3 (-0.5f, 0, -0.5f);
+					posicaoQuinaVazio = posicaoQuina + new Vector3 (0.25f, 0, 0.25f);
 					if (!SamePosition("Parede", posicaoQuina)) {
 						novaQuina = Instantiate (quina, posicaoQuina, quina.transform.rotation) as GameObject;
+						quinaVazio = new GameObject("QuinaVazio");
+						quinaVazio.transform.position = posicaoQuinaVazio;
 						if (diagonaisAceitas[3] && direcoesAceitas[2]) {
 							novaQuina.transform.parent = parentParedes.parentWallLeft;
+							quinaVazio.transform.parent = parentParedes.parentWallLeft;
 							novaQuina.transform.eulerAngles += new Vector3 (0, 90.0f, 0);
 						}
 						else {
 							novaQuina.transform.parent = parentParedes.parentWallBack;
+							quinaVazio.transform.parent = parentParedes.parentWallBack;
 							novaQuina.transform.eulerAngles = new Vector3 (0, 0, 0);
 						}
 					}
@@ -792,13 +814,17 @@ public class CreateWalls : MonoBehaviour
 								if (hit.transform.tag != "Chao") {
 									if (direction == Vector3.right) {
 										CreateCinchona(	piso.transform.position + new Vector3 (0.5f, 0, 0.5f),
+														new Vector3 (0.5f, 0, 0.5f),
 							               				parentParedes.parentWallRight,
-							               				new Vector3 (0, 90, 0));
+							               				new Vector3 (0, 90, 0),
+														true);
 									}
 									if (direction == Vector3.left) {
 										CreateCinchona(	piso.transform.position + new Vector3 (-0.5f, 0, 0.5f),
+														new Vector3 (-0.5f, 0, 0.5f),
 														parentParedes.parentWallLeft,
-														new Vector3 (0, 0, 0));
+														new Vector3 (0, 0, 0),
+														true);
 									}
 								}
 							}
@@ -815,16 +841,22 @@ public class CreateWalls : MonoBehaviour
 								                    out hit)) {
 								if (hit.transform.tag != "Chao") {
 									CreateCinchona(	piso.transform.position + new Vector3 (-0.5f, 0, 0.5f),
+													new Vector3 (-0.5f, 0, -0.5f),
 													parentParedes.parentWallRight,
-													new Vector3 (0, 270, 0));
+													new Vector3 (0, 270, 0),
+													false);
 									CreateCinchona(	piso.transform.position + new Vector3 (0.5f, 0, 0.5f),
-							               				parentParedes.parentWallRight,
-							               				new Vector3 (0, (int)90, 0));
+													new Vector3 (0.5f, 0, 0.5f),
+						               				parentParedes.parentWallRight,
+						               				new Vector3 (0, (int)90, 0),
+													true);
 								}
 								else {
 									CreateCinchona(	piso.transform.position + new Vector3 (-0.5f, 0, 0.5f),
+													new Vector3 (-0.5f, 0, -0.5f),
 													parentParedes.parentWallRight,
-													new Vector3 (0, 270, 0));
+													new Vector3 (0, 270, 0),
+													false);
 								}
 							}
 						}
@@ -838,16 +870,22 @@ public class CreateWalls : MonoBehaviour
 								                    out hit)) {
 								if (hit.transform.tag != "Chao") {
 									CreateCinchona(	piso.transform.position + new Vector3 (0.5f, 0, 0.5f),
+													new Vector3 (0.5f, 0, -0.5f),
 						               				parentParedes.parentWallLeft,
-						               				new Vector3 (0, 180, 0));
+						               				new Vector3 (0, 180, 0),
+													false);
 									CreateCinchona(	piso.transform.position + new Vector3 (-0.5f, 0, 0.5f),
+													new Vector3 (-0.5f, 0, 0.5f),
 													parentParedes.parentWallLeft,
-													new Vector3 (0, 0, 0));
+													new Vector3 (0, 0, 0),
+													true);
 								}
 								else {
 									CreateCinchona(	piso.transform.position + new Vector3 (0.5f, 0, 0.5f),
+													new Vector3 (0.5f, 0, -0.5f),
 						               				parentParedes.parentWallLeft,
-						               				new Vector3 (0, 180, 0));
+						               				new Vector3 (0, 180, 0),
+													false);
 								}
 							}
 						}
@@ -855,11 +893,15 @@ public class CreateWalls : MonoBehaviour
 					else if (frontalDirectionsAccepted.Count == 1) {
 						if (frontalDirectionsAccepted[0] == Vector3.forward) {
 							CreateCinchona(piso.transform.position + new Vector3 (0.5f, 0, 0.5f),
+										   new Vector3 (0.5f, 0, -0.5f),
 							               parentParedes.parentWallFront,
-							               new Vector3 (0, 180, 0));
+							               new Vector3 (0, 180, 0),
+										   false);
 							CreateCinchona(piso.transform.position + new Vector3 (-0.5f, 0, 0.5f),
+										   new Vector3 (-0.5f, 0, -0.5f),
 							               parentParedes.parentWallFront,
-							               new Vector3 (0, 270, 0));
+							               new Vector3 (0, 270, 0),
+										   false);
 						}
 					}
 				}
@@ -891,13 +933,17 @@ public class CreateWalls : MonoBehaviour
 								if (hit.transform.tag != "Chao") {
 									if (direction == Vector3.right) {
 										CreateCinchona(	piso.transform.position + new Vector3 (0.5f, 0, -0.5f),
+														new Vector3 (0.5f, 0, -0.5f),
 							               				parentParedes.parentWallRight,
-							               				new Vector3 (0, 180, 0));
+							               				new Vector3 (0, 180, 0),
+														true);
 									}
 									if (direction == Vector3.left) {
 										CreateCinchona(	piso.transform.position + new Vector3 (-0.5f, 0, -0.5f),
+														new Vector3 (-0.5f, 0, -0.5f),
 														parentParedes.parentWallLeft,
-														new Vector3 (0, 270, 0));
+														new Vector3 (0, 270, 0),
+														true);
 									}
 								}
 							}
@@ -914,16 +960,22 @@ public class CreateWalls : MonoBehaviour
 								                    out hit)) {
 								if (hit.transform.tag != "Chao") {
 									CreateCinchona(	piso.transform.position + new Vector3 (-0.5f, 0, -0.5f),
+													new Vector3 (-0.5f, 0, 0.5f),
 													parentParedes.parentWallRight,
-													new Vector3 (0, 0, 0));
+													new Vector3 (0, 0, 0),
+													false);
 									CreateCinchona(	piso.transform.position + new Vector3 (0.5f, 0, -0.5f),
-							               				parentParedes.parentWallRight,
-							               				new Vector3 (0, 180, 0));
+													new Vector3 (0.5f, 0, -0.5f),
+						               				parentParedes.parentWallRight,
+						               				new Vector3 (0, 180, 0),
+													true);
 								}
 								else {
 									CreateCinchona(	piso.transform.position + new Vector3 (-0.5f, 0, -0.5f),
+													new Vector3 (-0.5f, 0, 0.5f),
 													parentParedes.parentWallRight,
-													new Vector3 (0, 0, 0));
+													new Vector3 (0, 0, 0),
+													false);
 								}
 							}
 						}
@@ -937,16 +989,22 @@ public class CreateWalls : MonoBehaviour
 								                    out hit)) {
 								if (hit.transform.tag != "Chao") {
 									CreateCinchona(	piso.transform.position + new Vector3 (0.5f, 0, -0.5f),
+													new Vector3 (0.5f, 0, 0.5f),
 						               				parentParedes.parentWallLeft,
-						               				new Vector3 (0, 90, 0));
+						               				new Vector3 (0, 90, 0),
+													false);
 									CreateCinchona(	piso.transform.position + new Vector3 (-0.5f, 0, -0.5f),
+													new Vector3 (-0.5f, 0, -0.5f),
 													parentParedes.parentWallLeft,
-													new Vector3 (0, 270, 0));
+													new Vector3 (0, 270, 0),
+													true);
 								}
 								else {
 									CreateCinchona(	piso.transform.position + new Vector3 (0.5f, 0, -0.5f),
+													new Vector3 (0.5f, 0, 0.5f),
 						               				parentParedes.parentWallLeft,
-						               				new Vector3 (0, 90, 0));
+						               				new Vector3 (0, 90, 0),
+													false);
 								}
 							}
 						}
@@ -954,11 +1012,15 @@ public class CreateWalls : MonoBehaviour
 					else if (backwardDirectionsAccepted.Count == 1) {
 						if (backwardDirectionsAccepted[0] == Vector3.back) {
 							CreateCinchona(piso.transform.position + new Vector3 (0.5f, 0, -0.5f),
+							               new Vector3 (0.5f, 0, 0.5f),
 							               parentParedes.parentWallBack,
-							               new Vector3 (0, 90, 0));
+							               new Vector3 (0, 90, 0),
+										   false);
 							CreateCinchona(piso.transform.position + new Vector3 (-0.5f, 0, -0.5f),
+							               new Vector3 (-0.5f, 0, 0.5f),
 							               parentParedes.parentWallBack,
-							               new Vector3 (0, 0, 0));
+							               new Vector3 (0, 0, 0),
+										   false);
 						}
 					}
 				}
@@ -1358,7 +1420,7 @@ public class CreateWalls : MonoBehaviour
 	void CombineMesh (Transform target, bool createCollider) {
 		MeshFilter[] meshFilters = target.GetComponentsInChildren<MeshFilter>();
 		CombineInstance[] combine = new CombineInstance[meshFilters.Length];
-		for (int i = 0; i < meshFilters.Length; i++){
+		for (int i = 0; i != meshFilters.Length; i++){
 			combine[i].mesh = meshFilters[i].sharedMesh;
 			combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
 		}
@@ -1389,9 +1451,15 @@ public class CreateWalls : MonoBehaviour
 		}
 	}
 	
-	void CreateCinchona (Vector3 position, Transform side, Vector3 eulerAngles) {
+	void CreateCinchona (Vector3 position, Vector3 sum, Transform side, Vector3 eulerAngles, bool createEmptyCinchona) {
 		if (!SamePosition("Quina", position)) {
 			GameObject novaQuina;
+			if (createEmptyCinchona) {
+				GameObject qf = new GameObject("QuinaFantasma");
+				qf.transform.position = position + (-(sum / 8));
+				qf.tag = "QuinaVazia";
+				qf.transform.parent = side;
+			}
 			novaQuina = Instantiate (quina, position, quina.transform.rotation) as GameObject;
 			novaQuina.transform.parent = side;
 			novaQuina.transform.eulerAngles = eulerAngles;

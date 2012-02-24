@@ -15,14 +15,14 @@ public class Painter: MonoBehaviour {
 	private Rect rectWindow, rectReset, rectGetAll, rectDropper;
 	private Rect[] rectRGBA, rectFieldRGBA;
 	private Color lastColor;
-	private bool dropperBool, dropperBoolLast;
+	private bool dropperBool, dropperBoolLast, clicked;
 	private string nameObject;
 	private GuiCatalogo guiCatalogo;
 	private GuiCamera guiCamera;
 	private GuiDescription guiDescription;
 	
 	void Start () {
-		ScreenUtils.Initialize(1024, 768);
+		//ScreenUtils.Initialize(1024, 768);
 		
 		rectWindow = ScreenUtils.ScaledRect(200, 24, 120, 320);
 		//não precisa usar ScreenUtils, dentro da função isso já está sendo feito
@@ -51,11 +51,11 @@ public class Painter: MonoBehaviour {
 	
 	void  OnGUI (){
 		GUI.depth = 1;
-		if (MouseUtils.MouseButtonDoubleClickDown(0, 0.3f)) {
-			if (!MouseUtils.MouseClickedInArea(guiCatalogo.wndAccordMain) &&
-			    !MouseUtils.MouseClickedInArea(guiCamera.wndOpenMenu) &&
-			    !MouseUtils.MouseClickedInArea(guiDescription.window)) {
-				if (dropperBool) {
+		if (!MouseUtils.MouseClickedInArea(guiCatalogo.wndAccordMain) &&
+		    !MouseUtils.MouseClickedInArea(guiCamera.wndOpenMenu) &&
+		    !MouseUtils.MouseClickedInArea(guiDescription.window)) {
+			if (dropperBool) {
+				if (Input.GetMouseButtonUp(0)) {
 					if (!MouseUtils.MouseClickedInArea(rectWindow)) {
 						Ray ray = transform.parent.camera.ScreenPointToRay(Input.mousePosition);
 						RaycastHit hit;
@@ -70,9 +70,9 @@ public class Painter: MonoBehaviour {
 						dropperBoolLast = true;
 					}
 				}
-				else {
-					Ray ray = transform.parent.camera.ScreenPointToRay(Input.mousePosition);
-					RaycastHit hit;
+			}
+			else {
+				if (MouseUtils.MouseButtonDoubleClickUp(0, 0.3f)) {
 					if (!dropperBoolLast) {
 						bool breaker = false;
 						if (render != null) {
@@ -80,6 +80,8 @@ public class Painter: MonoBehaviour {
 						}
 						
 						if (!breaker) {
+							Ray ray = transform.parent.camera.ScreenPointToRay(Input.mousePosition);
+							RaycastHit hit;
 							if (Physics.Raycast(ray, out hit)) {
 								foreach (string tag in tags) {
 									if (hit.transform.tag == tag) {
@@ -100,17 +102,34 @@ public class Painter: MonoBehaviour {
 										else if (hit.transform.name == "ParedesRight") {
 											nameObject = "Parade Direito";
 										}
+										StartCoroutine(WaitClick(0.3f));
 										return;
 									}
 								}
+								render = null;
+							}
+						}
+					} else dropperBoolLast = false;
+				}
+				if (Input.GetMouseButtonUp(0) &&
+					!clicked) {
+					if (!dropperBoolLast) {
+						bool breaker = false;
+						if (render != null) {
+							if (MouseUtils.MouseClickedInArea(rectWindow)) breaker = true;
+						}
+						
+						if (!breaker) {
+							Ray ray = transform.parent.camera.ScreenPointToRay(Input.mousePosition);
+							RaycastHit hit;
+							if (Physics.Raycast(ray, out hit)) {
 								render = null;
 							}
 							if (!Physics.Raycast(ray, out hit)) {
 								render = null;
 							}
 						}
-					}
-					else dropperBoolLast = false;
+					} else dropperBoolLast = false;
 				}
 			}
 		}
@@ -167,5 +186,11 @@ public class Painter: MonoBehaviour {
 			}
 		}
 		GUI.depth = 0;
+	}
+	
+	IEnumerator WaitClick(float timer) {
+		clicked = true;
+		yield return new WaitForSeconds(timer);
+		clicked = false;
 	}
 }

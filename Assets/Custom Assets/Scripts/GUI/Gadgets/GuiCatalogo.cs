@@ -22,20 +22,19 @@ public class Slider {
 public class GuiCatalogo : MonoBehaviour, GuiBase {
 	
 	#region Common
-	public GUIStyle bgStyle;
+	public GUIStyle bgStyle;//Editor
 	#endregion
 	
 	#region Accordion Vars
 	public Rect wndAccordMain {get; private set;}
 	private Rect wndAccordOption;
 	private Rect btnAccordion;
-	public GUIStyle[] accordionStyle;
+	public GUIStyle[] accordionStyle;//Editor
 	#endregion
 	
 	#region Ground, walls  and Ceil Menu
 	public Texture2D[] groundTextures;//Editor
 	public Texture2D[] ceilTextures;  //Editor
-	public Texture2D colorPicker;	//Editor
 	
 	private Rect wndFrameTextures;
 	
@@ -43,13 +42,6 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 	private Vector2 scrollPosGround = Vector2.zero;
 	private Rect btnUpGround;
 	private Rect btnDownGround;
-	
-	//! Tweaks list.
-	public ArrayList TweaksList { get; private set; }
-	//! Color pickers for the color tweaks
-	public Dictionary<String,ColorPicker> ColorPickers { get; private set; }
-	
-	private List<Material> subsMaterials;//FIXME de Material para Material 
 	
 	private Rect rListCeil;
 	private Vector2 scrollPosCeil = Vector2.zero;
@@ -85,21 +77,32 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 	bool showItems = false;
 	#endregion
 	
+	#region Extras Menu
+	private Rect rListExtras;
+	private Vector2 scrollPosExtras;
+	private Rect scrollFraExtras;
+	private List<GameObject> extrasObjects;
+	#endregion
+	
 	#region Troca de portas
-	public GUIStyle LeftDoorStyle;
-	public GUIStyle RightDoorStyle;
+	public GUIStyle LeftDoorStyle; //Editor
+	public GUIStyle RightDoorStyle; //Editor
 	#endregion
 	
 	#region Main Light Menu
 	public Transform transformLight; //Editor
 	public GUIStyle lightSliderStyle; //Editor
 	public GUIStyle lightThumbStyle; //Editor
-	public Slider verticalValue;
-	public Slider horizontalValue;
-	public GameObject lampPoint, lampSpot;
+	public Slider verticalValue; //Editor
+	public Slider horizontalValue; //Editor
+	public GameObject lampPoint, lampSpot; //Editor
 	
 	private float rotationLightValueX;
 	private float rotationLightValueY;
+	#endregion
+	
+	#region Extras
+	public GameObject extras;
 	#endregion
 	
 	#region Fonts
@@ -118,21 +121,21 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 	#endregion
 	
 	#region Accordion Content Vars
-	public PrefabsTop[] prefabsTop;
-	public Material	materialTampo;
-	public Texture2D radioSelect;
+	public PrefabsTop[] prefabsTop; //Editor
+	public Material	materialTampo; //Editor
+	public Texture2D radioSelect; //Editor
 	Rect wndAccordionSelectedOption;
 	float wndAccordionHeight = 400f;
 	int id = 3, lastId = 3;
 	#endregion
 	
 	#region Styles
-	public GUIStyle hScrollStyle;
-	public GUIStyle vScrollStyle;
-	public GUIStyle[] randomStyles;
-	public GUIStyle btnUpStyle;
-	public GUIStyle btnDownStyle;
-	public GUIStyle accordionBtnStyle;
+	public GUIStyle hScrollStyle; //Editor
+	public GUIStyle vScrollStyle; //Editor
+	public GUIStyle[] randomStyles; //Editor
+	public GUIStyle btnUpStyle; //Editor
+	public GUIStyle btnDownStyle; //Editor
+	public GUIStyle accordionBtnStyle; //Editor
 	#endregion
 	
 	#region shared vars
@@ -161,17 +164,12 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 		btnUpGround	  = ScreenUtils.ScaledRect(0f, 155f, 32f, 32f);
 		btnDownGround = ScreenUtils.ScaledRect(23f, 400f, 25f, 25f);
 		
-		subsMaterials = new List<Material>();
-		
 		rotationLightValueX = transformLight.transform.localEulerAngles.x;
 		rotationLightValueY = transformLight.transform.localEulerAngles.y;
 		
 		labelSubAccordion = GuiFont.GetFont("Trebuchet12");
 		labelSubAccordion.alignment = TextAnchor.UpperCenter;
 		labelSubAccordion.wordWrap = true;
-		
-		TweaksList = new ArrayList ();	
-		ColorPickers = new Dictionary<String,ColorPicker>();
 		
 		labels = new string[5];
 		labels[0] = I18n.t("menu-catalogo-accordion-textura");	
@@ -215,29 +213,22 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 			    foreach(Category category in Line.CurrentLine.categories){
 					Tooltip.AddDynamicTip(category.Name);
 			    }
+				
+				extrasObjects = new List<GameObject>();
+				foreach (Transform ex in extras.transform) {
+					ex.GetComponent<InformacoesMovel>().Categoria = "";
+					extrasObjects.Add(ex.gameObject);
+					Tooltip.AddDynamicTip(ex.GetComponent<InformacoesMovel>().NomeP);
+				}
 			    
 				nCategories	  = Line.CurrentLine.categories.Count;
 				rListCategory = ScreenUtils.ScaledRect(0, 0, 64, 64 * nCategories);
 				rListTampo  = ScreenUtils.ScaledRect(0, 0, 90, 90 * 4);
 				rListGround = ScreenUtils.ScaledRect(0, 0, 90, 64 * groundTextures.Length);
+				rListExtras = ScreenUtils.ScaledRect(0, 0, 64, 64 * extrasObjects.Count);
 				
 				//Pegar a camera mãe com os materiais que devem ser mudados
 				GameObject cameraMae = gameObject.transform.parent.gameObject;
-				
-				subsMaterials.Add(cameraMae.GetComponent<Camera3d>().paredeMaterial);
-				subsMaterials.Add(cameraMae.GetComponent<Camera3d>().paredeTransparent);
-										
-				GameObject[] ceilings  = GameObject.FindGameObjectsWithTag("TetoParent");
-								 
-				foreach(GameObject ceiling in ceilings ){
-					
-					Material subsMaterial = ceiling.GetComponentInChildren<Renderer>().material;//.sharedMaterials[0] as Material;
-					
-					subsMaterials.Add(subsMaterial);
-					
-				}
-					
-				UpdateSubstance();
 				
 				wasInitialized = true;
 			}
@@ -576,6 +567,45 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 						}
 						break;
 					#endregion
+				case 4 : //Extras
+					#region Extras			
+						scrollFraExtras = new Rect(0, wndAccordOption.y + (btnAccordion.height * id) + ScreenUtils.ScaleHeight(116), 
+				                         ScreenUtils.ScaleWidth(100), wndAccordOption.height - ScreenUtils.ScaleHeight(144));
+						scrollPosExtras = GUI.BeginScrollView(scrollFraExtras, scrollPosExtras, rListExtras, hScrollStyle, btnUpStyle);
+						
+							for (int i = 0; i != extrasObjects.Count; ++i){
+						
+								if(GUI.Button(new Rect(	wndAccordOption.x + ScreenUtils.ScaleWidth(24), 
+														ScreenUtils.ScaleHeight(64) * i,
+							                 			ScreenUtils.ScaleWidth(64), 
+							                 			ScreenUtils.ScaleHeight(64)), 
+							                 				new GUIContent(	extrasObjects[i].GetComponent<InformacoesMovel>().Imagem, 
+							                 								extrasObjects[i].GetComponent<InformacoesMovel>().NomeP))){
+									SomClique.Play();
+									InstanceNewObject(extrasObjects[i]);
+								}
+							}
+					
+						GUI.EndScrollView ();
+						
+						if (scrollPosExtras.y > 0) {
+							if (GUI.Button(new Rect(	wndAccordOption.x + ScreenUtils.ScaleWidth(40), 
+						                                      		wndAccordOption.y + (btnAccordion.height * (id + 1)) + ScreenUtils.ScaleHeight(56),
+					                 								ScreenUtils.ScaleWidth(accordionStyle[1].normal.background.width), 
+						                                      		ScreenUtils.ScaleHeight(accordionStyle[1].normal.background.height)), "", accordionStyle[1]))
+								scrollPosExtras.y -= ScreenUtils.ScaleHeight(64);
+						}
+				
+						if (scrollPosExtras.y + ScreenUtils.ScaleHeight(64) * 4 < rListExtras.height) {
+							if (GUI.Button(new Rect(	wndAccordOption.x + ScreenUtils.ScaleWidth(40), 
+						                                      		wndAccordOption.y - (btnAccordion.height * (1 - id)) + wndAccordOption.height,
+					                 								ScreenUtils.ScaleWidth(accordionStyle[2].normal.background.width), 
+						                                      		ScreenUtils.ScaleHeight(accordionStyle[2].normal.background.height)), "", 
+						               								accordionStyle[2]))
+								scrollPosExtras.y += ScreenUtils.ScaleHeight(64);
+						}
+						break;
+					#endregion
 				default : //Problemas Oõ
 					Debug.LogError("Erro!");
 					break;
@@ -744,89 +774,6 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 	}
 	#endregion
 
-	#region Substance
-	
-	public Color colorPickerColor;
-	private void UpdateSubstance()
-	{
-		// Here we build 3 lists
-		// One with the color pickers (one for each color tweak in the substance)
-		// One with the ProceduralPropertyDescription of the tweaks we want to tweak.
-		// And one with the current gui value of each tweaks (except those for the color tweaks). 
-		// This list is necessary since we don't want to synch the ui with the substance computing.
-		TweaksList.Clear();
-		ColorPickers.Clear();
-		
-		ColorPickers.Add("parede-teto",new ColorPicker(transform.parent.gameObject.GetComponent<Camera3d>().paredeMaterial.color ,colorPicker,this.gameObject,"parede-teto",false,false));
-//		Debug.LogError(colorPickerColor);
-		//TODO make exposes and so on
-		/*
-		foreach (Material sub in GameObject.FindGameObjectWithTag("Parede").GetComponentInChildren<Renderer>().sharedMaterials)
-		{
-			Debug.LogError("Chegou 1");
-			
-			// We add every tweak to our lists unless they are already in it 
-			// to avoid GUI duplication if multiple substances share the same tweaks.
-			foreach( ProceduralPropertyDescription tweak in sub.GetProceduralPropertyDescriptions())
-			{
-				Debug.LogError("Chegou 2");
-				
-				if(tweak.type == ProceduralPropertyType.Color3 || tweak.type == ProceduralPropertyType.Color4 && !colorPickers.ContainsKey(tweak.name))
-				{
-					colorPickers.Add(tweak.name,new ColorPicker(sub.GetProceduralColor(tweak.name),colorPicker,this.gameObject,tweak.name));
-				} 
-		  		if(tweak.name != "$normalformat" && tweak.name != "$time" && !TweaksList.Contains(tweak.name))
-				{
-					bool alreadyThere = false;
-					foreach (ProceduralPropertyDescription tweak2 in TweaksList)
-						if (tweak2.name == tweak.name)
-						{
-							alreadyThere = true;
-						}
-					if (!alreadyThere)	
-					{
-						TweaksList.Add(tweak);
-					}
-				}
-			}
-	  	}
-	  	*/
-	}
-	   
-	//! Callback called each time a color picker is updated
-	private void ColorPickerColorChange(ColorPicker color_picker)
-	{
-		foreach(Material substance in subsMaterials){
-		
-			Color color = color_picker.getColorRGB();
-			
-			if(Regex.Match(substance.name, @"Teto.+",RegexOptions.IgnoreCase).Success){
-			
-				color.r *= 0.6f;
-				color.g *= 0.6f;
-				color.b *= 0.6f;
-				
-				Debug.LogWarning("color_picker.getColorRGB(): " + color_picker.getColorRGB());
-				Debug.LogWarning("color: " + color);
-			}
-			
-			substance.color = color;
-			
-			if(substance.GetColor("maincolor") != null){
-				substance.SetColor("maincolor", color);
-			}
-			
-			//TODO implement exposes on substance
-			/*
-			if (substance.HasProceduralProperty(color_picker.getTweakName()))
-			{
-				substance.SetProceduralColor(color_picker.getTweakName(),color_picker.getColorRGB());
-				substance.RebuildTextures();
-			}*/
-		}	
-	}
-	#endregion
-	
 	#region GuiBase implementation
 	public Rect[] GetWindows()
 	{

@@ -105,9 +105,9 @@ public class Configuration : MonoBehaviour {
 		
 		//Cor cena		
 		XmlNode wallCeilingNode	= xmlDoc.CreateElement ("parede-teto");
-
-		ColorPicker wallCeilingColorPicker = GameObject.Find("GUI").GetComponent<GuiCatalogo>().ColorPickers["parede-teto"];	
-		Color wallCeilingColor = wallCeilingColorPicker.getColorRGB();
+		
+		//Cor das paredes
+		/*Color wallCeilingColor = wallCeilingColorPicker.getColorRGB();
 		XmlAttribute wallCeilingAttr = xmlDoc.CreateAttribute("color");
 		wallCeilingAttr.Value =	wallCeilingColorPicker.getColorRGB().r + "x" +
 								wallCeilingColorPicker.getColorRGB().g + "x" +
@@ -119,6 +119,7 @@ public class Configuration : MonoBehaviour {
 		wallCeilingAttr.Value = wallCeilingColorPicker.getSaturation().ToString();
 		wallCeilingNode.Attributes.Append(wallCeilingAttr);
 		sceneNode.AppendChild(wallCeilingNode);
+		*/
 				
 		XmlNode floorNode = xmlDoc.CreateElement("piso");
 		XmlAttribute floorIndexTextureAttr = xmlDoc.CreateAttribute("indicetextura");

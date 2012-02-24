@@ -70,7 +70,7 @@ public class Camera3d : MonoBehaviour
 				tetoParent.collider.enabled = 
 					tetoParent.renderer.enabled = this.transform.position.y < tetoParent.transform.position.y + 2.45f;
 				chaoParent.collider.enabled = 
-					chaoParent.renderer.enabled = this.transform.position.y > chaoParent.transform.position.y - 1f;
+					chaoParent.renderer.enabled = this.transform.position.y > chaoParent.transform.position.y;
 		//}
 	}
 	

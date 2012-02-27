@@ -249,25 +249,6 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 					id = lastId;
 					return;
 				}
-				
-				switch(id){
-					case 1:
-						if(selectedMobile.GetComponent<InformacoesMovel>().top == Top.NENHUM){
-							//Não permite que abra o menu top se o objeto selecionado
-							id = lastId;
-							return;
-						}
-					break;
-					case 2:
-						//Não contém a palavra direita ou a palavra esquerda no nome do prefab
-						//então não mostra o menu de portas
-						if( !selectedMobile.name.Contains("direita") &&
-							!selectedMobile.name.Contains("esquerda") ) {
-							id = lastId;
-							return;
-						}
-					break;
-				}
 			}
 			if (id != -1) {
 				wndAccordionSelectedOption = new Rect(wndAccordOption.x,  wndAccordOption.y + (btnAccordion.height * (id + 1) + ScreenUtils.ScaleHeight(48)), ScreenUtils.ScaleWidth(200), wndAccordOption.height);
@@ -492,11 +473,16 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 										cCategory = i;
 										items = Line.CurrentLine.categories[cCategory].Furniture;
 										
-										foreach(GameObject item in items){
-											item.GetComponent<InformacoesMovel>().Initialize();
-											Tooltip.AddDynamicTip(item.GetComponent<InformacoesMovel>().Nome);
+										for (int j = 0; j != items.Count; ++j){
+											if (Regex.Match(items[j].name,".*(sem tampo|s tampo|direita).*").Success) {
+												items.RemoveAt(j);
+												--j;
+												continue;
+											}
+											items[j].GetComponent<InformacoesMovel>().Initialize();
+											Tooltip.AddDynamicTip(items[j].GetComponent<InformacoesMovel>().Nome);
 										}
-										
+							
 										rListItem = ScreenUtils.ScaledRect(0, 0, 64, 64 * items.Count);
 										showItems = !showItems;
 									}
@@ -504,7 +490,7 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 							GUI.EndScrollView();
 							
 							if (scrollPosCategory.y > 0) {
-								if (GUI.Button(new Rect(	wndAccordOption.x + ScreenUtils.ScaleWidth(40), 
+								if (GUI.Button(new Rect(	wndAccordOption.x + ScreenUtils.ScaleWidth(40),
 							                                      		wndAccordOption.y + (btnAccordion.height * (id + 1)) + ScreenUtils.ScaleHeight(56),
 						                 								ScreenUtils.ScaleWidth(accordionStyle[1].normal.background.width), 
 							                                      		ScreenUtils.ScaleHeight(accordionStyle[1].normal.background.height)), "", accordionStyle[1]))
@@ -524,9 +510,7 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 							scrollFraItem = new Rect(0, wndAccordOption.y + (btnAccordion.height * id) + ScreenUtils.ScaleHeight(116), 
 					                         ScreenUtils.ScaleWidth(100), wndAccordOption.height - ScreenUtils.ScaleHeight(144));
 							scrollPosItem = GUI.BeginScrollView(scrollFraItem, scrollPosItem, rListItem, hScrollStyle, btnUpStyle);
-							
 								for (int i = 0; i != items.Count; ++i){
-							
 									if(GUI.Button(new Rect(	wndAccordOption.x + ScreenUtils.ScaleWidth(24), 
 															ScreenUtils.ScaleHeight(64) * i,
 								                 			ScreenUtils.ScaleWidth(64), 
@@ -627,7 +611,7 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 			}
 			#endregion
 			
-			GameObject newFurniture = Instantiate(Line.CurrentLine.categories[cCategory].Furniture[id]) as GameObject;
+			GameObject newFurniture = Instantiate(items[id]) as GameObject;
 								
 			newFurniture.tag = "Movel";
 			newFurniture.layer = LayerMask.NameToLayer("Moveis");

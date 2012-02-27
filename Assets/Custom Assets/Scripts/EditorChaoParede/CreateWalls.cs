@@ -23,6 +23,27 @@ public class WallsParents {
 		walls[3] = parentWallRight;
 		return walls;
 	}
+	
+	public Color GetWallColor(int index){
+		switch (index) {
+			case 0 :
+				return colorWallFront;
+				break;
+			case 1 :
+				return colorWallBack;
+				break;
+			case 2 :
+				return colorWallLeft;
+				break;
+			case 3 :
+				return colorWallRight;
+				break;
+			default :
+				return Color.white;
+				break;
+		}
+	}
+	
 }
 
 public class CreateWalls : MonoBehaviour

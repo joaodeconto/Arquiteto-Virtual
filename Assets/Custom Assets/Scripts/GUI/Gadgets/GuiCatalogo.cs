@@ -5,7 +5,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-using Visiorama.Substance;
 using Visiorama.Utils;
 
 [System.Serializable]

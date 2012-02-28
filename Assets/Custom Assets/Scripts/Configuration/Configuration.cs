@@ -6,7 +6,6 @@ using System.Xml;
 using System.Xml.Serialization;
 
 using Visiorama.Utils;
-using Visiorama.Substance;
 
 [System.Serializable]
 public class PresetMobileData {

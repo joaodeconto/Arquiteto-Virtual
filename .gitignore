@@ -19,6 +19,7 @@
 /Library/MonoManager.asset
 /Library/ScriptMapper
 /Temp/
+/Build/
 
 *.apk
 *.exe

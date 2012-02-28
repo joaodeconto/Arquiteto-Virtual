@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Text.RegularExpressions;
 
 public class GuiDescription : MonoBehaviour, GuiBase {
 	
@@ -161,7 +162,7 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 		}
 		
 		GUI.DrawTexture(window,BgTexture);
-		GUI.BeginGroup(window);
+		GUI.BeginGroup(window); {
 			GUI.Label(wndItemName[0],I18n.t("Lin"),itemNameStyle);
 			GUI.Label(wndItemName[1],I18n.t("Cat"),itemNameStyle);
 			GUI.Label(wndItemName[2],I18n.t("Ref"),itemNameStyle);
@@ -225,7 +226,7 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 		
 			if( furnitureData.gameObject.name.Contains("direita") ||
 				furnitureData.gameObject.name.Contains("esquerda") ) {
-				if(GUI.Button(btnsActions[3], "Tampo", actionStyles[3])){
+				if(GUI.Button(btnsActions[3], "Porta", actionStyles[3])){
 					SelectedLeftDoor = !SelectedLeftDoor;
 					
 					SomClique.Play();
@@ -237,6 +238,18 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 					Hide();
 				}
 			}
+		
+			if( Regex.Match(furnitureData.gameObject.name, ".*(com tampo|c tampo)*.").Success) {
+				if(GUI.Button(btnsActions[4], "Porta", actionStyles[3])){
+					SomClique.Play();
+					
+					furnitureData.ToogleDoorSide();
+				
+					Hide();
+				}
+			}
+		
+		
 			/*#region Conteúdo do Tampo no Accordion
 			for (int i = 0; i != tamposTextures.Length; ++i) {
 				if(GUI.Button(ScreenUtils.ScaledRect(wndAccordOption.x + 20, 72 * i, 64, 64), "", tamposTextures[i].iconButton)){
@@ -279,7 +292,7 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 			}
 			GUI.Box(ScreenUtils.ScaledRect(24, 48 * (SelectedLeftDoor ? 0 : 1) ,64, 32), radioSelect);
 			#endregion*/
-		
+		}
 		GUI.EndGroup();
 		Tooltip.DoTips();
 	}

@@ -10,7 +10,7 @@ public class ChangeColor : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (dropperBool) {
+		if (checkbox.isChecked) {
 			if (Input.GetMouseButtonUp(0)) {
 				Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit;
@@ -19,11 +19,10 @@ public class ChangeColor : MonoBehaviour {
 						if (hit.transform.renderer != null) {
 						colorPicker.color = hit.transform.renderer.material.color;
 						}
+						checkbox.isChecked = false;
+						return;
 					}
 				}
-				dropperBool = false;
-				checkbox.isChecked = true;
-				return;
 			}
 		} else {
 			if (Input.GetMouseButtonDown(0)) {

@@ -223,32 +223,35 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 					}
 				}
 			}
+			
+			if (furnitureData.gameObject != null) {
+			
+				if( furnitureData.gameObject.name.Contains("direita") ||
+					furnitureData.gameObject.name.Contains("esquerda") ) {
+					if(GUI.Button(btnsActions[3], "Porta", actionStyles[3])){
+						SelectedLeftDoor = !SelectedLeftDoor;
+						
+						SomClique.Play();
+						
+						furnitureData.ToogleDoorSide();
+					
+						UpdateData(furnitureData);
+					
+						Hide();
+					}
+				}
 		
-			if( furnitureData.gameObject.name.Contains("direita") ||
-				furnitureData.gameObject.name.Contains("esquerda") ) {
-				if(GUI.Button(btnsActions[3], "Porta", actionStyles[3])){
-					SelectedLeftDoor = !SelectedLeftDoor;
+				if( Regex.Match(furnitureData.gameObject.name, ".*(com tampo|c tampo)*.").Success) {
+					if(GUI.Button(btnsActions[4], "Porta", actionStyles[3])){
+						SomClique.Play();
+						
+						furnitureData.ToogleDoorSide();
 					
-					SomClique.Play();
-					
-					furnitureData.ToogleDoorSide();
-				
-					UpdateData(furnitureData);
-				
-					Hide();
+						Hide();
+					}
 				}
 			}
-		
-			if( Regex.Match(furnitureData.gameObject.name, ".*(com tampo|c tampo)*.").Success) {
-				if(GUI.Button(btnsActions[4], "Porta", actionStyles[3])){
-					SomClique.Play();
-					
-					furnitureData.ToogleDoorSide();
-				
-					Hide();
-				}
-			}
-		
+
 		
 			/*#region Conteúdo do Tampo no Accordion
 			for (int i = 0; i != tamposTextures.Length; ++i) {

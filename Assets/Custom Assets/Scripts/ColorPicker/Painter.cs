@@ -9,7 +9,7 @@ public class Painter: MonoBehaviour {
 	public GUIStyle pickerColor;
 	public GUIStyle slider;
 	public Texture2D dropper;
-	public string[] tags;
+	public string[] tags, objectsNames;
 	private Renderer render;
 	private Vector2 position, sizeDropper, halfSizeDropper;
 	private Rect rectWindow, rectReset, rectGetAll, rectDropper;
@@ -65,6 +65,20 @@ public class Painter: MonoBehaviour {
 									color = hit.transform.renderer.material.color;
 								}
 							}
+							foreach (string name in objectsNames) {
+								if (hit.transform.name.Equals("(Clone)")) {
+									int index = hit.transform.name.IndexOf("(Clone)");
+									string objName = hit.transform.name.Remove(index);
+									print(name + " : " + objName);
+									if (objName == name) {
+										render = hit.transform.GetComponentInChildren<Renderer>();
+										color = render.materials[0].color;
+										nameObject = name;
+										StartCoroutine(WaitClick(0.3f));
+										return;
+									}
+								}
+							}
 						}
 						dropperBool = false;
 						dropperBoolLast = true;
@@ -72,6 +86,27 @@ public class Painter: MonoBehaviour {
 				}
 			}
 			else {
+
+				if (Input.GetMouseButtonUp(0) &&
+					!clicked) {
+					if (!dropperBoolLast) {
+						bool breaker = false;
+						if (render != null) {
+							if (MouseUtils.MouseClickedInArea(rectWindow)) breaker = true;
+						}
+						
+						if (!breaker) {
+							Ray ray = transform.parent.camera.ScreenPointToRay(Input.mousePosition);
+							RaycastHit hit;
+							if (Physics.Raycast(ray, out hit)) {
+								render = null;
+							}
+							if (!Physics.Raycast(ray, out hit)) {
+								render = null;
+							}
+						}
+					} else dropperBoolLast = false;
+				}
 				if (MouseUtils.MouseButtonDoubleClickUp(0, 0.3f)) {
 					if (!dropperBoolLast) {
 						bool breaker = false;
@@ -106,32 +141,23 @@ public class Painter: MonoBehaviour {
 										return;
 									}
 								}
+								foreach (string name in objectsNames) {
+									int index = hit.transform.name.IndexOf("(Clone)");
+									string objName = hit.transform.name.Remove(index);
+									print(name + " : " + objName);
+									if (objName == name) {
+										render = hit.transform.GetComponentInChildren<Renderer>();
+										color = render.materials[0].color;
+										nameObject = name;
+										StartCoroutine(WaitClick(0.3f));
+										return;
+									}
+								}
 								render = null;
 							}
 						}
 					} else dropperBoolLast = false;
-				}
-				if (Input.GetMouseButtonUp(0) &&
-					!clicked) {
-					if (!dropperBoolLast) {
-						bool breaker = false;
-						if (render != null) {
-							if (MouseUtils.MouseClickedInArea(rectWindow)) breaker = true;
-						}
-						
-						if (!breaker) {
-							Ray ray = transform.parent.camera.ScreenPointToRay(Input.mousePosition);
-							RaycastHit hit;
-							if (Physics.Raycast(ray, out hit)) {
-								render = null;
-							}
-							if (!Physics.Raycast(ray, out hit)) {
-								render = null;
-							}
-						}
-					} else dropperBoolLast = false;
-				}
-			}
+				}			}
 		}
 		
 		if (dropperBool) {
@@ -179,7 +205,7 @@ public class Painter: MonoBehaviour {
 			
 			dropperBool = GUI.Toggle(rectDropper, dropperBool, "Dropper", "button");
 			GUI.EndGroup();
-			render.material.color = color;
+			render.materials[0].color = color;
 		} else {
 			if (dropperBool) {
 				dropperBool = false;

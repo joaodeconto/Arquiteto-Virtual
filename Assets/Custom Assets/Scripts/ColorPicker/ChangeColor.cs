@@ -5,8 +5,9 @@ public class ChangeColor : MonoBehaviour {
 	
 	public ColorPicker colorPicker;
 	public UICheckbox checkbox;
+	public Camera cameraRender;
 	
-	public bool dropperBool;
+	private bool dropperBool;
 	
 	// Update is called once per frame
 	void Update () {
@@ -15,13 +16,17 @@ public class ChangeColor : MonoBehaviour {
 				Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit;
 				if (Physics.Raycast(ray, out hit)) {
-					if (hit.transform.gameObject.layer != LayerMask.NameToLayer("GUI")) {
-						if (hit.transform.renderer != null) {
-						colorPicker.color = hit.transform.renderer.material.color;
-						}
-						checkbox.isChecked = false;
+					if (hit.transform.gameObject.layer != LayerMask.NameToLayer("GUI"))
 						return;
+				}
+				Ray rayRender = cameraRender.ScreenPointToRay(Input.mousePosition);
+				RaycastHit hitRender;
+				if (Physics.Raycast(rayRender, out hitRender)) {
+					if (hitRender.transform.renderer != null) {
+						colorPicker.color = hitRender.transform.renderer.material.color;
 					}
+					checkbox.isChecked = false;
+					return;
 				}
 			}
 		} else {
@@ -37,12 +42,14 @@ public class ChangeColor : MonoBehaviour {
 			}
 			if (MouseUtils.MouseButtonDoubleClickUp(0, 0.3f)) {
 			    RaycastHit hit;
-				Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+				Ray ray = cameraRender.ScreenPointToRay(Input.mousePosition);
 			    if (!Physics.Raycast (ray, out hit))
 			        return;
 				
 				if (hit.transform.gameObject.layer == LayerMask.NameToLayer("GUI"))
 					return;
+				
+				print(hit.transform.name);
 				
 				colorPicker.CallColorPicker(hit.transform.gameObject);
 			}

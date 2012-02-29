@@ -20,6 +20,11 @@ public enum Top {
 	COOKTOP,
 }
 
+public enum TipoMovel {
+	FIXO,
+	MOVEL
+}
+
 public class InformacoesMovel : MonoBehaviour {
 	
 	public string[] 	Names { get; set; }
@@ -33,6 +38,7 @@ public class InformacoesMovel : MonoBehaviour {
 	public string 		Codigo;
 	public Texture2D 	Imagem;
 	public Top			top;
+	public TipoMovel	tipoMovel;
 	/* End Setted In Visual  */ 
 	
 	public string		Categoria { get; set; }
@@ -208,23 +214,28 @@ public class InformacoesMovel : MonoBehaviour {
 	
 	private void Clone(GameObject cloned, InformacoesMovel info, string tag)		{
 	
-			GameObject newFurniture = Instantiate(cloned,this.transform.position,this.transform.rotation) as GameObject;
-								
-			newFurniture.tag = tag;
-			newFurniture.layer = LayerMask.NameToLayer("Moveis");
-			
-			foreach (Animation anim in newFurniture.GetComponentsInChildren<Animation>()) {
-				anim.Stop();
-				anim.playAutomatically = false;
-			}
-			
-			newFurniture.AddComponent<SnapBehaviour>();
-			newFurniture.AddComponent<CalculateBounds>();
-			newFurniture.GetComponent<InformacoesMovel>().Initialize();
-			newFurniture.GetComponent<InformacoesMovel>().CloneInfo(info);
+		GameObject newFurniture = Instantiate(cloned,this.transform.position,this.transform.rotation) as GameObject;
+							
+		newFurniture.tag = tag;
+		newFurniture.layer = LayerMask.NameToLayer("Moveis");
+		
+		foreach (Animation anim in newFurniture.GetComponentsInChildren<Animation>()) {
+			anim.Stop();
+			anim.playAutomatically = false;
+		}
+		
+		newFurniture.AddComponent<SnapBehaviour>();
+		newFurniture.AddComponent<CalculateBounds>();
+		newFurniture.GetComponent<InformacoesMovel>().Initialize();
+		newFurniture.GetComponent<InformacoesMovel>().CloneInfo(info);
+		if (tipoMovel == TipoMovel.FIXO) {
 			newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | 
 												 RigidbodyConstraints.FreezeRotation;
-			newFurniture.transform.parent = GameObject.Find("Moveis GO").transform;
+		}
+		else {
+			newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+		}
+		newFurniture.transform.parent = GameObject.Find("Moveis GO").transform;
 	}
 	
 	public void CloneInfo(InformacoesMovel info){

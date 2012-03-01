@@ -10,13 +10,14 @@ public class Painter: MonoBehaviour {
 	public GUIStyle slider;
 	public Texture2D dropper;
 	public string[] tags, objectsNames;
+	private GameObject GO;
 	private Renderer render;
 	private Vector2 position, sizeDropper, halfSizeDropper;
 	private Rect rectWindow, rectReset, rectGetAll, rectDropper;
 	private Rect[] rectRGBA, rectFieldRGBA;
 	private Color lastColor;
 	private bool dropperBool, dropperBoolLast, clicked;
-	private string nameObject;
+	private string nameObject, tagObject;
 	private GuiCatalogo guiCatalogo;
 	private GuiCamera guiCamera;
 	private GuiDescription guiDescription;
@@ -55,30 +56,31 @@ public class Painter: MonoBehaviour {
 		    !MouseUtils.MouseClickedInArea(guiCamera.wndOpenMenu) &&
 		    !MouseUtils.MouseClickedInArea(guiDescription.window)) {
 			if (dropperBool) {
-				if (Input.GetMouseButtonUp(0)) {
+				if (Input.GetMouseButtonDown(0)) {
 					if (!MouseUtils.MouseClickedInArea(rectWindow)) {
 						Ray ray = transform.parent.camera.ScreenPointToRay(Input.mousePosition);
 						RaycastHit hit;
 						if (Physics.Raycast(ray, out hit)) {
+							print("1. " + tagObject + " && " + hit.transform.tag);
 							foreach (string tag in tags) {
 								if (hit.transform.tag == tag) {
 									color = hit.transform.renderer.material.color;
 								}
 							}
 							foreach (string name in objectsNames) {
-								if (hit.transform.name.Equals("(Clone)")) {
-									int index = hit.transform.name.IndexOf("(Clone)");
-									string objName = hit.transform.name.Remove(index);
-									print(name + " : " + objName);
-									if (objName == name) {
-										render = hit.transform.GetComponentInChildren<Renderer>();
-										color = render.materials[0].color;
-										nameObject = name;
-										StartCoroutine(WaitClick(0.3f));
-										return;
-									}
+								string objName = name + "(Clone)";
+								print (hit.transform.name + " : " + objName);
+								if (hit.transform.name == objName) {
+									color = hit.transform.GetComponentInChildren<Renderer>().materials[0].color;
 								}
 							}
+							if (tagObject == "MovelSelecionado") {
+								GO.tag = tagObject;
+							}
+							if (hit.transform.tag == "MovelSelecionado") {
+								hit.transform.tag = "Movel";
+							}
+							print("2. " + GO.tag + " && " + hit.transform.tag);
 						}
 						dropperBool = false;
 						dropperBoolLast = true;
@@ -87,7 +89,7 @@ public class Painter: MonoBehaviour {
 			}
 			else {
 
-				if (Input.GetMouseButtonUp(0) &&
+				if (Input.GetMouseButtonDown(0) &&
 					!clicked) {
 					if (!dropperBoolLast) {
 						bool breaker = false;
@@ -107,7 +109,7 @@ public class Painter: MonoBehaviour {
 						}
 					} else dropperBoolLast = false;
 				}
-				if (MouseUtils.MouseButtonDoubleClickUp(0, 0.3f)) {
+				if (MouseUtils.GUIMouseButtonDoubleClickUp(0, 0.3f)) {
 					if (!dropperBoolLast) {
 						bool breaker = false;
 						if (render != null) {
@@ -137,18 +139,28 @@ public class Painter: MonoBehaviour {
 										else if (hit.transform.name == "ParedesRight") {
 											nameObject = "Parade Direito";
 										}
+										tagObject = hit.transform.tag;
 										StartCoroutine(WaitClick(0.3f));
 										return;
 									}
 								}
 								foreach (string name in objectsNames) {
-									int index = hit.transform.name.IndexOf("(Clone)");
-									string objName = hit.transform.name.Remove(index);
-									print(name + " : " + objName);
-									if (objName == name) {
+//									int index = hit.transform.name.IndexOf("(Clone)");
+//									string objName = hit.transform.name.Remove(index);
+//									print(objName + " : " + name);
+									string objName = name + "(Clone)";
+									print (hit.transform.name + " : " + objName);
+									if (hit.transform.name == objName) {
+										GO = hit.transform.gameObject;
 										render = hit.transform.GetComponentInChildren<Renderer>();
+										tagObject = hit.transform.tag;
 										color = render.materials[0].color;
-										nameObject = name;
+										if (hit.transform.GetComponent<InformacoesMovel>() != null) {
+											nameObject = hit.transform.GetComponent<InformacoesMovel>().Nome;
+										}
+										else {
+											nameObject = name;
+										}
 										StartCoroutine(WaitClick(0.3f));
 										return;
 									}
@@ -157,7 +169,8 @@ public class Painter: MonoBehaviour {
 							}
 						}
 					} else dropperBoolLast = false;
-				}			}
+				}
+			}
 		}
 		
 		if (dropperBool) {

@@ -21,6 +21,7 @@ public class SetPivot : EditorWindow {
         SetPivot window = (SetPivot)EditorWindow.GetWindow (typeof (SetPivot));
         window.RecognizeSelectedObject(); //Initialize the variables by calling RecognizeSelectedObject on the class instance
         window.Show ();
+		window.namePath = "";
 		window.path = "";
     }
 

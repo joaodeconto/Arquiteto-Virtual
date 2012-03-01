@@ -10,13 +10,15 @@ public class Painter: MonoBehaviour {
 	public GUIStyle slider;
 	public Texture2D dropper;
 	public string[] tags, objectsNames;
+	public bool dropperBool {get; private set;}
+	internal Rect rectWindow;
 	private GameObject GO;
 	private Renderer render;
 	private Vector2 position, sizeDropper, halfSizeDropper;
-	private Rect rectWindow, rectReset, rectGetAll, rectDropper;
+	private Rect rectReset, rectGetAll, rectDropper;
 	private Rect[] rectRGBA, rectFieldRGBA;
 	private Color lastColor;
-	private bool dropperBool, dropperBoolLast, clicked;
+	private bool dropperBoolLast, clicked;
 	private string nameObject, tagObject;
 	private GuiCatalogo guiCatalogo;
 	private GuiCamera guiCamera;
@@ -42,12 +44,13 @@ public class Painter: MonoBehaviour {
 			rectFieldRGBA[i].y += rRGBA_field_Standart.height * i;
 		}
 		sizeDropper = ScreenUtils.ScaledVector2(dropper.width, dropper.height);
-		halfSizeDropper = new Vector2(dropper.width / 2, dropper.height / 2);
+		halfSizeDropper = new Vector2(dropper.width / 2, dropper.height);
 		rectDropper = ScreenUtils.ScaledRect(10 + 50 - 15, 270, 30, 30);
 		dropperBool = false;
 		guiCatalogo = GetComponent<GuiCatalogo>();
 		guiCamera = GetComponent<GuiCamera>();
 		guiDescription = GetComponent<GuiDescription>();
+		tagObject = "";
 	}
 	
 	void  OnGUI (){
@@ -56,12 +59,11 @@ public class Painter: MonoBehaviour {
 		    !MouseUtils.MouseClickedInArea(guiCamera.wndOpenMenu) &&
 		    !MouseUtils.MouseClickedInArea(guiDescription.window)) {
 			if (dropperBool) {
-				if (Input.GetMouseButtonDown(0)) {
+				if (Input.GetMouseButtonUp(0)) {
 					if (!MouseUtils.MouseClickedInArea(rectWindow)) {
 						Ray ray = transform.parent.camera.ScreenPointToRay(Input.mousePosition);
 						RaycastHit hit;
 						if (Physics.Raycast(ray, out hit)) {
-							print("1. " + tagObject + " && " + hit.transform.tag);
 							foreach (string tag in tags) {
 								if (hit.transform.tag == tag) {
 									color = hit.transform.renderer.material.color;
@@ -69,7 +71,6 @@ public class Painter: MonoBehaviour {
 							}
 							foreach (string name in objectsNames) {
 								string objName = name + "(Clone)";
-								print (hit.transform.name + " : " + objName);
 								if (hit.transform.name == objName) {
 									color = hit.transform.GetComponentInChildren<Renderer>().materials[0].color;
 								}
@@ -80,7 +81,6 @@ public class Painter: MonoBehaviour {
 							if (hit.transform.tag == "MovelSelecionado") {
 								hit.transform.tag = "Movel";
 							}
-							print("2. " + GO.tag + " && " + hit.transform.tag);
 						}
 						dropperBool = false;
 						dropperBoolLast = true;
@@ -119,6 +119,12 @@ public class Painter: MonoBehaviour {
 						if (!breaker) {
 							Ray ray = transform.parent.camera.ScreenPointToRay(Input.mousePosition);
 							RaycastHit hit;
+							rectWindow.x = Input.mousePosition.x;
+							if (rectWindow.x > Screen.width - rectWindow.width)
+								rectWindow.x -= rectWindow.width;
+							rectWindow.y = Screen.height - Input.mousePosition.y;
+							if (rectWindow.y > Screen.height - rectWindow.height)
+								rectWindow.y -= rectWindow.height;
 							if (Physics.Raycast(ray, out hit)) {
 								foreach (string tag in tags) {
 									if (hit.transform.tag == tag) {
@@ -180,35 +186,18 @@ public class Painter: MonoBehaviour {
 		}
 		else { if (!Screen.showCursor) Screen.showCursor = true; }
 		
-//		position.x = Input.mousePosition.x;
-//		position.y = Screen.height - Input.mousePosition.y;
 		if (render != null) {
 			GUI.BeginGroup(rectWindow, nameObject, "box");
 			color = GUIControls.RGBCircle (position, color,"",colorCircle, pickerColor, slider);
 			if (GUI.Button(rectReset, "Reset in white")) { color = Color.white; }
-			if (GUI.Button(rectGetAll, "Paint all this color")) {
-				GameObject[] walls = GameObject.FindGameObjectsWithTag("ParedeParent");
-				foreach (GameObject wall in walls) {
-					wall.renderer.material.color = color;
-				}
-				GameObject.FindWithTag("TetoParent").renderer.material.color = color;
-			}
-//			string rs = GUI.TextField(rectRGBA[0], Convert.ToString((color.r * 255)));
-//			if (float.TryParse(rs, out color.r)) {
-//		        color.r = Mathf.Clamp(color.r / 255f, 0f, 1f);
-//		    }
-//		    else if (rs == "") color.r = 0f;
-//			string gs = GUI.TextField(rectRGBA[1], Convert.ToString((color.g * 255)));
-//			if (float.TryParse(gs, out color.g)) {
-//		        color.g = Mathf.Clamp(color.g / 255f, 0f, 1f);
-//		    }
-//		    else if (gs == "") color.g = 0f;
-//			string bs = GUI.TextField(rectRGBA[2], Convert.ToString((color.b * 255)));
-//			if (float.TryParse(bs, out color.b)) {
-//		        color.b = Mathf.Clamp(color.b / 255f, 0f, 1f);
-//		    }
-//		    else if (bs == "") color.b = 0f;
-			
+//			if (GUI.Button(rectGetAll, "Paint all this color")) {
+//				GameObject[] walls = GameObject.FindGameObjectsWithTag("ParedeParent");
+//				foreach (GameObject wall in walls) {
+//					wall.renderer.material.color = color;
+//				}
+//				GameObject.FindWithTag("TetoParent").renderer.material.color = color;
+//			}
+			GUI.Label(rectGetAll, "RGB:");
 			color.r = GUI.HorizontalSlider(rectRGBA[0], color.r, 0f, 1f);
 			GUI.TextField(rectFieldRGBA[0], Convert.ToString((int)Mathf.Ceil(color.r * 255)));
 			color.g = GUI.HorizontalSlider(rectRGBA[1], color.g, 0f, 1f);
@@ -216,7 +205,7 @@ public class Painter: MonoBehaviour {
 			color.b = GUI.HorizontalSlider(rectRGBA[2], color.b, 0f, 1f);
 			GUI.TextField(rectFieldRGBA[2], Convert.ToString((int)Mathf.Ceil(color.b * 255)));
 			
-			dropperBool = GUI.Toggle(rectDropper, dropperBool, "Dropper", "button");
+			dropperBool = GUI.Toggle(rectDropper, dropperBool, dropper, "button");
 			GUI.EndGroup();
 			render.materials[0].color = color;
 		} else {

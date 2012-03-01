@@ -769,7 +769,7 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 	#region GuiBase implementation
 	public Rect[] GetWindows()
 	{
-		return new Rect[2]{wndAccordOption,wndAccordOption};
+		return new Rect[1]{wndAccordMain};
 	}
 	#endregion
 }

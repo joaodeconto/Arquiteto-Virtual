@@ -38,6 +38,7 @@ public class GuiScript : MonoBehaviour
 	private GuiDescription guiDescription;
 	private GuiCatalogo guiCatalogo;
 	private GuiCamera guiCamera;
+	private Painter painter;
 	private List<Rect> allGuiWindows;
 	#endregion
 
@@ -50,6 +51,7 @@ public class GuiScript : MonoBehaviour
 		guiDescription = GetComponent<GuiDescription> ();
 		guiCatalogo = GetComponent<GuiCatalogo> ();
 		guiCamera = GetComponent<GuiCamera> ();
+		painter = GetComponent<Painter> ();
 		
 		mainCamera = GameObject.FindGameObjectWithTag("Player").GetComponent<Camera>();
 		
@@ -112,9 +114,7 @@ public class GuiScript : MonoBehaviour
 		
 		//Botão esquerdo
 		if (Input.GetMouseButtonDown(0)) {
-			if (!MouseUtils.MouseClickedInArea(guiCamera.wndOpenMenu) &&
-			    !MouseUtils.MouseClickedInArea(guiCatalogo.wndAccordMain) &&
-			    !MouseUtils.MouseClickedInArea(guiDescription.window)) {
+			if (!MouseUtils.MouseClickedInArea(painter.rectWindow) && !painter.dropperBool) {
 				//Deselecionar móvel selecionado se clicar com o botão esquerdo
 				if (movelSelecionado != null) {
 					movelSelecionado.GetComponentInChildren<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Discrete;

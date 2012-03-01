@@ -108,13 +108,16 @@ public class SnapBehaviour : MonoBehaviour {
 		
         Ray ray = mainCamera.ScreenPointToRay(mousePosition);
 		
+		//int layerMask = ~((1 << LayerMask.NameToLayer("Cenario")) | (1 << LayerMask.NameToLayer("Moveis")));
         if(Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.NameToLayer("Cenario"))){
 			
 			if (hit.transform.tag == "Grid")
 				return;//Ignore Grid			
-				
+			
 			if (hit.transform.tag == "ParedeParent" ||
-			    hit.transform.tag == "ChaoParent"){
+			    hit.transform.tag == "ChaoParent" ||
+			    hit.transform.tag == "Movel" ||
+				hit.transform.tag == "TetoParent"){
 				
 				if (GetComponent<InformacoesMovel>().tipoMovel == TipoMovel.FIXO) {
 	           		transform.position = (hit.point.x * transform.parent.right)	+ 
@@ -186,7 +189,7 @@ public class SnapBehaviour : MonoBehaviour {
 		foreach(Vector3 origin in origins){
 			ray = new Ray(origin, Vector3.down);
 //			Debug.DrawRay(ray.origin, ray.direction * 100, Color.cyan);
-			if(Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.NameToLayer("Cenario"))){			
+	        if(Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.NameToLayer("Cenario"))){
 				if(hit.transform.tag == "ChaoParent" || hit.transform.tag == "ParedeParent"){
 					++foundGround;
 				} else {

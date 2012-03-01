@@ -76,11 +76,12 @@ public class I18n {
 		hashWords[0]["tip-construcao-paredes-reiniciar"]= "Colocar paredes\nLimpa área preenchida.";
 
 		hashWords[0]["tip-menu-catalogo-accordion-textura"] = "Escolher a cor das paredes e tipo de piso.";
-		hashWords[0]["tip-menu-catalogo-accordion-tampo"]	= "Troca a cor dos tampos.";
-		hashWords[0]["tip-menu-catalogo-accordion-portas"]	= "Trocar o lado da porta";
+		hashWords[0]["tip-menu-catalogo-accordion-tampo"]	= "Troca a cor dos tampos.";/*não existe mais*/
+		hashWords[0]["tip-menu-catalogo-accordion-portas"]	= "Trocar o lado da porta";/*não existe mais*/
 		hashWords[0]["tip-menu-catalogo-accordion-cor-detalhe"]	= "Quando um móvel estiver selecionado, pode-se trocar a sua cor de detalhe.";
 		hashWords[0]["tip-menu-catalogo-accordion-iluminacao"]	= "Mudar a iluminação do arquiteto.";
 		hashWords[0]["tip-menu-catalogo-accordion-moveis"]		= "Colocar novos móveis no arquiteto.";
+		hashWords[0]["tip-menu-catalogo-accordion-extras"]		= "utensílios a mais para decorar sua cozinha.";
 		#endregion
 				
 		#region GUI catálogo
@@ -91,6 +92,7 @@ public class I18n {
 		hashWords[0]["menu-catalogo-accordion-cor-detalhe"] = "Cor de Detalhe";	
 		hashWords[0]["menu-catalogo-accordion-iluminacao"] 	= "Iluminação";
 		hashWords[0]["menu-catalogo-accordion-moveis"] 		= "Móveis";
+		hashWords[0]["menu-catalogo-accordion-extras"] 		= "Extras";
 		
 		//Troca de textura chão/parede
 		hashWords[0]["Parede"] 					= "Parede";
@@ -107,6 +109,14 @@ public class I18n {
 		hashWords[0]["Alt"]						= "Alt";
 		#endregion
 		
+		#region Color Picker
+		hashWords[0]["Teto"]					= "Teto";
+		hashWords[0]["Parede Atrás"]			= "Parede Atrás";
+		hashWords[0]["Parede Frente"]			= "Parede Frente";
+		hashWords[0]["Parede Esquerdo"]			= "Parede Esquerdo";
+		hashWords[0]["Parede Direito"]			= "Parede Direito";
+		hashWords[0]["Branquear Objeto"]		= "Branquear Objeto";
+		#endregion
 	}
 	
 	static private void InitializeEnglish(){
@@ -120,6 +130,15 @@ public class I18n {
 		hashWords[1]["Construir cozinha"]			= "Building Kitchen";
 		hashWords[1]["Cozinha padrão"]				= "Standart Kitchen";
 		hashWords[1]["Escolha uma marca"]			= "Choice a brand";
+		#endregion
+		
+		#region GUI catálogo
+		//Botões accordion
+		hashWords[1]["menu-catalogo-accordion-textura"] 	= "Texture";	
+		hashWords[1]["menu-catalogo-accordion-cor-detalhe"] = "Color of Detail";	
+		hashWords[1]["menu-catalogo-accordion-iluminacao"] 	= "Ilumination";
+		hashWords[1]["menu-catalogo-accordion-moveis"] 		= "Mobile";
+		hashWords[1]["menu-catalogo-accordion-extras"] 		= "Extras";
 		#endregion
 		
 		#region tutorial
@@ -158,6 +177,18 @@ public class I18n {
 		hashWords[1]["tip-rotacao-objeto"]	= "Rotation\nClick here to rotate the mobile.";
 		hashWords[1]["tip-focar-objeto"]	= "Focus\nClick here to focus the selected mobile.";
 		hashWords[1]["tip-excluir-objeto"]	= "Delete\nClick here to delete the selected mobile.";
+		
+//		hashWords[1]["tip-construcao-paredes-preenche"]	= "Preenche área\nPreenche uma área com as medidas descritas à cima.";
+//		hashWords[1]["tip-construcao-paredes-coloca"]	= "Colocar paredes\nCria as paredes da cozinha e inicia o modo de edição da cozinha.";
+//		hashWords[1]["tip-construcao-paredes-reiniciar"]= "Colocar paredes\nLimpa área preenchida.";
+//				  
+//		hashWords[1]["tip-menu-catalogo-accordion-textura"] = "Escolher a cor das paredes e tipo de piso.";
+//		hashWords[1]["tip-menu-catalogo-accordion-tampo"]	= "Troca a cor dos tampos.";/*não existe mais*/
+//		hashWords[1]["tip-menu-catalogo-accordion-portas"]	= "Trocar o lado da porta";/*não existe mais*/
+//		hashWords[1]["tip-menu-catalogo-accordion-cor-detalhe"]	= "Quando um móvel estiver selecionado, pode-se trocar a sua cor de detalhe.";
+//		hashWords[1]["tip-menu-catalogo-accordion-iluminacao"]	= "Mudar a iluminação do arquiteto.";
+//		hashWords[1]["tip-menu-catalogo-accordion-moveis"]		= "Colocar novos móveis no arquiteto.";
+//		hashWords[1]["tip-menu-catalogo-accordion-extras"]		= "utensílios a mais para decorar sua cozinha.";
 		#endregion
 		
 		#region GUI catálogo
@@ -174,6 +205,15 @@ public class I18n {
 		hashWords[1]["reiniciar"]				= "restart";
 		hashWords[1]["Lar"]						= "Wid";
 		hashWords[1]["Alt"]						= "Hei";
+		#endregion
+		
+		#region Color Picker
+		hashWords[1]["Teto"]					= "Roof";
+		hashWords[1]["Parede Atrás"]			= "Behind Wall";
+		hashWords[1]["Parede Frente"]			= "Front Wall";
+		hashWords[1]["Parede Esquerdo"]			= "Left Wall";
+		hashWords[1]["Parede Direito"]			= "Right Wall";
+		hashWords[1]["Branquear Objeto"]		= "Blanch Object";
 		#endregion
 	}
 	static private void InitializeSpanish(){

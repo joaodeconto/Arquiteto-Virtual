@@ -172,28 +172,23 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 		
 		labels = new string[5];
 		labels[0] = I18n.t("menu-catalogo-accordion-textura");	
-//		labels[1] = I18n.t("menu-catalogo-accordion-tampo");	
-//		labels[2] = I18n.t("menu-catalogo-accordion-portas");	
 		labels[1] = I18n.t("menu-catalogo-accordion-cor-detalhe");	
 		labels[2] = I18n.t("menu-catalogo-accordion-iluminacao");
 		labels[3] = I18n.t("menu-catalogo-accordion-moveis");
-		labels[4] = "Extras";
+		labels[4] = I18n.t("menu-catalogo-accordion-extras");
 
 		tips = new string[labels.Length];
 		tips[0] = I18n.t("tip-menu-catalogo-accordion-textura");	
-//		tips[1] = I18n.t("tip-menu-catalogo-accordion-tampo");	
-//		tips[2] = I18n.t("tip-menu-catalogo-accordion-portas");	
 		tips[1] = I18n.t("tip-menu-catalogo-accordion-cor-detalhe");	
 		tips[2] = I18n.t("tip-menu-catalogo-accordion-iluminacao");	
 		tips[3] = I18n.t("tip-menu-catalogo-accordion-moveis");	
-		tips[4] = "Extras";	
+		tips[4] = I18n.t("tip-menu-catalogo-accordion-extras");	
 	
 	    Tooltip.AddDynamicTip(tips[0]);
 	    Tooltip.AddDynamicTip(tips[1]);
 	    Tooltip.AddDynamicTip(tips[2]);
 	    Tooltip.AddDynamicTip(tips[3]);
 	    Tooltip.AddDynamicTip(tips[4]);
-//	    Tooltip.AddDynamicTip(tips[5]);
 	    
 	    GuiFont.ChangeFont(accordionBtnStyle,"Trebuchet14");
 	    

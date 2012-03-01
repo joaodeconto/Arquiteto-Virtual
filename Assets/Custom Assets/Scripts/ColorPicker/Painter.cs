@@ -23,6 +23,7 @@ public class Painter: MonoBehaviour {
 	private GuiCatalogo guiCatalogo;
 	private GuiCamera guiCamera;
 	private GuiDescription guiDescription;
+	private GUIStyle groupStyle, buttonStyle, labelStyle;
 	
 	void Start () {
 		//ScreenUtils.Initialize(1024, 768);
@@ -51,6 +52,12 @@ public class Painter: MonoBehaviour {
 		guiCamera = GetComponent<GuiCamera>();
 		guiDescription = GetComponent<GuiDescription>();
 		tagObject = "";
+		
+		groupStyle = new GUIStyle("box");
+		groupStyle.fontSize = ScreenUtils.ScaledInt(10);
+		
+		buttonStyle = new GUIStyle("button");
+		buttonStyle.fontSize = ScreenUtils.ScaledInt(10);
 	}
 	
 	void  OnGUI (){
@@ -131,19 +138,19 @@ public class Painter: MonoBehaviour {
 										render = hit.transform.renderer;
 										color = hit.transform.renderer.material.color;
 										if (hit.transform.name == "ParentTeto") {
-											nameObject = "Teto";
+											nameObject = I18n.t("Teto");
 										}
 										else if (hit.transform.name == "ParedesBack") {
-											nameObject = "Parade Atrás";
+											nameObject = I18n.t("Parede Atrás");
 										}
 										else if (hit.transform.name == "ParedesFront") {
-											nameObject = "Parade Frente";
+											nameObject = I18n.t("Parede Frente");
 										}
 										else if (hit.transform.name == "ParedesLeft") {
-											nameObject = "Parade Esquerdo";
+											nameObject = I18n.t("Parede Esquerdo");
 										}
 										else if (hit.transform.name == "ParedesRight") {
-											nameObject = "Parade Direito";
+											nameObject = I18n.t("Parede Direito");
 										}
 										tagObject = hit.transform.tag;
 										StartCoroutine(WaitClick(0.3f));
@@ -165,7 +172,7 @@ public class Painter: MonoBehaviour {
 											nameObject = hit.transform.GetComponent<InformacoesMovel>().Nome;
 										}
 										else {
-											nameObject = name;
+											nameObject = "";
 										}
 										StartCoroutine(WaitClick(0.3f));
 										return;
@@ -187,9 +194,9 @@ public class Painter: MonoBehaviour {
 		else { if (!Screen.showCursor) Screen.showCursor = true; }
 		
 		if (render != null) {
-			GUI.BeginGroup(rectWindow, nameObject, "box");
-			color = GUIControls.RGBCircle (position, color,"",colorCircle, pickerColor, slider);
-			if (GUI.Button(rectReset, "Reset in white")) { color = Color.white; }
+			GUI.BeginGroup(rectWindow, nameObject, groupStyle);
+			color = GUIControls.RGBCircle (position, color, "", colorCircle, pickerColor, slider);
+			if (GUI.Button(rectReset, I18n.t("Branquear Objeto"), buttonStyle)) { color = Color.white; }
 //			if (GUI.Button(rectGetAll, "Paint all this color")) {
 //				GameObject[] walls = GameObject.FindGameObjectsWithTag("ParedeParent");
 //				foreach (GameObject wall in walls) {

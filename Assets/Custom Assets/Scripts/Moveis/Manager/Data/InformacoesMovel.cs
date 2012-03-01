@@ -20,6 +20,11 @@ public enum Top {
 	COOKTOP,
 }
 
+public enum TipoMovel {
+	FIXO,
+	LIVRE
+}
+
 public class InformacoesMovel : MonoBehaviour {
 	
 	public string[] 	Names { get; set; }
@@ -33,6 +38,7 @@ public class InformacoesMovel : MonoBehaviour {
 	public string 		Codigo;
 	public Texture2D 	Imagem;
 	public Top			top;
+	public TipoMovel	tipoMovel;
 	/* End Setted In Visual  */ 
 	
 	public string		Categoria { get; set; }

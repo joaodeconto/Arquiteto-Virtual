@@ -681,6 +681,10 @@ public class CreateWalls : MonoBehaviour
 						posicaoParede += new Vector3 (0, 0, 0.5f);
 						novaParede = Instantiate (parede, posicaoParede, parede.transform.rotation) as GameObject;
 					}
+//					for (int i = 0; i != 4; ++i) {
+//						GameObject v = new GameObject("Vazio");
+//						v.transform.parent = novaParede.transform;
+//					}
 					novaParede.transform.parent = parentParedes.parentWallFront;
 					novaParede.transform.eulerAngles += new Vector3 (0, 180.0f, 0);
 				}

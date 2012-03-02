@@ -153,22 +153,22 @@ public class SnapBehaviour : MonoBehaviour {
 		
 		Vector3[] origins =  new Vector3[4]{new Vector3(this.collider.bounds.center.x - 
 			                                            this.collider.bounds.size.x / 4,
-						                             	10,
+						                             	2,
 			                                            this.collider.bounds.center.z - 
 			                                            this.collider.bounds.size.z / 4),
 											new Vector3(this.collider.bounds.center.x - 
 			                                            this.collider.bounds.size.x / 4,
-						                             	10,
+						                             	2,
 			                                            this.collider.bounds.center.z + 
 			                                            this.collider.bounds.size.z / 4),
 											new Vector3(this.collider.bounds.center.x + 
 			                                            this.collider.bounds.size.x / 4,
-						                             	10,
+						                             	2,
 			                                            this.collider.bounds.center.z - 
 			                                            this.collider.bounds.size.z / 4),
 											new Vector3(this.collider.bounds.center.x + 
 			                                            this.collider.bounds.size.x / 4,
-						                             	10,
+						                             	2,
 			                                            this.collider.bounds.center.z + 
 			                                            this.collider.bounds.size.z / 4)};
 				

@@ -34,15 +34,25 @@ public class Camera3d : MonoBehaviour
 	private GuiDescription guiDescription;
 	
 	void Awake () {
-	
+		
 		sCamera = GetComponent<Camera>();
 		SpeedZoom = 1.5f;
 		StepZoom  = 8f;
+		
+		paredesParents = new WallsParents();
+		paredesParents.parentWallBack  = GameObject.Find("ParedesBack").transform;
+		paredesParents.parentWallFront = GameObject.Find("ParedesFront").transform;
+		paredesParents.parentWallLeft  = GameObject.Find("ParedesLeft").transform;
+		paredesParents.parentWallRight = GameObject.Find("ParedesRight").transform;
 		
 		paredesParents.colorWallLeft = Color.white;
 		paredesParents.colorWallRight = Color.white;
 		paredesParents.colorWallBack = Color.white;
 		paredesParents.colorWallFront = Color.white;
+		
+		tetoParent = GameObject.Find("ParentTeto");
+		chaoParent = GameObject.Find("ParentChao");
+		
 
 		AreWallsAlwaysVisible = false;
 		
@@ -177,9 +187,9 @@ public class Camera3d : MonoBehaviour
 				transform.localPosition += transform.TransformDirection(new Vector3(x, y, 0));
 			}
 			
-			transform.localPosition = new Vector3(Mathf.Clamp(transform.localPosition.x, -45f, 45f), 
+			transform.localPosition = new Vector3(Mathf.Clamp(transform.localPosition.x, 955f, 1045f), 
 			                                      Mathf.Clamp(transform.localPosition.y, -10f, 10f), 
-			                                      Mathf.Clamp(transform.localPosition.z, -45f, 45f));
+			                                      Mathf.Clamp(transform.localPosition.z, 955f, 1045f));
 			
 			// Mouse wheel moving forward
 			if(Input.GetAxisRaw("Mouse ScrollWheel") > 0f && transform.position.y > -10f) {

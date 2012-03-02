@@ -48,18 +48,18 @@ public class WallsParents
 
 public class WallBuilder : MonoBehaviour {
 	
+	#region Parents
+	public WallsParents parentWalls;
+	public Transform 	parentFloor;
+	public Transform 	parentCeil;
+	#endregion
+	
 	#region Prefabs references
 	public Camera 	mainCamera;
 	public GameObject 	grid;
 	public GameObject 	floor;
 	public GameObject 	wall, wall95, wall90, corner;
 	public GameObject 	ceil;
-	#endregion
-	
-	#region Parents
-	public WallsParents parentWalls;
-	public Transform 	parentFloor;
-	public Transform 	parentCeil;
 	#endregion
 	
 	#region Camera Data
@@ -106,7 +106,7 @@ public class WallBuilder : MonoBehaviour {
 		mov = transform.position;
 		zoom = GameObject.Find("Main Camera").camera.orthographicSize;
 	}
-	
+	/*
 	private void OnEnable () {
 		parentFloor.GetComponent<MeshFilter>().sharedMesh = null;
 		foreach (GameObject chaoVazio in GameObject.FindGameObjectsWithTag("ChaoVazio")) {
@@ -117,7 +117,7 @@ public class WallBuilder : MonoBehaviour {
 			walls.GetComponent<MeshFilter>().sharedMesh = null;
 		}
 		grid.renderer.enabled = true;
-	}
+	}*/
 	#endregion
 	
 	public void CreateTile (){
@@ -169,6 +169,7 @@ public class WallBuilder : MonoBehaviour {
 	}
 	
 	public void BuildWalls (){
+		
 		RemoveRoof();
 		RemoveWalls();
 		
@@ -615,15 +616,6 @@ public class WallBuilder : MonoBehaviour {
 			foreach (GameObject q in GameObject.FindGameObjectsWithTag("Quina")) {
 				q.tag = "Parede";
 			}
-			CombineMesh(parentFloor, true);
-			CombineMesh(parentWalls.parentWallFront, true);
-			CombineMesh(parentWalls.parentWallLeft, true);
-			CombineMesh(parentWalls.parentWallRight, true);
-			CombineMesh(parentWalls.parentWallBack, true);
-			CombineMesh(parentCeil, true);
-			RemoveGround();
-			RemoveWalls();
-			RemoveRoof();
 			
 			//region desativando teto, paredes e chão
 //			GameObject[] walls = GameObject.FindGameObjectsWithTag("ParedeParent");
@@ -642,6 +634,8 @@ public class WallBuilder : MonoBehaviour {
 //			GetComponent<GuiSelecaoMarca>().enabled = true;
 //			enabled = false;
 //			grid.renderer.enabled = false;
+			
+			Application.LoadLevel(3);
 			
 		} else {
 			Debug.LogWarning ("Não existe chão! Por isso não pode ser criado paredes.");
@@ -837,7 +831,7 @@ public class WallBuilder : MonoBehaviour {
 				Destroy (corner);
 		}
 	}
-
+	
 	void MethodEditionGUI ()
 	{/*
 		GUI.BeginGroup(wndBackground, bgTexture);
@@ -863,20 +857,6 @@ public class WallBuilder : MonoBehaviour {
 		GUI.EndGroup();
 		
 //		activeGrid = GUI.Toggle (new Rect (10, 60, 120, 20), activeGrid, "Grid Chao");*/
-	}
-	
-	private void CombineMesh (Transform target, bool createCollider) {
-		MeshFilter[] meshFilters = target.GetComponentsInChildren<MeshFilter>();
-		CombineInstance[] combine = new CombineInstance[meshFilters.Length];
-		for (int i = 0; i != meshFilters.Length; i++){
-			combine[i].mesh = meshFilters[i].sharedMesh;
-			combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
-		}
-		target.GetComponent<MeshFilter>().mesh = new Mesh();
-		target.GetComponent<MeshFilter>().mesh.CombineMeshes(combine);
-		if (createCollider) {
-			MeshCollider mc = target.gameObject.AddComponent("MeshCollider") as MeshCollider;
-		}
 	}
 	
 	private void CreateRoof () {

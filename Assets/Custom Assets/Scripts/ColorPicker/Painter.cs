@@ -116,7 +116,7 @@ public class Painter: MonoBehaviour {
 						}
 					} else dropperBoolLast = false;
 				}
-				if (MouseUtils.GUIMouseButtonDoubleClickUp(0, 0.3f)) {
+				if (MouseUtils.GUIMouseButtonDoubleClickDown(0, 0.3f)) {
 					if (!dropperBoolLast) {
 						bool breaker = false;
 						if (render != null) {

@@ -75,7 +75,7 @@ public class MouseUtils : MonoBehaviour {
 	private static int clickMonkeyPatch = 0;
 	public static bool GUIMouseButtonDoubleClickDown (int button, float timer) {
 		if (Input.GetMouseButtonDown (button)) {
-			if (clickMonkeyPatch > 1 && (Time.time - doubleClickStart) < timer) {
+			if (clickMonkeyPatch > 2 && (Time.time - doubleClickStart) < timer) {
 		        doubleClickStart = -1;
 				clickMonkeyPatch = 0;				
 				return true;
@@ -92,7 +92,7 @@ public class MouseUtils : MonoBehaviour {
 	
 	public static bool GUIMouseButtonDoubleClickUp (int button, float timer) {
 		if (Input.GetMouseButtonUp (button)) {
-			if (clickMonkeyPatch > 1 && (Time.time - doubleClickStart) < timer) {
+			if (clickMonkeyPatch > 2 && (Time.time - doubleClickStart) < timer) {
 		        doubleClickStart = -1;
 				clickMonkeyPatch = 0;				
 				return true;

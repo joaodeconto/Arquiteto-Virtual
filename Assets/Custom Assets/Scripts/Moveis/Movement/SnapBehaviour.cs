@@ -115,15 +115,10 @@ public class SnapBehaviour : MonoBehaviour {
 				
 			if (hit.transform.tag == "ParedeParent" ||
 			    hit.transform.tag == "ChaoParent"){
+				 					
+           		transform.position = (hit.point.x * transform.parent.right)	+ 
+									 (hit.point.z * transform.parent.forward);
 				
-				if (GetComponent<InformacoesMovel>().tipoMovel == TipoMovel.FIXO) {
-	           		transform.position = (hit.point.x * transform.parent.right)	+ 
-										 (hit.point.z * transform.parent.forward);
-				} else {
-	           		transform.position = (hit.point.x * transform.parent.right)	+ 
-										 (hit.point.y * transform.parent.up)	+ 
-										 (hit.point.z * transform.parent.forward);
-				}
 			}
 		
 			//transform.position += new Vector3(0,0.2f,0);
@@ -139,13 +134,8 @@ public class SnapBehaviour : MonoBehaviour {
 			
 		enableDrag = false;
 		
-		if (GetComponent<InformacoesMovel>().tipoMovel == TipoMovel.FIXO) {
-			this.rigidbody.constraints = RigidbodyConstraints.FreezePositionY |
-											RigidbodyConstraints.FreezeRotation;
-		}
-		else {
-			this.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-		}
+		this.rigidbody.constraints = RigidbodyConstraints.FreezePositionY |
+									 RigidbodyConstraints.FreezeRotation;
 		/*		
 		if(wasDragged){
 			transform.position -= new Vector3(0,0.2f,0);

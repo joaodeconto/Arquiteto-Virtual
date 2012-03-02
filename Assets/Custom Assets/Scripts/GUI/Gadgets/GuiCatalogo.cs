@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
+using Visiorama.Substance;
 using Visiorama.Utils;
 
 [System.Serializable]
@@ -625,12 +626,8 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 			newFurniture.GetComponent<InformacoesMovel>().Initialize();
 			newFurniture.GetComponent<InformacoesMovel>().Categoria = Line.CurrentLine.categories[cCategory].Name;
 			newFurniture.AddComponent<Rigidbody>();
-			if (newFurniture.GetComponent<InformacoesMovel>().tipoMovel == TipoMovel.FIXO) {
-				newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | 
-													 RigidbodyConstraints.FreezeRotation;
-			} else {
-				newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-			}
+			newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | 
+												 RigidbodyConstraints.FreezeRotation;
 							
 			GameObject MoveisGO = GameObject.Find("Moveis GO");
 		
@@ -708,13 +705,8 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 			newFurniture.GetComponent<InformacoesMovel>().Initialize();
 			newFurniture.GetComponent<InformacoesMovel>().Categoria = "";
 			newFurniture.AddComponent<Rigidbody>();
-			
-			if (newFurniture.GetComponent<InformacoesMovel>().tipoMovel == TipoMovel.FIXO) {
-				newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | 
-													 RigidbodyConstraints.FreezeRotation;
-			} else {
-				newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-			}
+			newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | 
+												 RigidbodyConstraints.FreezeRotation;
 							
 			GameObject MoveisGO = GameObject.Find("Moveis GO");
 		

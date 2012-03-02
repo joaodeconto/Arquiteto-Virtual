@@ -6,6 +6,7 @@ using System.Xml;
 using System.Xml.Serialization;
 
 using Visiorama.Utils;
+using Visiorama.Substance;
 
 [System.Serializable]
 public class PresetMobileData {
@@ -157,11 +158,7 @@ public class Configuration : MonoBehaviour {
 			mobile.GetComponent<InformacoesMovel> ().Initialize ();
 			mobile.GetComponent<InformacoesMovel> ().Categoria = Line.CurrentLine.categories[data.CategoryId].Name;
 			mobile.AddComponent<Rigidbody> ();
-			if (mobile.GetComponent<InformacoesMovel> ().tipoMovel == TipoMovel.FIXO) {
-				mobile.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
-			} else {
-				mobile.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-			}
+			mobile.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
 			
 			GameObject MoveisGO = GameObject.Find ("Moveis GO");
 			

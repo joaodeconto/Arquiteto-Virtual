@@ -19,6 +19,9 @@ public class ScreenUtils {
 		RealWidth  = gameTabWidth;
 		RealHeight = gameTabHeight;
 		
+		screenWidth  = (float)Screen.width;
+		screenHeight = (float)Screen.height;
+		
 		wasInitialized = true;
 	}
 	
@@ -34,9 +37,6 @@ public class ScreenUtils {
 		
 		if(!wasInitialized)
 			Debug.LogError("Esta classe não foi inicializada!");
-		
-		screenWidth  = (float)Screen.width;
-		screenHeight = (float)Screen.height;
 		
 		if((int)x != 0)
 	    	x = (x*screenWidth)/RealWidth;
@@ -122,9 +122,10 @@ public class ScreenUtils {
 	}
 	
 	static public bool ScreenSizeChange () {
+		Debug.Log((screenWidth != Screen.width) + " - " + screenWidth + " : " + Screen.width);
 		if (screenWidth != Screen.width ||
 			screenHeight != Screen.height) {
-			Initialize(Screen.width, Screen.height);
+			//Initialize(Screen.width, Screen.height);
 			return true;
 		}
 		return false;

@@ -154,6 +154,11 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 	#region GuiBase implementation
 	public void Draw(){
 		
+		if (Input.GetKeyDown(KeyCode.Delete)) {
+			Hide();
+			DestroyImmediate(item);
+		}
+		
 		window.x = leftBorderPosition;
 		
 		if(furnitureData == null){

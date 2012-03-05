@@ -65,7 +65,6 @@ public class Painter: MonoBehaviour {
 	
 	void  OnGUI (){
 		if (ScreenUtils.ScreenSizeChange()) {
-			print("AQUI");
 			rectWindow = ScreenUtils.ScaledRect(200, 24, 120, 320);
 			//não precisa usar ScreenUtils, dentro da função isso já está sendo feito
 			rectReset = ScreenUtils.ScaledRect(10, 140, 100, 20);

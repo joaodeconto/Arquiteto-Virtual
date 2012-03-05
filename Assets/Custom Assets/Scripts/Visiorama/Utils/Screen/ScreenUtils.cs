@@ -115,4 +115,18 @@ public class ScreenUtils {
 		
 		return Mathf.Ceil(scaledNumber);
 	}
+	
+	static public Rect ScaledRectInFloat(Rect rect) {
+		return new Rect(ScaledFloat(rect.x), ScaledFloat(rect.y), 
+						ScaledFloat(rect.width), ScaledFloat(rect.height));
+	}
+	
+	static public bool ScreenSizeChange () {
+		if (screenWidth != Screen.width ||
+			screenHeight != Screen.height) {
+			Initialize(Screen.width, Screen.height);
+			return true;
+		}
+		return false;
+	}
 }

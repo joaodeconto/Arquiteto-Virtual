@@ -13,6 +13,8 @@ public class MakeBrand : MonoBehaviour {
 	public Texture2D normalMapPortaG;
 	public Material materialPortaVidro;
 	public Texture2D texturaVidro;
+	public Material materialFruteira;
+	public Texture2D texturaFruteira;
 	
 	public void ChangeDoor () {
 //		Regex regexPorta = new Regex(@"Porta.+", RegexOptions.IgnoreCase);
@@ -46,6 +48,9 @@ public class MakeBrand : MonoBehaviour {
 		}
 		if (materialPortaVidro != null && texturaVidro != null) {
 			materialPortaVidro.mainTexture = texturaVidro;
+		}
+		if (materialFruteira != null && texturaFruteira != null) {
+			materialFruteira.SetTexture("_BumpMap", texturaFruteira);
 		}
 	}
 }

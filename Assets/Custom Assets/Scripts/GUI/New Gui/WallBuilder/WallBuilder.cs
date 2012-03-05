@@ -636,7 +636,6 @@ public class WallBuilder : MonoBehaviour {
 //			grid.renderer.enabled = false;
 			
 			Application.LoadLevel(3);
-			
 		} else {
 			Debug.LogWarning ("Não existe chão! Por isso não pode ser criado paredes.");
 			return;

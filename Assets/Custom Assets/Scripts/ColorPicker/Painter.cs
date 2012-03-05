@@ -54,9 +54,11 @@ public class Painter: MonoBehaviour {
 		tagObject = "";
 
 		groupStyle = new GUIStyle("box");
+		groupStyle.normal.textColor = Color.white;
 		groupStyle.fontSize = ScreenUtils.ScaledInt(10);
 
 		buttonStyle = new GUIStyle("button");
+		buttonStyle.normal.textColor = Color.white;
 		buttonStyle.fontSize = ScreenUtils.ScaledInt(10);
 	}
 

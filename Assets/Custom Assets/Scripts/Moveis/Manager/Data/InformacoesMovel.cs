@@ -157,12 +157,14 @@ public class InformacoesMovel : MonoBehaviour {
 		Regex regexPorta	  = new Regex(@"portas [PMG]", RegexOptions.IgnoreCase);
 		
 		foreach (Renderer r in renders) {
-			if( regexVidro.Match(r.material.name).Success ||
-			    regexGaveta.Match(r.material.name).Success ||
-				regexFruteira.Match(r.material.name).Success ||
-				regexEstrutura.Match(r.material.name).Success ||
-				regexPorta.Match(r.material.name).Success){
-					r.material.color = color;						
+			foreach (Material rm in r.materials) {
+				if( regexVidro.Match(rm.name).Success ||
+				    regexGaveta.Match(rm.name).Success ||
+					regexFruteira.Match(rm.name).Success ||
+					regexEstrutura.Match(rm.name).Success ||
+					regexPorta.Match(rm.name).Success){
+						rm.color = color;						
+				}
 			}
 		}
 	}

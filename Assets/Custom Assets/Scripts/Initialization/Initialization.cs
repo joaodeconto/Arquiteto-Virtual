@@ -25,6 +25,7 @@ public class Initialization : MonoBehaviour {
 		CombineMesh(GameObject.Find("ParedesLeft").transform, true);
 		CombineMesh(GameObject.Find("ParedesRight").transform, true);
 		CombineMesh(GameObject.Find("ParentTeto").transform, true);
+		Destroy(GameObject.FindWithTag("Grid"));
 		RemoveGround();
 		RemoveWalls();
 		RemoveRoof();

@@ -14,10 +14,10 @@ public class SelectLanguageHandler : MonoBehaviour {
 	private void OnClick(){
 	
 		switch(selectedLanguage){
-			case LanguageEnum.English:
+			case LanguageEnum.Portuguese:
 				PlayerPrefs.SetInt("SelectedLanguage",0);
 				break;
-			case LanguageEnum.Portuguese:
+			case LanguageEnum.English:
 				PlayerPrefs.SetInt("SelectedLanguage",1);
 				break;
 			case LanguageEnum.Spanish:

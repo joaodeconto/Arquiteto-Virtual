@@ -9,16 +9,16 @@ public class GuiScript : MonoBehaviour
 	private static bool showGUI;
 	public static bool ShowGUI {
 		set { 
-		
+
 			Debug.LogWarning("Changing gui state to: " + value.ToString() );
-			
+
 			showGUI = value;
-			
+
 			//Esconder cubo das direções
 			GameObject rotacaoCubo =  GameObject.Find("RotacaoCubo");
 			if(rotacaoCubo != null){
 				Renderer[] meshRenders = rotacaoCubo.GetComponentsInChildren<Renderer>();
-			
+
 				foreach(Renderer render in meshRenders){
 					render.enabled = showGUI;
 				}	
@@ -26,7 +26,7 @@ public class GuiScript : MonoBehaviour
 		}
 		get { return showGUI; }
 	}
-	
+
 	private int activeTexture;
 
 	public GUISkin guiSkin;
@@ -38,6 +38,7 @@ public class GuiScript : MonoBehaviour
 	private GuiDescription guiDescription;
 	private GuiCatalogo guiCatalogo;
 	private GuiCamera guiCamera;
+	private Painter painter;
 	private List<Rect> allGuiWindows;
 	#endregion
 
@@ -46,15 +47,16 @@ public class GuiScript : MonoBehaviour
 	void Start ()
 	{
 		furnitureManager = transform.parent.GetComponent<FurnitureManager> ();
-		
+
 		guiDescription = GetComponent<GuiDescription> ();
 		guiCatalogo = GetComponent<GuiCatalogo> ();
 		guiCamera = GetComponent<GuiCamera> ();
-		
+		painter = GetComponent<Painter> ();
+
 		mainCamera = GameObject.FindGameObjectWithTag("Player").GetComponent<Camera>();
-		
+
 		allGuiWindows = new List<Rect> ();
-		
+
 		showGUI = true;
 	}
 
@@ -72,18 +74,18 @@ public class GuiScript : MonoBehaviour
 			MoveActiveNewFurniture ();
 		}
 	}
-	
+
 	bool IsClickedInsideWindows ()
 	{
 		//Monkey patch ¬¬
 		Vector3 position = Input.mousePosition;
 		position.y = Screen.height - position.y;
-		
+
 		allGuiWindows.Clear();
 		allGuiWindows.AddRange(guiDescription.GetWindows ());
 		allGuiWindows.AddRange(guiCatalogo.GetWindows ());
 		allGuiWindows.AddRange(guiCamera.GetWindows ());
-		
+
 		foreach (Rect wnd in allGuiWindows) 
 		{
 			if (wnd.Contains (position)) 
@@ -98,23 +100,21 @@ public class GuiScript : MonoBehaviour
 	{
 		if (!Line.WasInitialized || !showGUI)
 			return;
-		
+
 		GUI.skin = guiSkin;
-		
+
 		guiDescription.Draw();
 		guiCatalogo.Draw();
 		guiCamera.Draw();
 	}
 
 	private void CheckActiveFurniture (){
-		
+
 		movelSelecionado = GameObject.FindGameObjectWithTag("MovelSelecionado");
-		
+
 		//Botão esquerdo
 		if (Input.GetMouseButtonDown(0)) {
-			if (!MouseUtils.MouseClickedInArea(guiCamera.wndOpenMenu) &&
-			    !MouseUtils.MouseClickedInArea(guiCatalogo.wndAccordMain) &&
-			    !MouseUtils.MouseClickedInArea(guiDescription.window)) {
+			if (!MouseUtils.MouseClickedInArea(painter.rectWindow) && !painter.dropperBool) {
 				//Deselecionar móvel selecionado se clicar com o botão esquerdo
 				if (movelSelecionado != null) {
 					movelSelecionado.GetComponentInChildren<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Discrete;
@@ -122,11 +122,11 @@ public class GuiScript : MonoBehaviour
 					movelSelecionado.GetComponentInChildren<SnapBehaviour>().Select = false;					
 					mainCamera.GetComponent<RenderBounds>().Display = false;
 				}
-				
+
 				RaycastHit hit = new RaycastHit ();
 				Ray ray = mainCamera.ScreenPointToRay (Input.mousePosition);
 				GameObject[] moveis = GameObject.FindGameObjectsWithTag ("Movel");
-				
+
 				//Só continua se pegar algum móvel no ray cast do mouse
 				//Se houverem moveis na cena
 				if (moveis.Length > 0) {
@@ -142,15 +142,15 @@ public class GuiScript : MonoBehaviour
 							mainCamera.GetComponent<RenderBounds>().SetBox(movel);
 						}
 					}
-					
+
 					movelSelecionado = GameObject.FindGameObjectWithTag ("MovelSelecionado");
-					
+
 					if (movelSelecionado != null) {
-											
+
 						if (movelSelecionado.GetComponent<InformacoesMovel>() == null) {
 							Debug.LogError ("The select furniture doesn't have a furniture data");
 						}
-						
+
 	//					furnitureData.Position = movelSelecionado.transform.position;
 	//					movelSelecionado.layer = LayerMask.NameToLayer("Moveis");
 	//					furnitureData.Position = movelSelecionado.transform.position;
@@ -169,12 +169,12 @@ public class GuiScript : MonoBehaviour
 
 	private void MoveActiveNewFurniture ()
 	{
-		
+
 		if (!furnitureManager.isNewFurnitureActive ())
 			return;
-		
+
 		GameObject activeFurniture = GetComponent<FurnitureManager> ().GetActiveNewFurniture ();
-		
+
 		if (activeFurniture.tag != "Movel") {
 			if (!Input.GetMouseButtonDown (0)) {
 				RaycastHit hit;
@@ -196,5 +196,5 @@ public class GuiScript : MonoBehaviour
 			Physics.IgnoreCollision (this.collider, hit.collider, true);
 		}
 	}
-	
+
 }

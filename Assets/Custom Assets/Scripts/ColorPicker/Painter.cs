@@ -9,21 +9,25 @@ public class Painter: MonoBehaviour {
 	public GUIStyle pickerColor;
 	public GUIStyle slider;
 	public Texture2D dropper;
-	public string[] tags;
+	public string[] tags, objectsNames;
+	public bool dropperBool {get; private set;}
+	internal Rect rectWindow;
+	private GameObject GO;
 	private Renderer render;
 	private Vector2 position, sizeDropper, halfSizeDropper;
-	private Rect rectWindow, rectReset, rectGetAll, rectDropper;
+	private Rect rectReset, rectGetAll, rectDropper;
 	private Rect[] rectRGBA, rectFieldRGBA;
 	private Color lastColor;
-	private bool dropperBool, dropperBoolLast, clicked;
-	private string nameObject;
+	private bool dropperBoolLast, clicked;
+	private string nameObject, tagObject;
 	private GuiCatalogo guiCatalogo;
 	private GuiCamera guiCamera;
 	private GuiDescription guiDescription;
-	
+	private GUIStyle groupStyle, buttonStyle, labelStyle;
+
 	void Start () {
 		//ScreenUtils.Initialize(1024, 768);
-		
+
 		rectWindow = ScreenUtils.ScaledRect(200, 24, 120, 320);
 		//não precisa usar ScreenUtils, dentro da função isso já está sendo feito
 		position = new Vector2(10, 30);
@@ -41,14 +45,21 @@ public class Painter: MonoBehaviour {
 			rectFieldRGBA[i].y += rRGBA_field_Standart.height * i;
 		}
 		sizeDropper = ScreenUtils.ScaledVector2(dropper.width, dropper.height);
-		halfSizeDropper = new Vector2(dropper.width / 2, dropper.height / 2);
+		halfSizeDropper = new Vector2(dropper.width / 2, dropper.height);
 		rectDropper = ScreenUtils.ScaledRect(10 + 50 - 15, 270, 30, 30);
 		dropperBool = false;
 		guiCatalogo = GetComponent<GuiCatalogo>();
 		guiCamera = GetComponent<GuiCamera>();
 		guiDescription = GetComponent<GuiDescription>();
+		tagObject = "";
+
+		groupStyle = new GUIStyle("box");
+		groupStyle.fontSize = ScreenUtils.ScaledInt(10);
+
+		buttonStyle = new GUIStyle("button");
+		buttonStyle.fontSize = ScreenUtils.ScaledInt(10);
 	}
-	
+
 	void  OnGUI (){
 		GUI.depth = 1;
 		if (!MouseUtils.MouseClickedInArea(guiCatalogo.wndAccordMain) &&
@@ -65,6 +76,18 @@ public class Painter: MonoBehaviour {
 									color = hit.transform.renderer.material.color;
 								}
 							}
+							foreach (string name in objectsNames) {
+								string objName = name + "(Clone)";
+								if (hit.transform.name == objName) {
+									color = hit.transform.GetComponentInChildren<Renderer>().materials[0].color;
+								}
+							}
+							if (tagObject == "MovelSelecionado") {
+								GO.tag = tagObject;
+							}
+							if (hit.transform.tag == "MovelSelecionado") {
+								hit.transform.tag = "Movel";
+							}
 						}
 						dropperBool = false;
 						dropperBoolLast = true;
@@ -72,53 +95,15 @@ public class Painter: MonoBehaviour {
 				}
 			}
 			else {
-				if (MouseUtils.MouseButtonDoubleClickUp(0, 0.3f)) {
-					if (!dropperBoolLast) {
-						bool breaker = false;
-						if (render != null) {
-							if (MouseUtils.MouseClickedInArea(rectWindow)) breaker = true;
-						}
-						
-						if (!breaker) {
-							Ray ray = transform.parent.camera.ScreenPointToRay(Input.mousePosition);
-							RaycastHit hit;
-							if (Physics.Raycast(ray, out hit)) {
-								foreach (string tag in tags) {
-									if (hit.transform.tag == tag) {
-										render = hit.transform.renderer;
-										color = hit.transform.renderer.material.color;
-										if (hit.transform.name == "ParentTeto") {
-											nameObject = "Teto";
-										}
-										else if (hit.transform.name == "ParedesBack") {
-											nameObject = "Parade Atrás";
-										}
-										else if (hit.transform.name == "ParedesFront") {
-											nameObject = "Parade Frente";
-										}
-										else if (hit.transform.name == "ParedesLeft") {
-											nameObject = "Parade Esquerdo";
-										}
-										else if (hit.transform.name == "ParedesRight") {
-											nameObject = "Parade Direito";
-										}
-										StartCoroutine(WaitClick(0.3f));
-										return;
-									}
-								}
-								render = null;
-							}
-						}
-					} else dropperBoolLast = false;
-				}
-				if (Input.GetMouseButtonUp(0) &&
+
+				if (Input.GetMouseButtonDown(0) &&
 					!clicked) {
 					if (!dropperBoolLast) {
 						bool breaker = false;
 						if (render != null) {
 							if (MouseUtils.MouseClickedInArea(rectWindow)) breaker = true;
 						}
-						
+
 						if (!breaker) {
 							Ray ray = transform.parent.camera.ScreenPointToRay(Input.mousePosition);
 							RaycastHit hit;
@@ -131,55 +116,105 @@ public class Painter: MonoBehaviour {
 						}
 					} else dropperBoolLast = false;
 				}
+				if (MouseUtils.GUIMouseButtonDoubleClickUp(0, 0.3f)) {
+					if (!dropperBoolLast) {
+						bool breaker = false;
+						if (render != null) {
+							if (MouseUtils.MouseClickedInArea(rectWindow)) breaker = true;
+						}
+
+						if (!breaker) {
+							Ray ray = transform.parent.camera.ScreenPointToRay(Input.mousePosition);
+							RaycastHit hit;
+							rectWindow.x = Input.mousePosition.x;
+							if (rectWindow.x > Screen.width - rectWindow.width)
+								rectWindow.x -= rectWindow.width;
+							rectWindow.y = Screen.height - Input.mousePosition.y;
+							if (rectWindow.y > Screen.height - rectWindow.height)
+								rectWindow.y -= rectWindow.height;
+							if (Physics.Raycast(ray, out hit)) {
+								foreach (string tag in tags) {
+									if (hit.transform.tag == tag) {
+										render = hit.transform.renderer;
+										color = hit.transform.renderer.material.color;
+										if (hit.transform.name == "ParentTeto") {
+											nameObject = I18n.t("Teto");
+										}
+										else if (hit.transform.name == "ParedesBack") {
+											nameObject = I18n.t("Parede Atrás");
+										}
+										else if (hit.transform.name == "ParedesFront") {
+											nameObject = I18n.t("Parede Frente");
+										}
+										else if (hit.transform.name == "ParedesLeft") {
+											nameObject = I18n.t("Parede Esquerdo");
+										}
+										else if (hit.transform.name == "ParedesRight") {
+											nameObject = I18n.t("Parede Direito");
+										}
+										tagObject = hit.transform.tag;
+										StartCoroutine(WaitClick(0.3f));
+										return;
+									}
+								}
+								foreach (string name in objectsNames) {
+//									int index = hit.transform.name.IndexOf("(Clone)");
+//									string objName = hit.transform.name.Remove(index);
+//									print(objName + " : " + name);
+									string objName = name + "(Clone)";
+									print (hit.transform.name + " : " + objName);
+									if (hit.transform.name == objName) {
+										GO = hit.transform.gameObject;
+										render = hit.transform.GetComponentInChildren<Renderer>();
+										tagObject = hit.transform.tag;
+										color = render.materials[0].color;
+										if (hit.transform.GetComponent<InformacoesMovel>() != null) {
+											nameObject = hit.transform.GetComponent<InformacoesMovel>().Nome;
+										}
+										else {
+											nameObject = "";
+										}
+										StartCoroutine(WaitClick(0.3f));
+										return;
+									}
+								}
+								render = null;
+							}
+						}
+					} else dropperBoolLast = false;
+				}
 			}
 		}
-		
+
 		if (dropperBool) {
 			Vector2 mp = Event.current.mousePosition;
 			GUI.DrawTexture(new Rect(mp.x, mp.y - halfSizeDropper.y, sizeDropper.x, sizeDropper.y), dropper);
 			if (Screen.showCursor) Screen.showCursor = false;
 		}
 		else { if (!Screen.showCursor) Screen.showCursor = true; }
-		
-//		position.x = Input.mousePosition.x;
-//		position.y = Screen.height - Input.mousePosition.y;
+
 		if (render != null) {
-			GUI.BeginGroup(rectWindow, nameObject, "box");
-			color = GUIControls.RGBCircle (position, color,"",colorCircle, pickerColor, slider);
-			if (GUI.Button(rectReset, "Reset in white")) { color = Color.white; }
-			if (GUI.Button(rectGetAll, "Paint all this color")) {
-				GameObject[] walls = GameObject.FindGameObjectsWithTag("ParedeParent");
-				foreach (GameObject wall in walls) {
-					wall.renderer.material.color = color;
-				}
-				GameObject.FindWithTag("TetoParent").renderer.material.color = color;
-			}
-//			string rs = GUI.TextField(rectRGBA[0], Convert.ToString((color.r * 255)));
-//			if (float.TryParse(rs, out color.r)) {
-//		        color.r = Mathf.Clamp(color.r / 255f, 0f, 1f);
-//		    }
-//		    else if (rs == "") color.r = 0f;
-//			string gs = GUI.TextField(rectRGBA[1], Convert.ToString((color.g * 255)));
-//			if (float.TryParse(gs, out color.g)) {
-//		        color.g = Mathf.Clamp(color.g / 255f, 0f, 1f);
-//		    }
-//		    else if (gs == "") color.g = 0f;
-//			string bs = GUI.TextField(rectRGBA[2], Convert.ToString((color.b * 255)));
-//			if (float.TryParse(bs, out color.b)) {
-//		        color.b = Mathf.Clamp(color.b / 255f, 0f, 1f);
-//		    }
-//		    else if (bs == "") color.b = 0f;
-			
+			GUI.BeginGroup(rectWindow, nameObject, groupStyle);
+			color = GUIControls.RGBCircle (position, color, "", colorCircle, pickerColor, slider);
+			if (GUI.Button(rectReset, I18n.t("Branquear Objeto"), buttonStyle)) { color = Color.white; }
+//			if (GUI.Button(rectGetAll, "Paint all this color")) {
+//				GameObject[] walls = GameObject.FindGameObjectsWithTag("ParedeParent");
+//				foreach (GameObject wall in walls) {
+//					wall.renderer.material.color = color;
+//				}
+//				GameObject.FindWithTag("TetoParent").renderer.material.color = color;
+//			}
+			GUI.Label(rectGetAll, "RGB:");
 			color.r = GUI.HorizontalSlider(rectRGBA[0], color.r, 0f, 1f);
 			GUI.TextField(rectFieldRGBA[0], Convert.ToString((int)Mathf.Ceil(color.r * 255)));
 			color.g = GUI.HorizontalSlider(rectRGBA[1], color.g, 0f, 1f);
 			GUI.TextField(rectFieldRGBA[1], Convert.ToString((int)Mathf.Ceil(color.g * 255)));
 			color.b = GUI.HorizontalSlider(rectRGBA[2], color.b, 0f, 1f);
 			GUI.TextField(rectFieldRGBA[2], Convert.ToString((int)Mathf.Ceil(color.b * 255)));
-			
-			dropperBool = GUI.Toggle(rectDropper, dropperBool, "Dropper", "button");
+
+			dropperBool = GUI.Toggle(rectDropper, dropperBool, dropper, "button");
 			GUI.EndGroup();
-			render.material.color = color;
+			render.materials[0].color = color;
 		} else {
 			if (dropperBool) {
 				dropperBool = false;
@@ -187,7 +222,7 @@ public class Painter: MonoBehaviour {
 		}
 		GUI.depth = 0;
 	}
-	
+
 	IEnumerator WaitClick(float timer) {
 		clicked = true;
 		yield return new WaitForSeconds(timer);

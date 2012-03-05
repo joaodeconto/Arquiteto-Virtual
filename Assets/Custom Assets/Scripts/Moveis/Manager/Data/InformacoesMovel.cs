@@ -20,6 +20,11 @@ public enum Top {
 	COOKTOP,
 }
 
+public enum TipoMovel {
+	FIXO,
+	MOVEL
+}
+
 public class InformacoesMovel : MonoBehaviour {
 	
 	public string[] 	Names { get; set; }
@@ -33,6 +38,7 @@ public class InformacoesMovel : MonoBehaviour {
 	public string 		Codigo;
 	public Texture2D 	Imagem;
 	public Top			top;
+	public TipoMovel	tipoMovel;
 	/* End Setted In Visual  */ 
 	
 	public string		Categoria { get; set; }
@@ -222,8 +228,12 @@ public class InformacoesMovel : MonoBehaviour {
 			newFurniture.AddComponent<CalculateBounds>();
 			newFurniture.GetComponent<InformacoesMovel>().Initialize();
 			newFurniture.GetComponent<InformacoesMovel>().CloneInfo(info);
-			newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | 
-												 RigidbodyConstraints.FreezeRotation;
+			if (newFurniture.GetComponent<InformacoesMovel>().tipoMovel == TipoMovel.FIXO) {
+				newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | 
+													 RigidbodyConstraints.FreezeRotation;
+			} else {
+				newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+			}
 			newFurniture.transform.parent = GameObject.Find("Moveis GO").transform;
 	}
 	

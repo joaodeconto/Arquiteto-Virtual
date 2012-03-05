@@ -202,16 +202,18 @@ public class InformacoesMovel : MonoBehaviour {
 				
 		foreach (Renderer r in renders) {
 			
-			if( regexVidro.Match(r.material.name).Success ||
-			    regexGaveta.Match(r.material.name).Success ||
-				regexFruteira.Match(r.material.name).Success){
-				
-				r.material.color = Line.CurrentLine.colors[DrawersAndGlassDoorColorIndex];
-				
-			} else if(regexEstrutura.Match(r.material.name).Success ||
-						  regexPorta.Match(r.material.name).Success){
-				
-				r.material.color = Line.CurrentLine.colors[StructureAndCommonDoorColorIndex];
+			foreach (Material rm in r.materials) {
+				if( regexVidro.Match(rm.name).Success ||
+				    regexGaveta.Match(rm.name).Success ||
+					regexFruteira.Match(rm.name).Success){
+					
+					rm.color = Line.CurrentLine.colors[DrawersAndGlassDoorColorIndex];
+					
+				} else if(regexEstrutura.Match(rm.name).Success ||
+							  regexPorta.Match(rm.name).Success){
+					
+					rm.color = Line.CurrentLine.colors[StructureAndCommonDoorColorIndex];
+				}
 			}
 		}
 	}

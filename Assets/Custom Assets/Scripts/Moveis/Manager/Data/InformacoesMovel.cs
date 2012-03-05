@@ -151,14 +151,16 @@ public class InformacoesMovel : MonoBehaviour {
 		
 		Regex regexVidro  = new Regex(@".+vidro.+",  RegexOptions.IgnoreCase);
 		Regex regexGaveta = new Regex(@"gaveta.+", RegexOptions.IgnoreCase);
+		Regex regexFruteira = new Regex(@".+fruteira.+", RegexOptions.IgnoreCase);
 			
 		Regex regexEstrutura  = new Regex(@"estrutura.+", RegexOptions.IgnoreCase);
 		Regex regexPorta	  = new Regex(@"portas [PMG]", RegexOptions.IgnoreCase);
 		
 		foreach (Renderer r in renders) {
 			if( regexVidro.Match(r.material.name).Success ||
-			   regexGaveta.Match(r.material.name).Success ||
-			regexEstrutura.Match(r.material.name).Success ||
+			    regexGaveta.Match(r.material.name).Success ||
+				regexFruteira.Match(r.material.name).Success ||
+				regexEstrutura.Match(r.material.name).Success ||
 				regexPorta.Match(r.material.name).Success){
 					r.material.color = color;						
 			}
@@ -193,14 +195,16 @@ public class InformacoesMovel : MonoBehaviour {
 		
 		Regex regexVidro  = new Regex(@".+vidro.+",RegexOptions.IgnoreCase);
 		Regex regexGaveta = new Regex(@"gaveta.+", RegexOptions.IgnoreCase);
+		Regex regexFruteira = new Regex(@".+fruteira.+", RegexOptions.IgnoreCase);
 			
 		Regex regexEstrutura  = new Regex(@"estrutura.+", RegexOptions.IgnoreCase);
-		Regex regexPorta	  = new Regex(@"portas.+", RegexOptions.IgnoreCase);
+		Regex regexPorta	  = new Regex(@"portas [PMG]", RegexOptions.IgnoreCase);
 				
 		foreach (Renderer r in renders) {
 			
 			if( regexVidro.Match(r.material.name).Success ||
-			   regexGaveta.Match(r.material.name).Success){
+			    regexGaveta.Match(r.material.name).Success ||
+				regexFruteira.Match(r.material.name).Success){
 				
 				r.material.color = Line.CurrentLine.colors[DrawersAndGlassDoorColorIndex];
 				

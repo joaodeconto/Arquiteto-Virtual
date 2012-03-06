@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class Initialization : MonoBehaviour {
 	
 	public GameObject[] everything;
-	//public GameObject camera;
+	public GameObject camera;
 	
 	// Use this for initialization of the static classes
 	void Start () {
@@ -30,7 +30,7 @@ public class Initialization : MonoBehaviour {
 		RemoveWalls();
 		RemoveRoof();
 
-		//camera.SetActiveRecursively(true);
+		camera.SetActiveRecursively(true);
 	}
 	
 	public void LoadObjects (int id) {

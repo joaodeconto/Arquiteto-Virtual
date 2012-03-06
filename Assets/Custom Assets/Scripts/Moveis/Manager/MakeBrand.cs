@@ -15,7 +15,7 @@ public class MakeBrand : MonoBehaviour {
 	public Texture2D texturaVidro;
 	public Material materialFruteira;
 	public Texture2D texturaFruteira;
-	
+
 	public void ChangeDoor () {
 //		Regex regexPorta = new Regex(@"Porta.+", RegexOptions.IgnoreCase);
 //		Regex regexPuxador = new Regex(@"Acrilico.+", RegexOptions.IgnoreCase);

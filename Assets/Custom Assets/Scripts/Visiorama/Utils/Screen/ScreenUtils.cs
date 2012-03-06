@@ -116,11 +116,12 @@ public class ScreenUtils {
 		return Mathf.Ceil(scaledNumber);
 	}
 	
+	
 	static public Rect ScaledRectInFloat(Rect rect) {
 		return new Rect(ScaledFloat(rect.x), ScaledFloat(rect.y), 
 						ScaledFloat(rect.width), ScaledFloat(rect.height));
 	}
-	
+
 	static public bool ScreenSizeChange () {
 		Debug.Log((screenWidth != Screen.width) + " - " + screenWidth + " : " + Screen.width);
 		if (screenWidth != Screen.width ||

@@ -27,7 +27,7 @@ public class Painter: MonoBehaviour {
 
 	void Start () {
 		//ScreenUtils.Initialize(1024, 768);
-		
+
 		rectWindow = ScreenUtils.ScaledRect(200, 24, 120, 320);
 		//não precisa usar ScreenUtils, dentro da função isso já está sendo feito
 		position = new Vector2(10, 30);
@@ -47,7 +47,7 @@ public class Painter: MonoBehaviour {
 		sizeDropper = ScreenUtils.ScaledVector2(dropper.width, dropper.height);
 		halfSizeDropper = new Vector2(dropper.width / 2, dropper.height);
 		rectDropper = ScreenUtils.ScaledRect(10 + 50 - 15, 270, 30, 30);		
-		
+
 		dropperBool = false;
 		guiCatalogo = GetComponent<GuiCatalogo>();
 		guiCamera = GetComponent<GuiCamera>();
@@ -62,7 +62,7 @@ public class Painter: MonoBehaviour {
 		buttonStyle.normal.textColor = Color.white;
 		buttonStyle.fontSize = ScreenUtils.ScaledInt(10);
 	}
-	
+
 	void  OnGUI (){
 		if (ScreenUtils.ScreenSizeChange()) {
 			rectWindow = ScreenUtils.ScaledRect(200, 24, 120, 320);
@@ -83,7 +83,7 @@ public class Painter: MonoBehaviour {
 			halfSizeDropper = new Vector2(dropper.width / 2, dropper.height);
 			rectDropper = ScreenUtils.ScaledRect(10 + 50 - 15, 270, 30, 30);
 		}
-		
+
 		GUI.depth = 1;
 		if (!MouseUtils.MouseClickedInArea(guiCatalogo.wndAccordMain) &&
 		    !MouseUtils.MouseClickedInArea(guiCamera.wndOpenMenu) &&

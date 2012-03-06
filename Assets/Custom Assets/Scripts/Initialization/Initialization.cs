@@ -6,8 +6,8 @@ using System.Collections.Generic;
 public class Initialization : MonoBehaviour {
 	
 	public GameObject[] everything;
-	public GameObject camera;
-		
+	//public GameObject camera;
+	
 	// Use this for initialization of the static classes
 	void Start () {
 		
@@ -16,9 +16,9 @@ public class Initialization : MonoBehaviour {
 		I18n.Initialize();
 		I18n.ChangeLanguage(PlayerPrefs.GetInt("SelectedLanguage"));
 		LoadObjects(PlayerPrefs.GetInt("SelectedKitchen"));
-		
+
 		/* Combine meshs for while */
-		
+
 		CombineMesh(GameObject.Find("ParentChao").transform, true);
 		CombineMesh(GameObject.Find("ParedesBack").transform, true);
 		CombineMesh(GameObject.Find("ParedesFront").transform, true);
@@ -29,8 +29,8 @@ public class Initialization : MonoBehaviour {
 		RemoveGround();
 		RemoveWalls();
 		RemoveRoof();
-		
-		camera.SetActiveRecursively(true);
+
+		//camera.SetActiveRecursively(true);
 	}
 	
 	public void LoadObjects (int id) {
@@ -72,7 +72,7 @@ public class Initialization : MonoBehaviour {
 				Destroy (piso,1);
 		}
 	}
-	
+
 	private void RemoveRoof () {
 		GameObject[] ceil = GameObject.FindGameObjectsWithTag ("Teto");
 		if (ceil.Length > 0) {
@@ -80,7 +80,7 @@ public class Initialization : MonoBehaviour {
 				Destroy (t);
 		}
 	}
-	
+
 	private void RemoveWalls () {
 		GameObject[] paredes = GameObject.FindGameObjectsWithTag ("Parede");
 		if (paredes.Length > 0) {
@@ -93,7 +93,7 @@ public class Initialization : MonoBehaviour {
 				Destroy (corner);
 		}
 	}
-	
+
 	private void CombineMesh (Transform target, bool createCollider) {
 		MeshFilter[] meshFilters = target.GetComponentsInChildren<MeshFilter>();
 		CombineInstance[] combine = new CombineInstance[meshFilters.Length];
@@ -107,5 +107,4 @@ public class Initialization : MonoBehaviour {
 			MeshCollider mc = target.gameObject.AddComponent("MeshCollider") as MeshCollider;
 		}
 	}
-
 }

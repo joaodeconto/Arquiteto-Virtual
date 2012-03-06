@@ -154,16 +154,17 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 	#region GuiBase implementation
 	public void Draw(){
 		
-		if (Input.GetKeyDown(KeyCode.Delete)) {
-			Hide();
-			DestroyImmediate(item);
-		}
-		
 		window.x = leftBorderPosition;
 		
 		if(furnitureData == null){
 			DrawEmptyWindow();
 			return;	
+		}
+		
+		if (Input.GetKeyDown(KeyCode.Delete)) {
+			Hide();
+			DestroyImmediate(item);
+			return;
 		}
 		
 		GUI.DrawTexture(window,BgTexture);
@@ -203,17 +204,19 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 				focusItemRotation.x = 25; focusItemRotation.y = 45;
 				transform.parent.position = focusItemPosition;
 				transform.parent.localEulerAngles = focusItemRotation;
-//			    Vector3 focusItemPosition = item.transform.position;
-//        		Vector3 focusItemRotation = item.transform.localEulerAngles;
-//        		focusItemPosition += (item.transform.forward * 2);
-//		        focusItemRotation += new Vector3(0, 180, 0);
-//      
-// 	    		iTween.MoveTo(transform.parent.gameObject, iTween.Hash(  iT.MoveTo.position, focusItemPosition, 
-//  	        	                                                     iT.MoveTo.time, 2f));
-//      
-//		        iTween.RotateTo(transform.parent.gameObject, iTween.Hash(iT.RotateTo.rotation, focusItemRotation,
-//      	                                                             iT.RotateTo.time, 2f));
+				
+//				Vector3 focusItemPosition = item.transform.position;
+//				Vector3 focusItemRotation = item.transform.localEulerAngles;
+//				focusItemPosition += (item.transform.forward * 2);
+//				focusItemRotation += new Vector3(0, 180, 0);
+//			
+//				iTween.MoveTo(transform.parent.gameObject, iTween.Hash(	iT.MoveTo.position, focusItemPosition, 
+//			                                                       		iT.MoveTo.time, 2f));
+//			
+//				iTween.RotateTo(transform.parent.gameObject, iTween.Hash(iT.RotateTo.rotation, focusItemRotation,
+//			                                                           	iT.RotateTo.time, 2f));
 			
+				
 			}
 			if(GUI.Button(btnsActions[2], new GUIContent("", I18n.t("tip-excluir-objeto")), actionStyles[2])){
 				SomClique.Play();
@@ -236,32 +239,35 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 					}
 				}
 			}
+			
+			if (furnitureData.gameObject != null) {
+			
+				if( furnitureData.gameObject.name.Contains("direita") ||
+					furnitureData.gameObject.name.Contains("esquerda") ) {
+					if(GUI.Button(btnsActions[3], "Porta", actionStyles[3])){
+						SelectedLeftDoor = !SelectedLeftDoor;
+						
+						SomClique.Play();
+						
+						furnitureData.ToogleDoorSide();
+					
+						UpdateData(furnitureData);
+					
+						Hide();
+					}
+				}
 		
-			if( furnitureData.gameObject.name.Contains("direita") ||
-				furnitureData.gameObject.name.Contains("esquerda") ) {
-				if(GUI.Button(btnsActions[3], "Porta", actionStyles[3])){
-					SelectedLeftDoor = !SelectedLeftDoor;
+				if( Regex.Match(furnitureData.gameObject.name, ".*(com tampo|c tampo)*.").Success) {
+					if(GUI.Button(btnsActions[4], "Porta", actionStyles[3])){
+						SomClique.Play();
+						
+						furnitureData.ToogleDoorSide();
 					
-					SomClique.Play();
-					
-					furnitureData.ToogleDoorSide();
-				
-					UpdateData(furnitureData);
-				
-					Hide();
+						Hide();
+					}
 				}
 			}
-		
-			if( Regex.Match(furnitureData.gameObject.name, ".*(com tampo|c tampo)*.").Success) {
-				if(GUI.Button(btnsActions[4], "Porta", actionStyles[3])){
-					SomClique.Play();
-					
-					furnitureData.ToogleDoorSide();
-				
-					Hide();
-				}
-			}
-		
+
 		
 			/*#region Conteúdo do Tampo no Accordion
 			for (int i = 0; i != tamposTextures.Length; ++i) {

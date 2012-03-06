@@ -149,21 +149,24 @@ public class InformacoesMovel : MonoBehaviour {
 		
 		Renderer[] renders = this.GetComponentsInChildren<Renderer>();
 		
-		Regex regexVidro  = new Regex(@".+vidro.+",  RegexOptions.IgnoreCase);
+		Regex regexVidro = new Regex(@".+vidro.+", RegexOptions.IgnoreCase);
 		Regex regexGaveta = new Regex(@"gaveta.+", RegexOptions.IgnoreCase);
 		Regex regexFruteira = new Regex(@".+fruteira.+", RegexOptions.IgnoreCase);
-			
-		Regex regexEstrutura  = new Regex(@"estrutura.+", RegexOptions.IgnoreCase);
-		Regex regexPorta	  = new Regex(@"portas [PMG]", RegexOptions.IgnoreCase);
 		
-		foreach (Renderer r in renders) {
-			foreach (Material rm in r.materials) {
+		Regex regexEstrutura = new Regex(@"estrutura.+", RegexOptions.IgnoreCase);
+		Regex regexPorta = new Regex(@"portas [PMG]", RegexOptions.IgnoreCase);
+		
+		foreach (Renderer r in renders) 
+		{
+			foreach (Material rm in r.materials) 
+			{
 				if( regexVidro.Match(rm.name).Success ||
-				    regexGaveta.Match(rm.name).Success ||
+					regexGaveta.Match(rm.name).Success ||
 					regexFruteira.Match(rm.name).Success ||
 					regexEstrutura.Match(rm.name).Success ||
-					regexPorta.Match(rm.name).Success){
-						rm.color = color;						
+					regexPorta.Match(rm.name).Success)
+				{
+					rm.color = color;
 				}
 			}
 		}
@@ -198,22 +201,22 @@ public class InformacoesMovel : MonoBehaviour {
 		Regex regexVidro  = new Regex(@".+vidro.+",RegexOptions.IgnoreCase);
 		Regex regexGaveta = new Regex(@"gaveta.+", RegexOptions.IgnoreCase);
 		Regex regexFruteira = new Regex(@".+fruteira.+", RegexOptions.IgnoreCase);
-			
+
 		Regex regexEstrutura  = new Regex(@"estrutura.+", RegexOptions.IgnoreCase);
 		Regex regexPorta	  = new Regex(@"portas [PMG]", RegexOptions.IgnoreCase);
-				
+
 		foreach (Renderer r in renders) {
-			
+
 			foreach (Material rm in r.materials) {
 				if( regexVidro.Match(rm.name).Success ||
 				    regexGaveta.Match(rm.name).Success ||
 					regexFruteira.Match(rm.name).Success){
-					
+
 					rm.color = Line.CurrentLine.colors[DrawersAndGlassDoorColorIndex];
-					
+
 				} else if(regexEstrutura.Match(rm.name).Success ||
 							  regexPorta.Match(rm.name).Success){
-					
+
 					rm.color = Line.CurrentLine.colors[StructureAndCommonDoorColorIndex];
 				}
 			}
@@ -222,27 +225,28 @@ public class InformacoesMovel : MonoBehaviour {
 	
 	private void Clone(GameObject cloned, InformacoesMovel info, string tag)		{
 	
-			GameObject newFurniture = Instantiate(cloned,this.transform.position,this.transform.rotation) as GameObject;
-								
-			newFurniture.tag = tag;
-			newFurniture.layer = LayerMask.NameToLayer("Moveis");
-			
-			foreach (Animation anim in newFurniture.GetComponentsInChildren<Animation>()) {
-				anim.Stop();
-				anim.playAutomatically = false;
-			}
-			
-			newFurniture.AddComponent<SnapBehaviour>();
-			newFurniture.AddComponent<CalculateBounds>();
-			newFurniture.GetComponent<InformacoesMovel>().Initialize();
-			newFurniture.GetComponent<InformacoesMovel>().CloneInfo(info);
-			if (newFurniture.GetComponent<InformacoesMovel>().tipoMovel == TipoMovel.FIXO) {
-				newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | 
-													 RigidbodyConstraints.FreezeRotation;
-			} else {
-				newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-			}
-			newFurniture.transform.parent = GameObject.Find("Moveis GO").transform;
+		GameObject newFurniture = Instantiate(cloned,this.transform.position,this.transform.rotation) as GameObject;
+							
+		newFurniture.tag = tag;
+		newFurniture.layer = LayerMask.NameToLayer("Moveis");
+		
+		foreach (Animation anim in newFurniture.GetComponentsInChildren<Animation>()) {
+			anim.Stop();
+			anim.playAutomatically = false;
+		}
+		
+		newFurniture.AddComponent<SnapBehaviour>();
+		newFurniture.AddComponent<CalculateBounds>();
+		newFurniture.GetComponent<InformacoesMovel>().Initialize();
+		newFurniture.GetComponent<InformacoesMovel>().CloneInfo(info);
+		if (tipoMovel == TipoMovel.FIXO) {
+			newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | 
+												 RigidbodyConstraints.FreezeRotation;
+		}
+		else {
+			newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+		}
+		newFurniture.transform.parent = GameObject.Find("Moveis GO").transform;
 	}
 	
 	public void CloneInfo(InformacoesMovel info){

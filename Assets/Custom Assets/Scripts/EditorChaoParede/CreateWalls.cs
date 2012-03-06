@@ -3,48 +3,48 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-//[System.Serializable]
-//public class WallsParents {
-//	public Transform parentWallFront;
-//	public Transform parentWallBack;
-//	public Transform parentWallLeft;
-//	public Transform parentWallRight;
-//	
-//	public Color colorWallFront;
-//	public Color colorWallBack;
-//	public Color colorWallLeft;
-//	public Color colorWallRight;
-//	
-//	public Transform[] GetWalls(){
-//		Transform[] walls = new Transform[4];
-//		walls[0] = parentWallFront;
-//		walls[1] = parentWallBack;
-//		walls[2] = parentWallLeft;
-//		walls[3] = parentWallRight;
-//		return walls;
-//	}
-//	
-//	public Color GetWallColor(int index){
-//		switch (index) {
-//			case 0 :
-//				return colorWallFront;
-//				break;
-//			case 1 :
-//				return colorWallBack;
-//				break;
-//			case 2 :
-//				return colorWallLeft;
-//				break;
-//			case 3 :
-//				return colorWallRight;
-//				break;
-//			default :
-//				return Color.white;
-//				break;
-//		}
-//	}
-//	
-//}
+[System.Serializable]
+public class WallsParents {
+	public Transform parentWallFront;
+	public Transform parentWallBack;
+	public Transform parentWallLeft;
+	public Transform parentWallRight;
+	
+	public Color colorWallFront;
+	public Color colorWallBack;
+	public Color colorWallLeft;
+	public Color colorWallRight;
+	
+	public Transform[] GetWalls(){
+		Transform[] walls = new Transform[4];
+		walls[0] = parentWallFront;
+		walls[1] = parentWallBack;
+		walls[2] = parentWallLeft;
+		walls[3] = parentWallRight;
+		return walls;
+	}
+	
+	public Color GetWallColor(int index){
+		switch (index) {
+			case 0 :
+				return colorWallFront;
+				break;
+			case 1 :
+				return colorWallBack;
+				break;
+			case 2 :
+				return colorWallLeft;
+				break;
+			case 3 :
+				return colorWallRight;
+				break;
+			default :
+				return Color.white;
+				break;
+		}
+	}
+	
+}
 
 public class CreateWalls : MonoBehaviour
 {
@@ -681,6 +681,10 @@ public class CreateWalls : MonoBehaviour
 						posicaoParede += new Vector3 (0, 0, 0.5f);
 						novaParede = Instantiate (parede, posicaoParede, parede.transform.rotation) as GameObject;
 					}
+//					for (int i = 0; i != 4; ++i) {
+//						GameObject v = new GameObject("Vazio");
+//						v.transform.parent = novaParede.transform;
+//					}
 					novaParede.transform.parent = parentParedes.parentWallFront;
 					novaParede.transform.eulerAngles += new Vector3 (0, 180.0f, 0);
 				}

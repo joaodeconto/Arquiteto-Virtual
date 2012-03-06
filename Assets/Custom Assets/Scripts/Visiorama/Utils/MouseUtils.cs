@@ -79,6 +79,20 @@ public class MouseUtils : MonoBehaviour
 
 	public static bool GUIMouseButtonDoubleClickDown (int button, float timer)
 	{
+		#if UNITY_STANDALONE_WIN
+		if (Input.GetMouseButtonDown (button)) {
+			if (clickMonkeyPatch > 6 && (Time.time - doubleClickStart) < timer) {
+				doubleClickStart = -1;
+				clickMonkeyPatch = 0;
+				return true;
+			} else {
+				if ((Time.time - doubleClickStart) >= timer)
+					clickMonkeyPatch = 0;
+				doubleClickStart = Time.time;
+				clickMonkeyPatch++;
+			}
+		}
+		#else
 		if (Input.GetMouseButtonDown (button)) {
 			if (clickMonkeyPatch > 2 && (Time.time - doubleClickStart) < timer) {
 				doubleClickStart = -1;
@@ -91,12 +105,27 @@ public class MouseUtils : MonoBehaviour
 				clickMonkeyPatch++;
 			}
 		}
+		#endif
 		return false;
 	}
 
 	public static bool GUIMouseButtonDoubleClickUp (int button, float timer)
 	{
+		#if UNITY_STANDALONE_WIN
 		if (Input.GetMouseButtonUp (button)) {
+			if (clickMonkeyPatch > 6 && (Time.time - doubleClickStart) < timer) {
+				doubleClickStart = -1;
+				clickMonkeyPatch = 0;
+				return true;
+			} else {
+				if ((Time.time - doubleClickStart) >= timer)
+					clickMonkeyPatch = 0;
+				doubleClickStart = Time.time;
+				clickMonkeyPatch++;
+			}
+		}
+		#else
+		if (Input.GetMouseButtonDown (button)) {
 			if (clickMonkeyPatch > 2 && (Time.time - doubleClickStart) < timer) {
 				doubleClickStart = -1;
 				clickMonkeyPatch = 0;
@@ -108,6 +137,7 @@ public class MouseUtils : MonoBehaviour
 				clickMonkeyPatch++;
 			}
 		}
+		#endif
 		return false;
 	}
 

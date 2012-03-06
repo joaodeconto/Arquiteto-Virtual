@@ -114,9 +114,9 @@ public class SnapBehaviour : MonoBehaviour {
 			if (hit.transform.tag == "Grid")
 				return;//Ignore Grid			
 
-			if (hit.transform.tag == "ParedeParent" ||
+			if (hit.transform.tag == "Movel" ||
+				hit.transform.tag == "ParedeParent" ||
 			    hit.transform.tag == "ChaoParent" ||
-			    hit.transform.tag == "Movel" ||
 				hit.transform.tag == "TetoParent"){
 
 				if (GetComponent<InformacoesMovel>().tipoMovel == TipoMovel.FIXO) {

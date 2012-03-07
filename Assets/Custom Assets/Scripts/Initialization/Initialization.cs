@@ -18,7 +18,7 @@ public class Initialization : MonoBehaviour {
 		LoadObjects(PlayerPrefs.GetInt("SelectedKitchen"));
 
 		/* Combine meshs for while */
-
+		
 		CombineMesh(GameObject.Find("ParentChao").transform, true);
 		CombineMesh(GameObject.Find("ParedesBack").transform, true);
 		CombineMesh(GameObject.Find("ParedesFront").transform, true);
@@ -37,6 +37,8 @@ public class Initialization : MonoBehaviour {
 		
 		#region load objects
 		GameObject root = everything[id];
+		
+		root.GetComponent<MakeBrand>().ChangeDoor();
 		
 		List<InformacoesMovel> listInfoMoveis = new List<InformacoesMovel>();
 		

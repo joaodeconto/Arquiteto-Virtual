@@ -4,7 +4,17 @@ using System.Collections;
 public class PersistObject : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
-		DontDestroyOnLoad(gameObject);
+	void Awake () {
+		if (Application.loadedLevelName == "WallBuilder" || 
+			Application.loadedLevelName == "MakeYourKitchen") {
+			DontDestroyOnLoad(gameObject);
+		}
+	}
+	
+	void LateUpdate () {
+		if (Application.loadedLevelName != "WallBuilder" && 
+			Application.loadedLevelName != "MakeYourKitchen") {
+			Destroy(gameObject);
+		}
 	}
 }

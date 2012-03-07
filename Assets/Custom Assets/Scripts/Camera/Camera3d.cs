@@ -33,7 +33,7 @@ public class Camera3d : MonoBehaviour
 	private GuiCamera guiCamera;
 	private GuiDescription guiDescription;
 	
-	void Awake () {
+	void Start () {
 	
 		sCamera = GetComponent<Camera>();
 		SpeedZoom = 1.5f;
@@ -46,6 +46,12 @@ public class Camera3d : MonoBehaviour
 
 		AreWallsAlwaysVisible = false;
 		
+		chaoParent = GameObject.Find("ParentChao");
+		paredesParents.parentWallBack = GameObject.Find("ParedesBack").transform;
+		paredesParents.parentWallFront = GameObject.Find("ParedesFront").transform;
+		paredesParents.parentWallLeft = GameObject.Find("ParedesLeft").transform;
+		paredesParents.parentWallRight = GameObject.Find("ParedesRight").transform;
+		tetoParent = GameObject.Find("ParentTeto");
 		GameObject.Find("RotacaoCubo").GetComponentInChildren<Camera>().enabled = true;
 		
 		guiCatalogo = GetComponentInChildren<GuiCatalogo>();
@@ -55,6 +61,12 @@ public class Camera3d : MonoBehaviour
 
 	// Update is called once per frame
 	void Update () {
+		if (guiCatalogo == null || guiCamera == null || guiDescription == null) {
+			guiCatalogo = GetComponentInChildren<GuiCatalogo>();
+			guiCamera = GetComponentInChildren<GuiCamera>();
+			guiDescription = GetComponentInChildren<GuiDescription>();
+		}
+		
 		MoveCamera();
 		MouseMoveCamera();
 		RenderWalls();
@@ -177,9 +189,9 @@ public class Camera3d : MonoBehaviour
 				transform.localPosition += transform.TransformDirection(new Vector3(x, y, 0));
 			}
 			
-			transform.localPosition = new Vector3(Mathf.Clamp(transform.localPosition.x, -45f, 45f), 
+			transform.localPosition = new Vector3(Mathf.Clamp(transform.localPosition.x, 955f, 1045f), 
 			                                      Mathf.Clamp(transform.localPosition.y, -10f, 10f), 
-			                                      Mathf.Clamp(transform.localPosition.z, -45f, 45f));
+			                                      Mathf.Clamp(transform.localPosition.z, 955f, 1045f));
 			
 			// Mouse wheel moving forward
 			if(Input.GetAxisRaw("Mouse ScrollWheel") > 0f && transform.position.y > -10f) {

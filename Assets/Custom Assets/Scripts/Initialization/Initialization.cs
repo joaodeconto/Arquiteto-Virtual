@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class Initialization : MonoBehaviour {
 	
 	public GameObject[] everything;
-	//public GameObject camera;
+	public GameObject camera;
 	
 	// Use this for initialization of the static classes
 	void Start () {
@@ -18,7 +18,7 @@ public class Initialization : MonoBehaviour {
 		LoadObjects(PlayerPrefs.GetInt("SelectedKitchen"));
 
 		/* Combine meshs for while */
-
+		
 		CombineMesh(GameObject.Find("ParentChao").transform, true);
 		CombineMesh(GameObject.Find("ParedesBack").transform, true);
 		CombineMesh(GameObject.Find("ParedesFront").transform, true);
@@ -30,13 +30,15 @@ public class Initialization : MonoBehaviour {
 		RemoveWalls();
 		RemoveRoof();
 
-		//camera.SetActiveRecursively(true);
+		camera.SetActiveRecursively(true);
 	}
 	
 	public void LoadObjects (int id) {
 		
 		#region load objects
 		GameObject root = everything[id];
+		
+		root.GetComponent<MakeBrand>().ChangeDoor();
 		
 		List<InformacoesMovel> listInfoMoveis = new List<InformacoesMovel>();
 		

@@ -347,9 +347,15 @@ class ChangeMaterial : EditorWindow {
 			}
 		}
 		
+		float totalItems = allChilds.Length;
+		float progress = 0;
+		
 		bool breaker = false;
 		foreach (Transform tm in allChilds) {
-			Debug.Log(regexName.IsMatch(tm.name));
+			EditorUtility.DisplayProgressBar(
+                "Add Materials",
+                "Checking Object: "+tm.name,
+                progress/totalItems);
 			if (regexName.IsMatch(tm.name)) {
 				if (getChildren) {
 					if (tm.GetComponentsInChildren<Renderer>().Length != 0) {
@@ -401,6 +407,7 @@ class ChangeMaterial : EditorWindow {
 					}
 				}
 			}
+			progress++;
 		}
 		
 		ClearLog ();
@@ -412,6 +419,7 @@ class ChangeMaterial : EditorWindow {
 		}
 		
 		AssetDatabase.Refresh();
+		EditorUtility.ClearProgressBar();
 	}
 
     void NewMaterial () {
@@ -424,9 +432,15 @@ class ChangeMaterial : EditorWindow {
 			}
 		}
 		
+		float totalItems = allChilds.Length;
+		float progress = 0;
+		
 		bool breaker = false;
 		foreach (Transform tm in allChilds) {
-			Debug.Log(regexName.IsMatch(tm.name));
+			EditorUtility.DisplayProgressBar(
+                "New Material",
+                "Checking Object: "+tm.name,
+                progress/totalItems);
 			if (regexName.IsMatch(tm.name)) {
 				if (getChildren) {
 					if (tm.GetComponentsInChildren<Renderer>().Length != 0) {
@@ -450,9 +464,11 @@ class ChangeMaterial : EditorWindow {
 					}
 				}
 			}
+			progress++;
 		}
 		
 		AssetDatabase.Refresh();
+		EditorUtility.ClearProgressBar();
 	}
 	
 	void OrganizeMaterial () {
@@ -473,10 +489,10 @@ class ChangeMaterial : EditorWindow {
 		
 		bool breaker = false;
 		foreach (Transform tm in allChilds) {
-		EditorUtility.DisplayProgressBar(
-                "Organizing files",
-                "Checking Object: "+tm.name,
-                progress/totalItems);
+			EditorUtility.DisplayProgressBar(
+	                "Organizing Materials",
+	                "Checking Object: "+tm.name,
+	                progress/totalItems);
 			Debug.Log(regexName.IsMatch(tm.name));
 			if (regexName.IsMatch(tm.name)) {
 				if (getChildren) {
@@ -541,7 +557,14 @@ class ChangeMaterial : EditorWindow {
 	void ApplyMaterial () {
 		Renderer[] allRenderers = materialObjectContains.GetComponentsInChildren<Renderer>();
 		
+		float totalItems = allRenderers.Length;
+		float progress = 0;
+		
 		foreach (Renderer rd in allRenderers) {
+			EditorUtility.DisplayProgressBar(
+	                "Organizing Materials",
+	                "Materal Object: "+rd.name,
+	                progress/totalItems);
 			Material[] actualMaterials = rd.materials;
 			Material[] applyMaterials = new Material[actualMaterials.Length];
 			for (int i = 0; i != rd.materials.Length; ++i) {
@@ -552,11 +575,13 @@ class ChangeMaterial : EditorWindow {
 				}
 			}
 			rd.materials = applyMaterials;
+			progress++;
 		}
 		
 		ClearLog ();
 		
 		AssetDatabase.Refresh();
+		EditorUtility.ClearProgressBar();
 	}
 	
 	void ClearLog () {

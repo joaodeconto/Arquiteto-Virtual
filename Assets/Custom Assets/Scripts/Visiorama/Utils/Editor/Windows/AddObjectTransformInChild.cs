@@ -142,7 +142,14 @@ class AddObjectTransformInChild : EditorWindow {
 		bool warning = false;
 		List<int> iWarning = new List<int>();
 		
+		float totalItems = allChilds.Length;
+		float progress = 0;
+		
 		foreach (Transform t in allChilds) {
+			EditorUtility.DisplayProgressBar(
+                "Add Materials",
+                "Checking Object: "+t.name,
+                progress/totalItems);
 			if (regexName.IsMatch(t.name)) {
 				if (setPosition) {
 					if (getChildrenPosition) {
@@ -179,6 +186,7 @@ class AddObjectTransformInChild : EditorWindow {
 					}
 				}
 			}
+			progress++;
 		}
 		
 		ClearLog ();

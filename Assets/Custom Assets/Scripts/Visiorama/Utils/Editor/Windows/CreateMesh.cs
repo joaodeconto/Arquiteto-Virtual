@@ -102,8 +102,16 @@ class CreateMesh : EditorWindow {
 		
 		MeshFilter[] meshFilters = transformMeshs.GetComponentsInChildren<MeshFilter>();
         CombineInstance[] combine = new CombineInstance[meshFilters.Length];
+		
+		float totalMeshs = meshFilters.Length;
+		float progress = 0;
+		
 		bool breaker = false;
-        for (int i = 0; i != meshFilters.Length; ++i) {
+        for (int i = 0; i != totalMeshs; ++i) {
+			EditorUtility.DisplayProgressBar(
+                "Add Materials",
+                "Checking Object: "+meshFilters[i].name,
+                i/totalMeshs);
 			if (regexIgnores.Count != 0) {
 				foreach(Regex regexIgnore in regexIgnores) {
 					if (regexIgnore.IsMatch(meshFilters[i].gameObject.name)

@@ -456,6 +456,7 @@ class ChangeMaterial : EditorWindow {
 	}
 	
 	void OrganizeMaterial () {
+		
 		Regex regexName = new Regex(nameObject);
 		Transform[] allChilds = materialObjectContains.GetComponentsInChildren<Transform>();
 		bool warning = false;
@@ -467,8 +468,15 @@ class ChangeMaterial : EditorWindow {
 			}
 		}
 		
+		float totalItems = allChilds.Length;
+		float progress = 0;
+		
 		bool breaker = false;
 		foreach (Transform tm in allChilds) {
+		EditorUtility.DisplayProgressBar(
+                "Organizing files",
+                "Checking Object: "+tm.name,
+                progress/totalItems);
 			Debug.Log(regexName.IsMatch(tm.name));
 			if (regexName.IsMatch(tm.name)) {
 				if (getChildren) {
@@ -515,6 +523,7 @@ class ChangeMaterial : EditorWindow {
 					}
 				}
 			}
+			progress++;
 		}
 		
 		ClearLog ();
@@ -526,6 +535,7 @@ class ChangeMaterial : EditorWindow {
 		}
 		
 		AssetDatabase.Refresh();
+		EditorUtility.ClearProgressBar();
 	}
 	
 	void ApplyMaterial () {

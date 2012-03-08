@@ -470,10 +470,10 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 								                 ScreenUtils.ScaleWidth(64), ScreenUtils.ScaleHeight(64)), new GUIContent(Line.CurrentLine.categories[i].Image, Line.CurrentLine.categories[i].Name))) {
 										SomClique.Play();
 										cCategory = i;
-										items = Line.CurrentLine.categories[cCategory].Furniture;
+										items = new List<GameObject>(Line.CurrentLine.categories[cCategory].Furniture);
 										
 										for (int j = 0; j != items.Count; ++j){
-											if (Regex.Match(items[j].name,".*(sem tampo|s tampo|direita).*").Success) {
+											if (Regex.Match(items[j].name,".*(com tampo|c tampo|cook top|cooktop|pia|direita).*",RegexOptions.IgnoreCase).Success) {
 												items.RemoveAt(j);
 												--j;
 												continue;

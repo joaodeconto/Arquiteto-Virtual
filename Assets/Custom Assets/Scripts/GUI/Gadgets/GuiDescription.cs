@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 public class GuiDescription : MonoBehaviour, GuiBase {
@@ -45,6 +46,11 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 	private int indexTampo = 0;
 	#endregion
 	
+	#region vars Choose Tampo Type
+	private string currentTampo = "";
+	private bool isSemTampo, isComTampo, isCooktop, isPia;
+	#endregion
+	
 	void Awake(){
 		
 		lerpStep 	= 0.1F;
@@ -74,12 +80,15 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 		wndItemValue[4] = ScreenUtils.ScaledRect(45,120,70,17);
 		wndItemValue[5] = ScreenUtils.ScaledRect(45,148,70,17);
 		
-		btnsActions = new Rect[5];
+		btnsActions = new Rect[8];
 		btnsActions[0] = ScreenUtils.ScaledRect(16,180,32,32);
 		btnsActions[1] = ScreenUtils.ScaledRect(48,203,32,32);
 		btnsActions[2] = ScreenUtils.ScaledRect(80,180,32,32);
 		btnsActions[3] = ScreenUtils.ScaledRect(16,212,32,32);
 		btnsActions[4] = ScreenUtils.ScaledRect(80,212,32,32);
+		btnsActions[5] = ScreenUtils.ScaledRect(16,244,32,32);
+		btnsActions[6] = ScreenUtils.ScaledRect(80,244,32,32);
+		btnsActions[7] = ScreenUtils.ScaledRect(12,212,32,32);
 		
 		Tooltip.AddDynamicTip(I18n.t("tip-rotacao-objeto"));
 		Tooltip.AddDynamicTip(I18n.t("tip-focar-objeto"));
@@ -107,9 +116,52 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 	
 	private void Showing(){
 		cLerp += 1F / (lerpTime);
+		isSemTampo = isComTampo = isCooktop = isPia = false;
 		if(cLerp > 1F){
 			//Quando termina de abrir a janela seleciona o objeto
 			item = GameObject.FindGameObjectWithTag("MovelSelecionado");
+			string regStrings = "(sem tampo|s tampo|com tampo|c tampo|cooktop|cook top|com pia)";
+			if (Regex.Match(item.name,regStrings).Success) {
+				string nameItemRegexPrefix = Regex.Match(item.name,".*(?=sem tampo|s tampo|com tampo|c tampo|cooktop|cook top|com pia)", RegexOptions.IgnoreCase).Value;
+				string currentTampoTypeRegexPrefix = Regex.Match(item.name,regStrings, RegexOptions.IgnoreCase).Value;
+				currentTampo = currentTampoTypeRegexPrefix;
+				currentTampoTypeRegexPrefix.ToLower();
+				
+//				print ("currentTampoTypeRegexPrefix: " + currentTampoTypeRegexPrefix + "\nnameItemRegexPrefix: " + nameItemRegexPrefix);
+				int categoryIndex = 0;
+				
+				//Find index of mobile's category 
+				List<Category> categories = Line.CurrentLine.categories;
+				for( categoryIndex = Line.CurrentLine.categories.Count - 1; categoryIndex != -1; --categoryIndex ){
+					if(categories[categoryIndex].Name.Equals(furnitureData.Categoria)){
+						break;		
+					}
+				}
+				
+				//Find the "Brother" of the current mobile
+				List<GameObject> furniture  = Line.CurrentLine.categories[categoryIndex].Furniture;
+				foreach(GameObject mobile in furniture){
+//					print ("BOOL: " + (Regex.Match(mobile.name, nameItemRegexPrefix, RegexOptions.IgnoreCase).Success && 
+//						Regex.Match(mobile.name, regStrings, RegexOptions.IgnoreCase).Success));
+					if(Regex.Match(mobile.name, nameItemRegexPrefix, RegexOptions.IgnoreCase).Success && 
+						Regex.Match(mobile.name, regStrings, RegexOptions.IgnoreCase).Success){
+						string tampoTypeRegexPrefix = Regex.Match(mobile.name,regStrings, RegexOptions.IgnoreCase).Value;
+						tampoTypeRegexPrefix.ToLower();
+						
+						print ("currentTampoTypeRegexPrefix: " + currentTampoTypeRegexPrefix + "\ntampoTypeRegexPrefix: " + tampoTypeRegexPrefix);
+						
+						//Checks if the this "Tampo" has the same name as current "Tampo" a little while ago
+						if (currentTampoTypeRegexPrefix.Equals(tampoTypeRegexPrefix)) continue;
+						
+						//If this is true, in the GUI show the option
+						if (tampoTypeRegexPrefix.Equals("sem tampo") || tampoTypeRegexPrefix.Equals("s tampo")) isSemTampo = true;
+						if (tampoTypeRegexPrefix.Equals("com tampo") || tampoTypeRegexPrefix.Equals("c tampo")) isComTampo = true;
+						if (tampoTypeRegexPrefix.Equals("cooktop") || tampoTypeRegexPrefix.Equals("cook top")) isCooktop = true;
+						if (tampoTypeRegexPrefix.Equals("com pia")) isPia = true;
+					}
+				}
+				
+			}
 			CancelInvoke("Showing");
 		}
 		
@@ -224,7 +276,7 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 				DestroyImmediate(item);
 			}
 		
-			if(furnitureData.top != Top.NENHUM){
+			/*if(furnitureData.top != Top.NENHUM){
 				if(GUI.Button(btnsActions[3], "Tampo", actionStyles[3])){
 					SomClique.Play();
 					
@@ -238,7 +290,7 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 						}
 					}
 				}
-			}
+			}*/
 			
 			if (furnitureData.gameObject != null) {
 			
@@ -256,12 +308,38 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 						Hide();
 					}
 				}
-		
-				if( Regex.Match(furnitureData.gameObject.name, ".*(com tampo|c tampo)*.").Success) {
+				if (isSemTampo) {
+					if(GUI.Button(btnsActions[7], "Porta", actionStyles[3])){
+						SomClique.Play();
+						
+						furnitureData.ChangeTop(new string[]{"sem tampo", "s tampo"}, currentTampo);
+					
+						Hide();
+					}
+				}
+				if (isComTampo) {
 					if(GUI.Button(btnsActions[4], "Porta", actionStyles[3])){
 						SomClique.Play();
 						
-						furnitureData.ToogleDoorSide();
+						furnitureData.ChangeTop(new string[]{"com tampo", "c tampo"}, currentTampo);
+					
+						Hide();
+					}
+				}
+				if (isCooktop) {
+					if(GUI.Button(btnsActions[5], "Porta", actionStyles[3])){
+						SomClique.Play();
+						
+						furnitureData.ChangeTop(new string[]{"cooktop", "cook top"}, currentTampo);
+					
+						Hide();
+					}
+				}
+				if (isPia) {
+					if(GUI.Button(btnsActions[6], "Porta", actionStyles[3])){
+						SomClique.Play();
+						
+						furnitureData.ChangeTop(new string[]{"com pia"}, currentTampo);
 					
 						Hide();
 					}

@@ -16,9 +16,11 @@ public class Camera3d : MonoBehaviour
 	public bool AreWallsAlwaysVisible {
 		get { return areWallsVisible; }
 		set { 
-				if(value == true){
-					foreach (Transform parede in paredesParents.GetWalls()) {
-						parede.renderer.material = paredeMaterial;
+				if(value == true)
+				{
+					foreach (Transform paredes in paredesParents.GetWalls())
+					{
+						paredes.renderer.material = paredeMaterial;
 					}
 				}
 

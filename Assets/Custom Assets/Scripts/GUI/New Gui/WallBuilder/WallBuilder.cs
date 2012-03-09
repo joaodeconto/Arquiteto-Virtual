@@ -14,35 +14,36 @@ public class WallsParents
 	public Color colorWallLeft;
 	public Color colorWallRight;
 	
-	public Transform[] GetWalls ()
+	public Transform this [int i] {
+		get {
+			if (i == 0)
+				return parentWallFront;
+			if (i == 1)
+				return parentWallBack;
+			if (i == 2)
+				return parentWallLeft;
+			/*if ( i == 3)*/
+			return parentWallRight;
+		}
+	}
+
+	public Transform[] GetWalls()
 	{
-		Transform[] walls = new Transform[4];
-		walls [0] = parentWallFront;
-		walls [1] = parentWallBack;
-		walls [2] = parentWallLeft;
-		walls [3] = parentWallRight;
-		return walls;
+		Transform[] transWalls = new Transform[4];
+		transWalls[0] = parentWallFront;
+		transWalls[0] = parentWallBack;
+		transWalls[0] = parentWallLeft;
+		transWalls[0] = parentWallRight;
+		return transWalls;
 	}
 	
-	public Color GetWallColor (int index)
+	public Color GetWallColor (int i)
 	{
-		switch (index) {
-		case 0 :
-			return colorWallFront;
-			break;
-		case 1 :
-			return colorWallBack;
-			break;
-		case 2 :
-			return colorWallLeft;
-			break;
-		case 3 :
-			return colorWallRight;
-			break;
-		default :
-			return Color.white;
-			break;
-		}
+		if (i == 0) return colorWallFront;
+		if (i == 1) return colorWallBack;
+		if (i == 2) return colorWallLeft;
+		if (i == 3) return colorWallRight;
+		return Color.white;
 	}	
 }
 
@@ -86,7 +87,7 @@ public class WallBuilder : MonoBehaviour {
 	#endregion
 	
 	#region WorkAround to resolve NGUI bug: Move object to negative positions crashes NGUI functionality
-	private Vector3 root;
+	public static Vector3 ROOT { get; private set; }
 	#endregion
 	
 	#region Unty Methods
@@ -101,7 +102,7 @@ public class WallBuilder : MonoBehaviour {
 		MinWallWidth = 2;
 		MinWallDepth = 2;
 		
-		root = new Vector3(1000,0,1000);
+		ROOT = new Vector3(1000,0,1000);
 		
 		mov = transform.position;
 		zoom = GameObject.Find("Main Camera").camera.orthographicSize;
@@ -162,7 +163,7 @@ public class WallBuilder : MonoBehaviour {
 		for (int z = 0; z != WallDepth; ++z) {
 			for (int x = 0; x != WallWidth; ++x) {
 				GameObject newTile = Instantiate (floor, Vector3.zero, floor.transform.rotation) as GameObject;
-				newTile.transform.position = root + new Vector3 ((int)(x - (WallWidth / 2)), 0.01f, (int)(z - (WallDepth / 2)));
+				newTile.transform.position = ROOT + new Vector3 ((int)(x - (WallWidth / 2)), 0.01f, (int)(z - (WallDepth / 2)));
 				newTile.transform.parent = parentFloor;
 			}
 		}

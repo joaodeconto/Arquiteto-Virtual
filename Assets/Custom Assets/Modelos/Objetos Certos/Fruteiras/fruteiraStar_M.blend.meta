@@ -5,7 +5,6 @@ ModelImporter:
     4300000: Cube.001
     4300002: Cube
     4300004: Cube.002
-    100100000: DataTemplate __Singleton__
   serializedVersion: 10
   materials:
     importMaterials: 1

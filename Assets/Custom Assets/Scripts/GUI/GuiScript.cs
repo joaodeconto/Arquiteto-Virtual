@@ -103,7 +103,7 @@ public class GuiScript : MonoBehaviour
 		
 		guiDescription.Draw();
 		guiCatalogo.Draw();
-		guiCamera.Draw();
+		//guiCamera.Draw();
 	}
 
 	private void CheckActiveFurniture (){

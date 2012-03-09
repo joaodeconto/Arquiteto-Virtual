@@ -92,14 +92,61 @@ public class InformacoesMovel : MonoBehaviour {
 		}
 	}
 	
-	public void ChangeTop (GameObject top){
+//	public void ChangeTop (GameObject top){
+//		
+//		Regex regexType = new Regex(@".+posicaoTop.+", RegexOptions.IgnoreCase);
+//
+//		foreach(Transform child in transform){
+//			if(regexType.Match(child.name).Success){
+//				GameObject newTop = Instantiate(top, child.position, child.rotation) as GameObject;
+//				newTop.transform.parent = child.transform;
+//			}
+//		}
+//	}
+	
+	public void ChangeTop (string[] filterTop, string oldFilterTop) {
+		if (filterTop.Length == 0)
+			return;
 		
-		Regex regexType = new Regex(@"posicaoTop.+", RegexOptions.IgnoreCase);
-
-		foreach(Transform child in transform){
-			if(regexType.Match(child.name).Success){
-				GameObject newTop = Instantiate(top, child.position, child.rotation) as GameObject;
-				newTop.transform.parent = child.transform;
+		string nameRegexPrefix = Regex.Match(this.name,".*(?="+oldFilterTop+")").Value;
+		
+		#region Filtro
+		string[] filters = new string[filterTop.Length];
+		for (int i = 0; i != filterTop.Length; i++) {
+			if (i == (filterTop.Length-1)) {
+				filters[i] = filterTop[i];
+			} else {
+				filters[i] = filterTop[i]+"|";
+			}
+		}
+		string filter = "";
+		foreach (string f in filters) {
+			filter += f;
+		}
+		print("Filter: " + filter);
+		Regex regexTop = new Regex(".*("+filter+").*", RegexOptions.IgnoreCase);
+		#endregion
+		
+		int categoryIndex;
+				
+		//Find index of mobile's category 
+		List<Category> categories = Line.CurrentLine.categories;
+		for( categoryIndex = Line.CurrentLine.categories.Count - 1; categoryIndex != -1; --categoryIndex ){
+			if(categories[categoryIndex].Name.Equals(this.Categoria)){
+				break;		
+			}
+		}
+		
+		//Find the "Brother" of the current mobile
+		List<GameObject> furniture  = Line.CurrentLine.categories[categoryIndex].Furniture;
+		foreach(GameObject mobile in furniture){
+			string nameMobileRegexPrefix = Regex.Match(mobile.name,".*(?="+filter+")").Value;
+			print((nameRegexPrefix.Equals(nameMobileRegexPrefix) && regexTop.Match(mobile.name).Success) + " : " +
+				mobile.name);
+			if(nameRegexPrefix.Equals(nameMobileRegexPrefix)  && regexTop.Match(mobile.name).Success){
+				Clone(mobile, this.GetComponent<InformacoesMovel>(), "Movel");
+				Destroy(this.gameObject);
+				break;
 			}
 		}
 	}
@@ -109,12 +156,14 @@ public class InformacoesMovel : MonoBehaviour {
 		string nameRegexPrefix = Regex.Match(this.name,".*(?=esquerda|direita)").Value;
 		string patternToFind = "";
 		
+		string typeTampoRegexPrefix = Regex.Match(this.name,"(sem tampo|s tampo|com tampo|c tampo|com cooktop|com cook top|com pia)").Value;
+		
 		if(Regex.Match(this.name,"direita").Success){
 //			Debug.LogError("Turn Left");
-			patternToFind = nameRegexPrefix + "esquerda.*";
+			patternToFind = nameRegexPrefix + "esquerda.*" + typeTampoRegexPrefix;
 		} else if(Regex.Match(this.name,"esquerda").Success){
 //			Debug.LogError("Turn Right");
-			patternToFind = nameRegexPrefix + "direita.*";
+			patternToFind = nameRegexPrefix + "direita.*" + typeTampoRegexPrefix;
 		} else {
 			Debug.LogError("Whata?!");
 			return;

@@ -470,10 +470,10 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 								                 ScreenUtils.ScaleWidth(64), ScreenUtils.ScaleHeight(64)), new GUIContent(Line.CurrentLine.categories[i].Image, Line.CurrentLine.categories[i].Name))) {
 										SomClique.Play();
 										cCategory = i;
-										items = Line.CurrentLine.categories[cCategory].Furniture;
+										items = new List<GameObject>(Line.CurrentLine.categories[cCategory].Furniture);
 										
 										for (int j = 0; j != items.Count; ++j){
-											if (Regex.Match(items[j].name,".*(sem tampo|s tampo|direita).*").Success) {
+											if (Regex.Match(items[j].name,".*(com tampo|c tampo|cook top|cooktop|pia|direita).*",RegexOptions.IgnoreCase).Success) {
 												items.RemoveAt(j);
 												--j;
 												continue;
@@ -597,6 +597,7 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 	}
 	#endregion
 	
+	//Só pro GERAL menos EXTRAS
 	#region Método de Instanciar Móvel
 	void InstanceNewObject (int id) {
        	ray = transform.parent.camera.ScreenPointToRay(new Vector2(Screen.width / 2,Screen.height / 2));
@@ -639,23 +640,21 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 			}
 		
 			#region Setando a posicao inicial do móvel se não estiver sobre um "Chao"
-			if(hit.transform.tag != "ChaoParent"){
-				GameObject[] ground = GameObject.FindGameObjectsWithTag("ChaoVazio");
-				GameObject nearestAvailableGround = null;
-				float shortestDistance = float.MaxValue;
-				float distance;
-				foreach(GameObject groundPiece in ground){
-					distance = Vector3.Distance(groundPiece.transform.position,hit.point);
-					if(distance < shortestDistance){
-						shortestDistance = distance;
-						nearestAvailableGround = groundPiece;
-					}
+			GameObject[] ground = GameObject.FindGameObjectsWithTag("ChaoVazio");
+			GameObject nearestAvailableGround = null;
+			float shortestDistance = float.MaxValue;
+			float distance;
+			foreach(GameObject groundPiece in ground){
+				distance = Vector3.Distance(groundPiece.transform.position,hit.point);
+				if(distance < shortestDistance){
+					shortestDistance = distance;
+					nearestAvailableGround = groundPiece;
 				}
-			
-				print("nearestAvailableGround.transform.position: " + nearestAvailableGround.transform.position);
-				Vector3 newPosition = nearestAvailableGround.transform.position;
-				newFurniture.transform.position = newPosition;
 			}
+		
+			print("nearestAvailableGround.transform.position: " + nearestAvailableGround.transform.position);
+			Vector3 newPosition = nearestAvailableGround.transform.position;
+			newFurniture.transform.position = newPosition;
 			#endregion
 			
 			#region colocar objeto virado para a câmera
@@ -680,7 +679,8 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 			newFurniture.transform.parent = MoveisGO.transform;
 		}
 	}
-					
+	
+	//Só pro EXTRAS
 	void InstanceNewObject (GameObject gameObject) {
        	ray = transform.parent.camera.ScreenPointToRay(new Vector2(Screen.width / 2,Screen.height / 2));
 		
@@ -723,23 +723,21 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 			}
 		
 			#region Setando a posicao inicial do móvel se não estiver sobre um "Chao"
-			if(hit.transform.tag != "ChaoParent"){
-				GameObject[] ground = GameObject.FindGameObjectsWithTag("ChaoVazio");
-				GameObject nearestAvailableGround = null;
-				float shortestDistance = float.MaxValue;
-				float distance;
-				foreach(GameObject groundPiece in ground){
-					distance = Vector3.Distance(groundPiece.transform.position,hit.point);
-					if(distance < shortestDistance){
-						shortestDistance = distance;
-						nearestAvailableGround = groundPiece;
-					}
+			GameObject[] ground = GameObject.FindGameObjectsWithTag("ChaoVazio");
+			GameObject nearestAvailableGround = null;
+			float shortestDistance = float.MaxValue;
+			float distance;
+			foreach(GameObject groundPiece in ground){
+				distance = Vector3.Distance(groundPiece.transform.position,hit.point);
+				if(distance < shortestDistance){
+					shortestDistance = distance;
+					nearestAvailableGround = groundPiece;
 				}
-			
-				print("nearestAvailableGround.transform.position: " + nearestAvailableGround.transform.position);
-				Vector3 newPosition = nearestAvailableGround.transform.position;
-				newFurniture.transform.position = newPosition;
 			}
+		
+			print("nearestAvailableGround.transform.position: " + nearestAvailableGround.transform.position);
+			Vector3 newPosition = nearestAvailableGround.transform.position;
+			newFurniture.transform.position = newPosition;
 			#endregion
 			
 			#region colocar objeto virado para a câmera

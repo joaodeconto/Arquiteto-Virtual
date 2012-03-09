@@ -108,9 +108,15 @@ class ChangeMesh : EditorWindow {
 			}
 		}
 		
+		float totalItems = allChilds.Length;
+		float progress = 0;
+		
 		bool breaker = false;
 		foreach (Transform tm in allChilds) {
-			Debug.Log(regexName.IsMatch(tm.name));
+			EditorUtility.DisplayProgressBar(
+                "Add Materials",
+                "Checking Object: "+tm.name,
+                progress/totalItems);
 			if (regexName.IsMatch(tm.name)) {
 				if (getChildren) {
 					if (tm.GetComponentsInChildren<MeshFilter>().Length	!= 0) {
@@ -134,6 +140,7 @@ class ChangeMesh : EditorWindow {
 					}
 				}
 			}
+			progress++;
 		}
 		
 		AssetDatabase.Refresh();

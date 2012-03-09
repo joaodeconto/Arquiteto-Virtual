@@ -109,18 +109,12 @@ public class InformacoesMovel : MonoBehaviour {
 			return;
 		
 		string nameRegexPrefix = Regex.Match(this.name,".*(?="+oldFilterTop+")").Value;
-		print("nameRegexPrefix: "+nameRegexPrefix);
 		
-		Regex regexName = new Regex(nameRegexPrefix, RegexOptions.IgnoreCase);
-		
+		#region Filtro
 		string[] filters = new string[filterTop.Length];
 		for (int i = 0; i != filterTop.Length; i++) {
-			if (i == 0 && i == (filterTop.Length-1)) {
-				filters[i] = ".*"+filterTop[i]+".*";
-			} else if (i == 0) {
-				filters[i] = ".*("+filterTop[i]+"|";
-			} else if (i == (filterTop.Length-1)) {
-				filters[i] = filterTop[i]+").*";
+			if (i == (filterTop.Length-1)) {
+				filters[i] = filterTop[i];
 			} else {
 				filters[i] = filterTop[i]+"|";
 			}
@@ -130,7 +124,8 @@ public class InformacoesMovel : MonoBehaviour {
 			filter += f;
 		}
 		print("Filter: " + filter);
-		Regex regexTop = new Regex(filter, RegexOptions.IgnoreCase);
+		Regex regexTop = new Regex(".*("+filter+").*", RegexOptions.IgnoreCase);
+		#endregion
 		
 		int categoryIndex;
 				
@@ -145,9 +140,10 @@ public class InformacoesMovel : MonoBehaviour {
 		//Find the "Brother" of the current mobile
 		List<GameObject> furniture  = Line.CurrentLine.categories[categoryIndex].Furniture;
 		foreach(GameObject mobile in furniture){
-			print((regexName.Match(mobile.name).Success && regexTop.Match(mobile.name).Success) + " : " +
+			string nameMobileRegexPrefix = Regex.Match(mobile.name,".*(?="+filter+")").Value;
+			print((nameRegexPrefix.Equals(nameMobileRegexPrefix) && regexTop.Match(mobile.name).Success) + " : " +
 				mobile.name);
-			if(regexName.Match(mobile.name).Success && regexTop.Match(mobile.name).Success){
+			if(nameRegexPrefix.Equals(nameMobileRegexPrefix)  && regexTop.Match(mobile.name).Success){
 				Clone(mobile, this.GetComponent<InformacoesMovel>(), "Movel");
 				Destroy(this.gameObject);
 				break;
@@ -160,12 +156,14 @@ public class InformacoesMovel : MonoBehaviour {
 		string nameRegexPrefix = Regex.Match(this.name,".*(?=esquerda|direita)").Value;
 		string patternToFind = "";
 		
+		string typeTampoRegexPrefix = Regex.Match(this.name,"(sem tampo|s tampo|com tampo|c tampo|com cooktop|com cook top|com pia)").Value;
+		
 		if(Regex.Match(this.name,"direita").Success){
 //			Debug.LogError("Turn Left");
-			patternToFind = nameRegexPrefix + "esquerda.*";
+			patternToFind = nameRegexPrefix + "esquerda.*" + typeTampoRegexPrefix;
 		} else if(Regex.Match(this.name,"esquerda").Success){
 //			Debug.LogError("Turn Right");
-			patternToFind = nameRegexPrefix + "direita.*";
+			patternToFind = nameRegexPrefix + "direita.*" + typeTampoRegexPrefix;
 		} else {
 			Debug.LogError("Whata?!");
 			return;

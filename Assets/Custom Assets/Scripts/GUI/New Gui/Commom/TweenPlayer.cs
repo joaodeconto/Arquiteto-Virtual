@@ -39,6 +39,17 @@ public class TweenPlayer : MonoBehaviour {
 		{
 			tweenSequence[currentTween].enabled = true;
 			tweenSequence[currentTween].Play(true);
+			
+			//Playing tweens on the same group
+			NTweener[] tweenBrothers = tweenSequence[currentTween].gameObject.GetComponents<NTweener> ();
+			
+			foreach (NTweener tw in tweenBrothers)
+			{
+				if (tw.tweenGroup == tweenSequence[currentTween].tweenGroup)
+				{
+					tw.Play (true);
+				}
+			}
 		}
 	}
 }

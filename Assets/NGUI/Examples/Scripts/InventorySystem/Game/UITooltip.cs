@@ -15,6 +15,7 @@ public class UITooltip : MonoBehaviour
 	public UISlicedSprite background;
 	public float appearSpeed = 10f;
 	public bool scalingTransitions = true;
+	public float offsetCamera = 10f;
 
 	Transform mTrans;
 	float mTarget = 0f;
@@ -61,7 +62,8 @@ public class UITooltip : MonoBehaviour
 				Vector3 size = Vector3.one * (1.5f - mCurrent * 0.5f);
 				Vector3 pos = Vector3.Lerp(mPos - offset, mPos, mCurrent);
 				pos = NGUIMath.ApplyHalfPixelOffset(pos);
-
+				pos.z += offsetCamera;
+				
 				mTrans.localPosition = pos;
 				mTrans.localScale = size;
 			}
@@ -155,7 +157,10 @@ public class UITooltip : MonoBehaviour
 			}
 
 			// Set the final position
-			mTrans.localPosition = NGUIMath.ApplyHalfPixelOffset(mPos);
+//			mTrans.localPosition = NGUIMath.ApplyHalfPixelOffset(mPos);
+			Vector3 tempPosition =  NGUIMath.ApplyHalfPixelOffset(mPos);
+			tempPosition.z += offsetCamera;
+			mTrans.localPosition = tempPosition;
 		}
 		else mTarget = 0f;
 	}
@@ -214,5 +219,9 @@ public class UITooltip : MonoBehaviour
 			}
 		}
 		if (mInstance != null) mInstance.mTarget = 0f;
+	}
+	
+	static public void Close() {
+		mInstance.mTarget = 0f;
 	}
 }

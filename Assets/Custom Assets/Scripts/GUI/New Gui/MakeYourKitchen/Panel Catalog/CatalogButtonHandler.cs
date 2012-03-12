@@ -28,7 +28,7 @@ public class CatalogButtonHandler : MonoBehaviour
 				//TODO something
 				break;
 			case CatalogButtonHandlerEnum.CatalogFurniture:
-				catalogController.ShowCategories();
+			//	catalogController.ShowCategories();
 				break;
 			case CatalogButtonHandlerEnum.CatalogIllumination:
 				//TODO something

@@ -13,8 +13,10 @@ public class TooltipHandlerEditor : Editor
 	void OnEnable ()
 	{
 		tooltipHandler = target as TooltipHandler;
-		if (tooltipHandler.gameObject == null)
+		if (tooltipHandler.gameObject == null && !tooltipHandler.getViaCode)
+		{
 			tooltipHandler.gameObject = tooltipHandler.transform.gameObject;
+		}
 	}
 	
 	public override void OnInspectorGUI ()
@@ -22,37 +24,53 @@ public class TooltipHandlerEditor : Editor
 		GUILayout.Label ("Development: BlackBugio ®");
 		GUILayout.Space (10f);
 		
-		tooltipHandler.gameObject = EditorGUILayout.ObjectField (tooltipHandler.gameObject, typeof(GameObject)) as GameObject;
+		tooltipHandler.getViaCode = EditorGUILayout.Toggle("Get Via Code?",  tooltipHandler.getViaCode);
 		GUILayout.Space (5f);
 		
-		if (tooltipHandler.gameObject != null) {
-			Component[] comps = tooltipHandler.gameObject.GetComponents (typeof(Component));
-			tooltipHandler.components = new List<Type> ();
-			foreach (Component c in comps) {
-				if (c.GetType ().GetFields ().Length != 0) {
-					tooltipHandler.components.Add (c.GetType ());
-				}
-			}
+		if (!tooltipHandler.getViaCode) {
 			
-			tooltipHandler.selectedComp = EditorGUILayout.Popup (tooltipHandler.selectedComp, ComponentsNames ());
+			GUILayout.Label ("GameObject Reference:");
+			tooltipHandler.gameObject = EditorGUILayout.ObjectField (tooltipHandler.gameObject, typeof(GameObject)) as GameObject;
 			GUILayout.Space (5f);
 			
-			if (tooltipHandler.selectedComp != 0) {
-				tooltipHandler.vars = new List<FieldInfo> ();
-				foreach (FieldInfo f in tooltipHandler.components[tooltipHandler.selectedComp-1].GetFields()) {
-					if (f.FieldType == tooltipHandler.label.GetType ()) {
-						tooltipHandler.vars.Add (f);
+			if (tooltipHandler.gameObject != null) {
+				Component[] comps = tooltipHandler.gameObject.GetComponents (typeof(Component));
+				tooltipHandler.components = new List<Type> ();
+				foreach (Component c in comps) {
+					if (c.GetType ().GetFields ().Length != 0) {
+						tooltipHandler.components.Add (c.GetType ());
 					}
 				}
-				tooltipHandler.selectedVar = EditorGUILayout.Popup (tooltipHandler.selectedVar, VarsNames ());
-				if (tooltipHandler.selectedVar != 0) {
-					string val = tooltipHandler.vars [tooltipHandler.selectedVar - 1].GetValue (
-									tooltipHandler.gameObject.GetComponent (
-									tooltipHandler.components [tooltipHandler.selectedComp - 1])).ToString ();
-					tooltipHandler.SetTooltip (val);
+				if (tooltipHandler.components.Count == 0 ||
+					tooltipHandler.selectedComp > tooltipHandler.components.Count) { tooltipHandler.selectedComp = 0; return; }
+				
+				GUILayout.Label ("Components:");
+				tooltipHandler.selectedComp = EditorGUILayout.Popup (tooltipHandler.selectedComp, ComponentsNames ());
+				GUILayout.Space (5f);
+				
+				if (tooltipHandler.selectedComp != 0) {
+					tooltipHandler.vars = new List<FieldInfo> ();
+					string type = "";
+					foreach (FieldInfo f in tooltipHandler.components[tooltipHandler.selectedComp-1].GetFields()) {
+						if (f.FieldType == type.GetType()) {
+							tooltipHandler.vars.Add (f);
+						}
+					}
+					
+					if (tooltipHandler.vars.Count == 0 ||
+						tooltipHandler.selectedVar > tooltipHandler.vars.Count) { tooltipHandler.selectedVar = 0; return; }
+					
+					GUILayout.Label ("String Variables:");
+					tooltipHandler.selectedVar = EditorGUILayout.Popup (tooltipHandler.selectedVar, VarsNames ());
+					if (tooltipHandler.selectedVar != 0) {
+						string val = tooltipHandler.vars [tooltipHandler.selectedVar - 1].GetValue (
+										tooltipHandler.gameObject.GetComponent (
+										tooltipHandler.components [tooltipHandler.selectedComp - 1])).ToString ();
+						tooltipHandler.label = val;
+					}
 				}
 			}
-		}
+		} 
 	}
 	
 	string[] ComponentsNames ()

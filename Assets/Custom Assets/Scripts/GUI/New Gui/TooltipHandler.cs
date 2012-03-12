@@ -7,7 +7,9 @@ using System.Reflection;
 [AddComponentMenu("NGUI-Black Bugio/Tooltip Handler")]
 public class TooltipHandler : MonoBehaviour
 {
-	public string label { get; private set; }
+	public string label;
+	
+	public bool getViaCode;
 	
 	#region GetComponets
 	public GameObject gameObject;

@@ -9,7 +9,7 @@ public class TweenStream
 
 }
 
-public class TweenPlayer : MonoBehaviour {
+public class TweenPlayerButton : MonoBehaviour {
 	
 	public string Name;
 	public bool RunOnStart;
@@ -17,7 +17,7 @@ public class TweenPlayer : MonoBehaviour {
 	
 	private int currentStream;
 	
-	// Use this for initialization
+	#region unity methods
 	protected void Start ()
 	{
 		#region validate tweens
@@ -47,6 +47,14 @@ public class TweenPlayer : MonoBehaviour {
 			PlayNextTween();
 		}
 	}
+	#endregion
+	
+	public void Play ()
+	{
+		currentStream = 0;
+		
+		PlayNextTween ();
+	}
 	
 	public void PlayNextTween ()
 	{
@@ -61,5 +69,16 @@ public class TweenPlayer : MonoBehaviour {
 				}
 			}
 		}
+		else
+		{
+			currentStream = 0;
+		}
 	}
+	
+	#region NGUI button behaviour
+	public void OnClick ()
+	{
+		Play ();
+	}
+	#endregion
 }

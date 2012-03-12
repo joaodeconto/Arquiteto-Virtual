@@ -1,52 +1,62 @@
 using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
+public class TweenStream
+{
+	public string name;
+	public NTweener[] parallelTweens;
+
+}
+
 public class TweenPlayer : MonoBehaviour {
 	
-	public NTweener[] tweenSequence;
+	public string Name;
 	public bool RunOnStart;
+	public TweenStream[] tweenStreams;
 	
-	private int currentTween;
+	private int currentStream;
 	
 	// Use this for initialization
-	protected void Start () {
-		if (tweenSequence.Length != 0)
+	protected void Start ()
+	{
+		#region validate tweens
+		for (int i = 0; i != tweenStreams.Length; ++i)
 		{
-			currentTween = 0;
-			
-			for(int i = 0; i != tweenSequence.Length; ++i)
+			foreach (NTweener tw in tweenStreams[i].parallelTweens)
 			{
-				if (tweenSequence[i] == null)
+				if (tw == null)
 				{
-					Debug.LogError("Tween não selecionada");
-					Debug.Break();
+					Debug.LogError ("A TweenStream " + tweenStreams[i].name + 
+									" no objeto "  + this.gameObject.name + " está nula.");
+					Debug.Break ();
 				}
+				else
+				{
+					tw.callWhenFinished = "PlayNextTween";
+					tw.enabled = false;
+				}
+			}
+		}
+		#endregion
+		
+		currentStream = 0;
 				
-				tweenSequence[i].callWhenFinished = "PlayNextTween";
-				tweenSequence[i].enabled = false;
-			}
-			if (RunOnStart)
-			{
-				tweenSequence[0].enabled = true;
-				tweenSequence[0].Play(true);
-			}
+		if (RunOnStart)
+		{
+			PlayNextTween();
 		}
 	}
 	
 	public void PlayNextTween ()
 	{
-		if (++currentTween != tweenSequence.Length)
+		if (currentStream++ != tweenStreams.Length)
 		{
-			tweenSequence[currentTween].enabled = true;
-			tweenSequence[currentTween].Play(true);
-			
-			//Playing tweens on the same group
-			NTweener[] tweenBrothers = tweenSequence[currentTween].gameObject.GetComponents<NTweener> ();
-			
-			foreach (NTweener tw in tweenBrothers)
+			foreach(TweenStream tweenStream in tweenStreams)
 			{
-				if (tw.tweenGroup == tweenSequence[currentTween].tweenGroup)
+				foreach(NTweener tw in tweenStream.parallelTweens)
 				{
+					tw.enabled = true;
 					tw.Play (true);
 				}
 			}

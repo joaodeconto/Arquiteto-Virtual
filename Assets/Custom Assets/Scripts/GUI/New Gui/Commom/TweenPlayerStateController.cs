@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class TweenStateStream
@@ -8,17 +9,20 @@ public class TweenStateStream
 	public TweenStream[] tweenStreams;
 }
 
+public enum TweenPlayerStateControllerEnum
+{
+	DEFAULT = 0,
+}
+
 public class TweenPlayerStateController : MonoBehaviour {
-	
+
 	public string Name;
 	public bool RunOnStart;
 	
 	public TweenStateStream[] tweenStateStreams;
 	
-	private int currentTweenStateStream;
 	private int currentTweenStream;
-	
-	private int lastTweenStateStreamIndex;
+	private int currentTweenStateStream;
 	
 	#region unity methods
 	protected void Start ()
@@ -49,7 +53,7 @@ public class TweenPlayerStateController : MonoBehaviour {
 		currentTweenStateStream = 0;
 		currentTweenStream = 0;
 		
-		lastTweenStateStreamIndex = -1;
+//		lastTweenStateStreamIndex = -1;
 				
 		if (RunOnStart)
 		{
@@ -57,25 +61,12 @@ public class TweenPlayerStateController : MonoBehaviour {
 		}
 	}
 	#endregion
-		
+	
 	public void PlayState (int index)
 	{
 		if(index > 0 && index < tweenStateStreams.Length)
 		{
-			currentTweenStream = 0;
-			currentTweenStateStream = 0;
-			
-			//Se o último indice
-			if(lastTweenStateStreamIndex != index)
-			{
-				PlayNextTween (true);
-			}
-			else{
-				PlayNextTween (false);
-			}
-			
-			lastTweenStateStreamIndex = index;
-			
+			PlayNextTween (true);	
 		}
 	}
 	

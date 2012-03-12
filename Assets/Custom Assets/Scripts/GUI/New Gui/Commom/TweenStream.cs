@@ -6,4 +6,5 @@ public class TweenStream
 {
 	public string name;
 	public NTweener[] parallelTweens;
+	public GameObject m_GameObject;
 }

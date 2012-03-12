@@ -108,7 +108,9 @@ public class UITooltip : MonoBehaviour
 					Transform textTrans = text.transform;
 					Vector3 offset = textTrans.localPosition;
 					Vector3 textScale = textTrans.localScale;
-
+				
+					//mSize = text.font.CalculatePrintedSize(text.font.WrapText(tooltipText, textScale.x / text.cachedTransform.localScale.y, true, false).Replace("\\n", "\n"), false);
+					
 					// Calculate the dimensions of the printed text
 					mSize = text.font.CalculatePrintedSize(tooltipText, true);
 

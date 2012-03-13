@@ -1,70 +1,105 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-[System.Serializable]
-public class TweenPlayer : MonoBehaviour {
-	
+public class TweenPlayer : MonoBehaviour
+{	
 	public string Name;
+	
 	public bool RunOnStart;
-	public TweenStream[] tweenStreams;
+	public bool AutoCompleteFromValues;
+	//public bool PlayNextOnLastTweenFinish;
 	
-	private int currentStream;
-	
+	public NTweener[] parallelTweens;
+			
 	#region unity methods
-	protected void Start ()
-	{
+	void Start ()
+	{						
+		NTweener currentTween;
+		int parallelTweensLength = parallelTweens.Length;
+			
+		int indexMaxValue = 0;
+		int indexMinValue = 0;
+		
+		float maxTime = float.MinValue;
+		float minTime = float.MaxValue;
+		
 		#region validate tweens
-		for (int i = 0; i != tweenStreams.Length; ++i)
+		for (int i = 0; i != parallelTweensLength; ++i)
 		{
-			foreach (NTweener tw in tweenStreams[i].parallelTweens)
+			currentTween = parallelTweens [i]; 
+			if (currentTween == null)
 			{
-				if (tw == null)
+				continue;	
+			}
+		
+			if (AutoCompleteFromValues)
+			{
+				//Fixing from values
+				if (parallelTweens [i] is TweenPosition)
 				{
-					Debug.LogError ("A TweenStream " + tweenStreams[i].name + 
-									" no objeto "  + this.gameObject.name + " está nula.");
-					Debug.Break ();
-				}
-				else
+					(parallelTweens [i] as TweenPosition).from = parallelTweens [i].transform.localPosition;
+				} else if (parallelTweens [i] is TweenScale)
 				{
-					tw.callWhenFinished = "PlayNextTween";
-					tw.enabled = false;
+					(parallelTweens [i] as TweenScale).from = parallelTweens [i].transform.localScale;
+				} else if (parallelTweens [i] is TweenRotation)
+				{
+					(parallelTweens [i] as TweenRotation).from = parallelTweens [i].transform.localEulerAngles;
 				}
 			}
-		}
-		#endregion
+			
+			if (currentTween.duration > maxTime) {
+				maxTime = currentTween.duration;
+				indexMaxValue = i;
+			} else if (currentTween.duration < minTime) {
+				minTime = currentTween.duration;
+				indexMinValue = i;
+			}
 		
-		currentStream = 0;
-				
-		if (RunOnStart)
-		{
-			PlayNextTween();
+			currentTween.callWhenFinished = "DoNothing";
+			currentTween.enabled = false;
+		}
+			
+		/*if (PlayNextOnLastTweenFinish) {
+			parallelTweens[indexMaxValue].callWhenFinished = "Play";
+			//parallelTweens[indexMaxValue].eventReceiver = NextTweenPlayer.gameObject;
+		} else {
+			parallelTweens[indexMinValue].callWhenFinished = "Play";
+			//parallelTweens [indexMaxValue].eventReceiver = NextTweenPlayer.gameObject;
+		}*/
+		#endregion		
+		
+		if (RunOnStart) {
+			Play ();
 		}
 	}
 	#endregion
 	
 	public void Play ()
 	{
-		currentStream = 0;
-		
-		PlayNextTween ();
+		PlayTween ();
 	}
 	
-	public void PlayNextTween ()
+	private void PlayTween ()
 	{
-		if (currentStream++ != tweenStreams.Length)
-		{
-			foreach(TweenStream tweenStream in tweenStreams)
-			{
-				foreach(NTweener tw in tweenStream.parallelTweens)
-				{
-					tw.enabled = true;
-					tw.Play (true);
+		NTweener[] tweensBrothers;
+		for (int i = 0; i != parallelTweens.Length; ++i) {
+			if (parallelTweens [i] == null) {
+				continue;
+			}
+			
+			tweensBrothers = parallelTweens [i].gameObject.GetComponents<NTweener> ();
+			if (tweensBrothers != null) {
+				foreach (NTweener tw in parallelTweens[i].gameObject.GetComponents<NTweener>()) {
+					if (tw.tweenGroup == parallelTweens [i].tweenGroup) {
+						tw.enabled = true;
+						tw.Play (true);
+					}
 				}
 			}
-		}
-		else
-		{
-			currentStream = 0;
+			
+			parallelTweens [i].enabled = true;
+			parallelTweens [i].Play (true);
 		}
 	}
 }

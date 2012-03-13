@@ -3,15 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class TweenPlayerButton : MonoBehaviour
-{
-		
+{	
 	public string Name;
 	public bool IsToggle;
 	public bool PlayNextOnLastTweenFinish;
 	public bool RunOnStart;
-	public bool IsActive;
+	
 	public TweenPlayerController tweenPlayerController;
 	public NTweener[] parallelTweens;
+	
+	public bool IsActive { get; set; }
+	
 	private int internalControllerRegister;
 	private bool isForwardDirection;
 	

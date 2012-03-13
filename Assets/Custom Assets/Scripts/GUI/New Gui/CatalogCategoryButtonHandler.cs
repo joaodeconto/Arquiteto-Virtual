@@ -15,11 +15,11 @@ public class CatalogCategoryButtonHandler : MonoBehaviour {
 	}
 	
 	void CatalogCategory () {
-		foreach (Category category in Line.CurrentLine.categories) {
-			UISprite newSprite = new UISprite();
-			newSprite.texture = category.Image;
-			newSprite.spriteName = category.Name;
+		//foreach (Category category in Line.CurrentLine.categories) {
+		//	UISprite newSprite = new UISprite();
+		//	newSprite.texture = category.Image;
+		//	newSprite.spriteName = category.Name;
 //			atlas.sprites.Add(newSprite);
-		}
+	//	}
 	}
 }

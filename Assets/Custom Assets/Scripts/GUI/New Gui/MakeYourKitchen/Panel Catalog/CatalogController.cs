@@ -55,7 +55,7 @@ public class CatalogController : MonoBehaviour
 			foreach (Transform mobile in categoriesTransform.transform) {
 				furniture.Add (mobile.gameObject);
 			}
-			categories.Add (new Category (categoriesTransform.name, furniture, categoriesTransform.GetComponent<MakeCategory> ().ico));
+			categories.Add (new Category (categoriesTransform.name, furniture, categoriesTransform.GetComponent<MakeCategory> ().imageReference));
 		}
 		
 		//print ("categories.Count: " + categories.Count);

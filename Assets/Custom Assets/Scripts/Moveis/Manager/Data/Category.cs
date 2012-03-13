@@ -33,17 +33,17 @@ public class Category {
 	#endregion
 	
 	public string Name { get; private set; }
-	public Texture2D Image { get; private set; }
-	public Texture2D SelectedImage { get; private set; }
+	public string ImageReference { get; private set; }
+//	public Texture2D SelectedImage { get; private set; }
 	public List<GameObject> Furniture { get; private set; }
-	public void SetImages(Texture2D image, Texture2D selectedImage){
-		Image = image;
-		SelectedImage = selectedImage;
-	}
-	public Category(string name, List<GameObject> furniture, Texture2D image){
-		Name  	 = name;
-		Image	 = image;
-		Furniture= furniture;
+//	public void SetImages(Texture2D image, Texture2D selectedImage){
+//		Image = image;
+//		SelectedImage = selectedImage;
+//	}
+	public Category(string name, List<GameObject> furniture, string imageReference){
+		Name  	 		= name;
+		ImageReference	= imageReference;
+		Furniture		= furniture;
 	}
 			
 }

@@ -20,7 +20,10 @@ public class TweenPlayerButton : MonoBehaviour
 	#region unity methods
 	void Start ()
 	{		
-		internalControllerRegister = tweenPlayerController.AddButton (this);
+		if (tweenPlayerController != null)
+		{
+			internalControllerRegister = tweenPlayerController.AddButton (this);
+		}
 				
 		NTweener currentTween;
 		int parallelTweensLength = parallelTweens.Length;
@@ -101,7 +104,10 @@ public class TweenPlayerButton : MonoBehaviour
 		} else {
 			IsActive = true;
 			
-			tweenPlayerController.NotifyActiveButton (internalControllerRegister);
+			if (tweenPlayerController != null)
+			{
+				tweenPlayerController.NotifyActiveButton (internalControllerRegister);
+			}
 			
 			isForwardDirection = true;
 			

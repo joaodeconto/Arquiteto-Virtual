@@ -3,9 +3,7 @@ using System.Collections.Generic;
 
 public class CatalogController : MonoBehaviour
 {
-	
 	public GameObject[] everything;
-	public GameObject camera;
 	
 	// Use this for initialization of the static classes
 	void Start ()
@@ -19,19 +17,17 @@ public class CatalogController : MonoBehaviour
 
 		/* Combine meshs for while */
 		
-		MeshUtils.CombineMesh (GameObject.Find ("ParentChao").transform, true);
-		MeshUtils.CombineMesh (GameObject.Find ("ParedesBack").transform, true);
-		MeshUtils.CombineMesh (GameObject.Find ("ParedesFront").transform, true);
-		MeshUtils.CombineMesh (GameObject.Find ("ParedesLeft").transform, true);
-		MeshUtils.CombineMesh (GameObject.Find ("ParedesRight").transform, true);
-		MeshUtils.CombineMesh (GameObject.Find ("ParentTeto").transform, true);
-		
-		Destroy (GameObject.FindWithTag ("Grid"));
-		RemoveGround ();
-		RemoveWalls ();
-		RemoveRoof ();
-
-		camera.SetActiveRecursively (true);
+//		MeshUtils.CombineMesh (GameObject.Find ("ParentChao").transform, true);
+//		MeshUtils.CombineMesh (GameObject.Find ("ParedesBack").transform, true);
+//		MeshUtils.CombineMesh (GameObject.Find ("ParedesFront").transform, true);
+//		MeshUtils.CombineMesh (GameObject.Find ("ParedesLeft").transform, true);
+//		MeshUtils.CombineMesh (GameObject.Find ("ParedesRight").transform, true);
+//		MeshUtils.CombineMesh (GameObject.Find ("ParentTeto").transform, true);
+//		
+//		Destroy (GameObject.FindWithTag ("Grid"));
+//		RemoveGround ();
+//		RemoveWalls ();
+//		RemoveRoof ();
 	}
 	
 	public void LoadObjects (int id)

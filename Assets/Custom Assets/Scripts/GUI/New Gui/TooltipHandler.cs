@@ -22,6 +22,7 @@ public class TooltipHandler : MonoBehaviour
 	public int selectedVar = 0;
 	#endregion
 	
+	private string lastLabel;
 	private bool isOver;
 	
 	void OnHover (bool isOver)
@@ -33,8 +34,14 @@ public class TooltipHandler : MonoBehaviour
 	
 	void Update ()
 	{
-		if (isOver)
-			UITooltip.ShowText (label);
+		if (isOver) {
+			if (label != lastLabel) {
+				lastLabel = label;
+				UITooltip.Close ();
+			} else {
+				UITooltip.ShowText (label);
+			}
+		}
 	}
 	
 	public void SetTooltip (string label)

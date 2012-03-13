@@ -62,7 +62,7 @@ public class UITooltip : MonoBehaviour
 				Vector3 size = Vector3.one * (1.5f - mCurrent * 0.5f);
 				Vector3 pos = Vector3.Lerp(mPos - offset, mPos, mCurrent);
 				pos = NGUIMath.ApplyHalfPixelOffset(pos);
-				pos.z += offsetCamera;
+//				pos.z += offsetCamera;
 				
 				mTrans.localPosition = pos;
 				mTrans.localScale = size;
@@ -129,7 +129,7 @@ public class UITooltip : MonoBehaviour
 			{
 				// Since the screen can be of different than expected size, we want to convert
 				// mouse coordinates to view space, then convert that to world position.
-				mPos.x = Mathf.Clamp01(mPos.x / Screen.width);
+				mPos.x = Mathf.Clamp01((mPos.x * 1.75f) / Screen.width);
 				mPos.y = Mathf.Clamp01(mPos.y / Screen.height);
 
 				// Calculate the ratio of the camera's target orthographic size to current screen size
@@ -140,8 +140,8 @@ public class UITooltip : MonoBehaviour
 				Vector2 max = new Vector2(ratio * mSize.x / Screen.width, ratio * mSize.y / Screen.height);
 
 				// Limit the tooltip to always be visible
-				mPos.x = Mathf.Min(mPos.x, 1f - max.x);
-				mPos.y = Mathf.Max(mPos.y, max.y);
+//				mPos.x = Mathf.Min(mPos.x, 1f - max.x);
+//				mPos.y = Mathf.Max(mPos.y, max.y);
 
 				// Update the absolute position and save the local one
 				mTrans.position = uiCamera.ViewportToWorldPoint(mPos);

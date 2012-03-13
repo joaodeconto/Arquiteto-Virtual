@@ -3,22 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class TweenPlayerButton : MonoBehaviour
-{
-		
+{	
 	public string Name;
 	public bool IsToggle;
 	public bool PlayNextOnLastTweenFinish;
 	public bool RunOnStart;
-	public bool IsActive;
+	
 	public TweenPlayerController tweenPlayerController;
 	public NTweener[] parallelTweens;
+	
+	public bool IsActive { get; set; }
+	
 	private int internalControllerRegister;
 	private bool isForwardDirection;
 	
 	#region unity methods
 	void Start ()
 	{		
-		internalControllerRegister = tweenPlayerController.AddButton (this);
+		if (tweenPlayerController != null)
+		{
+			internalControllerRegister = tweenPlayerController.AddButton (this);
+		}
 				
 		NTweener currentTween;
 		int parallelTweensLength = parallelTweens.Length;
@@ -99,7 +104,10 @@ public class TweenPlayerButton : MonoBehaviour
 		} else {
 			IsActive = true;
 			
-			tweenPlayerController.NotifyActiveButton (internalControllerRegister);
+			if (tweenPlayerController != null)
+			{
+				tweenPlayerController.NotifyActiveButton (internalControllerRegister);
+			}
 			
 			isForwardDirection = true;
 			

@@ -16,6 +16,8 @@ public class UITooltip : MonoBehaviour
 	public float appearSpeed = 10f;
 	public bool scalingTransitions = true;
 	public float offsetCamera = 10f;
+	public bool withFade = true;
+	public UIRoot uiRoot;
 
 	Transform mTrans;
 	float mTarget = 0f;
@@ -50,10 +52,16 @@ public class UITooltip : MonoBehaviour
 	{
 		if (mCurrent != mTarget)
 		{
-			mCurrent = Mathf.Lerp(mCurrent, mTarget, Time.deltaTime * appearSpeed);
-			if (Mathf.Abs(mCurrent - mTarget) < 0.001f) mCurrent = mTarget;
-			SetAlpha(mCurrent * mCurrent);
-
+			if (!withFade) {
+				mCurrent = Mathf.Lerp(mCurrent, mTarget, 1f);;
+				SetAlpha(mCurrent);
+			}
+			else {
+				mCurrent = Mathf.Lerp(mCurrent, mTarget, Time.deltaTime * appearSpeed);
+				if (Mathf.Abs(mCurrent - mTarget) < 0.001f) mCurrent = mTarget;
+				SetAlpha(mCurrent * mCurrent);
+	
+			}
 			if (scalingTransitions)
 			{
 				Vector3 offset = mSize * 0.25f;
@@ -62,7 +70,7 @@ public class UITooltip : MonoBehaviour
 				Vector3 size = Vector3.one * (1.5f - mCurrent * 0.5f);
 				Vector3 pos = Vector3.Lerp(mPos - offset, mPos, mCurrent);
 				pos = NGUIMath.ApplyHalfPixelOffset(pos);
-//				pos.z += offsetCamera;
+				//pos.z += offsetCamera;
 				
 				mTrans.localPosition = pos;
 				mTrans.localScale = size;
@@ -109,7 +117,7 @@ public class UITooltip : MonoBehaviour
 					Vector3 offset = textTrans.localPosition;
 					Vector3 textScale = textTrans.localScale;
 				
-					//mSize = text.font.CalculatePrintedSize(text.font.WrapText(tooltipText, textScale.x / text.cachedTransform.localScale.y, true, false).Replace("\\n", "\n"), false);
+//					mSize = text.font.CalculatePrintedSize(text.font.WrapText(tooltipText, textScale.x / text.cachedTransform.localScale.y, true, false).Replace("\\n", "\n"), true);
 					
 					// Calculate the dimensions of the printed text
 					mSize = text.font.CalculatePrintedSize(tooltipText, true);
@@ -120,6 +128,12 @@ public class UITooltip : MonoBehaviour
 					mSize.x += offset.x * 2f;
 					mSize.y -= offset.y * 2f;
 					mSize.z = 1f;
+					
+					if (mSize.x > text.lineWidth && text.lineWidth != 0) {
+						int newLines = (int)(mSize.x / text.lineWidth) + 1;
+						mSize.x = text.lineWidth;
+						mSize.y *= newLines;
+					}
 
 					backgroundTrans.localScale = mSize;
 				}
@@ -129,15 +143,19 @@ public class UITooltip : MonoBehaviour
 			{
 				// Since the screen can be of different than expected size, we want to convert
 				// mouse coordinates to view space, then convert that to world position.
-				mPos.x = Mathf.Clamp01((mPos.x * 1.75f) / Screen.width);
+				float realSize = (float)uiRoot.manualHeight / (float)Screen.height;
+				float mPosX = (mPos.x + mSize.x) > Screen.width ? 
+					mPos.x - (mSize.x / (2f * realSize)) : 
+					mPos.x + (mSize.x / (2f * realSize));
+				mPos.x = Mathf.Clamp01(mPosX / Screen.width);
 				mPos.y = Mathf.Clamp01(mPos.y / Screen.height);
 
 				// Calculate the ratio of the camera's target orthographic size to current screen size
-				float activeSize = uiCamera.orthographicSize / mTrans.parent.lossyScale.y;
-				float ratio = (Screen.height * 0.5f) / activeSize;
+//				float activeSize = uiCamera.orthographicSize / mTrans.parent.lossyScale.y;
+//				float ratio = (Screen.height * 0.5f) / activeSize;
 
 				// Calculate the maximum on-screen size of the tooltip window
-				Vector2 max = new Vector2(ratio * mSize.x / Screen.width, ratio * mSize.y / Screen.height);
+//				Vector2 max = new Vector2(ratio * mSize.x / Screen.width, ratio * mSize.y / Screen.height);
 
 				// Limit the tooltip to always be visible
 //				mPos.x = Mathf.Min(mPos.x, 1f - max.x);

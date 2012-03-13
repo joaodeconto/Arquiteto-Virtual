@@ -466,25 +466,25 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 					                             ScreenUtils.ScaleWidth(100), wndAccordOption.height - ScreenUtils.ScaleHeight(144));
 							scrollPosCategory = GUI.BeginScrollView(scrollFraCategory, scrollPosCategory, rListCategory, hScrollStyle,vScrollStyle);
 								for (int i = 0; i != nCategories; ++i) {
-									if(GUI.Button(new Rect(wndAccordOption.x + ScreenUtils.ScaleWidth(24), ScreenUtils.ScaleHeight(64) * i,
-								                 ScreenUtils.ScaleWidth(64), ScreenUtils.ScaleHeight(64)), new GUIContent(Line.CurrentLine.categories[i].Image, Line.CurrentLine.categories[i].Name))) {
-										SomClique.Play();
-										cCategory = i;
-										items = new List<GameObject>(Line.CurrentLine.categories[cCategory].Furniture);
-										
-										for (int j = 0; j != items.Count; ++j){
-											if (Regex.Match(items[j].name,".*(com tampo|c tampo|cook top|cooktop|pia|direita).*",RegexOptions.IgnoreCase).Success) {
-												items.RemoveAt(j);
-												--j;
-												continue;
-											}
-											items[j].GetComponent<InformacoesMovel>().Initialize();
-											Tooltip.AddDynamicTip(items[j].GetComponent<InformacoesMovel>().Nome);
-										}
-							
-										rListItem = ScreenUtils.ScaledRect(0, 0, 64, 64 * items.Count);
-										showItems = !showItems;
-									}
+//									if(GUI.Button(new Rect(wndAccordOption.x + ScreenUtils.ScaleWidth(24), ScreenUtils.ScaleHeight(64) * i,
+//								                 ScreenUtils.ScaleWidth(64), ScreenUtils.ScaleHeight(64)), new GUIContent(Line.CurrentLine.categories[i].Image, Line.CurrentLine.categories[i].Name))) {
+//										SomClique.Play();
+//										cCategory = i;
+//										items = new List<GameObject>(Line.CurrentLine.categories[cCategory].Furniture);
+//										
+//										for (int j = 0; j != items.Count; ++j){
+//											if (Regex.Match(items[j].name,".*(com tampo|c tampo|cook top|cooktop|pia|direita).*",RegexOptions.IgnoreCase).Success) {
+//												items.RemoveAt(j);
+//												--j;
+//												continue;
+//											}
+//											items[j].GetComponent<InformacoesMovel>().Initialize();
+//											Tooltip.AddDynamicTip(items[j].GetComponent<InformacoesMovel>().Nome);
+//										}
+//							
+//										rListItem = ScreenUtils.ScaledRect(0, 0, 64, 64 * items.Count);
+//										showItems = !showItems;
+//									}
 								}
 							GUI.EndScrollView();
 							

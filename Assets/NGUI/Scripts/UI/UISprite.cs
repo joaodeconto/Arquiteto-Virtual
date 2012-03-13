@@ -109,6 +109,23 @@ public class UISprite : UIWidget
 			}
 		}
 	}
+	
+	/// <summary>
+	/// Texture of this sprite
+	/// </summary>
+	
+	public Texture texture
+	{
+		get
+		{
+			return mainTexture;
+		}
+		set
+		{
+			Texture tex = mainTexture;
+			tex = value;
+		}
+	}
 
 	/// <summary>
 	/// Get the sprite used by the atlas. Work-around for a bug in Unity.

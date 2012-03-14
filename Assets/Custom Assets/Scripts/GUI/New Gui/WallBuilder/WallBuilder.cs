@@ -31,9 +31,9 @@ public class WallsParents
 	{
 		Transform[] transWalls = new Transform[4];
 		transWalls[0] = parentWallFront;
-		transWalls[0] = parentWallBack;
-		transWalls[0] = parentWallLeft;
-		transWalls[0] = parentWallRight;
+		transWalls[1] = parentWallBack;
+		transWalls[2] = parentWallLeft;
+		transWalls[3] = parentWallRight;
 		return transWalls;
 	}
 	

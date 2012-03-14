@@ -636,6 +636,8 @@ public class WallBuilder : MonoBehaviour {
 //			enabled = false;
 //			grid.renderer.enabled = false;
 			 
+			Debug.Break();
+			
 			Application.LoadLevel(3);
 			Debug.LogError ("Chegou aqũi");
 		} else {

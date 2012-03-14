@@ -14,7 +14,7 @@ public class TweenPlayerController : MonoBehaviour
 		}
 		
 		buttonList.Add (button);
-		return buttonList.Count;
+		return buttonList.Count - 1;
 	}
 	
 	public void NotifyActiveButton (int index)
@@ -22,7 +22,7 @@ public class TweenPlayerController : MonoBehaviour
 		int count = buttonList.Count;
 		
 		for (int i = 0; i != count; ++i) {
-			if (i + 1 != index) {
+			if (i != index) {
 				buttonList [i].IsActive = false;
 			}
 		}

@@ -1,9 +1,0 @@
-		
-
-			GameObject[] grounds = GameObject.FindGameObjectsWithTag("ParedeParent");
-
-			foreach(GameObject ground in grounds){
-
-				ground.GetComponent<MeshRenderer>().enabled = false;	
-
-			}

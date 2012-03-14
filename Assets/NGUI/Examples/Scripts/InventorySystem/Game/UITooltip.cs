@@ -52,15 +52,15 @@ public class UITooltip : MonoBehaviour
 	{
 		if (mCurrent != mTarget)
 		{
+			mCurrent = Mathf.Lerp(mCurrent, mTarget, Time.deltaTime * appearSpeed);;
+			if (Mathf.Abs(mCurrent - mTarget) < 0.001f) mCurrent = mTarget;
+			
 			if (!withFade) {
-				mCurrent = Mathf.Lerp(mCurrent, mTarget, 1f);;
-				SetAlpha(mCurrent);
+				if (mCurrent == mTarget || mTarget == 0)
+					SetAlpha(mTarget);
 			}
 			else {
-				mCurrent = Mathf.Lerp(mCurrent, mTarget, Time.deltaTime * appearSpeed);
-				if (Mathf.Abs(mCurrent - mTarget) < 0.001f) mCurrent = mTarget;
 				SetAlpha(mCurrent * mCurrent);
-	
 			}
 			if (scalingTransitions)
 			{

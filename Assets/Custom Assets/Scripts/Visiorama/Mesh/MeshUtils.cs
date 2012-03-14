@@ -5,6 +5,11 @@ public class MeshUtils {
 	
 	public static void CombineMesh (Transform target, bool createCollider)
 	{
+		CombineMesh(target, createCollider, false);
+	}
+	
+	public static void CombineMesh (Transform target, bool createCollider, bool destroyChildren)
+	{
 		MeshFilter[] meshFilters = target.GetComponentsInChildren<MeshFilter> ();
 		
 		if(meshFilters.Length == 0)
@@ -25,9 +30,11 @@ public class MeshUtils {
 			MeshCollider mc = target.gameObject.AddComponent ("MeshCollider") as MeshCollider;
 		}
 		
-		for(int i = target.transform.childCount - 1; i != -1; --i)
-		{
-			GameObject.Destroy(target.transform.GetChild(i).gameObject);
+		if (destroyChildren) {
+			for(int i = target.transform.childCount - 1; i != -1; --i)
+			{
+				GameObject.Destroy(target.transform.GetChild(i).gameObject);
+			}
 		}
 	}
 }

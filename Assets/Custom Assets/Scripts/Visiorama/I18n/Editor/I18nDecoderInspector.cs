@@ -24,7 +24,15 @@ public class I18nDecoderInspector : Editor
 												  true) as UILabel;
 		if (uiLabelTemp != null)
 		{
-			decoder.labels.Add (uiLabelTemp);
+			if (decoder.labels.Contains(uiLabelTemp))
+			{
+				Debug.LogError ("O Label já foi adicionado ao I18n.");
+			}
+			else
+			{
+				decoder.labels.Add (uiLabelTemp);
+			}
+			
 			uiLabelTemp = null;
 		}
 		

@@ -8,17 +8,39 @@ public class WallSizeSliderHandler : MonoBehaviour {
 		Width,
 	}
 	
-	private WallBuilder wallBuilder;
-	
-	void Awake(){
-		wallBuilder = GameObject.Find("WallBuilder").GetComponent<WallBuilder>();
-	}
-	
 	public SliderWallMeasureType sliderWallMeasureType;
 	public UILabel label;
+	public string TooltipString;
 	
-	void OnSliderChange(float val){
-		switch(sliderWallMeasureType){
+	private WallBuilder wallBuilder;
+	
+	void Awake ()
+	{
+		wallBuilder = GameObject.Find ("WallBuilder").GetComponent<WallBuilder> ();
+		
+		if (TooltipString.Length == 0)
+		{
+			Debug.LogError ("Deve-se preencher a string");
+		}
+		else
+		{
+			GameObject objectLabel 	  = label.gameObject;
+			
+			BoxCollider labelCollider = objectLabel.AddComponent<BoxCollider>();
+			labelCollider.center = new Vector3(-0.8f,-1.05f,0.0f);
+			labelCollider.size   = new Vector3( 7.0f, 1.55f,0.0f);
+			
+			TooltipHandler tipHandler = objectLabel.AddComponent<TooltipHandler> ();
+			tipHandler.gameObject = objectLabel;
+			tipHandler.SetTooltip (I18n.t (TooltipString));
+			
+		}
+	}
+	
+	void OnSliderChange(float val)
+	{
+		switch(sliderWallMeasureType)
+		{
 			case SliderWallMeasureType.Depth:
 				wallBuilder.WallDepth = (int)Mathf.Max(wallBuilder.MinWallDepth, val * wallBuilder.MaxWallDepth);
 				label.text = wallBuilder.WallDepth + "m";

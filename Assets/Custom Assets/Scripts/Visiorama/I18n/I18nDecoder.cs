@@ -6,7 +6,7 @@ public class I18nDecoder : MonoBehaviour
 {
 	public List<UILabel> labels = new List<UILabel>();
 	
-	void Start ()
+	void Awake ()
 	{
 		I18n.Initialize();
 		I18n.ChangeLanguage(PlayerPrefs.GetInt("SelectedLanguage"));

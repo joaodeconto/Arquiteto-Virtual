@@ -10,10 +10,17 @@ public class WallBuilderButtonHandler : MonoBehaviour {
 	}
 	
 	public WallBuilderButtonEnum wallBuilderButton;
+	public string TooltipString;
+	
 	private WallBuilder wallBuilder;
 	
 	void Start(){
+	
 		wallBuilder = GameObject.Find("WallBuilder").GetComponent<WallBuilder>();
+		
+		TooltipHandler tipHandler = gameObject.AddComponent<TooltipHandler>();
+		tipHandler.gameObject = gameObject;
+		tipHandler.SetTooltip(I18n.t (TooltipString));
 	}
 	
 	void OnClick(){
@@ -27,6 +34,14 @@ public class WallBuilderButtonHandler : MonoBehaviour {
 			case WallBuilderButtonEnum.Restart:
 				wallBuilder.Restart();
 				break;
+		}
+	}
+	
+	void Update()
+	{
+		if(Input.GetKey(KeyCode.P))
+		{
+			Debug.Break();
 		}
 	}
 }

@@ -48,7 +48,7 @@ public class I18n {
 		hashWords [0] ["Pro."] = "Pro.";
 		
 		//Montar paredes - Tooltips
-		hashWords [0] ["tip-comprimento"]	= "Selecionar o comprimento (em metros) que o chão da sua cozinha terá.";
+		hashWords [0] ["tip-profundidade"]	= "Selecionar a profundidade (em metros) que o chão da sua cozinha terá.";
 		hashWords [0] ["tip-largura"]		= "Selecionar a largura (em metros) que o chão da sua cozinha terá.";
 		hashWords [0] ["tip-preencher-area"]= "Preencher a área escolhida à cima com chão.";
 		hashWords [0] ["tip-colocar-paredes"] = "Colocar paredes ao redor do chão criado.";

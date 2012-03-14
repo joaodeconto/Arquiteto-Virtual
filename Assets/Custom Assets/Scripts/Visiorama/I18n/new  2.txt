@@ -1,6 +1,0 @@
-Tarefas:
-ok 1. Travar todos os objetos na cena quando for colocar um novo.
-ok 2. Não mostrar paredes montadas até chegar na colocação de móveis.
-ok 3. Mover cubo mágico pra baixo.
-ok 4. Colocar uma cor mais legal na inicialização das paredes
-	5. 

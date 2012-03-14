@@ -6,7 +6,8 @@ public class CatalogCategoryButtonHandler : MonoBehaviour {
 	public GameObject item;
 	public Camera cameraTarget;
 	public Transform rootForBounds;
-	public NTweener tween;
+	public TweenPlayerButton tweenPlayerButton;
+	public Transform offsetCatalogItem;
 	
 	// Use this for initialization
 	void Start () {
@@ -26,8 +27,9 @@ public class CatalogCategoryButtonHandler : MonoBehaviour {
 			newItem.transform.localPosition = new Vector3(0, (i * -185), 0);
 			newItem.transform.localScale = item.transform.localScale;
 			newItem.AddComponent<TweenPlayerButton>();
-			newItem.GetComponent<TweenPlayerButton>().parallelTweens = new NTweener[1];
-			newItem.GetComponent<TweenPlayerButton>().parallelTweens[0] = tween;
+			TweenPlayerButton tpb = newItem.GetComponent<TweenPlayerButton>();
+			tpb.ApplyTweenPlayerButton(tweenPlayerButton);
+			newItem.AddComponent<ClickCategory>();
 			foreach (UISprite sprite in newItem.GetComponentsInChildren<UISprite>()) {
 				if (sprite.name.Equals("UISprite")) {
 					sprite.spriteName = Line.CurrentLine.categories[i].ImageReference;

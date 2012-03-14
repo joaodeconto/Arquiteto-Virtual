@@ -197,28 +197,28 @@ public class Camera3d : MonoBehaviour
 			
 			// Mouse wheel moving forward
 			if(Input.GetAxisRaw("Mouse ScrollWheel") > 0f && transform.position.y > -10f) {
-				if (!MouseUtils.MouseClickedInArea(guiCatalogo.wndAccordMain) &&
-				    !MouseUtils.MouseClickedInArea(guiCamera.wndOpenMenu) &&
-				    !MouseUtils.MouseClickedInArea(guiDescription.window)) {
+//				if (!MouseUtils.MouseClickedInArea(guiCatalogo.wndAccordMain) &&
+//				    !MouseUtils.MouseClickedInArea(guiCamera.wndOpenMenu) &&
+//				    !MouseUtils.MouseClickedInArea(guiDescription.window)) {
 					Ray rayMouse = camera.ScreenPointToRay(Input.mousePosition);
 					if (Physics.Raycast(rayMouse) || !Physics.Raycast(rayMouse)) {
 						Vector3 cameraPosition = (rayMouse.origin - transform.position) * SpeedZoom;
 						StartCoroutine(LerpCamera(cameraPosition, true));
 					}
-				}
+//				}
 			}
 			
 			// Mouse wheel moving backward
 			if(Input.GetAxisRaw("Mouse ScrollWheel") < 0f && transform.position.y < 10f) {
-				if (!MouseUtils.MouseClickedInArea(guiCatalogo.wndAccordMain) &&
-				    !MouseUtils.MouseClickedInArea(guiCamera.wndOpenMenu) &&
-				    !MouseUtils.MouseClickedInArea(guiDescription.window)) {
+//				if (!MouseUtils.MouseClickedInArea(guiCatalogo.wndAccordMain) &&
+//				    !MouseUtils.MouseClickedInArea(guiCamera.wndOpenMenu) &&
+//				    !MouseUtils.MouseClickedInArea(guiDescription.window)) {
 					Ray rayMouse = camera.ScreenPointToRay(Input.mousePosition);
 					if (Physics.Raycast(rayMouse) || !Physics.Raycast(rayMouse)) {
 						Vector3 cameraPosition = (rayMouse.origin - transform.position) * SpeedZoom;
 						StartCoroutine(LerpCamera(cameraPosition, false));
 					}
-				}
+//				}
 			}
 		}
 	}

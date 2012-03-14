@@ -17,6 +17,20 @@ public class TweenPlayerButton : MonoBehaviour
 	public int internalControllerRegister;
 	private bool isForwardDirection;
 	
+	public void ApplyTweenPlayerButton (TweenPlayerButton tweenPlayerButton) {
+		this.Name = tweenPlayerButton.Name;
+		this.IsToggle = tweenPlayerButton.IsToggle;
+		this.PlayNextOnLastTweenFinish = tweenPlayerButton.PlayNextOnLastTweenFinish;
+		this.RunOnStart = tweenPlayerButton.RunOnStart;
+		this.tweenPlayerController = tweenPlayerButton.tweenPlayerController;
+		this.parallelTweens = new NTweener[tweenPlayerButton.parallelTweens.Length];
+		int i = 0;
+		foreach (NTweener nt in tweenPlayerButton.parallelTweens) {
+			this.parallelTweens[i] = nt;
+			++i;
+		}
+	}
+	
 	#region unity methods
 	void Start ()
 	{		

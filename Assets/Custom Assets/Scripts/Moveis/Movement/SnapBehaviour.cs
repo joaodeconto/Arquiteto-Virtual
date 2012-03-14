@@ -100,7 +100,7 @@ public class SnapBehaviour : MonoBehaviour {
 		if(!isSelected || !enabled || !enableDrag)
 			return;
 			
-        mainCamera = GameObject.FindWithTag("Player").camera;
+        mainCamera = GameObject.FindWithTag("MainCamera").camera;
 		
 		mousePosition = Input.mousePosition;
 		//mousePosition.x += Screen.width  * 0.0050f;

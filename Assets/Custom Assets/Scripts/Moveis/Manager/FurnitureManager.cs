@@ -17,7 +17,7 @@ public class FurnitureManager : MonoBehaviour {
 	
 	void Start(){
 		
-		mainCamera = GameObject.FindGameObjectWithTag("Player").camera;
+		mainCamera = GameObject.FindGameObjectWithTag("MainCamera").camera;
 		
 		GameObject[] chaos = GameObject.FindGameObjectsWithTag("Chao");
 		for(int i = 0; i != chaos.Length; ++i){

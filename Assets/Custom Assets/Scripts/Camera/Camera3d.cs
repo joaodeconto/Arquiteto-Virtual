@@ -3,166 +3,27 @@ using System.Collections;
 
 public class Camera3d : MonoBehaviour
 {
-	public Material paredeMaterial;
-	public Material paredeTransparent;
-	
-	public WallsParents paredesParents;
-	public GameObject tetoParent, chaoParent;
-	
 	static public Camera sCamera;
 	static public float SpeedZoom { get; private set; }
 	static public float StepZoom  { get; private set; }
 	
-	public bool AreWallsAlwaysVisible {
-		get { return areWallsVisible; }
-		set { 
-				if(value == true)
-				{
-					foreach (Transform paredes in paredesParents.GetWalls())
-					{
-						paredes.renderer.material = paredeMaterial;
-					}
-				}
-
-				//tetoParent.renderer.enabled = value;
-				
-				areWallsVisible = value;
-			}
-	}
-	private bool areWallsVisible;
-	
-	private GuiCatalogo guiCatalogo;
-	private GuiCamera guiCamera;
-	private GuiDescription guiDescription;
+	private GameObject movelSelecionado;
+	private FurnitureManager furnitureManager;
 	
 	void Start () {
+		
+		furnitureManager = GetComponent<FurnitureManager> ();
 	
 		sCamera = GetComponent<Camera>();
 		SpeedZoom = 1.5f;
 		StepZoom  = 8f;
-		
-		paredesParents.colorWallLeft = Color.white;
-		paredesParents.colorWallRight = Color.white;
-		paredesParents.colorWallBack = Color.white;
-		paredesParents.colorWallFront = Color.white;
-
-		AreWallsAlwaysVisible = false;
-		
-		chaoParent = GameObject.Find("ParentChao");
-		paredesParents.parentWallBack = GameObject.Find("ParedesBack").transform;
-		paredesParents.parentWallFront = GameObject.Find("ParedesFront").transform;
-		paredesParents.parentWallLeft = GameObject.Find("ParedesLeft").transform;
-		paredesParents.parentWallRight = GameObject.Find("ParedesRight").transform;
-		tetoParent = GameObject.Find("ParentTeto");
-		GameObject.Find("RotacaoCubo").GetComponentInChildren<Camera>().enabled = true;
-		
-		guiCatalogo = GetComponentInChildren<GuiCatalogo>();
-		guiCamera = GetComponentInChildren<GuiCamera>();
-		guiDescription = GetComponentInChildren<GuiDescription>();
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (guiCatalogo == null || guiCamera == null || guiDescription == null) {
-			guiCatalogo = GetComponentInChildren<GuiCatalogo>();
-			guiCamera = GetComponentInChildren<GuiCamera>();
-			guiDescription = GetComponentInChildren<GuiDescription>();
-		}
-		
 		MoveCamera();
 		MouseMoveCamera();
-		RenderWalls();
-		RenderCeiling();
-	}
-		
-	void OnGUI(){
-		//GUI.Label(new Rect(200,200,200,200),(transform.localEulerAngles).ToString());
-	}
-
-	void RenderCeiling () {
-		//if (AreWallsAlwaysVisible){
-				tetoParent.collider.enabled = 
-					tetoParent.renderer.enabled = this.transform.position.y < tetoParent.transform.position.y + 2.45f;
-				chaoParent.collider.enabled = 
-					chaoParent.renderer.enabled = this.transform.position.y > chaoParent.transform.position.y;
-		//}
-	}
-	
-	void RenderWalls() {
-	
-		if (!AreWallsAlwaysVisible) {
-			//paredes da esquerda
-			if (transform.localEulerAngles.y > 20 && transform.localEulerAngles.y < 160) {
-				if (paredesParents.parentWallLeft.renderer.material.name != paredeTransparent.name+" (Instance)") {
-					paredesParents.parentWallLeft.renderer.material = paredeTransparent;
-					paredesParents.parentWallLeft.renderer.material.color = paredesParents.colorWallLeft;
-					paredesParents.parentWallLeft.collider.enabled = false;
-				}
-				paredesParents.colorWallLeft = paredesParents.parentWallLeft.renderer.material.color;
-			}
-			else {
-				if (paredesParents.parentWallLeft.renderer.material.name != paredeMaterial.name+" (Instance)") {
-					paredesParents.parentWallLeft.renderer.material = paredeMaterial;
-					paredesParents.parentWallLeft.renderer.material.color = paredesParents.colorWallLeft;
-					paredesParents.parentWallLeft.collider.enabled = true;
-				}
-				paredesParents.colorWallLeft = paredesParents.parentWallLeft.renderer.material.color;
-			}
-			
-			//paredes da direita
-			if (transform.localEulerAngles.y > 200 && transform.localEulerAngles.y < 340) {
-				if (paredesParents.parentWallRight.renderer.material.name != paredeTransparent.name+" (Instance)") {
-					paredesParents.parentWallRight.renderer.material = paredeTransparent;
-					paredesParents.parentWallRight.renderer.material.color = paredesParents.colorWallRight;
-					paredesParents.parentWallRight.collider.enabled = false;
-				}
-				paredesParents.colorWallRight = paredesParents.parentWallRight.renderer.material.color;
-			}
-			else {
-				if (paredesParents.parentWallRight.renderer.material.name != paredeMaterial.name+" (Instance)") {
-					paredesParents.parentWallRight.renderer.material = paredeMaterial;
-					paredesParents.parentWallRight.renderer.material.color = paredesParents.colorWallRight;
-					paredesParents.parentWallRight.collider.enabled = true;
-				}
-				paredesParents.colorWallRight = paredesParents.parentWallRight.renderer.material.color;
-			}
-
-			//paredes de atrás
-			if (transform.localEulerAngles.y > 290 || transform.localEulerAngles.y < 70) {
-				if (paredesParents.parentWallBack.renderer.material.name != paredeTransparent.name+" (Instance)") {
-					paredesParents.parentWallBack.renderer.material = paredeTransparent;
-					paredesParents.parentWallBack.renderer.material.color = paredesParents.colorWallBack;
-					paredesParents.parentWallBack.collider.enabled = false;
-				}
-				paredesParents.colorWallBack = paredesParents.parentWallBack.renderer.material.color;
-			}
-			else {
-				if (paredesParents.parentWallBack.renderer.material.name != paredeMaterial.name+" (Instance)") {
-					paredesParents.parentWallBack.renderer.material = paredeMaterial;
-					paredesParents.parentWallBack.renderer.material.color = paredesParents.colorWallBack;
-					paredesParents.parentWallBack.collider.enabled = true;
-				}
-				paredesParents.colorWallBack = paredesParents.parentWallBack.renderer.material.color;
-			}
-			
-			//paredes de frente
-			if (transform.localEulerAngles.y > 110 && transform.localEulerAngles.y < 270) {
-				if (paredesParents.parentWallFront.renderer.material.name != paredeTransparent.name+" (Instance)") {
-					paredesParents.parentWallFront.renderer.material = paredeTransparent;
-					paredesParents.parentWallFront.renderer.material.color = paredesParents.colorWallFront;
-					paredesParents.parentWallFront.collider.enabled = false;
-				}
-				paredesParents.colorWallFront = paredesParents.parentWallFront.renderer.material.color;
-			}
-			else {
-				if (paredesParents.parentWallFront.renderer.material.name != paredeMaterial.name+" (Instance)") {
-					paredesParents.parentWallFront.renderer.material = paredeMaterial;
-					paredesParents.parentWallFront.renderer.material.color = paredesParents.colorWallFront;
-					paredesParents.parentWallFront.collider.enabled = true;
-				}
-				paredesParents.colorWallFront = paredesParents.parentWallFront.renderer.material.color;
-			}
-		}
+		SelectMobile ();
 	}
 
 	void MoveCamera () {
@@ -219,6 +80,79 @@ public class Camera3d : MonoBehaviour
 						StartCoroutine(LerpCamera(cameraPosition, false));
 					}
 //				}
+			}
+		}
+	}
+	
+	private void SelectMobile () {
+		if (Input.GetMouseButtonDown(0) && 
+		    !furnitureManager.isNewFurnitureActive()) 
+		{
+			CheckActiveFurniture();
+		}
+		else 
+		{
+			MoveActiveNewFurniture ();
+		}		
+	}
+	
+	private void CheckActiveFurniture (){
+		
+		movelSelecionado = GameObject.FindGameObjectWithTag("MovelSelecionado");
+		
+		//Botão esquerdo
+		if (Input.GetMouseButtonDown(0)) {
+			//Deselecionar móvel selecionado se clicar com o botão esquerdo
+			if (movelSelecionado != null) {
+				movelSelecionado.GetComponentInChildren<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Discrete;
+				movelSelecionado.tag = "Movel";
+				movelSelecionado.GetComponentInChildren<SnapBehaviour>().Select = false;					
+				GetComponent<RenderBounds>().Display = false;
+			}
+			
+			RaycastHit hit = new RaycastHit ();
+			Ray ray = camera.ScreenPointToRay (Input.mousePosition);
+			GameObject[] moveis = GameObject.FindGameObjectsWithTag ("Movel");
+			
+			//Só continua se pegar algum móvel no ray cast do mouse
+			//Se houverem moveis na cena
+			if (moveis.Length > 0) {
+				foreach (GameObject movel in moveis) {
+					if (Physics.Raycast (ray, out hit, Mathf.Infinity) && hit.transform.tag != "Movel")
+						continue;
+					if (hit.transform == movel.transform) {
+						movel.tag = "MovelSelecionado";
+						movel.GetComponentInChildren<SnapBehaviour>().Select = true;
+						movel.GetComponentInChildren<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+						GetComponent<RenderBounds>().Display = true;
+						GetComponent<RenderBounds>().SetBox(movel);
+					}
+				}
+			} else {
+				print ("Não há mais objetos deselecionados.");
+			}
+		}
+	}
+
+	private void MoveActiveNewFurniture ()
+	{
+		
+		if (!furnitureManager.isNewFurnitureActive ())
+			return;
+		
+		GameObject activeFurniture = GetComponent<FurnitureManager> ().GetActiveNewFurniture ();
+		
+		if (activeFurniture.tag != "Movel") {
+			if (!Input.GetMouseButtonDown (0)) {
+				RaycastHit hit;
+				Ray ray = camera.ScreenPointToRay (Input.mousePosition);
+				if (Physics.Raycast (ray, out hit)) {
+					if (hit.transform.gameObject.layer == LayerMask.NameToLayer ("Chao")) {
+						activeFurniture.transform.position = hit.point;
+					}
+				}
+			} else {
+				furnitureManager.FreeActiveNewFurniture ();
 			}
 		}
 	}

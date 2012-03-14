@@ -85,127 +85,122 @@ public class Painter: MonoBehaviour {
 		}
 
 		GUI.depth = 1;
-		if (!MouseUtils.MouseClickedInArea(guiCatalogo.wndAccordMain) &&
-		    !MouseUtils.MouseClickedInArea(guiCamera.wndOpenMenu) &&
-		    !MouseUtils.MouseClickedInArea(guiDescription.window)) {
-			if (dropperBool) {
-				if (Input.GetMouseButtonUp(0)) {
-					if (!MouseUtils.MouseClickedInArea(rectWindow)) {
+		if (dropperBool) {
+			if (Input.GetMouseButtonUp(0)) {
+				if (!MouseUtils.MouseClickedInArea(rectWindow)) {
+					Ray ray = transform.parent.camera.ScreenPointToRay(Input.mousePosition);
+					RaycastHit hit;
+					if (Physics.Raycast(ray, out hit)) {
+						foreach (string tag in tags) {
+							if (hit.transform.tag == tag) {
+								color = hit.transform.renderer.material.color;
+							}
+						}
+						foreach (string name in objectsNames) {
+							string objName = name + "(Clone)";
+							if (hit.transform.name == objName) {
+								color = hit.transform.GetComponentInChildren<Renderer>().materials[0].color;
+							}
+						}
+						if (tagObject == "MovelSelecionado") {
+							GO.tag = tagObject;
+						}
+						if (hit.transform.tag == "MovelSelecionado") {
+							hit.transform.tag = "Movel";
+						}
+					}
+					dropperBool = false;
+					dropperBoolLast = true;
+				}
+			}
+		}
+		else {
+			if (Input.GetMouseButtonDown(0) &&
+				!clicked) {
+				if (!dropperBoolLast) {
+					bool breaker = false;
+					if (render != null) {
+						if (MouseUtils.MouseClickedInArea(rectWindow)) breaker = true;
+					}
+
+					if (!breaker) {
 						Ray ray = transform.parent.camera.ScreenPointToRay(Input.mousePosition);
 						RaycastHit hit;
 						if (Physics.Raycast(ray, out hit)) {
+							render = null;
+						}
+						if (!Physics.Raycast(ray, out hit)) {
+							render = null;
+						}
+					}
+				} else dropperBoolLast = false;
+			}
+			if (MouseUtils.GUIMouseButtonDoubleClickDown(0, 0.3f)) {
+				if (!dropperBoolLast) {
+					bool breaker = false;
+					if (render != null) {
+						if (MouseUtils.MouseClickedInArea(rectWindow)) breaker = true;
+					}
+
+					if (!breaker) {
+						Ray ray = transform.parent.camera.ScreenPointToRay(Input.mousePosition);
+						RaycastHit hit;
+						rectWindow.x = Input.mousePosition.x;
+						if (rectWindow.x > Screen.width - rectWindow.width)
+							rectWindow.x -= rectWindow.width;
+						rectWindow.y = Screen.height - Input.mousePosition.y;
+						if (rectWindow.y > Screen.height - rectWindow.height)
+							rectWindow.y -= rectWindow.height;
+						if (Physics.Raycast(ray, out hit)) {
 							foreach (string tag in tags) {
 								if (hit.transform.tag == tag) {
+									render = hit.transform.renderer;
 									color = hit.transform.renderer.material.color;
+									if (hit.transform.name == "ParentTeto") {
+										nameObject = I18n.t("Teto");
+									}
+									else if (hit.transform.name == "ParedesBack") {
+										nameObject = I18n.t("Parede Atrás");
+									}
+									else if (hit.transform.name == "ParedesFront") {
+										nameObject = I18n.t("Parede Frente");
+									}
+									else if (hit.transform.name == "ParedesLeft") {
+										nameObject = I18n.t("Parede Esquerdo");
+									}
+									else if (hit.transform.name == "ParedesRight") {
+										nameObject = I18n.t("Parede Direito");
+									}
+									tagObject = hit.transform.tag;
+									StartCoroutine(WaitClick(0.3f));
+									return;
 								}
 							}
 							foreach (string name in objectsNames) {
-								string objName = name + "(Clone)";
-								if (hit.transform.name == objName) {
-									color = hit.transform.GetComponentInChildren<Renderer>().materials[0].color;
-								}
-							}
-							if (tagObject == "MovelSelecionado") {
-								GO.tag = tagObject;
-							}
-							if (hit.transform.tag == "MovelSelecionado") {
-								hit.transform.tag = "Movel";
-							}
-						}
-						dropperBool = false;
-						dropperBoolLast = true;
-					}
-				}
-			}
-			else {
-
-				if (Input.GetMouseButtonDown(0) &&
-					!clicked) {
-					if (!dropperBoolLast) {
-						bool breaker = false;
-						if (render != null) {
-							if (MouseUtils.MouseClickedInArea(rectWindow)) breaker = true;
-						}
-
-						if (!breaker) {
-							Ray ray = transform.parent.camera.ScreenPointToRay(Input.mousePosition);
-							RaycastHit hit;
-							if (Physics.Raycast(ray, out hit)) {
-								render = null;
-							}
-							if (!Physics.Raycast(ray, out hit)) {
-								render = null;
-							}
-						}
-					} else dropperBoolLast = false;
-				}
-				if (MouseUtils.GUIMouseButtonDoubleClickDown(0, 0.3f)) {
-					if (!dropperBoolLast) {
-						bool breaker = false;
-						if (render != null) {
-							if (MouseUtils.MouseClickedInArea(rectWindow)) breaker = true;
-						}
-
-						if (!breaker) {
-							Ray ray = transform.parent.camera.ScreenPointToRay(Input.mousePosition);
-							RaycastHit hit;
-							rectWindow.x = Input.mousePosition.x;
-							if (rectWindow.x > Screen.width - rectWindow.width)
-								rectWindow.x -= rectWindow.width;
-							rectWindow.y = Screen.height - Input.mousePosition.y;
-							if (rectWindow.y > Screen.height - rectWindow.height)
-								rectWindow.y -= rectWindow.height;
-							if (Physics.Raycast(ray, out hit)) {
-								foreach (string tag in tags) {
-									if (hit.transform.tag == tag) {
-										render = hit.transform.renderer;
-										color = hit.transform.renderer.material.color;
-										if (hit.transform.name == "ParentTeto") {
-											nameObject = I18n.t("Teto");
-										}
-										else if (hit.transform.name == "ParedesBack") {
-											nameObject = I18n.t("Parede Atrás");
-										}
-										else if (hit.transform.name == "ParedesFront") {
-											nameObject = I18n.t("Parede Frente");
-										}
-										else if (hit.transform.name == "ParedesLeft") {
-											nameObject = I18n.t("Parede Esquerdo");
-										}
-										else if (hit.transform.name == "ParedesRight") {
-											nameObject = I18n.t("Parede Direito");
-										}
-										tagObject = hit.transform.tag;
-										StartCoroutine(WaitClick(0.3f));
-										return;
-									}
-								}
-								foreach (string name in objectsNames) {
 //									int index = hit.transform.name.IndexOf("(Clone)");
 //									string objName = hit.transform.name.Remove(index);
 //									print(objName + " : " + name);
-									string objName = name + "(Clone)";
-									print (hit.transform.name + " : " + objName);
-									if (hit.transform.name == objName) {
-										GO = hit.transform.gameObject;
-										render = hit.transform.GetComponentInChildren<Renderer>();
-										tagObject = hit.transform.tag;
-										color = render.materials[0].color;
-										if (hit.transform.GetComponent<InformacoesMovel>() != null) {
-											nameObject = hit.transform.GetComponent<InformacoesMovel>().Nome;
-										}
-										else {
-											nameObject = "";
-										}
-										StartCoroutine(WaitClick(0.3f));
-										return;
+								string objName = name + "(Clone)";
+								print (hit.transform.name + " : " + objName);
+								if (hit.transform.name == objName) {
+									GO = hit.transform.gameObject;
+									render = hit.transform.GetComponentInChildren<Renderer>();
+									tagObject = hit.transform.tag;
+									color = render.materials[0].color;
+									if (hit.transform.GetComponent<InformacoesMovel>() != null) {
+										nameObject = hit.transform.GetComponent<InformacoesMovel>().Nome;
 									}
+									else {
+										nameObject = "";
+									}
+									StartCoroutine(WaitClick(0.3f));
+									return;
 								}
-								render = null;
 							}
+							render = null;
 						}
-					} else dropperBoolLast = false;
-				}
+					}
+				} else dropperBoolLast = false;
 			}
 		}
 

@@ -271,7 +271,7 @@ public class GuiCamera : MonoBehaviour, GuiBase
 		}
 		//Disable walls btn
 		if (GUI.Button (btnsExtras [3], "", extrasStyles [3])) {
-			cameraMain.GetComponent<Camera3d> ().AreWallsAlwaysVisible = !cameraMain.GetComponent<Camera3d> ().AreWallsAlwaysVisible;
+//			cameraMain.GetComponent<Camera3d> ().AreWallsAlwaysVisible = !cameraMain.GetComponent<Camera3d> ().AreWallsAlwaysVisible;
 		}
 		
 		if (isLocked) {

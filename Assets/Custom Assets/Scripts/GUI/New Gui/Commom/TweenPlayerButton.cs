@@ -8,13 +8,13 @@ public class TweenPlayerButton : MonoBehaviour
 	public bool IsToggle;
 	public bool PlayNextOnLastTweenFinish;
 	public bool RunOnStart;
+	public bool IsActive;
 	
 	public TweenPlayerController tweenPlayerController;
 	public NTweener[] parallelTweens;
 	
-	public bool IsActive { get; set; }
 	
-	private int internalControllerRegister;
+	public int internalControllerRegister;
 	private bool isForwardDirection;
 	
 	public void ApplyTweenPlayerButton (TweenPlayerButton tweenPlayerButton) {

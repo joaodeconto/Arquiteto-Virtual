@@ -32,7 +32,7 @@ public class I18n {
 		}
 		
 		if (checkPhrasesNumberArray[0] != checkPhrasesNumberArray[1] ||
-			checkPhrasesNumberArray[0] == checkPhrasesNumberArray[2])
+			checkPhrasesNumberArray[0] != checkPhrasesNumberArray[2])
 		{
 			Debug.LogError ("Alguma língua no I18n está com mais frases que outras. Por favor verifique o arquivo.");
 			Debug.Break ();
@@ -148,7 +148,6 @@ public class I18n {
 		hashWords [1] ["tip-modulo-focar"] 	 = "Focus camera on selected module.";
 		hashWords [1] ["tip-modulo-remover"] = "Delete selected module.";
 	}
-	
 	static private void InitializeSpanish ()
 	{
 		//Escolha cozinha
@@ -160,9 +159,9 @@ public class I18n {
 		hashWords [2] ["Comprimento"] = "Depth";
 		
 		hashWords [2] ["Ações"] = "Actions";
-		hashWords [2] ["Preencher Área"] = "Fill area";
+		hashWords [2] ["Preencher Área"]  = "Fill area";
 		hashWords [2] ["Colocar Paredes"] = "Build walls";
-		hashWords [2] ["Reiniciar"] = "Restart";
+		hashWords [2] ["Reiniciar"] 	  = "Restart";
 		
 		//Monte sua cozinha
 		hashWords [2] ["Módulos"] = "Modules";
@@ -178,29 +177,29 @@ public class I18n {
 		
 		//Montar paredes - Tooltips
 		hashWords [2] ["tip-profundidade"] = "Choose the depth (in meters) that the floor of your kitchen will have.";
-		hashWords [2] ["tip-largura"] = "Choose the width (in meters) that the floor of your kitchen will have.";
-		hashWords [2] ["tip-preencher-area"] = "Fill the selected area above with floor.";
+		hashWords [2] ["tip-largura"] 	   = "Choose the width (in meters) that the floor of your kitchen will have.";
+		hashWords [2] ["tip-preencher-area"]  = "Fill the selected area above with floor.";
 		hashWords [2] ["tip-colocar-paredes"] = "Build walls around the floor.";
-		hashWords [2] ["tip-reiniciar"] = "Removing the previously placed floor.";
+		hashWords [2] ["tip-reiniciar"] 	  = "Removing the previously placed floor.";
 		
 		//Montar cozinha - Tooltips
-		hashWords [2] ["tip-modulos"] = "Choose the modules for your kitchen.";
+		hashWords [2] ["tip-modulos"] 	 = "Choose the modules for your kitchen.";
 		hashWords [2] ["tip-iluminação"] = "Set the lighting of the scene.";
-		hashWords [2] ["tip-extras"] = "Select additional accessories for your kitchen.";
-		hashWords [2] ["tip-play"] = "Enable first-person mode.";
+		hashWords [2] ["tip-extras"] 	 = "Select additional accessories for your kitchen.";
+		hashWords [2] ["tip-play"] 		 = "Enable first-person mode.";
 		hashWords [2] ["tip-screenshot"] = "Take a picture of the kitchen.";
 		hashWords [2] ["tip-screenshot"] = "Download the report of the modules in your kitchen.";
 		hashWords [2] ["tip-paredes"] = "Enable/Disable always visible walls.";
 		
-		hashWords [2] ["tip-mover-vertical"] = "Move camera on vertical direction.";
+		hashWords [2] ["tip-mover-vertical"]   = "Move camera on vertical direction.";
 		hashWords [2] ["tip-mover-horizontal"] = "Move camera on horizontal direction.";
 		hashWords [2] ["tip-rotacionar-horizontal"] = "Rotate camera on horizontal direction.";
-		hashWords [2] ["tip-rotacionar-vertical"] = "Rotate camera on vertical direction.";
-		hashWords [2] ["tip-zoom-mais"] = "Move camera forward.";
+		hashWords [2] ["tip-rotacionar-vertical"]	= "Rotate camera on vertical direction.";
+		hashWords [2] ["tip-zoom-mais"]  = "Move camera forward.";
 		hashWords [2] ["tip-zoom-menos"] = "Move camera backwards.";
 		
 		hashWords [2] ["tip-modulo-rotacao"] = "Rotate selected module.";
-		hashWords [2] ["tip-modulo-focar"] = "Focus camera on selected module.";
+		hashWords [2] ["tip-modulo-focar"] 	 = "Focus camera on selected module.";
 		hashWords [2] ["tip-modulo-remover"] = "Delete selected module.";
 	}
 	#endregion

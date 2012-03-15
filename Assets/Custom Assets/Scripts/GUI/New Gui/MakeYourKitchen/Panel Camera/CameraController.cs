@@ -13,11 +13,12 @@ public class CameraController : MonoBehaviour {
 	public Material wallMaterial;
 	public Material wallMaterialTransparent;
 	
-	public bool AreWallsAlwaysVisible;
 	public float rateRefreshWallsVisibility;
+
+	public bool areWallsAlwaysVisible {get; private set; }
 	
-	private Camera mainCamera;
-	private GameObject firstPersonCamera;
+	public Camera mainCamera { get; private set; }
+	public GameObject firstPersonCamera { get; private set; }
 	
 	public WallsParents wallParents { get; private set; }
 	private GameObject ceilParent;
@@ -28,10 +29,10 @@ public class CameraController : MonoBehaviour {
 	
 	private bool isGuiLocked;
 		
-	void Start()
+	void Start ()
 	{
-		mainCamera 		  = GameObject.Find ("Main Camera").camera;
-		firstPersonCamera = GameObject.Find ("First Person Camera");
+		mainCamera 		  = GameObject.FindWithTag ("MainCamera").camera;
+		firstPersonCamera = GameObject.Find ("First Person Controller");
 		firstPersonCamera.gameObject.SetActiveRecursively (false);//disable other cam
 		
 		//NGUI Monkey patch gonna patch...
@@ -52,13 +53,6 @@ public class CameraController : MonoBehaviour {
 		
 		ceilParent  = GameObject.Find ("ParentTeto");
 		floorParent = GameObject.Find ("ParentChao");
-		
-		MeshUtils.CombineMesh (wallParents.parentWallFront, true);
-		MeshUtils.CombineMesh (wallParents.parentWallLeft, true);
-		MeshUtils.CombineMesh (wallParents.parentWallRight, true);
-		MeshUtils.CombineMesh (wallParents.parentWallBack, true);
-		MeshUtils.CombineMesh (floorParent.transform, true);
-		MeshUtils.CombineMesh (ceilParent.transform, false);
 		
 		showCeil  = true;
 		showFloor = true;
@@ -103,7 +97,6 @@ public class CameraController : MonoBehaviour {
 		showFloor = mainCamera.transform.position.y > floorParent.transform.position.y;
 		//TODO add collider here floorParent.collider.enabled = showFloor;
 		floorParent.renderer.enabled = showFloor;
-		
 	}
 	
 	#region GUI
@@ -164,8 +157,8 @@ public class CameraController : MonoBehaviour {
 	
 	public void ShowHideWalls ()
 	{
-		AreWallsAlwaysVisible = !AreWallsAlwaysVisible;
-		if(AreWallsAlwaysVisible)
+		areWallsAlwaysVisible = !areWallsAlwaysVisible;
+		if(areWallsAlwaysVisible)
 		{
 			for(int i = 0; i != 4; ++i)
 			{
@@ -183,7 +176,7 @@ public class CameraController : MonoBehaviour {
 	#endregion
 	private void VerifyWallVisibility ()
 	{
-		if(AreWallsAlwaysVisible)
+		if(areWallsAlwaysVisible)
 		{
 			return;
 		}
@@ -249,7 +242,7 @@ public class CameraController : MonoBehaviour {
 			
 	private void ChangeWallMaterial (Transform wallParent, Material newMaterial, Color selectedColor, bool enableWall)
 	{	
-		if (wallParent.renderer.material.name != newMaterial.name + " (Instance)") {
+		if (!wallParent.renderer.material.name.Equals(newMaterial.name + " (Instance)")) {
 			wallParent.renderer.material = newMaterial;
 			wallParent.renderer.material.color = selectedColor;
 			if (wallParent.collider != null) {
@@ -261,85 +254,4 @@ public class CameraController : MonoBehaviour {
 	
 	}
 	
-	/*
-	void MoveCamera ()
-	{
-		Vector3 direcao = (transform.right * Input.GetAxis ("Horizontal") * Time.deltaTime * 5) + (transform.forward * Input.GetAxis ("Vertical") * Time.deltaTime * 5);
-		direcao = new Vector3 (direcao.x, 0, direcao.z);
-		transform.position += direcao;
-		if (Input.GetKey (KeyCode.Q))
-			transform.eulerAngles -= new Vector3 (0, 1, 0);
-		if (Input.GetKey (KeyCode.E))
-			transform.eulerAngles += new Vector3 (0, 1, 0);
-	}
-	
-	void MouseMoveCamera ()
-	{
-		if (!isDoingLerp) {
-			if (Input.GetMouseButton (1)) {
-				float x = Input.GetAxis ("Mouse X") * 2;
-				float y = Input.GetAxis ("Mouse Y") * 2;
-				
-				camEulerAngles += new Vector3 (-y, x, 0);	
-			}
-			
-			if (Input.GetMouseButton (2)) {
-				float x = Input.GetAxis ("Mouse X");
-				float y = Input.GetAxis ("Mouse Y");
-				
-				transform.localPosition += transform.TransformDirection (new Vector3 (x, y, 0));
-			}
-			
-			transform.localPosition = new Vector3 (Mathf.Clamp (transform.localPosition.x, 955f, 1045f), 
-			                                      Mathf.Clamp (transform.localPosition.y, -10f, 10f), 
-			                                      Mathf.Clamp (transform.localPosition.z, 955f, 1045f));
-			
-			// Mouse wheel moving forward
-			if (Input.GetAxisRaw ("Mouse ScrollWheel") > 0f && transform.position.y > -10f) {
-				if (!MouseUtils.MouseClickedInArea (guiCatalogo.wndAccordMain) &&
-				    !MouseUtils.MouseClickedInArea (guiCamera.wndOpenMenu) &&
-				    !MouseUtils.MouseClickedInArea (guiDescription.window)) {
-					Ray rayMouse = camera.ScreenPointToRay (Input.mousePosition);
-					if (Physics.Raycast (rayMouse) || !Physics.Raycast (rayMouse)) {
-						Vector3 cameraPosition = (rayMouse.origin - transform.position) * SpeedZoom;
-						StartCoroutine (LerpCamera (cameraPosition, true));
-					}
-				}
-			}
-			
-			// Mouse wheel moving backward
-			if (Input.GetAxisRaw ("Mouse ScrollWheel") < 0f && transform.position.y < 10f) {
-				if (!MouseUtils.MouseClickedInArea (guiCatalogo.wndAccordMain) &&
-				    !MouseUtils.MouseClickedInArea (guiCamera.wndOpenMenu) &&
-				    !MouseUtils.MouseClickedInArea (guiDescription.window)) {
-					Ray rayMouse = camera.ScreenPointToRay (Input.mousePosition);
-					if (Physics.Raycast (rayMouse) || !Physics.Raycast (rayMouse)) {
-						Vector3 cameraPosition = (rayMouse.origin - transform.position) * SpeedZoom;
-						StartCoroutine (LerpCamera (cameraPosition, false));
-					}
-				}
-			}
-		}
-	}
-	
-	public static bool isDoingLerp = false;
-
-	public static IEnumerator LerpCamera (Vector3 position, bool positive)
-	{
-		float i = 0;
-		isDoingLerp = true;
-		while (i < 1) {
-			if (sCamera.transform.position.y > -10f) {
-				if (positive)
-					sCamera.transform.localPosition += position * Time.deltaTime * StepZoom;
-				else
-					sCamera.transform.localPosition -= position * Time.deltaTime * StepZoom;
-				i += Time.deltaTime * 2;
-				yield return null;
-			} else
-				break;
-		}
-		isDoingLerp = false;
-	}
-	*/
 }

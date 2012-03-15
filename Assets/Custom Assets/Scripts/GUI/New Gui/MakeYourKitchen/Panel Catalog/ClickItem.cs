@@ -71,7 +71,7 @@ public class ClickItem : MonoBehaviour {
 			#endregion
 			
 			#region colocar objeto virado para a câmera
-			float yRotation  = GameObject.FindGameObjectWithTag("Player").transform.rotation.eulerAngles.y;
+			float yRotation  = GameObject.FindGameObjectWithTag("MainCamera").transform.rotation.eulerAngles.y;
 			
 			Debug.Log("yRotation: " + yRotation);
 			

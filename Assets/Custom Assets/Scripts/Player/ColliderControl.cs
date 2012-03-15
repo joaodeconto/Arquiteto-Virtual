@@ -62,9 +62,13 @@ public class ColliderControl : MonoBehaviour {
 				parede.collider.isTrigger = true;
 			}
 		}
-		foreach (Transform teto in GameObject.Find("ParentTeto").transform) {
-			if  (teto != null && teto.renderer != null)
-				teto.renderer.enabled = cameraController.areWallsAlwaysVisible;
+		GameObject parentTeto = GameObject.FindWithTag("ParentTeto");
+		if (parentTeto != null)
+		{
+			foreach (Transform teto in parentTeto.transform) {
+				if  (teto != null && teto.renderer != null)
+					teto.renderer.enabled = cameraController.areWallsAlwaysVisible;
+			}
 		}
 	}
 	

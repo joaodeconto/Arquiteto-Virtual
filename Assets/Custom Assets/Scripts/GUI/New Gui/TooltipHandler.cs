@@ -10,6 +10,7 @@ public class TooltipHandler : MonoBehaviour
 	public string label;
 	
 	public bool getViaCode;
+	public bool getViaLabel;
 	
 	#region GetComponets
 	public GameObject gameObject;
@@ -27,21 +28,10 @@ public class TooltipHandler : MonoBehaviour
 	
 	void OnHover (bool isOver)
 	{
-		this.isOver = isOver;
-		if (!isOver)
+		if (isOver)
+			UITooltip.ShowText (label);
+		else
 			UITooltip.Close ();
-	}
-	
-	void Update ()
-	{
-		if (isOver) {
-			if (label != lastLabel) {
-				lastLabel = label;
-				UITooltip.Close ();
-			} else {
-				UITooltip.ShowText (label);
-			}
-		}
 	}
 	
 	public void SetTooltip (string label)

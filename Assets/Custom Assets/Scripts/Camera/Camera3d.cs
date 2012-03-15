@@ -9,6 +9,8 @@ public class Camera3d : MonoBehaviour
 	
 	private GameObject movelSelecionado;
 	private FurnitureManager furnitureManager;
+	private InfoController infoController;
+	private CameraGUIController cameraGUIController;
 	
 	void Start () {
 		
@@ -17,6 +19,9 @@ public class Camera3d : MonoBehaviour
 		sCamera = GetComponent<Camera>();
 		SpeedZoom = 1.5f;
 		StepZoom  = 8f;
+		
+		infoController = GameObject.FindWithTag("GameController").GetComponentInChildren<InfoController>();
+		cameraGUIController = GameObject.FindWithTag("GameController").GetComponentInChildren<CameraGUIController>();
 	}
 
 	// Update is called once per frame
@@ -88,10 +93,14 @@ public class Camera3d : MonoBehaviour
 		if (Input.GetMouseButtonDown(0) && 
 		    !furnitureManager.isNewFurnitureActive()) 
 		{
+			//Se clicar em cima de uma GUI ele ignora e volta
+			if (cameraGUIController.ClickInGUI ()) return;
 			CheckActiveFurniture();
 		}
-		else 
+		else if (Input.GetMouseButtonDown(0))
 		{
+			//Se clicar em cima de uma GUI ele ignora e volta
+			if (cameraGUIController.ClickInGUI ()) return;
 			MoveActiveNewFurniture ();
 		}		
 	}
@@ -102,12 +111,14 @@ public class Camera3d : MonoBehaviour
 		
 		//Botão esquerdo
 		if (Input.GetMouseButtonDown(0)) {
+			
 			//Deselecionar móvel selecionado se clicar com o botão esquerdo
 			if (movelSelecionado != null) {
 				movelSelecionado.GetComponentInChildren<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Discrete;
 				movelSelecionado.tag = "Movel";
 				movelSelecionado.GetComponentInChildren<SnapBehaviour>().Select = false;					
 				GetComponent<RenderBounds>().Display = false;
+				infoController.Close();
 			}
 			
 			RaycastHit hit = new RaycastHit ();
@@ -126,6 +137,7 @@ public class Camera3d : MonoBehaviour
 						movel.GetComponentInChildren<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 						GetComponent<RenderBounds>().Display = true;
 						GetComponent<RenderBounds>().SetBox(movel);
+						infoController.Open(movel.GetComponent<InformacoesMovel>());
 					}
 				}
 			} else {

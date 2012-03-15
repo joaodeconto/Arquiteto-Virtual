@@ -177,7 +177,7 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 		this.furnitureData = furnitureData;
 	}
 	
-	public InformacoesMovel GetData(){
+	public InformacoesMovel GetData() {
 		return furnitureData;
 	}
 	

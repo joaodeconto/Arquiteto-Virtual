@@ -60,12 +60,11 @@ public class I18n {
 		hashWords [0] ["Iluminação"] = "Iluminação";
 		hashWords [0] ["Extras"] 	 = "Extras";
 		
-		hashWords [0] ["Lin."] = "Lin.";
-		hashWords [0] ["Cat."] = "Cat.";
-		hashWords [0] ["Ref."] = "Ref.";
-		hashWords [0] ["Lar."] = "Lar.";
-		hashWords [0] ["Alt."] = "Alt.";
-		hashWords [0] ["Pro."] = "Pro.";
+		hashWords [0] ["Código"] = "Código";
+		hashWords [0] ["LXPXA"] = "LXPXA";
+		hashWords [0] ["Descrição"] = "Descrição";
+		hashWords [0] ["Linha"] = "Linha";
+		hashWords [0] ["Categoria"] = "Categoria";
 		
 		//Montar paredes - Tooltips
 		hashWords [0] ["tip-profundidade"]	= "Selecionar a profundidade (em metros) que o chão da sua cozinha terá.";
@@ -114,12 +113,11 @@ public class I18n {
 		hashWords [1] ["Iluminação"] = "Illumination";
 		hashWords [1] ["Extras"] = "Extras";
 		
-		hashWords [1] ["Lin."] = "Lin.";
-		hashWords [1] ["Cat."] = "Cat.";
-		hashWords [1] ["Ref."] = "Ref.";
-		hashWords [1] ["Lar."] = "Wdh.";
-		hashWords [1] ["Alt."] = "Hgt.";
-		hashWords [1] ["Pro."] = "Dpt.";
+		hashWords [1] ["Código"] = "Reference";
+		hashWords [1] ["LXPXA"] = "WXDXH";
+		hashWords [1] ["Descrição"] = "Description";
+		hashWords [1] ["Linha"] = "Line";
+		hashWords [1] ["Categoria"] = "Category";
 		
 		//Montar paredes - Tooltips
 		hashWords [1] ["tip-profundidade"] = "Choose the depth (in meters) that the floor of your kitchen will have.";
@@ -168,12 +166,11 @@ public class I18n {
 		hashWords [2] ["Iluminação"] = "Illumination";
 		hashWords [2] ["Extras"] = "Extras";
 		
-		hashWords [2] ["Lin."] = "Lin.";
-		hashWords [2] ["Cat."] = "Cat.";
-		hashWords [2] ["Ref."] = "Ref.";
-		hashWords [2] ["Lar."] = "Wdh.";
-		hashWords [2] ["Alt."] = "Hgt.";
-		hashWords [2] ["Pro."] = "Dpt.";
+		hashWords [2] ["Código"] = "Reference";
+		hashWords [2] ["LXPXA"] = "WXDXH";
+		hashWords [2] ["Descrição"] = "Description";
+		hashWords [2] ["Linha"] = "Line";
+		hashWords [2] ["Categoria"] = "Category";
 		
 		//Montar paredes - Tooltips
 		hashWords [2] ["tip-profundidade"] = "Choose the depth (in meters) that the floor of your kitchen will have.";

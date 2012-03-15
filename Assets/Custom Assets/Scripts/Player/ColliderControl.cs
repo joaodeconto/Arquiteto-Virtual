@@ -62,7 +62,7 @@ public class ColliderControl : MonoBehaviour {
 				parede.collider.isTrigger = true;
 			}
 		}
-		GameObject parentTeto = GameObject.FindWithTag("ParentTeto");
+		GameObject parentTeto = GameObject.FindWithTag("TetoParent");
 		if (parentTeto != null)
 		{
 			foreach (Transform teto in parentTeto.transform) {

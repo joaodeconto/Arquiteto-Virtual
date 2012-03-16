@@ -22,13 +22,19 @@ public class InfoController : MonoBehaviour {
 	public GameObject panelInfo;
 	
 	private bool isSemTampo, isComTampo, isCooktop, isPia;
-	
+	bool wasInitialized;
 	// Use this for initialization
 	void Awake ()
 	{
 		Close ();
-		
-		Invoke("ResolveCheckBoxColors",1f);
+	}
+	
+	void OnEnabled ()
+	{
+		if (!wasInitialized) {
+			Invoke ("ResolveCheckBoxColors", 1f);
+			wasInitialized = true;
+		}
 	}
 	
 	void ResolveCheckBoxColors ()
@@ -38,14 +44,14 @@ public class InfoController : MonoBehaviour {
 			Debug.Break ();
 		} else {
 			Transform checkBoxCores = GameObject.Find ("CheckBox Cores").transform;
-			GameObject checkBox;
+			Transform checkBox;
 			Vector3 rootColorGuiPosition = new Vector3 (-54f, 2.4f, 0f);
 			float xOffset = 37f;
 			
 			BrandColorEnum[] brandColors = Line.CurrentLine.colors;
 			
 			for (int i = 0; i != brandColors.Length; ++i) {
-				checkBox = checkBoxCores.Find ("Check " + BrandColor.GetColorName (brandColors [i])).gameObject;//.gameObject;
+				checkBox = checkBoxCores.Find ("Check " + BrandColor.GetColorName (brandColors [i]));//.gameObject;
 				if (checkBox == null) {
 					Debug.LogError ("Verifique os nomes das checkbox de cores. " + 
 									"\n Cor pedida e nã encontrada: " + BrandColor.GetColorName (brandColors [i]));
@@ -55,7 +61,7 @@ public class InfoController : MonoBehaviour {
 				
 				//colocando checkbox para o lado
 				checkBox.transform.localPosition = rootColorGuiPosition + (Vector3.right * xOffset * i);
-				checkBox.SetActiveRecursively(true);
+				checkBox.gameObject.SetActiveRecursively(true);
 			}
 		}
 	}
@@ -74,7 +80,7 @@ public class InfoController : MonoBehaviour {
 	
 	public void Close (){
 		this.furnitureData = null;
-		//panelInfo.SetActiveRecursively(false);
+		panelInfo.SetActiveRecursively(false);
 		DrawEmptyWindow();
 	}	
 	#endregion

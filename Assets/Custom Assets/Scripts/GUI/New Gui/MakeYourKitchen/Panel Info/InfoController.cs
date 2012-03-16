@@ -102,9 +102,14 @@ public class InfoController : MonoBehaviour {
 				}
 			}
 			
+			if (categoryIndex == -1)
+			{
+				Debug.LogError ("Categoria do módulo não existe: " + furnitureData.Categoria);
+			}
+			
 			GameObject checkBoxTops = GameObject.Find ("CheckBox Tops");			
 			if (checkBoxTops == null) {
-				Debug.LogError ("O nome do checkbox das cores deve ser \"CheckBox Cores\" renome-o por favor.");
+				Debug.LogError ("O nome do checkbox de tampos deve ser \"CheckBox Tops\" renome-o por favor.");
 				Debug.Break ();
 			}
 			else

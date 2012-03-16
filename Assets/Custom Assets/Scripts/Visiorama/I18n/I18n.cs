@@ -219,7 +219,6 @@ public class I18n {
 
 	#region Translate!
 	static public string t(string text){
-	Debug.LogWarning ("text: " + text);
 		return (string)hashWords[selectedLanguage][text];
 	}
 	#endregion

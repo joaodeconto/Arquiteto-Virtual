@@ -12,7 +12,8 @@ public class TweenPlayerButton : MonoBehaviour
 	
 	public float ActiveSince { get; set; }
 	
-	public NTweener[] parallelTweens;
+	public List<NTweener> parallelTweens;
+	public List<NTweener> parallelTweensStandard;
 	
 	private bool isForwardDirection;
 	
@@ -21,7 +22,7 @@ public class TweenPlayerButton : MonoBehaviour
 		this.IsToggle = tweenPlayerButton.IsToggle;
 		this.PlayNextOnLastTweenFinish = tweenPlayerButton.PlayNextOnLastTweenFinish;
 		this.RunOnStart = tweenPlayerButton.RunOnStart;
-		this.parallelTweens = new NTweener[tweenPlayerButton.parallelTweens.Length];
+		this.parallelTweens = new List<NTweener>(tweenPlayerButton.parallelTweens.Count);
 		int i = 0;
 		foreach (NTweener nt in tweenPlayerButton.parallelTweens) {
 			this.parallelTweens[i] = nt;
@@ -33,7 +34,7 @@ public class TweenPlayerButton : MonoBehaviour
 	void Start ()
 	{		
 		NTweener currentTween;
-		int parallelTweensLength = parallelTweens.Length;
+		int parallelTweensLength = parallelTweens.Count;
 			
 		int indexMaxValue = 0;
 		int indexMinValue = 0;
@@ -114,7 +115,7 @@ public class TweenPlayerButton : MonoBehaviour
 	private void PlayTween ()
 	{
 		NTweener[] tweensBrothers;
-		for (int i = 0; i != parallelTweens.Length; ++i)
+		for (int i = 0; i != parallelTweens.Count; ++i)
 		{
 			if (parallelTweens [i] == null)
 			{

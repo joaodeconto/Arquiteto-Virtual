@@ -99,6 +99,7 @@ public class CameraController : MonoBehaviour {
 	
 	void Update ()
 	{
+		print(setFirstPerson);
 		if (setFirstPerson) return;
 		
 		//Show/Hide ceil and floor
@@ -140,6 +141,7 @@ public class CameraController : MonoBehaviour {
 		
 		//Swap cameras
 		mainCamera.gameObject.SetActiveRecursively(false);
+		setFirstPerson = true;
 		firstPersonCamera.gameObject.SetActiveRecursively(true);
 		firstPersonCamera.GetComponent<ColliderControl>().Enable();
 	}

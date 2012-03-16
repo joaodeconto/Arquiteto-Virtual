@@ -7,7 +7,7 @@ public class ColliderControl : MonoBehaviour {
 	
 	private GameObject lastSelectedMobile;
 
-	void Awake () {
+	void Start () {
 		cameraController = GameObject.FindWithTag("GameController").GetComponentInChildren<CameraController>();
 	}
 	
@@ -80,11 +80,14 @@ public class ColliderControl : MonoBehaviour {
 		if (Input.GetKeyUp(KeyCode.Escape)) {
 			SnapBehaviour.ActivateAll();
 			cameraController.mainCamera.gameObject.SetActiveRecursively(true);
-			cameraController.setFirstPerson = true;
+			cameraController.setFirstPerson = false;
 			foreach (Transform child in GameObject.Find("GUI").transform) {
 				child.gameObject.SetActiveRecursively(true);
 			}
 			Disable();
+			if (lastSelectedMobile == null) {
+				GameObject.Find("Panel Info").SetActiveRecursively(false);
+			}
 			gameObject.SetActiveRecursively(false);
 		}
 	}

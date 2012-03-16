@@ -43,14 +43,14 @@ public class Initialization : MonoBehaviour {
 		List<InformacoesMovel> listInfoMoveis = new List<InformacoesMovel>();
 		
 		int i = 0;
-		Color[] colors;
+		BrandColorEnum[] colors;
 		Texture[] colorsTextures;
 		Line line;
 		List<Line> lines = new List<Line>();
 		List<Category> categories = new List<Category>();
 		List<GameObject> furniture = new List<GameObject>();
 		
-		colors 			= root.GetComponent<LineColorsPrefab>().colors;		
+		colors 			= root.GetComponent<BrandColor>().colors;		
 		colorsTextures 	= root.GetComponent<LineColorsPrefab>().colorTextures;		
 		
 		foreach (Transform categoriesTransform in root.transform) {
@@ -62,7 +62,7 @@ public class Initialization : MonoBehaviour {
 		}
 		
 		print("categories.Count: " + categories.Count);
-		lines.Add(new Line(colors,colorsTextures,categories, root.name));
+		lines.Add(new Line(colors,categories, root.name));
 		Line.Initialize(lines);
 		#endregion	
 	}

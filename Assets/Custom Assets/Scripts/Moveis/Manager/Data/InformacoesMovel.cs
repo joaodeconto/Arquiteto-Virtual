@@ -261,12 +261,12 @@ public class InformacoesMovel : MonoBehaviour {
 				    regexGaveta.Match(rm.name).Success ||
 					regexFruteira.Match(rm.name).Success){
 
-					rm.color = Line.CurrentLine.colors[DrawersAndGlassDoorColorIndex];
+					rm.color = BrandColor.GetRealColor(Line.CurrentLine.colors[DrawersAndGlassDoorColorIndex]);
 
 				} else if(regexEstrutura.Match(rm.name).Success ||
 							  regexPorta.Match(rm.name).Success){
 
-					rm.color = Line.CurrentLine.colors[StructureAndCommonDoorColorIndex];
+					rm.color = BrandColor.GetRealColor(Line.CurrentLine.colors[StructureAndCommonDoorColorIndex]);
 				}
 			}
 		}

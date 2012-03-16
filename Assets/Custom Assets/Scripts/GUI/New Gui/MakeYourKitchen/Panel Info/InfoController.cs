@@ -24,8 +24,40 @@ public class InfoController : MonoBehaviour {
 	private bool isSemTampo, isComTampo, isCooktop, isPia;
 	
 	// Use this for initialization
-	void Start () {
+	void Awake ()
+	{
 		Close ();
+		
+		Invoke("ResolveCheckBoxColors",1f);
+	}
+	
+	void ResolveCheckBoxColors ()
+	{
+		if (GameObject.Find ("CheckBox Cores") == null) {
+			Debug.LogError ("O nome do checkbox das cores deve ser \"CheckBox Cores\" renome-o por favor.");
+			Debug.Break ();
+		} else {
+			Transform checkBoxCores = GameObject.Find ("CheckBox Cores").transform;
+			GameObject checkBox;
+			Vector3 rootColorGuiPosition = new Vector3 (-54f, 2.4f, 0f);
+			float xOffset = 37f;
+			
+			BrandColorEnum[] brandColors = Line.CurrentLine.colors;
+			
+			for (int i = 0; i != brandColors.Length; ++i) {
+				checkBox = checkBoxCores.Find ("Check " + BrandColor.GetColorName (brandColors [i])).gameObject;//.gameObject;
+				if (checkBox == null) {
+					Debug.LogError ("Verifique os nomes das checkbox de cores. " + 
+									"\n Cor pedida e nã encontrada: " + BrandColor.GetColorName (brandColors [i]));
+					Debug.Break ();
+					return;
+				}
+				
+				//colocando checkbox para o lado
+				checkBox.transform.localPosition = rootColorGuiPosition + (Vector3.right * xOffset * i);
+				checkBox.SetActiveRecursively(true);
+			}
+		}
 	}
 	
 	// Update is called once per frame
@@ -57,6 +89,7 @@ public class InfoController : MonoBehaviour {
 	}
 	
 	private void DrawEmptyWindow (){
+	
 		infoLabels[0].SetLabels(I18n.t("Código"), "");
 		infoLabels[1].SetLabels(I18n.t("LXPXA"), "");
 		infoLabels[2].SetLabels(I18n.t("Descrição"), "");

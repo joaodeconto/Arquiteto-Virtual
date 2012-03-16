@@ -10,11 +10,10 @@ public class TweenPlayerButton : MonoBehaviour
 	public bool RunOnStart;
 	public bool IsActive;
 	
-	public TweenPlayerController tweenPlayerController;
+	public float ActiveSince { get; set; }
+	
 	public NTweener[] parallelTweens;
 	
-	
-	public int internalControllerRegister;
 	private bool isForwardDirection;
 	
 	public void ApplyTweenPlayerButton (TweenPlayerButton tweenPlayerButton) {
@@ -22,7 +21,6 @@ public class TweenPlayerButton : MonoBehaviour
 		this.IsToggle = tweenPlayerButton.IsToggle;
 		this.PlayNextOnLastTweenFinish = tweenPlayerButton.PlayNextOnLastTweenFinish;
 		this.RunOnStart = tweenPlayerButton.RunOnStart;
-		this.tweenPlayerController = tweenPlayerButton.tweenPlayerController;
 		this.parallelTweens = new NTweener[tweenPlayerButton.parallelTweens.Length];
 		int i = 0;
 		foreach (NTweener nt in tweenPlayerButton.parallelTweens) {
@@ -34,11 +32,6 @@ public class TweenPlayerButton : MonoBehaviour
 	#region unity methods
 	void Start ()
 	{		
-		if (tweenPlayerController != null)
-		{
-			internalControllerRegister = tweenPlayerController.AddButton (this);
-		}
-				
 		NTweener currentTween;
 		int parallelTweensLength = parallelTweens.Length;
 			
@@ -58,16 +51,7 @@ public class TweenPlayerButton : MonoBehaviour
 			}
 		
 			//Fixing from values
-			if (parallelTweens [i] is TweenPosition)
-			{
-				(parallelTweens [i] as TweenPosition).from = parallelTweens [i].transform.localPosition;
-			} else if (parallelTweens [i] is TweenScale)
-			{
-				(parallelTweens [i] as TweenScale).from = parallelTweens [i].transform.localScale;
-			} else if (parallelTweens [i] is TweenRotation)
-			{
-				(parallelTweens [i] as TweenRotation).from = parallelTweens [i].transform.localEulerAngles;
-			}
+			ValidFromValues (parallelTweens [i]);
 			
 			if (currentTween.duration > maxTime)
 			{
@@ -109,20 +93,18 @@ public class TweenPlayerButton : MonoBehaviour
 	
 	public void Play ()
 	{
-		if (IsActive && IsToggle) {
-			
+		if (IsActive && IsToggle)
+		{
 			IsActive = false;
 			isForwardDirection = false;
 			
 			PlayTween ();
-		} else {
+		}
+		else if (!IsActive)
+		{
 			IsActive = true;
-			
-			if (tweenPlayerController != null)
-			{
-				tweenPlayerController.NotifyActiveButton (internalControllerRegister);
-			}
-			
+			ActiveSince = Time.time;
+						
 			isForwardDirection = true;
 			
 			PlayTween ();
@@ -132,23 +114,38 @@ public class TweenPlayerButton : MonoBehaviour
 	private void PlayTween ()
 	{
 		NTweener[] tweensBrothers;
-		for (int i = 0; i != parallelTweens.Length; ++i) {
-			if (parallelTweens [i] == null) {
+		for (int i = 0; i != parallelTweens.Length; ++i)
+		{
+			if (parallelTweens [i] == null)
+			{
 				continue;
 			}
 			
 			tweensBrothers = parallelTweens [i].gameObject.GetComponents<NTweener> ();
-			if (tweensBrothers != null) {
-				foreach (NTweener tw in parallelTweens[i].gameObject.GetComponents<NTweener>()) {
-					if (tw.tweenGroup == parallelTweens [i].tweenGroup) {
-						tw.enabled = true;
-						tw.Play (isForwardDirection);
-					}
-				}
+			
+			if (isForwardDirection)
+			{
+				ValidFromValues (parallelTweens [i]);
 			}
 			
 			parallelTweens [i].enabled = true;
 			parallelTweens [i].Play (isForwardDirection);
+		}
+	}
+	
+	private void ValidFromValues (NTweener tween)
+	{
+		if (tween is TweenPosition)
+		{
+			(tween as TweenPosition).from = tween.transform.localPosition;
+		}
+		else if (tween  is TweenScale)
+		{
+			(tween as TweenScale).from = tween.transform.localScale;
+		}
+		else if (tween  is TweenRotation)
+		{
+			(tween as TweenRotation).from = tween.transform.localEulerAngles;
 		}
 	}
 }

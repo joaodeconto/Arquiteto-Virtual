@@ -1,8 +1,14 @@
 using UnityEngine;
 using System.Collections;
+using System;
+using System.Text;
+using System.Text.RegularExpressions;
 
 public class CameraController : MonoBehaviour {
-
+	
+	private const string pathExportReport = "upload/export/";
+	private const string pathExportImage = "upload/images/";
+	
 	public float Step;
 	public float Angle;
 	public float ZoomSpeed;
@@ -21,6 +27,9 @@ public class CameraController : MonoBehaviour {
 	public GameObject firstPersonCamera { get; private set; }
 	
 	public WallsParents wallParents { get; private set; }
+	
+	internal bool setFirstPerson;
+		
 	private GameObject ceilParent;
 	private GameObject floorParent;
 				
@@ -34,6 +43,7 @@ public class CameraController : MonoBehaviour {
 		mainCamera 		  = GameObject.FindWithTag ("MainCamera").camera;
 		firstPersonCamera = GameObject.Find ("First Person Controller");
 		firstPersonCamera.gameObject.SetActiveRecursively (false);//disable other cam
+		setFirstPerson = false;
 		
 		//NGUI Monkey patch gonna patch...
 		mainCamera.transform.RotateAround(mainCamera.transform.right, 0.2f);//It's Rad measure
@@ -89,14 +99,17 @@ public class CameraController : MonoBehaviour {
 	
 	void Update ()
 	{
+		print(setFirstPerson);
+		if (setFirstPerson) return;
+		
 		//Show/Hide ceil and floor
 		showCeil = mainCamera.transform.position.y < ceilParent.transform.position.y + 2.45f;
 		//TODO add collider here ceilParent.collider.enabled = showCeil;
-		ceilParent.renderer.enabled = showCeil;
+		ceilParent.renderer.enabled = ceilParent.collider.enabled = showCeil;
 		
 		showFloor = mainCamera.transform.position.y > floorParent.transform.position.y;
 		//TODO add collider here floorParent.collider.enabled = showFloor;
-		floorParent.renderer.enabled = showFloor;
+		floorParent.renderer.enabled = floorParent.collider.enabled = showFloor;
 	}
 	
 	#region GUI
@@ -122,22 +135,15 @@ public class CameraController : MonoBehaviour {
 	{
 		SnapBehaviour.DeactivateAll ();
 		
-		GameObject rotationCube = GameObject.Find ("RotacaoCubo");
-		if(rotationCube != null)
-		{	
-			foreach (Transform child in rotationCube.transform)
-			{
-				child.gameObject.SetActiveRecursively (false);
-			}
-		}
-		else 
-		{
-			Debug.LogWarning ("Rotation Cube doesn't present in this scene!");
+		foreach (Transform child in GameObject.Find("GUI").transform) {
+			child.gameObject.SetActiveRecursively(false);
 		}
 		
 		//Swap cameras
-		mainCamera.enabled = false;
+		mainCamera.gameObject.SetActiveRecursively(false);
+		setFirstPerson = true;
 		firstPersonCamera.gameObject.SetActiveRecursively(true);
+		firstPersonCamera.GetComponent<ColliderControl>().Enable();
 	}
 	
 	public void Screenshot ()
@@ -152,7 +158,7 @@ public class CameraController : MonoBehaviour {
 	public void Report ()
 	{
 		//TODO make this method works
-		Debug.LogError ("Report");
+		StartCoroutine(SendReportData("http://www.visiorama360.com.br/Telasul/teste_relatorio/uploadReport.php"));
 	}
 	
 	public void ShowHideWalls ()
@@ -176,6 +182,8 @@ public class CameraController : MonoBehaviour {
 	#endregion
 	private void VerifyWallVisibility ()
 	{
+		if (setFirstPerson) return;
+		
 		if(areWallsAlwaysVisible)
 		{
 			return;
@@ -237,6 +245,103 @@ public class CameraController : MonoBehaviour {
 							   	wallMaterial,
 							   	wallParents.colorWallFront,
 							   	true);
+		}
+	}
+	
+	private IEnumerator SendScreenshotToForm (string screenShotURL)
+	{
+		Transform gui = GameObject.Find("GUI").transform;
+		foreach (Transform child in gui) {
+			child.gameObject.SetActiveRecursively(false);
+		}
+		
+		yield return new WaitForSeconds(0.1f);
+		yield return new WaitForEndOfFrame();
+	    
+		// Create a texture the size of the screen, RGB24 format
+		int width = Screen.width;
+		int height = Screen.height;
+		Texture2D tex = new Texture2D (width, height, TextureFormat.RGB24, false);
+	    
+		// Read screen contents into the texture
+		tex.ReadPixels (new Rect (0, 0, width, height), 0, 0);
+		tex.Apply ();
+	    
+		GuiScript.ShowGUI = true;
+	
+		// Encode texture into PNG
+		byte[] bytes = tex.EncodeToPNG ();
+		Destroy (tex);
+	
+		// Create a Web Form
+		WWWForm form = new WWWForm ();
+//	    Debug.LogError( String.Format("{0:yyyy-MM-dd-HH-mm-ss-}", DateTime.Now) + "screenshot.png");
+	    
+		string filename = String.Format ("{0:yyyy-MM-dd-HH-mm-ss-}", DateTime.Now) + "screenshot.png";
+	    
+		form.AddBinaryData ("file", bytes, filename, "multipart/form-data");
+		
+		WWW www = new WWW (screenShotURL, form);
+	
+		yield return www;
+	    
+		if (www.error != null)
+			print (www.error);
+		else {
+			print ("Finished Uploading Screenshot"); 
+			Application.ExternalCall ("tryToDownload", pathExportImage + filename);
+		}
+	    
+		foreach (Transform child in gui) {
+			child.gameObject.SetActiveRecursively(true);
+		}
+	}
+	
+	private IEnumerator SendReportData (string urlForm)
+	{
+		GameObject[] mobiles = GameObject.FindGameObjectsWithTag ("Movel");
+	
+		string filename = String.Format ("{0:yyyy-MM-dd-HH-mm-ss}", DateTime.Now) + ".csv";
+		string csvString = "LINHA: " + Line.CurrentLine.Name + "\r\n";
+	
+		csvString += "NOME;CODIGO;LARGURA;ALTURA;PROFUNDIDADE;\r\n";
+	
+		foreach (GameObject mobile in mobiles) {
+	
+			InformacoesMovel info = mobile.GetComponent<InformacoesMovel> ();
+	
+			if (!"Extras".Equals (info.Categoria)) {
+				if (Regex.Match(info.name, "(com cooktop|com cook top)").Success) {
+					csvString += info.Nome + ";" + info.Codigo + ";" + info.Largura + ";" + info.Altura + ";" + info.Comprimento + ";" + "\r\n";
+					if (Regex.Match(info.name, "(Balcão triplo|Balcao triplo)").Success) {
+						csvString += "Tampo cooktop triplo" + ";" + "89121" + ";" + "1200" + ";" + "30" + ";" + "520" + ";" + "\r\n";
+					} else {
+						csvString += "Tampo cooktop duplo" + ";" + "89081" + ";" + "800" + ";" + "30" + ";" + "520" + ";" + "\r\n";
+					}
+					csvString += "Cooktop" + ";" + "89150" + ";" + "NA" + ";" + "NA" + ";" + "NA" + ";" + "\r\n";
+				}
+				else {
+					csvString += info.Nome + ";" + info.Codigo + ";" + info.Largura + ";" + info.Altura + ";" + info.Comprimento + ";" + "\r\n";
+				}
+			}
+		}
+		
+		print(csvString);
+		
+		WWWForm form = new WWWForm ();
+		
+		byte[] utf8String = Encoding.UTF8.GetBytes (csvString);
+		form.AddField ("CSV-FILE", Encoding.UTF8.GetString (utf8String));
+		form.AddField ("CSV-FILE-NAME", filename);
+	
+		WWW www = new WWW (urlForm, form);
+	
+		yield return www;
+	
+		if (www.error != null)
+			print (www.error);
+		else {
+			Application.ExternalCall ("tryToDownload", pathExportReport + filename);
 		}
 	}
 			

@@ -7,7 +7,7 @@ public class CuboOrientacao : MonoBehaviour {
 		
 	void Start()
 	{
-		mainCamera = GameObject.Find("Main Camera").transform;
+		mainCamera = GameObject.FindWithTag("MainCamera").transform;
 	}
 	
 	void Update ()

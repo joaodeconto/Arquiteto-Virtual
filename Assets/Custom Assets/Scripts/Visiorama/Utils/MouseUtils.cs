@@ -79,7 +79,7 @@ public class MouseUtils : MonoBehaviour
 
 	public static bool GUIMouseButtonDoubleClickDown (int button, float timer)
 	{
-		#if UNITY_STANDALONE_WIN
+		#if UNITY_STANDALONE_WIN || UNITY_WEBPLAYER
 		if (Input.GetMouseButtonDown (button)) {
 			if (clickMonkeyPatch > 6 && (Time.time - doubleClickStart) < timer) {
 				doubleClickStart = -1;

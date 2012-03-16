@@ -23,7 +23,8 @@ public class Painter: MonoBehaviour {
 	private GUIStyle groupStyle, buttonStyle, labelStyle;
 
 	void Start () {
-		//ScreenUtils.Initialize(1024, 768);
+	
+		ScreenUtils.Initialize(1024, 640);
 
 		rectWindow = ScreenUtils.ScaledRect(200, 24, 120, 320);
 		//não precisa usar ScreenUtils, dentro da função isso já está sendo feito

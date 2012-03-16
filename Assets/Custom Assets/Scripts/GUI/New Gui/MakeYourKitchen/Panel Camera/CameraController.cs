@@ -99,7 +99,6 @@ public class CameraController : MonoBehaviour {
 	
 	void Update ()
 	{
-		print(setFirstPerson);
 		if (setFirstPerson) return;
 		
 		//Show/Hide ceil and floor
@@ -169,6 +168,8 @@ public class CameraController : MonoBehaviour {
 			for(int i = 0; i != 4; ++i)
 			{
 				wallParents[i].renderer.material = wallMaterial;
+				wallParents[i].renderer.material.color = wallParents.GetWallColor(i);
+
 			}
 		}
 	}

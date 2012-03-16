@@ -410,7 +410,7 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 	}
 	#endregion
 		
-	void changeItemColor(uint colorIndex){
+	void changeItemColor(int colorIndex){
 		if(colorIndex == Line.CurrentLine.colors.Length - 1)
 			item.GetComponent<InformacoesMovel>().Colorize(colorIndex,0);
 		else 

@@ -23,6 +23,7 @@ public class InfoController : MonoBehaviour {
 	
 	private bool isSemTampo, isComTampo, isCooktop, isPia;
 	bool wasInitialized;
+	bool isOpen;
 	// Use this for initialization
 	void Awake ()
 	{
@@ -51,6 +52,7 @@ public class InfoController : MonoBehaviour {
 			BrandColorEnum[] brandColors = Line.CurrentLine.colors;
 			
 			for (int i = 0; i != brandColors.Length; ++i) {
+				
 				checkBox = checkBoxCores.Find ("Check " + BrandColor.GetColorName (brandColors [i]));//.gameObject;
 				if (checkBox == null) {
 					Debug.LogError ("Verifique os nomes das checkbox de cores. " + 
@@ -58,17 +60,29 @@ public class InfoController : MonoBehaviour {
 					Debug.Break ();
 					return;
 				}
-				
 				//colocando checkbox para o lado
 				checkBox.transform.localPosition = rootColorGuiPosition + (Vector3.right * xOffset * i);
 				checkBox.gameObject.SetActiveRecursively(true);
+				
+				if (i == 0) {
+					checkBox.GetComponent<UICheckbox> ().startsChecked = true;
+				}				
 			}
 		}
 	}
 	
-	// Update is called once per frame
 	void Update () {
-	
+		if (!isOpen)
+			return;
+		if (Input.GetKeyUp (KeyCode.Delete)) {
+			Close ();
+			DestroyImmediate (GameObject.FindWithTag("MovelSelecionado"));
+		}
+		if (Input.GetKeyUp (KeyCode.R))
+		{
+			GameObject.FindWithTag ("MovelSelecionado").transform.RotateAround (Vector3.up, Mathf.PI / 2);
+			GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<RenderBounds> ().UpdateObj ();
+		}
 	}
 	
 	#region Panel info controller
@@ -76,12 +90,15 @@ public class InfoController : MonoBehaviour {
 		this.furnitureData = furnitureData;
 		panelInfo.SetActiveRecursively(true);
 		GetInfo ();
+		isOpen = true;
+
 	}
 	
 	public void Close (){
 		this.furnitureData = null;
 		panelInfo.SetActiveRecursively(false);
 		DrawEmptyWindow();
+		isOpen = false;
 	}	
 	#endregion
 	

@@ -16,14 +16,14 @@ public class Line {
 		ChooseLine(0);
 	}
 	
-	public static Line ChooseLine(uint index)
+	public static Line ChooseLine(int index)
 	{
-		return CurrentLine = Lines[(int)index];
+		return CurrentLine = Lines[index];
 	}
 	#endregion
 	
-	public uint GlobalDetailColorIndex { get; set; }
-	public uint GlobalBaseColorIndex { get; set; }
+	public int GlobalDetailColorIndex { get; set; }
+	public int GlobalBaseColorIndex { get; set; }
 	public BrandColorEnum[] colors { get; private set; }
 	public Texture[] colorsImg { get; private set; }
 	public List<Category> categories { get; private set; }

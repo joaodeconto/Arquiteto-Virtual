@@ -48,8 +48,8 @@ public class InformacoesMovel : MonoBehaviour {
 	public string		Comprimento { get; private set; }
 	
 	internal Portas		portas;
-	internal uint DrawersAndGlassDoorColorIndex;
-	internal uint StructureAndCommonDoorColorIndex;
+	internal int DrawersAndGlassDoorColorIndex;
+	internal int StructureAndCommonDoorColorIndex;
 	
 	private bool wasInitialized;
 	
@@ -221,7 +221,7 @@ public class InformacoesMovel : MonoBehaviour {
 		}
 	}
 	
-	public void Colorize(uint drawersAndGlassDoorColorIndex, uint structureAndCommonDoorColorIndex){
+	public void Colorize(int drawersAndGlassDoorColorIndex, int structureAndCommonDoorColorIndex){
 		
 		this.DrawersAndGlassDoorColorIndex 	  = drawersAndGlassDoorColorIndex;
 		this.StructureAndCommonDoorColorIndex = structureAndCommonDoorColorIndex;
@@ -229,14 +229,14 @@ public class InformacoesMovel : MonoBehaviour {
 		ReColorize();
 	}
 	
-	public void ChangeBaseColor(uint selectedColor ){
+	public void ChangeBaseColor(int selectedColor ){
 		
 		this.StructureAndCommonDoorColorIndex = selectedColor;
 		
 		ReColorize();
 	}
 	
-	public void ChangeDetailColor(uint selectedColor){
+	public void ChangeDetailColor(int selectedColor){
 		
 		this.DrawersAndGlassDoorColorIndex = selectedColor;
 		

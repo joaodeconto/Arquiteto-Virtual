@@ -10,17 +10,26 @@ public class CheckBoxColorHandler : MonoBehaviour {
 		BrandColorEnum[] colors = Line.CurrentLine.colors;
 		bool success  = false;
 		
-		for(int i = 0; i != colors.Length; ++i)
+		for(int selectedColorIndex = 0; selectedColorIndex != colors.Length; ++selectedColorIndex)
 		{
-			if (colorName.Equals(BrandColor.GetColorName(colors[i])))
+			if (colorName.Equals(BrandColor.GetColorName(colors[selectedColorIndex])))
 			{
 				GameObject selectedModule = GameObject.FindWithTag("MovelSelecionado");
 				if (selectedModule == null) break;
+								
+				Line.CurrentLine.GlobalDetailColorIndex = selectedColorIndex;
 				
-				if (i == Line.CurrentLine.colors.Length - 1)
-					selectedModule.GetComponent<InformacoesMovel> ().Colorize ((uint)i, 0);
-				else 
-					selectedModule.GetComponent<InformacoesMovel> ().Colorize ((uint)i, (uint)i + 1);
+				GameObject selectedMobile = GameObject.FindGameObjectWithTag ("MovelSelecionado");
+				if (selectedMobile != null) {
+					selectedMobile.GetComponent<InformacoesMovel> ().ChangeDetailColor (selectedColorIndex);										
+				}
+							
+				GameObject[] furniture = GameObject.FindGameObjectsWithTag ("Movel");
+				if (furniture != null && furniture.Length != 0) {
+					foreach (GameObject mobile in furniture) {
+						mobile.GetComponent<InformacoesMovel> ().ChangeDetailColor (selectedColorIndex);										
+					}
+				}
 				
 				success = true;
 				break;

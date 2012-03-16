@@ -11,5 +11,11 @@ public class ClickCategory : MonoBehaviour {
 		GameObject item = transform.parent.GetComponent<CatalogCategoryButtonHandler>().item;
 		Transform catalogItem = transform.parent.GetComponent<CatalogCategoryButtonHandler>().offsetCatalogItem;
 		catalogItem.GetComponent<CatalogItemButtonHandler>().CallItems(sp, item);
+		if (!catalogCategoryButtonHandler.isClicked) {
+			catalogCategoryButtonHandler.tweenPlayerButton.Play();
+			catalogCategoryButtonHandler.isClicked = true;
+		}
 	}
+	
+	public CatalogCategoryButtonHandler catalogCategoryButtonHandler {get; set;}
 }

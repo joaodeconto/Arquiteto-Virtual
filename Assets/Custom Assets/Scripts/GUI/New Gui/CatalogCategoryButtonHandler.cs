@@ -9,8 +9,12 @@ public class CatalogCategoryButtonHandler : MonoBehaviour {
 	public TweenPlayerButton tweenPlayerButton;
 	public Transform offsetCatalogItem;
 	
-	// Use this for initialization
+	public bool isClicked {get; set;}
+	
+	private CameraGUIController cameraGUIController;
+	
 	void Start () {
+		cameraGUIController = GameObject.FindWithTag("GameController").GetComponentInChildren<CameraGUIController>();
 		Invoke("CatalogCategory", 0.1f);
 	}
 	
@@ -26,16 +30,26 @@ public class CatalogCategoryButtonHandler : MonoBehaviour {
 			newItem.transform.parent = transform;
 			newItem.transform.localPosition = new Vector3(0, (i * -185), 0);
 			newItem.transform.localScale = item.transform.localScale;
-			newItem.AddComponent<TweenPlayerButton>();
-			TweenPlayerButton tpb = newItem.GetComponent<TweenPlayerButton>();
-			tpb.ApplyTweenPlayerButton(tweenPlayerButton);
+//			newItem.AddComponent<TweenPlayerButton>();
+//			TweenPlayerButton tpb = newItem.GetComponent<TweenPlayerButton>();
+//			tpb.ApplyTweenPlayerButton(tweenPlayerButton);
 			newItem.AddComponent<ClickCategory>();
+			newItem.GetComponent<ClickCategory>().catalogCategoryButtonHandler = this;
 			foreach (UISprite sprite in newItem.GetComponentsInChildren<UISprite>()) {
 				if (sprite.name.Equals("UISprite")) {
 					sprite.spriteName = Line.CurrentLine.categories[i].ImageReference;
 				}
 			}
 			++i;
+		}
+	}
+	
+	void Update () {
+		if (Input.GetMouseButtonUp(0) && isClicked) {
+			if (!cameraGUIController.ClickInGUI()) {
+				tweenPlayerButton.Play();
+				isClicked = false;
+			}
 		}
 	}
 }

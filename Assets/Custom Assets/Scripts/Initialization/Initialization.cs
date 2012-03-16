@@ -56,6 +56,7 @@ public class Initialization : MonoBehaviour {
 		foreach (Transform categoriesTransform in root.transform) {
 			furniture = new List<GameObject>();
 			foreach (Transform mobile in categoriesTransform.transform) {
+				mobile.GetComponent<InformacoesMovel>().Categoria = categoriesTransform.name;
 				furniture.Add(mobile.gameObject);
 			}
 			categories.Add(new Category(categoriesTransform.name,furniture,categoriesTransform.GetComponent<MakeCategory>().imageReference));

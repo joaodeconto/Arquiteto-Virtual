@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+[AddComponentMenu("BlackBugio/Tween/TweenPlayerController")]
 public class TweenPlayerController : MonoBehaviour
 {
 	public string Name;
@@ -23,6 +24,11 @@ public class TweenPlayerController : MonoBehaviour
 		int activeBtnRegisterValue = -1;
 		for (int i = 0; i != buttonList.Count; ++i)
 		{
+			if (buttonList [i] == null)
+			{
+				Debug.LogError ("whata?!");
+				Debug.LogError (name + " i : " + i);
+			}
 			if (buttonList[i].IsActive && activeSince < buttonList[i].ActiveSince)
 			{
 				activeSince 		   = buttonList[i].ActiveSince;

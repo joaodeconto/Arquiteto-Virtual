@@ -2,8 +2,9 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+[AddComponentMenu("BlackBugio/Tween/TweenPlayerButton")]
 public class TweenPlayerButton : MonoBehaviour
-{	
+{
 	public string Name;
 	public bool IsToggle;
 	public bool PlayNextOnLastTweenFinish;
@@ -12,19 +13,17 @@ public class TweenPlayerButton : MonoBehaviour
 	
 	public float ActiveSince { get; set; }
 	
-	public List<NTweener> parallelTweens;
-	public List<NTweener> parallelTweensStandard;
-	
-	private bool isForwardDirection;
-	
+	public List<iTweenMotion> parallelTweens;
+	public List<iTweenMotion> parallelTweensStandard;
+		
 	public void ApplyTweenPlayerButton (TweenPlayerButton tweenPlayerButton) {
 		this.Name = tweenPlayerButton.Name;
 		this.IsToggle = tweenPlayerButton.IsToggle;
 		this.PlayNextOnLastTweenFinish = tweenPlayerButton.PlayNextOnLastTweenFinish;
 		this.RunOnStart = tweenPlayerButton.RunOnStart;
-		this.parallelTweens = new List<NTweener>(tweenPlayerButton.parallelTweens.Count);
+		this.parallelTweens = new List<iTweenMotion>(tweenPlayerButton.parallelTweens.Count);
 		int i = 0;
-		foreach (NTweener nt in tweenPlayerButton.parallelTweens) {
+		foreach (iTweenMotion nt in tweenPlayerButton.parallelTweens) {
 			this.parallelTweens[i] = nt;
 			++i;
 		}
@@ -33,7 +32,7 @@ public class TweenPlayerButton : MonoBehaviour
 	#region unity methods
 	void Start ()
 	{		
-		NTweener currentTween;
+		iTweenMotion currentTween;
 		int parallelTweensLength = parallelTweens.Count;
 			
 		int indexMaxValue = 0;
@@ -50,22 +49,20 @@ public class TweenPlayerButton : MonoBehaviour
 			{
 				continue;	
 			}
-		
-			//Fixing from values
-			ValidFromValues (parallelTweens [i]);
-			
+					
 			if (currentTween.duration > maxTime)
 			{
 				maxTime = currentTween.duration;
 				indexMaxValue = i;
-			} else if (currentTween.duration < minTime)
+			}
+			else if (currentTween.duration < minTime)
 			{
 				minTime = currentTween.duration;
 				indexMinValue = i;
 			}
 		
-			currentTween.callWhenFinished = "DoNothing";
-			currentTween.enabled = false;
+//			currentTween.callWhenFinished = "DoNothing";
+//			currentTween.enabled = false;
 		}
 			
 		if (PlayNextOnLastTweenFinish)
@@ -80,7 +77,7 @@ public class TweenPlayerButton : MonoBehaviour
 		
 		if (RunOnStart)
 		{
-			//OnClick ();
+			//Play ();
 		}
 	}
 	#endregion
@@ -97,16 +94,14 @@ public class TweenPlayerButton : MonoBehaviour
 		if (IsActive && IsToggle)
 		{
 			IsActive = false;
-			isForwardDirection = false;
 			
 			PlayTween ();
 		}
 		else if (!IsActive)
 		{
 			IsActive = true;
+			
 			ActiveSince = Time.time;
-						
-			isForwardDirection = true;
 			
 			PlayTween ();
 		}
@@ -114,23 +109,26 @@ public class TweenPlayerButton : MonoBehaviour
 	
 	private void PlayTween ()
 	{
-		NTweener[] tweensBrothers;
-		for (int i = 0; i != parallelTweens.Count; ++i)
+		if (IsActive) {
+			for (int i = 0; i != parallelTweens.Count; ++i)
+			{
+				if ( parallelTweens [i] == null)
+				{
+					Debug.LogWarning (name + " i : " + i);
+				}
+//				ValidFromValues (parallelTweens [i]);
+				parallelTweens [i].enabled = true;
+				parallelTweens [i].Play (true);
+			}
+		}
+		else
 		{
-			if (parallelTweens [i] == null)
+			for (int i = 0; i != parallelTweensStandard.Count; ++i)
 			{
-				continue;
+//				ValidFromValues (parallelTweensStandard [i]);
+				parallelTweensStandard [i].enabled = true;
+				parallelTweensStandard [i].Play (true);
 			}
-			
-			tweensBrothers = parallelTweens [i].gameObject.GetComponents<NTweener> ();
-			
-			if (isForwardDirection)
-			{
-				ValidFromValues (parallelTweens [i]);
-			}
-			
-			parallelTweens [i].enabled = true;
-			parallelTweens [i].Play (isForwardDirection);
 		}
 	}
 	
@@ -140,11 +138,11 @@ public class TweenPlayerButton : MonoBehaviour
 		{
 			(tween as TweenPosition).from = tween.transform.localPosition;
 		}
-		else if (tween  is TweenScale)
+		else if (tween is TweenScale)
 		{
 			(tween as TweenScale).from = tween.transform.localScale;
 		}
-		else if (tween  is TweenRotation)
+		else if (tween is TweenRotation)
 		{
 			(tween as TweenRotation).from = tween.transform.localEulerAngles;
 		}

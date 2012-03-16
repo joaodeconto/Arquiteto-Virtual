@@ -12,13 +12,13 @@ public class TweenPlayerButtonInspetor : Editor
 	public bool RunOnStart;
 	public bool IsActive;
 	
-	public NTweener[] parallelTweens;
-	public NTweener[] parallelTweensStandard;
+	public iTweenMotion[] parallelTweens;
+	public iTweenMotion[] parallelTweensStandard;
 	
 	private bool isForwardDirection;
 	
 	private TweenPlayerButton btnTweenPlayer;
-	private NTweener tempTween;
+	private iTweenMotion tempTween;
 	/*
 	#region unity methods
 	void Start ()
@@ -85,25 +85,23 @@ public class TweenPlayerButtonInspetor : Editor
 		GUILayout.Label ("Blackbugio:");
 		GUILayout.Space (10f);
 		
+		btnTweenPlayer.IsToggle = EditorGUILayout.Toggle("IsToggle?", btnTweenPlayer.IsToggle);
+		
 		#region comportamento 1
 		GUILayout.Label ("Comportamento 1:");
 		GUILayout.Space (10f);
 		
 		tempTween = EditorGUILayout.ObjectField ("Adicionar tween:",
 												  tempTween, 
-												  typeof(NTweener), 
-												  true) as NTweener;
+												  typeof(iTweenMotion), 
+												  true) as iTweenMotion;
 		if (tempTween != null)
 		{
 			if (btnTweenPlayer.parallelTweens.Contains (tempTween))
-			{
-				Debug.LogError ("O Label j√° foi adicionado ao I18n.");
-			}
+				Debug.LogError ("O Label j· foi adicionado ao I18n.");
 			else
-			{
 				btnTweenPlayer.parallelTweens.Add (tempTween);
-			}
-			
+				
 			tempTween = null;
 		}
 		
@@ -114,13 +112,29 @@ public class TweenPlayerButtonInspetor : Editor
 		{
 			for (int i = 0; i != btnTweenPlayer.parallelTweens.Count; ++i)
 			{
+				if ( btnTweenPlayer.parallelTweens [i] == null)
+				{
+					btnTweenPlayer.parallelTweens.RemoveAt (i);
+				}
+				
 				GUILayout.BeginHorizontal ();
-				GUILayout.Label (btnTweenPlayer.parallelTweens [i].name);
-				btnTweenPlayer.parallelTweens [i] = EditorGUILayout.ObjectField (btnTweenPlayer.parallelTweens [i],
-																    typeof(NTweener),
-																    true,
-																    GUILayout.Width (200f)) as NTweener;
-																    
+				GUILayout.Label ("to: " + btnTweenPlayer.parallelTweens [i].to);	
+					
+				tempTween = EditorGUILayout.ObjectField (btnTweenPlayer.parallelTweens [i],
+													    typeof(iTweenMotion),
+													    true,
+													    GUILayout.Width (200f)) as iTweenMotion;
+														
+				if (tempTween != null)
+				{
+					if (!btnTweenPlayer.parallelTweens.Contains (tempTween))
+					{
+						btnTweenPlayer.parallelTweens.RemoveAt(i);
+						btnTweenPlayer.parallelTweens.Insert (i,tempTween);
+					}
+					tempTween = null;
+				}
+				
 				if (GUILayout.Button ("Deletar", GUILayout.Width (60f)))
 				{
 					btnTweenPlayer.parallelTweens.RemoveAt (i);
@@ -131,19 +145,19 @@ public class TweenPlayerButtonInspetor : Editor
 		}
 		#endregion
 		
-		#region comportamento padr√£o
-		GUILayout.Label ("Comportamento padr√£o:");
+		#region comportamento padr„o
+		GUILayout.Label ("Comportamento padr„o:");
 		GUILayout.Space (10f);
 		
 		tempTween = EditorGUILayout.ObjectField ("Adicionar tween:",
 												  tempTween, 
-												  typeof(NTweener), 
-												  true) as NTweener;
+												  typeof(iTweenMotion), 
+												  true) as iTweenMotion;
 		if (tempTween != null)
 		{
 			if (btnTweenPlayer.parallelTweensStandard.Contains (tempTween))
 			{
-				Debug.LogError ("O Label j√° foi adicionado ao I18n.");
+				Debug.LogError ("O Label j· foi adicionado ao I18n.");
 			}
 			else
 			{
@@ -161,12 +175,25 @@ public class TweenPlayerButtonInspetor : Editor
 			for (int i = 0; i != btnTweenPlayer.parallelTweensStandard.Count; ++i)
 			{
 				GUILayout.BeginHorizontal ();
-				GUILayout.Label (btnTweenPlayer.parallelTweensStandard [i].name);
-				btnTweenPlayer.parallelTweensStandard [i] = EditorGUILayout.ObjectField (btnTweenPlayer.parallelTweensStandard [i],
-																    typeof(NTweener),
-																    true,
-																    GUILayout.Width (200f)) as NTweener;
-																    
+				
+				GUILayout.Label ("to: " + btnTweenPlayer.parallelTweensStandard [i].to);
+					
+				tempTween = EditorGUILayout.ObjectField (btnTweenPlayer.parallelTweensStandard [i],
+													    typeof(iTweenMotion),
+													    true,
+													    GUILayout.Width (200f)) as iTweenMotion;
+																													
+				if (tempTween != null)
+				{
+					if (!btnTweenPlayer.parallelTweensStandard.Contains (tempTween))
+					{
+						btnTweenPlayer.parallelTweensStandard.RemoveAt (i);
+						btnTweenPlayer.parallelTweensStandard.Insert (i, tempTween);
+					}
+				
+					tempTween = null;
+				}
+					    
 				if (GUILayout.Button ("Deletar", GUILayout.Width (60f)))
 				{
 					btnTweenPlayer.parallelTweensStandard.RemoveAt (i);

@@ -8,7 +8,7 @@ public class InfoController : MonoBehaviour {
 	// Data furniture selected in camera
 	private InformacoesMovel furnitureData;
 	// Item selected
-	private GameObject item;
+	public GameObject item {get; private set;}
 	
 	[System.Serializable]
 	public class InfoLabels {
@@ -24,10 +24,10 @@ public class InfoController : MonoBehaviour {
 	
 	public InfoLabels[] infoLabels;
 	public GameObject panelInfo;
+	public Material topMaterial;
 	
 	#region vars Choose Tampo Type
 	private string currentTop = "";
-	private bool isWithoutTop, isWithTampo, isCooktop, isSink;
 	#endregion
 	
 	bool isOpen;
@@ -53,6 +53,7 @@ public class InfoController : MonoBehaviour {
 			//levar as checkboxes far, far away
 			foreach (Transform color in checkBoxCores.transform)
 			{
+				if (color.name.Equals("Label")) continue;
 				color.gameObject.SetActiveRecursively (false);
 			}
 			
@@ -92,8 +93,6 @@ public class InfoController : MonoBehaviour {
 			
 			int categoryIndex = 0;
 			
-			Debug.LogWarning("Line.CurrentLine.categories = " + furnitureData.Nome);
-			
 			//Find index of mobile's category 
 			List<Category> categories = Line.CurrentLine.categories;
 			for( categoryIndex = Line.CurrentLine.categories.Count - 1; categoryIndex != -1; --categoryIndex ){
@@ -123,6 +122,8 @@ public class InfoController : MonoBehaviour {
 				//levar as checkboxes far, far away
 				foreach (Transform tops in checkBoxTops.transform)
 				{
+					if (tops.name.Equals("Label")) continue;
+					tops.GetComponent<UICheckbox>().isChecked = false;
 					tops.gameObject.SetActiveRecursively (false);
 				}
 				
@@ -159,8 +160,41 @@ public class InfoController : MonoBehaviour {
 						
 						//Checks if the this "Tampo" has the same name as current "Tampo" a little while ago
 						if (currentTampoTypeRegexPrefix.Equals(tampoTypeRegexPrefix)) checkBox.GetComponent<UICheckbox>().isChecked = true;
-						else checkBox.GetComponent<UICheckbox>().isChecked = false;
 					}
+				}
+			}
+		}
+	}
+	
+	private void ResolveCheckBoxTextures () {
+		GameObject checkBoxTextures = GameObject.Find ("CheckBox Tops Textures");
+		
+		
+		if (checkBoxTextures == null) {
+			Debug.LogError ("O nome do checkbox de tampos deve ser \"CheckBox Tops Textures\" renome-o por favor.");
+			Debug.Break ();
+		}
+		else
+		{
+			if( currentTop.Equals("com tampo") || currentTop.Equals("c tampo") || 
+				currentTop.Equals("com cooktop") || currentTop.Equals("com cook top"))
+			{
+				foreach (Transform textures in checkBoxTextures.transform)
+				{
+					if (textures.name.Equals("Label")) continue;
+					textures.gameObject.SetActiveRecursively (true);
+					
+					if (topMaterial.mainTexture == textures.GetComponent<CheckBoxTextureHandler>().texture)
+						textures.GetComponent<UICheckbox>().isChecked = true;
+				}
+			}
+			else 
+			{
+				foreach (Transform textures in checkBoxTextures.transform)
+				{
+					if (textures.name.Equals("Label")) continue;
+					textures.GetComponent<UICheckbox>().isChecked = false;
+					textures.gameObject.SetActiveRecursively (false);
 				}
 			}
 		}
@@ -184,11 +218,12 @@ public class InfoController : MonoBehaviour {
 	public void Open (InformacoesMovel furnitureData){
 		this.furnitureData = furnitureData;
 		panelInfo.SetActiveRecursively(true);
-		GetInfo ();
 		isOpen = true;
-		Invoke ("GetMobile", 0.1f);
-		Invoke ("ResolveCheckBoxColors", 0.1f);
-		Invoke ("ResolveCheckBoxTops", 0.1f);
+		Invoke ("GetInfo", 0.001f);
+		Invoke ("GetMobile", 0.001f);
+		Invoke ("ResolveCheckBoxColors", 0.001f);
+		Invoke ("ResolveCheckBoxTops", 0.001f);
+		Invoke ("ResolveCheckBoxTextures", 0.001f);
 	}
 	
 	void GetMobile () {

@@ -38,6 +38,8 @@ public class CatalogCategoryButtonHandler : MonoBehaviour {
 			foreach (UISprite sprite in newItem.GetComponentsInChildren<UISprite>()) {
 				if (sprite.name.Equals("UISprite")) {
 					sprite.spriteName = Line.CurrentLine.categories[i].ImageReference;
+					sprite.MakePixelPerfect();
+					sprite.transform.localPosition = new Vector3(0, 0, -0.1f);
 				}
 			}
 			++i;

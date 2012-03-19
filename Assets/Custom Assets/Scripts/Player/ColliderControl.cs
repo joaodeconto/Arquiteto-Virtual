@@ -3,10 +3,15 @@ using System.Collections;
 
 public class ColliderControl : MonoBehaviour {
 	
-	public CameraController cameraController;
+	private CameraController cameraController;
 	
 	private GameObject lastSelectedMobile;
-	void OnEnable () {
+
+	void Start () {
+		cameraController = GameObject.FindWithTag("GameController").GetComponentInChildren<CameraController>();
+	}
+	
+	public void Enable () {
 		if (GameObject.FindGameObjectsWithTag("MovelSelecionado").Length == 1) {
 			lastSelectedMobile = GameObject.FindWithTag("MovelSelecionado");
 			lastSelectedMobile.tag = "Movel";
@@ -18,9 +23,16 @@ public class ColliderControl : MonoBehaviour {
 			}
 		}
 		
+		print(GameObject.Find("ParentTeto"));
+		
+		GameObject teto = GameObject.Find("ParentTeto");
+		if  (teto != null && teto.renderer != null)
+			teto.renderer.enabled = teto.collider.enabled = true;
+		
 		int i = 0;
-		if (cameraController.wallParents != null) {
-			foreach (Transform parede in cameraController.wallParents.GetWalls()) {
+		foreach (Transform parede in cameraController.wallParents.GetWalls()) {
+			if (parede != null) {
+				print(parede);
 				parede.renderer.material = cameraController.wallMaterial;
 				parede.renderer.material.color = cameraController.wallParents.GetWallColor(i);
 				parede.collider.enabled = true;
@@ -28,13 +40,10 @@ public class ColliderControl : MonoBehaviour {
 				++i;
 			}
 		}
-		GameObject teto = GameObject.FindWithTag("TetoParent");
-		if (teto != null && teto.renderer != null && !teto.renderer.enabled)
-			teto.renderer.enabled = true;
 	}
 	
 	// Update is called once per frame
-	void OnDisable () {
+	public void Disable () {
 		GameObject[] moveis = GameObject.FindGameObjectsWithTag("Movel");
 		if (moveis.Length != 0) {
 			foreach (GameObject movel in moveis) {
@@ -62,20 +71,24 @@ public class ColliderControl : MonoBehaviour {
 				parede.collider.isTrigger = true;
 			}
 		}
-		foreach (Transform teto in GameObject.Find("ParentTeto").transform) {
-			if  (teto != null && teto.renderer != null)
-				teto.renderer.enabled = cameraController.areWallsAlwaysVisible;
-		}
+		GameObject teto = GameObject.Find("ParentTeto");
+		if  (teto != null && teto.renderer != null)
+			teto.renderer.enabled = teto.collider.enabled = true;
 	}
 	
 	void Update () {
 		if (Input.GetKeyUp(KeyCode.Escape)) {
 			SnapBehaviour.ActivateAll();
-			gameObject.SetActiveRecursively(false);
-			foreach (Transform child in GameObject.Find("RotacaoCubo").transform) {
+			cameraController.mainCamera.gameObject.SetActiveRecursively(true);
+			cameraController.setFirstPerson = false;
+			foreach (Transform child in GameObject.Find("GUI").transform) {
 				child.gameObject.SetActiveRecursively(true);
 			}
-			cameraController.mainCamera.gameObject.SetActiveRecursively(true);
+			Disable();
+			if (lastSelectedMobile == null) {
+				GameObject.Find("Panel Info").SetActiveRecursively(false);
+			}
+			gameObject.SetActiveRecursively(false);
 		}
 	}
 }

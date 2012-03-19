@@ -177,8 +177,8 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 		this.furnitureData = furnitureData;
 	}
 	
-	public InformacoesMovel GetData(){
-		return furnitureData;		
+	public InformacoesMovel GetData() {
+		return furnitureData;
 	}
 	
 	private void DrawEmptyWindow (){
@@ -202,7 +202,6 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 		
 		Tooltip.DoTips();
 	}
-
 	#endregion
 
 	#region GuiBase implementation
@@ -316,6 +315,8 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 						SomClique.Play();
 						
 						furnitureData.ChangeTop(new string[]{"sem tampo", "s tampo"}, currentTampo);
+						
+						UpdateData(furnitureData);
 					
 						Hide();
 					}
@@ -325,6 +326,8 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 						SomClique.Play();
 						
 						furnitureData.ChangeTop(new string[]{"com tampo", "c tampo"}, currentTampo);
+						
+						UpdateData(furnitureData);
 					
 						Hide();
 					}
@@ -334,6 +337,8 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 						SomClique.Play();
 						
 						furnitureData.ChangeTop(new string[]{"com cooktop", "com cook top"}, currentTampo);
+						
+						UpdateData(furnitureData);
 					
 						Hide();
 					}
@@ -343,6 +348,8 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 						SomClique.Play();
 						
 						furnitureData.ChangeTop(new string[]{"com pia"}, currentTampo);
+						
+						UpdateData(furnitureData);
 					
 						Hide();
 					}
@@ -403,7 +410,7 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 	}
 	#endregion
 		
-	void changeItemColor(uint colorIndex){
+	void changeItemColor(int colorIndex){
 		if(colorIndex == Line.CurrentLine.colors.Length - 1)
 			item.GetComponent<InformacoesMovel>().Colorize(colorIndex,0);
 		else 

@@ -20,13 +20,11 @@ public class Painter: MonoBehaviour {
 	private Color lastColor;
 	private bool dropperBoolLast, clicked;
 	private string nameObject, tagObject;
-	private GuiCatalogo guiCatalogo;
-	private GuiCamera guiCamera;
-	private GuiDescription guiDescription;
 	private GUIStyle groupStyle, buttonStyle, labelStyle;
 
 	void Start () {
-		//ScreenUtils.Initialize(1024, 768);
+	
+		ScreenUtils.Initialize(1024, 640);
 
 		rectWindow = ScreenUtils.ScaledRect(200, 24, 120, 320);
 		//não precisa usar ScreenUtils, dentro da função isso já está sendo feito
@@ -49,9 +47,6 @@ public class Painter: MonoBehaviour {
 		rectDropper = ScreenUtils.ScaledRect(10 + 50 - 15, 270, 30, 30);		
 
 		dropperBool = false;
-		guiCatalogo = GetComponent<GuiCatalogo>();
-		guiCamera = GetComponent<GuiCamera>();
-		guiDescription = GetComponent<GuiDescription>();
 		tagObject = "";
 
 		groupStyle = new GUIStyle("box");
@@ -64,7 +59,7 @@ public class Painter: MonoBehaviour {
 	}
 
 	void  OnGUI (){
-		if (ScreenUtils.ScreenSizeChange()) {
+		/*if (ScreenUtils.ScreenSizeChange()) {
 			rectWindow = ScreenUtils.ScaledRect(200, 24, 120, 320);
 			//não precisa usar ScreenUtils, dentro da função isso já está sendo feito
 			rectReset = ScreenUtils.ScaledRect(10, 140, 100, 20);
@@ -82,7 +77,7 @@ public class Painter: MonoBehaviour {
 			sizeDropper = ScreenUtils.ScaledVector2(dropper.width, dropper.height);
 			halfSizeDropper = new Vector2(dropper.width / 2, dropper.height);
 			rectDropper = ScreenUtils.ScaledRect(10 + 50 - 15, 270, 30, 30);
-		}
+		}*/
 
 		GUI.depth = 1;
 		if (dropperBool) {

@@ -48,8 +48,8 @@ public class InformacoesMovel : MonoBehaviour {
 	public string		Comprimento { get; private set; }
 	
 	internal Portas		portas;
-	internal uint DrawersAndGlassDoorColorIndex;
-	internal uint StructureAndCommonDoorColorIndex;
+	internal int DrawersAndGlassDoorColorIndex;
+	internal int StructureAndCommonDoorColorIndex;
 	
 	private bool wasInitialized;
 	
@@ -72,6 +72,14 @@ public class InformacoesMovel : MonoBehaviour {
 		Comprimento = splitedStr[2];
 		
 		portas = Portas.FECHADAS;
+		
+		foreach (Category c in Line.CurrentLine.categories) {
+			foreach (GameObject f in c.Furniture) {
+				if (f.transform == this.transform) {
+					Categoria = c.Name;
+				}
+			}
+		}
 		
 		DrawersAndGlassDoorColorIndex 	 = Line.CurrentLine.GlobalDetailColorIndex;
 		StructureAndCommonDoorColorIndex = Line.CurrentLine.GlobalBaseColorIndex;
@@ -221,7 +229,7 @@ public class InformacoesMovel : MonoBehaviour {
 		}
 	}
 	
-	public void Colorize(uint drawersAndGlassDoorColorIndex, uint structureAndCommonDoorColorIndex){
+	public void Colorize(int drawersAndGlassDoorColorIndex, int structureAndCommonDoorColorIndex){
 		
 		this.DrawersAndGlassDoorColorIndex 	  = drawersAndGlassDoorColorIndex;
 		this.StructureAndCommonDoorColorIndex = structureAndCommonDoorColorIndex;
@@ -229,14 +237,14 @@ public class InformacoesMovel : MonoBehaviour {
 		ReColorize();
 	}
 	
-	public void ChangeBaseColor(uint selectedColor ){
+	public void ChangeBaseColor(int selectedColor ){
 		
 		this.StructureAndCommonDoorColorIndex = selectedColor;
 		
 		ReColorize();
 	}
 	
-	public void ChangeDetailColor(uint selectedColor){
+	public void ChangeDetailColor(int selectedColor){
 		
 		this.DrawersAndGlassDoorColorIndex = selectedColor;
 		
@@ -261,12 +269,12 @@ public class InformacoesMovel : MonoBehaviour {
 				    regexGaveta.Match(rm.name).Success ||
 					regexFruteira.Match(rm.name).Success){
 
-					rm.color = Line.CurrentLine.colors[DrawersAndGlassDoorColorIndex];
+					rm.color = BrandColor.GetRealColor(Line.CurrentLine.colors[DrawersAndGlassDoorColorIndex]);
 
 				} else if(regexEstrutura.Match(rm.name).Success ||
 							  regexPorta.Match(rm.name).Success){
 
-					rm.color = Line.CurrentLine.colors[StructureAndCommonDoorColorIndex];
+					rm.color = BrandColor.GetRealColor(Line.CurrentLine.colors[StructureAndCommonDoorColorIndex]);
 				}
 			}
 		}

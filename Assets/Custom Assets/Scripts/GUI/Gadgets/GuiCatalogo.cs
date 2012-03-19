@@ -388,17 +388,17 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 									SomClique.Play();
 									selectColorDetalhe = i;
 							
-									Line.CurrentLine.GlobalDetailColorIndex = (uint)selectColorDetalhe;
+									Line.CurrentLine.GlobalDetailColorIndex = selectColorDetalhe;
 							
 									GameObject selectedMobile = GameObject.FindGameObjectWithTag("MovelSelecionado");
 									if(selectedMobile != null){
-										selectedMobile.GetComponent<InformacoesMovel>().ChangeDetailColor((uint)selectColorDetalhe);										
+										selectedMobile.GetComponent<InformacoesMovel>().ChangeDetailColor(selectColorDetalhe);										
 									}
 							
 									GameObject[] furniture = GameObject.FindGameObjectsWithTag("Movel");
 									if(furniture != null && furniture.Length != 0){
 										foreach(GameObject mobile in furniture){
-											mobile.GetComponent<InformacoesMovel>().ChangeDetailColor((uint)selectColorDetalhe);										
+											mobile.GetComponent<InformacoesMovel>().ChangeDetailColor(selectColorDetalhe);										
 										}
 									}
 								}

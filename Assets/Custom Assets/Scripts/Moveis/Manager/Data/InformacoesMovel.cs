@@ -73,6 +73,14 @@ public class InformacoesMovel : MonoBehaviour {
 		
 		portas = Portas.FECHADAS;
 		
+		foreach (Category c in Line.CurrentLine.categories) {
+			foreach (GameObject f in c.Furniture) {
+				if (f.transform == this.transform) {
+					Categoria = c.Name;
+				}
+			}
+		}
+		
 		DrawersAndGlassDoorColorIndex 	 = Line.CurrentLine.GlobalDetailColorIndex;
 		StructureAndCommonDoorColorIndex = Line.CurrentLine.GlobalBaseColorIndex;
 		

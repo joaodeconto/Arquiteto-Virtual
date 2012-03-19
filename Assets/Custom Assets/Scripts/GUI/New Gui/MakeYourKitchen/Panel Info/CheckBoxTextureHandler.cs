@@ -3,8 +3,6 @@ using System.Collections;
 
 public class CheckBoxTextureHandler : MonoBehaviour {
 	
-	public GameObject item;
-	
 	public Texture2D texture;
 	
 	private InfoController infoController;

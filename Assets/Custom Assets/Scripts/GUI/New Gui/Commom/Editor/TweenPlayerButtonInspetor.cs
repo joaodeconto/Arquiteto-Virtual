@@ -19,6 +19,8 @@ public class TweenPlayerButtonInspetor : Editor
 	
 	private TweenPlayerButton btnTweenPlayer;
 	private iTweenMotion tempTween;
+	private GameObject tmpGameObject;
+	
 	/*
 	#region unity methods
 	void Start ()
@@ -87,6 +89,14 @@ public class TweenPlayerButtonInspetor : Editor
 		
 		btnTweenPlayer.IsToggle = EditorGUILayout.Toggle("IsToggle?", btnTweenPlayer.IsToggle);
 		
+		btnTweenPlayer.EventReceiver = EditorGUILayout.ObjectField	("Event Receiver:",
+																	  btnTweenPlayer.EventReceiver, 
+																	  typeof(GameObject), 
+																	  true) as GameObject;
+		
+		btnTweenPlayer.CallWhenFinish = EditorGUILayout.TextField("Call When Finish: ",btnTweenPlayer.CallWhenFinish);
+		btnTweenPlayer.CallWhenLastTweenFinish = EditorGUILayout.Toggle("Call when last tween finish?", btnTweenPlayer.CallWhenLastTweenFinish);
+				
 		#region comportamento 1
 		GUILayout.Label ("Comportamento 1:");
 		GUILayout.Space (10f);

@@ -7,19 +7,26 @@ public class TweenPlayerButton : MonoBehaviour
 {
 	public string Name;
 	public bool IsToggle;
-	public bool PlayNextOnLastTweenFinish;
+	public bool CallWhenLastTweenFinish;
+	public string CallWhenFinish;
+	public GameObject EventReceiver;
+	
 	public bool RunOnStart;
+	
 	public bool IsActive;
 	
 	public float ActiveSince { get; set; }
 	
 	public List<iTweenMotion> parallelTweens;
 	public List<iTweenMotion> parallelTweensStandard;
+	
+	public float MaxDuration { get; private set; }
+	public float MinDuration { get; private set; }
 		
 	public void ApplyTweenPlayerButton (TweenPlayerButton tweenPlayerButton) {
 		this.Name = tweenPlayerButton.Name;
 		this.IsToggle = tweenPlayerButton.IsToggle;
-		this.PlayNextOnLastTweenFinish = tweenPlayerButton.PlayNextOnLastTweenFinish;
+		this.CallWhenLastTweenFinish = tweenPlayerButton.CallWhenLastTweenFinish;
 		this.RunOnStart = tweenPlayerButton.RunOnStart;
 		this.parallelTweens = new List<iTweenMotion>(tweenPlayerButton.parallelTweens.Count);
 		int i = 0;
@@ -32,8 +39,10 @@ public class TweenPlayerButton : MonoBehaviour
 	#region unity methods
 	void Start ()
 	{		
+		List<iTweenMotion> tweensWhoCall = IsToggle ? parallelTweensStandard : parallelTweens;
+		
 		iTweenMotion currentTween;
-		int parallelTweensLength = parallelTweens.Count;
+		int parallelTweensLength = tweensWhoCall.Count;
 			
 		int indexMaxValue = 0;
 		int indexMinValue = 0;
@@ -44,34 +53,34 @@ public class TweenPlayerButton : MonoBehaviour
 		#region validate tweens
 		for (int i = 0; i != parallelTweensLength; ++i)
 		{
-			currentTween = parallelTweens [i]; 
-			if (currentTween == null) 
+			currentTween = tweensWhoCall [i]; 
+			if (currentTween == null)
 			{
-				continue;	
+				continue;
 			}
 					
 			if (currentTween.duration > maxTime)
 			{
-				maxTime = currentTween.duration;
+				MaxDuration = maxTime = currentTween.duration;
 				indexMaxValue = i;
 			}
 			else if (currentTween.duration < minTime)
 			{
-				minTime = currentTween.duration;
+				MinDuration = minTime = currentTween.duration;
 				indexMinValue = i;
 			}
 		
-//			currentTween.callWhenFinished = "DoNothing";
-//			currentTween.enabled = false;
+			currentTween.CallWhenFinish = "DoNothing";
+			currentTween.enabled = false;
 		}
 			
-		if (PlayNextOnLastTweenFinish)
+		if (CallWhenLastTweenFinish)
 		{
-			//parallelTweens[indexMaxValue].callWhenFinished = "PlayNextTween";
+			tweensWhoCall[indexMaxValue].CallWhenFinish = "TweensAreOver";
 		}
 		else
 		{
-			//parallelTweens[indexMinValue].callWhenFinished = "PlayNextTween";
+			tweensWhoCall[indexMinValue].CallWhenFinish = "TweensAreOver";
 		}
 		#endregion		
 		
@@ -81,6 +90,11 @@ public class TweenPlayerButton : MonoBehaviour
 		}
 	}
 	#endregion
+	
+	private void TweensAreOver ()
+	{
+		EventReceiver.SendMessage (CallWhenFinish);
+	}
 		
 	#region NGUI button behaviour
 	public void OnClick ()

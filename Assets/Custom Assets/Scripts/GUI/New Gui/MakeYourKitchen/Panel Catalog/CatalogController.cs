@@ -47,7 +47,6 @@ public class CatalogController : MonoBehaviour
 		List<GameObject> furniture = new List<GameObject> ();
 		
 		colors = root.GetComponent<BrandColor> ().colors;		
-		colorsTextures = root.GetComponent<LineColorsPrefab> ().colorTextures;		
 		
 		foreach (Transform categoriesTransform in root.transform) {
 			furniture = new List<GameObject> ();

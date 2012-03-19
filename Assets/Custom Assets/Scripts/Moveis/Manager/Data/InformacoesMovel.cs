@@ -41,7 +41,7 @@ public class InformacoesMovel : MonoBehaviour {
 	public TipoMovel	tipoMovel;
 	/* End Setted In Visual  */ 
 	
-	public string		Categoria { get; set; }
+	public string		Categoria;
 	
 	public string		Altura { get; private set; }
 	public string		Largura { get; private set; }
@@ -131,7 +131,6 @@ public class InformacoesMovel : MonoBehaviour {
 		foreach (string f in filters) {
 			filter += f;
 		}
-		print("Filter: " + filter);
 		Regex regexTop = new Regex(".*("+filter+").*", RegexOptions.IgnoreCase);
 		#endregion
 		
@@ -153,7 +152,6 @@ public class InformacoesMovel : MonoBehaviour {
 				mobile.name);
 			if(nameRegexPrefix.Equals(nameMobileRegexPrefix)  && regexTop.Match(mobile.name).Success){
 				Clone(mobile, this.GetComponent<InformacoesMovel>(), "Movel");
-				Destroy(this.gameObject);
 				break;
 			}
 		}
@@ -280,7 +278,7 @@ public class InformacoesMovel : MonoBehaviour {
 		}
 	}
 	
-	private void Clone(GameObject cloned, InformacoesMovel info, string tag)		{
+	public void Clone(GameObject cloned, InformacoesMovel info, string tag)		{
 	
 		GameObject newFurniture = Instantiate(cloned,this.transform.position,this.transform.rotation) as GameObject;
 							
@@ -304,6 +302,7 @@ public class InformacoesMovel : MonoBehaviour {
 			newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 		}
 		newFurniture.transform.parent = GameObject.Find("Moveis GO").transform;
+		Destroy(this.gameObject);
 	}
 	
 	public void CloneInfo(InformacoesMovel info){

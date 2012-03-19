@@ -78,67 +78,6 @@ public class InfoController : MonoBehaviour {
 		}
 	}
 	
-	void Update () {
-		if (!isOpen)
-			return;
-		if (Input.GetKeyUp (KeyCode.Delete)) {
-			Close ();
-			DestroyImmediate (GameObject.FindWithTag("MovelSelecionado"));
-		}
-		if (Input.GetKeyUp (KeyCode.R))
-		{
-			GameObject.FindWithTag ("MovelSelecionado").transform.RotateAround (Vector3.up, Mathf.PI / 2);
-			GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<RenderBounds> ().UpdateObj ();
-		}
-	}
-	
-	#region Panel info controller
-	public void Open (InformacoesMovel furnitureData){
-		this.furnitureData = furnitureData;
-		item = GameObject.FindGameObjectWithTag("MovelSelecionado");
-		panelInfo.SetActiveRecursively(true);
-		GetInfo ();
-		isOpen = true;
-		Invoke ("ResolveCheckBoxColors", 0.5f);
-		Invoke ("ResolveCheckBoxTops", 0.5f);
-	}
-	
-	public void Close (){
-		this.furnitureData = null;
-		item = null;
-		panelInfo.SetActiveRecursively(false);
-		DrawEmptyWindow();
-		isOpen = false;
-	}	
-	#endregion
-	
-	#region get/set furniture data
-	public void UpdateData(InformacoesMovel furnitureData){
-		this.furnitureData = furnitureData;
-	}
-	
-	public InformacoesMovel GetData(){
-		return furnitureData;
-	}
-	
-	private void DrawEmptyWindow (){
-	
-		infoLabels[0].SetLabels(I18n.t("Código"), "");
-		infoLabels[1].SetLabels(I18n.t("LXPXA"), "");
-		infoLabels[2].SetLabels(I18n.t("Descrição"), "");
-		infoLabels[3].SetLabels(I18n.t("Linha"), "");
-		infoLabels[4].SetLabels(I18n.t("Categoria"), "");
-	}
-	#endregion
-	
-	private void GetInfo () {
-		infoLabels[0].SetLabels(I18n.t("Código"), furnitureData.Codigo);
-		infoLabels[1].SetLabels(I18n.t("LXPXA"), furnitureData.Medidas);
-		infoLabels[2].SetLabels(I18n.t("Descrição"), furnitureData.Nome);
-		infoLabels[3].SetLabels(I18n.t("Linha"), Line.CurrentLine.Name);
-		infoLabels[4].SetLabels(I18n.t("Categoria"), furnitureData.Categoria);
-	}
-	
 	private void ResolveCheckBoxTops () {
 		//isWithoutTop = isWithTampo = isCooktop = isSink = false;
 		currentTop = "";
@@ -192,7 +131,7 @@ public class InfoController : MonoBehaviour {
 				
 				foreach(GameObject mobile in furniture){
 					string nameMobileRegexPrefix = Regex.Match(mobile.name,".*(?=sem tampo|s tampo|com tampo|c tampo|com cooktop|com cook top|com pia|para pia)", RegexOptions.IgnoreCase).Value;
-					if(nameItemRegexPrefix.Equals(nameMobileRegexPrefix) && 
+					if( nameItemRegexPrefix.Equals(nameMobileRegexPrefix) && 
 						Regex.Match(mobile.name, regStrings, RegexOptions.IgnoreCase).Success){
 						string tampoTypeRegexPrefix = Regex.Match(mobile.name,regStrings, RegexOptions.IgnoreCase).Value;
 						tampoTypeRegexPrefix.ToLower();
@@ -215,11 +154,80 @@ public class InfoController : MonoBehaviour {
 							return;
 						}
 						
+						checkBox.gameObject.SetActiveRecursively(true);
+						checkBox.GetComponent<CheckBoxTopHandler>().item = mobile;
+						
 						//Checks if the this "Tampo" has the same name as current "Tampo" a little while ago
 						if (currentTampoTypeRegexPrefix.Equals(tampoTypeRegexPrefix)) checkBox.GetComponent<UICheckbox>().isChecked = true;
+						else checkBox.GetComponent<UICheckbox>().isChecked = false;
 					}
 				}
 			}
 		}
+	}
+	
+	void Update () {
+		if (!isOpen)
+			return;
+		if (Input.GetKeyUp (KeyCode.Delete)) {
+			Close ();
+			DestroyImmediate (GameObject.FindWithTag("MovelSelecionado"));
+		}
+		if (Input.GetKeyUp (KeyCode.R))
+		{
+			GameObject.FindWithTag ("MovelSelecionado").transform.RotateAround (Vector3.up, Mathf.PI / 2);
+			GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<RenderBounds> ().UpdateObj ();
+		}
+	}
+	
+	#region Panel info controller
+	public void Open (InformacoesMovel furnitureData){
+		this.furnitureData = furnitureData;
+		panelInfo.SetActiveRecursively(true);
+		GetInfo ();
+		isOpen = true;
+		Invoke ("GetMobile", 0.1f);
+		Invoke ("ResolveCheckBoxColors", 0.1f);
+		Invoke ("ResolveCheckBoxTops", 0.1f);
+	}
+	
+	void GetMobile () {
+		item = GameObject.FindGameObjectWithTag("MovelSelecionado");
+	}
+	
+	public void Close (){
+		this.furnitureData = null;
+		item = null;
+		panelInfo.SetActiveRecursively(false);
+		DrawEmptyWindow();
+		isOpen = false;
+	}	
+	#endregion
+	
+	#region get/set furniture data
+	public void UpdateData(InformacoesMovel furnitureData){
+		this.furnitureData = furnitureData;
+	}
+	
+	public InformacoesMovel GetData(){
+		return furnitureData;
+	}
+	
+	private void DrawEmptyWindow (){
+	
+		infoLabels[0].SetLabels(I18n.t("Código"), "");
+		infoLabels[1].SetLabels(I18n.t("LXPXA"), "");
+		infoLabels[2].SetLabels(I18n.t("Descrição"), "");
+		infoLabels[3].SetLabels(I18n.t("Linha"), "");
+		infoLabels[4].SetLabels(I18n.t("Categoria"), "");
+	}
+	#endregion
+	
+	private void GetInfo () {
+		infoLabels[0].SetLabels(I18n.t("Código"), furnitureData.Codigo);
+		infoLabels[1].SetLabels(I18n.t("LXPXA"), furnitureData.Medidas);
+		infoLabels[2].SetLabels(I18n.t("Descrição"), furnitureData.Nome);
+		infoLabels[3].SetLabels(I18n.t("Linha"), Line.CurrentLine.Name);
+		infoLabels[4].SetLabels(I18n.t("Categoria"), furnitureData.Categoria);
 	}
 }

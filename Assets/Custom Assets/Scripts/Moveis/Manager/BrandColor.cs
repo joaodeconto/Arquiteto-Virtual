@@ -18,22 +18,22 @@ public class BrandColor : MonoBehaviour {
 	{
 		switch (color) {
 		case BrandColorEnum.BLACK:
-			return new Color (0, 0, 0, 0);
+			return new Color (0, 0, 0, 1);
 			break;
 		case BrandColorEnum.GRAY:
-			return new Color (0.53f, 0.53f, 0.53f, 0);
+			return new Color (0.53f, 0.53f, 0.53f, 1);
 			break;
 		case BrandColorEnum.GREEN:
-			return new Color (0, 0.65f, 0, 0);
+			return new Color (0, 0.65f, 0, 1);
 			break;
 		case BrandColorEnum.VIOLET:
-			return new Color (0.36f, 0.11f, 0.29f, 0);
+			return new Color (0.36f, 0.11f, 0.29f, 1);
 			break;
 		case BrandColorEnum.WHITE:
-			return new Color (1f, 1f, 1f, 0);
+			return new Color (1f, 1f, 1f, 1);
 			break;
 		default:
-			return new Color (1f, 1f, 1f, 0);
+			return new Color (1f, 1f, 1f, 1);
 			break;
 		}
 	}

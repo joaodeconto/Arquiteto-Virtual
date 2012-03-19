@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-
+	
 public enum BrandColorEnum
 {
 	BLACK,
@@ -9,7 +9,7 @@ public enum BrandColorEnum
 	VIOLET,
 	WHITE,
 }
-	
+
 public class BrandColor : MonoBehaviour {
 	
 	public BrandColorEnum[] colors;

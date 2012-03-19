@@ -11,7 +11,7 @@ public enum iTweenMotionType
 [AddComponentMenu("BlackBugio/Tween/iTweenMotion")]
 public class iTweenMotion : MonoBehaviour
 {
-	public string name;
+	public string Name;
 	public GameObject go;
 	public iTweenMotionType type;
 	public Vector3 to;

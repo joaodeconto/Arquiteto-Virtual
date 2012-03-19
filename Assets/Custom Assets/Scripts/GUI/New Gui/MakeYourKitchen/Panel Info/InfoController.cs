@@ -34,13 +34,77 @@ public class InfoController : MonoBehaviour {
 	// Use this for initialization
 	void Awake ()
 	{
-		//Close ();
+		Close ();
+	}
+
+	void Update () {
+		if (!isOpen)
+			return;
+		if (Input.GetKeyUp (KeyCode.Delete)) {
+			Close ();
+			DestroyImmediate (GameObject.FindWithTag("MovelSelecionado"));
+		}
+		if (Input.GetKeyUp (KeyCode.R))
+		{
+			GameObject.FindWithTag ("MovelSelecionado").transform.RotateAround (Vector3.up, Mathf.PI / 2);
+			GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<RenderBounds> ().UpdateObj ();
+		}
 	}
 	
+	#region Panel info controller
+	public void Open (InformacoesMovel furnitureData){
+		this.furnitureData = furnitureData;
+		item = GameObject.FindGameObjectWithTag("MovelSelecionado");
+		panelInfo.SetActiveRecursively(true);
+		GetInfo ();
+		isOpen = true;
+		Invoke ("ResolveCheckBoxColors", 0.25f);
+		Invoke ("ResolveCheckBoxTops", 0.25f);
+		Invoke ("ResolveCheckBoxDoorSide", 0.25f);
+		Invoke ("ReplaceCheckBoxes", 0.5f);
+	}
+	
+	public void Close (){
+		this.furnitureData = null;
+		item = null;
+		panelInfo.SetActiveRecursively(false);
+		DrawEmptyWindow();
+		isOpen = false;
+	}	
+	#endregion
+	
+	#region get/set furniture data
+	public void UpdateData(InformacoesMovel furnitureData){
+		this.furnitureData = furnitureData;
+	}
+	
+	public InformacoesMovel GetData(){
+		return furnitureData;
+	}
+	#endregion
+	
+	private void GetInfo () {
+		infoLabels[0].SetLabels(I18n.t("Código"), furnitureData.Codigo);
+		infoLabels[1].SetLabels(I18n.t("LXPXA"), furnitureData.Medidas);
+		infoLabels[2].SetLabels(I18n.t("Descrição"), furnitureData.Nome);
+		infoLabels[3].SetLabels(I18n.t("Linha"), Line.CurrentLine.Name);
+		infoLabels[4].SetLabels(I18n.t("Categoria"), furnitureData.Categoria);
+	}
+	
+	private void DrawEmptyWindow (){
+	
+		infoLabels[0].SetLabels(I18n.t("Código"), "");
+		infoLabels[1].SetLabels(I18n.t("LXPXA"), "");
+		infoLabels[2].SetLabels(I18n.t("Descrição"), "");
+		infoLabels[3].SetLabels(I18n.t("Linha"), "");
+		infoLabels[4].SetLabels(I18n.t("Categoria"), "");
+	}
+			
 	private void ResolveCheckBoxColors ()
 	{
 		GameObject checkBoxCores = GameObject.Find ("CheckBox Cores");
-		if (checkBoxCores == null) {
+		if (checkBoxCores == null)
+		{
 			Debug.LogError ("O nome do checkbox das cores deve ser \"CheckBox Cores\" renome-o por favor.");
 			Debug.Break ();
 		}
@@ -160,65 +224,97 @@ public class InfoController : MonoBehaviour {
 		}
 	}
 	
-	void Update () {
-		if (!isOpen)
-			return;
-		if (Input.GetKeyUp (KeyCode.Delete)) {
-			Close ();
-			DestroyImmediate (GameObject.FindWithTag("MovelSelecionado"));
-		}
-		if (Input.GetKeyUp (KeyCode.R))
+	private void ResolveCheckBoxDoorSide ()
+	{	
+		GameObject checkBoxDoorSide = GameObject.Find ("CheckBox Door Side");
+		if (checkBoxDoorSide == null)
 		{
-			GameObject.FindWithTag ("MovelSelecionado").transform.RotateAround (Vector3.up, Mathf.PI / 2);
-			GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<RenderBounds> ().UpdateObj ();
+			Debug.LogError ("O nome do checkbox de troca de lado de porta deve ser \"CheckBox Door Side\" renome-o por favor.");
+			Debug.Break ();
+		}
+		else
+		{
+			//levar as checkboxes far, far away
+			foreach (Transform check in checkBoxDoorSide.transform)
+			{
+				check.gameObject.SetActiveRecursively (false);
+				
+				if (check.gameObject.GetComponent<UICheckbox>() != null)
+					check.gameObject.GetComponent<UICheckbox>().isChecked = false;
+			}
+			
+			if (!Regex.Match(item.name, ".*(direita|esquerda).*").Success)
+			{
+				//Módulo não possui lado de porta
+				return;	
+			}
+			
+			foreach (Transform check in checkBoxDoorSide.transform)
+			{
+				check.gameObject.SetActiveRecursively (true);
+			}
+			
+			bool isOpenRightDoor = Regex.Match(item.name,".*direita.*").Success;
+			foreach (Transform check in checkBoxDoorSide.transform)
+			{
+				if (check.gameObject.GetComponent<UICheckbox>() == null)
+					continue;
+		
+				switch (check.gameObject.GetComponent<CheckBoxDoorSideHandler>().doorSideEnum)
+				{
+				case DoorSideEnum.LEFT:
+					check.gameObject.GetComponent<UICheckbox>().isChecked = !isOpenRightDoor;
+					break;
+				case DoorSideEnum.RIGHT:
+					check.gameObject.GetComponent<UICheckbox>().isChecked = isOpenRightDoor;
+					break;
+				}
+			}
 		}
 	}
 	
-	#region Panel info controller
-	public void Open (InformacoesMovel furnitureData){
-		this.furnitureData = furnitureData;
-		item = GameObject.FindGameObjectWithTag("MovelSelecionado");
-		panelInfo.SetActiveRecursively(true);
-		GetInfo ();
-		isOpen = true;
-		Invoke ("ResolveCheckBoxColors", 0.5f);
-		Invoke ("ResolveCheckBoxTops", 0.5f);
+	private void ReplaceCheckBoxes ()
+	{
+		GameObject checkBoxCores = GameObject.Find ("CheckBox Cores");
+		if (checkBoxCores == null)
+		{
+			Debug.Break ();
+			return;
+		}
+		
+		Transform checksTransform = checkBoxCores.transform.parent;
+		
+		int yOffset = -50;
+		Vector3 rootPosition = new Vector3(0,-50, 0);
+		int activeCheckGroups = 0;
+		foreach (Transform checkGroup in checksTransform)
+		{
+			if (checkGroup.gameObject.active == true)
+			{
+				checkGroup.position = rootPosition + Vector3.up * yOffset * activeCheckGroups++;
+			}
+		}
+		
+		//Arrumando scala do tween do background do menu
+		Transform background = checksTransform.parent.FindChild ("_BGMobiles");
+		
+		if (background == null)
+		{
+			Debug.LogError ("O nome do background do menu de opções está com o nome errado! Nome esperado: " + "_BGMobiles");
+			Debug.Break ();
+			return;
+		}
+		
+		Debug.Log ("Para fazer o resize do background do menu opções funcionar deve-se se ter um iTweenMotion com o nome de \"descer\"");
+		
+		yOffset = 60;
+		Vector3 backgroundScaleRoot = new Vector3(162, 100, 0);
+		foreach (iTweenMotion motion in background.gameObject.GetComponents<iTweenMotion>())
+		{
+			if (motion.Name == "descer")
+			{
+				motion.to = backgroundScaleRoot + Vector3.up * yOffset * activeCheckGroups;
+			}
+		}
 	}
-	
-	public void Close (){
-		this.furnitureData = null;
-		item = null;
-		panelInfo.SetActiveRecursively(false);
-		DrawEmptyWindow();
-		isOpen = false;
-	}	
-	#endregion
-	
-	#region get/set furniture data
-	public void UpdateData(InformacoesMovel furnitureData){
-		this.furnitureData = furnitureData;
-	}
-	
-	public InformacoesMovel GetData(){
-		return furnitureData;
-	}
-	
-	private void DrawEmptyWindow (){
-	
-		infoLabels[0].SetLabels(I18n.t("Código"), "");
-		infoLabels[1].SetLabels(I18n.t("LXPXA"), "");
-		infoLabels[2].SetLabels(I18n.t("Descrição"), "");
-		infoLabels[3].SetLabels(I18n.t("Linha"), "");
-		infoLabels[4].SetLabels(I18n.t("Categoria"), "");
-	}
-	#endregion
-	
-	private void GetInfo () {
-		infoLabels[0].SetLabels(I18n.t("Código"), furnitureData.Codigo);
-		infoLabels[1].SetLabels(I18n.t("LXPXA"), furnitureData.Medidas);
-		infoLabels[2].SetLabels(I18n.t("Descrição"), furnitureData.Nome);
-		infoLabels[3].SetLabels(I18n.t("Linha"), Line.CurrentLine.Name);
-		infoLabels[4].SetLabels(I18n.t("Categoria"), furnitureData.Categoria);
-	}
-	
 }

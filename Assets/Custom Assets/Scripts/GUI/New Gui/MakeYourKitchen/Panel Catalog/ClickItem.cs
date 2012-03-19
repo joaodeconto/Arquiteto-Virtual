@@ -36,7 +36,6 @@ public class ClickItem : MonoBehaviour {
 			newFurniture.AddComponent<SnapBehaviour>();
 			newFurniture.AddComponent<CalculateBounds>();
 			newFurniture.GetComponent<InformacoesMovel>().Initialize();
-			newFurniture.GetComponent<InformacoesMovel>().Categoria = "";
 			newFurniture.AddComponent<Rigidbody>();
 			
 			if (newFurniture.GetComponent<InformacoesMovel>().tipoMovel == TipoMovel.FIXO) {

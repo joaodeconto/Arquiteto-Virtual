@@ -23,8 +23,6 @@ public class ColliderControl : MonoBehaviour {
 			}
 		}
 		
-		print(GameObject.Find("ParentTeto"));
-		
 		GameObject teto = GameObject.Find("ParentTeto");
 		if  (teto != null && teto.renderer != null)
 			teto.renderer.enabled = teto.collider.enabled = true;
@@ -32,7 +30,6 @@ public class ColliderControl : MonoBehaviour {
 		int i = 0;
 		foreach (Transform parede in cameraController.wallParents.GetWalls()) {
 			if (parede != null) {
-				print(parede);
 				parede.renderer.material = cameraController.wallMaterial;
 				parede.renderer.material.color = cameraController.wallParents.GetWallColor(i);
 				parede.collider.enabled = true;

@@ -8,7 +8,6 @@ public class CatalogController : MonoBehaviour
 	// Use this for initialization of the static classes
 	void Start ()
 	{
-		
 		//Inicializar classe ScreenUtils
 		ScreenUtils.Initialize (1024, 640);
 		I18n.Initialize ();
@@ -53,7 +52,6 @@ public class CatalogController : MonoBehaviour
 		foreach (Transform categoriesTransform in root.transform) {
 			furniture = new List<GameObject> ();
 			foreach (Transform mobile in categoriesTransform.transform) {
-				mobile.GetComponent<InformacoesMovel>().Categoria = categoriesTransform.name;
 				furniture.Add (mobile.gameObject);
 			}
 			categories.Add (new Category (categoriesTransform.name, furniture, categoriesTransform.GetComponent<MakeCategory> ().imageReference));

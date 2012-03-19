@@ -51,8 +51,9 @@ public class CatalogItemButtonHandler : MonoBehaviour {
 							}
 						}
 					}
-					print(spriteName);
 					sprite.spriteName = spriteName;
+					sprite.MakePixelPerfect();
+					sprite.transform.localPosition = new Vector3(0, 0, -0.1f);
 				}
 			}
 			++j;

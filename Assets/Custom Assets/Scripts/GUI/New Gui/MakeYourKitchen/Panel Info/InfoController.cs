@@ -8,7 +8,7 @@ public class InfoController : MonoBehaviour {
 	// Data furniture selected in camera
 	private InformacoesMovel furnitureData;
 	// Item selected
-	private GameObject item;
+	public GameObject item {get; private set;}
 	
 	[System.Serializable]
 	public class InfoLabels {
@@ -24,10 +24,10 @@ public class InfoController : MonoBehaviour {
 	
 	public InfoLabels[] infoLabels;
 	public GameObject panelInfo;
+	public Material topMaterial;
 	
 	#region vars Choose Tampo Type
 	private string currentTop = "";
-	private bool isWithoutTop, isWithTampo, isCooktop, isSink;
 	#endregion
 	
 	bool isOpen;
@@ -36,7 +36,7 @@ public class InfoController : MonoBehaviour {
 	{
 		Close ();
 	}
-
+	
 	void Update () {
 		if (!isOpen)
 			return;
@@ -54,14 +54,17 @@ public class InfoController : MonoBehaviour {
 	#region Panel info controller
 	public void Open (InformacoesMovel furnitureData){
 		this.furnitureData = furnitureData;
-		item = GameObject.FindGameObjectWithTag("MovelSelecionado");
 		panelInfo.SetActiveRecursively(true);
-		GetInfo ();
 		isOpen = true;
-		Invoke ("ResolveCheckBoxColors", 0.25f);
-		Invoke ("ResolveCheckBoxTops", 0.25f);
-		Invoke ("ResolveCheckBoxDoorSide", 0.25f);
-		Invoke ("ReplaceCheckBoxes", 0.5f);
+		Invoke ("GetInfo", 0.001f);
+		Invoke ("GetMobile", 0.001f);
+		Invoke ("ResolveCheckBoxColors", 0.001f);
+		Invoke ("ResolveCheckBoxTops", 0.001f);
+		Invoke ("ResolveCheckBoxTextures", 0.001f);
+	}
+	
+	void GetMobile () {
+		item = GameObject.FindGameObjectWithTag("MovelSelecionado");
 	}
 	
 	public void Close (){
@@ -81,15 +84,6 @@ public class InfoController : MonoBehaviour {
 	public InformacoesMovel GetData(){
 		return furnitureData;
 	}
-	#endregion
-	
-	private void GetInfo () {
-		infoLabels[0].SetLabels(I18n.t("Código"), furnitureData.Codigo);
-		infoLabels[1].SetLabels(I18n.t("LXPXA"), furnitureData.Medidas);
-		infoLabels[2].SetLabels(I18n.t("Descrição"), furnitureData.Nome);
-		infoLabels[3].SetLabels(I18n.t("Linha"), Line.CurrentLine.Name);
-		infoLabels[4].SetLabels(I18n.t("Categoria"), furnitureData.Categoria);
-	}
 	
 	private void DrawEmptyWindow (){
 	
@@ -99,7 +93,16 @@ public class InfoController : MonoBehaviour {
 		infoLabels[3].SetLabels(I18n.t("Linha"), "");
 		infoLabels[4].SetLabels(I18n.t("Categoria"), "");
 	}
-			
+	#endregion
+	
+	private void GetInfo () {
+		infoLabels[0].SetLabels(I18n.t("Código"), furnitureData.Codigo);
+		infoLabels[1].SetLabels(I18n.t("LXPXA"), furnitureData.Medidas);
+		infoLabels[2].SetLabels(I18n.t("Descrição"), furnitureData.Nome);
+		infoLabels[3].SetLabels(I18n.t("Linha"), Line.CurrentLine.Name);
+		infoLabels[4].SetLabels(I18n.t("Categoria"), furnitureData.Categoria);
+	}
+		
 	private void ResolveCheckBoxColors ()
 	{
 		GameObject checkBoxCores = GameObject.Find ("CheckBox Cores");
@@ -117,6 +120,7 @@ public class InfoController : MonoBehaviour {
 			//levar as checkboxes far, far away
 			foreach (Transform color in checkBoxCores.transform)
 			{
+				if (color.name.Equals("Label")) continue;
 				color.gameObject.SetActiveRecursively (false);
 			}
 			
@@ -156,8 +160,6 @@ public class InfoController : MonoBehaviour {
 			
 			int categoryIndex = 0;
 			
-			Debug.LogWarning("Line.CurrentLine.categories = " + furnitureData.Categoria);
-			
 			//Find index of mobile's category 
 			List<Category> categories = Line.CurrentLine.categories;
 			for( categoryIndex = Line.CurrentLine.categories.Count - 1; categoryIndex != -1; --categoryIndex ){
@@ -169,6 +171,7 @@ public class InfoController : MonoBehaviour {
 			if (categoryIndex == -1)
 			{
 				Debug.LogError ("Categoria do módulo não existe: " + furnitureData.Categoria);
+				Debug.Break ();
 			}
 			
 			GameObject checkBoxTops = GameObject.Find ("CheckBox Tops");			
@@ -185,6 +188,8 @@ public class InfoController : MonoBehaviour {
 				//levar as checkboxes far, far away
 				foreach (Transform tops in checkBoxTops.transform)
 				{
+					if (tops.name.Equals("Label")) continue;
+					tops.GetComponent<UICheckbox>().isChecked = false;
 					tops.gameObject.SetActiveRecursively (false);
 				}
 				
@@ -216,6 +221,9 @@ public class InfoController : MonoBehaviour {
 							return;
 						}
 						
+						checkBox.gameObject.SetActiveRecursively(true);
+						checkBox.GetComponent<CheckBoxTopHandler>().item = mobile;
+						
 						//Checks if the this "Tampo" has the same name as current "Tampo" a little while ago
 						if (currentTampoTypeRegexPrefix.Equals(tampoTypeRegexPrefix)) checkBox.GetComponent<UICheckbox>().isChecked = true;
 					}
@@ -223,7 +231,7 @@ public class InfoController : MonoBehaviour {
 			}
 		}
 	}
-	
+
 	private void ResolveCheckBoxDoorSide ()
 	{	
 		GameObject checkBoxDoorSide = GameObject.Find ("CheckBox Door Side");
@@ -273,6 +281,40 @@ public class InfoController : MonoBehaviour {
 		}
 	}
 	
+	private void ResolveCheckBoxTextures () {
+		GameObject checkBoxTextures = GameObject.Find ("CheckBox Tops Textures");
+		
+		
+		if (checkBoxTextures == null) {
+			Debug.LogError ("O nome do checkbox de tampos deve ser \"CheckBox Tops Textures\" renome-o por favor.");
+			Debug.Break ();
+		}
+		else
+		{
+			if( currentTop.Equals("com tampo") || currentTop.Equals("c tampo") || 
+				currentTop.Equals("com cooktop") || currentTop.Equals("com cook top"))
+			{
+				foreach (Transform textures in checkBoxTextures.transform)
+				{
+					if (textures.name.Equals("Label")) continue;
+					textures.gameObject.SetActiveRecursively (true);
+					
+					if (topMaterial.mainTexture == textures.GetComponent<CheckBoxTextureHandler>().texture)
+						textures.GetComponent<UICheckbox>().isChecked = true;
+				}
+			}
+			else 
+			{
+				foreach (Transform textures in checkBoxTextures.transform)
+				{
+					if (textures.name.Equals("Label")) continue;
+					textures.GetComponent<UICheckbox>().isChecked = false;
+					textures.gameObject.SetActiveRecursively (false);
+				}
+			}
+		}
+	}
+	
 	private void ReplaceCheckBoxes ()
 	{
 		GameObject checkBoxCores = GameObject.Find ("CheckBox Cores");
@@ -317,4 +359,5 @@ public class InfoController : MonoBehaviour {
 			}
 		}
 	}
+
 }

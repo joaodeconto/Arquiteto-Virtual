@@ -35,6 +35,8 @@ public class InfoController : MonoBehaviour {
 	
 	// Data furniture selected in camera
 	private InformacoesMovel furnitureData;
+	public int selectedColorIndex {get; set;}
+		
 	private bool isOpen;
 	
 	void Awake ()
@@ -77,6 +79,8 @@ public class InfoController : MonoBehaviour {
 		btn.SendMessage("OnClick");
 		btn.SendMessage("OnClick");
 		panelInfo.SetActiveRecursively(false);
+		
+		selectedColorIndex = 0;
 	}
 	
 	void Update () {
@@ -100,15 +104,17 @@ public class InfoController : MonoBehaviour {
 		
 		isOpen = true;
 		
+		UpdateInfoOptions(furnitureData);		
+	}
+	
+	public void UpdateInfoOptions(InformacoesMovel furnitureData) {
 		SetInfo(furnitureData);
-		
 		item = GameObject.FindGameObjectWithTag("MovelSelecionado");
-		
 		ResolveCheckBoxColors();
 		ResolveCheckBoxTops();
 		ResolveCheckBoxDoorSide();
 		ResolveCheckBoxTextures();
-		ReplaceCheckBoxes();
+		ReplaceCheckBoxes();		
 	}
 	
 	public void Close (){
@@ -125,6 +131,10 @@ public class InfoController : MonoBehaviour {
 			btn.SendMessage("OnClick");
 		}
 		
+		NullObject ();
+	}
+	
+	public void NullObject (){
 		this.furnitureData = null;
 		item = null;
 		DrawEmptyWindow();
@@ -139,6 +149,10 @@ public class InfoController : MonoBehaviour {
 	#endregion
 	
 	#region get/set furniture data
+	public void UpdateItem (GameObject item) {
+		this.item = item;
+	}
+	
 	public void UpdateData(InformacoesMovel furnitureData){
 		this.furnitureData = furnitureData;
 	}
@@ -197,7 +211,7 @@ public class InfoController : MonoBehaviour {
 			checkBox.transform.localPosition = rootColorGuiPosition + (Vector3.right * xOffset * i);
 			checkBox.gameObject.SetActiveRecursively(true);
 			
-			if (i == 0) {
+			if (i == selectedColorIndex) {
 				checkBox.GetComponent<UICheckbox> ().isChecked = true;
 			}				
 		}
@@ -207,8 +221,6 @@ public class InfoController : MonoBehaviour {
 	}
 	
 	private void ResolveCheckBoxTops () {
-		
-		//isWithoutTop = isWithTampo = isCooktop = isSink = false;
 		currentTop = "";
 		
 		//Quando termina de abrir a janela seleciona o objeto
@@ -286,8 +298,10 @@ public class InfoController : MonoBehaviour {
 				checkBox.GetComponent<CheckBoxTopHandler>().item = mobile;
 				
 				//Checks if the this "Tampo" has the same name as current "Tampo" a little while ago
-				if (currentTampoTypeRegexPrefix.Equals(tampoTypeRegexPrefix))
+				if (currentTampoTypeRegexPrefix.Equals(tampoTypeRegexPrefix)) {
+					print("currentTampoTypeRegexPrefix: " + currentTampoTypeRegexPrefix + " - tampoTypeRegexPrefix: " + tampoTypeRegexPrefix);
 					checkBox.GetComponent<UICheckbox>().isChecked = true;
+				}
 			}
 		}
 		
@@ -396,5 +410,90 @@ public class InfoController : MonoBehaviour {
 			}
 		}
 	}
-
+	
+	/*public void UpdateSetting () {
+		if (checkBoxTextures.active) {
+			if (check.gameObject.GetComponent<UICheckbox>() != null) {
+				check.gameObject.GetComponent<UICheckbox>().isChecked = false;
+				if (topMaterial.mainTexture == check.GetComponent<CheckBoxTextureHandler>().texture)
+					check.GetComponent<UICheckbox>().isChecked = true;
+			}
+		}
+		
+		if (checkBoxTops.active) {
+			if (Regex.Match(currentTop, "(sem tampo|s tampo|com tampo|c tampo|com cooktop|com cook top|com pia|para pia)", RegexOptions.IgnoreCase)) {
+			string currentTampoTypeRegexPrefix = Regex.Match(item.name,regStrings, RegexOptions.IgnoreCase).Value;
+			currentTop = currentTampoTypeRegexPrefix;
+			currentTampoTypeRegexPrefix.ToLower();
+			
+			int categoryIndex = 0;
+			
+			//Find index of mobile's category 
+			List<Category> categories = Line.CurrentLine.categories;
+			for( categoryIndex = Line.CurrentLine.categories.Count - 1; categoryIndex != -1; --categoryIndex ){
+				if(categories[categoryIndex].Name.Equals(furnitureData.Categoria)){
+					break;		
+				}
+			}
+			
+			if (categoryIndex == -1)
+			{
+				Debug.LogError ("Categoria do módulo não existe: " + furnitureData.Categoria);
+				Debug.Break ();
+			}
+			
+			Transform checkBox;
+			Vector3 rootTopGuiPosition = new Vector3 (-54f, 2.4f, 0f);
+			float xOffset = 37f;
+			
+			//levar as checkboxes far, far away
+			foreach (Transform check in checkBoxTops.transform)
+			{
+				check.gameObject.SetActiveRecursively (false);
+				
+				if (check.gameObject.GetComponent<UICheckbox>() != null)
+					check.gameObject.GetComponent<UICheckbox>().isChecked = false;
+			}
+			
+			//Find the "Brother" of the current mobile
+			List<GameObject> furniture = Line.CurrentLine.categories[categoryIndex].Furniture;
+			
+			foreach(GameObject mobile in furniture){
+				string nameMobileRegexPrefix = Regex.Match(mobile.name,".*(?=sem tampo|s tampo|com tampo|c tampo|com cooktop|com cook top|com pia|para pia)", RegexOptions.IgnoreCase).Value;
+				if(nameItemRegexPrefix.Equals(nameMobileRegexPrefix) && 
+					Regex.Match(mobile.name, regStrings, RegexOptions.IgnoreCase).Success){
+					string tampoTypeRegexPrefix = Regex.Match(mobile.name,regStrings, RegexOptions.IgnoreCase).Value;
+					tampoTypeRegexPrefix.ToLower();
+					
+					checkBox = null;
+					
+					//If this is true, in the GUI, show the option
+					if (currentTop.Equals("sem tampo") || currentTop.Equals("s tampo"))
+						checkBox = checkBoxTops.transform.Find ("Check1");
+					if (currentTop.Equals("com tampo") || currentTop.Equals("c tampo"))
+						checkBox = checkBoxTops.transform.Find ("Check2");
+					if (currentTop.Equals("com cooktop") || currentTop.Equals("com cook top"))
+						checkBox = checkBoxTops.transform.Find ("Check3");
+					if (currentTop.Equals("com pia") || currentTop.Equals("para pia"))
+						checkBox = checkBoxTops.transform.Find ("Check4");
+					
+					if (checkBox == null) {
+						Debug.LogError ("WTF? Ele nao achou nenhum check dos TOPS o.o");
+						Debug.Break ();
+						return;
+					}
+					
+					checkBox.gameObject.SetActiveRecursively(true);
+					checkBox.GetComponent<CheckBoxTopHandler>().item = mobile;
+					
+					//Checks if the this "Tampo" has the same name as current "Tampo" a little while ago
+					if (currentTop.Equals(tampoTypeRegexPrefix))
+						checkBox.GetComponent<UICheckbox>().isChecked = true;
+				}
+			}
+			
+			//Religar label do tops
+			checkBoxTops.transform.Find("Label").gameObject.active = true;
+		}
+	}*/
 }

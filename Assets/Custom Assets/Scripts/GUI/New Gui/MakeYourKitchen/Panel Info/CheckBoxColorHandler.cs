@@ -2,7 +2,13 @@ using UnityEngine;
 using System.Collections;
 
 public class CheckBoxColorHandler : MonoBehaviour {
-
+	
+	private InfoController infoController;
+	
+	void Start () {
+		infoController = GameObject.FindWithTag("GameController").GetComponentInChildren<InfoController>();
+	}
+	
 	void OnClick ()
 	{
 		//Obter a cor da checkbox
@@ -31,6 +37,7 @@ public class CheckBoxColorHandler : MonoBehaviour {
 					}
 				}
 				
+				infoController.selectedColorIndex = selectedColorIndex;
 				success = true;
 				break;
 			}

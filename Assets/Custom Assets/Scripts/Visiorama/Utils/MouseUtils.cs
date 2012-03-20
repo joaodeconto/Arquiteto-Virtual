@@ -76,7 +76,39 @@ public class MouseUtils : MonoBehaviour
 	}
 
 	private static int clickMonkeyPatch = 0;
-
+	
+	public static bool ItemMouseButtonDoubleClickDown (int button, float timer)
+	{
+		#if UNITY_STANDALONE_WIN || UNITY_WEBPLAYER
+		if (Input.GetMouseButtonDown (button)) {
+			if (clickMonkeyPatch > 4 && (Time.time - doubleClickStart) < timer) {
+				doubleClickStart = -1;
+				clickMonkeyPatch = 0;
+				return true;
+			} else {
+				if ((Time.time - doubleClickStart) >= timer)
+					clickMonkeyPatch = 0;
+				doubleClickStart = Time.time;
+				clickMonkeyPatch++;
+			}
+		}
+		#else
+		if (Input.GetMouseButtonDown (button)) {
+			if (clickMonkeyPatch > 2 && (Time.time - doubleClickStart) < timer) {
+				doubleClickStart = -1;
+				clickMonkeyPatch = 0;
+				return true;
+			} else {
+				if ((Time.time - doubleClickStart) >= timer)
+					clickMonkeyPatch = 0;
+				doubleClickStart = Time.time;
+				clickMonkeyPatch++;
+			}
+		}
+		#endif
+		return false;
+	}
+	
 	public static bool GUIMouseButtonDoubleClickDown (int button, float timer)
 	{
 		#if UNITY_STANDALONE_WIN || UNITY_WEBPLAYER
@@ -111,7 +143,7 @@ public class MouseUtils : MonoBehaviour
 
 	public static bool GUIMouseButtonDoubleClickUp (int button, float timer)
 	{
-		#if UNITY_STANDALONE_WIN
+		#if UNITY_STANDALONE_WIN || UNITY_WEBPLAYER
 		if (Input.GetMouseButtonUp (button)) {
 			if (clickMonkeyPatch > 6 && (Time.time - doubleClickStart) < timer) {
 				doubleClickStart = -1;
@@ -125,7 +157,7 @@ public class MouseUtils : MonoBehaviour
 			}
 		}
 		#else
-		if (Input.GetMouseButtonDown (button)) {
+		if (Input.GetMouseButtonUp (button)) {
 			if (clickMonkeyPatch > 2 && (Time.time - doubleClickStart) < timer) {
 				doubleClickStart = -1;
 				clickMonkeyPatch = 0;

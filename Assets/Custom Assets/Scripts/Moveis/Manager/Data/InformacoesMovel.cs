@@ -305,6 +305,34 @@ public class InformacoesMovel : MonoBehaviour {
 		Destroy(this.gameObject);
 	}
 	
+	public GameObject CloneGameObject(GameObject cloned, InformacoesMovel info, string tag)		{
+	
+		GameObject newFurniture = Instantiate(cloned,this.transform.position,this.transform.rotation) as GameObject;
+							
+		newFurniture.tag = tag;
+		newFurniture.layer = LayerMask.NameToLayer("Moveis");
+		
+		foreach (Animation anim in newFurniture.GetComponentsInChildren<Animation>()) {
+			anim.Stop();
+			anim.playAutomatically = false;
+		}
+		
+		newFurniture.AddComponent<SnapBehaviour>();
+		newFurniture.AddComponent<CalculateBounds>();
+		newFurniture.GetComponent<InformacoesMovel>().Initialize();
+		newFurniture.GetComponent<InformacoesMovel>().CloneInfo(info);
+		if (tipoMovel == TipoMovel.FIXO) {
+			newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | 
+												 RigidbodyConstraints.FreezeRotation;
+		}
+		else {
+			newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+		}
+		newFurniture.transform.parent = GameObject.Find("Moveis GO").transform;
+		Destroy(this.gameObject);
+		return newFurniture;
+	}
+	
 	public void CloneInfo(InformacoesMovel info){
 	
 		Names = new string[info.Names.Length];

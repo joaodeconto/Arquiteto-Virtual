@@ -99,8 +99,8 @@ public class WallBuilder : MonoBehaviour {
 		MaxWallWidth = 10;
 		MaxWallDepth = 10;
 		
-		MinWallWidth = 2;
-		MinWallDepth = 2;
+		MinWallWidth = 3;
+		MinWallDepth = 3;
 		
 		ROOT = new Vector3(1000,0,1000);
 		

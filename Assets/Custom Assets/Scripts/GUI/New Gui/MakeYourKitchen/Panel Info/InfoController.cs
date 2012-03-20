@@ -104,17 +104,26 @@ public class InfoController : MonoBehaviour {
 		
 		isOpen = true;
 		
-		UpdateInfoOptions(furnitureData);		
-	}
-	
-	public void UpdateInfoOptions(InformacoesMovel furnitureData) {
 		SetInfo(furnitureData);
 		item = GameObject.FindGameObjectWithTag("MovelSelecionado");
 		ResolveCheckBoxColors();
 		ResolveCheckBoxTops();
 		ResolveCheckBoxDoorSide();
 		ResolveCheckBoxTextures();
-		ReplaceCheckBoxes();		
+		ReplaceCheckBoxes();			
+	}
+	
+	public void UpdateInfo(InformacoesMovel furnitureData) {
+		SetInfo(furnitureData);
+		item = furnitureData.gameObject;
+		ResolveCheckBoxColors();
+		ResolveCheckBoxTops();
+		ResolveCheckBoxDoorSide();
+		ResolveCheckBoxTextures();
+		TweenPlayerButton btn = panelInfo.GetComponentInChildren<TweenPlayerButton>();
+		btn.SendMessage("OnClick");
+		ReplaceCheckBoxes();			
+		btn.SendMessage("OnClick");
 	}
 	
 	public void Close (){

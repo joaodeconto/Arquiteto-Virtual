@@ -10,6 +10,10 @@ public class ClickCategory : MonoBehaviour {
 		int sp = System.Convert.ToInt32(separator);
 		GameObject item = transform.parent.GetComponent<CatalogCategoryButtonHandler>().item;
 		Transform catalogItem = transform.parent.GetComponent<CatalogCategoryButtonHandler>().offsetCatalogItem;
+		Camera itemCameraTarget = catalogItem.GetComponent<CatalogItemButtonHandler>().cameraTarget;
+		Vector3 posCamItem = itemCameraTarget.transform.position;
+		catalogItem.GetComponent<CatalogItemButtonHandler>().cameraTarget.transform.position = 
+			new Vector3(11.25f, -0.125f, posCamItem.z);
 		catalogItem.GetComponent<CatalogItemButtonHandler>().CallItems(sp, item);
 		if (!catalogCategoryButtonHandler.isClicked) {
 			catalogCategoryButtonHandler.tweenPlayerButton.Play();

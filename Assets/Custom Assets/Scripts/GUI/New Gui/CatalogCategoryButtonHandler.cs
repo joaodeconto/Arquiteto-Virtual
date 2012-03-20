@@ -47,7 +47,7 @@ public class CatalogCategoryButtonHandler : MonoBehaviour {
 	}
 	
 	void Update () {
-		if (Input.GetMouseButtonUp(0) && isClicked) {
+		if (Input.GetMouseButtonDown(0) && isClicked) {
 			if (!cameraGUIController.ClickInGUI()) {
 				tweenPlayerButton.Play();
 				isClicked = false;

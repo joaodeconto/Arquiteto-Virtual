@@ -58,5 +58,21 @@ public class CatalogItemButtonHandler : MonoBehaviour {
 			}
 			++j;
 		}
+//		
+//		Vector3 posBottomRight = Vector3.one;
+//		print("posBottomRight (OLD): " + posBottomRight);
+//		if (j == 1) {
+//			posBottomRight.y = 0.05f;
+//		} else if (j == 2) {
+//			posBottomRight.y = -0.02f;
+//		} else if (j == 3) {
+//			posBottomRight.y = -0.50f;
+//		} else {
+//			posBottomRight.y = -0.75f;
+//		}
+//		print("posBottomRight (NEW): " + posBottomRight);
+//		
+//		cameraTarget.GetComponent<UIViewport>().bottomRight.transform.position = 
+//			new Vector3(posBottomRight.x, posBottomRight.y, posBottomRight.z);
 	}
 }

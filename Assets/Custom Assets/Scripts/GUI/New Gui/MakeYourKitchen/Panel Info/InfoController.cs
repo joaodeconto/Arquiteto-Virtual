@@ -130,6 +130,10 @@ public class InfoController : MonoBehaviour {
 	public void Close (){
 		
 		TweenPlayerButton btn = panelInfo.GetComponentInChildren<TweenPlayerButton>();
+		if (btn == null)
+		{
+			return;
+		}
 		
 		if (btn.IsActive)
 		{

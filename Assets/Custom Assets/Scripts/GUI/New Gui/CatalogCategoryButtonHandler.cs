@@ -30,9 +30,9 @@ public class CatalogCategoryButtonHandler : MonoBehaviour {
 			newItem.transform.parent = transform;
 			newItem.transform.localPosition = new Vector3(0, (i * -160), 0);
 			newItem.transform.localScale = item.transform.localScale;
-			newItem.AddComponent<TweenPlayerButton>();
-			TweenPlayerButton tpb = newItem.GetComponent<TweenPlayerButton>();
-			tpb.ApplyTweenPlayerButton(tweenPlayerButton);
+//			newItem.AddComponent<TweenPlayerButton>();
+//			TweenPlayerButton tpb = newItem.GetComponent<TweenPlayerButton>();
+//			tpb.ApplyTweenPlayerButton(tweenPlayerButton);
 			newItem.AddComponent<ClickCategory>();
 			newItem.GetComponent<ClickCategory>().catalogCategoryButtonHandler = this;
 			foreach (UISprite sprite in newItem.GetComponentsInChildren<UISprite>()) {

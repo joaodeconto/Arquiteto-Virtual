@@ -32,8 +32,7 @@ public class WallSizeSliderHandler : MonoBehaviour {
 			
 			TooltipHandler tipHandler = objectLabel.AddComponent<TooltipHandler> ();
 			tipHandler.gameObject = objectLabel;
-			tipHandler.SetTooltip (I18n.t (TooltipString));
-			
+			tipHandler.SetTooltip (I18n.t (TooltipString));	
 		}
 	}
 	
@@ -42,11 +41,11 @@ public class WallSizeSliderHandler : MonoBehaviour {
 		switch(sliderWallMeasureType)
 		{
 			case SliderWallMeasureType.Depth:
-				wallBuilder.WallDepth = (int)Mathf.Max(wallBuilder.MinWallDepth, val * wallBuilder.MaxWallDepth);
+				wallBuilder.WallDepth = (int)(wallBuilder.MinWallDepth + val * ( wallBuilder.MaxWallDepth - wallBuilder.MinWallDepth ) );
 				label.text = wallBuilder.WallDepth + "m";
 				break;
 			case SliderWallMeasureType.Width:
-				wallBuilder.WallWidth = (int)Mathf.Max (wallBuilder.MinWallWidth, val * wallBuilder.MaxWallWidth);	
+				wallBuilder.WallWidth = (int)(wallBuilder.MinWallWidth + val * ( wallBuilder.MaxWallWidth - wallBuilder.MinWallWidth ) );	
 				label.text = wallBuilder.WallWidth + "m";
 				break;
 		}

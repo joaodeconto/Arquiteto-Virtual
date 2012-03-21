@@ -134,9 +134,15 @@ public class CameraController : MonoBehaviour {
 	{
 		SnapBehaviour.DeactivateAll ();
 		
-		foreach (Transform child in GameObject.Find("GUI").transform) {
+		GameObject panelFloor = GameObject.Find("Panel Floor");
+		firstPersonCamera.GetComponent<ColliderControl>().IsPanelFloor = 
+			panelFloor != null ? true : false;
+		
+		foreach (Transform child in GameObject.Find("GUI").GetComponentsInChildren<Transform>()) {
 			child.gameObject.SetActiveRecursively(false);
 		}
+		
+		GameObject.Find("GUI/Lists").SetActiveRecursively(false);
 		
 		//Swap cameras
 		mainCamera.gameObject.SetActiveRecursively(false);

@@ -114,7 +114,8 @@ public class SnapBehaviour : MonoBehaviour {
 				return;//Ignore Grid			
 				
 			if (hit.transform.tag == "ParedeParent" ||
-			    hit.transform.tag == "ChaoParent"){
+			    hit.transform.tag == "ChaoParent" ||
+				hit.transform.tag == "TetoParent"){
 				
 				if (GetComponent<InformacoesMovel>().tipoMovel == TipoMovel.FIXO) {
 	           		transform.position = (hit.point.x * transform.parent.right)	+ 
@@ -154,7 +155,7 @@ public class SnapBehaviour : MonoBehaviour {
 		//need to refresh wasDragged 
 		wasDragged = false;
 		
-		Invoke("VerifyGround",0.4f);
+		Invoke("VerifyGround",0.2f);
 	}
 	
 	void VerifyGround(){
@@ -212,7 +213,13 @@ public class SnapBehaviour : MonoBehaviour {
 					nearestAvailableGround = groundPiece;
 				}
 			}
-			this.transform.position  = nearestAvailableGround.transform.position;
+			if (GetComponent<InformacoesMovel>().tipoMovel == TipoMovel.FIXO) {
+				this.transform.position  = nearestAvailableGround.transform.position;
+			} else {
+				Vector3 positionMobile = nearestAvailableGround.transform.position;
+				positionMobile.y = this.transform.position.y;
+				this.transform.position  = positionMobile;
+			}
 		}
 	}
 }

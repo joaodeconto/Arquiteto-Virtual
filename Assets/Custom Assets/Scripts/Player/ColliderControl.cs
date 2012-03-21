@@ -78,7 +78,7 @@ public class ColliderControl : MonoBehaviour {
 			SnapBehaviour.ActivateAll();
 			cameraController.mainCamera.gameObject.SetActiveRecursively(true);
 			cameraController.setFirstPerson = false;
-			foreach (Transform child in GameObject.Find("GUI").transform) {
+			foreach (Transform child in GameObject.Find("GUI").GetComponentsInChildren<Transform>()) {
 				child.gameObject.SetActiveRecursively(true);
 			}
 			Disable();

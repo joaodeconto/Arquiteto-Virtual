@@ -303,7 +303,7 @@ public class GuiDescription : MonoBehaviour, GuiBase {
 						
 						SomClique.Play();
 						
-						furnitureData.ToogleDoorSide();
+						furnitureData.ToggleDoorSide();
 					
 						UpdateData(furnitureData);
 					

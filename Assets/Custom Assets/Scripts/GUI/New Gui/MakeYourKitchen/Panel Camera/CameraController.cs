@@ -134,7 +134,7 @@ public class CameraController : MonoBehaviour {
 	{
 		SnapBehaviour.DeactivateAll ();
 		
-		foreach (Transform child in GameObject.Find("GUI").transform) {
+		foreach (Transform child in GameObject.Find("GUI").GetComponentsInChildren<Transform>()) {
 			child.gameObject.SetActiveRecursively(false);
 		}
 		

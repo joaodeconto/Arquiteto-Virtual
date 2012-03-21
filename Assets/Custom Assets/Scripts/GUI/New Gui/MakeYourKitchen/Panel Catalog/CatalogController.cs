@@ -4,8 +4,6 @@ using System.Collections.Generic;
 public class CatalogController : MonoBehaviour
 {
 	public GameObject[] everything;
-	public GameObject extras;
-	public GameObject extraBtnMatrix;
 	
 	// Use this for initialization of the static classes
 	void Start ()
@@ -29,8 +27,6 @@ public class CatalogController : MonoBehaviour
 		RemoveGround ();
 		RemoveWalls ();
 		RemoveRoof ();
-		
-		InitializeExtras ();
 	}
 	
 	public void LoadObjects (int id)
@@ -95,37 +91,6 @@ public class CatalogController : MonoBehaviour
 		if (quinas.Length > 0) {
 			foreach (GameObject corner in quinas)
 				Destroy (corner);
-		}
-	}
-
-	private void InitializeExtras ()
-	{
-		if (extras == null)
-		{
-			Debug.LogWarning ("Não foi associado o prefab de extras");
-			return;	
-		}
-		
-		int i = 0;
-		foreach (Transform extraModule in extras.transform) {
-			GameObject newItem = Instantiate(extraBtnMatrix) as GameObject;
-			newItem.name = extraBtnMatrix.name + " " + i;
-			newItem.GetComponent<TooltipHandler>().SetTooltip(Line.CurrentLine.categories[i].Name);
-//			newItem.GetComponent<UIDragCamera>().target = cameraTarget;
-//			newItem.GetComponent<UIDragCamera>().rootForBounds = rootForBounds;
-			newItem.transform.parent = extraBtnMatrix.transform.parent;
-			newItem.transform.localPosition = new Vector3(0, (i * -160), 0);
-			newItem.transform.localScale = extraBtnMatrix.transform.localScale;
-			newItem.AddComponent<ClickCategory>();
-//			newItem.GetComponent<ClickCategory>().catalogCategoryButtonHandler = this;
-			foreach (UISprite sprite in newItem.GetComponentsInChildren<UISprite>()) {
-				if (sprite.name.Equals("UISprite")) {
-					sprite.spriteName = extraModule.name;
-					sprite.MakePixelPerfect();
-					sprite.transform.localPosition = new Vector3(0, 0, -0.1f);
-				}
-			}
-			++i;
 		}
 	}
 }

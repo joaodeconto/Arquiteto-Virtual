@@ -5,15 +5,19 @@ public class CatalogExtrasButtonHandler : MonoBehaviour {
 	
 	public GameObject item;
 	public Camera cameraTarget;
+	public Camera camera3d;
 	public Transform rootForBounds;
+	public TweenPlayerButton tweenPlayerButton;
 	public GameObject extras;
 	
-	private Camera camera3d;
+	public bool isClicked { get; set; }
 	
-	// Use this for initialization
-	void Start () {
-		camera3d = GameObject.FindWithTag("MainCamera").camera;
-		Invoke("CatalogExtras", 0.1f);
+	private CameraGUIController cameraGUIController;
+	
+	void Start ()
+	{
+		cameraGUIController = GameObject.FindWithTag ("GameController").GetComponentInChildren<CameraGUIController> ();
+		Invoke ("CatalogExtras", 0.1f);
 	}
 	
 	void CatalogExtras () {
@@ -31,14 +35,25 @@ public class CatalogExtrasButtonHandler : MonoBehaviour {
 			newItem.AddComponent<ClickItem>();
 			newItem.GetComponent<ClickItem>().item = extra.gameObject;
 			newItem.GetComponent<ClickItem>().camera = camera3d;
-//			foreach (UISprite sprite in newItem.GetComponentsInChildren<UISprite>()) {
-//				if (sprite.name.Equals("UISprite")) {
-//					sprite.spriteName = extra.imageReference;
-//					sprite.MakePixelPerfect();
-//					sprite.transform.localPosition = new Vector3(0, 0, -0.1f);
-//				}
-//			}
+			foreach (UISprite sprite in newItem.GetComponentsInChildren<UISprite>()) {
+				if (sprite.name.Equals("UISprite")) {
+//					sprite.spriteName = extra.GetComponent<InformacoesMovel>().Codigo;
+					sprite.spriteName = extra.name;
+					sprite.MakePixelPerfect();
+					sprite.transform.localPosition = new Vector3(0, 0, -5f);
+				}
+			}
 			++i;
+		}
+	}
+	
+	void Update ()
+	{
+		if (Input.GetMouseButtonDown (0) && isClicked) {
+			if (!cameraGUIController.ClickInGUI ()) {
+				tweenPlayerButton.Play ();
+				isClicked = false;
+			}
 		}
 	}
 }

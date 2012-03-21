@@ -191,12 +191,12 @@ public class SnapBehaviour : MonoBehaviour {
 				if(hit.transform.tag == "ChaoParent" || hit.transform.tag == "ParedeParent"){
 					++foundGround;
 				} else {
-					Debug.Log(hit.transform.tag);	
+//					Debug.Log(hit.transform.tag);	
 				}
 			}
 			else
 			{
-				Debug.LogError ("Whata? Não pegou em nada?");
+//				Debug.LogError ("Whata? Não pegou em nada?");
 			}
 		}
 //		Debug.Break();

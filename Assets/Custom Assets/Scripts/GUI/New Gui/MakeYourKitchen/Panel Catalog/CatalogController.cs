@@ -16,7 +16,7 @@ public class CatalogController : MonoBehaviour
 
 		/* Combine meshs for while */
 		
-		/*MeshUtils.CombineMesh (GameObject.Find ("ParentChao").transform, true);
+		MeshUtils.CombineMesh (GameObject.Find ("ParentChao").transform, true);
 		MeshUtils.CombineMesh (GameObject.Find ("ParedesBack").transform, true);
 		MeshUtils.CombineMesh (GameObject.Find ("ParedesFront").transform, true);
 		MeshUtils.CombineMesh (GameObject.Find ("ParedesLeft").transform, true);
@@ -26,7 +26,7 @@ public class CatalogController : MonoBehaviour
 		Destroy (GameObject.FindWithTag ("Grid"));
 		RemoveGround ();
 		RemoveWalls ();
-		RemoveRoof ();*/
+		RemoveRoof ();
 	}
 	
 	public void LoadObjects (int id)

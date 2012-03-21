@@ -58,7 +58,7 @@ public class Painter: MonoBehaviour {
 
 		buttonStyle = new GUIStyle("button");
 		buttonStyle.normal.textColor = Color.white;
-		buttonStyle.fontSize = ScreenUtils.ScaledInt(10);
+		buttonStyle.fontSize = ScreenUtils.ScaledInt(14);
 		
 		cameraGUIController = GameObject.Find("CameraController").GetComponentInChildren<CameraGUIController> ();
 	}
@@ -228,7 +228,7 @@ public class Painter: MonoBehaviour {
 			rectWindow.x = Screen.width - rectWindow.width;
 			GUI.BeginGroup(rectWindow, nameObject, groupStyle);
 			color = GUIControls.RGBCircle (position, color, "", colorCircle, pickerColor, slider);
-			if (GUI.Button(rectReset, I18n.t("Branquear Objeto"), buttonStyle)) { color = Color.white; }
+			if (GUI.Button(rectReset, I18n.t("Descolorir"), buttonStyle)) { color = Color.white; }
 //			if (GUI.Button(rectGetAll, "Paint all this color")) {
 //				GameObject[] walls = GameObject.FindGameObjectsWithTag("ParedeParent");
 //				foreach (GameObject wall in walls) {

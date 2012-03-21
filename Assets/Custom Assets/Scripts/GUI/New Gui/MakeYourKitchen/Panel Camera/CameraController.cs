@@ -205,11 +205,16 @@ public class CameraController : MonoBehaviour {
 							  	wallMaterialTransparent,
 							  	wallParents.colorWallLeft,
 							   	false);
+			
+		
+			wallParents.colorWallLeft = wallParents.parentWallLeft.renderer.material.color;
+	
 		} else {
 			ChangeWallMaterial (wallParents.parentWallLeft,
 						   		wallMaterial,
 						    	wallParents.colorWallLeft,
 						    	true);
+			wallParents.colorWallLeft = wallParents.parentWallLeft.renderer.material.color;
 		}
 		
 		//paredes da direita
@@ -219,11 +224,17 @@ public class CameraController : MonoBehaviour {
 							   wallMaterialTransparent,
 							   wallParents.colorWallRight,
 							   false);
+			
+			wallParents.colorWallRight = wallParents.parentWallRight.renderer.material.color;
+			
 		} else {
 			ChangeWallMaterial (wallParents.parentWallRight,
 							   	wallMaterial,
 							   	wallParents.colorWallRight,
 							   	true);
+			
+			wallParents.colorWallRight = wallParents.parentWallRight.renderer.material.color;
+			
 		}
 
 		//paredes de atrás
@@ -232,11 +243,17 @@ public class CameraController : MonoBehaviour {
 							   	wallMaterialTransparent,
 							  	wallParents.colorWallBack,
 							   	false);
+			
+			wallParents.colorWallBack = wallParents.parentWallBack.renderer.material.color;
+			
 		} else {
 			ChangeWallMaterial (wallParents.parentWallBack,
 							   	wallMaterial,
 							   	wallParents.colorWallBack,
 							   	true);
+			
+			wallParents.colorWallBack = wallParents.parentWallBack.renderer.material.color;
+			
 		}
 		
 		//paredes de frente
@@ -246,12 +263,18 @@ public class CameraController : MonoBehaviour {
 							   	wallMaterialTransparent,
 							   	wallParents.colorWallFront,
 							   	false);
+			
+			wallParents.colorWallFront = wallParents.parentWallFront.renderer.material.color;
+			
 		} else {
 		
 			ChangeWallMaterial (wallParents.parentWallFront,
 							   	wallMaterial,
 							   	wallParents.colorWallFront,
 							   	true);
+			
+			wallParents.colorWallFront = wallParents.parentWallFront.renderer.material.color;
+			
 		}
 	}
 	
@@ -355,15 +378,13 @@ public class CameraController : MonoBehaviour {
 	private void ChangeWallMaterial (Transform wallParent, Material newMaterial, Color selectedColor, bool enableWall)
 	{	
 		if (!wallParent.renderer.material.name.Equals(newMaterial.name + " (Instance)")) {
+			print(selectedColor);
 			wallParent.renderer.material = newMaterial;
 			wallParent.renderer.material.color = selectedColor;
 			if (wallParent.collider != null) {
 				wallParent.collider.enabled = enableWall;
 			}
 		}
-		
-		selectedColor = wallParent.renderer.material.color;
-	
 	}
 	
 }

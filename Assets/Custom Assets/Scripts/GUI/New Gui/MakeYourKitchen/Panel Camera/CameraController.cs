@@ -149,6 +149,10 @@ public class CameraController : MonoBehaviour {
 		setFirstPerson = true;
 		firstPersonCamera.gameObject.SetActiveRecursively(true);
 		firstPersonCamera.GetComponent<ColliderControl>().Enable();
+		
+		//Forgive me please...
+		GameObject.Find("View UI Piso").SetActiveRecursively(false);
+		GameObject.Find ("Panel Floor").SetActiveRecursively (false);
 	}
 	
 	public void Screenshot ()

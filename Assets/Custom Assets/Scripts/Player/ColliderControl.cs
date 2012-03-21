@@ -92,6 +92,11 @@ public class ColliderControl : MonoBehaviour {
 				if (panelInfo.active)
 					panelInfo.SetActiveRecursively(false);
 			}
+			
+			//Forgive me please...
+			GameObject.Find ("View UI Piso").SetActiveRecursively (false);
+			GameObject.Find ("Panel Floor").SetActiveRecursively (false);
+			
 			gameObject.SetActiveRecursively(false);
 		}
 	}

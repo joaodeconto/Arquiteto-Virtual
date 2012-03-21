@@ -76,11 +76,13 @@ public class TweenPlayerButton : MonoBehaviour
 			
 		if (CallWhenLastTweenFinish)
 		{
-			tweensWhoCall[indexMaxValue].CallWhenFinish = "TweensAreOver";
+			if (tweensWhoCall[indexMaxValue] != null)
+				tweensWhoCall[indexMaxValue].CallWhenFinish = "TweensAreOver";
 		}
 		else
 		{
-			tweensWhoCall[indexMinValue].CallWhenFinish = "TweensAreOver";
+			if (tweensWhoCall[indexMinValue] != null)
+				tweensWhoCall[indexMinValue].CallWhenFinish = "TweensAreOver";
 		}
 		#endregion		
 		
@@ -139,6 +141,9 @@ public class TweenPlayerButton : MonoBehaviour
 		{
 			for (int i = 0; i != parallelTweensStandard.Count; ++i)
 			{
+				if (parallelTweensStandard [i] == null) {
+					Debug.LogWarning (name + " i : " + i);
+				}
 //				ValidFromValues (parallelTweensStandard [i]);
 				parallelTweensStandard [i].enabled = true;
 				parallelTweensStandard [i].Play (true);

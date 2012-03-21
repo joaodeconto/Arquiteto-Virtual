@@ -9,6 +9,7 @@ public class SelectKitchenHandler : MonoBehaviour {
 		Diamante,
 		Mirage,
 		Maxima,
+		MaximaBlack,
 		Novita,
 		Star,
 	}
@@ -38,6 +39,9 @@ public class SelectKitchenHandler : MonoBehaviour {
 				break;
 			case KitchenEnum.Maxima:
 				PlayerPrefs.SetInt ("SelectedKitchen", 6);
+				break;
+			case KitchenEnum.MaximaBlack:
+				PlayerPrefs.SetInt ("SelectedKitchen", 7);
 				break;
 		}
 		

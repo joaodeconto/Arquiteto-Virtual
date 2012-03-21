@@ -184,6 +184,10 @@ public class TweenPlayerButtonInspetor : Editor
 		{
 			for (int i = 0; i != btnTweenPlayer.parallelTweensStandard.Count; ++i)
 			{
+				if (btnTweenPlayer.parallelTweensStandard [i] == null)
+				{
+					btnTweenPlayer.parallelTweensStandard.RemoveAt (i);
+				}
 				GUILayout.BeginHorizontal ();
 				
 				GUILayout.Label ("to: " + btnTweenPlayer.parallelTweensStandard [i].to);

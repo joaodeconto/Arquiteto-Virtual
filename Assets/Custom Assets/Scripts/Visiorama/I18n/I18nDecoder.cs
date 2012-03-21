@@ -13,7 +13,21 @@ public class I18nDecoder : MonoBehaviour
 		
 		for(int i = 0; i != labels.Count;++i)
 		{
-			labels[i].text = I18n.t(labels[i].text);
+			if (labels [i] == null)
+			{
+				Debug.LogWarning (" labels[i].name: " + labels [i].name);
+				continue;
+			}
+			if (labels [i].gameObject.active == false)
+			{
+				labels[i].gameObject.active = true;
+				labels[i].text = I18n.t(labels[i].text);
+				labels [i].gameObject.active = false;
+			}
+			else
+			{
+				labels [i].text = I18n.t (labels [i].text);
+			}
 		}
 	}
 }

@@ -100,6 +100,12 @@ public class CatalogController : MonoBehaviour
 
 	private void InitializeExtras ()
 	{
+		if (extras == null)
+		{
+			Debug.LogWarning ("Não foi associado o prefab de extras");
+			return;	
+		}
+		
 		int i = 0;
 		foreach (Transform extraModule in extras.transform) {
 			GameObject newItem = Instantiate(extraBtnMatrix) as GameObject;

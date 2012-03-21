@@ -78,14 +78,14 @@ public class TweenPlayerButton : MonoBehaviour
 		{
 				Debug.LogWarning ("indexMaxValue: " + indexMaxValue);
 		
-			if (tweensWhoCall[indexMaxValue] != null)
+			if (tweensWhoCall.Count != 0 && tweensWhoCall[indexMaxValue] != null)
 				tweensWhoCall[indexMaxValue].CallWhenFinish = "TweensAreOver";
 		}
 		else
 		{
 				Debug.LogWarning ("indexMinValue: " + indexMinValue);
 				
-			if (tweensWhoCall[indexMinValue] != null)
+			if (tweensWhoCall.Count != 0 && tweensWhoCall[indexMinValue] != null)
 				tweensWhoCall[indexMinValue].CallWhenFinish = "TweensAreOver";
 		}
 		#endregion		

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class SnapBehaviour : MonoBehaviour {
-	
+		
 	#region public variables
 	public bool canSnapTop;
 	public bool canSnapBottom;
@@ -158,28 +158,28 @@ public class SnapBehaviour : MonoBehaviour {
 		Invoke("VerifyGround",0.2f);
 	}
 	
-	void VerifyGround(){
-		
+	void VerifyGround()
+	{
 		uint foundGround = 0;
 		
 		Vector3[] origins =  new Vector3[4]{new Vector3(this.collider.bounds.center.x - 
 			                                            this.collider.bounds.size.x / 4,
-						                             	10,
+						                             	2,
 			                                            this.collider.bounds.center.z - 
 			                                            this.collider.bounds.size.z / 4),
 											new Vector3(this.collider.bounds.center.x - 
 			                                            this.collider.bounds.size.x / 4,
-						                             	10,
+						                             	2,
 			                                            this.collider.bounds.center.z + 
 			                                            this.collider.bounds.size.z / 4),
 											new Vector3(this.collider.bounds.center.x + 
 			                                            this.collider.bounds.size.x / 4,
-						                             	10,
+						                             	2,
 			                                            this.collider.bounds.center.z - 
 			                                            this.collider.bounds.size.z / 4),
 											new Vector3(this.collider.bounds.center.x + 
 			                                            this.collider.bounds.size.x / 4,
-						                             	10,
+						                             	2,
 			                                            this.collider.bounds.center.z + 
 			                                            this.collider.bounds.size.z / 4)};
 				
@@ -194,6 +194,10 @@ public class SnapBehaviour : MonoBehaviour {
 					Debug.Log(hit.transform.tag);	
 				}
 			}
+			else
+			{
+				Debug.LogError ("Whata? Não pegou em nada?");
+			}
 		}
 //		Debug.Break();
 //		Debug.DebugBreak();
@@ -206,16 +210,22 @@ public class SnapBehaviour : MonoBehaviour {
 			
 			float shortestDistance = float.MaxValue;
 			float distance;
-			foreach(GameObject groundPiece in ground){
+			foreach(GameObject groundPiece in ground)
+			{
 				distance = Vector3.Distance(groundPiece.transform.position,hit.point);
-				if(distance < shortestDistance){
+				if(distance < shortestDistance)
+				{
 					shortestDistance = distance;
 					nearestAvailableGround = groundPiece;
 				}
 			}
-			if (GetComponent<InformacoesMovel>().tipoMovel == TipoMovel.FIXO) {
+			
+			if (GetComponent<InformacoesMovel>().tipoMovel == TipoMovel.FIXO)
+			{
 				this.transform.position  = nearestAvailableGround.transform.position;
-			} else {
+			} 
+			else 
+			{
 				Vector3 positionMobile = nearestAvailableGround.transform.position;
 				positionMobile.y = this.transform.position.y;
 				this.transform.position  = positionMobile;

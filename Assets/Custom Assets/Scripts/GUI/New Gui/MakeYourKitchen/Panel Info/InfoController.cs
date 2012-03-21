@@ -78,6 +78,7 @@ public class InfoController : MonoBehaviour {
 		TweenPlayerButton btn = panelInfo.GetComponentInChildren<TweenPlayerButton>();
 		btn.SendMessage("OnClick");
 		btn.SendMessage("OnClick");
+		Close();
 		panelInfo.SetActiveRecursively(false);
 		
 		selectedColorIndex = 0;
@@ -98,7 +99,7 @@ public class InfoController : MonoBehaviour {
 	}
 	
 	#region Panel info controller
-	public void Open (InformacoesMovel furnitureData){
+	public void Open (InformacoesMovel furnitureData) {
 		
 		panelInfo.SetActiveRecursively(true);
 		

@@ -157,7 +157,7 @@ public class InformacoesMovel : MonoBehaviour {
 		}
 	}
 	
-	public void ToogleDoorSide (){
+	public GameObject ToggleDoorSide (){
 		
 		string nameRegexPrefix = Regex.Match(this.name,".*(?=esquerda|direita)").Value;
 		string patternToFind = "";
@@ -172,7 +172,7 @@ public class InformacoesMovel : MonoBehaviour {
 			patternToFind = nameRegexPrefix + "direita.*" + typeTampoRegexPrefix;
 		} else {
 			Debug.LogError("Whata?!");
-			return;
+			return null;
 		}
 		
 //		Debug.LogError("patternToFind: " + patternToFind);
@@ -192,12 +192,11 @@ public class InformacoesMovel : MonoBehaviour {
 		List<GameObject> furniture  = categories[categoryIndex].Furniture;
 		foreach(GameObject mobile in furniture){
 			if(Regex.Match(mobile.name, patternToFind).Success){
-				Clone(mobile,this.GetComponent<InformacoesMovel>(), "Movel");
-				Destroy(this.gameObject);
-//				Debug.LogError("Chegou");
-				break;
+				return Clone(mobile,this.GetComponent<InformacoesMovel>(), "MovelSelecionado");
 			}
 		}
+		
+		return null;
 	}
 	
 	public void Colorize(Color color){
@@ -278,14 +277,15 @@ public class InformacoesMovel : MonoBehaviour {
 		}
 	}
 	
-	public void Clone(GameObject cloned, InformacoesMovel info, string tag)		{
-	
+	public GameObject Clone(GameObject cloned, InformacoesMovel info, string tag)
+	{
 		GameObject newFurniture = Instantiate(cloned,this.transform.position,this.transform.rotation) as GameObject;
 							
 		newFurniture.tag = tag;
 		newFurniture.layer = LayerMask.NameToLayer("Moveis");
 		
-		foreach (Animation anim in newFurniture.GetComponentsInChildren<Animation>()) {
+		foreach (Animation anim in newFurniture.GetComponentsInChildren<Animation>())
+		{
 			anim.Stop();
 			anim.playAutomatically = false;
 		}
@@ -303,6 +303,7 @@ public class InformacoesMovel : MonoBehaviour {
 		}
 		newFurniture.transform.parent = GameObject.Find("Moveis GO").transform;
 		Destroy(this.gameObject);
+		return newFurniture;
 	}
 	
 	public GameObject CloneGameObject(GameObject cloned, InformacoesMovel info, string tag)		{

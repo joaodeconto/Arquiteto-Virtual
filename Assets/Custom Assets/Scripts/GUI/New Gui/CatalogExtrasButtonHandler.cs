@@ -37,8 +37,8 @@ public class CatalogExtrasButtonHandler : MonoBehaviour {
 			newItem.GetComponent<ClickItem>().camera = camera3d;
 			foreach (UISprite sprite in newItem.GetComponentsInChildren<UISprite>()) {
 				if (sprite.name.Equals("UISprite")) {
-//					sprite.spriteName = extra.GetComponent<InformacoesMovel>().Codigo;
-					sprite.spriteName = extra.name;
+					sprite.spriteName = extra.GetComponent<InformacoesMovel>().Codigo;
+//					sprite.spriteName = extra.name;
 					sprite.MakePixelPerfect();
 					sprite.transform.localPosition = new Vector3(0, 0, -5f);
 				}

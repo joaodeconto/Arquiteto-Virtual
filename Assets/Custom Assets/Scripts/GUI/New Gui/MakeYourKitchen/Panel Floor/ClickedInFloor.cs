@@ -20,7 +20,7 @@ public class ClickedInFloor : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void OnGUI () {
 		if (Input.GetMouseButtonDown(0)) {
 			if (!cameraGUIController.ClickInGUI()){
 				if (GUIPanelFloor.active) {
@@ -29,7 +29,7 @@ public class ClickedInFloor : MonoBehaviour {
 				}
 			}
 		}
-		if (MouseUtils.ItemMouseButtonDoubleClickDown(0, 0.3f)) {
+		if (MouseUtils.GUIMouseButtonDoubleClick(0)) {
 			if (!cameraGUIController.ClickInGUI()){
 				Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit = new RaycastHit();

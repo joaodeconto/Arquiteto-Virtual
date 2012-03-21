@@ -186,7 +186,7 @@ public class SnapBehaviour : MonoBehaviour {
 		Ray ray;
 		foreach(Vector3 origin in origins){
 			ray = new Ray(origin, Vector3.down);
-			Debug.DrawRay(ray.origin, ray.direction * 100, Color.cyan);
+//			Debug.DrawRay(ray.origin, ray.direction * 100, Color.cyan);
 			if(Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.NameToLayer("Cenario"))){			
 				if(hit.transform.tag == "ChaoParent" || hit.transform.tag == "ParedeParent"){
 					++foundGround;
@@ -199,8 +199,8 @@ public class SnapBehaviour : MonoBehaviour {
 				Debug.LogError ("Whata? Não pegou em nada?");
 			}
 		}
-		Debug.Break();
-		Debug.DebugBreak();
+//		Debug.Break();
+//		Debug.DebugBreak();
 		
 		Debug.Log("foundGround: " + foundGround.ToString());
 		if(foundGround != 4){

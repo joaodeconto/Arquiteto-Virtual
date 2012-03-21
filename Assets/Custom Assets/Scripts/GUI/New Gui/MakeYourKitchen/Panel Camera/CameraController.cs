@@ -47,7 +47,7 @@ public class CameraController : MonoBehaviour {
 		
 		//NGUI Monkey patch gonna patch...
 		mainCamera.transform.RotateAround(mainCamera.transform.right, 0.2f);//It's Rad measure
-		mainCamera.transform.position 		 	 = new Vector3 (WallBuilder.ROOT.x - 0.5f, 2.5f, WallBuilder.ROOT.z - 5f);
+		mainCamera.transform.position 		 	 = new Vector3 (WallBuilder.ROOT.x, 1.7f, WallBuilder.ROOT.z - 3.6f);
 		firstPersonCamera.transform.position = new Vector3 (WallBuilder.ROOT.x		 , 1.5f, WallBuilder.ROOT.z);
 		
 		wallParents = new WallsParents ();

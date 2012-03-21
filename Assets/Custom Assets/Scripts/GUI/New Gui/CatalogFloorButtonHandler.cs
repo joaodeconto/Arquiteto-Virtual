@@ -32,13 +32,13 @@ public class CatalogFloorButtonHandler : MonoBehaviour {
 			newItem.transform.localScale = item.transform.localScale;
 			newItem.AddComponent<ClickFloor>();
 			newItem.GetComponent<ClickFloor>().textureFloor = floor.texture;
-//			foreach (UISprite sprite in newItem.GetComponentsInChildren<UISprite>()) {
-//				if (sprite.name.Equals("UISprite")) {
-//					sprite.spriteName = floor.texture.name;
-//					sprite.MakePixelPerfect();
-//					sprite.transform.localPosition = new Vector3(0, 0, -0.1f);
-//				}
-//			}
+			foreach (UISprite sprite in newItem.GetComponentsInChildren<UISprite>()) {
+				if (sprite.name.Equals("UISprite")) {
+					sprite.spriteName = floor.texture.name;
+					sprite.MakePixelPerfect();
+					sprite.transform.localPosition = new Vector3(0, 0, -0.1f);
+				}
+			}
 			++i;
 		}
 	}

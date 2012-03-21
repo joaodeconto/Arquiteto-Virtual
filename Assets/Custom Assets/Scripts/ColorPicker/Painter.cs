@@ -4,6 +4,7 @@ using System;
 using Visiorama.Utils;
 
 public class Painter: MonoBehaviour {
+	public Texture2D background;
 	public Texture2D colorCircle;
 	public Color color = Color.white;
 	public GUIStyle pickerColor;
@@ -27,7 +28,7 @@ public class Painter: MonoBehaviour {
 	
 		ScreenUtils.Initialize(1024, 640);
 
-		rectWindow = ScreenUtils.ScaledRect(200, 24, 120, 320);
+		rectWindow = ScreenUtils.ScaledRect(Screen.width - 120, 24, 120, 320);
 		//não precisa usar ScreenUtils, dentro da função isso já está sendo feito
 		position = new Vector2(10, 30);
 		//rectReset = ScreenUtils.ScaledRect(0, 100, 100, 30);
@@ -50,13 +51,14 @@ public class Painter: MonoBehaviour {
 		dropperBool = false;
 		tagObject = "";
 
-		groupStyle = new GUIStyle("box");
+		groupStyle = new GUIStyle();
+		groupStyle.normal.background = background;
 		groupStyle.normal.textColor = Color.white;
 		groupStyle.fontSize = ScreenUtils.ScaledInt(10);
 
 		buttonStyle = new GUIStyle("button");
 		buttonStyle.normal.textColor = Color.white;
-		buttonStyle.fontSize = ScreenUtils.ScaledInt(10);
+		buttonStyle.fontSize = ScreenUtils.ScaledInt(14);
 		
 		cameraGUIController = GameObject.Find("CameraController").GetComponentInChildren<CameraGUIController> ();
 	}
@@ -146,7 +148,7 @@ public class Painter: MonoBehaviour {
 					}
 				} else dropperBoolLast = false;
 			}
-			if (MouseUtils.GUIMouseButtonDoubleClickDown(0, 0.3f)) {
+			if (MouseUtils.GUIMouseButtonDoubleClick(0)) {
 				if (!dropperBoolLast) {
 					bool breaker = false;
 					if (render != null) {
@@ -156,12 +158,12 @@ public class Painter: MonoBehaviour {
 					if (!breaker) {
 						Ray ray = transform.parent.camera.ScreenPointToRay(Input.mousePosition);
 						RaycastHit hit;
-						rectWindow.x = Input.mousePosition.x;
-						if (rectWindow.x > Screen.width - rectWindow.width)
-							rectWindow.x -= rectWindow.width;
-						rectWindow.y = Screen.height - Input.mousePosition.y;
-						if (rectWindow.y > Screen.height - rectWindow.height)
-							rectWindow.y -= rectWindow.height;
+//						rectWindow.x = Input.mousePosition.x;
+//						if (rectWindow.x > Screen.width - rectWindow.width)
+//							rectWindow.x -= rectWindow.width;
+//						rectWindow.y = Screen.height - Input.mousePosition.y;
+//						if (rectWindow.y > Screen.height - rectWindow.height)
+//							rectWindow.y -= rectWindow.height;
 						if (Physics.Raycast(ray, out hit)) {
 							foreach (string tag in tags) {
 								if (hit.transform.tag == tag) {
@@ -223,9 +225,10 @@ public class Painter: MonoBehaviour {
 		else { if (!Screen.showCursor) Screen.showCursor = true; }
 
 		if (render != null) {
+			rectWindow.x = Screen.width - rectWindow.width;
 			GUI.BeginGroup(rectWindow, nameObject, groupStyle);
 			color = GUIControls.RGBCircle (position, color, "", colorCircle, pickerColor, slider);
-			if (GUI.Button(rectReset, I18n.t("Branquear Objeto"), buttonStyle)) { color = Color.white; }
+			if (GUI.Button(rectReset, I18n.t("Descolorir"), buttonStyle)) { color = Color.white; }
 //			if (GUI.Button(rectGetAll, "Paint all this color")) {
 //				GameObject[] walls = GameObject.FindGameObjectsWithTag("ParedeParent");
 //				foreach (GameObject wall in walls) {

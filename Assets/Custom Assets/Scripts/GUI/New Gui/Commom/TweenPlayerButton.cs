@@ -47,8 +47,8 @@ public class TweenPlayerButton : MonoBehaviour
 		int indexMaxValue = 0;
 		int indexMinValue = 0;
 		
-		float maxTime = float.MinValue;
-		float minTime = float.MaxValue;
+		MaxDuration = float.MinValue;
+		MinDuration = float.MaxValue;
 		
 		#region validate tweens
 		for (int i = 0; i != parallelTweensLength; ++i)
@@ -59,14 +59,14 @@ public class TweenPlayerButton : MonoBehaviour
 				continue;
 			}
 					
-			if (currentTween.duration > maxTime)
+			if (currentTween.duration > MaxDuration)
 			{
-				MaxDuration = maxTime = currentTween.duration;
+				MaxDuration = currentTween.duration;
 				indexMaxValue = i;
 			}
-			else if (currentTween.duration < minTime)
+			else if (currentTween.duration < MinDuration)
 			{
-				MinDuration = minTime = currentTween.duration;
+				MinDuration = currentTween.duration;
 				indexMinValue = i;
 			}
 		
@@ -76,11 +76,17 @@ public class TweenPlayerButton : MonoBehaviour
 			
 		if (CallWhenLastTweenFinish)
 		{
-			tweensWhoCall[indexMaxValue].CallWhenFinish = "TweensAreOver";
+				Debug.LogWarning ("indexMaxValue: " + indexMaxValue);
+		
+			if (tweensWhoCall[indexMaxValue] != null)
+				tweensWhoCall[indexMaxValue].CallWhenFinish = "TweensAreOver";
 		}
 		else
 		{
-			tweensWhoCall[indexMinValue].CallWhenFinish = "TweensAreOver";
+				Debug.LogWarning ("indexMinValue: " + indexMinValue);
+				
+			if (tweensWhoCall[indexMinValue] != null)
+				tweensWhoCall[indexMinValue].CallWhenFinish = "TweensAreOver";
 		}
 		#endregion		
 		
@@ -139,6 +145,9 @@ public class TweenPlayerButton : MonoBehaviour
 		{
 			for (int i = 0; i != parallelTweensStandard.Count; ++i)
 			{
+				if (parallelTweensStandard [i] == null) {
+					Debug.LogWarning (name + " i : " + i);
+				}
 //				ValidFromValues (parallelTweensStandard [i]);
 				parallelTweensStandard [i].enabled = true;
 				parallelTweensStandard [i].Play (true);

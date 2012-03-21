@@ -42,6 +42,12 @@ public class I18nDecoderInspector : Editor
 		if (decoder.labels.Count != 0) {
 			for (int i = 0; i != decoder.labels.Count; ++i)
 			{
+				if(decoder.labels[i] == null || decoder.labels [i].gameObject == null)
+				{
+					decoder.labels.RemoveAt (i);
+					break;
+				}
+			
 				GUILayout.BeginHorizontal();
 					GUILayout.Label(decoder.labels[i].gameObject.name + " - "+ decoder.labels[i].text);
 					decoder.labels[i] = EditorGUILayout.ObjectField(decoder.labels[i],

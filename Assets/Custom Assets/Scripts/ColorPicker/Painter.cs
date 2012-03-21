@@ -21,6 +21,7 @@ public class Painter: MonoBehaviour {
 	private bool dropperBoolLast, clicked;
 	private string nameObject, tagObject;
 	private GUIStyle groupStyle, buttonStyle, labelStyle;
+	private CameraGUIController cameraGUIController;
 
 	void Start () {
 	
@@ -56,6 +57,8 @@ public class Painter: MonoBehaviour {
 		buttonStyle = new GUIStyle("button");
 		buttonStyle.normal.textColor = Color.white;
 		buttonStyle.fontSize = ScreenUtils.ScaledInt(10);
+		
+		cameraGUIController = GameObject.Find("CameraController").GetComponentInChildren<CameraGUIController> ();
 	}
 
 	void  OnGUI (){
@@ -82,6 +85,7 @@ public class Painter: MonoBehaviour {
 		GUI.depth = 1;
 		if (dropperBool) {
 			if (Input.GetMouseButtonUp(0)) {
+						
 				if (!MouseUtils.MouseClickedInArea(rectWindow)) {
 					Ray ray = transform.parent.camera.ScreenPointToRay(Input.mousePosition);
 					RaycastHit hit;
@@ -113,6 +117,12 @@ public class Painter: MonoBehaviour {
 			if (Input.GetMouseButtonDown(0) &&
 				!clicked) {
 				if (!dropperBoolLast) {
+					
+					//Testa se clicou dentro de alguma coisa da gui
+					//se clicou sai do método
+					if (cameraGUIController.ClickInGUI ())
+						return;
+				
 					bool breaker = false;
 					if (render != null) {
 						if (MouseUtils.MouseClickedInArea(rectWindow)) breaker = true;

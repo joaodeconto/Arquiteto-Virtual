@@ -41,6 +41,8 @@ public class ColliderControl : MonoBehaviour {
 				++i;
 			}
 		}
+		
+		cameraController.interfaceGUI.uiRootFPS.SetActiveRecursively (true);
 	}
 	
 	// Update is called once per frame
@@ -75,6 +77,7 @@ public class ColliderControl : MonoBehaviour {
 		GameObject teto = GameObject.Find("ParentTeto");
 		if  (teto != null && teto.renderer != null)
 			teto.renderer.enabled = teto.collider.enabled = true;
+					
 	}
 	
 	void Update () {
@@ -83,6 +86,8 @@ public class ColliderControl : MonoBehaviour {
 			cameraController.mainCamera.gameObject.SetActiveRecursively(true);
 			cameraController.setFirstPerson = false;
 			cameraController.interfaceGUI.main.SetActiveRecursively(true);
+			cameraController.interfaceGUI.uiRootFPS.SetActiveRecursively (false);
+			
 			Disable();
 			if (!IsPanelFloor) {
 				cameraController.interfaceGUI.viewUIPiso.SetActiveRecursively(false);

@@ -7,9 +7,11 @@ using System.Text.RegularExpressions;
 public class CameraController : MonoBehaviour {
 	
 	[System.Serializable]
-	public class InterfaceGUI {
+	public class InterfaceGUI
+	{
 		public GameObject main;
 		public GameObject panelFloor;
+		public GameObject uiRootFPS;
 		public GameObject viewUIPiso;
 		public GameObject panelInfo;
 		public GameObject lists;
@@ -105,11 +107,7 @@ public class CameraController : MonoBehaviour {
 			Debug.LogError ("The var RateRefreshWallsVisibility can't be lower than 0.01 seconds neither greater than 10 seconds");
 		}
 		
-		interfaceGUI.main 		= GameObject.Find("GUI/Lists").transform.parent.gameObject;
-		interfaceGUI.panelFloor = GameObject.Find("Panel Floor");
-		interfaceGUI.viewUIPiso = GameObject.Find("View UI Piso");
-		interfaceGUI.panelInfo 	= GameObject.Find("Panel Info");
-		interfaceGUI.lists 		= GameObject.Find("GUI/Lists");
+		interfaceGUI.uiRootFPS.SetActiveRecursively (false);
 		
 		InvokeRepeating("VerifyWallVisibility", rateRefreshWallsVisibility, rateRefreshWallsVisibility);
 	}
@@ -152,13 +150,14 @@ public class CameraController : MonoBehaviour {
 		SnapBehaviour.DeactivateAll ();
 		
 		firstPersonCamera.GetComponent<ColliderControl>().IsPanelFloor = 
-			interfaceGUI.panelInfo.active ? true : false;
+			 interfaceGUI.panelInfo.active ? true : false;
 		
 		interfaceGUI.lists.SetActiveRecursively(false);
 		
 		foreach (Transform child in interfaceGUI.main.GetComponentsInChildren<Transform>()) {
 			child.gameObject.SetActiveRecursively(false);
 		}
+		
 		
 		//Swap cameras
 		mainCamera.gameObject.SetActiveRecursively(false);

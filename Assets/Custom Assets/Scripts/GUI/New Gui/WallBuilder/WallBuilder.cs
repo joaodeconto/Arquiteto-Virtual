@@ -800,7 +800,7 @@ public class WallBuilder : MonoBehaviour {
 		GameObject[] pisos = GameObject.FindGameObjectsWithTag ("Chao");
 		if (pisos.Length > 0) {
 			foreach (GameObject piso in pisos)
-				Destroy (piso,1);
+				DestroyImmediate (piso);
 		}
 	}
 	
@@ -808,7 +808,7 @@ public class WallBuilder : MonoBehaviour {
 		GameObject[] ceil = GameObject.FindGameObjectsWithTag ("Teto");
 		if (ceil.Length > 0) {
 			foreach (GameObject t in ceil)
-				Destroy (t);
+				DestroyImmediate (t);
 		}
 	}
 	
@@ -816,12 +816,12 @@ public class WallBuilder : MonoBehaviour {
 		GameObject[] paredes = GameObject.FindGameObjectsWithTag ("Parede");
 		if (paredes.Length > 0) {
 			foreach (GameObject wall in paredes)
-				Destroy (wall);
+				DestroyImmediate (wall);
 		}
 		GameObject[] quinas = GameObject.FindGameObjectsWithTag ("Quina");
 		if (quinas.Length > 0) {
 			foreach (GameObject corner in quinas)
-				Destroy (corner);
+				DestroyImmediate (corner);
 		}
 	}
 	

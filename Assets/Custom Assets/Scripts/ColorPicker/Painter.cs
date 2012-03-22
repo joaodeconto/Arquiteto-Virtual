@@ -10,7 +10,7 @@ public class Painter: MonoBehaviour {
 	public GUIStyle pickerColor;
 	public GUIStyle slider;
 	public Texture2D dropper;
-	public string[] tags, objectsNames;
+	public string[] tags, categoryNames;
 	public bool dropperBool {get; private set;}
 	internal Rect rectWindow;
 	private GameObject GO;
@@ -102,10 +102,14 @@ public class Painter: MonoBehaviour {
 								color = hit.transform.renderer.material.color;
 							}
 						}
-						foreach (string name in objectsNames) {
-							string objName = name + "(Clone)";
-							if (hit.transform.name == objName) {
-								color = hit.transform.GetComponentInChildren<Renderer>().materials[0].color;
+						foreach (string categoryName in categoryNames) 
+						{
+							if ( hit.transform.gameObject.GetComponent<InformacoesMovel>() != null)
+							{
+								if (hit.transform.gameObject.GetComponent<InformacoesMovel>().Categoria == categoryName) 
+								{
+									color = hit.transform.GetComponentInChildren<Renderer>().materials[0].color;
+								}
 							}
 						}
 						if (tagObject == "MovelSelecionado") {
@@ -189,25 +193,23 @@ public class Painter: MonoBehaviour {
 									return;
 								}
 							}
-							foreach (string name in objectsNames) {
-//									int index = hit.transform.name.IndexOf("(Clone)");
-//									string objName = hit.transform.name.Remove(index);
-//									print(objName + " : " + name);
-								string objName = name + "(Clone)";
-								print (hit.transform.name + " : " + objName);
-								if (hit.transform.name == objName) {
-									GO = hit.transform.gameObject;
-									render = hit.transform.GetComponentInChildren<Renderer>();
-									tagObject = hit.transform.tag;
-									color = render.materials[0].color;
-									if (hit.transform.GetComponent<InformacoesMovel>() != null) {
+							foreach (string categoryName in categoryNames)
+							{
+//								print (hit.transform.name + " : " + categoryName);
+								if (hit.transform.GetComponent<InformacoesMovel> () != null)
+								{
+									if (hit.transform.GetComponent<InformacoesMovel> ().Categoria == categoryName)
+									{
+										GO = hit.transform.gameObject;
+										render = hit.transform.GetComponentInChildren<Renderer>();
+										tagObject = hit.transform.tag;
+										color = render.materials[0].color;
+										
 										nameObject = hit.transform.GetComponent<InformacoesMovel>().Nome;
+										
+										StartCoroutine(WaitClick(0.3f));
+										return;
 									}
-									else {
-										nameObject = "";
-									}
-									StartCoroutine(WaitClick(0.3f));
-									return;
 								}
 							}
 							render = null;

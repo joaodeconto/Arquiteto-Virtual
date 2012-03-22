@@ -157,6 +157,40 @@ public class WallBuilder : MonoBehaviour {
 			}
 		}
 	}
+	
+	public void DestroyTile ()
+	{
+		Ray ray = mainCamera.ScreenPointToRay (Input.mousePosition);
+		RaycastHit hit;
+		if (Physics.Raycast (ray, out hit)) {
+			if (hit.transform.tag == "Chao") {
+				Transform chaoDestruido = hit.transform;
+				Vector3[] direcoes = new Vector3[] { Vector3.forward, Vector3.right, Vector3.left, Vector3.back };
+				foreach (Vector3 direcao in direcoes) {
+					RaycastHit hit2;
+					if (Physics.Raycast (hit.transform.position, direcao, out hit2, 1.0f)) {
+						if (hit2.transform.tag == "Chao") {
+							Vector3[] direcoes2 = new Vector3[] { Vector3.forward, Vector3.right, Vector3.left, Vector3.back };
+							int colisores = 0;
+							foreach (Vector3 direcao2 in direcoes2) {
+								RaycastHit hit3;
+								Debug.DrawRay (hit2.transform.position, direcao2 * 1.0f, Color.blue);
+								if (Physics.Raycast (hit2.transform.position, direcao2, out hit3, 1.0f)) {
+									if (hit3.transform.tag == "Chao")
+										colisores++;
+								}
+							}
+							Debug.Log (colisores);
+							if (colisores > 1) {
+								Destroy (hit.transform.gameObject);
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 
 	public void BuildGround (){
 		RemoveGround();
@@ -756,47 +790,6 @@ public class WallBuilder : MonoBehaviour {
 							novoChao.transform.parent = parentFloor;
 							novoChao.renderer.material.color = new Color (0, 1, 0, 1);
 						}
-					}
-				}
-			}
-		}
-	}
-	
-	private void DestroyOneBlockGround ()
-	{
-		if (Input.GetMouseButtonUp (1)) {
-			Ray ray = camera.ScreenPointToRay (Input.mousePosition);
-			RaycastHit hit;
-			int chaoSemColisoes = 0;
-			if (Physics.Raycast (ray, out hit)) {
-				if (hit.transform.tag == "Chao") {
-					Transform chaoDestruido = hit.transform;
-					Destroy (hit.transform.gameObject);
-					Vector3[] direcoes = new Vector3[] { Vector3.forward, Vector3.right, Vector3.left, Vector3.back };
-					foreach (Vector3 direcao in direcoes) {
-						RaycastHit hit2;
-						if (Physics.Raycast (hit.transform.position, direcao, out hit2, 1.0f)) {
-							if (hit2.transform.tag == "Chao") {
-								Vector3[] direcoes2 = new Vector3[] { Vector3.forward, Vector3.right, Vector3.left, Vector3.back };
-								int colisores = 0;
-								foreach (Vector3 direcao2 in direcoes2) {
-									RaycastHit hit3;
-									Debug.DrawRay (hit2.transform.position, direcao2 * 1.0f, Color.blue);
-									if (Physics.Raycast (hit2.transform.position, direcao2, out hit3, 1.0f)) {
-										if (hit3.transform.tag == "Chao")
-											colisores++;
-									}
-								}
-								Debug.Log (colisores);
-								if (colisores < 2)
-									chaoSemColisoes++;
-							}
-						}
-					}
-					Debug.Log (chaoSemColisoes);
-					if (chaoSemColisoes > 0) {
-						GameObject novoChao = Instantiate (floor, chaoDestruido.position, chaoDestruido.rotation) as GameObject;
-						novoChao.transform.parent = parentFloor;
 					}
 				}
 			}

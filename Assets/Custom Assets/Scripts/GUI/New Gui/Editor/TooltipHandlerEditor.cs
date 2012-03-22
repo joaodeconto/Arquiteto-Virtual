@@ -89,10 +89,12 @@ public class TooltipHandlerEditor : Editor
 					}
 				}
 			} else {
-			GUILayout.Label ("Digit a label to appear in tooltip:");
-			tooltipHandler.label = GUILayout.TextField(tooltipHandler.label);
-			GUILayout.Space (5f);
+				GUILayout.Label ("Digit a label to appear in tooltip:");
+				tooltipHandler.label = GUILayout.TextField(tooltipHandler.label);
 			}
+			GUILayout.Space (2.5f);
+			tooltipHandler.useI18n = EditorGUILayout.Toggle ("Use I18n?", tooltipHandler.useI18n);
+			GUILayout.Space (2.5f);
 		} else {
 			GUILayout.Label ("Get Via Code with this method:\n" +
 				"non-static TooltipHandler.SetTooltip(string label);\n\n" +

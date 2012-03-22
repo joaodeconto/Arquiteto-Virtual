@@ -13,6 +13,9 @@ public class ColliderControl : MonoBehaviour {
 	}
 	
 	public void Enable () {
+		
+		Screen.lockCursor = true;
+		
 		if (GameObject.FindGameObjectsWithTag("MovelSelecionado").Length == 1) {
 			lastSelectedMobile = GameObject.FindWithTag("MovelSelecionado");
 			lastSelectedMobile.tag = "Movel";

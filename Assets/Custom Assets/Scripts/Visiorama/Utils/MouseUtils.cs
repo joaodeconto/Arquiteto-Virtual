@@ -77,7 +77,7 @@ public class MouseUtils : MonoBehaviour
 
 	private static int clickMonkeyPatch = 0;
 	
-	public static bool ItemMouseButtonDoubleClickDown (int button, float timer)
+	/*public static bool ItemMouseButtonDoubleClickDown (int button, float timer)
 	{
 		#if UNITY_STANDALONE_WIN || UNITY_WEBPLAYER
 		if (Input.GetMouseButtonDown (button)) {
@@ -107,7 +107,7 @@ public class MouseUtils : MonoBehaviour
 		}
 		#endif
 		return false;
-	}
+	}*/
 	
 	public static bool GUIMouseButtonDoubleClickDown (int button, float timer)
 	{

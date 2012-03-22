@@ -4,13 +4,17 @@ using System.Collections.Generic;
 using System;
 using System.Reflection;
 
-[AddComponentMenu("NGUI-Black Bugio/Tooltip Handler")]
+[AddComponentMenu("NGUI-Black Bugio/Tooltip Handler %#t")]
 public class TooltipHandler : MonoBehaviour
 {
-	public string label;
+	public string label = "";
 	
 	public bool getViaCode;
 	public bool getViaLabel;
+	
+	#region Via Label
+	public bool useI18n;
+	#endregion
 	
 	#region GetComponets
 	public GameObject gameObject;
@@ -25,6 +29,10 @@ public class TooltipHandler : MonoBehaviour
 	
 	private string lastLabel;
 	private bool isOver;
+	
+	void Start () {
+		label = useI18n ? I18n.t(label) : label;
+	}
 	
 	void OnHover (bool isOver)
 	{

@@ -267,7 +267,7 @@ public class GuiCamera : MonoBehaviour, GuiBase
 		//Report btn
 		if (GUI.Button (btnsExtras [2], "", extrasStyles [2])) {
 //			Debug.LogError ("Report");
-			StartCoroutine(SendReportData("http://www.visiorama360.com.br/Telasul/teste_relatorio/uploadReport.php"));
+			StartCoroutine(SendReportData("http://www.visiorama360.com.br/Telasul/uploadReport.php"));
 		}
 		//Disable walls btn
 		if (GUI.Button (btnsExtras [3], "", extrasStyles [3])) {

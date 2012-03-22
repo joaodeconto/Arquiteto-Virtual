@@ -163,7 +163,7 @@ public class CameraController : MonoBehaviour {
 	public void Report ()
 	{
 		//TODO make this method works
-		StartCoroutine(SendReportData("http://www.visiorama360.com.br/Telasul/teste_relatorio/uploadReport.php"));
+		StartCoroutine(SendReportData("http://www.visiorama360.com.br/Telasul/uploadReport.php"));
 	}
 	
 	public void ShowHideWalls ()

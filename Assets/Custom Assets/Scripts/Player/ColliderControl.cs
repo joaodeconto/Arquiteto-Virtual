@@ -82,18 +82,15 @@ public class ColliderControl : MonoBehaviour {
 			SnapBehaviour.ActivateAll();
 			cameraController.mainCamera.gameObject.SetActiveRecursively(true);
 			cameraController.setFirstPerson = false;
-			foreach (Transform child in GameObject.Find("GUI").GetComponentsInChildren<Transform>()) {
-				child.gameObject.SetActiveRecursively(true);
-			}
+			cameraController.interfaceGUI.main.SetActiveRecursively(true);
 			Disable();
 			if (!IsPanelFloor) {
-				GameObject.Find("View UI Piso").SetActiveRecursively(false);
-				GameObject.Find("Panel Floor").SetActiveRecursively(false);
+				cameraController.interfaceGUI.viewUIPiso.SetActiveRecursively(false);
+				cameraController.interfaceGUI.panelFloor.SetActiveRecursively(false);
 			}
 			if (lastSelectedMobile == null) {
-				GameObject panelInfo = GameObject.Find("Panel Info");
-				if (panelInfo.active)
-					panelInfo.SetActiveRecursively(false);
+				if (cameraController.interfaceGUI.panelInfo.active)
+					cameraController.interfaceGUI.panelInfo.SetActiveRecursively(false);
 			}
 			
 			gameObject.SetActiveRecursively(false);

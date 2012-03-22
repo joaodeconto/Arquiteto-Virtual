@@ -8,11 +8,11 @@ public class CameraController : MonoBehaviour {
 	
 	[System.Serializable]
 	public class InterfaceGUI {
-		public GameObject main = GameObject.Find("GUI/Lists").transform.parent.gameObject;
-		public GameObject panelFloor = GameObject.Find("Panel Floor");
-		public GameObject viewUIPiso = GameObject.Find("View UI Piso");
-		public GameObject panelInfo = GameObject.Find("Panel Info");
-		public GameObject lists = GameObject.Find("GUI/Lists");
+		public GameObject main;
+		public GameObject panelFloor;
+		public GameObject viewUIPiso;
+		public GameObject panelInfo;
+		public GameObject lists;
 	}
 	
 	private const string pathExportReport = "upload/export/";
@@ -104,6 +104,12 @@ public class CameraController : MonoBehaviour {
 			rateRefreshWallsVisibility = 0.1f;
 			Debug.LogError ("The var RateRefreshWallsVisibility can't be lower than 0.01 seconds neither greater than 10 seconds");
 		}
+		
+		interfaceGUI.main 		= GameObject.Find("GUI/Lists").transform.parent.gameObject;
+		interfaceGUI.panelFloor = GameObject.Find("Panel Floor");
+		interfaceGUI.viewUIPiso = GameObject.Find("View UI Piso");
+		interfaceGUI.panelInfo 	= GameObject.Find("Panel Info");
+		interfaceGUI.lists 		= GameObject.Find("GUI/Lists");
 		
 		InvokeRepeating("VerifyWallVisibility", rateRefreshWallsVisibility, rateRefreshWallsVisibility);
 	}

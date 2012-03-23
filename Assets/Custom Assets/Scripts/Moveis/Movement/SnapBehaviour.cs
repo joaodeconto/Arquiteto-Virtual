@@ -46,7 +46,7 @@ public class SnapBehaviour : MonoBehaviour {
 	}
 	
 	void Start(){
-		coolDownTime = 0.2f;
+		coolDownTime = 0.3f;
 		enableDrag = false;
         rigidbody.detectCollisions = true;
         rigidbody.mass = 1000.0f;

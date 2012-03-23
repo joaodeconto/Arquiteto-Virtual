@@ -51,9 +51,15 @@ public class Configuration : MonoBehaviour {
 	
 	public bool SaveCurrentState(string path, bool isWeb){
 				
-		GameObject[] mobiles = GameObject.FindGameObjectsWithTag("Movel");
+		List<GameObject> mobiles = new List<GameObject>(GameObject.FindGameObjectsWithTag("Movel"));
+		GameObject selectedMobile = GameObject.FindGameObjectWithTag("MovelSelecionado");
 		
-		if(mobiles == null || mobiles.Length == 0){
+		if (selectedMobile != null)
+		{
+			mobiles.Add(selectedMobile);
+		}
+		
+		if (mobiles.Count == 0){
 			Debug.LogError ("Nao ha moveis na cena");
 			return false;
 		}
@@ -70,6 +76,7 @@ public class Configuration : MonoBehaviour {
 		//Nodo móveis
 		XmlNode furnitureNode = xmlDoc.CreateElement ("moveis");
 		rootNode.AppendChild(furnitureNode);
+				
 		//Acrescentando móveis da cena
 		foreach(GameObject mobile in mobiles){
 			
@@ -122,7 +129,8 @@ public class Configuration : MonoBehaviour {
 				
 		XmlNode floorNode = xmlDoc.CreateElement("piso");
 		XmlAttribute floorIndexTextureAttr = xmlDoc.CreateAttribute("indicetextura");
-		floorIndexTextureAttr.Value = GameObject.Find("GUI").GetComponent<GuiCatalogo>().CurrentTextureIndex.ToString();
+		Transform parentTextureBtns = GameObject.Find("Lists").transform.FindChild ("View UI Piso").GetChild(0).GetChild(0);
+		floorIndexTextureAttr.Value = parentTextureBtns.GetComponent<CatalogFloorButtonHandler> ().SelectedFloorIndex.ToString();
 		floorNode.Attributes.Append(floorIndexTextureAttr);
 		sceneNode.AppendChild(floorNode);
 		
@@ -182,7 +190,7 @@ public class Configuration : MonoBehaviour {
 			}
 			++index;
 		}
-		Debug.LogError ("index: " + index);
+//		Debug.LogError ("index: " + index);
 		return index;
 	}
 	

@@ -102,7 +102,8 @@ public class CameraButtonHandler : MonoBehaviour {
 				cameraController.Zoom (-1);
 				break;
 			case CameraButtonHandlerEnum.CameraZoomPlus:
-				cameraController.Zoom (1);
+				gameObject.AddComponent<Configuration>().SaveCurrentState("scene-template-" + string.Format ("{0:yyyy-MM-dd-HH-mm-ss}", System.DateTime.Now) + ".xml", false);
+				//cameraController.Zoom (1);
 				break;
 			#endregion
 		/*

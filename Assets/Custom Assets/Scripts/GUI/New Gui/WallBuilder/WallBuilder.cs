@@ -164,30 +164,7 @@ public class WallBuilder : MonoBehaviour {
 		RaycastHit hit;
 		if (Physics.Raycast (ray, out hit)) {
 			if (hit.transform.tag == "Chao") {
-				Transform chaoDestruido = hit.transform;
-				Vector3[] direcoes = new Vector3[] { Vector3.forward, Vector3.right, Vector3.left, Vector3.back };
-				foreach (Vector3 direcao in direcoes) {
-					RaycastHit hit2;
-					if (Physics.Raycast (hit.transform.position, direcao, out hit2, 1.0f)) {
-						if (hit2.transform.tag == "Chao") {
-							Vector3[] direcoes2 = new Vector3[] { Vector3.forward, Vector3.right, Vector3.left, Vector3.back };
-							int colisores = 0;
-							foreach (Vector3 direcao2 in direcoes2) {
-								RaycastHit hit3;
-								Debug.DrawRay (hit2.transform.position, direcao2 * 1.0f, Color.blue);
-								if (Physics.Raycast (hit2.transform.position, direcao2, out hit3, 1.0f)) {
-									if (hit3.transform.tag == "Chao")
-										colisores++;
-								}
-							}
-							Debug.Log (colisores);
-							if (colisores > 1) {
-								Destroy (hit.transform.gameObject);
-								break;
-							}
-						}
-					}
-				}
+				Destroy (hit.transform.gameObject);
 			}
 		}
 	}

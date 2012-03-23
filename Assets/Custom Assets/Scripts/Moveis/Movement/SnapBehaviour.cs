@@ -10,8 +10,8 @@ public class SnapBehaviour : MonoBehaviour {
 	#endregion
 	
 	public bool collidedWithWall = false;
+	public bool wasDragged {get; private set;}
 	private bool isSelected = false;
-	private bool wasDragged = false;
 	
 	private Camera mainCamera;
 	
@@ -22,7 +22,7 @@ public class SnapBehaviour : MonoBehaviour {
 	
 	private float coolDownTime;
 	private bool enableDrag;
-		
+	
 	#region Unity Methods
 	
 	public static void ActivateAll(){
@@ -46,7 +46,7 @@ public class SnapBehaviour : MonoBehaviour {
 	}
 	
 	void Start(){
-		coolDownTime = 0.2f;
+		coolDownTime = 0.3f;
 		enableDrag = false;
         rigidbody.detectCollisions = true;
         rigidbody.mass = 1000.0f;

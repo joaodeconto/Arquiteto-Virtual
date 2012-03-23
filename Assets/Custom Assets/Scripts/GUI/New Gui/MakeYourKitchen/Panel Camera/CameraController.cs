@@ -6,6 +6,17 @@ using System.Text.RegularExpressions;
 
 public class CameraController : MonoBehaviour {
 	
+	[System.Serializable]
+	public class InterfaceGUI
+	{
+		public GameObject main;
+		public GameObject panelFloor;
+		public GameObject uiRootFPS;
+		public GameObject viewUIPiso;
+		public GameObject panelInfo;
+		public GameObject lists;
+	}
+	
 	private const string pathExportReport = "upload/export/";
 	private const string pathExportImage = "upload/images/";
 	
@@ -20,6 +31,8 @@ public class CameraController : MonoBehaviour {
 	public Material wallMaterialTransparent;
 	
 	public float rateRefreshWallsVisibility;
+	
+	public InterfaceGUI interfaceGUI;
 
 	public bool areWallsAlwaysVisible {get; private set; }
 	
@@ -94,6 +107,8 @@ public class CameraController : MonoBehaviour {
 			Debug.LogError ("The var RateRefreshWallsVisibility can't be lower than 0.01 seconds neither greater than 10 seconds");
 		}
 		
+		interfaceGUI.uiRootFPS.SetActiveRecursively (false);
+		
 		InvokeRepeating("VerifyWallVisibility", rateRefreshWallsVisibility, rateRefreshWallsVisibility);
 	}
 	
@@ -134,15 +149,15 @@ public class CameraController : MonoBehaviour {
 	{
 		SnapBehaviour.DeactivateAll ();
 		
-		GameObject panelFloor = GameObject.Find("Panel Floor");
 		firstPersonCamera.GetComponent<ColliderControl>().IsPanelFloor = 
-			panelFloor != null ? true : false;
+			 interfaceGUI.panelInfo.active ? true : false;
 		
-		foreach (Transform child in GameObject.Find("GUI").GetComponentsInChildren<Transform>()) {
+		interfaceGUI.lists.SetActiveRecursively(false);
+		
+		foreach (Transform child in interfaceGUI.main.GetComponentsInChildren<Transform>()) {
 			child.gameObject.SetActiveRecursively(false);
 		}
 		
-		GameObject.Find("GUI/Lists").SetActiveRecursively(false);
 		
 		//Swap cameras
 		mainCamera.gameObject.SetActiveRecursively(false);
@@ -157,13 +172,14 @@ public class CameraController : MonoBehaviour {
 		//GameObject.Find("cfg").GetComponent<Configuration>().SaveCurrentState("lolol",true);
 		//GameObject.Find("cfg").GetComponent<Configuration>().LoadState("teste/teste.xml",false);
 		//GameObject.Find("cfg").GetComponent<Configuration>().RunPreset(0);
+		
 		StartCoroutine ("SendScreenshotToForm", "http://www.visiorama360.com.br/Telasul/uploadScreenshot.php");
 	}
 	
 	public void Report ()
 	{
 		//TODO make this method works
-		StartCoroutine(SendReportData("http://www.visiorama360.com.br/Telasul/teste_relatorio/uploadReport.php"));
+		StartCoroutine(SendReportData("http://www.visiorama360.com.br/Telasul/uploadReport.php"));
 	}
 	
 	public void ShowHideWalls ()
@@ -280,8 +296,14 @@ public class CameraController : MonoBehaviour {
 	
 	private IEnumerator SendScreenshotToForm (string screenShotURL)
 	{
-		Transform gui = GameObject.Find("GUI").transform;
-		foreach (Transform child in gui) {
+		bool isPanelFloor = interfaceGUI.panelFloor.active ? true : false;
+		
+		bool isPanelInfo = interfaceGUI.panelInfo.active != null ? true : false;
+		
+		interfaceGUI.lists.SetActiveRecursively(false);
+		
+		Transform[] allchids = interfaceGUI.main.GetComponentsInChildren<Transform>();
+		foreach (Transform child in allchids) {
 			child.gameObject.SetActiveRecursively(false);
 		}
 		
@@ -321,9 +343,17 @@ public class CameraController : MonoBehaviour {
 			print ("Finished Uploading Screenshot"); 
 			Application.ExternalCall ("tryToDownload", pathExportImage + filename);
 		}
-	    
-		foreach (Transform child in gui) {
-			child.gameObject.SetActiveRecursively(true);
+		
+		foreach (Transform child in allchids) {
+				child.gameObject.SetActiveRecursively(true);
+		}
+		if (!isPanelFloor) {
+			interfaceGUI.viewUIPiso.SetActiveRecursively(false);
+			interfaceGUI.panelFloor.SetActiveRecursively(false);
+		}
+		if (!isPanelInfo) {
+			if (interfaceGUI.panelInfo.active)
+				interfaceGUI.panelInfo.SetActiveRecursively(false);
 		}
 	}
 	

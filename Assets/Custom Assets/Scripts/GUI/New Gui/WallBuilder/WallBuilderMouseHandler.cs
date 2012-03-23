@@ -19,5 +19,18 @@ public class WallBuilderMouseHandler : MonoBehaviour {
 				wallBuilder.CreateTile();
 			}
 		}
+		if (Input.GetMouseButtonDown(1)){
+			
+			RaycastHit hit;
+			Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+			
+			if (Physics.Raycast (ray, out hit)) {
+				if (hit.transform.gameObject.layer != LayerMask.NameToLayer("GUI")) {
+					wallBuilder.DestroyTile();
+				}
+			} else {
+				wallBuilder.DestroyTile();
+			}
+		}
 	}
 }

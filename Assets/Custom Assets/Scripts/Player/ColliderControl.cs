@@ -13,6 +13,9 @@ public class ColliderControl : MonoBehaviour {
 	}
 	
 	public void Enable () {
+		
+		Screen.lockCursor = true;
+		
 		if (GameObject.FindGameObjectsWithTag("MovelSelecionado").Length == 1) {
 			lastSelectedMobile = GameObject.FindWithTag("MovelSelecionado");
 			lastSelectedMobile.tag = "Movel";
@@ -38,6 +41,8 @@ public class ColliderControl : MonoBehaviour {
 				++i;
 			}
 		}
+		
+		cameraController.interfaceGUI.uiRootFPS.SetActiveRecursively (true);
 	}
 	
 	// Update is called once per frame
@@ -72,6 +77,7 @@ public class ColliderControl : MonoBehaviour {
 		GameObject teto = GameObject.Find("ParentTeto");
 		if  (teto != null && teto.renderer != null)
 			teto.renderer.enabled = teto.collider.enabled = true;
+					
 	}
 	
 	void Update () {
@@ -79,18 +85,17 @@ public class ColliderControl : MonoBehaviour {
 			SnapBehaviour.ActivateAll();
 			cameraController.mainCamera.gameObject.SetActiveRecursively(true);
 			cameraController.setFirstPerson = false;
-			foreach (Transform child in GameObject.Find("GUI").GetComponentsInChildren<Transform>()) {
-				child.gameObject.SetActiveRecursively(true);
-			}
+			cameraController.interfaceGUI.main.SetActiveRecursively(true);
+			cameraController.interfaceGUI.uiRootFPS.SetActiveRecursively (false);
+			
 			Disable();
 			if (!IsPanelFloor) {
-				GameObject.Find("View UI Piso").SetActiveRecursively(false);
-				GameObject.Find("Panel Floor").SetActiveRecursively(false);
+				cameraController.interfaceGUI.viewUIPiso.SetActiveRecursively(false);
+				cameraController.interfaceGUI.panelFloor.SetActiveRecursively(false);
 			}
 			if (lastSelectedMobile == null) {
-				GameObject panelInfo = GameObject.Find("Panel Info");
-				if (panelInfo.active)
-					panelInfo.SetActiveRecursively(false);
+				if (cameraController.interfaceGUI.panelInfo.active)
+					cameraController.interfaceGUI.panelInfo.SetActiveRecursively(false);
 			}
 			
 			gameObject.SetActiveRecursively(false);

@@ -23,6 +23,10 @@ public class CatalogExtrasButtonHandler : MonoBehaviour {
 	void CatalogExtras () {
 		int i = 0;
 		foreach (Transform extra in extras.transform) {
+		
+			//dá o nome da categoria dos extras Categoria
+			extra.GetComponent<InformacoesMovel>().Categoria = "Extras";			
+			
 			GameObject newItem = Instantiate(item) as GameObject;
 			string nameObject = extra.name;
 			newItem.name = nameObject;
@@ -35,6 +39,7 @@ public class CatalogExtrasButtonHandler : MonoBehaviour {
 			newItem.AddComponent<ClickItem>();
 			newItem.GetComponent<ClickItem>().item = extra.gameObject;
 			newItem.GetComponent<ClickItem>().camera = camera3d;
+			
 			foreach (UISprite sprite in newItem.GetComponentsInChildren<UISprite>()) {
 				if (sprite.name.Equals("UISprite")) {
 					sprite.spriteName = extra.GetComponent<InformacoesMovel>().Codigo;

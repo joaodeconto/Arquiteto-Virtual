@@ -47,6 +47,8 @@ public class ColliderControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	public void Disable () {
+		cameraController.interfaceGUI.uiRootFPS.SetActiveRecursively (false);
+		
 		GameObject[] moveis = GameObject.FindGameObjectsWithTag("Movel");
 		if (moveis.Length != 0) {
 			foreach (GameObject movel in moveis) {
@@ -94,8 +96,10 @@ public class ColliderControl : MonoBehaviour {
 				cameraController.interfaceGUI.panelFloor.SetActiveRecursively(false);
 			}
 			if (lastSelectedMobile == null) {
-				if (cameraController.interfaceGUI.panelInfo.active)
+				if (cameraController.interfaceGUI.panelInfo.active) {
 					cameraController.interfaceGUI.panelInfo.SetActiveRecursively(false);
+					cameraController.interfaceGUI.panelMobile.SetActiveRecursively(false);
+				}
 			}
 			
 			gameObject.SetActiveRecursively(false);

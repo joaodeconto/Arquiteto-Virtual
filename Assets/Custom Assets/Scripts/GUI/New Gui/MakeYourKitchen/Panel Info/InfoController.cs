@@ -105,11 +105,7 @@ public class InfoController : MonoBehaviour {
 			if (!panelChange) {
 				panelChange = true;
 				panelMobile.SetActiveRecursively(true);
-				Vector3 panelMobilePosition = mainCamera.camera.WorldToScreenPoint(item.transform.position);
-				panelMobilePosition.x = panelMobilePosition.x - (Screen.width/2);
-				panelMobilePosition.y = panelMobilePosition.y - (Screen.height/2);
-				panelMobilePosition.z = 0;
-				panelMobile.transform.localPosition = panelMobilePosition;
+				Invoke("UpdatePainelMobile", 0.5f);
 			}
 		}
 		
@@ -129,6 +125,15 @@ public class InfoController : MonoBehaviour {
 		}
 	}
 	
+	void UpdatePainelMobile () {
+		//Vector3 positionReal = new Vector3(item.transform.position.x, item.collider.bounds.center.y, item.transform.position.z);
+		Vector3 panelMobilePosition = mainCamera.camera.WorldToScreenPoint(item.transform.position);
+		panelMobilePosition.x = panelMobilePosition.x - (Screen.width/2);
+		panelMobilePosition.y = panelMobilePosition.y - (Screen.height/2);
+		panelMobilePosition.z = 0;
+		panelMobile.transform.localPosition = panelMobilePosition;
+	}
+	
 	#region Flying Buttons
 	public void DeleteObject () {
 		DestroyImmediate (item);
@@ -143,10 +148,6 @@ public class InfoController : MonoBehaviour {
 	public void FocusObject () {
 		Vector3 focusItemPosition = item.collider.bounds.center;
 		Vector3 focusItemRotation = item.transform.localEulerAngles;
-		
-		print("X: " + item.collider.bounds.size.x + 
-			" - Y: " + item.collider.bounds.size.y +
-			" - Z: " + item.collider.bounds.size.z);
 		
 		if (item.collider.bounds.size.x > item.collider.bounds.size.y &&
 			item.collider.bounds.size.x > item.collider.bounds.size.z) {
@@ -180,11 +181,7 @@ public class InfoController : MonoBehaviour {
 		item = GameObject.FindGameObjectWithTag("MovelSelecionado");
 		
 		panelMobile.SetActiveRecursively(true);
-		Vector3 panelMobilePosition = mainCamera.camera.WorldToScreenPoint(item.transform.position);
-		panelMobilePosition.x = panelMobilePosition.x - (Screen.width/2);
-		panelMobilePosition.y = panelMobilePosition.y - (Screen.height/2);
-		panelMobilePosition.z = 0;
-		panelMobile.transform.localPosition = panelMobilePosition;
+		UpdatePainelMobile ();
 		
 		ResolveCheckBoxColors();
 		ResolveCheckBoxTops();
@@ -196,11 +193,7 @@ public class InfoController : MonoBehaviour {
 	public void UpdateInfo(InformacoesMovel furnitureData) {
 		SetInfo(furnitureData);
 		item = furnitureData.gameObject;
-		Vector3 panelMobilePosition = mainCamera.camera.WorldToScreenPoint(item.transform.position);
-		panelMobilePosition.x = panelMobilePosition.x - (Screen.width/2);
-		panelMobilePosition.y = panelMobilePosition.y - (Screen.height/2);
-		panelMobilePosition.z = 0;
-		panelMobile.transform.localPosition = panelMobilePosition;
+		UpdatePainelMobile ();
 		ResolveCheckBoxColors();
 		ResolveCheckBoxTops();
 		ResolveCheckBoxDoorSide();

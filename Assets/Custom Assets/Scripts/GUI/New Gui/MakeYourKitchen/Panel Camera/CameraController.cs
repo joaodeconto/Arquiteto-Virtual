@@ -15,6 +15,7 @@ public class CameraController : MonoBehaviour {
 		public GameObject viewUIPiso;
 		public GameObject panelInfo;
 		public GameObject lists;
+		public GameObject panelMobile;
 	}
 	
 	private const string pathExportReport = "upload/export/";
@@ -150,7 +151,7 @@ public class CameraController : MonoBehaviour {
 		SnapBehaviour.DeactivateAll ();
 		
 		firstPersonCamera.GetComponent<ColliderControl>().IsPanelFloor = 
-			 interfaceGUI.panelInfo.active ? true : false;
+			 interfaceGUI.panelFloor.active ? true : false;
 		
 		interfaceGUI.lists.SetActiveRecursively(false);
 		

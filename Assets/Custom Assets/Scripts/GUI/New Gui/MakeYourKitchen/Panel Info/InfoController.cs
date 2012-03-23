@@ -22,6 +22,7 @@ public class InfoController : MonoBehaviour {
 	
 	public InfoLabels[] infoLabels;
 	public GameObject panelInfo;
+	public GameObject panelMobile;
 	public Material topMaterial;
 	
 	public GameObject checkBoxCores;
@@ -39,8 +40,13 @@ public class InfoController : MonoBehaviour {
 		
 	private bool isOpen;
 	
+	private GameObject mainCamera;
+	private bool panelChange = false;
+	
 	void Awake ()
 	{
+		mainCamera = GameObject.FindWithTag("MainCamera");
+		
 		if (checkBoxCores == null)
 		{
 			Debug.LogError ("A referencia do checkbox de cores deve ser colocada neste script.");
@@ -81,22 +87,87 @@ public class InfoController : MonoBehaviour {
 		Close();
 		panelInfo.SetActiveRecursively(false);
 		
+		panelMobile.SetActiveRecursively(false);
+		
 		selectedColorIndex = 0;
 	}
 	
 	void Update () {
-		if (!isOpen)
+		if (!isOpen && item == null)
 			return;
-		if (Input.GetKeyUp (KeyCode.Delete)) {
-			Close ();
-			DestroyImmediate (GameObject.FindWithTag("MovelSelecionado"));
+		
+		if (item.GetComponent<SnapBehaviour>().wasDragged) {
+			if (panelChange) {
+				panelChange = false;
+				panelMobile.SetActiveRecursively(false);
+			}
+		} else {
+			if (!panelChange) {
+				panelChange = true;
+				panelMobile.SetActiveRecursively(true);
+				Vector3 panelMobilePosition = mainCamera.camera.WorldToScreenPoint(item.transform.position);
+				panelMobilePosition.x = panelMobilePosition.x - (Screen.width/2);
+				panelMobilePosition.y = panelMobilePosition.y - (Screen.height/2);
+				panelMobilePosition.z = 0;
+				panelMobile.transform.localPosition = panelMobilePosition;
+			}
 		}
+		
+		if (Input.GetKeyUp (KeyCode.Delete))
+		{
+			DeleteObject ();
+		}
+		
 		if (Input.GetKeyUp (KeyCode.R))
 		{
-			GameObject.FindWithTag ("MovelSelecionado").transform.RotateAround (Vector3.up, Mathf.PI / 2);
-			GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<RenderBounds> ().UpdateObj ();
+			RotateObject ();
+		}
+		
+		if (Input.GetKeyUp (KeyCode.F))
+		{
+			FocusObject ();
 		}
 	}
+	
+	#region Flying Buttons
+	public void DeleteObject () {
+		DestroyImmediate (item);
+		Close ();
+	}
+	
+	public void RotateObject () {
+		item.transform.RotateAround (Vector3.up, Mathf.PI / 2);
+		GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<RenderBounds> ().UpdateObj ();
+	}
+	
+	public void FocusObject () {
+		Vector3 focusItemPosition = item.collider.bounds.center;
+		Vector3 focusItemRotation = item.transform.localEulerAngles;
+		
+		print("X: " + item.collider.bounds.size.x + 
+			" - Y: " + item.collider.bounds.size.y +
+			" - Z: " + item.collider.bounds.size.z);
+		
+		if (item.collider.bounds.size.x > item.collider.bounds.size.y &&
+			item.collider.bounds.size.x > item.collider.bounds.size.z) {
+			focusItemPosition += (item.transform.forward * item.collider.bounds.size.x);
+		} else if (item.collider.bounds.size.y > item.collider.bounds.size.z) {
+			focusItemPosition += (item.transform.forward * item.collider.bounds.size.y);
+		} else {
+			focusItemPosition += (item.transform.forward * item.collider.bounds.size.z);
+		}
+		
+		focusItemRotation += new Vector3(0, 180, 0);
+		
+		GameObject mainCamera = GameObject.FindGameObjectWithTag ("MainCamera");
+		
+		iTween.MoveTo(mainCamera, iTween.Hash(	iT.MoveTo.position, focusItemPosition, 
+	                                                       		iT.MoveTo.time, 2f));
+	
+		iTween.RotateTo(mainCamera, iTween.Hash(iT.RotateTo.rotation, focusItemRotation,
+	                                                           	iT.RotateTo.time, 2f));
+	}
+	#endregion
 	
 	#region Panel info controller
 	public void Open (InformacoesMovel furnitureData) {
@@ -107,6 +178,14 @@ public class InfoController : MonoBehaviour {
 		
 		SetInfo(furnitureData);
 		item = GameObject.FindGameObjectWithTag("MovelSelecionado");
+		
+		panelMobile.SetActiveRecursively(true);
+		Vector3 panelMobilePosition = mainCamera.camera.WorldToScreenPoint(item.transform.position);
+		panelMobilePosition.x = panelMobilePosition.x - (Screen.width/2);
+		panelMobilePosition.y = panelMobilePosition.y - (Screen.height/2);
+		panelMobilePosition.z = 0;
+		panelMobile.transform.localPosition = panelMobilePosition;
+		
 		ResolveCheckBoxColors();
 		ResolveCheckBoxTops();
 		ResolveCheckBoxDoorSide();
@@ -117,6 +196,11 @@ public class InfoController : MonoBehaviour {
 	public void UpdateInfo(InformacoesMovel furnitureData) {
 		SetInfo(furnitureData);
 		item = furnitureData.gameObject;
+		Vector3 panelMobilePosition = mainCamera.camera.WorldToScreenPoint(item.transform.position);
+		panelMobilePosition.x = panelMobilePosition.x - (Screen.width/2);
+		panelMobilePosition.y = panelMobilePosition.y - (Screen.height/2);
+		panelMobilePosition.z = 0;
+		panelMobile.transform.localPosition = panelMobilePosition;
 		ResolveCheckBoxColors();
 		ResolveCheckBoxTops();
 		ResolveCheckBoxDoorSide();
@@ -157,8 +241,11 @@ public class InfoController : MonoBehaviour {
 	
 	private void HideInfoController ()
 	{
-		if (!isOpen)
+		if (!isOpen) {
 			panelInfo.SetActiveRecursively(false);
+			panelMobile.SetActiveRecursively(false);
+			UITooltip.Close();
+		}
 	}
 	#endregion
 	
@@ -183,7 +270,6 @@ public class InfoController : MonoBehaviour {
 		infoLabels[3].SetLabels(I18n.t("Linha"), "");
 		infoLabels[4].SetLabels(I18n.t("Categoria"), "");
 	}
-	#endregion
 	
 	private void SetInfo (InformacoesMovel furnitureData) {
 		this.furnitureData = furnitureData;
@@ -193,6 +279,7 @@ public class InfoController : MonoBehaviour {
 		infoLabels[3].SetLabels(I18n.t("Linha"), Line.CurrentLine.Name);
 		infoLabels[4].SetLabels(I18n.t("Categoria"), furnitureData.Categoria);
 	}
+	#endregion
 		
 	private void ResolveCheckBoxColors ()
 	{

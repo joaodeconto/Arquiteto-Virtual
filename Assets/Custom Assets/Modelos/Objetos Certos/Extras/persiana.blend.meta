@@ -3,6 +3,7 @@ guid: 683317a00b913de4492030dacbb16bcb
 ModelImporter:
   fileIDToRecycleName:
     4300000: Plane.001
+    4300002: Plane
   serializedVersion: 10
   materials:
     importMaterials: 1
@@ -47,6 +48,19 @@ ModelImporter:
       data:
         first: 111
         second: 605fa900
+    Plane:
+      data:
+        first: 1
+        second: a4860100
+      data:
+        first: 4
+        second: 841a0600
+      data:
+        first: 23
+        second: 62182300
+      data:
+        first: 33
+        second: a25a3200
     Plane.001:
       data:
         first: 1

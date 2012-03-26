@@ -18,13 +18,13 @@ public class Initialization : MonoBehaviour {
 		LoadObjects(PlayerPrefs.GetInt("SelectedKitchen"));
 
 		/* Combine meshs for while */
-		
-		CombineMesh(GameObject.Find("ParentChao").transform, true);
-		CombineMesh(GameObject.Find("ParedesBack").transform, true);
-		CombineMesh(GameObject.Find("ParedesFront").transform, true);
-		CombineMesh(GameObject.Find("ParedesLeft").transform, true);
-		CombineMesh(GameObject.Find("ParedesRight").transform, true);
-		CombineMesh(GameObject.Find("ParentTeto").transform, true);
+		Debug.Break ();
+//		CombineMesh(GameObject.Find("ParentChao").transform, true);
+//		CombineMesh(GameObject.Find("ParedesBack").transform, true);
+//		CombineMesh(GameObject.Find("ParedesFront").transform, true);
+//		CombineMesh(GameObject.Find("ParedesLeft").transform, true);
+//		CombineMesh(GameObject.Find("ParedesRight").transform, true);
+//		CombineMesh(GameObject.Find("ParentTeto").transform, true);
 		Destroy(GameObject.FindWithTag("Grid"));
 		RemoveGround();
 		RemoveWalls();

@@ -13,10 +13,10 @@ public class WallBuilderMouseHandler : MonoBehaviour {
 			
 			if (Physics.Raycast (ray, out hit)) {
 				if (hit.transform.gameObject.layer != LayerMask.NameToLayer("GUI")) {
-					wallBuilder.CreateTile();
+					wallBuilder.CreateTile(ray,hit);
 				}
 			} else {
-				wallBuilder.CreateTile();
+				wallBuilder.CreateTile (ray, hit);
 			}
 		}
 		if (Input.GetMouseButtonDown(1)){

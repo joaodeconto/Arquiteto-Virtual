@@ -15,7 +15,6 @@ public class CatalogController : MonoBehaviour
 		LoadObjects (PlayerPrefs.GetInt ("SelectedKitchen"));
 
 		/* Combine meshs for while */
-		
 		MeshUtils.CombineMesh (GameObject.Find ("ParentChao").transform, true);
 		MeshUtils.CombineMesh (GameObject.Find ("ParedesBack").transform, true);
 		MeshUtils.CombineMesh (GameObject.Find ("ParedesFront").transform, true);

@@ -299,9 +299,12 @@ public class CameraController : MonoBehaviour {
 	{
 		bool isPanelFloor = interfaceGUI.panelFloor.active ? true : false;
 		
-		bool isPanelInfo = interfaceGUI.panelInfo.active != null ? true : false;
+		bool isPanelInfo = interfaceGUI.panelInfo.active ? true : false;
+		
+		bool isPainter = mainCamera.GetComponentInChildren<Painter>().enabled ? true : false;
 		
 		interfaceGUI.lists.SetActiveRecursively(false);
+		mainCamera.GetComponentInChildren<Painter>().enabled = false;
 		
 		Transform[] allchids = interfaceGUI.main.GetComponentsInChildren<Transform>();
 		foreach (Transform child in allchids) {
@@ -353,9 +356,13 @@ public class CameraController : MonoBehaviour {
 			interfaceGUI.panelFloor.SetActiveRecursively(false);
 		}
 		if (!isPanelInfo) {
-			if (interfaceGUI.panelInfo.active)
-				interfaceGUI.panelInfo.SetActiveRecursively(false);
+			interfaceGUI.panelInfo.SetActiveRecursively(false);
+			interfaceGUI.panelMobile.SetActiveRecursively(false);
 		}
+		if (isPainter) {
+			mainCamera.GetComponentInChildren<Painter>().enabled = true;
+		}
+		interfaceGUI.uiRootFPS.SetActiveRecursively(false);
 	}
 	
 	private IEnumerator SendReportData (string urlForm)

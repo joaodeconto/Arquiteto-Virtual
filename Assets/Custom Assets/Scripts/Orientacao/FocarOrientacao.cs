@@ -8,8 +8,7 @@ public enum Orientacao {
 public class FocarOrientacao : MonoBehaviour {
 	
 	public Orientacao orientacao = Orientacao.Frente;
-	public float minimumHeight = 2;
-	public float tweenTime = 2.0f;
+	private float tweenTime = 2.0f;
 	
 	private float distanceRate = 1.5f;
 	private float cameraInclination = 11f;
@@ -19,6 +18,11 @@ public class FocarOrientacao : MonoBehaviour {
 	private float distanceFromMiddle = 0f; 
 	
 	private GameObject mainCamera;
+	
+	void Start ()
+	{
+		tweenTime = 1.0f;
+	}
 				
 	void OnMouseUp () {
 		
@@ -82,10 +86,22 @@ public class FocarOrientacao : MonoBehaviour {
 				break;
 		}
 		
-		iTween.RotateTo (mainCamera, iTween.Hash (iT.RotateTo.rotation, newDirection,
-												iT.RotateTo.time, tweenTime));
+		mainCamera.GetComponent<Camera3d>().FreezeCamera ();
+		
+		iTween.RotateTo (mainCamera, iTween.Hash (	iT.RotateTo.rotation, newDirection,
+													iT.RotateTo.time, tweenTime,
+													iT.RotateTo.easetype, iTween.EaseType.easeInOutSine));
 		
 		iTween.MoveTo (mainCamera, iTween.Hash (iT.MoveTo.position, newPosition,
-												iT.MoveTo.time, tweenTime));
+												iT.MoveTo.time, tweenTime,
+												iT.MoveTo.easetype, iTween.EaseType.easeInOutSine,
+												iT.MoveTo.oncomplete, "ReleaseCamera",
+												iT.MoveTo.oncompletetarget, this.gameObject));
+	}
+	
+	void ReleaseCamera ()
+	{
+		Debug.LogWarning ("Was called ReleaseCamera");
+		mainCamera.GetComponent<Camera3d> ().FreeCamera ();
 	}
 }

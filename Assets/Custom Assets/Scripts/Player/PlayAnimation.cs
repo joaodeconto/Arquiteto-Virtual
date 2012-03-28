@@ -11,7 +11,7 @@ public class PlayAnimation : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetMouseButtonUp(0)) {
-			Transform cam = GetComponentInChildren<Camera>().transform;
+			Transform cam = GameObject.FindWithTag("Player").transform;
 			RaycastHit hit;
 			if (Physics.Raycast(cam.position, cam.forward, out hit)) {
 				if (hit.transform.tag == "Movel" ||

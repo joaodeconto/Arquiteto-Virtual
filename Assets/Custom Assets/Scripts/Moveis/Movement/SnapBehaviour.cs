@@ -117,7 +117,7 @@ public class SnapBehaviour : MonoBehaviour {
 			    hit.transform.tag == "ChaoParent" ||
 				hit.transform.tag == "TetoParent"){
 				
-				if (GetComponent<InformacoesMovel>().tipoMovel == TipoMovel.FIXO) {
+				if (GetComponent<InformacoesMovel>().tipoMovel != TipoMovel.MOVEL) {
 	           		transform.position = (hit.point.x * transform.parent.right)	+ 
 										 (hit.point.z * transform.parent.forward);
 				} else {
@@ -140,7 +140,7 @@ public class SnapBehaviour : MonoBehaviour {
 			
 		enableDrag = false;
 		
-		if (GetComponent<InformacoesMovel>().tipoMovel == TipoMovel.FIXO) {
+		if (GetComponent<InformacoesMovel>().tipoMovel != TipoMovel.MOVEL) {
 			this.rigidbody.constraints = RigidbodyConstraints.FreezePositionY |
 											RigidbodyConstraints.FreezeRotation;
 		}
@@ -220,7 +220,7 @@ public class SnapBehaviour : MonoBehaviour {
 				}
 			}
 			
-			if (GetComponent<InformacoesMovel>().tipoMovel == TipoMovel.FIXO)
+			if (GetComponent<InformacoesMovel>().tipoMovel != TipoMovel.MOVEL)
 			{
 				this.transform.position  = nearestAvailableGround.transform.position;
 			} 

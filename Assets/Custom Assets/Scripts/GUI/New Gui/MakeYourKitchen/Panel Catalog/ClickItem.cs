@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ClickItem : MonoBehaviour {
 	
-	public GameObject item;
+	public GameObject item {private get; set;}
 	public Camera camera;
 	
 	void OnClick () {
@@ -35,16 +35,17 @@ public class ClickItem : MonoBehaviour {
 			
 			newFurniture.AddComponent<SnapBehaviour>();
 			newFurniture.AddComponent<CalculateBounds>();
-			newFurniture.GetComponent<InformacoesMovel>().Initialize();
 			newFurniture.AddComponent<Rigidbody>();
 			
-			if (newFurniture.GetComponent<InformacoesMovel>().tipoMovel == TipoMovel.FIXO) {
+			if (newFurniture.GetComponent<InformacoesMovel>().tipoMovel != TipoMovel.MOVEL) {
 				newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | 
 													 RigidbodyConstraints.FreezeRotation;
 			} else {
 				newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 			}
 							
+			newFurniture.GetComponent<InformacoesMovel>().Initialize();
+			
 			GameObject MoveisGO = GameObject.Find("Moveis GO");
 		
 			if(MoveisGO == null){

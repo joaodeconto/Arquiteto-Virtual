@@ -626,7 +626,7 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 			newFurniture.GetComponent<InformacoesMovel>().Initialize();
 			newFurniture.GetComponent<InformacoesMovel>().Categoria = Line.CurrentLine.categories[cCategory].Name;
 			newFurniture.AddComponent<Rigidbody>();
-			if (newFurniture.GetComponent<InformacoesMovel>().tipoMovel == TipoMovel.FIXO) {
+			if (newFurniture.GetComponent<InformacoesMovel>().tipoMovel != TipoMovel.MOVEL) {
 				newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | 
 													 RigidbodyConstraints.FreezeRotation;
 			} else {
@@ -709,7 +709,7 @@ public class GuiCatalogo : MonoBehaviour, GuiBase {
 			newFurniture.GetComponent<InformacoesMovel>().Categoria = "";
 			newFurniture.AddComponent<Rigidbody>();
 			
-			if (newFurniture.GetComponent<InformacoesMovel>().tipoMovel == TipoMovel.FIXO) {
+			if (newFurniture.GetComponent<InformacoesMovel>().tipoMovel != TipoMovel.MOVEL) {
 				newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | 
 													 RigidbodyConstraints.FreezeRotation;
 			} else {

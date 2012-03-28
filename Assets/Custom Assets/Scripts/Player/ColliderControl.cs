@@ -95,12 +95,10 @@ public class ColliderControl : MonoBehaviour {
 				cameraController.interfaceGUI.viewUIPiso.SetActiveRecursively(false);
 				cameraController.interfaceGUI.panelFloor.SetActiveRecursively(false);
 			}
-			if (lastSelectedMobile == null) {
-				if (cameraController.interfaceGUI.panelInfo.active) {
-					cameraController.interfaceGUI.panelInfo.SetActiveRecursively(false);
-					cameraController.interfaceGUI.panelMobile.SetActiveRecursively(false);
-				}
-			}
+			
+			//desativa sempre o panel info e o panel mobile
+			cameraController.interfaceGUI.panelInfo.SetActiveRecursively(false);
+			cameraController.interfaceGUI.panelMobile.SetActiveRecursively(false);
 			
 			gameObject.SetActiveRecursively(false);
 		}

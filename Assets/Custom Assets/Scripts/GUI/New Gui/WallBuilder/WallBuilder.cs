@@ -121,41 +121,54 @@ public class WallBuilder : MonoBehaviour {
 	}*/
 	#endregion
 	
-	public void CreateTile (){
+	private bool IsFirstClick;	
+	private Vector3 secondPosition;
+	private float IPSILON = 0.01f;
+	public void CreateTile (Ray ray, RaycastHit hit){
+	
+		if (IsFirstClick)
+		{
+			firstPosition = hit.point;
+			GameObject box = GameObject.CreatePrimitive (PrimitiveType.Cube);
+			
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		float x, y, z;
+								
+		x = ray.origin.x;
+		y = 0.01f;
+		z = ray.origin.z;
+		x = x - (int)x > 0.5f ? (int)x + 1 : x - (int)x < -0.5f ? (int)x - 1 : (int)x;
+		z = z - (int)z > 0.5f ? (int)z + 1 : z - (int)z < -0.5f ? (int)z - 1 : (int)z;
 		
-		Ray ray = mainCamera.ScreenPointToRay (Input.mousePosition);
-		RaycastHit hit;
-		if (Physics.Raycast (ray, out hit)) {
-			if (hit.transform.tag == "Grid") {
-				float x, y, z;
-										
-				x = ray.origin.x;
-				y = 0.01f;
-				z = ray.origin.z;
-				x = x - (int)x > 0.5f ? (int)x + 1 : x - (int)x < -0.5f ? (int)x - 1 : (int)x;
-				z = z - (int)z > 0.5f ? (int)z + 1 : z - (int)z < -0.5f ? (int)z - 1 : (int)z;
-				
-				Vector3 posicaoCalibrada = new Vector3 (x, y, z);
-				GameObject[] pisos = GameObject.FindGameObjectsWithTag ("Chao");
-				if (pisos.Length > 0) {
-					Vector3[] direcoes = new Vector3[] { Vector3.forward, Vector3.right, Vector3.left, Vector3.back };
-					int countDirecoes = 0;
-					foreach (Vector3 direcao in direcoes) {
-						RaycastHit hit2;
-						if (Physics.Raycast (posicaoCalibrada, direcao, out hit2, 1.0f)) {
-							Debug.DrawRay (posicaoCalibrada, direcao * 1.0f, Color.blue);
-							if (hit2.transform.tag == "Chao" && countDirecoes != 1) {
-								GameObject novoChao = Instantiate (floor, posicaoCalibrada, floor.transform.rotation) as GameObject;
-								novoChao.transform.parent = parentFloor;
-								countDirecoes++;
-							}
-						}
+		Vector3 posicaoCalibrada = new Vector3 (x, y, z);
+		GameObject[] pisos = GameObject.FindGameObjectsWithTag ("Chao");
+		if (pisos.Length > 0) {
+			Vector3[] direcoes = new Vector3[] { Vector3.forward, Vector3.right, Vector3.left, Vector3.back };
+			int countDirecoes = 0;
+			foreach (Vector3 direcao in direcoes) {
+				RaycastHit hit2;
+				if (Physics.Raycast (posicaoCalibrada, direcao, out hit2, 1.0f)) {
+					Debug.DrawRay (posicaoCalibrada, direcao * 1.0f, Color.blue);
+					if (hit2.transform.tag == "Chao" && countDirecoes != 1) {
+						GameObject novoChao = Instantiate (floor, posicaoCalibrada, floor.transform.rotation) as GameObject;
+						novoChao.transform.parent = parentFloor;
+						countDirecoes++;
 					}
 				}
-				if (activeGrid)
-					firstPosition = posicaoCalibrada;
 			}
 		}
+		if (activeGrid)
+			firstPosition = posicaoCalibrada;
 	}
 	
 	public void DestroyTile ()

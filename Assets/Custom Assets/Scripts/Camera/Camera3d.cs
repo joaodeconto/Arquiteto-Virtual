@@ -11,6 +11,7 @@ public class Camera3d : MonoBehaviour
 	private FurnitureManager furnitureManager;
 	private InfoController infoController;
 	private CameraGUIController cameraGUIController;
+	private bool CanMoveCamera;
 	
 	void Start () {
 		
@@ -26,9 +27,22 @@ public class Camera3d : MonoBehaviour
 
 	// Update is called once per frame
 	void Update () {
-		MoveCamera();
-		MouseMoveCamera();
-		SelectMobile ();
+		if (CanMoveCamera)
+		{
+			MoveCamera();
+			MouseMoveCamera();
+			SelectMobile ();
+		}
+	}
+	
+	public void FreezeCamera ()
+	{
+		CanMoveCamera = false;
+	}
+	
+	public void FreeCamera ()
+	{
+		CanMoveCamera = true;
 	}
 
 	void MoveCamera () {

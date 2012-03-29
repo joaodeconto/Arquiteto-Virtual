@@ -129,6 +129,10 @@ public class InfoController : MonoBehaviour {
 	
 	void UpdatePainelMobile () {
 		//Vector3 positionReal = new Vector3(item.transform.position.x, item.collider.bounds.center.y, item.transform.position.z);
+		if (item == null) {
+			CancelInvoke();
+			return;
+		}
 		Vector3 panelMobilePosition = mainCamera.camera.WorldToScreenPoint(item.collider.bounds.center);
 		panelMobilePosition.x = panelMobilePosition.x - (Screen.width/2);
 		panelMobilePosition.y = panelMobilePosition.y - (Screen.height/2);

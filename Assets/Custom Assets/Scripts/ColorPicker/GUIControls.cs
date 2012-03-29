@@ -17,7 +17,8 @@ public class GUIControls {
 		return c;
 	}
 	
-	public static Color RGBCircle (Vector2 position, Color c, string label, Texture2D colorCircle, GUIStyle pickerColor, GUIStyle slider){
+	static Color actualColor, lastColor, lastColor2;
+	public static Color RGBCircle (Vector2 position, Color c, string label, Texture2D colorCircle, GUIStyle pickerColor, GUIStyle slider, GUIStyle thumb){
 		#region Forma GUI Unity
 		/*Rect r = new Rect(position.x, position.y, 100, 100);
 		//Rect r = GUILayoutUtility.GetAspectRect (1);
@@ -67,11 +68,10 @@ public class GUIControls {
 		#endregion
 		
 		#region Forma GUI Unity com ScreenUtils
-		Rect r = new Rect (ScreenUtils.ScaleWidth(position.x), ScreenUtils.ScaleHeight(position.y), 
-		                   ScreenUtils.ScaledFloat(100), ScreenUtils.ScaledFloat(100));
-		//Rect r = GUILayoutUtility.GetAspectRect (1);
+		Rect r = new Rect (ScreenUtils.ScaleHeight(position.x), ScreenUtils.ScaleHeight(position.y), 
+		                   ScreenUtils.ScaleHeight(100), ScreenUtils.ScaleHeight(100));
 		r.height = r.width -= ScreenUtils.ScaledFloat(15);
-		Rect r2 = new Rect(r.x + r.width + ScreenUtils.ScaleWidth(5),r.y,ScreenUtils.ScaleWidth(10),r.height);
+		Rect r2 = new Rect(r.x + r.width + ScreenUtils.ScaleHeight(15),r.y,ScreenUtils.ScaleHeight(18),r.height);
 		HSBColor hsb = new HSBColor (c);//It is much easier to work with HSB colours in this case
 		
 		Vector2 cp = new Vector2 (r.x+r.width/2,r.y+r.height/2);
@@ -82,7 +82,7 @@ public class GUIControls {
 			InputVector.y = cp.y - Event.current.mousePosition.y;
 			
 			float hyp = Mathf.Sqrt( (InputVector.x * InputVector.x) + (InputVector.y * InputVector.y) );
-			if (hyp <= r.width/2 + ScreenUtils.ScaledFloat(5)) {
+			if (hyp <= r.width/2 + ScreenUtils.ScaleHeight(5)) {
 				hyp = Mathf.Clamp (hyp,0,r.width/2);
 				float a = Vector3.Angle(new Vector3(-1,0,0), InputVector);
 				
@@ -98,8 +98,13 @@ public class GUIControls {
 		HSBColor hsb2 = new HSBColor (c);
 		hsb2.b = 1;
 		Color c2 = hsb2.ToColor ();
+		if (c == Color.black) {
+			c2 = lastColor2;
+		} else {
+			lastColor2 = c2;
+		}
 		GUI.color = c2;
-		hsb.b = GUI.VerticalSlider (r2,hsb.b,1.0f,0.0f,slider,"verticalsliderthumb");
+		hsb.b = GUI.VerticalSlider (r2,hsb.b,1.0f,0.0f,slider,thumb/*"verticalsliderthumb"*/);
 		
 		GUI.color = Color.white * hsb.b;
 		GUI.color = new Color(GUI.color.r, GUI.color.g, GUI.color.b, 1f);
@@ -108,10 +113,19 @@ public class GUIControls {
 		Vector2 pos = (new Vector2 (Mathf.Cos (hsb.h*360*Mathf.Deg2Rad),-Mathf.Sin (hsb.h*360*Mathf.Deg2Rad))*r.height*hsb.s/2);
 		
 		GUI.color = c;
-		GUI.Box ( new Rect(pos.x-ScreenUtils.ScaledFloat(5)+cp.x,pos.y-ScreenUtils.ScaledFloat(5)+cp.y,ScreenUtils.ScaledFloat(10),ScreenUtils.ScaledFloat(10)),"",pickerColor);
+		GUI.Box ( new Rect(pos.x-ScreenUtils.ScaleHeight(5)+cp.x,pos.y-ScreenUtils.ScaleHeight(5)+cp.y,ScreenUtils.ScaleHeight(10),ScreenUtils.ScaleHeight(10)),"",pickerColor);
 		GUI.color = Color.white;
 		
 		c = hsb.ToColor ();
+		if (c == Color.black) {
+			actualColor = c;
+		} else {
+			if (actualColor == Color.black) {
+				c = lastColor;
+				actualColor = Color.white;
+			}
+			lastColor = c;
+		}
 		return c;
 		#endregion
 	}

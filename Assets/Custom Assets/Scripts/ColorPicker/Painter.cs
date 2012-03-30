@@ -5,84 +5,99 @@ using Visiorama.Utils;
 
 public class Painter: MonoBehaviour {
 	public Texture2D background;
+	public Texture2D topBackground;
 	public Texture2D colorCircle;
 	public Color color = Color.white;
 	public GUIStyle pickerColor;
-	public GUIStyle slider;
+	public GUIStyle sliderColorPicker;
+	public GUIStyle slider, thumb, button;
 	public Texture2D dropper;
+	public Font font, fontBold;
 	public string[] tags, categoryNames;
 	public bool dropperBool {get; private set;}
 	internal Rect rectWindow;
 	private GameObject GO;
 	private Renderer render;
 	private Vector2 position, sizeDropper, halfSizeDropper;
-	private Rect rectReset, rectGetAll, rectDropper;
+	private Rect rectTop, rectReset, rectGetAll, rectDropper;
 	private Rect[] rectRGBA, rectFieldRGBA;
 	private Color lastColor;
 	private bool dropperBoolLast, clicked;
 	private string nameObject, tagObject;
-	private GUIStyle groupStyle, buttonStyle, labelStyle;
+	private GUIStyle groupStyle, topGroupStyle, labelStyle;
+	private int fontSizeGroup, fontSizeButton, fontSizeLabel, thumbSize;
 	private CameraGUIController cameraGUIController;
-
-	void Start () {
 	
-		ScreenUtils.Initialize(1024, 640);
-
-		rectWindow = ScreenUtils.ScaledRect(Screen.width - 120, 24, 120, 320);
+	// Setando posições (Chamar ela no Start e no ScreenSizeChange)
+	void SetPositions () {
+		rectWindow = ScreenUtils.ScaledRectInSenseHeight(Screen.width - 165, 24, 165, 320);
+		
+		rectTop = ScreenUtils.ScaledRectInSenseHeight(0, 0, topBackground.width, topBackground.height);
+		topGroupStyle.normal.background = topBackground;
+		topGroupStyle.fontSize = (int)Mathf.Ceil(ScreenUtils.ScaleHeight(fontSizeGroup));
+		
 		//não precisa usar ScreenUtils, dentro da função isso já está sendo feito
-		position = new Vector2(10, 30);
-		//rectReset = ScreenUtils.ScaledRect(0, 100, 100, 30);
-		rectReset = ScreenUtils.ScaledRect(10, 140, 100, 20);
-		rectGetAll = ScreenUtils.ScaledRect(10, 170, 100, 20);
+		position = new Vector2(20, 50);
+		rectReset = ScreenUtils.ScaledRectInSenseHeight(25, 150, 100, 20);
+		rectGetAll = ScreenUtils.ScaledRectInSenseHeight(25, 180, 100, 20);
 		rectRGBA = new Rect[3];
 		rectFieldRGBA = new Rect[rectRGBA.Length];
-		Rect rRGBA_Standart = ScreenUtils.ScaledRect(10, 200, 60, 15);
-		Rect rRGBA_field_Standart = ScreenUtils.ScaledRect(10 + 65, 200, 35, 20);
+		Rect rRGBA_Standart = ScreenUtils.ScaledRectInSenseHeight(25, 200, 60, 15);
+		Rect rRGBA_field_Standart = ScreenUtils.ScaledRectInSenseHeight(25 + 65, 200, 35, 20);
 		for (int i = 0; i != rectRGBA.Length; ++i) {
 			rectRGBA[i] = rRGBA_Standart;
 			rectFieldRGBA[i] = rRGBA_field_Standart;
 			rectRGBA[i].y += rRGBA_field_Standart.height * i + ((rRGBA_field_Standart.height - rRGBA_Standart.height)/2);
 			rectFieldRGBA[i].y += rRGBA_field_Standart.height * i;
 		}
-		sizeDropper = ScreenUtils.ScaledVector2(dropper.width, dropper.height);
+		sizeDropper = new Vector2(ScreenUtils.ScaleHeight(dropper.width), ScreenUtils.ScaleHeight(dropper.height));
 		halfSizeDropper = new Vector2(dropper.width / 2, dropper.height);
-		rectDropper = ScreenUtils.ScaledRect(10 + 50 - 15, 270, 30, 30);		
+		rectDropper = ScreenUtils.ScaledRectInSenseHeight(25 + 50 - 15, 270, 30, 30);	
+		button.fontSize = (int)Mathf.Ceil(ScreenUtils.ScaleHeight(fontSizeButton));
+		labelStyle.fontSize = (int)Mathf.Ceil(ScreenUtils.ScaleHeight(fontSizeLabel));
+		thumb.padding.top = thumb.padding.bottom = thumb.padding.left = thumb.padding.right = ScreenUtils.ScaledInt(thumbSize/2);
+	}
+	
+	void Start () {
+		ScreenUtils.Initialize(1024, 640);
 
 		dropperBool = false;
 		tagObject = "";
-
+		
+		fontSizeGroup = fontSizeButton = fontSizeLabel = 14;
+		
 		groupStyle = new GUIStyle();
 		groupStyle.normal.background = background;
-		groupStyle.normal.textColor = Color.white;
-		groupStyle.fontSize = ScreenUtils.ScaledInt(10);
-
-		buttonStyle = new GUIStyle("button");
-		buttonStyle.normal.textColor = Color.white;
-		buttonStyle.fontSize = ScreenUtils.ScaledInt(14);
+		groupStyle.alignment = TextAnchor.UpperCenter;
+		
+		topGroupStyle = new GUIStyle();
+		topGroupStyle.font = fontBold;
+		topGroupStyle.alignment = TextAnchor.MiddleCenter;
+		topGroupStyle.fontStyle = FontStyle.Bold;
+		topGroupStyle.normal.textColor = Color.white;
+		
+		button.alignment = TextAnchor.MiddleCenter;
+		button.font = font;
+		button.fontStyle = FontStyle.Bold;
+		button.normal.textColor = Color.white;
+		
+		labelStyle = new GUIStyle("label");
+		labelStyle.font = font;
+		labelStyle.fontStyle = FontStyle.Bold;
+		labelStyle.normal.textColor = Color.white;
+		
+		thumbSize = thumb.normal.background.height;
+		thumb.fixedWidth = thumb.fixedHeight = 0;
+		
+		SetPositions ();
 		
 		cameraGUIController = GameObject.Find("CameraController").GetComponentInChildren<CameraGUIController> ();
 	}
 
 	void  OnGUI (){
-		/*if (ScreenUtils.ScreenSizeChange()) {
-			rectWindow = ScreenUtils.ScaledRect(200, 24, 120, 320);
-			//não precisa usar ScreenUtils, dentro da função isso já está sendo feito
-			rectReset = ScreenUtils.ScaledRect(10, 140, 100, 20);
-			rectGetAll = ScreenUtils.ScaledRect(10, 170, 100, 20);
-			rectRGBA = new Rect[3];
-			rectFieldRGBA = new Rect[rectRGBA.Length];
-			Rect rRGBA_Standart = ScreenUtils.ScaledRect(10, 200, 60, 15);
-			Rect rRGBA_field_Standart = ScreenUtils.ScaledRect(10 + 65, 200, 35, 20);
-			for (int i = 0; i != rectRGBA.Length; ++i) {
-				rectRGBA[i] = rRGBA_Standart;
-				rectFieldRGBA[i] = rRGBA_field_Standart;
-				rectRGBA[i].y += rRGBA_field_Standart.height * i + ((rRGBA_field_Standart.height - rRGBA_Standart.height)/2);
-				rectFieldRGBA[i].y += rRGBA_field_Standart.height * i;
-			}
-			sizeDropper = ScreenUtils.ScaledVector2(dropper.width, dropper.height);
-			halfSizeDropper = new Vector2(dropper.width / 2, dropper.height);
-			rectDropper = ScreenUtils.ScaledRect(10 + 50 - 15, 270, 30, 30);
-		}*/
+		if (ScreenUtils.ScreenSizeChange()) {
+			SetPositions ();
+		}
 
 		GUI.depth = 1;
 		if (dropperBool) {
@@ -162,31 +177,16 @@ public class Painter: MonoBehaviour {
 					if (!breaker) {
 						Ray ray = transform.parent.camera.ScreenPointToRay(Input.mousePosition);
 						RaycastHit hit;
-//						rectWindow.x = Input.mousePosition.x;
-//						if (rectWindow.x > Screen.width - rectWindow.width)
-//							rectWindow.x -= rectWindow.width;
-//						rectWindow.y = Screen.height - Input.mousePosition.y;
-//						if (rectWindow.y > Screen.height - rectWindow.height)
-//							rectWindow.y -= rectWindow.height;
 						if (Physics.Raycast(ray, out hit)) {
 							foreach (string tag in tags) {
 								if (hit.transform.tag == tag) {
 									render = hit.transform.renderer;
 									color = hit.transform.renderer.material.color;
-									if (hit.transform.name == "ParentTeto") {
+									if (hit.transform.name == "TetoParent") {
 										nameObject = I18n.t("Teto");
 									}
-									else if (hit.transform.name == "ParedesBack") {
-										nameObject = I18n.t("Parede Atrás");
-									}
-									else if (hit.transform.name == "ParedesFront") {
-										nameObject = I18n.t("Parede Frente");
-									}
-									else if (hit.transform.name == "ParedesLeft") {
-										nameObject = I18n.t("Parede Esquerdo");
-									}
-									else if (hit.transform.name == "ParedesRight") {
-										nameObject = I18n.t("Parede Direito");
+									else if (hit.transform.tag == "ParedeParent") {
+										nameObject = I18n.t("Parede");
 									}
 									tagObject = hit.transform.tag;
 									StartCoroutine(WaitClick(0.3f));
@@ -195,7 +195,6 @@ public class Painter: MonoBehaviour {
 							}
 							foreach (string categoryName in categoryNames)
 							{
-//								print (hit.transform.name + " : " + categoryName);
 								if (hit.transform.GetComponent<InformacoesMovel> () != null)
 								{
 									if (hit.transform.GetComponent<InformacoesMovel> ().Categoria == categoryName)
@@ -220,33 +219,29 @@ public class Painter: MonoBehaviour {
 		}
 
 		if (dropperBool) {
+			GUI.depth = 2;
 			Vector2 mp = Event.current.mousePosition;
 			GUI.DrawTexture(new Rect(mp.x, mp.y - halfSizeDropper.y, sizeDropper.x, sizeDropper.y), dropper);
 			if (Screen.showCursor) Screen.showCursor = false;
+			GUI.depth = 1;
 		}
 		else { if (!Screen.showCursor) Screen.showCursor = true; }
 
 		if (render != null) {
 			rectWindow.x = Screen.width - rectWindow.width;
-			GUI.BeginGroup(rectWindow, nameObject, groupStyle);
-			color = GUIControls.RGBCircle (position, color, "", colorCircle, pickerColor, slider);
-			if (GUI.Button(rectReset, I18n.t("Descolorir"), buttonStyle)) { color = Color.white; }
-//			if (GUI.Button(rectGetAll, "Paint all this color")) {
-//				GameObject[] walls = GameObject.FindGameObjectsWithTag("ParedeParent");
-//				foreach (GameObject wall in walls) {
-//					wall.renderer.material.color = color;
-//				}
-//				GameObject.FindWithTag("TetoParent").renderer.material.color = color;
-//			}
-			GUI.Label(rectGetAll, "RGB:");
-			color.r = GUI.HorizontalSlider(rectRGBA[0], color.r, 0f, 1f);
-			GUI.TextField(rectFieldRGBA[0], Convert.ToString((int)Mathf.Ceil(color.r * 255)));
-			color.g = GUI.HorizontalSlider(rectRGBA[1], color.g, 0f, 1f);
-			GUI.TextField(rectFieldRGBA[1], Convert.ToString((int)Mathf.Ceil(color.g * 255)));
-			color.b = GUI.HorizontalSlider(rectRGBA[2], color.b, 0f, 1f);
-			GUI.TextField(rectFieldRGBA[2], Convert.ToString((int)Mathf.Ceil(color.b * 255)));
+			GUI.BeginGroup(rectWindow, "", groupStyle);
+			GUI.Label(rectTop, I18n.t("Cor"), topGroupStyle);
+			color = GUIControls.RGBCircle (position, color, "", colorCircle, pickerColor, sliderColorPicker, thumb);
+			if (GUI.Button(rectReset, I18n.t("Descolorir"), button)) { color = Color.white; }
+			GUI.Label(rectGetAll, "RGB:", labelStyle);
+			color.r = GUI.HorizontalSlider(rectRGBA[0], color.r, 0f, 1f, slider, thumb);
+			GUI.Label(rectFieldRGBA[0], Convert.ToString((int)Mathf.Ceil(color.r * 255)), labelStyle);
+			color.g = GUI.HorizontalSlider(rectRGBA[1], color.g, 0f, 1f, slider, thumb);
+			GUI.Label(rectFieldRGBA[1], Convert.ToString((int)Mathf.Ceil(color.g * 255)), labelStyle);
+			color.b = GUI.HorizontalSlider(rectRGBA[2], color.b, 0f, 1f, slider, thumb);
+			GUI.Label(rectFieldRGBA[2], Convert.ToString((int)Mathf.Ceil(color.b * 255)), labelStyle);
 
-			dropperBool = GUI.Toggle(rectDropper, dropperBool, dropper, "button");
+			dropperBool = GUI.Toggle(rectDropper, dropperBool, dropper, button);
 			GUI.EndGroup();
 			render.materials[0].color = color;
 		} else {
@@ -256,7 +251,7 @@ public class Painter: MonoBehaviour {
 		}
 		GUI.depth = 0;
 	}
-
+	
 	IEnumerator WaitClick(float timer) {
 		clicked = true;
 		yield return new WaitForSeconds(timer);

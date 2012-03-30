@@ -15,6 +15,8 @@ public class Camera3d : MonoBehaviour
 	
 	void Start () {
 		
+		CanMoveCamera = true;
+		
 		furnitureManager = GetComponent<FurnitureManager> ();
 	
 		sCamera = GetComponent<Camera>();

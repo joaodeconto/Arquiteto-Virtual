@@ -90,6 +90,7 @@ public class InfoController : MonoBehaviour {
 		panelMobile.SetActiveRecursively(false);
 		
 		selectedColorIndex = 0;
+		print ("24f p/ sec.: " + (1f / 24f));
 	}
 	
 	void Update () {
@@ -100,12 +101,13 @@ public class InfoController : MonoBehaviour {
 			if (panelChange) {
 				panelChange = false;
 				panelMobile.SetActiveRecursively(false);
+				CancelInvoke("UpdatePainelMobile");
 			}
 		} else {
 			if (!panelChange) {
 				panelChange = true;
 				panelMobile.SetActiveRecursively(true);
-				Invoke("UpdatePainelMobile", 0.5f);
+				InvokeRepeating("UpdatePainelMobile", 0.1f, 0.1f);
 			}
 		}
 		
@@ -127,7 +129,11 @@ public class InfoController : MonoBehaviour {
 	
 	void UpdatePainelMobile () {
 		//Vector3 positionReal = new Vector3(item.transform.position.x, item.collider.bounds.center.y, item.transform.position.z);
-		Vector3 panelMobilePosition = mainCamera.camera.WorldToScreenPoint(item.transform.position);
+		if (item == null) {
+			CancelInvoke();
+			return;
+		}
+		Vector3 panelMobilePosition = mainCamera.camera.WorldToScreenPoint(item.collider.bounds.center);
 		panelMobilePosition.x = panelMobilePosition.x - (Screen.width/2);
 		panelMobilePosition.y = panelMobilePosition.y - (Screen.height/2);
 		panelMobilePosition.z = 0;

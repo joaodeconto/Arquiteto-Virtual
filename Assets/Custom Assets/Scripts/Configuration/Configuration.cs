@@ -166,7 +166,7 @@ public class Configuration : MonoBehaviour {
 			mobile.GetComponent<InformacoesMovel> ().Initialize ();
 			mobile.GetComponent<InformacoesMovel> ().Categoria = Line.CurrentLine.categories[data.CategoryId].Name;
 			mobile.AddComponent<Rigidbody> ();
-			if (mobile.GetComponent<InformacoesMovel> ().tipoMovel == TipoMovel.FIXO) {
+			if (mobile.GetComponent<InformacoesMovel> ().tipoMovel != TipoMovel.MOVEL) {
 				mobile.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
 			} else {
 				mobile.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;

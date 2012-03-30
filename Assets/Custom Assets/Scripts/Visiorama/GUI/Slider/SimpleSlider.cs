@@ -132,7 +132,7 @@ public class SimpleSlider : MonoBehaviour, GuiBase {
 		} else if(GUI.Button (ScreenUtils.ScaledRect (715,450,rightBtnStyle.active.background.width,
 														  	rightBtnStyle.active.background.height), "", exitBtnStyle)){
 														  	//TODO mudar isso e deixar reutilizável
-														  	GetComponent<CreateWalls>().enabled = true;
+//														  	GetComponent<CreateWalls>().enabled = true;
 														  	enabled = false;
 		}
 	}

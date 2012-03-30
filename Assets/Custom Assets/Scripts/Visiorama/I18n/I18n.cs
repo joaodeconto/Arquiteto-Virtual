@@ -56,6 +56,9 @@ public class I18n {
 		hashWords [0] ["Reiniciar"]		  = "Reiniciar";
 		
 		//Color Picker
+		hashWords [0] ["Cor"] = "Cor";
+		hashWords [0] ["Teto"] = "Teto";
+		hashWords [0] ["Parede"] = "Parede";
 		hashWords [0] ["Descolorir"] = "Descolorir";
 		
 		//Monte sua cozinha
@@ -112,6 +115,9 @@ public class I18n {
 		hashWords [1] ["Reiniciar"] 	  = "Restart";
 		
 		//Color Picker
+		hashWords [1] ["Cor"] = "Color";
+		hashWords [1] ["Teto"] = "Roof";
+		hashWords [1] ["Parede"] = "Wall";
 		hashWords [1] ["Descolorir"] = "Discolor";
 		
 		//Monte sua cozinha
@@ -168,6 +174,9 @@ public class I18n {
 		hashWords [2] ["Reiniciar"] 	  = "Restart";
 		
 		//Color Picker
+		hashWords [2] ["Cor"] = "Color";
+		hashWords [2] ["Teto"] = "Roof";
+		hashWords [2] ["Parede"] = "Wall";
 		hashWords [2] ["Descolorir"] = "Discolor";
 		
 		//Monte sua cozinha

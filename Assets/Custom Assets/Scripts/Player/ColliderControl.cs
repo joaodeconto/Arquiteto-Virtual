@@ -32,7 +32,7 @@ public class ColliderControl : MonoBehaviour {
 			teto.renderer.enabled = teto.collider.enabled = true;
 		
 		int i = 0;
-		foreach (WallColor wallColor in cameraController.walls) {
+		foreach (InfoWall wallColor in cameraController.walls) {
 			if (wallColor != null)
 			{
 				wallColor.wall.renderer.material = cameraController.wallMaterial;
@@ -74,7 +74,7 @@ public class ColliderControl : MonoBehaviour {
 		
 		if (cameraController.walls != null)
 		{
-			foreach (WallColor wallColor in cameraController.walls)
+			foreach (InfoWall wallColor in cameraController.walls)
 			{
 				wallColor.wall.collider.isTrigger = true;
 			}

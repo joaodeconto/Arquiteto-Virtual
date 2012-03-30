@@ -21,8 +21,10 @@ public class Camera3d : MonoBehaviour
 		SpeedZoom = 1.5f;
 		StepZoom  = 8f;
 		
-		infoController = GameObject.FindWithTag("GameController").GetComponentInChildren<InfoController>();
+		infoController 		= GameObject.FindWithTag("GameController").GetComponentInChildren<InfoController>();
 		cameraGUIController = GameObject.FindWithTag("GameController").GetComponentInChildren<CameraGUIController>();
+		
+		CanMoveCamera = true;
 	}
 
 	// Update is called once per frame

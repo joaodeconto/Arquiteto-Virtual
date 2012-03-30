@@ -59,7 +59,8 @@ public class Configuration : MonoBehaviour {
 			mobiles.Add(selectedMobile);
 		}
 		
-		if (mobiles.Count == 0){
+		if (mobiles.Count == 0)
+		{
 			Debug.LogError ("Nao ha moveis na cena");
 			return false;
 		}

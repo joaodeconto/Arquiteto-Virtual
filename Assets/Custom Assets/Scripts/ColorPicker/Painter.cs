@@ -113,8 +113,13 @@ public class Painter: MonoBehaviour {
 					RaycastHit hit;
 					if (Physics.Raycast(ray, out hit)) {
 						foreach (string tag in tags) {
-							if (hit.transform.tag == tag) {
-								color = hit.transform.renderer.material.color;
+							if (hit.transform.tag.Equals(tag)) {
+								if (hit.transform.tag.Equals("Parede")) {
+									color = hit.transform.GetComponentInChildren<Renderer>().material.color;
+								}
+								else if (hit.transform.name.Equals("TetoParent")) {
+									color = hit.transform.renderer.material.color;
+								}
 							}
 						}
 						foreach (string categoryName in categoryNames) 
@@ -179,15 +184,18 @@ public class Painter: MonoBehaviour {
 						RaycastHit hit;
 						if (Physics.Raycast(ray, out hit)) {
 							foreach (string tag in tags) {
-								if (hit.transform.tag == tag) {
-									render = hit.transform.renderer;
-									color = hit.transform.renderer.material.color;
-									if (hit.transform.name == "TetoParent") {
-										nameObject = I18n.t("Teto");
-									}
-									else if (hit.transform.tag == "ParedeParent") {
+								print("hit.transform.tag: " + hit.transform.tag + " : " + hit.transform.tag.Equals("Parede"));
+								if (hit.transform.tag.Equals(tag)) {
+									print("render: " + render);
+									if (hit.transform.tag.Equals("Parede")) {
 										nameObject = I18n.t("Parede");
+										render = hit.transform.GetComponentInChildren<Renderer>();
 									}
+									else if (hit.transform.name.Equals("TetoParent")) {
+										nameObject = I18n.t("Teto");
+										render = hit.transform.renderer;
+									}
+									color = render.material.color;
 									tagObject = hit.transform.tag;
 									StartCoroutine(WaitClick(0.3f));
 									return;

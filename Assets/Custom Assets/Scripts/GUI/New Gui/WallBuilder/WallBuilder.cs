@@ -1,11 +1,14 @@
+//#define DRAW_RAY
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class WallColor : MonoBehaviour
+public class InfoWall : MonoBehaviour
 {
 	public Transform wall;
+	public Transform rightWall;
+	public Transform leftWall;
 	public Color color;
 }
 
@@ -14,7 +17,7 @@ public class WallBuilder : MonoBehaviour {
 	public const float IPSLON = 0.0001f;
 	
 	#region Parents
-	public WallColor[] 	walls;
+	public InfoWall[] 	walls;
 	public Transform 	parentFloor;
 	public Transform 	parentCeil;
 	public Transform	parentWalls;
@@ -228,9 +231,10 @@ public class WallBuilder : MonoBehaviour {
 			}
 		}
 	}
-
+	
+	public Material asa;
 	public void BuildGround (){
-	/*
+	
 		Vector3[] vertices = new Vector3[lastCreatedWalls.Count];
 		Vector3[] normals  = new Vector3[lastCreatedWalls.Count];
 		int[] triangles    = new int[lastCreatedWalls.Count * 3];
@@ -255,7 +259,7 @@ public class WallBuilder : MonoBehaviour {
 			}
 		}
 		
-		Debug.LogWarning ("triangles[triangles.Length - 1]: " + triangles [triangles.Length - 1]);
+//		Debug.LogWarning ("triangles[triangles.Length - 1]: " + triangles [triangles.Length - 1]);
 		Mesh groundMesh = new Mesh();
 		groundMesh.vertices = vertices;
 		groundMesh.normals  = normals;
@@ -264,9 +268,9 @@ public class WallBuilder : MonoBehaviour {
 		GameObject a = (new GameObject("teste-chao") as GameObject);
 		a.transform.position = WallBuilder.ROOT;
 		a.AddComponent<MeshFilter>().mesh = groundMesh;
-		a.AddComponent<MeshRenderer>();
-		*/
+		a.AddComponent<MeshRenderer>().material = asa;
 		
+		/*
 		RemoveGround();
 		for (int z = 0; z != WallDepth; ++z) {
 			for (int x = 0; x != WallWidth; ++x) {
@@ -274,7 +278,7 @@ public class WallBuilder : MonoBehaviour {
 				newTile.transform.position = ROOT + new Vector3 ((int)(x - (WallWidth / 2)), 0.01f, (int)(z - (WallDepth / 2)));
 				newTile.transform.parent = parentFloor;
 			}
-		}
+		}*/
 	}
 	
 	public void BuildWalls (){
@@ -305,8 +309,10 @@ public class WallBuilder : MonoBehaviour {
 			List<Vector3> frontalDirectionsAccepted = new List<Vector3>();
 			foreach (Vector3 direction in frontalDirections) {
 				RaycastHit hit;
+#if DRAW_RAY
 				Debug.DrawRay(piso.transform.position, 
 				              direction, Color.blue);
+#endif          
 				if (Physics.Raycast(piso.transform.position + new Vector3(0, 0.25f, 0),
 				                    direction - new Vector3(0, 0.25f, 0),
 				                    out hit)) {
@@ -319,8 +325,10 @@ public class WallBuilder : MonoBehaviour {
 				if (frontalDirectionsAccepted.Count	== 3) {
 					foreach (Vector3 direction in sides) {
 						RaycastHit hit;
+#if DRAW_RAY
 						Debug.DrawRay(piso.transform.position, 
 						              direction, Color.red);
+#endif
 						if (Physics.Raycast(piso.transform.position + new Vector3(0, 0.25f, 0),
 						                    direction - new Vector3(0, 0.25f, 0),
 						                    out hit)) {
@@ -346,8 +354,10 @@ public class WallBuilder : MonoBehaviour {
 				else if (frontalDirectionsAccepted.Count == 2) {
 					if (frontalDirectionsAccepted[0] == (Vector3.forward + Vector3.right) && 
 					    frontalDirectionsAccepted[1] == Vector3.forward) {
+#if DRAW_RAY
 						Debug.DrawRay(piso.transform.position,
 						              sides[0], Color.cyan);
+#endif
 						RaycastHit hit;
 						if (Physics.Raycast(piso.transform.position + new Vector3(0, 0.25f, 0),
 							                    sides[0] - new Vector3(0, 0.25f, 0),
@@ -375,8 +385,10 @@ public class WallBuilder : MonoBehaviour {
 					}
 					else if (frontalDirectionsAccepted[0] == (Vector3.forward + Vector3.left) && 
 					    	 frontalDirectionsAccepted[1] == Vector3.forward) {
+#if DRAW_RAY
 						Debug.DrawRay(piso.transform.position,
 						              sides[1], Color.cyan);
+#endif
 						RaycastHit hit;
 						if (Physics.Raycast(piso.transform.position + new Vector3(0, 0.25f, 0),
 							                    sides[1] - new Vector3(0, 0.25f, 0),
@@ -424,8 +436,10 @@ public class WallBuilder : MonoBehaviour {
 			List<Vector3> backwardDirectionsAccepted = new List<Vector3>();
 			foreach (Vector3 direction in backwardDirections) {
 				RaycastHit hit;
+#if DRAW_RAY
 				Debug.DrawRay(piso.transform.position, 
 				              direction, Color.blue);
+#endif
 				if (Physics.Raycast(piso.transform.position + new Vector3(0, 0.25f, 0),
 				                    direction - new Vector3(0, 0.25f, 0),
 				                    out hit)) {
@@ -438,8 +452,10 @@ public class WallBuilder : MonoBehaviour {
 				if (backwardDirectionsAccepted.Count == 3) {
 					foreach (Vector3 direction in sides) {
 						RaycastHit hit;
+#if DRAW_RAY
 						Debug.DrawRay(piso.transform.position, 
 						              direction, Color.red);
+#endif
 						if (Physics.Raycast(piso.transform.position + new Vector3(0, 0.25f, 0),
 						                    direction - new Vector3(0, 0.25f, 0),
 						                    out hit)) {
@@ -465,8 +481,10 @@ public class WallBuilder : MonoBehaviour {
 				else if (backwardDirectionsAccepted.Count == 2) {
 					if (backwardDirectionsAccepted[0] == (Vector3.back + Vector3.right) && 
 					    backwardDirectionsAccepted[1] == Vector3.back) {
+#if DRAW_RAY
 						Debug.DrawRay(piso.transform.position,
 						              sides[0], Color.cyan);
+#endif
 						RaycastHit hit;
 						if (Physics.Raycast(piso.transform.position + new Vector3(0, 0.25f, 0),
 							                    sides[0] - new Vector3(0, 0.25f, 0),
@@ -494,8 +512,10 @@ public class WallBuilder : MonoBehaviour {
 					}
 					else if (backwardDirectionsAccepted[0] == (Vector3.back + Vector3.left) && 
 					    	 backwardDirectionsAccepted[1] == Vector3.back) {
+#if DRAW_RAY
 						Debug.DrawRay(piso.transform.position,
 						              sides[1], Color.cyan);
+#endif
 						RaycastHit hit;
 						if (Physics.Raycast(piso.transform.position + new Vector3(0, 0.25f, 0),
 							                    sides[1] - new Vector3(0, 0.25f, 0),
@@ -572,6 +592,57 @@ public class WallBuilder : MonoBehaviour {
 			}
 			
 			alreadyPlaced [i] = true;
+		}
+		
+		float angleBetweenWalls;
+		
+		//Inicializando InfoWall em cada parede
+		foreach (GameObject wall in GameObject.FindGameObjectsWithTag("Parede"))
+		{
+			if (wall.GetComponent<InfoWall> () == null) {
+				wall.AddComponent<InfoWall> ();
+			}
+			
+			wall.GetComponent<InfoWall> ().color = Color.white;
+			wall.GetComponent<InfoWall> ().wall  = wall.transform;
+			
+			foreach (GameObject cWall in GameObject.FindGameObjectsWithTag("Parede"))
+			{
+				if (wall.Equals (cWall))
+					continue;
+					
+				angleBetweenWalls = (wall.transform.eulerAngles.y - cWall.transform.eulerAngles.y);	
+				
+				if ((angleBetweenWalls - 90f) <  IPSLON &&
+					(angleBetweenWalls - 90f) > -IPSLON)
+				{
+					if (cWall.GetComponent<InfoWall> () == null){
+						cWall.AddComponent<InfoWall> ();
+					}
+					
+					wall.GetComponent<InfoWall> ().rightWall = cWall.transform;
+					cWall.GetComponent<InfoWall> ().leftWall = wall.transform;
+					break;
+				}
+			}
+		}
+		
+		//Preencher leftWall/rightWall que ficaram de fora
+		foreach (GameObject wall in GameObject.FindGameObjectsWithTag("Parede"))
+		{
+			if (wall.GetComponent<InfoWall> ().rightWall == null)
+			{
+				foreach (GameObject cWall in GameObject.FindGameObjectsWithTag("Parede"))
+				{
+					if (cWall.GetComponent<InfoWall> ().leftWall == null)
+					{
+						wall.GetComponent<InfoWall> ().rightWall = cWall.transform;
+						cWall.GetComponent<InfoWall> ().leftWall = wall.transform;
+						break;
+					}
+				}
+				break;
+			}
 		}
 		
 		//removendo quinas fantasma
@@ -675,7 +746,9 @@ public class WallBuilder : MonoBehaviour {
 					Vector3 posicaoArray = new Vector3 (newX, y, newZ);
 					RaycastHit hit2;
 					if (Physics.Raycast (posicaoArray + new Vector3 (0, 0.01f, 0), Vector3.down, out hit2, 1.0f)) {
+#if DRAW_RAY
 						Debug.DrawRay (posicaoArray, Vector3.down * 1.0f, Color.blue);
+#endif
 						if (hit2.transform.tag != "Chao") {
 							GameObject novoChao = Instantiate (floor, posicaoArray, floor.transform.rotation) as GameObject;
 							novoChao.transform.parent = parentFloor;
@@ -687,7 +760,9 @@ public class WallBuilder : MonoBehaviour {
 					Vector3 posicaoArray = new Vector3 (newX, y, newZ);
 					RaycastHit hit2;
 					if (Physics.Raycast (posicaoArray + new Vector3 (0, 0.01f, 0), Vector3.down, out hit2, 1.0f)) {
+#if DRAW_RAY
 						Debug.DrawRay (posicaoArray, Vector3.down * 1.0f, Color.blue);
+#endif
 						if (hit2.transform.tag != "Chao") {
 							GameObject novoChao = Instantiate (floor, posicaoArray, floor.transform.rotation) as GameObject;
 							novoChao.transform.parent = parentFloor;
@@ -699,7 +774,9 @@ public class WallBuilder : MonoBehaviour {
 					Vector3 posicaoArray = new Vector3 (newX, y, zs);
 					RaycastHit hit2;
 					if (Physics.Raycast (posicaoArray + new Vector3 (0, 0.01f, 0), Vector3.down, out hit2, 1.0f)) {
+#if DRAW_RAY
 						Debug.DrawRay (posicaoArray, Vector3.down * 1.0f, Color.blue);
+#endif
 						if (hit2.transform.tag != "Chao") {
 							GameObject novoChao = Instantiate (floor, posicaoArray, floor.transform.rotation) as GameObject;
 							novoChao.transform.parent = parentFloor;
@@ -711,7 +788,9 @@ public class WallBuilder : MonoBehaviour {
 					Vector3 posicaoArray = new Vector3 (newX, y, zs);
 					RaycastHit hit2;
 					if (Physics.Raycast (posicaoArray + new Vector3 (0, 0.01f, 0), Vector3.down, out hit2, 1.0f)) {
+#if DRAW_RAY
 						Debug.DrawRay (posicaoArray, Vector3.down * 1.0f, Color.blue);
+#endif
 						if (hit2.transform.tag != "Chao") {
 							GameObject novoChao = Instantiate (floor, posicaoArray, floor.transform.rotation) as GameObject;
 							novoChao.transform.parent = parentFloor;
@@ -723,7 +802,9 @@ public class WallBuilder : MonoBehaviour {
 					Vector3 posicaoArray = new Vector3 (xs, y, newZ);
 					RaycastHit hit2;
 					if (Physics.Raycast (posicaoArray + new Vector3 (0, 0.01f, 0), Vector3.down, out hit2, 1.0f)) {
+#if DRAW_RAY
 						Debug.DrawRay (posicaoArray, Vector3.down * 1.0f, Color.blue);
+#endif
 						if (hit2.transform.tag != "Chao") {
 							GameObject novoChao = Instantiate (floor, posicaoArray, floor.transform.rotation) as GameObject;
 							novoChao.transform.parent = parentFloor;
@@ -735,7 +816,9 @@ public class WallBuilder : MonoBehaviour {
 					Vector3 posicaoArray = new Vector3 (xs, y, newZ);
 					RaycastHit hit2;
 					if (Physics.Raycast (posicaoArray + new Vector3 (0, 0.01f, 0), Vector3.down, out hit2, 1.0f)) {
+#if DRAW_RAY
 						Debug.DrawRay (posicaoArray, Vector3.down * 1.0f, Color.blue);
+#endif
 						if (hit2.transform.tag != "Chao") {
 							GameObject novoChao = Instantiate (floor, posicaoArray, floor.transform.rotation) as GameObject;
 							novoChao.transform.parent = parentFloor;

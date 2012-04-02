@@ -44,6 +44,7 @@ public class WallBuilderMouseHandler : MonoBehaviour {
 		
 		if (Input.GetKey (KeyCode.X))
 		{
+			wallBuilder.BuildGround ();
 			if (Input.GetKeyDown (KeyCode.Z))
 			{
 				wallBuilder.Undo ();

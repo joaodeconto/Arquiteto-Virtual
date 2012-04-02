@@ -23,19 +23,23 @@ public class SculptController : MonoBehaviour
 		
 	private RaycastHit hit;
 	private Ray ray;
-	private Transform tmpTransf;
+	private Transform selectedWall;
 	
 	private bool IsExtruding;
 	private bool IsSculptModeOn;
+	private bool IsExtrudingXAxis;
 	
-	private List<WallExtrudeMovement> wallExtrudeMovements;
+	private Vector3 lastMousePosition;
+	
+	private Stack<WallExtrudeMovement> wallExtrudeMovements;
 	
 	void Start ()
 	{
 		IsExtruding	   = false;
 		IsSculptModeOn = false;
+		IsExtrudingXAxis=false;
 		
-		wallExtrudeMovements = new List<WallExtrudeMovement>();
+		wallExtrudeMovements = new Stack<WallExtrudeMovement>();
 	}
 	
 	void Update ()
@@ -50,14 +54,29 @@ public class SculptController : MonoBehaviour
 			Debug.LogWarning ("IsSculptModeOn: " + IsSculptModeOn);
 		}
 		
-		if (IsSculptModeOn && Input.GetMouseButton(0))
+		if (IsSculptModeOn && Input.GetMouseButtonDown(0))
 		{
+			lastMousePosition = Input.mousePosition;
+			
 			SelectWallToExtrude ();
+			
+			IsExtruding = true;
 		}
 		
 		if (IsExtruding)
 		{
+			//TODO update wall and adjacents
+//			selectedWall.position = GetSelect ();
 			
+			lastMousePosition = Input.mousePosition;
+						
+			if (Input.GetMouseButtonUp (0))
+			{
+				//TODO add extrude to stack
+//				wallExtrudeMovements.Add (new WallExtrudeMovement ());
+				
+				IsExtruding = false;
+			}
 		}
 	}
 	
@@ -67,29 +86,31 @@ public class SculptController : MonoBehaviour
 		
 		if (Physics.Raycast (ray, out hit))
 		{
-			tmpTransf = hit.transform;
-			if (tmpTransf.gameObject.layer != LayerMask.NameToLayer("GUI"))
+			selectedWall = hit.transform;
+			if (selectedWall.gameObject.layer != LayerMask.NameToLayer("GUI"))
 			{
-				if (tmpTransf.tag == "Parede")
+				if (selectedWall.tag == "Parede")
 				{
-					//Achando paredes adjacentes
-					GameObject leftWall  = null;
-					GameObject rightWall = null;
-					float minDistanceLeftWall  = float.MaxValue;
-					float minDistanceRightWall = float.MaxValue;
-					
-					Vector3 wallPosition = tmpTransf.position;
-					
-					GameObject[] walls = GameObject.FindGameObjectsWithTag ("Parede");
-					foreach (GameObject wall in walls)
-					{
-						//verificando distancia parede adjacente direita
-//						if (wall.transform.position)
-					}
-					wallExtrudeMovements.Add(new WallExtrudeMovement());
+					if (selectedWall.eulerAngles.y > 65  && selectedWall.eulerAngles.y < 115 ||
+						selectedWall.eulerAngles.y > 245 && selectedWall.eulerAngles.y < 295)
+						IsExtrudingXAxis = true;
+					else
+						IsExtrudingXAxis = false;
 				}
 			}
 		}
+	}
+	
+	private Vector3 GetExtrudedWallPosition ()
+	{
+		ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+		
+		if (Physics.Raycast (ray, out hit))
+		{
+			
+		}
+		
+		return Vector3.zero;
 	}
 	
 	private void ExtrudeWholeWall ()

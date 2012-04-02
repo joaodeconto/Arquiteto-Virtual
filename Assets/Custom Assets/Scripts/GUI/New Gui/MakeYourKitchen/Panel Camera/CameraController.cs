@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -35,12 +36,12 @@ public class CameraController : MonoBehaviour {
 	
 	public InterfaceGUI interfaceGUI;
 
-	public bool areWallsAlwaysVisible {get; private set; }
+	public bool areWallsAlwaysVisible { get; private set; }
 	
 	public Camera mainCamera { get; private set; }
 	public GameObject firstPersonCamera { get; private set; }
 	
-	public WallColor[] walls { get; private set; }
+	public List<InfoWall> walls { get; private set; }
 	
 	internal bool setFirstPerson;
 		
@@ -64,28 +65,11 @@ public class CameraController : MonoBehaviour {
 		mainCamera.transform.RotateAround(mainCamera.transform.right, 0.2f);//It's Rad measure
 		mainCamera.transform.position 		 	 = new Vector3 (WallBuilder.ROOT.x, 1.7f, WallBuilder.ROOT.z - 3.6f);
 		firstPersonCamera.transform.position = new Vector3 (WallBuilder.ROOT.x		 , 1.5f, WallBuilder.ROOT.z);
-		/*
-		wallParents = new WallsParents ();
-		wallParents.parentWallBack  = GameObject.Find ("ParedesBack").transform;
-		wallParents.parentWallFront = GameObject.Find ("ParedesFront").transform;
-		wallParents.parentWallLeft  = GameObject.Find ("ParedesLeft").transform;
-		wallParents.parentWallRight = GameObject.Find ("ParedesRight").transform;
-		
-		wallParents.colorWallLeft  = Color.white;
-		wallParents.colorWallRight = Color.white;
-		wallParents.colorWallBack  = Color.white;
-		wallParents.colorWallFront = Color.white;
-		*/
-		
+
 		ceilParent  = GameObject.Find ("ParentTeto");
 		floorParent = GameObject.Find ("ParentChao");
 		wallParent  = GameObject.Find ("ParentParede");
-		
-		foreach (Transform wall in wallParent.transform)
-		{
-			wall.gameObject.AddComponent<WallColor> ().color = Color.white;
-		}
-		
+				
 		showCeil  = true;
 		showFloor = true;
 		
@@ -215,8 +199,10 @@ public class CameraController : MonoBehaviour {
 		{
 			foreach (Transform wall in wallParent.transform) 
 			{
-				wall.GetChild(0).renderer.material 		= wallMaterial;
-				wall.GetChild(0).renderer.material.color= wall.gameObject.GetComponent<WallColor>().color;
+				wall.GetChild(0).renderer.material = wallMaterial;
+				
+				if (wall.name.Contains("Parede"))
+					wall.GetChild(0).renderer.material.color = wall.gameObject.GetComponent<InfoWall>().color;
 			}
 		}		
 	}
@@ -246,14 +232,14 @@ public class CameraController : MonoBehaviour {
 			{
 				ChangeWallMaterial (wall,
 								  	wallMaterial,
-								  	wall.GetComponent<WallColor> ().color,
+								  	wall.GetComponent<InfoWall> ().color,
 								   	false);
 			}
 			else
 			{
 				ChangeWallMaterial (wall,
 								  	wallMaterialTransparent,
-								  	wall.GetComponent<WallColor> ().color,
+								  	wall.GetComponent<InfoWall> ().color,
 								   	true);
 			}
 		}

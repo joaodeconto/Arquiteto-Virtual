@@ -559,11 +559,11 @@ public class WallBuilder : MonoBehaviour {
 			}
 			#endregion
 			
-			/*GameObject cf = new GameObject("ChaoFantasma");
+			GameObject cf = new GameObject("ChaoFantasma");
 			cf.transform.position = piso.transform.position;
 			cf.tag = "ChaoVazio";
 			cf.transform.parent = parentFloor;
-			*/
+			
 		}
 		
 		GameObject[] corners = GameObject.FindGameObjectsWithTag("Quina");

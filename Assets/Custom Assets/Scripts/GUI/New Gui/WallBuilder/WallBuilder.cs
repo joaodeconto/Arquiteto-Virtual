@@ -234,7 +234,7 @@ public class WallBuilder : MonoBehaviour {
 	
 	public Material asa;
 	public void BuildGround (){
-	
+	/*
 		Vector3[] vertices = new Vector3[lastCreatedWalls.Count];
 		Vector3[] normals  = new Vector3[lastCreatedWalls.Count];
 		int[] triangles    = new int[lastCreatedWalls.Count * 3];
@@ -259,6 +259,7 @@ public class WallBuilder : MonoBehaviour {
 			}
 		}
 		
+		
 //		Debug.LogWarning ("triangles[triangles.Length - 1]: " + triangles [triangles.Length - 1]);
 		Mesh groundMesh = new Mesh();
 		groundMesh.vertices = vertices;
@@ -268,17 +269,30 @@ public class WallBuilder : MonoBehaviour {
 		GameObject a = (new GameObject("teste-chao") as GameObject);
 		a.transform.position = WallBuilder.ROOT;
 		a.AddComponent<MeshFilter>().mesh = groundMesh;
-		a.AddComponent<MeshRenderer>().material = asa;
+		a.AddComponent<MeshRenderer>().material = asa;*/
 		
-		/*
 		RemoveGround();
-		for (int z = 0; z != WallDepth; ++z) {
-			for (int x = 0; x != WallWidth; ++x) {
+/*
+		for (int z = 0; z != WallDepth; ++z)
+		{
+			for (int x = 0; x != WallWidth; ++x)
+			{
 				GameObject newTile = Instantiate (floor, Vector3.zero, floor.transform.rotation) as GameObject;
 				newTile.transform.position = ROOT + new Vector3 ((int)(x - (WallWidth / 2)), 0.01f, (int)(z - (WallDepth / 2)));
 				newTile.transform.parent = parentFloor;
 			}
-		}*/
+		}
+*/		
+		GameObject newTile = Instantiate (floor, Vector3.zero, floor.transform.rotation) as GameObject;
+		newTile.transform.position = WallBuilder.ROOT + new Vector3 ( (int)(- ( WallWidth / 2) ) - 0.5f ,0.1f, (int)( WallDepth / 2) + 0.5f );// + new Vector3 (- (WallWidth / 2 + 0.5f) , 0.01f, - (WallDepth / 2 + 0.5f));
+		newTile.transform.parent = parentFloor;
+		newTile.transform.localScale = new Vector3(WallWidth, WallDepth, 1);	
+		foreach (Material cMaterial in newTile.renderer.materials)
+		{
+			Debug.LogWarning ("materials - cMaterial.name: " + cMaterial.name);
+			cMaterial.mainTextureScale = new Vector2 (WallWidth, WallDepth);
+			cMaterial.SetTextureScale ("_BumpMap", new Vector2 (WallWidth, WallDepth));
+		}
 	}
 	
 	public void BuildWalls (){
@@ -860,22 +874,15 @@ public class WallBuilder : MonoBehaviour {
 	}
 	
 	private void CreateRoof () {
-		GameObject[] pisos = GameObject.FindGameObjectsWithTag ("Chao");
-		if (pisos.Length > 0) {
-			Vector3 posicao;
-			Quaternion rotacao;
-			foreach (GameObject piso in pisos) {
-				posicao = piso.transform.position;
-				rotacao = Quaternion.identity;
-				posicao.y = 2.5f;
-				GameObject newTeto = Instantiate(ceil, posicao, rotacao) as GameObject;
-				newTeto.transform.localEulerAngles = new Vector3(90, 0, 0);
-				newTeto.transform.parent = parentCeil;
-			}
-		}
-		else {
-			Debug.LogWarning ("Não existe chão! Por isso não pode ser criado ceil.");
-			return;
+		GameObject newCeil = Instantiate(ceil, Vector3.zero, ceil.transform.rotation) as GameObject;	
+		newCeil.transform.position = WallBuilder.ROOT + new Vector3 ( (int)(- ( WallWidth / 2) ) - 0.5f , 2.5f , (int)( WallDepth / 2) + 0.5f );// + new Vector3 (- (WallWidth / 2 + 0.5f) , 0.01f, - (WallDepth / 2 + 0.5f));
+		newCeil.transform.parent = parentCeil;
+		newCeil.transform.localScale = new Vector3(WallWidth, WallDepth, 1);	
+		foreach (Material cMaterial in newCeil.renderer.materials)
+		{
+			Debug.LogWarning ("materials - cMaterial.name: " + cMaterial.name);
+			cMaterial.mainTextureScale = new Vector2 (WallWidth, WallDepth);
+			cMaterial.SetTextureScale ("_BumpMap", new Vector2 (WallWidth, WallDepth));
 		}
 	}
 	

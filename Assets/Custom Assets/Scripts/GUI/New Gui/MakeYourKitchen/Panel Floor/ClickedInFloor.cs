@@ -35,7 +35,7 @@ public class ClickedInFloor : MonoBehaviour {
 				RaycastHit hit = new RaycastHit();
 				
 				if (Physics.Raycast(ray, out hit)) {
-					if (hit.transform.tag == "ChaoParent") {
+					if (hit.transform.tag == "Chao") {
 						GUIPanelFloor.SetActiveRecursively(true);
 						ListPanelFloor.SetActiveRecursively(true);
 					}

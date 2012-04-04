@@ -219,7 +219,7 @@ public class SnapBehaviour : MonoBehaviour {
 			ray = new Ray(origin, Vector3.down);
 //			Debug.DrawRay(ray.origin, ray.direction * 100, Color.cyan);
 			if(Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.NameToLayer("Cenario"))){			
-				if(hit.transform.tag == "ChaoParent" || hit.transform.tag == "ParedeParent"){
+				if(hit.transform.tag == "Chao" || hit.transform.tag == "Parede"){
 					++foundGround;
 				} else {
 //					Debug.Log(hit.transform.tag);	

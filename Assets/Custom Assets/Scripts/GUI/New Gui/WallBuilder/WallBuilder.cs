@@ -10,6 +10,11 @@ public class InfoWall : MonoBehaviour
 	public Transform rightWall;
 	public Transform leftWall;
 	public Color color;
+	
+	public void SetColor (Color color)
+	{
+		this.color = color;
+	}
 }
 
 public class WallBuilder : MonoBehaviour {
@@ -232,7 +237,6 @@ public class WallBuilder : MonoBehaviour {
 		}
 	}
 	
-	public Material asa;
 	public void BuildGround (){
 	/*
 		Vector3[] vertices = new Vector3[lastCreatedWalls.Count];
@@ -302,6 +306,42 @@ public class WallBuilder : MonoBehaviour {
 		
 		CreateRoof();
 		
+		GameObject floor = GameObject.FindWithTag ("Chao");
+		Vector3 floorSizeOffset = floor.transform.localScale;
+		Vector3 floorPosition   = floor.transform.localPosition;
+		floorSizeOffset.z = floorSizeOffset.y;
+		floorSizeOffset.y = 0;
+		Debug.LogWarning ("floorSizeOffset: " + floorSizeOffset);
+		
+		GameObject newWall;
+		
+		//0
+		newWall = Instantiate (	wall,
+								floorPosition + (Vector3.right * floorSizeOffset.x), 
+								Quaternion.Euler (Vector3.up * 0.0f)) as GameObject;
+		ChangeWalMaterialAndScale (newWall, WallWidth);
+		
+		//90
+		newWall = Instantiate (	wall,
+								floorPosition
+									+ (Vector3.right * floorSizeOffset.x) 
+										- (Vector3.forward * floorSizeOffset.z),
+								Quaternion.Euler (Vector3.up * 90.0f)) as GameObject;
+		ChangeWalMaterialAndScale (newWall, WallDepth);
+		
+		//180
+		newWall = Instantiate (	wall,
+								floorPosition - (Vector3.forward * floorSizeOffset.z),
+								Quaternion.Euler (Vector3.up * 180.0f)) as GameObject;
+		ChangeWalMaterialAndScale (newWall, WallWidth);
+				
+		//270
+		newWall = Instantiate (	wall,
+								floorPosition,
+								Quaternion.Euler (Vector3.up * 270.0f)) as GameObject;
+		ChangeWalMaterialAndScale (newWall, WallDepth);
+		
+		/*
 		GameObject[] pisos = GameObject.FindGameObjectsWithTag ("Chao");
 		if (pisos.Length == 0) 
 		{
@@ -609,17 +649,18 @@ public class WallBuilder : MonoBehaviour {
 		}
 		
 		float angleBetweenWalls;
-		
+			
+		*/
 		//Inicializando InfoWall em cada parede
-		foreach (GameObject wall in GameObject.FindGameObjectsWithTag("Parede"))
+		foreach (GameObject cWall in GameObject.FindGameObjectsWithTag("Parede"))
 		{
-			if (wall.GetComponent<InfoWall> () == null) {
-				wall.AddComponent<InfoWall> ();
+			if (cWall.GetComponent<InfoWall> () == null) {
+				cWall.AddComponent<InfoWall> ();
 			}
-			
-			wall.GetComponent<InfoWall> ().color = Color.white;
-			wall.GetComponent<InfoWall> ().wall  = wall.transform;
-			
+			cWall.GetComponent<InfoWall> ().color = Color.white;
+			cWall.GetComponent<InfoWall> ().wall  = cWall.transform;
+		
+			/*
 			foreach (GameObject cWall in GameObject.FindGameObjectsWithTag("Parede"))
 			{
 				if (wall.Equals (cWall))
@@ -638,9 +679,10 @@ public class WallBuilder : MonoBehaviour {
 					cWall.GetComponent<InfoWall> ().leftWall = wall.transform;
 					break;
 				}
-			}
+			}	
+		*/
 		}
-		
+		/*
 		//Preencher leftWall/rightWall que ficaram de fora
 		foreach (GameObject wall in GameObject.FindGameObjectsWithTag("Parede"))
 		{
@@ -665,27 +707,51 @@ public class WallBuilder : MonoBehaviour {
 		{
 			Destroy (ghostCorner);
 		}
+			
+		*/
 		
 		Application.LoadLevel(4);
 		
 	}
 	
+	private void ChangeWalMaterialAndScale (GameObject newWall, float wallScaleX)
+	{
+		newWall.transform.localScale = new Vector3 (wallScaleX, 1, 1);
+				
+		foreach (Material cMaterial in newWall.transform.GetChild(0).renderer.materials)
+		{
+			cMaterial.mainTextureScale = new Vector2 (wallScaleX, 1);
+			cMaterial.SetTextureScale ("_BumpMap", new Vector2 (wallScaleX, 1));
+		}
+		
+		newWall.transform.parent = parentWalls.transform;
+	}
+	
 	private GameObject CreateWall ( Vector3 initialPosition, Vector3 finalPosition )
 	{
-		GameObject newWall = Instantiate (wall, initialPosition, Quaternion.identity) as GameObject;
+		float wallAngle = Vector3.Angle (Vector3.right, (finalPosition - initialPosition));
+		Debug.LogWarning ("wallAngle: " + wallAngle);
+		
+//		if (initialPosition.z > finalPosition.z)
+//			wallAngle += 180f;
+//		else 
+//			wallAngle += 180f;
+		
+		Vector3 a;
+		if (initialPosition.x > finalPosition.x)
+		{
+			a = initialPosition;
+		}
+		else
+		{
+			a = finalPosition;
+		}
+			
+		GameObject newWall = Instantiate (wall, a, Quaternion.Euler(new Vector3(0,wallAngle,0))) as GameObject;
 		 
 		float wallScaleX = Vector3.Distance (finalPosition, initialPosition);
 		newWall.transform.localScale = new Vector3 (wallScaleX, 1, 1);
-		
-		float wallAngle = Vector3.Angle (Vector3.forward, (finalPosition - initialPosition).normalized);
-			
-		if (firstPosition.x < finalPosition.x)
-			wallAngle += 90f;
-		else
-			wallAngle = 90f - wallAngle;
-		
-		newWall.transform.localEulerAngles = Vector3.up * wallAngle;
-		
+				
 		foreach (Material cMaterial in newWall.transform.GetChild(0).renderer.materials)
 		{
 			cMaterial.mainTextureScale = new Vector2 (wallScaleX, 1);
@@ -694,6 +760,7 @@ public class WallBuilder : MonoBehaviour {
 		
 		newWall.transform.parent = parentWalls.transform;
 		
+		/*
 		//Testando para ver se há uma parede exatamente sobre o mesmo lugar
 		GameObject[] walls = GameObject.FindGameObjectsWithTag("Parede");
 		foreach (GameObject cWall in walls)
@@ -708,7 +775,7 @@ public class WallBuilder : MonoBehaviour {
 				newWall.transform.position		   = newWall.transform.position + (newWall.transform.right.normalized * wallScaleX);
 				break;
 			}
-		}
+		}*/
 		
 		return newWall;
 	}

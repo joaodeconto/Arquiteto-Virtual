@@ -117,7 +117,7 @@ public class Painter: MonoBehaviour {
 								if (hit.transform.tag.Equals("Parede")) {
 									color = hit.transform.GetComponentInChildren<Renderer>().material.color;
 								}
-								else if (hit.transform.name.Equals("TetoParent")) {
+								else if (hit.transform.name.Equals("Teto")) {
 									color = hit.transform.renderer.material.color;
 								}
 							}
@@ -191,7 +191,7 @@ public class Painter: MonoBehaviour {
 										nameObject = I18n.t("Parede");
 										render = hit.transform.GetComponentInChildren<Renderer>();
 									}
-									else if (hit.transform.name.Equals("TetoParent")) {
+									else if (hit.transform.tag.Equals("Teto")) {
 										nameObject = I18n.t("Teto");
 										render = hit.transform.renderer;
 									}

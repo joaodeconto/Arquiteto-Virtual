@@ -53,6 +53,8 @@ public class CameraController : MonoBehaviour {
 	private bool showFloor;
 	
 	private bool isGuiLocked;
+	
+	private Vector3 lastCamPosition;
 		
 	void Start ()
 	{
@@ -223,24 +225,31 @@ public class CameraController : MonoBehaviour {
 		
 		Vector3 camForwardVector = mainCamera.transform.forward;
 		
+		if (Mathf.Abs(Vector3.Distance(camForwardVector,lastCamPosition)) < 0.1f)
+			return;
+			
 		foreach (Transform wall in wallParent.transform)
 		{
 			if (wall.name.Contains("Quina"))
 				continue;
+			//se a cor do InfoWall da parede for diferente da cor do material do renderer da parede
+			//atualiza a cor do InfoWall
+			if (wall.transform.GetChild(0).renderer.materials[0].color != wall.GetComponent<InfoWall> ().color)	
+				wall.GetComponent<InfoWall> ().color = wall.transform.GetChild(0).renderer.materials[0].color;
 				
 			if (Vector3.Angle (camForwardVector, wall.transform.forward) < 120f)
 			{
 				ChangeWallMaterial (wall,
 								  	wallMaterial,
 								  	wall.GetComponent<InfoWall> ().color,
-								   	false);
+								   	true);
 			}
 			else
 			{
 				ChangeWallMaterial (wall,
 								  	wallMaterialTransparent,
 								  	wall.GetComponent<InfoWall> ().color,
-								   	true);
+								   	false);
 			}
 		}
 	}

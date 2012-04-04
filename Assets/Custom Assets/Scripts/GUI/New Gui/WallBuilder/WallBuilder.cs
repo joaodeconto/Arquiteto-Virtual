@@ -52,6 +52,8 @@ public class WallBuilder : MonoBehaviour {
 	#region Wall Size
 	public int 		WallWidth { get; set; }
 	public int 		WallDepth  { get; set; }
+	public float 	RealWallWidth { get; set; }
+	public float 	RealWallDepth  { get; set; }
 	
 	public int 		MaxWallWidth { get; private set; }
 	public int 		MaxWallDepth  { get; private set; }
@@ -69,233 +71,32 @@ public class WallBuilder : MonoBehaviour {
 		WallWidth = 5;
 		WallDepth = 5;
 		
-		MaxWallWidth = 10;
-		MaxWallDepth = 10;
+		MaxWallWidth = 100;
+		MaxWallDepth = 100;
 		
-		MinWallWidth = 3;
-		MinWallDepth = 3;
+		MinWallWidth = 30;
+		MinWallDepth = 30;
 		
 		ROOT = new Vector3(1000,0,1000);
 		
 		mov = transform.position;
 		zoom = GameObject.FindWithTag("MainCamera").camera.orthographicSize;
-		
-		lastCreatedWalls = new Stack<GameObject> ();
-		redoCreatedWalls = new Stack<GameObject> ();
 	}
-	/*
-	private void OnEnable () {
-		parentFloor.GetComponent<MeshFilter>().sharedMesh = null;
-		foreach (GameObject chaoVazio in GameObject.FindGameObjectsWithTag("ChaoVazio")) {
-			Destroy(chaoVazio);
-		}
-		parentCeil.GetComponent<MeshFilter>().sharedMesh = null;
-		foreach (Transform walls in parentWalls.GetWalls()) {
-			walls.GetComponent<MeshFilter>().sharedMesh = null;
-		}
-		grid.renderer.enabled = true;
-	}*/
 	#endregion
-	
-	private Ray ray;
-	private RaycastHit hit;
-	private bool IsFirstClick = true;
-	private Vector3 secondPosition;
-	
-	private Stack<GameObject> lastCreatedWalls;
-	private Stack<GameObject> redoCreatedWalls;
-	
-	public void CreateWall ()
-	{
-		ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-		Physics.Raycast (ray, out hit);
-			
-		GameObject box = GameObject.CreatePrimitive (PrimitiveType.Cube);
-		box.transform.position  = new Vector3 (ray.origin.x, 0 , ray.origin.z);
-		box.transform.localScale = Vector3.one * 0.25f;
-		  
-		if (IsFirstClick)
-		{
-			firstPosition = box.transform.position;
-			IsFirstClick = !IsFirstClick;
-		}
-		else
-		{
-			//Limpar redo
-			redoCreatedWalls.Clear ();
 		
-			secondPosition = box.transform.position;
-			
-			GameObject newWall = Instantiate (wall, firstPosition, Quaternion.identity) as GameObject;
-			lastCreatedWalls.Push (newWall);
-			
-			float wallScaleX = Vector3.Distance (secondPosition, firstPosition);
-			newWall.transform.localScale = new Vector3 ( wallScaleX, 1, 1 );
-			
-			float wallAngle = Vector3.Angle(Vector3.forward, (secondPosition - firstPosition).normalized);
-				
-			if (firstPosition.x < secondPosition.x)
-				wallAngle += 90f;
-			else
-				wallAngle = 90f - wallAngle;
-			
-			newWall.transform.localEulerAngles = Vector3.up * wallAngle;
-			
-			foreach (Material cMaterial in newWall.transform.GetChild(0).renderer.materials)
-			{
-				Debug.LogWarning ("materials - cMaterial.name: " + cMaterial.name );
-				cMaterial.mainTextureScale = new Vector2 (wallScaleX, 1);
-				cMaterial.SetTextureScale ("_BumpMap", new Vector2 (wallScaleX, 1));
-			}
-			
-			firstPosition = secondPosition;
-		}
-	
-	/*
-	
-		float x, y, z;
-								
-		x = ray.origin.x;
-		y = 0.01f;
-		z = ray.origin.z;
-		x = x - (int)x > 0.5f ? (int)x + 1 : x - (int)x < -0.5f ? (int)x - 1 : (int)x;
-		z = z - (int)z > 0.5f ? (int)z + 1 : z - (int)z < -0.5f ? (int)z - 1 : (int)z;
-		
-		Vector3 posicaoCalibrada = new Vector3 (x, y, z);
-		GameObject[] pisos = GameObject.FindGameObjectsWithTag ("Chao");
-		if (pisos.Length > 0) {
-			Vector3[] direcoes = new Vector3[] { Vector3.forward, Vector3.right, Vector3.left, Vector3.back };
-			int countDirecoes = 0;
-			foreach (Vector3 direcao in direcoes) {
-				RaycastHit hit2;
-				if (Physics.Raycast (posicaoCalibrada, direcao, out hit2, 1.0f)) {
-					Debug.DrawRay (posicaoCalibrada, direcao * 1.0f, Color.blue);
-					if (hit2.transform.tag == "Chao" && countDirecoes != 1) {
-						GameObject novoChao = Instantiate (floor, posicaoCalibrada, floor.transform.rotation) as GameObject;
-						novoChao.transform.parent = parentFloor;
-						countDirecoes++;
-					}
-				}
-			}
-		}
-		if (activeGrid)
-			firstPosition = posicaoCalibrada;*/
-	}
-	
-	public void Redo ()
-	{
-		if (redoCreatedWalls.Count == 0)
-			return;
-			
-		GameObject redoWall = redoCreatedWalls.Pop ();
-		lastCreatedWalls.Push (redoWall);
-		
-		redoWall.SetActiveRecursively(true);
-		firstPosition = redoWall.transform.position + Vector3.RotateTowards((Vector3.forward * redoWall.transform.localScale.x),Vector3.up,redoWall.transform.eulerAngles.y,100);
-		firstPosition.y = 0; 
-	}
-	
-	public void Undo ()
-	{
-		if (lastCreatedWalls.Count == 0)
-			return;
-			
-		GameObject lastWall = lastCreatedWalls.Pop ();
-		redoCreatedWalls.Push (lastWall);
-		lastWall.SetActiveRecursively(false);
-		lastWall = lastCreatedWalls.Peek ();
-		firstPosition = lastWall.transform.position + Vector3.RotateTowards ((Vector3.forward * lastWall.transform.localScale.x), Vector3.up, lastWall.transform.eulerAngles.y, 100);
-		firstPosition.y = 0; 
-	}
-	
-	public void ClearCaches ()
-	{
-		GameObject cWall = null;
-		while (lastCreatedWalls.Count != 0)
-		{
-			cWall = lastCreatedWalls.Pop();
-			DestroyImmediate (cWall);
-		}
-		while (redoCreatedWalls.Count != 0)
-		{
-			cWall = redoCreatedWalls.Pop();
-			DestroyImmediate (cWall);
-		}
-		
-		Debug.LogWarning ("lastCreatedWalls.Count: " + lastCreatedWalls.Count);
-		Debug.LogWarning ("redoCreatedWalls.Count: " + redoCreatedWalls.Count);
-	}
-	
-	public void DestroyTile ()
-	{
-		Ray ray = mainCamera.ScreenPointToRay (Input.mousePosition);
-		RaycastHit hit;
-		if (Physics.Raycast (ray, out hit)) {
-			if (hit.transform.tag == "Chao") {
-				Destroy (hit.transform.gameObject);
-			}
-		}
-	}
-	
 	public void BuildGround (){
-	/*
-		Vector3[] vertices = new Vector3[lastCreatedWalls.Count];
-		Vector3[] normals  = new Vector3[lastCreatedWalls.Count];
-		int[] triangles    = new int[lastCreatedWalls.Count * 3];
-		Vector2[] uvs	   = new Vector2[lastCreatedWalls.Count * 3];
-		
-		GameObject cWall = null;
-		for (int i = 0, j = 3; lastCreatedWalls.Count != 0; ++i, j += 3 )
-		{
-			cWall = lastCreatedWalls.Pop ();
-			vertices[i] = cWall.transform.position;
-			normals[i]  = Vector3.up;
-			DestroyImmediate (cWall);
-			
-			if ( lastCreatedWalls.Count > 2)
-			{
-				Debug.LogWarning ("triangles.Length: " + triangles.Length);
-				Debug.LogWarning ("j : " + j);
-			
-				triangles [j] = 0;
-				triangles [j + 1] = i + 1;
-				triangles [j + 2] = i + 2;
-			}
-		}
-		
-		
-//		Debug.LogWarning ("triangles[triangles.Length - 1]: " + triangles [triangles.Length - 1]);
-		Mesh groundMesh = new Mesh();
-		groundMesh.vertices = vertices;
-		groundMesh.normals  = normals;
-		groundMesh.triangles= triangles;
-		
-		GameObject a = (new GameObject("teste-chao") as GameObject);
-		a.transform.position = WallBuilder.ROOT;
-		a.AddComponent<MeshFilter>().mesh = groundMesh;
-		a.AddComponent<MeshRenderer>().material = asa;*/
-		
+	
 		RemoveGround();
-/*
-		for (int z = 0; z != WallDepth; ++z)
-		{
-			for (int x = 0; x != WallWidth; ++x)
-			{
-				GameObject newTile = Instantiate (floor, Vector3.zero, floor.transform.rotation) as GameObject;
-				newTile.transform.position = ROOT + new Vector3 ((int)(x - (WallWidth / 2)), 0.01f, (int)(z - (WallDepth / 2)));
-				newTile.transform.parent = parentFloor;
-			}
-		}
-*/		
+
 		GameObject newTile = Instantiate (floor, Vector3.zero, floor.transform.rotation) as GameObject;
-		newTile.transform.position = WallBuilder.ROOT + new Vector3 ( (int)(- ( WallWidth / 2) ) - 0.5f ,0.1f, (int)( WallDepth / 2) + 0.5f );// + new Vector3 (- (WallWidth / 2 + 0.5f) , 0.01f, - (WallDepth / 2 + 0.5f));
+		newTile.transform.position = WallBuilder.ROOT + new Vector3 ( (int)(- ( RealWallWidth / 2) ) - 0.5f ,0.1f, (int)( RealWallDepth / 2) + 0.5f );// + new Vector3 (- (RealWallWidth / 2 + 0.5f) , 0.01f, - (RealWallDepth / 2 + 0.5f));
 		newTile.transform.parent = parentFloor;
-		newTile.transform.localScale = new Vector3(WallWidth, WallDepth, 1);	
+		newTile.transform.localScale = new Vector3(RealWallWidth, RealWallDepth, 1);	
 		foreach (Material cMaterial in newTile.renderer.materials)
 		{
 			Debug.LogWarning ("materials - cMaterial.name: " + cMaterial.name);
-			cMaterial.mainTextureScale = new Vector2 (WallWidth, WallDepth);
-			cMaterial.SetTextureScale ("_BumpMap", new Vector2 (WallWidth, WallDepth));
+			cMaterial.mainTextureScale = new Vector2 (RealWallWidth, RealWallDepth);
+			cMaterial.SetTextureScale ("_BumpMap", new Vector2 (RealWallWidth, RealWallDepth));
 		}
 	}
 	
@@ -319,7 +120,7 @@ public class WallBuilder : MonoBehaviour {
 		newWall = Instantiate (	wall,
 								floorPosition + (Vector3.right * floorSizeOffset.x), 
 								Quaternion.Euler (Vector3.up * 0.0f)) as GameObject;
-		ChangeWalMaterialAndScale (newWall, WallWidth);
+		ChangeWalMaterialAndScale (newWall, RealWallWidth);
 		
 		//90
 		newWall = Instantiate (	wall,
@@ -327,19 +128,19 @@ public class WallBuilder : MonoBehaviour {
 									+ (Vector3.right * floorSizeOffset.x) 
 										- (Vector3.forward * floorSizeOffset.z),
 								Quaternion.Euler (Vector3.up * 90.0f)) as GameObject;
-		ChangeWalMaterialAndScale (newWall, WallDepth);
+		ChangeWalMaterialAndScale (newWall, RealWallDepth);
 		
 		//180
 		newWall = Instantiate (	wall,
 								floorPosition - (Vector3.forward * floorSizeOffset.z),
 								Quaternion.Euler (Vector3.up * 180.0f)) as GameObject;
-		ChangeWalMaterialAndScale (newWall, WallWidth);
+		ChangeWalMaterialAndScale (newWall, RealWallWidth);
 				
 		//270
 		newWall = Instantiate (	wall,
 								floorPosition,
 								Quaternion.Euler (Vector3.up * 270.0f)) as GameObject;
-		ChangeWalMaterialAndScale (newWall, WallDepth);
+		ChangeWalMaterialAndScale (newWall, RealWallDepth);
 		
 		/*
 		GameObject[] pisos = GameObject.FindGameObjectsWithTag ("Chao");
@@ -942,14 +743,14 @@ public class WallBuilder : MonoBehaviour {
 	
 	private void CreateRoof () {
 		GameObject newCeil = Instantiate(ceil, Vector3.zero, ceil.transform.rotation) as GameObject;	
-		newCeil.transform.position = WallBuilder.ROOT + new Vector3 ( (int)(- ( WallWidth / 2) ) - 0.5f , 2.5f , (int)( WallDepth / 2) + 0.5f );// + new Vector3 (- (WallWidth / 2 + 0.5f) , 0.01f, - (WallDepth / 2 + 0.5f));
+		newCeil.transform.position = WallBuilder.ROOT + new Vector3 ( (int)(- ( RealWallWidth / 2) ) - 0.5f , 2.5f , (int)( RealWallDepth / 2) + 0.5f );// + new Vector3 (- (RealWallWidth / 2 + 0.5f) , 0.01f, - (RealWallDepth / 2 + 0.5f));
 		newCeil.transform.parent = parentCeil;
-		newCeil.transform.localScale = new Vector3(WallWidth, WallDepth, 1);	
+		newCeil.transform.localScale = new Vector3(RealWallWidth, RealWallDepth, 1);	
 		foreach (Material cMaterial in newCeil.renderer.materials)
 		{
 			Debug.LogWarning ("materials - cMaterial.name: " + cMaterial.name);
-			cMaterial.mainTextureScale = new Vector2 (WallWidth, WallDepth);
-			cMaterial.SetTextureScale ("_BumpMap", new Vector2 (WallWidth, WallDepth));
+			cMaterial.mainTextureScale = new Vector2 (RealWallWidth, RealWallDepth);
+			cMaterial.SetTextureScale ("_BumpMap", new Vector2 (RealWallWidth, RealWallDepth));
 		}
 	}
 	

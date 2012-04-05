@@ -380,11 +380,20 @@ public class CameraController : MonoBehaviour {
 		{
 			wallChild.renderer.material 	  = newMaterial;
 			wallChild.renderer.material.color = selectedColor;
+					
+			float wallScaleX = wall.localScale.x;
+				
+			foreach (Material cMaterial in wall.transform.GetChild(0).renderer.materials)
+			{
+				cMaterial.mainTextureScale = new Vector2 (wallScaleX, 1);
+				cMaterial.SetTextureScale ("_BumpMap", new Vector2 (wallScaleX, 1));
+			}
+				
 			if (wall.collider != null)
 			{
 				wall.collider.enabled = enableWall;
 			}
+			
 		}
-	}
-	
+	}		
 }

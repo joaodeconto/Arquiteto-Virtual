@@ -47,6 +47,9 @@ public class ColliderControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	public void Disable () {
+		
+		Screen.lockCursor = false;
+		
 		cameraController.interfaceGUI.uiRootFPS.SetActiveRecursively (false);
 		
 		GameObject[] moveis = GameObject.FindGameObjectsWithTag("Movel");

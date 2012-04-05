@@ -23,6 +23,9 @@ public class SnapBehaviour : MonoBehaviour {
 	private float coolDownTime;
 	private bool enableDrag;
 	
+	private Vector3 p; //Pivot value -1..1, calculated from Mesh bounds
+    private Vector3 last_p; //Last used pivot
+	
 	#region Unity Methods
 	
 	public static void ActivateAll(){
@@ -73,7 +76,6 @@ public class SnapBehaviour : MonoBehaviour {
     }
 	
 	void OnMouseDown(){
-		
 		if(!enabled)
 			return;
 		
@@ -90,6 +92,11 @@ public class SnapBehaviour : MonoBehaviour {
 		
 		if(activeFurniture != null)
 			activeFurniture.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+		
+		Bounds b = GetComponentInChildren<MeshFilter>().mesh.bounds;
+        Vector3 offset = -1 * b.center;
+        p = last_p = new Vector3(offset.x / b.extents.x, offset.y / b.extents.y, offset.z / b.extents.z);
+
 	}
 	
 	float vertical,horizontal;
@@ -113,11 +120,15 @@ public class SnapBehaviour : MonoBehaviour {
 			if (hit.transform.tag == "Grid")
 				return;//Ignore Grid			
 				
-			if (hit.transform.tag == "ParedeParent" ||
-			    hit.transform.tag == "ChaoParent" ||
-				hit.transform.tag == "TetoParent"){
+			if (hit.transform.tag == "Parede" ||
+			    hit.transform.tag == "Chao" ||
+				hit.transform.tag == "Teto"){
 				
-				if (GetComponent<InformacoesMovel>().tipoMovel == TipoMovel.FIXO) {
+				if( p != last_p) { 
+					//Detects user input on any of the three sliders
+	                UpdatePivot(transform.GetComponentInChildren<MeshFilter>());
+            	}
+				if (GetComponent<InformacoesMovel>().tipoMovel != TipoMovel.MOVEL) {
 	           		transform.position = (hit.point.x * transform.parent.right)	+ 
 										 (hit.point.z * transform.parent.forward);
 				} else {
@@ -133,6 +144,26 @@ public class SnapBehaviour : MonoBehaviour {
 		}
 	}
 	
+	bool MinMax (float value, float min, float max)
+	{
+	    return (value > min) && (value < max);
+	}
+	
+	void UpdatePivot (MeshFilter meshFilter) {
+		Vector3 diff = Vector3.Scale(meshFilter.mesh.bounds.extents, last_p - p); //Calculate difference in 3d position
+    	meshFilter.transform.position -= Vector3.Scale(diff, meshFilter.transform.localScale); //Move object position
+        last_p = p;
+		if(collider) {
+            if(collider is BoxCollider) {
+                ((BoxCollider) collider).center += diff;
+            } else if(collider is CapsuleCollider) {
+                ((CapsuleCollider) collider).center += diff;
+            } else if(collider is SphereCollider) {
+                ((SphereCollider) collider).center += diff;
+            }
+        }
+	}
+	
 	void OnMouseUp(){
 		
 		if(!isSelected || !enabled)
@@ -140,7 +171,7 @@ public class SnapBehaviour : MonoBehaviour {
 			
 		enableDrag = false;
 		
-		if (GetComponent<InformacoesMovel>().tipoMovel == TipoMovel.FIXO) {
+		if (GetComponent<InformacoesMovel>().tipoMovel != TipoMovel.MOVEL) {
 			this.rigidbody.constraints = RigidbodyConstraints.FreezePositionY |
 											RigidbodyConstraints.FreezeRotation;
 		}
@@ -188,7 +219,7 @@ public class SnapBehaviour : MonoBehaviour {
 			ray = new Ray(origin, Vector3.down);
 //			Debug.DrawRay(ray.origin, ray.direction * 100, Color.cyan);
 			if(Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.NameToLayer("Cenario"))){			
-				if(hit.transform.tag == "ChaoParent" || hit.transform.tag == "ParedeParent"){
+				if(hit.transform.tag == "Chao" || hit.transform.tag == "Parede"){
 					++foundGround;
 				} else {
 //					Debug.Log(hit.transform.tag);	
@@ -220,7 +251,7 @@ public class SnapBehaviour : MonoBehaviour {
 				}
 			}
 			
-			if (GetComponent<InformacoesMovel>().tipoMovel == TipoMovel.FIXO)
+			if (GetComponent<InformacoesMovel>().tipoMovel != TipoMovel.MOVEL)
 			{
 				this.transform.position  = nearestAvailableGround.transform.position;
 			} 

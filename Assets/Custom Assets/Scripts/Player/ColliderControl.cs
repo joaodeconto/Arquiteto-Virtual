@@ -32,12 +32,13 @@ public class ColliderControl : MonoBehaviour {
 			teto.renderer.enabled = teto.collider.enabled = true;
 		
 		int i = 0;
-		foreach (Transform parede in cameraController.wallParents.GetWalls()) {
-			if (parede != null) {
-				parede.renderer.material = cameraController.wallMaterial;
-				parede.renderer.material.color = cameraController.wallParents.GetWallColor(i);
-				parede.collider.enabled = true;
-				parede.collider.isTrigger = false;
+		foreach (InfoWall wallColor in cameraController.walls) {
+			if (wallColor != null)
+			{
+				wallColor.wall.renderer.material = cameraController.wallMaterial;
+				wallColor.wall.renderer.material.color = wallColor.color;
+				wallColor.wall.collider.enabled = true;
+				wallColor.wall.collider.isTrigger = false;
 				++i;
 			}
 		}
@@ -74,9 +75,11 @@ public class ColliderControl : MonoBehaviour {
 			}
 		}
 		
-		if (cameraController.wallParents != null) {
-			foreach (Transform parede in cameraController.wallParents.GetWalls()) {
-				parede.collider.isTrigger = true;
+		if (cameraController.walls != null)
+		{
+			foreach (InfoWall wallColor in cameraController.walls)
+			{
+				wallColor.wall.collider.isTrigger = true;
 			}
 		}
 		GameObject teto = GameObject.Find("ParentTeto");

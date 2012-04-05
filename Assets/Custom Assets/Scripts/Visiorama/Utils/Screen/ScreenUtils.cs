@@ -13,8 +13,8 @@ public class ScreenUtils {
 	
 	static public void Initialize(int gameTabWidth, int gameTabHeight){
 		
-		if(wasInitialized)
-			Debug.LogWarning("ScreenUtils já foi inicializada.");
+//		if(wasInitialized)
+//			Debug.LogWarning("ScreenUtils já foi inicializada.");
 		
 		RealWidth  = gameTabWidth;
 		RealHeight = gameTabHeight;
@@ -121,12 +121,18 @@ public class ScreenUtils {
 		return new Rect(ScaledFloat(rect.x), ScaledFloat(rect.y), 
 						ScaledFloat(rect.width), ScaledFloat(rect.height));
 	}
+	
+	static public Rect ScaledRectInSenseHeight(Rect rect) {
+		return ScaledRectInSenseHeight(rect.x, rect.y, rect.width, rect.height);
+	}
+	
+	static public Rect ScaledRectInSenseHeight(float x, float y, float width, float height){
+		return new Rect(ScaleHeight(x),ScaleHeight(y),ScaleHeight(width),ScaleHeight(height));
+	}
 
 	static public bool ScreenSizeChange () {
-		Debug.Log((screenWidth != Screen.width) + " - " + screenWidth + " : " + Screen.width);
 		if (screenWidth != Screen.width ||
 			screenHeight != Screen.height) {
-			//Initialize(Screen.width, Screen.height);
 			return true;
 		}
 		return false;

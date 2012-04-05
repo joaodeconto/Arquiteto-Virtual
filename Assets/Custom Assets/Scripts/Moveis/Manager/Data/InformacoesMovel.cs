@@ -22,7 +22,8 @@ public enum Top {
 
 public enum TipoMovel {
 	FIXO,
-	MOVEL
+	MOVEL,
+	LIVRE
 }
 
 public class InformacoesMovel : MonoBehaviour {
@@ -79,6 +80,10 @@ public class InformacoesMovel : MonoBehaviour {
 					Categoria = c.Name;
 				}
 			}
+		}
+		
+		if (tipoMovel != TipoMovel.FIXO) {
+			rigidbody.isKinematic = true;
 		}
 		
 		DrawersAndGlassDoorColorIndex 	 = Line.CurrentLine.GlobalDetailColorIndex;
@@ -294,7 +299,7 @@ public class InformacoesMovel : MonoBehaviour {
 		newFurniture.AddComponent<CalculateBounds>();
 		newFurniture.GetComponent<InformacoesMovel>().Initialize();
 		newFurniture.GetComponent<InformacoesMovel>().CloneInfo(info);
-		if (tipoMovel == TipoMovel.FIXO) {
+		if (tipoMovel != TipoMovel.MOVEL) {
 			newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | 
 												 RigidbodyConstraints.FreezeRotation;
 		}
@@ -322,7 +327,7 @@ public class InformacoesMovel : MonoBehaviour {
 		newFurniture.AddComponent<CalculateBounds>();
 		newFurniture.GetComponent<InformacoesMovel>().Initialize();
 		newFurniture.GetComponent<InformacoesMovel>().CloneInfo(info);
-		if (tipoMovel == TipoMovel.FIXO) {
+		if (tipoMovel != TipoMovel.MOVEL) {
 			newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | 
 												 RigidbodyConstraints.FreezeRotation;
 		}

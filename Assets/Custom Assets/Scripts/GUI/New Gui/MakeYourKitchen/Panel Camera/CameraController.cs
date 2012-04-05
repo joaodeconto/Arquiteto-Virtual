@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -35,22 +36,25 @@ public class CameraController : MonoBehaviour {
 	
 	public InterfaceGUI interfaceGUI;
 
-	public bool areWallsAlwaysVisible {get; private set; }
+	public bool areWallsAlwaysVisible { get; private set; }
 	
 	public Camera mainCamera { get; private set; }
 	public GameObject firstPersonCamera { get; private set; }
 	
-	public WallsParents wallParents { get; private set; }
+	public List<InfoWall> walls { get; private set; }
 	
 	internal bool setFirstPerson;
 		
 	private GameObject ceilParent;
 	private GameObject floorParent;
+	private GameObject wallParent;
 				
 	private bool showCeil;
 	private bool showFloor;
 	
 	private bool isGuiLocked;
+	
+	private Vector3 lastCamPosition;
 		
 	void Start ()
 	{
@@ -63,21 +67,11 @@ public class CameraController : MonoBehaviour {
 		mainCamera.transform.RotateAround(mainCamera.transform.right, 0.2f);//It's Rad measure
 		mainCamera.transform.position 		 	 = new Vector3 (WallBuilder.ROOT.x, 1.7f, WallBuilder.ROOT.z - 3.6f);
 		firstPersonCamera.transform.position = new Vector3 (WallBuilder.ROOT.x		 , 1.5f, WallBuilder.ROOT.z);
-		
-		wallParents = new WallsParents ();
-		wallParents.parentWallBack  = GameObject.Find ("ParedesBack").transform;
-		wallParents.parentWallFront = GameObject.Find ("ParedesFront").transform;
-		wallParents.parentWallLeft  = GameObject.Find ("ParedesLeft").transform;
-		wallParents.parentWallRight = GameObject.Find ("ParedesRight").transform;
-		
-		wallParents.colorWallLeft  = Color.white;
-		wallParents.colorWallRight = Color.white;
-		wallParents.colorWallBack  = Color.white;
-		wallParents.colorWallFront = Color.white;
-		
+
 		ceilParent  = GameObject.Find ("ParentTeto");
 		floorParent = GameObject.Find ("ParentChao");
-		
+		wallParent  = GameObject.Find ("ParentParede");
+				
 		showCeil  = true;
 		showFloor = true;
 		
@@ -118,13 +112,31 @@ public class CameraController : MonoBehaviour {
 		if (setFirstPerson) return;
 		
 		//Show/Hide ceil and floor
-		showCeil = mainCamera.transform.position.y < ceilParent.transform.position.y + 2.45f;
-		//TODO add collider here ceilParent.collider.enabled = showCeil;
-		ceilParent.renderer.enabled = ceilParent.collider.enabled = showCeil;
 		
-		showFloor = mainCamera.transform.position.y > floorParent.transform.position.y;
-		//TODO add collider here floorParent.collider.enabled = showFloor;
-		floorParent.renderer.enabled = floorParent.collider.enabled = showFloor;
+		//Verify if changed state of showCeil
+		if (showCeil != mainCamera.transform.position.y < ceilParent.transform.position.y + 2.45f)
+		{
+			showCeil = !showCeil;
+			foreach (Transform ceil in ceilParent.transform)
+			{
+				ceil.renderer.enabled = showCeil;
+				ceil.collider.enabled = showCeil;
+			}
+		}
+		
+		//Verify if changed state of showFloor 
+		if (showFloor != mainCamera.transform.position.y > floorParent.transform.position.y)
+		{
+			showFloor = !showFloor;
+			foreach (Transform floor in floorParent.transform)
+			{
+				if (!floor.name.Contains("Fantasma"))
+				{
+					floor.renderer.enabled = showFloor;
+					floor.collider.enabled = showFloor;
+				}
+			}
+		}
 	}
 	
 	#region GUI
@@ -134,7 +146,6 @@ public class CameraController : MonoBehaviour {
 		Vector3 upVector    = Vector3.up    * y;
 		
 		mainCamera.transform.Translate((upVector + rightVector) * Time.deltaTime * Step);
-		
 	}
 	
 	public void Rotate (float x, float y)
@@ -188,13 +199,14 @@ public class CameraController : MonoBehaviour {
 		areWallsAlwaysVisible = !areWallsAlwaysVisible;
 		if(areWallsAlwaysVisible)
 		{
-			for(int i = 0; i != 4; ++i)
+			foreach (Transform wall in wallParent.transform) 
 			{
-				wallParents[i].renderer.material = wallMaterial;
-				wallParents[i].renderer.material.color = wallParents.GetWallColor(i);
-
+				wall.GetChild(0).renderer.material = wallMaterial;
+				
+				if (wall.name.Contains("Parede"))
+					wall.GetChild(0).renderer.material.color = wall.gameObject.GetComponent<InfoWall>().color;
 			}
-		}
+		}		
 	}
 	
 	public void Zoom (int step)
@@ -206,92 +218,39 @@ public class CameraController : MonoBehaviour {
 	#endregion
 	private void VerifyWallVisibility ()
 	{
-		if (setFirstPerson) return;
-		
-		if(areWallsAlwaysVisible)
+		if (setFirstPerson || areWallsAlwaysVisible)
 		{
 			return;
 		}
 		
-		Vector3 camEulerAngles = mainCamera.transform.localEulerAngles;
-	
-		//paredes da esquerda
-		if (camEulerAngles.y > 20 && camEulerAngles.y < 160) 
+		Vector3 camForwardVector = mainCamera.transform.forward;
+		
+		if (Mathf.Abs(Vector3.Distance(camForwardVector,lastCamPosition)) < 0.1f)
+			return;
+			
+		foreach (Transform wall in wallParent.transform)
 		{
-			ChangeWallMaterial (wallParents.parentWallLeft,
-							  	wallMaterialTransparent,
-							  	wallParents.colorWallLeft,
-							   	false);
-			
-		
-			wallParents.colorWallLeft = wallParents.parentWallLeft.renderer.material.color;
-	
-		} else {
-			ChangeWallMaterial (wallParents.parentWallLeft,
-						   		wallMaterial,
-						    	wallParents.colorWallLeft,
-						    	true);
-			wallParents.colorWallLeft = wallParents.parentWallLeft.renderer.material.color;
-		}
-		
-		//paredes da direita
-		if (camEulerAngles.y > 200 && camEulerAngles.y < 340) {
-		
-			ChangeWallMaterial(wallParents.parentWallRight,
-							   wallMaterialTransparent,
-							   wallParents.colorWallRight,
-							   false);
-			
-			wallParents.colorWallRight = wallParents.parentWallRight.renderer.material.color;
-			
-		} else {
-			ChangeWallMaterial (wallParents.parentWallRight,
-							   	wallMaterial,
-							   	wallParents.colorWallRight,
-							   	true);
-			
-			wallParents.colorWallRight = wallParents.parentWallRight.renderer.material.color;
-			
-		}
-
-		//paredes de atrás
-		if (camEulerAngles.y > 290 || camEulerAngles.y < 70) {
-			ChangeWallMaterial (wallParents.parentWallBack,
-							   	wallMaterialTransparent,
-							  	wallParents.colorWallBack,
-							   	false);
-			
-			wallParents.colorWallBack = wallParents.parentWallBack.renderer.material.color;
-			
-		} else {
-			ChangeWallMaterial (wallParents.parentWallBack,
-							   	wallMaterial,
-							   	wallParents.colorWallBack,
-							   	true);
-			
-			wallParents.colorWallBack = wallParents.parentWallBack.renderer.material.color;
-			
-		}
-		
-		//paredes de frente
-		if (camEulerAngles.y > 110 && camEulerAngles.y < 270) {
-		
-			ChangeWallMaterial (wallParents.parentWallFront,
-							   	wallMaterialTransparent,
-							   	wallParents.colorWallFront,
-							   	false);
-			
-			wallParents.colorWallFront = wallParents.parentWallFront.renderer.material.color;
-			
-		} else {
-		
-			ChangeWallMaterial (wallParents.parentWallFront,
-							   	wallMaterial,
-							   	wallParents.colorWallFront,
-							   	true);
-			
-			wallParents.colorWallFront = wallParents.parentWallFront.renderer.material.color;
-			
+			if (wall.name.Contains("Quina"))
+				continue;
+			//se a cor do InfoWall da parede for diferente da cor do material do renderer da parede
+			//atualiza a cor do InfoWall
+			if (wall.transform.GetChild(0).renderer.materials[0].color != wall.GetComponent<InfoWall> ().color)	
+				wall.GetComponent<InfoWall> ().color = wall.transform.GetChild(0).renderer.materials[0].color;
+				
+			if (Vector3.Angle (camForwardVector, wall.transform.forward) < 120f)
+			{
+				ChangeWallMaterial (wall,
+								  	wallMaterial,
+								  	wall.GetComponent<InfoWall> ().color,
+								   	true);
+			}
+			else
+			{
+				ChangeWallMaterial (wall,
+								  	wallMaterialTransparent,
+								  	wall.GetComponent<InfoWall> ().color,
+								   	false);
+			}
 		}
 	}
 	
@@ -413,14 +372,17 @@ public class CameraController : MonoBehaviour {
 		}
 	}
 			
-	private void ChangeWallMaterial (Transform wallParent, Material newMaterial, Color selectedColor, bool enableWall)
-	{	
-		if (!wallParent.renderer.material.name.Equals(newMaterial.name + " (Instance)")) {
-			print(selectedColor);
-			wallParent.renderer.material = newMaterial;
-			wallParent.renderer.material.color = selectedColor;
-			if (wallParent.collider != null) {
-				wallParent.collider.enabled = enableWall;
+	Transform wallChild;
+	private void ChangeWallMaterial (Transform wall, Material newMaterial, Color selectedColor, bool enableWall)
+	{
+		wallChild = wall.transform.GetChild(0);
+		if (!wallChild.renderer.material.name.Equals(newMaterial.name + " (Instance)"))
+		{
+			wallChild.renderer.material 	  = newMaterial;
+			wallChild.renderer.material.color = selectedColor;
+			if (wall.collider != null)
+			{
+				wall.collider.enabled = enableWall;
 			}
 		}
 	}

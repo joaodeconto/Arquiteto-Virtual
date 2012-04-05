@@ -23,8 +23,10 @@ public class Camera3d : MonoBehaviour
 		SpeedZoom = 1.5f;
 		StepZoom  = 8f;
 		
-		infoController = GameObject.FindWithTag("GameController").GetComponentInChildren<InfoController>();
+		infoController 		= GameObject.FindWithTag("GameController").GetComponentInChildren<InfoController>();
 		cameraGUIController = GameObject.FindWithTag("GameController").GetComponentInChildren<CameraGUIController>();
+		
+		CanMoveCamera = true;
 	}
 
 	// Update is called once per frame
@@ -48,7 +50,7 @@ public class Camera3d : MonoBehaviour
 	}
 
 	void MoveCamera () {
-		Vector3 direcao = (transform.right * Input.GetAxis ("Horizontal") * Time.deltaTime * 5) + (transform.forward * Input.GetAxis ("Vertical") * Time.deltaTime * 5);
+		Vector3 direcao = (transform.right * Input.GetAxis ("Horizontal") * Time.deltaTime * 5) + (((transform.up + transform.forward) * Input.GetAxis ("Vertical") * Time.deltaTime * 5) / 2);
 		direcao = new Vector3(direcao.x, 0, direcao.z);
 		transform.position += direcao;
 		if (Input.GetKey (KeyCode.Q))

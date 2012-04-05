@@ -186,7 +186,7 @@ public class GuiSelecaoMarca : MonoBehaviour {
 		GUI.EndScrollView();
 		
 		if (GUI.Button(wndClose, "", btnClose)) {
-			GetComponent<CreateWalls>().enabled = true;
+//			GetComponent<CreateWalls>().enabled = true;
 			enabled = false;
 		}
 		

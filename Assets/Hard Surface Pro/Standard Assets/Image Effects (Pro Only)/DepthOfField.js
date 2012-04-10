@@ -136,7 +136,7 @@ class DepthOfField extends PostEffectsBase {
 			
 			var fgBlurPass : int = enableBokeh ? 9 : 6;
 												
-	        for(it33 = 0; it33 < foregroundBlurIterations; it33++) {
+	        for(var it33 = 0; it33 < foregroundBlurIterations; it33++) {
 	        	_preDofMaterial.SetVector("_Vh", Vector4(foregroundBlurSpread,0.0,0,0));
 				Graphics.Blit(oneEight, oneEightTmp, _preDofMaterial, fgBlurPass);
 				_preDofMaterial.SetVector("_Vh", Vector4(0.0,foregroundBlurSpread,0,0));
@@ -180,7 +180,7 @@ class DepthOfField extends PostEffectsBase {
 			var bgBlurPass : int = enableBokeh ? 0 : 1;		
 			
 			// blur and evtly bokeh'ify background
-			for(it=0; it<blurIterations;it++) 
+			for(var it=0; it<blurIterations;it++) 
 			{
 				_weightedBlurMaterial.SetVector ("offsets", Vector4 (0.0, (blurSpread)/source.height, 0.0,0.0));
 				Graphics.Blit ( it==0 ?  oneEightUnblurredBg : oneEight2, oneEightTmp, _weightedBlurMaterial,bgBlurPass);

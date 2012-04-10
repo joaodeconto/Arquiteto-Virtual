@@ -28,4 +28,9 @@ public class SelectLanguageHandler : MonoBehaviour {
 		Application.LoadLevel(1);
 		
 	}
+	
+	void Start () {
+		QualitySettings.currentLevel = QualityLevel.Fantastic;
+		//QualitySettings.SetQualityLevel(5);
+	}
 }

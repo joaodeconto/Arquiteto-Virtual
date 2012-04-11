@@ -10,7 +10,7 @@ public class PlayAnimation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetMouseButtonUp(0)) {
+		/*if (Input.GetMouseButtonUp(0)) {
 			Transform cam = GameObject.FindWithTag("Player").transform;
 			RaycastHit hit;
 			if (Physics.Raycast(cam.position, cam.forward, out hit)) {
@@ -43,6 +43,6 @@ public class PlayAnimation : MonoBehaviour {
 						movel.portas = Portas.FECHADAS;
 				}
 			}
-		}
+		}*/
 	}
 }

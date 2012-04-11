@@ -129,6 +129,11 @@ public class ScreenUtils {
 	static public Rect ScaledRectInSenseHeight(float x, float y, float width, float height){
 		return new Rect(ScaleHeight(x),ScaleHeight(y),ScaleHeight(width),ScaleHeight(height));
 	}
+	
+	static public float DescaledHeight(float height){
+		screenHeight = (float)Screen.height;
+		return height*(RealHeight/screenHeight);
+	}
 
 	static public bool ScreenSizeChange () {
 		if (screenWidth != Screen.width ||

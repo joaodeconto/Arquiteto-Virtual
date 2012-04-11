@@ -75,7 +75,44 @@ public class SnapBehaviour : MonoBehaviour {
     	enableDrag = true;
     }
 	
+	#if (!UNITY_ANDROID && !UNITY_IPHONE) || UNITY_EDITOR
 	void OnMouseDown(){
+		SelectObject();
+	}
+	
+	void OnMouseDrag(){
+		DragObject();
+	}
+	
+	void OnMouseUp(){
+		DropObject();
+	}
+	#endif
+	
+	#if UNITY_ANDROID || UNITY_IPHONE
+	// Android & Iphone Method to move object
+	void Update () {
+		if (Input.touchCount == 1) { 
+			Touch touch = Input.GetTouch(0);
+			switch (touch.phase) {
+				case TouchPhase.Began :
+					SelectObject();
+					break;
+				case TouchPhase.Moved :
+					DragObject();
+					break;
+				case TouchPhase.Canceled :
+					DropObject();
+					break;
+				case TouchPhase.Ended :
+					DropObject();
+					break;
+			}
+		}
+	}
+	#endif
+	
+	void SelectObject () {
 		if(!enabled)
 			return;
 		
@@ -93,16 +130,16 @@ public class SnapBehaviour : MonoBehaviour {
 		if(activeFurniture != null)
 			activeFurniture.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
 		
-		Bounds b = GetComponentInChildren<MeshFilter>().mesh.bounds;
+		/*Bounds b = GetComponentInChildren<MeshFilter>().mesh.bounds;
         Vector3 offset = -1 * b.center;
         p = last_p = new Vector3(offset.x / b.extents.x, offset.y / b.extents.y, offset.z / b.extents.z);
-
+        */
 	}
 	
 	float vertical,horizontal;
 	RaycastHit hit;
 	Vector2 mousePosition;
-	void OnMouseDrag(){
+	void DragObject () {
 		
 		if(!isSelected || !enabled || !enableDrag)
 			return;
@@ -124,10 +161,10 @@ public class SnapBehaviour : MonoBehaviour {
 			    hit.transform.tag == "Chao" ||
 				hit.transform.tag == "Teto"){
 				
-				if( p != last_p) { 
+				/*if( p != last_p) { 
 					//Detects user input on any of the three sliders
-	                UpdatePivot(transform.GetComponentInChildren<MeshFilter>());
-            	}
+	               	UpdatePivot(transform.GetComponentInChildren<MeshFilter>());
+            	}*/
 				if (GetComponent<InformacoesMovel>().tipoMovel != TipoMovel.MOVEL) {
 	           		transform.position = (hit.point.x * transform.parent.right)	+ 
 										 (hit.point.z * transform.parent.forward);
@@ -164,8 +201,7 @@ public class SnapBehaviour : MonoBehaviour {
         }
 	}
 	
-	void OnMouseUp(){
-		
+	void DropObject () {
 		if(!isSelected || !enabled)
 			return;
 			

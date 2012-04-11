@@ -59,8 +59,17 @@ public class CameraController : MonoBehaviour {
 	void Start ()
 	{
 		mainCamera 		  = GameObject.FindWithTag ("MainCamera").camera;
+		//disable other cam
+		#if UNITY_ANDROID || UNITY_IPHONE
+		firstPersonCamera = GameObject.Find ("2D Side Scroller");
+		firstPersonCamera.SetActiveRecursively (false);
+		GameObject.Find ("First Person Controller").SetActiveRecursively (false);
+		#endif
+		#if !UNITY_ANDROID && !UNITY_IPHONE
 		firstPersonCamera = GameObject.Find ("First Person Controller");
-		firstPersonCamera.gameObject.SetActiveRecursively (false);//disable other cam
+		firstPersonCamera.SetActiveRecursively (false);
+		GameObject.Find ("2D Side Scroller").SetActiveRecursively (false);
+		#endif
 		setFirstPerson = false;
 		
 		//NGUI Monkey patch gonna patch...
@@ -161,8 +170,18 @@ public class CameraController : MonoBehaviour {
 	{
 		SnapBehaviour.DeactivateAll ();
 		
+		setFirstPerson = true;
+		firstPersonCamera.SetActiveRecursively(true);
+		#if UNITY_ANDROID || UNITY_IPHONE
+		firstPersonCamera.GetComponentInChildren<ColliderControl>().IsPanelFloor = 
+			 interfaceGUI.panelFloor.active ? true : false;
+		firstPersonCamera.GetComponentInChildren<ColliderControl>().Enable();
+		#endif
+		#if !UNITY_ANDROID && !UNITY_IPHONE
 		firstPersonCamera.GetComponent<ColliderControl>().IsPanelFloor = 
 			 interfaceGUI.panelFloor.active ? true : false;
+		firstPersonCamera.GetComponent<ColliderControl>().Enable();
+		#endif
 		
 		interfaceGUI.lists.SetActiveRecursively(false);
 		
@@ -170,12 +189,7 @@ public class CameraController : MonoBehaviour {
 			child.gameObject.SetActiveRecursively(false);
 		}
 		
-		
-		//Swap cameras
 		mainCamera.gameObject.SetActiveRecursively(false);
-		setFirstPerson = true;
-		firstPersonCamera.gameObject.SetActiveRecursively(true);
-		firstPersonCamera.GetComponent<ColliderControl>().Enable();
 	}
 	
 	public void Screenshot ()

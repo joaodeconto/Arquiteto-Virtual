@@ -18,16 +18,39 @@ public class FocarOrientacao : MonoBehaviour {
 	private float distanceFromMiddle = 0f; 
 	
 	private GameObject mainCamera;
+	private Camera thisCamera;
 	
 	void Start ()
 	{
 		tweenTime = 1.0f;
-	}
-				
-	void OnMouseUp () {
-		
+		thisCamera = transform.parent.GetComponentInChildren<Camera>() != null ?
+					 transform.parent.GetComponentInChildren<Camera>() :
+					 transform.parent.transform.parent.GetComponentInChildren<Camera>();
 		mainCamera = GameObject.FindWithTag("MainCamera");
-		
+	}
+	
+	#if (!UNITY_ANDROID && !UNITY_IPHONE) || UNITY_EDITOR
+	void OnMouseUp () {
+		ChangeOrietation();
+	}
+	#endif
+	
+	#if UNITY_ANDROID || UNITY_IPHONE
+	void Update () {
+		if (Input.touchCount == 1) {
+			Touch touch = Input.GetTouch(0);
+			if (touch.phase == TouchPhase.Ended) {
+				Ray ray = thisCamera.ScreenPointToRay(touch.position);
+				RaycastHit hit;
+				if (Physics.Raycast(ray, out hit)) {
+					if (hit.transform == transform) ChangeOrietation();
+				}
+			}
+		}
+	}
+	#endif
+	
+	void ChangeOrietation () {
 		if (mainCamera == null)
 		{
 			Debug.LogError ("Main camera can't be found");

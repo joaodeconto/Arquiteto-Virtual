@@ -27,7 +27,7 @@ public class ColliderControl : MonoBehaviour {
 			}
 		}
 		
-		GameObject teto = GameObject.Find("ParentTeto");
+		GameObject teto = GameObject.Find("Teto");
 		if  (teto != null && teto.renderer != null)
 			teto.renderer.enabled = teto.collider.enabled = true;
 		
@@ -82,7 +82,7 @@ public class ColliderControl : MonoBehaviour {
 				wallColor.wall.collider.isTrigger = true;
 			}
 		}
-		GameObject teto = GameObject.Find("ParentTeto");
+		GameObject teto = GameObject.Find("Teto");
 		if  (teto != null && teto.renderer != null)
 			teto.renderer.enabled = teto.collider.enabled = true;
 					
@@ -106,7 +106,12 @@ public class ColliderControl : MonoBehaviour {
 			cameraController.interfaceGUI.panelInfo.SetActiveRecursively(false);
 			cameraController.interfaceGUI.panelMobile.SetActiveRecursively(false);
 			
+			#if UNITY_ANDROID || UNITY_IPHONE
+			transform.parent.gameObject.SetActiveRecursively(false);
+			#endif
+			#if !UNITY_ANDROID && !UNITY_IPHONE
 			gameObject.SetActiveRecursively(false);
+			#endif
 		}
 	}
 }

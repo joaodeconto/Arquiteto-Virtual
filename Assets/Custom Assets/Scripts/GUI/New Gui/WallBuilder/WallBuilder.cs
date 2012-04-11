@@ -118,10 +118,10 @@ public class WallBuilder : MonoBehaviour {
 		
 		//0
 		newWall = Instantiate (	wall,
-								floorPosition + (Vector3.right * floorSizeOffset.x), 
+								floorPosition + (Vector3.right * (floorSizeOffset.x - 0.08f)), 
 								Quaternion.Euler (Vector3.up * 0.0f)) as GameObject;
 		ChangeWalMaterialAndScale (newWall, RealWallWidth);
-		
+		newWall.name = "Back Wall";
 		//90
 		newWall = Instantiate (	wall,
 								floorPosition
@@ -129,18 +129,23 @@ public class WallBuilder : MonoBehaviour {
 										- (Vector3.forward * floorSizeOffset.z),
 								Quaternion.Euler (Vector3.up * 90.0f)) as GameObject;
 		ChangeWalMaterialAndScale (newWall, RealWallDepth);
+		newWall.name = "Right Wall";
 		
 		//180
 		newWall = Instantiate (	wall,
-								floorPosition - (Vector3.forward * floorSizeOffset.z),
+								floorPosition 
+									+ (Vector3.right * 0.075f) 
+										- (Vector3.forward * (floorSizeOffset.z)),
 								Quaternion.Euler (Vector3.up * 180.0f)) as GameObject;
 		ChangeWalMaterialAndScale (newWall, RealWallWidth);
+		newWall.name = "Front Wall";
 				
 		//270
 		newWall = Instantiate (	wall,
-								floorPosition,
+								floorPosition - (Vector3.forward * (0.075f)),
 								Quaternion.Euler (Vector3.up * 270.0f)) as GameObject;
 		ChangeWalMaterialAndScale (newWall, RealWallDepth);
+		newWall.name = "Left Wall";
 		
 		/*
 		GameObject[] pisos = GameObject.FindGameObjectsWithTag ("Chao");
@@ -517,7 +522,7 @@ public class WallBuilder : MonoBehaviour {
 	
 	private void ChangeWalMaterialAndScale (GameObject newWall, float wallScaleX)
 	{
-		newWall.transform.localScale = new Vector3 (wallScaleX, 1, 1);
+		newWall.transform.localScale = new Vector3 (wallScaleX, 2.6f, 1);
 				
 		foreach (Material cMaterial in newWall.transform.GetChild(0).renderer.materials)
 		{

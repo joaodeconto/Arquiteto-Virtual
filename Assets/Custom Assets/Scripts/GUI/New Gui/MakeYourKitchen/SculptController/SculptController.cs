@@ -19,7 +19,7 @@ public class SculptController : MonoBehaviour
 {
 	public const float IPSLON = 0.0001f;
 
-	public Camera mainCamera;
+	private Camera mainCamera;
 		
 	private RaycastHit hit;
 	private Ray ray;
@@ -30,8 +30,10 @@ public class SculptController : MonoBehaviour
 	private bool IsExtrudingXAxis;
 	
 	private Vector3 lastMousePosition;
-	
-	private Stack<WallExtrudeMovement> wallExtrudeMovements;
+		
+	private int cWindowType;
+	private Vector2[] WindowType;
+	private float WindowPivotY;
 	
 	void Start ()
 	{
@@ -39,95 +41,119 @@ public class SculptController : MonoBehaviour
 		IsSculptModeOn = false;
 		IsExtrudingXAxis=false;
 		
-		wallExtrudeMovements = new Stack<WallExtrudeMovement>();
+		mainCamera = GameObject.FindWithTag("MainCamera").camera;
+		
+		WindowPivotY = 0.6f;
+		WindowType = new Vector2[6]{new Vector2 (1.0f, 1.2f), 
+									new Vector2 (1.2f, 1.2f), 
+									new Vector2 (1.4f, 1.2f), 
+									new Vector2 (1.6f, 1.2f), 
+									new Vector2 (1.8f, 1.2f), 
+									new Vector2 (2.1f, 1.2f) };
+		cWindowType = 0;		
 	}
 	
 	void Update ()
 	{
-		if (Input.GetKeyDown (KeyCode.Keypad0))
+		if (Input.GetKeyDown (KeyCode.Keypad9))
+		{
+			cWindowType = cWindowType != WindowType.Length ? cWindowType + 1 : 0;
+		}
+		
+		if (Input.GetKeyDown (KeyCode.J))
 		{
 			IsSculptModeOn = !IsSculptModeOn;
+			//Debug.LogWarning ("IsSculptModeOn: " + IsSculptModeOn);
 			
-			GameObject cameraController = GameObject.Find ("CameraController");
-			cameraController.GetComponent<CameraController>().ShowHideWalls();
+			ray = mainCamera.ScreenPointToRay(new Vector3( Screen.width / 2, Screen.height / 2, 0));
 			
-			Debug.LogWarning ("IsSculptModeOn: " + IsSculptModeOn);
+	        if(Physics.Raycast(ray, out hit))
+	        {
+	        	if (hit.transform.tag != "Parede")
+	        		return;
+	        	
+				Transform wallTrans = hit.transform;
+				
+	        	InfoWall infoWall = wallTrans.GetComponent<InfoWall>();
+	        	
+	        	Vector3 wallPosition = wallTrans.position;
+	        	Vector3 wallRotation = wallTrans.eulerAngles;
+	        	
+	        	Vector3 hitPoint = hit.point;
+	
+//				if (Vector3.Distance (wallPosition, hitPoint) < (WindowType [cWindowType].x / 2.0f))
+//				{
+//					hitPoint = hitPoint.normalized * (WindowType [cWindowType].x * 1.5f) ;
+//				}
+				
+				hitPoint.y = 0.1f;
+				
+				float cRightScale 	= Vector3.Distance (wallPosition, hitPoint) - (WindowType [cWindowType].x / 2.0f); 
+	        	float cLeftScale 	= (wallTrans.localScale.x - cRightScale) 				- (WindowType [cWindowType].x);
+	        	float cMiddleScale 	= wallTrans.localScale.x - cRightScale - cLeftScale;
+				float cMiddleUpperScale = wallTrans.localScale.y - WindowType [cWindowType].y - WindowPivotY;
+				float cMiddleLowerScale = WindowPivotY;
+				
+				Vector3 leftWallPosition = wallPosition - 
+										   	(wallTrans.transform.right.normalized *
+											(cRightScale + (WindowType [cWindowType].x)));
+				Vector3 middleWallPosition = wallPosition - 
+										   	(wallTrans.transform.right.normalized * cRightScale);
+				leftWallPosition.y = 0.1f;
+										
+	        	GameObject rightWall = Instantiate(	wallTrans.gameObject,
+	        										wallTrans.position,
+	        										wallTrans.rotation) as GameObject;
+				rightWall.name = "Right Wall";
+	        	rightWall.transform.localScale = new Vector3(cRightScale,
+	        												 wallTrans.localScale.y,
+	        												 wallTrans.localScale.z);
+	        	
+				GameObject leftWall = Instantiate (wallTrans.gameObject,
+	        									   leftWallPosition,
+	        									   wallTrans.rotation) as GameObject;
+				leftWall.name = "Left Wall";
+				leftWall.transform.localScale = new Vector3 (cLeftScale,
+	        												 wallTrans.localScale.y,
+	        												 wallTrans.localScale.z);
+	        												
+				middleWallPosition.y = WindowType [cWindowType].y + WindowPivotY;
+				GameObject upperWall = Instantiate (wallTrans.gameObject,
+	        									    middleWallPosition,
+	        									    wallTrans.rotation) as GameObject;
+				upperWall.name = "Upper Wall";
+				upperWall.transform.localScale = new Vector3 (cMiddleScale,
+	        												  cMiddleUpperScale,
+	        												  wallTrans.localScale.z);
+				middleWallPosition.y = 0;
+				GameObject lowerWall = Instantiate (wallTrans.gameObject,
+	        									    middleWallPosition,
+	        									    wallTrans.rotation) as GameObject;
+				lowerWall.name = "Lower Wall";
+				lowerWall.transform.localScale = new Vector3 (cMiddleScale,
+	        												  cMiddleLowerScale,
+	        												  wallTrans.localScale.z);
+	        	Destroy (wallTrans.gameObject);
+	        	
+	        	return;
+	        }
 		}
 		
 		if (IsSculptModeOn && Input.GetMouseButtonDown(0))
 		{
 			lastMousePosition = Input.mousePosition;
-			
-			SelectWallToExtrude ();
-			
+						
 			IsExtruding = true;
 		}
 		
 		if (IsExtruding)
-		{
-			//TODO update wall and adjacents
-//			selectedWall.position = GetSelect ();
-			
+		{			
 			lastMousePosition = Input.mousePosition;
 						
 			if (Input.GetMouseButtonUp (0))
-			{
-				//TODO add extrude to stack
-//				wallExtrudeMovements.Add (new WallExtrudeMovement ());
-				
+			{	
 				IsExtruding = false;
 			}
 		}
 	}
-	
-	private void SelectWallToExtrude ()
-	{
-		ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-		
-		if (Physics.Raycast (ray, out hit))
-		{
-			selectedWall = hit.transform;
-			if (selectedWall.gameObject.layer != LayerMask.NameToLayer("GUI"))
-			{
-				if (selectedWall.tag == "Parede")
-				{
-					if (selectedWall.eulerAngles.y > 65  && selectedWall.eulerAngles.y < 115 ||
-						selectedWall.eulerAngles.y > 245 && selectedWall.eulerAngles.y < 295)
-						IsExtrudingXAxis = true;
-					else
-						IsExtrudingXAxis = false;
-				}
-			}
-		}
-	}
-	
-	private Vector3 GetExtrudedWallPosition ()
-	{
-		ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-		
-		if (Physics.Raycast (ray, out hit))
-		{
-			
-		}
-		
-		return Vector3.zero;
-	}
-	
-	private void ExtrudeWholeWall ()
-	{
-		
-	}
-	
-	//TODO
-	private void ExtrudePartialWall ()
-	{
-		
-	}
-	
-	//TODO
-	private void ExtrudeDiagonalWall ()
-	{
-		
-	}
-	
 }

@@ -511,7 +511,7 @@ public class WallBuilder : MonoBehaviour {
 			
 		*/
 		
-		Application.LoadLevel(4);
+		Application.LoadLevel(3);
 		
 	}
 	

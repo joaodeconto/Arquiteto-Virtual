@@ -30,7 +30,6 @@ public class SelectLanguageHandler : MonoBehaviour {
 	}
 	
 	void Start () {
-		QualitySettings.currentLevel = QualityLevel.Fantastic;
-		//QualitySettings.SetQualityLevel(5);
+		QualitySettings.currentLevel = QualityLevel.Fastest;
 	}
 }

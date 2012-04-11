@@ -294,6 +294,7 @@ public class Painter: MonoBehaviour {
 					rectWindow.height = ScreenUtils.ScaleHeight(topBackground.height * 2);
 				}
 			}
+			
 			if(tagObject.Equals("MovelSelecionado"))
 				GUI.enabled = false;
 			

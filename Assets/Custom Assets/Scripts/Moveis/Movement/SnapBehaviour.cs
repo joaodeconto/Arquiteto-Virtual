@@ -92,7 +92,7 @@ public class SnapBehaviour : MonoBehaviour {
 	#if UNITY_ANDROID || UNITY_IPHONE
 	// Android & Iphone Method to move object
 	void Update () {
-		if (Input.touchCount == 1) { 
+		if (Input.touchCount == 1) {
 			Touch touch = Input.GetTouch(0);
 			switch (touch.phase) {
 				case TouchPhase.Began :

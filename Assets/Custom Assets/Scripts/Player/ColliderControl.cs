@@ -32,13 +32,13 @@ public class ColliderControl : MonoBehaviour {
 			teto.renderer.enabled = teto.collider.enabled = true;
 		
 		int i = 0;
-		foreach (InfoWall wallColor in cameraController.walls) {
+		foreach (Transform wallColor in cameraController.wallParent.transform) {
 			if (wallColor != null)
 			{
-				wallColor.wall.renderer.material = cameraController.wallMaterial;
-				wallColor.wall.renderer.material.color = wallColor.color;
-				wallColor.wall.collider.enabled = true;
-				wallColor.wall.collider.isTrigger = false;
+				wallColor.GetComponent<InfoWall>().wall.transform.GetChild(0).renderer.material = cameraController.wallMaterial;
+				wallColor.GetComponent<InfoWall>().wall.transform.GetChild(0).renderer.material.color = wallColor.GetComponent<InfoWall>().color;
+				wallColor.GetComponent<InfoWall>().wall.collider.enabled = true;
+				wallColor.GetComponent<InfoWall>().wall.collider.isTrigger = false;
 				++i;
 			}
 		}
@@ -48,6 +48,12 @@ public class ColliderControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	public void Disable () {
+		
+		SnapBehaviour.ActivateAll();
+		cameraController.mainCamera.gameObject.SetActiveRecursively(true);
+		cameraController.setFirstPerson = false;
+		cameraController.interfaceGUI.main.SetActiveRecursively(true);
+		cameraController.interfaceGUI.uiRootFPS.SetActiveRecursively (false);
 		
 		Screen.lockCursor = false;
 		
@@ -75,43 +81,45 @@ public class ColliderControl : MonoBehaviour {
 			}
 		}
 		
-		if (cameraController.walls != null)
+		if (cameraController.wallParent != null)
 		{
-			foreach (InfoWall wallColor in cameraController.walls)
+			foreach (Transform wallColor in cameraController.wallParent.transform)
 			{
-				wallColor.wall.collider.isTrigger = true;
+				wallColor.GetComponent<InfoWall>().wall.collider.isTrigger = true;
 			}
 		}
+		
 		GameObject teto = GameObject.Find("Teto");
 		if  (teto != null && teto.renderer != null)
 			teto.renderer.enabled = teto.collider.enabled = true;
 					
+		if (!IsPanelFloor) {
+			cameraController.interfaceGUI.viewUIPiso.SetActiveRecursively(false);
+			cameraController.interfaceGUI.panelFloor.SetActiveRecursively(false);
+		}
+		
+		//desativa sempre o panel info e o panel mobile
+		cameraController.interfaceGUI.panelInfo.SetActiveRecursively(false);
+		cameraController.interfaceGUI.panelMobile.SetActiveRecursively(false);
+		
+		#if UNITY_ANDROID || UNITY_IPHONE
+		transform.parent.gameObject.SetActiveRecursively(false);
+		#else
+		gameObject.SetActiveRecursively(false);
+		#endif
 	}
 	
+	#if !UNITY_ANDROID && !UNITY_IPHONE
 	void Update () {
 		if (Input.GetKeyUp(KeyCode.Escape)) {
-			SnapBehaviour.ActivateAll();
-			cameraController.mainCamera.gameObject.SetActiveRecursively(true);
-			cameraController.setFirstPerson = false;
-			cameraController.interfaceGUI.main.SetActiveRecursively(true);
-			cameraController.interfaceGUI.uiRootFPS.SetActiveRecursively (false);
-			
 			Disable();
-			if (!IsPanelFloor) {
-				cameraController.interfaceGUI.viewUIPiso.SetActiveRecursively(false);
-				cameraController.interfaceGUI.panelFloor.SetActiveRecursively(false);
-			}
-			
-			//desativa sempre o panel info e o panel mobile
-			cameraController.interfaceGUI.panelInfo.SetActiveRecursively(false);
-			cameraController.interfaceGUI.panelMobile.SetActiveRecursively(false);
-			
-			#if UNITY_ANDROID || UNITY_IPHONE
-			transform.parent.gameObject.SetActiveRecursively(false);
-			#endif
-			#if !UNITY_ANDROID && !UNITY_IPHONE
-			gameObject.SetActiveRecursively(false);
-			#endif
 		}
 	}
+	#else
+	void OnGUI () {
+		if (MouseUtils.GUIMouseButtonDoubleClick(0)) {
+			Disable ();
+		}
+	}
+	#endif
 }

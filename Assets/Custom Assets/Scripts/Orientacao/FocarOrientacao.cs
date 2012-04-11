@@ -34,24 +34,21 @@ public class FocarOrientacao : MonoBehaviour {
 			return;
 		}
 		
-		GameObject[] phantomFloors = GameObject.FindGameObjectsWithTag ("ChaoVazio");
-		if (phantomFloors == null || phantomFloors.Length == 0)
+		GameObject floor = GameObject.FindWithTag ("Chao");
+		if (floor == null)
 		{
-			Debug.LogError ("Não foi possível encontrar nenhum \"ChaoVazio\" por favor verifique se as cenas estão interligadas corretamente.");
+			Debug.LogError ("Não foi possível encontrar nenhum \"Chao\". Por favor verifique se as cenas estão interligadas corretamente.");
 			return;	
 		}
 		
-		Debug.LogWarning ("distanceFromMiddle: " + distanceFromMiddle);
-		Debug.LogWarning ("Mathf.Sqrt(distanceRate): " + Mathf.Sqrt (distanceRate));
-		distanceFromMiddle = phantomFloors.Length * distanceRate;
+		distanceFromMiddle = (floor.collider.bounds.size.x + floor.collider.bounds.size.y) / 1.5f * distanceRate;
 		distanceFromMiddle /= Mathf.Sqrt(distanceFromMiddle); 
-		Debug.LogWarning ("distanceFromMiddle: " + distanceFromMiddle);
 		
-		Debug.LogError ("orientacao: " + orientacao.ToString());
 		newDirection   = Vector3.zero;
 		newDirection.x = cameraInclination;
 		newPosition    = WallBuilder.ROOT;
 		newPosition.y  = 1.7f;
+		
 		switch (orientacao)
 		{
 			case Orientacao.Frente:

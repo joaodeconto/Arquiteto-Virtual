@@ -47,7 +47,7 @@ public class CameraController : MonoBehaviour {
 		
 	private GameObject ceilParent;
 	private GameObject floorParent;
-	private GameObject wallParent;
+	public GameObject wallParent  { get; private set; }
 				
 	private bool showCeil;
 	private bool showFloor;
@@ -61,21 +61,21 @@ public class CameraController : MonoBehaviour {
 		mainCamera 		  = GameObject.FindWithTag ("MainCamera").camera;
 		//disable other cam
 		#if UNITY_ANDROID || UNITY_IPHONE
-		firstPersonCamera = GameObject.Find ("2D Side Scroller");
+		firstPersonCamera = GameObject.Find ("First Person Controller Mobile");
 		firstPersonCamera.SetActiveRecursively (false);
 		GameObject.Find ("First Person Controller").SetActiveRecursively (false);
-		#endif
-		#if !UNITY_ANDROID && !UNITY_IPHONE
+		firstPersonCamera.transform.GetChild(0).transform.localPosition = new Vector3 (WallBuilder.ROOT.x		 , 1.5f, WallBuilder.ROOT.z);
+		#else
 		firstPersonCamera = GameObject.Find ("First Person Controller");
 		firstPersonCamera.SetActiveRecursively (false);
-		GameObject.Find ("2D Side Scroller").SetActiveRecursively (false);
+		GameObject.Find ("First Person Controller Mobile").SetActiveRecursively (false);
+		firstPersonCamera.transform.localPosition = new Vector3 (WallBuilder.ROOT.x		 , 1.5f, WallBuilder.ROOT.z);
 		#endif
 		setFirstPerson = false;
 		
 		//NGUI Monkey patch gonna patch...
 		mainCamera.transform.RotateAround(mainCamera.transform.right, 0.2f);//It's Rad measure
 		mainCamera.transform.position 		 	 = new Vector3 (WallBuilder.ROOT.x, 1.7f, WallBuilder.ROOT.z - 3.6f);
-		firstPersonCamera.transform.position = new Vector3 (WallBuilder.ROOT.x		 , 1.5f, WallBuilder.ROOT.z);
 
 		ceilParent  = GameObject.Find ("ParentTeto");
 		floorParent = GameObject.Find ("ParentChao");
@@ -176,8 +176,7 @@ public class CameraController : MonoBehaviour {
 		firstPersonCamera.GetComponentInChildren<ColliderControl>().IsPanelFloor = 
 			 interfaceGUI.panelFloor.active ? true : false;
 		firstPersonCamera.GetComponentInChildren<ColliderControl>().Enable();
-		#endif
-		#if !UNITY_ANDROID && !UNITY_IPHONE
+		#else
 		firstPersonCamera.GetComponent<ColliderControl>().IsPanelFloor = 
 			 interfaceGUI.panelFloor.active ? true : false;
 		firstPersonCamera.GetComponent<ColliderControl>().Enable();
@@ -186,6 +185,7 @@ public class CameraController : MonoBehaviour {
 		interfaceGUI.lists.SetActiveRecursively(false);
 		
 		foreach (Transform child in interfaceGUI.main.GetComponentsInChildren<Transform>()) {
+			print(child);
 			child.gameObject.SetActiveRecursively(false);
 		}
 		

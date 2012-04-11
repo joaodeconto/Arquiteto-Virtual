@@ -57,6 +57,9 @@ public class FocarOrientacao : MonoBehaviour {
 			return;
 		}
 		
+		if (!mainCamera.GetComponent<Camera3d>().CanMoveCamera)
+			return;
+		
 		GameObject floor = GameObject.FindWithTag ("Chao");
 		if (floor == null)
 		{

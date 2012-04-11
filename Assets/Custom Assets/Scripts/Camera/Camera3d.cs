@@ -11,7 +11,7 @@ public class Camera3d : MonoBehaviour
 	private FurnitureManager furnitureManager;
 	private InfoController infoController;
 	private CameraGUIController cameraGUIController;
-	private bool CanMoveCamera;
+	public bool CanMoveCamera {get; private set;}
 	
 	void Start () {
 		
@@ -33,8 +33,10 @@ public class Camera3d : MonoBehaviour
 	void Update () {
 		if (CanMoveCamera)
 		{
+			#if !UNITY_ANDROID && !UNITY_IPHONE
 			MoveCamera();
 			MouseMoveCamera();
+			#endif
 			SelectMobile ();
 		}
 	}

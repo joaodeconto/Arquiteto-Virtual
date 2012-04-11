@@ -23,9 +23,9 @@ public class Painter: MonoBehaviour {
 	public Font font, fontBold;
 	public string[] tags, categoryNames;
 	public bool dropperBool {get; private set;}
+	public Renderer render {get; private set;}
 	internal Rect rectWindow;
 	private GameObject GO;
-	private Renderer render;
 	private Rect rectTopColor, rectTopTexture;
 	
 	#region COLOR vars

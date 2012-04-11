@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ClickItem : MonoBehaviour {
 	
-	public GameObject item {private get; set;}
+	public GameObject item;
 	public Camera camera;
 	
 	void OnClick () {

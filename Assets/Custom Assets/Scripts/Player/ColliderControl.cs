@@ -103,7 +103,7 @@ public class ColliderControl : MonoBehaviour {
 		cameraController.interfaceGUI.panelMobile.SetActiveRecursively(false);
 		
 		#if UNITY_ANDROID || UNITY_IPHONE
-		transform.parent.gameObject.SetActiveRecursively(false);
+		transform.parent.parent.gameObject.SetActiveRecursively(false);
 		#else
 		gameObject.SetActiveRecursively(false);
 		#endif

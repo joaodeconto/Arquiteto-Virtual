@@ -15,7 +15,7 @@ public class InfoController : MonoBehaviour {
 			this.itemName.text = itemName;
 			this.itemValue.text = itemValue;
 		}
-	}	
+	}
 	
 	// Item selected
 	public GameObject item {get; private set;}
@@ -42,6 +42,9 @@ public class InfoController : MonoBehaviour {
 	
 	private GameObject mainCamera;
 	private bool panelChange = false;
+	
+	//Painter to Extras
+	private Painter painter;
 	
 	void Awake ()
 	{
@@ -80,6 +83,8 @@ public class InfoController : MonoBehaviour {
 			return;
 		}
 		
+		painter = mainCamera.GetComponentInChildren<Painter>();
+		
 		panelInfo.SetActiveRecursively(true);
 		TweenPlayerButton btn = panelInfo.GetComponentInChildren<TweenPlayerButton>();
 		btn.SendMessage("OnClick");
@@ -96,6 +101,10 @@ public class InfoController : MonoBehaviour {
 	void Update () {
 		if (!isOpen && item == null)
 			return;
+		
+		if (painter.render != null) {
+			Close();
+		}
 		
 		if (item.GetComponent<SnapBehaviour>().wasDragged) {
 			if (panelChange) {
@@ -130,7 +139,6 @@ public class InfoController : MonoBehaviour {
 	void UpdatePainelMobile () {
 		//Vector3 positionReal = new Vector3(item.transform.position.x, item.collider.bounds.center.y, item.transform.position.z);
 		if (item == null) {
-			CancelInvoke();
 			return;
 		}
 		Vector3 panelMobilePosition = mainCamera.camera.WorldToScreenPoint(item.collider.bounds.center);
@@ -152,6 +160,10 @@ public class InfoController : MonoBehaviour {
 	}
 	
 	public void FocusObject () {
+		GameObject mainCamera = GameObject.FindGameObjectWithTag ("MainCamera");
+		
+		if (!mainCamera.GetComponent<Camera3d>().CanMoveCamera) return;
+		
 		Vector3 focusItemPosition = item.collider.bounds.center;
 		Vector3 focusItemRotation = item.transform.localEulerAngles;
 		
@@ -166,15 +178,25 @@ public class InfoController : MonoBehaviour {
 		
 		focusItemRotation += new Vector3(0, 180, 0);
 		
-		GameObject mainCamera = GameObject.FindGameObjectWithTag ("MainCamera");
+		mainCamera.GetComponent<Camera3d>().FreezeCamera ();
 		
 		iTween.MoveTo(mainCamera, iTween.Hash(	iT.MoveTo.position, focusItemPosition, 
-	                                                       		iT.MoveTo.time, 2f));
+	                                            iT.MoveTo.time, 2f,
+												iT.MoveTo.oncomplete, "ReleaseCamera",
+												iT.MoveTo.oncompletetarget, this.gameObject));
 	
 		iTween.RotateTo(mainCamera, iTween.Hash(iT.RotateTo.rotation, focusItemRotation,
-	                                                           	iT.RotateTo.time, 2f));
+	                                            iT.RotateTo.time, 2f));
 	}
 	#endregion
+	
+	void ReleaseCamera ()
+	{
+		Debug.LogWarning ("Was called ReleaseCamera");
+		GameObject mainCamera = GameObject.FindGameObjectWithTag ("MainCamera");
+		mainCamera.GetComponent<Camera3d> ().FreeCamera ();
+	}
+
 	
 	#region Panel info controller
 	public void Open (InformacoesMovel furnitureData) {

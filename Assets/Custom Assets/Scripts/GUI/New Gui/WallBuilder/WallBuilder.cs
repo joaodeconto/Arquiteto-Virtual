@@ -126,7 +126,7 @@ public class WallBuilder : MonoBehaviour {
 		newWall = Instantiate (	wall,
 								floorPosition
 									+ (Vector3.right * floorSizeOffset.x) 
-										- (Vector3.forward * floorSizeOffset.z),
+										- (Vector3.forward * (floorSizeOffset.z - 0.075f)),
 								Quaternion.Euler (Vector3.up * 90.0f)) as GameObject;
 		ChangeWalMaterialAndScale (newWall, RealWallDepth);
 		newWall.name = "Right Wall";

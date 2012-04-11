@@ -64,11 +64,11 @@ public class CameraController : MonoBehaviour {
 		firstPersonCamera = GameObject.Find ("2D Side Scroller");
 		firstPersonCamera.SetActiveRecursively (false);
 		GameObject.Find ("First Person Controller").SetActiveRecursively (false);
-		#endif
-		#if !UNITY_ANDROID && !UNITY_IPHONE
+		#else
 		firstPersonCamera = GameObject.Find ("First Person Controller");
 		firstPersonCamera.SetActiveRecursively (false);
-		GameObject.Find ("2D Side Scroller").SetActiveRecursively (false);
+		if (GameObject.Find ("2D Side Scroller") != null)
+			GameObject.Find ("2D Side Scroller").SetActiveRecursively (false);
 		#endif
 		setFirstPerson = false;
 		

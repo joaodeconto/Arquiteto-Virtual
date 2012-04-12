@@ -54,8 +54,9 @@ public class CameraController : MonoBehaviour {
 	
 	private bool isGuiLocked;
 	
-	private Vector3 lastCamPosition;
-		
+	private Vector3 lastCamForwardVector;
+	private Vector3 camForwardVector;
+	
 	void Start ()
 	{
 		mainCamera 		  = GameObject.FindWithTag ("MainCamera").camera;
@@ -239,21 +240,29 @@ public class CameraController : MonoBehaviour {
 			return;
 		}
 		
-		Vector3 camForwardVector = mainCamera.transform.forward;
+		lastCamForwardVector= camForwardVector;
+		camForwardVector 	= mainCamera.transform.forward;
 		
-		if (Mathf.Abs(Vector3.Distance(camForwardVector,lastCamPosition)) < 0.1f)
+		if (Mathf.Abs(Vector3.Distance(camForwardVector,lastCamForwardVector)) < 0.1f)
 			return;
 			
 		foreach (Transform wall in wallParent.transform)
 		{
 			if (wall.name.Contains("Quina"))
 				continue;
+				
+			if (wall.name.Equals ("PackSculptWall"))
+			{
+				ColorizeSculptedWall (wall);
+				continue;			
+			}
+				
 			//se a cor do InfoWall da parede for diferente da cor do material do renderer da parede
 			//atualiza a cor do InfoWall
 			if (wall.transform.GetChild(0).renderer.materials[0].color != wall.GetComponent<InfoWall> ().color)	
 				wall.GetComponent<InfoWall> ().color = wall.transform.GetChild(0).renderer.materials[0].color;
 				
-			if (Vector3.Angle (camForwardVector, wall.transform.forward) < 120f)
+			if (Vector3.Angle (camForwardVector, wall.forward) < 120f)
 			{
 				ChangeWallMaterial (wall,
 								  	wallMaterial,
@@ -265,6 +274,38 @@ public class CameraController : MonoBehaviour {
 				ChangeWallMaterial (wall,
 								  	wallMaterialTransparent,
 								  	wall.GetComponent<InfoWall> ().color,
+								   	false);
+			}
+		}
+	}
+	
+	private void ColorizeSculptedWall (Transform sculptedWall)
+	{
+		foreach (Transform cWall in sculptedWall.transform)
+		{
+			if (cWall.name.Equals ("PackSculptWall"))
+			{
+				ColorizeSculptedWall ( cWall );
+				continue;
+			}
+			
+			//se a cor do InfoWall da parede for diferente da cor do material do renderer da parede
+			//atualiza a cor do InfoWall
+			if (cWall.transform.GetChild(0).renderer.materials[0].color != cWall.GetComponent<InfoWall> ().color)	
+				cWall.GetComponent<InfoWall> ().color = cWall.transform.GetChild(0).renderer.materials[0].color;
+				
+			if (Vector3.Angle (camForwardVector, cWall.forward) < 120f)
+			{
+				ChangeWallMaterial (cWall,
+								  	wallMaterial,
+								  	cWall.GetComponent<InfoWall> ().color,
+								   	true);
+			}
+			else
+			{
+				ChangeWallMaterial (cWall,
+								  	wallMaterialTransparent,
+								  	cWall.GetComponent<InfoWall> ().color,
 								   	false);
 			}
 		}

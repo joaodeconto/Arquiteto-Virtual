@@ -15,11 +15,20 @@ public class InfoWall : MonoBehaviour
 	{
 		this.color = color;
 	}
+
+	public void CopyFrom (InfoWall info)
+	{
+		this.wall 		= info.wall;
+		this.rightWall	= info.rightWall;
+		this.leftWall 	= info.leftWall;
+		this.color 		= info.color;
+	}
 }
 
 public class WallBuilder : MonoBehaviour {
 	
-	public const float IPSLON = 0.0001f;
+	public const float IPSLON 		= 0.0001f;
+	public const float WALL_HEIGHT 	= 2.6f;
 	
 	#region Parents
 	public InfoWall[] 	walls;
@@ -147,316 +156,6 @@ public class WallBuilder : MonoBehaviour {
 		ChangeWalMaterialAndScale (newWall, RealWallDepth);
 		newWall.name = "Left Wall";
 		
-		/*
-		GameObject[] pisos = GameObject.FindGameObjectsWithTag ("Chao");
-		if (pisos.Length == 0) 
-		{
-			Debug.LogWarning ("Não existe chão! Por isso não pode ser criado paredes.");
-			return;
-		}
-		foreach (GameObject piso in pisos) {
-			Vector3[] frontalDirections = new Vector3[] {
-				Vector3.forward + Vector3.right, Vector3.forward + Vector3.left, Vector3.forward
-			};
-			Vector3[] backwardDirections = new Vector3[] {
-				Vector3.back + Vector3.right, Vector3.back + Vector3.left, Vector3.back,
-			};
-			Vector3[] sides = new Vector3[] {
-				Vector3.right, Vector3.left
-			};
-			
-			#region Frontal Search
-			List<Vector3> frontalDirectionsAccepted = new List<Vector3>();
-			foreach (Vector3 direction in frontalDirections) {
-				RaycastHit hit;
-#if DRAW_RAY
-				Debug.DrawRay(piso.transform.position, 
-				              direction, Color.blue);
-#endif          
-				if (Physics.Raycast(piso.transform.position + new Vector3(0, 0.25f, 0),
-				                    direction - new Vector3(0, 0.25f, 0),
-				                    out hit)) {
-					if (hit.transform.tag != "Chao") {
-						frontalDirectionsAccepted.Add(direction);
-					}
-				}
-			}
-			if (frontalDirectionsAccepted.Count	!= 0) {
-				if (frontalDirectionsAccepted.Count	== 3) {
-					foreach (Vector3 direction in sides) {
-						RaycastHit hit;
-#if DRAW_RAY
-						Debug.DrawRay(piso.transform.position, 
-						              direction, Color.red);
-#endif
-						if (Physics.Raycast(piso.transform.position + new Vector3(0, 0.25f, 0),
-						                    direction - new Vector3(0, 0.25f, 0),
-						                    out hit)) {
-							if (hit.transform.tag != "Chao") {
-								if (direction == Vector3.right) {
-									CreateCorner(	piso.transform.position + new Vector3 (0.5f, 0, 0.5f),
-													new Vector3 (0.5f, 0, 0.5f),
-						               				parentWalls,
-						               				new Vector3 (0, 90, 0),
-													true);
-								}
-								if (direction == Vector3.left) {
-									CreateCorner(	piso.transform.position + new Vector3 (-0.5f, 0, 0.5f),
-													new Vector3 (-0.5f, 0, 0.5f),
-													parentWalls,
-													new Vector3 (0, 0, 0),
-													true);
-								}
-							}
-						}
-					}
-				}
-				else if (frontalDirectionsAccepted.Count == 2) {
-					if (frontalDirectionsAccepted[0] == (Vector3.forward + Vector3.right) && 
-					    frontalDirectionsAccepted[1] == Vector3.forward) {
-#if DRAW_RAY
-						Debug.DrawRay(piso.transform.position,
-						              sides[0], Color.cyan);
-#endif
-						RaycastHit hit;
-						if (Physics.Raycast(piso.transform.position + new Vector3(0, 0.25f, 0),
-							                    sides[0] - new Vector3(0, 0.25f, 0),
-							                    out hit)) {
-							if (hit.transform.tag != "Chao") {
-								CreateCorner(	piso.transform.position + new Vector3 (-0.5f, 0, 0.5f),
-												new Vector3 (-0.5f, 0, -0.5f),
-												parentWalls,
-												new Vector3 (0, 270, 0),
-												false);
-								CreateCorner(	piso.transform.position + new Vector3 (0.5f, 0, 0.5f),
-												new Vector3 (0.5f, 0, 0.5f),
-					               				parentWalls,
-					               				new Vector3 (0, (int)90, 0),
-												true);
-							}
-							else {
-								CreateCorner(	piso.transform.position + new Vector3 (-0.5f, 0, 0.5f),
-												new Vector3 (-0.5f, 0, -0.5f),
-												parentWalls,
-												new Vector3 (0, 270, 0),
-												false);
-							}
-						}
-					}
-					else if (frontalDirectionsAccepted[0] == (Vector3.forward + Vector3.left) && 
-					    	 frontalDirectionsAccepted[1] == Vector3.forward) {
-#if DRAW_RAY
-						Debug.DrawRay(piso.transform.position,
-						              sides[1], Color.cyan);
-#endif
-						RaycastHit hit;
-						if (Physics.Raycast(piso.transform.position + new Vector3(0, 0.25f, 0),
-							                    sides[1] - new Vector3(0, 0.25f, 0),
-							                    out hit)) {
-							if (hit.transform.tag != "Chao") {
-								CreateCorner(	piso.transform.position + new Vector3 (0.5f, 0, 0.5f),
-												new Vector3 (0.5f, 0, -0.5f),
-					               				parentWalls,
-					               				new Vector3 (0, 180, 0),
-												false);
-								CreateCorner(	piso.transform.position + new Vector3 (-0.5f, 0, 0.5f),
-												new Vector3 (-0.5f, 0, 0.5f),
-												parentWalls,
-												new Vector3 (0, 0, 0),
-												true);
-							}
-							else {
-								CreateCorner(	piso.transform.position + new Vector3 (0.5f, 0, 0.5f),
-												new Vector3 (0.5f, 0, -0.5f),
-					               				parentWalls,
-					               				new Vector3 (0, 180, 0),
-												false);
-							}
-						}
-					}
-				}
-				else if (frontalDirectionsAccepted.Count == 1) {
-					if (frontalDirectionsAccepted[0] == Vector3.forward) {
-						CreateCorner(piso.transform.position + new Vector3 (0.5f, 0, 0.5f),
-									   new Vector3 (0.5f, 0, -0.5f),
-						               parentWalls,
-						               new Vector3 (0, 180, 0),
-									   false);
-						CreateCorner(piso.transform.position + new Vector3 (-0.5f, 0, 0.5f),
-									   new Vector3 (-0.5f, 0, -0.5f),
-						               parentWalls,
-						               new Vector3 (0, 270, 0),
-									   false);
-					}
-				}
-			}
-			#endregion
-			
-			#region Backward Search
-			List<Vector3> backwardDirectionsAccepted = new List<Vector3>();
-			foreach (Vector3 direction in backwardDirections) {
-				RaycastHit hit;
-#if DRAW_RAY
-				Debug.DrawRay(piso.transform.position, 
-				              direction, Color.blue);
-#endif
-				if (Physics.Raycast(piso.transform.position + new Vector3(0, 0.25f, 0),
-				                    direction - new Vector3(0, 0.25f, 0),
-				                    out hit)) {
-					if (hit.transform.tag != "Chao") {
-						backwardDirectionsAccepted.Add(direction);
-					}
-				}
-			}
-			if (backwardDirectionsAccepted.Count != 0) {
-				if (backwardDirectionsAccepted.Count == 3) {
-					foreach (Vector3 direction in sides) {
-						RaycastHit hit;
-#if DRAW_RAY
-						Debug.DrawRay(piso.transform.position, 
-						              direction, Color.red);
-#endif
-						if (Physics.Raycast(piso.transform.position + new Vector3(0, 0.25f, 0),
-						                    direction - new Vector3(0, 0.25f, 0),
-						                    out hit)) {
-							if (hit.transform.tag != "Chao") {
-								if (direction == Vector3.right) {
-									CreateCorner(	piso.transform.position + new Vector3 (0.5f, 0, -0.5f),
-													new Vector3 (0.5f, 0, -0.5f),
-						               				parentWalls,
-						               				new Vector3 (0, 180, 0),
-													true);
-								}
-								if (direction == Vector3.left) {
-									CreateCorner(	piso.transform.position + new Vector3 (-0.5f, 0, -0.5f),
-													new Vector3 (-0.5f, 0, -0.5f),
-													parentWalls,
-													new Vector3 (0, 270, 0),
-													true);
-								}
-							}
-						}
-					}
-				}
-				else if (backwardDirectionsAccepted.Count == 2) {
-					if (backwardDirectionsAccepted[0] == (Vector3.back + Vector3.right) && 
-					    backwardDirectionsAccepted[1] == Vector3.back) {
-#if DRAW_RAY
-						Debug.DrawRay(piso.transform.position,
-						              sides[0], Color.cyan);
-#endif
-						RaycastHit hit;
-						if (Physics.Raycast(piso.transform.position + new Vector3(0, 0.25f, 0),
-							                    sides[0] - new Vector3(0, 0.25f, 0),
-							                    out hit)) {
-							if (hit.transform.tag != "Chao") {
-								CreateCorner(	piso.transform.position + new Vector3 (-0.5f, 0, -0.5f),
-												new Vector3 (-0.5f, 0, 0.5f),
-												parentWalls,
-												new Vector3 (0, 0, 0),
-												false);
-								CreateCorner(	piso.transform.position + new Vector3 (0.5f, 0, -0.5f),
-												new Vector3 (0.5f, 0, -0.5f),
-					               				parentWalls,
-					               				new Vector3 (0, 180, 0),
-												true);
-							}
-							else {
-								CreateCorner(	piso.transform.position + new Vector3 (-0.5f, 0, -0.5f),
-												new Vector3 (-0.5f, 0, 0.5f),
-												parentWalls,
-												new Vector3 (0, 0, 0),
-												false);
-							}
-						}
-					}
-					else if (backwardDirectionsAccepted[0] == (Vector3.back + Vector3.left) && 
-					    	 backwardDirectionsAccepted[1] == Vector3.back) {
-#if DRAW_RAY
-						Debug.DrawRay(piso.transform.position,
-						              sides[1], Color.cyan);
-#endif
-						RaycastHit hit;
-						if (Physics.Raycast(piso.transform.position + new Vector3(0, 0.25f, 0),
-							                    sides[1] - new Vector3(0, 0.25f, 0),
-							                    out hit)) {
-							if (hit.transform.tag != "Chao") {
-								CreateCorner(	piso.transform.position + new Vector3 (0.5f, 0, -0.5f),
-												new Vector3 (0.5f, 0, 0.5f),
-					               				parentWalls,
-					               				new Vector3 (0, 90, 0),
-												false);
-								CreateCorner(	piso.transform.position + new Vector3 (-0.5f, 0, -0.5f),
-												new Vector3 (-0.5f, 0, -0.5f),
-												parentWalls,
-												new Vector3 (0, 270, 0),
-												true);
-							}
-							else {
-								CreateCorner(	piso.transform.position + new Vector3 (0.5f, 0, -0.5f),
-												new Vector3 (0.5f, 0, 0.5f),
-					               				parentWalls,
-					               				new Vector3 (0, 90, 0),
-												false);
-							}
-						}
-					}
-				}
-				else if (backwardDirectionsAccepted.Count == 1) {
-					if (backwardDirectionsAccepted[0] == Vector3.back) {
-						CreateCorner(piso.transform.position + new Vector3 (0.5f, 0, -0.5f),
-						               new Vector3 (0.5f, 0, 0.5f),
-						               parentWalls,
-						               new Vector3 (0, 90, 0),
-									   false);
-						CreateCorner(piso.transform.position + new Vector3 (-0.5f, 0, -0.5f),
-						               new Vector3 (-0.5f, 0, 0.5f),
-						               parentWalls,
-						               new Vector3 (0, 0, 0),
-									   false);
-					}
-				}
-			}
-			#endregion
-			
-			GameObject cf = new GameObject("ChaoFantasma");
-			cf.transform.position = piso.transform.position;
-			cf.tag = "ChaoVazio";
-			cf.transform.parent = parentFloor;
-			
-		}
-		
-		GameObject[] corners = GameObject.FindGameObjectsWithTag("Quina");
-		if (corners.Length == 0)
-		{
-			Debug.LogError("Algo ocorreu de forma equivocada!");
-		}
-		
-		bool[] alreadyPlaced = new bool[corners.Length];
-		
-		Debug.LogWarning ("corners.Length: " + corners.Length);
-		for (int i = 0; i != corners.Length; ++i)
-		{
-//			corners[i].tag = "Parede";
-			
-			for (int j = 0; j != corners.Length; ++j)
-			{
-				if (i != j && !alreadyPlaced [j])
-				{
-					if (corners [i].transform.position.x == corners [j].transform.position.x ||
-						corners [i].transform.position.z == corners [j].transform.position.z)
-					{
-						CreateWall (corners [i].transform.position, corners [j].transform.position);
-					}
-				}
-			}
-			
-			alreadyPlaced [i] = true;
-		}
-		
-		float angleBetweenWalls;
-			
-		*/
 		//Inicializando InfoWall em cada parede
 		foreach (GameObject cWall in GameObject.FindGameObjectsWithTag("Parede"))
 		{
@@ -465,69 +164,19 @@ public class WallBuilder : MonoBehaviour {
 			}
 			cWall.GetComponent<InfoWall> ().color = Color.white;
 			cWall.GetComponent<InfoWall> ().wall  = cWall.transform;
-		
-			/*
-			foreach (GameObject cWall in GameObject.FindGameObjectsWithTag("Parede"))
-			{
-				if (wall.Equals (cWall))
-					continue;
-					
-				angleBetweenWalls = (wall.transform.eulerAngles.y - cWall.transform.eulerAngles.y);	
-				
-				if ((angleBetweenWalls - 90f) <  IPSLON &&
-					(angleBetweenWalls - 90f) > -IPSLON)
-				{
-					if (cWall.GetComponent<InfoWall> () == null){
-						cWall.AddComponent<InfoWall> ();
-					}
-					
-					wall.GetComponent<InfoWall> ().rightWall = cWall.transform;
-					cWall.GetComponent<InfoWall> ().leftWall = wall.transform;
-					break;
-				}
-			}	
-		*/
 		}
-		/*
-		//Preencher leftWall/rightWall que ficaram de fora
-		foreach (GameObject wall in GameObject.FindGameObjectsWithTag("Parede"))
-		{
-			if (wall.GetComponent<InfoWall> ().rightWall == null)
-			{
-				foreach (GameObject cWall in GameObject.FindGameObjectsWithTag("Parede"))
-				{
-					if (cWall.GetComponent<InfoWall> ().leftWall == null)
-					{
-						wall.GetComponent<InfoWall> ().rightWall = cWall.transform;
-						cWall.GetComponent<InfoWall> ().leftWall = wall.transform;
-						break;
-					}
-				}
-				break;
-			}
-		}
-		
-		//removendo quinas fantasma
-		GameObject[] ghostCorners = GameObject.FindGameObjectsWithTag("QuinaVazia");
-		foreach (GameObject ghostCorner in ghostCorners)
-		{
-			Destroy (ghostCorner);
-		}
-			
-		*/
-		
 		Application.LoadLevel(3);
 		
 	}
 	
 	private void ChangeWalMaterialAndScale (GameObject newWall, float wallScaleX)
 	{
-		newWall.transform.localScale = new Vector3 (wallScaleX, 2.6f, 1);
+		newWall.transform.localScale = new Vector3 (wallScaleX, WallBuilder.WALL_HEIGHT, 1);
 				
 		foreach (Material cMaterial in newWall.transform.GetChild(0).renderer.materials)
 		{
-			cMaterial.mainTextureScale = new Vector2 (wallScaleX, 1);
-			cMaterial.SetTextureScale ("_BumpMap", new Vector2 (wallScaleX, 1));
+			cMaterial.mainTextureScale = new Vector2 (newWall.transform.localScale.x, 1);
+			cMaterial.SetTextureScale ("_BumpMap", new Vector2 (newWall.transform.localScale.x, 1));
 		}
 		
 		newWall.transform.parent = parentWalls.transform;

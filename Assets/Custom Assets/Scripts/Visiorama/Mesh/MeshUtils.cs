@@ -37,4 +37,12 @@ public class MeshUtils {
 			}
 		}
 	}
+
+	public static Vector3 FixZYFromBlender (Vector3 size)
+	{
+		float t	= size.y;
+		size.y	= size.z;
+		size.z 	= t;
+		return size;
+	}
 }

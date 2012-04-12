@@ -23,11 +23,6 @@ public class OverOrientacao : MonoBehaviour
 		mainCamera = GameObject.FindWithTag("MainCamera").camera;
 	}
 	
-	// Update is called once per frame
-	void OnMouseEnter () {
-		Over ();
-	}
-	
 	#if UNITY_ANDROID || UNITY_IPHONE
 	void Update () {
 		if (Input.touchCount == 1) {
@@ -43,11 +38,16 @@ public class OverOrientacao : MonoBehaviour
 			}
 		}
 	}
-	#endif
+	#else
+	
+	void OnMouseEnter () {
+		Over ();
+	}
 	
 	void OnMouseExit () {
 		Out ();
 	}
+	#endif
 	
 	void Over () {
 		if (renderer != null) {

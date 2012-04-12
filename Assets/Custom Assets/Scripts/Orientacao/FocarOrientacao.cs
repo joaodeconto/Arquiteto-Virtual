@@ -29,12 +29,6 @@ public class FocarOrientacao : MonoBehaviour {
 		mainCamera = GameObject.FindWithTag("MainCamera");
 	}
 	
-	#if (!UNITY_ANDROID && !UNITY_IPHONE) || UNITY_EDITOR
-	void OnMouseUp () {
-		ChangeOrietation();
-	}
-	#endif
-	
 	#if UNITY_ANDROID || UNITY_IPHONE
 	void Update () {
 		if (Input.touchCount == 1) {
@@ -47,6 +41,10 @@ public class FocarOrientacao : MonoBehaviour {
 				}
 			}
 		}
+	}
+	#else
+	void OnMouseUp () {
+		ChangeOrietation();
 	}
 	#endif
 	
@@ -98,7 +96,7 @@ public class FocarOrientacao : MonoBehaviour {
 				newPosition.y += distanceFromMiddle;
 				break;
 			case Orientacao.Baixo:
-				newDirection.x  = -90;
+				newDirection.x  = 270f;
 				newPosition.y -= distanceFromMiddle;
 				break;
 			case Orientacao.Perspectiva:
@@ -109,7 +107,24 @@ public class FocarOrientacao : MonoBehaviour {
 				break;
 		}
 		
+		if (newPosition.x.ToString().Equals("NaN")) { 
+			if (orientacao.ToString().Equals("Esquerda")) newPosition.x = 1000 - 1.7f;
+			if (orientacao.ToString().Equals("Direita")) newPosition.x = 1000f + 1.7f;
+			if (orientacao.ToString().Equals("Perspectiva")) newPosition.x = 1000f - 1.7f;
+		}
+		if (newPosition.y.ToString().Equals("NaN")) { 
+			if (orientacao.ToString().Equals("Baixo")) newPosition.y = -1.7f;
+			if (orientacao.ToString().Equals("Cima")) newPosition.y = 3f;
+		}
+		if (newPosition.z.ToString().Equals("NaN")) { 
+			if (orientacao.ToString().Equals("Frente")) newPosition.z = 1000f - 1.7f;
+			if (orientacao.ToString().Equals("Atras")) newPosition.z = 1000f + 1.7f;
+			if (orientacao.ToString().Equals("Perspectiva")) newPosition.z = 1000f - 1.7f;
+		}
+		
 		mainCamera.GetComponent<Camera3d>().FreezeCamera ();
+		
+		print("newDirection: " + newDirection + " - newPosition: " + newPosition);
 		
 		iTween.RotateTo (mainCamera, iTween.Hash (	iT.RotateTo.rotation, newDirection,
 													iT.RotateTo.time, tweenTime,

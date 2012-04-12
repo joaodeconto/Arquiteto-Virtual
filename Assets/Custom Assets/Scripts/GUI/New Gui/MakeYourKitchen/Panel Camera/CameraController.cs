@@ -201,13 +201,17 @@ public class CameraController : MonoBehaviour {
 		//GameObject.Find("cfg").GetComponent<Configuration>().LoadState("teste/teste.xml",false);
 		//GameObject.Find("cfg").GetComponent<Configuration>().RunPreset(0);
 		
+		#if !UNITY_ANDROID && !UNITY_IPHONE
 		StartCoroutine ("SendScreenshotToForm", "http://www.visiorama360.com.br/Telasul/uploadScreenshot.php");
+		#endif
 	}
 	
 	public void Report ()
 	{
 		//TODO make this method works
+		#if !UNITY_ANDROID && !UNITY_IPHONE
 		StartCoroutine(SendReportData("http://www.visiorama360.com.br/Telasul/uploadReport.php"));
+		#endif
 	}
 	
 	public void ShowHideWalls ()

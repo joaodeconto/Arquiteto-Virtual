@@ -23,6 +23,17 @@ public class FocarOrientacao : MonoBehaviour {
 	void Start ()
 	{
 		tweenTime = 1.0f;
+		
+		GameObject floor = GameObject.FindWithTag ("Chao");
+		if (floor == null)
+		{
+			Debug.LogError ("Não foi possível encontrar nenhum \"Chao\". Por favor verifique se as cenas estão interligadas corretamente.");
+			return;	
+		}
+		
+		distanceFromMiddle = (floor.collider.bounds.size.x + floor.collider.bounds.size.y) / 1.5f * distanceRate;
+		distanceFromMiddle /= Mathf.Sqrt(distanceFromMiddle); 
+		
 		thisCamera = transform.parent.GetComponentInChildren<Camera>() != null ?
 					 transform.parent.GetComponentInChildren<Camera>() :
 					 transform.parent.transform.parent.GetComponentInChildren<Camera>();
@@ -58,20 +69,12 @@ public class FocarOrientacao : MonoBehaviour {
 		if (!mainCamera.GetComponent<Camera3d>().CanMoveCamera)
 			return;
 		
-		GameObject floor = GameObject.FindWithTag ("Chao");
-		if (floor == null)
-		{
-			Debug.LogError ("Não foi possível encontrar nenhum \"Chao\". Por favor verifique se as cenas estão interligadas corretamente.");
-			return;	
-		}
-		
-		distanceFromMiddle = (floor.collider.bounds.size.x + floor.collider.bounds.size.y) / 1.5f * distanceRate;
-		distanceFromMiddle /= Mathf.Sqrt(distanceFromMiddle); 
-		
 		newDirection   = Vector3.zero;
 		newDirection.x = cameraInclination;
 		newPosition    = WallBuilder.ROOT;
 		newPosition.y  = 1.7f;
+		
+		print("cameraInclination: " + cameraInclination);
 		
 		switch (orientacao)
 		{
@@ -107,24 +110,7 @@ public class FocarOrientacao : MonoBehaviour {
 				break;
 		}
 		
-		if (newPosition.x.ToString().Equals("NaN")) { 
-			if (orientacao.ToString().Equals("Esquerda")) newPosition.x = 1000 - 1.7f;
-			if (orientacao.ToString().Equals("Direita")) newPosition.x = 1000f + 1.7f;
-			if (orientacao.ToString().Equals("Perspectiva")) newPosition.x = 1000f - 1.7f;
-		}
-		if (newPosition.y.ToString().Equals("NaN")) { 
-			if (orientacao.ToString().Equals("Baixo")) newPosition.y = -1.7f;
-			if (orientacao.ToString().Equals("Cima")) newPosition.y = 3f;
-		}
-		if (newPosition.z.ToString().Equals("NaN")) { 
-			if (orientacao.ToString().Equals("Frente")) newPosition.z = 1000f - 1.7f;
-			if (orientacao.ToString().Equals("Atras")) newPosition.z = 1000f + 1.7f;
-			if (orientacao.ToString().Equals("Perspectiva")) newPosition.z = 1000f - 1.7f;
-		}
-		
 		mainCamera.GetComponent<Camera3d>().FreezeCamera ();
-		
-		print("newDirection: " + newDirection + " - newPosition: " + newPosition);
 		
 		iTween.RotateTo (mainCamera, iTween.Hash (	iT.RotateTo.rotation, newDirection,
 													iT.RotateTo.time, tweenTime,

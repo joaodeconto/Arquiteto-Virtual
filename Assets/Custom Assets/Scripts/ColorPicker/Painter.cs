@@ -70,7 +70,7 @@ public class Painter: MonoBehaviour {
 		rectRGBA = new Rect[3];
 		rectFieldRGBA = new Rect[rectRGBA.Length];
 		Rect rRGBA_Standart = ScreenUtils.ScaledRectInSenseHeight(25, 200, 60, 15);
-		Rect rRGBA_field_Standart = ScreenUtils.ScaledRectInSenseHeight(25 + 65, 200, 35, 20);
+		Rect rRGBA_field_Standart = ScreenUtils.ScaledRectInSenseHeight(25 + 65, 200, 40, 20);
 		for (int i = 0; i != rectRGBA.Length; ++i) {
 			rectRGBA[i] = rRGBA_Standart;
 			rectFieldRGBA[i] = rRGBA_field_Standart;
@@ -106,7 +106,7 @@ public class Painter: MonoBehaviour {
 		dropperBool = colorOption = textureOption = false;
 		tagObject = "";
 		
-		fontSizeGroup = fontSizeButton = fontSizeLabel = 20;
+		fontSizeGroup = fontSizeButton = fontSizeLabel = 16;
 		
 		print("fontSizeGroup: " + fontSizeGroup);
 		

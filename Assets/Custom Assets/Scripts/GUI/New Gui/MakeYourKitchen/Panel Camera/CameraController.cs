@@ -150,6 +150,10 @@ public class CameraController : MonoBehaviour {
 		}
 	}
 	
+	public void EnableCeilFloor () {
+		showCeil = showFloor = true;
+	}
+	
 	#region GUI
 	public void Move (float x, float y)
 	{
@@ -172,6 +176,15 @@ public class CameraController : MonoBehaviour {
 	{
 		SnapBehaviour.DeactivateAll ();
 		
+		interfaceGUI.lists.SetActiveRecursively(false);
+		
+		foreach (Transform child in interfaceGUI.main.GetComponentsInChildren<Transform>()) {
+			print(child);
+			child.gameObject.SetActiveRecursively(false);
+		}
+		
+		mainCamera.gameObject.SetActiveRecursively(false);
+		
 		setFirstPerson = true;
 		firstPersonCamera.SetActiveRecursively(true);
 		#if UNITY_ANDROID || UNITY_IPHONE
@@ -184,14 +197,6 @@ public class CameraController : MonoBehaviour {
 		firstPersonCamera.GetComponent<ColliderControl>().Enable();
 		#endif
 		
-		interfaceGUI.lists.SetActiveRecursively(false);
-		
-		foreach (Transform child in interfaceGUI.main.GetComponentsInChildren<Transform>()) {
-			print(child);
-			child.gameObject.SetActiveRecursively(false);
-		}
-		
-		mainCamera.gameObject.SetActiveRecursively(false);
 	}
 	
 	public void Screenshot ()
@@ -201,8 +206,10 @@ public class CameraController : MonoBehaviour {
 		//GameObject.Find("cfg").GetComponent<Configuration>().LoadState("teste/teste.xml",false);
 		//GameObject.Find("cfg").GetComponent<Configuration>().RunPreset(0);
 		
-		#if !UNITY_ANDROID && !UNITY_IPHONE
+		#if UNITY_WEBPLAYER
 		StartCoroutine ("SendScreenshotToForm", "http://www.visiorama360.com.br/Telasul/uploadScreenshot.php");
+		#else
+		StartCoroutine (GetScreenshot());
 		#endif
 	}
 	
@@ -272,6 +279,55 @@ public class CameraController : MonoBehaviour {
 								   	false);
 			}
 		}
+	}
+	
+	private IEnumerator GetScreenshot () {
+		bool isPanelFloor = interfaceGUI.panelFloor.active ? true : false;
+		
+		bool isPanelInfo = interfaceGUI.panelInfo.active ? true : false;
+		
+		bool isPainter = mainCamera.GetComponentInChildren<Painter>().enabled ? true : false;
+		
+		interfaceGUI.lists.SetActiveRecursively(false);
+		mainCamera.GetComponentInChildren<Painter>().enabled = false;
+		
+		Transform[] allchids = interfaceGUI.main.GetComponentsInChildren<Transform>();
+		foreach (Transform child in allchids) {
+			child.gameObject.SetActiveRecursively(false);
+		}
+		
+		yield return new WaitForSeconds(0.2f);
+		
+		int screenshotCount = 0;
+		string screenshotFilename;
+		string directory = Application.dataPath + "/Screenshots/";
+		if (!System.IO.Directory.Exists(directory)) 
+			System.IO.Directory.CreateDirectory(directory);
+		do
+        {
+			if (screenshotCount != 0) screenshotFilename = "arquiteto-virtual" + screenshotCount + ".jpg";
+			else screenshotFilename = "arquiteto-virtual.jpg";
+            screenshotCount++;
+        } while (System.IO.File.Exists(directory + screenshotFilename));
+		Application.CaptureScreenshot(directory + screenshotFilename);
+		
+		yield return new WaitForSeconds(0.2f);
+		
+		foreach (Transform child in allchids) {
+				child.gameObject.SetActiveRecursively(true);
+		}
+		if (!isPanelFloor) {
+			interfaceGUI.viewUIPiso.SetActiveRecursively(false);
+			interfaceGUI.panelFloor.SetActiveRecursively(false);
+		}
+		if (!isPanelInfo) {
+			interfaceGUI.panelInfo.SetActiveRecursively(false);
+			interfaceGUI.panelMobile.SetActiveRecursively(false);
+		}
+		if (isPainter) {
+			mainCamera.GetComponentInChildren<Painter>().enabled = true;
+		}
+		interfaceGUI.uiRootFPS.SetActiveRecursively(false);		
 	}
 	
 	private IEnumerator SendScreenshotToForm (string screenShotURL)

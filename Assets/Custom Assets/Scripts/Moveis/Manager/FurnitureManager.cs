@@ -34,40 +34,6 @@ public class FurnitureManager : MonoBehaviour {
 		}
 	}
 	
-//	private bool isCreating = false;
-//	public void Create(int index){
-//		return;
-//		select = index;
-//		isCreating = true;
-//		
-//        RaycastHit hit;
-//        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-//		
-//        if (Physics.Raycast(ray, out hit)){
-//            if (GetComponent<FurnitureStore>().get(index)){
-//				
-//				newFurniture = Instantiate(GetComponent<FurnitureStore>().get(index), hit.point,Quaternion.identity) as GameObject;// new Quaternion(objetos[numObjeto].transform.rotation.x, objetos[numObjeto].transform.rotation.y, objetos[numObjeto].transform.rotation.z, objetos[numObjeto].transform.rotation.w)) as GameObject;
-//				newFurniture.layer = LayerMask.NameToLayer("Moveis");
-//			
-//				/* Por enquanto */
-//				FurnitureData fd = newFurniture.AddComponent<Furniture>().Data;
-//			
-//				fd.Name 	= "Nome de um móvel";
-//				fd.Position = newFurniture.transform.position;
-//				fd.Size		= new int[3];
-//				fd.Line		= "";
-//			
-//				/* Só por enquanrto */
-//			
-//				newFurniture.tag = "MovelSelecionado";
-//			}
-//            else
-//                return;
-//			
-//            newFurniture.transform.parent = GameObject.Find("Moveis GO").transform;
-//        }
-//    }
-	
 	public bool isNewFurnitureActive(){
 		return select != -1;
 	}
@@ -78,7 +44,6 @@ public class FurnitureManager : MonoBehaviour {
 	
 	public void FreeActiveNewFurniture(){
 		select = -1;
-//		isCreating = false;
 		newFurniture.tag = "Movel";
 	}
 }

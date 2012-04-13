@@ -24,7 +24,7 @@ public class CameraButtonHandler : MonoBehaviour {
 	public CameraButtonHandlerEnum cameraButtonHandler;
 	public bool IsRepeatButton;
 	
-	private CameraController cameraController;
+	private GUICameraController cameraController;
 	
 	#region NGUI monkey patch vars :P
 	private float repeatInterval = 0.01f;
@@ -36,7 +36,7 @@ public class CameraButtonHandler : MonoBehaviour {
 		
 	void Start()
 	{
-		cameraController = GameObject.Find("CameraController").GetComponent<CameraController>();
+		cameraController = GameObject.Find("CameraController").GetComponent<GUICameraController>();
 		mainCamera = GameObject.FindWithTag("MainCamera");
 	}
  
@@ -56,7 +56,7 @@ public class CameraButtonHandler : MonoBehaviour {
 	
 	void OnClick()
 	{
-		if (!mainCamera.GetComponent<Camera3d>().CanMoveCamera) return;
+		if (!mainCamera.GetComponent<CameraController>().freeCamera.CanMoveCamera) return;
 		
 		switch (cameraButtonHandler) {
 		//para mover a câmera uso coordenadas x,y

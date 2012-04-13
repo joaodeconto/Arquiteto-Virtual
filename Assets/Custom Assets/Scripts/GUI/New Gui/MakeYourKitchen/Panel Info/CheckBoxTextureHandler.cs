@@ -7,12 +7,10 @@ public class CheckBoxTextureHandler : MonoBehaviour {
 	
 	private InfoController infoController;
 	private UICheckbox checkbox;
-	private Camera3d camera;
 	
 	void Start () {
 		infoController = GameObject.FindWithTag("GameController").GetComponentInChildren<InfoController>();
 		checkbox = GetComponent<UICheckbox>();
-		camera = GameObject.FindWithTag("MainCamera").GetComponent<Camera3d>();
 	}
 	
 	void OnClick ()

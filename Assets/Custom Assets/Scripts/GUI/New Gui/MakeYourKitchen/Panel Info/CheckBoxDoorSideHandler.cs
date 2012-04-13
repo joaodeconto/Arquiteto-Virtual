@@ -12,12 +12,12 @@ public class CheckBoxDoorSideHandler : MonoBehaviour {
 	public DoorSideEnum doorSideEnum;
 	
 	private InfoController infoController;
-	private Camera3d camera3d;
+	private GameObject cCamera;
 	
 	void Awake ()
 	{
 		infoController = GameObject.FindWithTag("GameController").GetComponentInChildren<InfoController>();
-		camera3d = GameObject.FindWithTag("MainCamera").GetComponent<Camera3d>();
+		cCamera = GameObject.FindWithTag("MainCamera");
 	}
 	
 	void OnClick ()
@@ -34,9 +34,9 @@ public class CheckBoxDoorSideHandler : MonoBehaviour {
 				
 		newModule.GetComponent<SnapBehaviour>().Select = true;
 		newModule.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-		camera3d.GetComponent<RenderBounds>().Display = true;
-		camera3d.GetComponent<RenderBounds>().SetBox(newModule);
-		camera3d.GetComponent<RenderBounds>().UpdateObj();
+		cCamera.GetComponent<RenderBounds>().Display = true;
+		cCamera.GetComponent<RenderBounds>().SetBox(newModule);
+		cCamera.GetComponent<RenderBounds>().UpdateObj();
 		
 		infoController.SendMessage("UpdateInfo", newModule.GetComponent<InformacoesMovel>());
 		

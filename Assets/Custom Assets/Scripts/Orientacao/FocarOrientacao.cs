@@ -66,7 +66,7 @@ public class FocarOrientacao : MonoBehaviour {
 			return;
 		}
 		
-		if (!mainCamera.GetComponent<Camera3d>().CanMoveCamera)
+		if (!mainCamera.GetComponent<CameraController>().freeCamera.CanMoveCamera)
 			return;
 		
 		newDirection   = Vector3.zero;
@@ -110,7 +110,7 @@ public class FocarOrientacao : MonoBehaviour {
 				break;
 		}
 		
-		mainCamera.GetComponent<Camera3d>().FreezeCamera ();
+		mainCamera.GetComponent<CameraController>().freeCamera.FreezeCamera ();
 		
 		iTween.RotateTo (mainCamera, iTween.Hash (	iT.RotateTo.rotation, newDirection,
 													iT.RotateTo.time, tweenTime,
@@ -126,6 +126,6 @@ public class FocarOrientacao : MonoBehaviour {
 	void ReleaseCamera ()
 	{
 		Debug.LogWarning ("Was called ReleaseCamera");
-		mainCamera.GetComponent<Camera3d> ().FreeCamera ();
+		mainCamera.GetComponent<FreeCamera3d>().FreeCamera ();
 	}
 }

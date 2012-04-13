@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Visiorama;
 
 public class CatalogCategoryButtonHandler : MonoBehaviour {
 	
@@ -10,12 +11,23 @@ public class CatalogCategoryButtonHandler : MonoBehaviour {
 	public Transform offsetCatalogItem;
 	
 	public bool isClicked {get; set;}
-	
-	private CameraGUIController cameraGUIController;
+		
+	private GameObject[] cameras;
 	
 	void Start () {
-		cameraGUIController = GameObject.FindWithTag("GameController").GetComponentInChildren<CameraGUIController>();
 		Invoke("CatalogCategory", 0.1f);
+		cameras = GameObject.FindGameObjectsWithTag("GUICamera");
+	}
+	
+	void Update () {
+		if (Input.GetMouseButtonDown(0) && isClicked)
+		{
+			if (!NGUIUtils.ClickedInGUI (cameras,"GUI"))
+			{
+				tweenPlayerButton.Play();
+				isClicked = false;
+			}
+		}
 	}
 	
 	void CatalogCategory () {
@@ -43,15 +55,6 @@ public class CatalogCategoryButtonHandler : MonoBehaviour {
 				}
 			}
 			++i;
-		}
-	}
-	
-	void Update () {
-		if (Input.GetMouseButtonDown(0) && isClicked) {
-			if (!cameraGUIController.ClickInGUI()) {
-				tweenPlayerButton.Play();
-				isClicked = false;
-			}
 		}
 	}
 }

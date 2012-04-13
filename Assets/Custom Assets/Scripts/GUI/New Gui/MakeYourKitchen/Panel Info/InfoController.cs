@@ -162,7 +162,7 @@ public class InfoController : MonoBehaviour {
 	public void FocusObject () {
 		GameObject mainCamera = GameObject.FindGameObjectWithTag ("MainCamera");
 		
-		if (!mainCamera.GetComponent<Camera3d>().CanMoveCamera) return;
+		if (!mainCamera.GetComponent<CameraController>().freeCamera.CanMoveCamera) return;
 		
 		Vector3 focusItemPosition = item.collider.bounds.center;
 		Vector3 focusItemRotation = item.transform.localEulerAngles;
@@ -178,7 +178,7 @@ public class InfoController : MonoBehaviour {
 		
 		focusItemRotation += new Vector3(0, 180, 0);
 		
-		mainCamera.GetComponent<Camera3d>().FreezeCamera ();
+		mainCamera.GetComponent<CameraController>().freeCamera.FreezeCamera ();
 		
 		iTween.MoveTo(mainCamera, iTween.Hash(	iT.MoveTo.position, focusItemPosition, 
 	                                            iT.MoveTo.time, 2f,
@@ -194,7 +194,7 @@ public class InfoController : MonoBehaviour {
 	{
 		Debug.LogWarning ("Was called ReleaseCamera");
 		GameObject mainCamera = GameObject.FindGameObjectWithTag ("MainCamera");
-		mainCamera.GetComponent<Camera3d> ().FreeCamera ();
+		mainCamera.GetComponent<CameraController>().freeCamera.FreeCamera ();
 	}
 
 	

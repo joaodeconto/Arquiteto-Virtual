@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Visiorama;
 
 public class CatalogExtrasButtonHandler : MonoBehaviour {
 	
@@ -12,12 +13,22 @@ public class CatalogExtrasButtonHandler : MonoBehaviour {
 	
 	public bool isClicked { get; set; }
 	
-	private CameraGUIController cameraGUIController;
+	private GameObject[] cameras;
 	
 	void Start ()
 	{
-		cameraGUIController = GameObject.FindWithTag ("GameController").GetComponentInChildren<CameraGUIController> ();
 		Invoke ("CatalogExtras", 0.1f);
+	}
+	
+	void Update () {
+		if (Input.GetMouseButtonDown(0) && isClicked)
+		{
+			if (!NGUIUtils.ClickedInGUI (cameras,"GUI"))
+			{
+				tweenPlayerButton.Play();
+				isClicked = false;
+			}
+		}
 	}
 	
 	void CatalogExtras () {
@@ -49,16 +60,6 @@ public class CatalogExtrasButtonHandler : MonoBehaviour {
 				}
 			}
 			++i;
-		}
-	}
-	
-	void Update ()
-	{
-		if (Input.GetMouseButtonDown (0) && isClicked) {
-			if (!cameraGUIController.ClickInGUI ()) {
-				tweenPlayerButton.Play ();
-				isClicked = false;
-			}
 		}
 	}
 }

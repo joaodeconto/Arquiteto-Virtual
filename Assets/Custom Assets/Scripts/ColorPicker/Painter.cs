@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System;
-using Visiorama.Utils;
+using Visiorama;
 
 public class Painter: MonoBehaviour {
 	public Texture2D background;
@@ -46,7 +46,8 @@ public class Painter: MonoBehaviour {
 	private string nameObject, tagObject;
 	private GUIStyle groupStyle, topColorGroupStyle, topTextureGroupStyle, labelStyle;
 	private int fontSizeGroup, fontSizeButton, fontSizeLabel, thumbSize;
-	private CameraGUIController cameraGUIController;
+	
+	private GameObject[] cameras;
 	
 	// Setando posições (Chamar ela no Start e no ScreenSizeChange)
 	void SetPositions () {
@@ -135,7 +136,7 @@ public class Painter: MonoBehaviour {
 		
 		SetPositions ();
 		
-		cameraGUIController = GameObject.Find("CameraController").GetComponentInChildren<CameraGUIController> ();
+		cameras = GameObject.FindGameObjectsWithTag("GUICamera");
 	}
 
 	void OnGUI (){
@@ -149,7 +150,7 @@ public class Painter: MonoBehaviour {
 			
 				//Testa se clicou dentro de alguma coisa da gui
 				//se clicou sai do método
-				if (cameraGUIController.ClickInGUI ())
+				if (NGUIUtils.ClickedInGUI (cameras, "GUI"))
 					return;
 						
 				if (!MouseUtils.MouseClickedInArea(rectWindow)) {
@@ -194,7 +195,7 @@ public class Painter: MonoBehaviour {
 				
 				//Testa se clicou dentro de alguma coisa da gui
 				//se clicou sai do método
-				if (cameraGUIController.ClickInGUI ())
+				if (NGUIUtils.ClickedInGUI (cameras,"GUI"))
 					return;
 					
 				if (!dropperBoolLast) {

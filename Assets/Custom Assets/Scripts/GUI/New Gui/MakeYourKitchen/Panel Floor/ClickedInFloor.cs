@@ -1,19 +1,22 @@
 using UnityEngine;
 using System.Collections;
+using Visiorama;
 
 public class ClickedInFloor : MonoBehaviour {
 	
 	public GameObject GUIPanelFloor;
 	public GameObject ListPanelFloor;
 	
-	private CameraGUIController cameraGUIController;
 	private Camera mainCamera;
 	
+	private GameObject[] cameras;
+		
 	// Use this for initialization
 	void Start () {
-		cameraGUIController = GameObject.FindWithTag("GameController").GetComponentInChildren<CameraGUIController>();
 		mainCamera = transform.parent.camera;
-		if (GUIPanelFloor.active) {
+		cameras = GameObject.FindGameObjectsWithTag("GUICamera");
+		if (GUIPanelFloor.active)
+		{
 			GUIPanelFloor.SetActiveRecursively(false);
 			ListPanelFloor.SetActiveRecursively(false);
 		}
@@ -21,21 +24,28 @@ public class ClickedInFloor : MonoBehaviour {
 	
 	// Update is called once per frame
 	void OnGUI () {
-		if (Input.GetMouseButtonDown(0)) {
-			if (!cameraGUIController.ClickInGUI()){
-				if (GUIPanelFloor.active) {
+		if (Input.GetMouseButtonDown(0)) 
+		{
+			if (!NGUIUtils.ClickedInGUI(cameras, "GUI"))
+			{
+				if (GUIPanelFloor.active) 
+				{
 					GUIPanelFloor.SetActiveRecursively(false);
 					ListPanelFloor.SetActiveRecursively(false);
 				}
 			}
 		}
-		if (MouseUtils.GUIMouseButtonDoubleClick(0)) {
-			if (!cameraGUIController.ClickInGUI()){
+		if (MouseUtils.GUIMouseButtonDoubleClick(0))
+		{
+			if (!NGUIUtils.ClickedInGUI(cameras, "GUI"))
+			{
 				Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit = new RaycastHit();
 				
-				if (Physics.Raycast(ray, out hit)) {
-					if (hit.transform.tag == "Chao") {
+				if (Physics.Raycast(ray, out hit))
+				{
+					if (hit.transform.tag == "Chao")
+					{
 						GUIPanelFloor.SetActiveRecursively(true);
 						ListPanelFloor.SetActiveRecursively(true);
 					}

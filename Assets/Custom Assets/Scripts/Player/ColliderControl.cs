@@ -3,13 +3,13 @@ using System.Collections;
 
 public class ColliderControl : MonoBehaviour {
 	
-	private CameraController cameraController;
+	private GUICameraController cameraController;
 	
 	private GameObject lastSelectedMobile;
 	public bool IsPanelFloor {get; set;}
 
 	void Start () {
-		cameraController = GameObject.FindWithTag("GameController").GetComponentInChildren<CameraController>();
+		cameraController = GameObject.FindWithTag("GameController").GetComponentInChildren<GUICameraController>();
 	}
 	
 	public void Enable () {

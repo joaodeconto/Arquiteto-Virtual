@@ -585,7 +585,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 66791105}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.92120063, y: .960960984, z: 321.600006}
+  m_LocalPosition: {x: -.666666687, y: .666666687, z: 321.600006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -4513,7 +4513,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 497391926}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.92120063, y: .960960984, z: 321.600037}
+  m_LocalPosition: {x: -.666666687, y: .666666687, z: 321.600037}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -5805,7 +5805,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 665805632}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.4015007, y: 1.2012012, z: 402}
+  m_LocalPosition: {x: -.833333373, y: .833333373, z: 402}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -6592,7 +6592,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 761155668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.4015007, y: 1.2012012, z: 402}
+  m_LocalPosition: {x: -.833333373, y: .833333373, z: 402}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -7438,15 +7438,15 @@ Camera:
   m_BackGroundColor: {r: .5, g: .5, b: .5, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: .220793083
-    y: .122892559
+    x: .165924817
+    y: .122432739
     width: 0
-    height: .817671478
+    height: .817671418
   near clip plane: -10
   far clip plane: 10
   field of view: 60
   orthographic: 1
-  orthographic size: .817671478
+  orthographic size: .817671418
   m_Depth: 2
   m_CullingMask:
     serializedVersion: 2
@@ -8194,6 +8194,46 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 5af1a8c674cd7f44aadab96ae19d39ff, type: 2}
   mSpriteName: bt_bt
   mFillCenter: 0
+--- !u!1 &887095642
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 3
+  m_Component:
+  - 4: {fileID: 887095643}
+  - 114: {fileID: 887095644}
+  m_Layer: 0
+  m_Name: SculptController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &887095643
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 887095642}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.5945711, y: -.179590076, z: 1.22875941}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1911918447}
+--- !u!114 &887095644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 887095642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8c81be7475c9f644b692a0fe87494c9, type: 1}
+  m_Name: 
+  WindowsModels:
+  - {fileID: 100000, guid: 2a5676028499b704d84019948a649848, type: 2}
 --- !u!1 &905585792
 GameObject:
   m_ObjectHideFlags: 0
@@ -8969,9 +9009,9 @@ Camera:
   m_BackGroundColor: {r: .5, g: .5, b: .5, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: .00492381956
-    y: .906216264
-    width: .147151053
+    x: -.0926322341
+    y: .905756354
+    width: .176249921
     height: 0
   near clip plane: .100000001
   far clip plane: 10
@@ -11094,9 +11134,9 @@ Camera:
   m_BackGroundColor: {r: .5, g: .5, b: .5, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: .84979564
-    y: .121215969
-    width: .145781949
+    x: .919311643
+    y: .120756119
+    width: .174610227
     height: .755285561
   near clip plane: .100000001
   far clip plane: 10
@@ -12500,9 +12540,9 @@ Camera:
   m_BackGroundColor: {r: .5, g: .5, b: .5, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: .00492370035
-    y: .790477872
-    width: .147151127
+    x: -.0926324129
+    y: .790017962
+    width: .176250041
     height: 0
   near clip plane: .100000001
   far clip plane: 10
@@ -13904,7 +13944,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1513702682}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.92120063, y: .960960984, z: 321.600006}
+  m_LocalPosition: {x: -.666666687, y: .666666687, z: 321.600006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -16159,7 +16199,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1808111177}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.92120063, y: .960960984, z: 321.600006}
+  m_LocalPosition: {x: -.666666687, y: .666666687, z: 321.600006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -17216,6 +17256,7 @@ Transform:
   - {fileID: 996875311}
   - {fileID: 1209945963}
   - {fileID: 1986218927}
+  - {fileID: 887095643}
   m_Father: {fileID: 0}
 --- !u!1 &1919249685
 GameObject:
@@ -17882,7 +17923,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1995852662}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.4015007, y: 1.2012012, z: 402}
+  m_LocalPosition: {x: -.833333373, y: .833333373, z: 402}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -18767,7 +18808,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2107165997}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.4015007, y: 1.2012012, z: 402}
+  m_LocalPosition: {x: -.833333373, y: .833333373, z: 402}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:

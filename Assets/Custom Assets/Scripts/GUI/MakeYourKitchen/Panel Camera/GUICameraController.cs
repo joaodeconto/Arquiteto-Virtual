@@ -226,19 +226,22 @@ public class GUICameraController : MonoBehaviour {
 		areWallsAlwaysVisible = !areWallsAlwaysVisible;
 		if(areWallsAlwaysVisible)
 		{
-			foreach (Transform wall in wallParent.transform) 
+			foreach (GameObject wall in GameObject.FindGameObjectsWithTag("Parede"))
 			{
-				wall.GetChild(0).renderer.material = wallMaterial;
+				wall.transform.GetChild(0).renderer.material = wallMaterial;
 				
 				if (wall.name.Contains("Parede"))
-					wall.GetChild(0).renderer.material.color = wall.gameObject.GetComponent<InfoWall>().color;
+					wall.transform.GetChild(0).
+										renderer.material.
+												color = wall.GetComponent<InfoWall>().color;
 			}
 		}		
 	}
 	
 	public void Zoom (int step)
 	{			
-		Ray rayMouse = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2,Screen.height / 2,0));
+		Ray rayMouse = mainCamera.ScreenPointToRay(
+											new Vector3(Screen.width / 2,Screen.height / 2,0));
 		Vector3 cameraPos = (rayMouse.origin - mainCamera.transform.position);
 		mainCamera.transform.localPosition += cameraPos * Time.deltaTime * 10 * step;
 	}
@@ -255,27 +258,26 @@ public class GUICameraController : MonoBehaviour {
 		if (Mathf.Abs(Vector3.Distance(camForwardVector,lastCamPosition)) < 0.1f)
 			return;
 			
-		foreach (Transform wall in wallParent.transform)
+		foreach (GameObject wall in GameObject.FindGameObjectsWithTag("Parede"))
 		{
-			if (wall.name.Contains("Quina"))
+			if (wall.name.Contains ("Quina"))
 				continue;
+
 			//se a cor do InfoWall da parede for diferente da cor do material do renderer da parede
 			//atualiza a cor do InfoWall
 			if (wall.transform.GetChild(0).renderer.materials[0].color != wall.GetComponent<InfoWall> ().color)	
 				wall.GetComponent<InfoWall> ().color = wall.transform.GetChild(0).renderer.materials[0].color;
 				
-			if (Vector3.Angle (camForwardVector, wall.transform.forward) < 120f)
+			if (Vector3.Angle (camForwardVector, wall.transform.forward) < 110f)
 			{
-				ChangeWallMaterial (wall,
+				ChangeWallMaterial (wall.transform,
 								  	wallMaterial,
-								  	wall.GetComponent<InfoWall> ().color,
 								   	true);
 			}
 			else
 			{
-				ChangeWallMaterial (wall,
+				ChangeWallMaterial (wall.transform,
 								  	wallMaterialTransparent,
-								  	wall.GetComponent<InfoWall> ().color,
 								   	false);
 			}
 		}
@@ -447,13 +449,13 @@ public class GUICameraController : MonoBehaviour {
 	}
 			
 	Transform wallChild;
-	private void ChangeWallMaterial (Transform wall, Material newMaterial, Color selectedColor, bool enableWall)
+	private void ChangeWallMaterial (Transform wall, Material newMaterial, bool enableWall)
 	{
 		wallChild = wall.transform.GetChild(0);
 		if (!wallChild.renderer.material.name.Equals(newMaterial.name + " (Instance)"))
 		{
 			wallChild.renderer.material 	  = newMaterial;
-			wallChild.renderer.material.color = selectedColor;
+			wallChild.renderer.material.color = wall.GetComponent<InfoWall>().color;
 					
 			float wallScaleX = wall.localScale.x;
 				

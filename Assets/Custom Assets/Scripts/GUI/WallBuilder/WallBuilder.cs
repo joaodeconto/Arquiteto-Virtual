@@ -121,8 +121,7 @@ public class WallBuilder : MonoBehaviour {
 		Vector3 floorPosition   = floor.transform.localPosition;
 		floorSizeOffset.z = floorSizeOffset.y;
 		floorSizeOffset.y = 0;
-		Debug.LogWarning ("floorSizeOffset: " + floorSizeOffset);
-		
+
 		GameObject newWall;
 		
 		//0
@@ -155,7 +154,7 @@ public class WallBuilder : MonoBehaviour {
 								Quaternion.Euler (Vector3.up * 270.0f)) as GameObject;
 		ChangeWalMaterialAndScale (newWall, RealWallDepth);
 		newWall.name = "Left Wall";
-		
+
 		//Inicializando InfoWall em cada parede
 		foreach (GameObject cWall in GameObject.FindGameObjectsWithTag("Parede"))
 		{
@@ -214,24 +213,7 @@ public class WallBuilder : MonoBehaviour {
 		}
 		
 		newWall.transform.parent = parentWalls.transform;
-		
-		/*
-		//Testando para ver se há uma parede exatamente sobre o mesmo lugar
-		GameObject[] walls = GameObject.FindGameObjectsWithTag("Parede");
-		foreach (GameObject cWall in walls)
-		{
-			if (cWall.Equals (newWall))
-				continue;
-			
-			if (Vector3.Distance(cWall.transform.position, newWall.transform.position) < WallBuilder.IPSLON)
-			{
-				//achou parede coincidente
-				newWall.transform.localEulerAngles = Vector3.up * (wallAngle + 180f);
-				newWall.transform.position		   = newWall.transform.position + (newWall.transform.right.normalized * wallScaleX);
-				break;
-			}
-		}*/
-		
+
 		return newWall;
 	}
 	
@@ -251,119 +233,6 @@ public class WallBuilder : MonoBehaviour {
 		zoom -= Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime * zoomAngle * Mathf.Abs(zoom);
 		zoom = Mathf.Clamp(zoom, 2.5f, 15f);
 		camera.orthographicSize = zoom;
-	}
-	
-	private void VerifyGroundShift ()
-	{
-		Ray ray = camera.ScreenPointToRay (Input.mousePosition);
-		RaycastHit hit;
-		if (Physics.Raycast (ray, out hit)) {
-			if (hit.transform.tag == "Grid") {
-				float x, y, z;
-				
-				x = ray.origin.x;
-				y = 0.01f;
-				z = ray.origin.z;
-				x = x - (int)x > 0.5f ? (int)x + 1 : x - (int)x < -0.5f ? (int)x - 1 : (int)x;
-				z = z - (int)z > 0.5f ? (int)z + 1 : z - (int)z < -0.5f ? (int)z - 1 : (int)z;
-				
-				Vector3 posicaoCalibrada = new Vector3 (x, y, z);
-				float xs = firstPosition.x, zs = firstPosition.z;
-				if (xs > posicaoCalibrada.x)
-					xs = posicaoCalibrada.x;
-				if (xs < posicaoCalibrada.x)
-					xs = posicaoCalibrada.x;
-				if (zs > posicaoCalibrada.z)
-					zs = posicaoCalibrada.z;
-				if (zs < posicaoCalibrada.z)
-					zs = posicaoCalibrada.z;
-				
-				for (int newX = (int)firstPosition.x, newZ = (int)firstPosition.z; newX < (int)xs && newZ < (int)zs; ++newX, ++newZ) {
-					Vector3 posicaoArray = new Vector3 (newX, y, newZ);
-					RaycastHit hit2;
-					if (Physics.Raycast (posicaoArray + new Vector3 (0, 0.01f, 0), Vector3.down, out hit2, 1.0f)) {
-#if DRAW_RAY
-						Debug.DrawRay (posicaoArray, Vector3.down * 1.0f, Color.blue);
-#endif
-						if (hit2.transform.tag != "Chao") {
-							GameObject novoChao = Instantiate (floor, posicaoArray, floor.transform.rotation) as GameObject;
-							novoChao.transform.parent = parentFloor;
-							novoChao.renderer.material.color = new Color (0, 1, 0, 1);
-						}
-					}
-				}
-				for (int newX = (int)firstPosition.x, newZ = (int)firstPosition.z; newX > (int)xs && newZ > (int)zs; --newX, --newZ) {
-					Vector3 posicaoArray = new Vector3 (newX, y, newZ);
-					RaycastHit hit2;
-					if (Physics.Raycast (posicaoArray + new Vector3 (0, 0.01f, 0), Vector3.down, out hit2, 1.0f)) {
-#if DRAW_RAY
-						Debug.DrawRay (posicaoArray, Vector3.down * 1.0f, Color.blue);
-#endif
-						if (hit2.transform.tag != "Chao") {
-							GameObject novoChao = Instantiate (floor, posicaoArray, floor.transform.rotation) as GameObject;
-							novoChao.transform.parent = parentFloor;
-							novoChao.renderer.material.color = new Color (0, 1, 0, 1);
-						}
-					}
-				}
-				for (int newX = (int)firstPosition.x; newX < (int)xs; ++newX) {
-					Vector3 posicaoArray = new Vector3 (newX, y, zs);
-					RaycastHit hit2;
-					if (Physics.Raycast (posicaoArray + new Vector3 (0, 0.01f, 0), Vector3.down, out hit2, 1.0f)) {
-#if DRAW_RAY
-						Debug.DrawRay (posicaoArray, Vector3.down * 1.0f, Color.blue);
-#endif
-						if (hit2.transform.tag != "Chao") {
-							GameObject novoChao = Instantiate (floor, posicaoArray, floor.transform.rotation) as GameObject;
-							novoChao.transform.parent = parentFloor;
-							novoChao.renderer.material.color = new Color (0, 1, 0, 1);
-						}
-					}
-				}
-				for (int newX = (int)firstPosition.x; newX > (int)xs; --newX) {
-					Vector3 posicaoArray = new Vector3 (newX, y, zs);
-					RaycastHit hit2;
-					if (Physics.Raycast (posicaoArray + new Vector3 (0, 0.01f, 0), Vector3.down, out hit2, 1.0f)) {
-#if DRAW_RAY
-						Debug.DrawRay (posicaoArray, Vector3.down * 1.0f, Color.blue);
-#endif
-						if (hit2.transform.tag != "Chao") {
-							GameObject novoChao = Instantiate (floor, posicaoArray, floor.transform.rotation) as GameObject;
-							novoChao.transform.parent = parentFloor;
-							novoChao.renderer.material.color = new Color (0, 1, 0, 1);
-						}
-					}
-				}
-				for (int newZ = (int)firstPosition.z; newZ < (int)zs; ++newZ) {
-					Vector3 posicaoArray = new Vector3 (xs, y, newZ);
-					RaycastHit hit2;
-					if (Physics.Raycast (posicaoArray + new Vector3 (0, 0.01f, 0), Vector3.down, out hit2, 1.0f)) {
-#if DRAW_RAY
-						Debug.DrawRay (posicaoArray, Vector3.down * 1.0f, Color.blue);
-#endif
-						if (hit2.transform.tag != "Chao") {
-							GameObject novoChao = Instantiate (floor, posicaoArray, floor.transform.rotation) as GameObject;
-							novoChao.transform.parent = parentFloor;
-							novoChao.renderer.material.color = new Color (0, 1, 0, 1);
-						}
-					}
-				}
-				for (int newZ = (int)firstPosition.z; newZ > (int)zs; --newZ) {
-					Vector3 posicaoArray = new Vector3 (xs, y, newZ);
-					RaycastHit hit2;
-					if (Physics.Raycast (posicaoArray + new Vector3 (0, 0.01f, 0), Vector3.down, out hit2, 1.0f)) {
-#if DRAW_RAY
-						Debug.DrawRay (posicaoArray, Vector3.down * 1.0f, Color.blue);
-#endif
-						if (hit2.transform.tag != "Chao") {
-							GameObject novoChao = Instantiate (floor, posicaoArray, floor.transform.rotation) as GameObject;
-							novoChao.transform.parent = parentFloor;
-							novoChao.renderer.material.color = new Color (0, 1, 0, 1);
-						}
-					}
-				}
-			}
-		}
 	}
 	
 	private void RemoveGround() {
@@ -406,30 +275,5 @@ public class WallBuilder : MonoBehaviour {
 			cMaterial.mainTextureScale = new Vector2 (RealWallWidth, RealWallDepth);
 			cMaterial.SetTextureScale ("_BumpMap", new Vector2 (RealWallWidth, RealWallDepth));
 		}
-	}
-	
-	private void CreateCorner (Vector3 position, Vector3 sum, Transform side, Vector3 eulerAngles, bool createEmptyCinchona) {
-		if (!SamePosition("Quina", position)) {
-			GameObject novaQuina;
-			if (createEmptyCinchona) {
-				GameObject qf = new GameObject("QuinaFantasma");
-				qf.transform.position = position + (-(sum / 8));
-				qf.tag = "QuinaVazia";
-				qf.transform.parent = side;
-			}
-			novaQuina = Instantiate (corner, position, corner.transform.rotation) as GameObject;
-			novaQuina.transform.parent = side;
-			novaQuina.transform.eulerAngles = eulerAngles;
-		}
-	}
-	
-	private bool SamePosition (string tag, Vector3 position) {
-		GameObject[] novas = GameObject.FindGameObjectsWithTag (tag);
-		foreach (GameObject n in novas) {
-			if (position == n.transform.position) {
-				return true;
-			}
-		}
-		return false;
 	}
 }

@@ -330,12 +330,16 @@ public class Painter: MonoBehaviour {
 			// Option Texture
 			if (textureOption) {
 				if (wallTextures.Length > 3)
-					scrollPositionTexture = GUI.BeginScrollView(rectScrollTexture, scrollPositionTexture, rectListTexture, false, true);
+					scrollPositionTexture = GUI.BeginScrollView(rectScrollTexture,
+																scrollPositionTexture,
+																rectListTexture, false, true);
 				else
 					GUI.BeginGroup(rectScrollTexture);
 				for (int i = 0; i != wallTextures.Length; ++i) {
-					if (GUI.Button(rectTextures[i], wallTextures[i], button)) {
-						render.sharedMaterial.mainTexture = wallTextures[i];
+					if (GUI.Button(rectTextures[i], wallTextures[i], button))
+					{
+						render.sharedMaterial.mainTexture 		 				  = wallTextures [i];
+						render.transform.parent.GetComponent<InfoWall> ().texture = wallTextures [i];
 					}
 				}
 				if (wallTextures.Length > 3)

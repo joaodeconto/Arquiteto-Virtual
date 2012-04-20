@@ -254,20 +254,24 @@ public class GUICameraController : MonoBehaviour {
 		}
 		
 		Vector3 camForwardVector = mainCamera.transform.forward;
-		
+		Renderer cRenderer = null;
 		if (Mathf.Abs(Vector3.Distance(camForwardVector,lastCamPosition)) < 0.1f)
 			return;
 			
 		foreach (GameObject wall in GameObject.FindGameObjectsWithTag("Parede"))
 		{
+
 			if (wall.name.Contains ("Quina"))
 				continue;
 
+			cRenderer = wall.transform.GetChild(0).renderer;
 			//se a cor do InfoWall da parede for diferente da cor do material do renderer da parede
 			//atualiza a cor do InfoWall
-			if (wall.transform.GetChild(0).renderer.materials[0].color != wall.GetComponent<InfoWall> ().color)	
-				wall.GetComponent<InfoWall> ().color = wall.transform.GetChild(0).renderer.materials[0].color;
-				
+			if (cRenderer.materials[0].color != wall.GetComponent<InfoWall> ().color)
+			{
+				wall.GetComponent<InfoWall> ().color = cRenderer.materials[0].color;
+			}
+
 			if (Vector3.Angle (camForwardVector, wall.transform.forward) < 110f)
 			{
 				ChangeWallMaterial (wall.transform,
@@ -413,19 +417,45 @@ public class GUICameraController : MonoBehaviour {
 	
 			InformacoesMovel info = mobile.GetComponent<InformacoesMovel> ();
 	
-			if (!"Extras".Equals (info.Categoria)) {
-				if (Regex.Match(info.name, "(com cooktop|com cook top)").Success) {
-					csvString += info.Nome + ";" + info.Codigo + ";" + info.Largura + ";" + info.Altura + ";" + info.Comprimento + ";" + "\r\n";
-					if (Regex.Match(info.name, "(Balcão triplo|Balcao triplo)").Success) {
-						csvString += "Tampo cooktop triplo" + ";" + "89121" + ";" + "1200" + ";" + "30" + ";" + "520" + ";" + "\r\n";
-					} else {
-						csvString += "Tampo cooktop duplo" + ";" + "89081" + ";" + "800" + ";" + "30" + ";" + "520" + ";" + "\r\n";
-					}
-					csvString += "Cooktop" + ";" + "89150" + ";" + "NA" + ";" + "NA" + ";" + "NA" + ";" + "\r\n";
+			if ("Extras".Equals (info.Categoria))
+				continue;
+
+			if (Regex.Match(info.name, "(com cooktop|com cook top)").Success)
+			{
+				csvString += info.Nome 	+ ";" +
+							 info.Codigo + ";" +
+							 info.Largura + ";" +
+							 info.Altura + ";" +
+							 info.Comprimento + ";" + "\r\n";
+				if (Regex.Match(info.name, "(Balcão triplo|Balcao triplo)").Success)
+				{
+					csvString += "Tampo cooktop triplo" + ";" +
+								 "89121" + ";" +
+								 "1200" + ";" +
+								 "30" + ";" +
+								 "520" + ";" + "\r\n";
 				}
-				else {
-					csvString += info.Nome + ";" + info.Codigo + ";" + info.Largura + ";" + info.Altura + ";" + info.Comprimento + ";" + "\r\n";
+				else
+				{
+					csvString += "Tampo cooktop duplo" + ";" +
+								 "89081" + ";" +
+								 "800" + ";" +
+								 "30" + ";" +
+								 "520" + ";" + "\r\n";
 				}
+				csvString += "Cooktop" + ";" +
+							 "89150" + ";" +
+							 "NA" + ";" +
+							 "NA" + ";" +
+							 "NA" + ";" + "\r\n";
+			}
+			else
+			{
+				csvString += info.Nome + ";" +
+							 info.Codigo + ";" +
+							 info.Largura + ";" +
+							 info.Altura + ";" +
+							 info.Comprimento + ";" + "\r\n";
 			}
 		}
 		
@@ -443,28 +473,35 @@ public class GUICameraController : MonoBehaviour {
 	
 		if (www.error != null)
 			print (www.error);
-		else {
+		else
 			Application.ExternalCall ("tryToDownload", pathExportReport + filename);
-		}
 	}
 			
 	Transform wallChild;
 	private void ChangeWallMaterial (Transform wall, Material newMaterial, bool enableWall)
 	{
 		wallChild = wall.transform.GetChild(0);
+
 		if (!wallChild.renderer.material.name.Equals(newMaterial.name + " (Instance)"))
 		{
-			wallChild.renderer.material 	  = newMaterial;
-			wallChild.renderer.material.color = wall.GetComponent<InfoWall>().color;
-					
-			float wallScaleX = wall.localScale.x;
-				
+			wallChild.renderer.material 	  	= newMaterial;
+			wallChild.renderer.material.color	= wall.GetComponent<InfoWall> ().color;
+
+			if (enableWall)
+			{
+				wallChild.renderer.material.mainTexture = wall.GetComponent<InfoWall> ().texture;
+			}
+
+			Vector2 textScale  = new Vector2 (wall.localScale.x,  wall.localScale.y);
+			Vector2 textOffset = GetTextOffset(wall);
 			foreach (Material cMaterial in wall.transform.GetChild(0).renderer.materials)
 			{
-				cMaterial.mainTextureScale = new Vector2 (wallScaleX, 1);
-				cMaterial.SetTextureScale ("_BumpMap", new Vector2 (wallScaleX, 1));
+				cMaterial.mainTextureScale  = textScale;
+				cMaterial.mainTextureOffset = textOffset;
+				cMaterial.SetTextureScale  ("_BumpMap", textScale);
+				cMaterial.SetTextureOffset ("_BumpMap", textOffset);
 			}
-				
+
 			if (wall.collider != null)
 			{
 				wall.collider.enabled = enableWall;
@@ -472,4 +509,38 @@ public class GUICameraController : MonoBehaviour {
 			
 		}
 	}		
+
+	Vector2 GetTextOffset (Transform wall)
+	{
+		Transform trnsParent = wall.transform.parent;
+
+		//Apenas paredes esculpidas serão alteradas os offsets
+		if (!"PackSculptWall".Equals (trnsParent.name))
+			return Vector2.zero;
+
+		Vector2 textOffset = Vector2.zero;
+
+		switch(wall.name)
+		{
+			case "Lower Wall":
+				textOffset.x = trnsParent.FindChild ("Right Wall").localScale.x;
+				textOffset.y = 0.003f;
+				break;
+			case "Upper Wall":
+				Transform trnsWnd = trnsParent.GetComponent<SculptedWall>().sculptedWindow.transform;
+				textOffset.x = trnsParent.FindChild ("Right Wall").localScale.x;
+				textOffset.y = trnsParent.FindChild ("Lower Wall").localScale.y +
+							   trnsWnd.localScale.y + 0.01f;
+				break;
+			case "Left Wall":
+				textOffset.x = trnsParent.FindChild ("Right Wall").localScale.x +
+							   trnsParent.FindChild ("Lower Wall").localScale.x;
+				break;
+			default:
+				textOffset = Vector2.zero;
+				break;
+		}
+
+		return textOffset;
+	}
 }

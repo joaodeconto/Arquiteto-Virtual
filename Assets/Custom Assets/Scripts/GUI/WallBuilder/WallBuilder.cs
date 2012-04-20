@@ -10,6 +10,7 @@ public class InfoWall : MonoBehaviour
 	public Transform rightWall;
 	public Transform leftWall;
 	public Color color;
+	public Texture texture;
 	
 	public void SetColor (Color color)
 	{
@@ -22,6 +23,7 @@ public class InfoWall : MonoBehaviour
 		this.rightWall	= info.rightWall;
 		this.leftWall 	= info.leftWall;
 		this.color 		= info.color;
+		this.texture	= info.texture;
 	}
 }
 
@@ -158,11 +160,15 @@ public class WallBuilder : MonoBehaviour {
 		//Inicializando InfoWall em cada parede
 		foreach (GameObject cWall in GameObject.FindGameObjectsWithTag("Parede"))
 		{
-			if (cWall.GetComponent<InfoWall> () == null) {
+			if (cWall.GetComponent<InfoWall> () == null){
 				cWall.AddComponent<InfoWall> ();
 			}
-			cWall.GetComponent<InfoWall> ().color = Color.white;
-			cWall.GetComponent<InfoWall> ().wall  = cWall.transform;
+			cWall.GetComponent<InfoWall> ().color  	= Color.white;
+			cWall.GetComponent<InfoWall> ().wall  	= cWall.transform;
+			cWall.GetComponent<InfoWall> ().texture = cWall.transform.
+																GetChild(0).
+																	renderer.
+																		materials[0].mainTexture;
 		}
 		Application.LoadLevel(3);
 		
@@ -171,11 +177,12 @@ public class WallBuilder : MonoBehaviour {
 	private void ChangeWalMaterialAndScale (GameObject newWall, float wallScaleX)
 	{
 		newWall.transform.localScale = new Vector3 (wallScaleX, WallBuilder.WALL_HEIGHT, 1);
-				
+
+		Vector2 textScale = new Vector2 (wallScaleX, WallBuilder.WALL_HEIGHT);
 		foreach (Material cMaterial in newWall.transform.GetChild(0).renderer.materials)
 		{
-			cMaterial.mainTextureScale = new Vector2 (newWall.transform.localScale.x, 1);
-			cMaterial.SetTextureScale ("_BumpMap", new Vector2 (newWall.transform.localScale.x, 1));
+			cMaterial.mainTextureScale = textScale;
+			cMaterial.SetTextureScale ("_BumpMap", textScale);
 		}
 		
 		newWall.transform.parent = parentWalls.transform;

@@ -52,7 +52,6 @@ public class SculptController : MonoBehaviour
 //									new Vector2 (1.8f, 1.2f), 
 //									new Vector2 (2.1f, 1.2f) };
 		cWindowType = 0;
-		
 	}
 	
 	void Update ()
@@ -135,11 +134,7 @@ public class SculptController : MonoBehaviour
 		
 		float cMiddleUpperScaleY = wallTrans.localScale.y - cWallSize.y - WindowPivotY - monkeyPatchUpperWallYScale;
 		float cMiddleLowerScaleY = WindowPivotY;
-		
-		Debug.LogWarning ("cWallSize.y: " + cWallSize.y);
-		Debug.LogWarning ("wallTrans.localScale.y: " + wallTrans.localScale.y);
-		Debug.LogWarning ("cMiddleUpperScaleY: " + cMiddleUpperScaleY);
-		Debug.LogWarning ("WindowPivotY: " + WindowPivotY);
+
 			
 		Vector3 leftWallPosition = wallPosition - 
 									   	(wallTrans.transform.right.normalized *
@@ -147,35 +142,16 @@ public class SculptController : MonoBehaviour
 		Vector3 middleWallPosition = wallPosition - 
 									   	(wallTrans.transform.right.normalized * cRightScaleX);
 		leftWallPosition.y = 0.0f;
-									
+
 		GameObject rightWall = Instantiate (wallTrans.gameObject,
-        										wallTrans.position,
-        										wallTrans.rotation) as GameObject;
+    										wallTrans.position,
+    										wallTrans.rotation) as GameObject;
 		rightWall.name = "Right Wall";
 		rightWall.transform.localScale = new Vector3 (cRightScaleX,
-        												 wallTrans.localScale.y,
-        												 wallTrans.localScale.z);
-		ResizeWallMaterial (rightWall);
-        	
-		GameObject leftWall = Instantiate (wallTrans.gameObject,
-    									   leftWallPosition,
-    									   wallTrans.rotation) as GameObject;
-		leftWall.name = "Left Wall";
-		leftWall.transform.localScale = new Vector3 (cLeftScaleX,
-    												 wallTrans.localScale.y,
-    												 wallTrans.localScale.z);
-		ResizeWallMaterial (leftWall);
-        												
-		middleWallPosition.y = cWallSize.y + WindowPivotY;
-		GameObject upperWall = Instantiate (wallTrans.gameObject,
-    									    middleWallPosition,
-    									    wallTrans.rotation) as GameObject;
-		upperWall.name = "Upper Wall";
-		upperWall.transform.localScale = new Vector3 (cMiddleScaleX,
-    												  cMiddleUpperScaleY,
+    												  wallTrans.localScale.y,
     												  wallTrans.localScale.z);
-		ResizeWallMaterial (upperWall);
-			
+		ResizeWallMaterial (rightWall, cRightScaleX, wallTrans.localScale.y, 0, 0);
+
 		middleWallPosition.y = 0.0f;
 		GameObject lowerWall = Instantiate (wallTrans.gameObject,
     									    middleWallPosition,
@@ -184,8 +160,35 @@ public class SculptController : MonoBehaviour
 		lowerWall.transform.localScale = new Vector3 (cMiddleScaleX,
     												  cMiddleLowerScaleY,
     												  wallTrans.localScale.z);
-		ResizeWallMaterial (lowerWall);
-			
+		ResizeWallMaterial (lowerWall, cMiddleScaleX, cMiddleLowerScaleY, cRightScaleX, 0.003f);
+
+		middleWallPosition.y = cWallSize.y + WindowPivotY;
+		GameObject upperWall = Instantiate (wallTrans.gameObject,
+    									    middleWallPosition,
+    									    wallTrans.rotation) as GameObject;
+		upperWall.name = "Upper Wall";
+		upperWall.transform.localScale = new Vector3 (cMiddleScaleX,
+    												  cMiddleUpperScaleY,
+    												  wallTrans.localScale.z);
+		ResizeWallMaterial (upperWall,
+							cMiddleScaleX,
+							cMiddleUpperScaleY,
+							cRightScaleX,
+							cMiddleLowerScaleY + cWallSize.y + 0.01f);
+
+		GameObject leftWall = Instantiate (wallTrans.gameObject,
+    									   leftWallPosition,
+    									   wallTrans.rotation) as GameObject;
+		leftWall.name = "Left Wall";
+		leftWall.transform.localScale = new Vector3 (cLeftScaleX,
+    												 wallTrans.localScale.y,
+    												 wallTrans.localScale.z);
+		ResizeWallMaterial (leftWall,
+							cLeftScaleX,
+							wallTrans.localScale.y,
+							cRightScaleX + cMiddleScaleX,
+							0);
+
 		GameObject wnd = Instantiate (WindowsModels [cWindowType],
 										new Vector3(middleWallPosition.x,
 													WindowPivotY + cWallSize.y / 2.0f,
@@ -202,7 +205,7 @@ public class SculptController : MonoBehaviour
 		upperWall.AddComponent<InfoWall> ().CopyFrom (wallTrans.GetComponent<InfoWall> ());
 			
 		GameObject packWall = new GameObject ("PackSculptWall");
-		
+
 		packWall.AddComponent<SculptedWall> ().sculptedWindow  = wnd;
 		wnd.AddComponent<SculptedWindow> ().sculptedWall 	   = packWall;
 					
@@ -221,7 +224,9 @@ public class SculptController : MonoBehaviour
 		}
 			
 		wnd.transform.parent = wnds.transform;
-			
+
+		Debug.Break ();
+
 		Destroy (wallTrans.gameObject);
 	}
 	
@@ -257,21 +262,23 @@ public class SculptController : MonoBehaviour
     												hit.transform.localScale.z);
     	newWall.name = "Unpacked Wall";
     	newWall.transform.parent = packWalls.transform.parent;
-    	ResizeWallMaterial (newWall);
+    	ResizeWallMaterial (newWall, WallSizeX, WallBuilder.WALL_HEIGHT,0,0);
     	
     	Destroy (hit.transform.gameObject);
 		Destroy (packWalls);
 	}
 	
-	private void ResizeWallMaterial (GameObject cWall)
+	private void ResizeWallMaterial (GameObject cWall, float wallScaleX, float wallScaleY, float offsetX, float offsetY)
 	{
-		float wallScaleX = cWall.transform.localScale.x;
-		float wallScaleY = cWall.transform.localScale.y;
-		
+		Vector2 textScale  = new Vector2 (wallScaleX, wallScaleY);
+		Vector2 textOffset = new Vector2 (offsetX, offsetY);
+
 		foreach (Material cMaterial in cWall.transform.GetChild(0).renderer.materials)
 		{
-			cMaterial.mainTextureScale = new Vector2 (wallScaleX, wallScaleY);
-			cMaterial.SetTextureScale ("_BumpMap", new Vector2 (wallScaleX, wallScaleY));
+			cMaterial.mainTextureScale  = textScale;
+			cMaterial.mainTextureOffset = textOffset;
+			cMaterial.SetTextureScale  ("_BumpMap", textScale);
+			cMaterial.SetTextureOffset ("_BumpMap", textOffset);
 		}
 	}
 }

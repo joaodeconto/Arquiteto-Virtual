@@ -3,6 +3,7 @@ guid: cf3e1270cb19d2544966712b403af503
 ModelImporter:
   fileIDToRecycleName:
     4300000: Cube
+    7400000: Default Take //// Balc_A_divi_3portasGG
   serializedVersion: 10
   materials:
     importMaterials: 1
@@ -60,7 +61,7 @@ ModelImporter:
       data:
         first: 33
         second: a05a3200
-    Cube.001:
+    Cube_001:
       data:
         first: 1
         second: a4860100

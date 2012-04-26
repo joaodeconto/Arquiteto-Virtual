@@ -4,6 +4,9 @@ ModelImporter:
   fileIDToRecycleName:
     4300000: Cube.001
     4300002: Cube.002
+    4300004: Cube_001
+    4300006: Cube_002
+    7400000: Default Take //// Kit_A_M
   serializedVersion: 10
   materials:
     importMaterials: 1
@@ -48,7 +51,7 @@ ModelImporter:
       data:
         first: 111
         second: 605fa900
-    Cube.001:
+    Cube_001:
       data:
         first: 1
         second: a2860100
@@ -61,7 +64,7 @@ ModelImporter:
       data:
         first: 33
         second: a25a3200
-    Cube.002:
+    Cube_002:
       data:
         first: 1
         second: a0860100

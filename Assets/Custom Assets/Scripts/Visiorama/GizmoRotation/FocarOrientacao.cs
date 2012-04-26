@@ -54,9 +54,18 @@ public class FocarOrientacao : MonoBehaviour {
 		}
 	}
 	#else
-	void OnMouseUp () {
-		ChangeOrietation();
+	void Update () {
+		if (Input.GetMouseButtonUp(0)) {
+			Ray ray = thisCamera.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+			if (Physics.Raycast(ray, out hit)) {
+				if (hit.transform == transform) ChangeOrietation();
+			}
+		}
 	}
+	/*void OnMouseUp () {
+		ChangeOrietation();
+	}*/
 	#endif
 	
 	void ChangeOrietation () {

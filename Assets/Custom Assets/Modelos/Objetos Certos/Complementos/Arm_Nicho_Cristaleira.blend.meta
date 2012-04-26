@@ -4,6 +4,8 @@ ModelImporter:
   fileIDToRecycleName:
     4300000: Plane
     4300002: Cube.002
+    4300004: Cube_002
+    7400000: Default Take //// Arm_Nicho_Cristaleira
     100100000: DataTemplate __Singleton__
   serializedVersion: 10
   materials:
@@ -49,7 +51,7 @@ ModelImporter:
       data:
         first: 111
         second: 605fa900
-    Cube.002:
+    Cube_002:
       data:
         first: 1
         second: a0860100

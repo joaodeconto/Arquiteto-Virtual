@@ -324,11 +324,30 @@ public class Painter: MonoBehaviour {
 				GUI.Label(rectFieldRGBA[2], Convert.ToString((int)Mathf.Ceil(color.b * 255)), labelStyle);
 	
 				dropperBool = GUI.Toggle(rectDropper, dropperBool, dropper, button);
-				render.materials[0].color = color;
+				if (render.materials [0].color != color)
+				{
+					render.materials[0].color = color;
+
+					if (render.transform.parent.name.ToLower().Contains ("wall"))
+					{
+						//Pega tudo da parede atual e troca a cor
+						Renderer[] renders = GetWallRoot (render.transform).
+																GetComponentsInChildren<Renderer>();
+						for( int j = 0; j != renders.Length; ++j )
+						{
+							renders[j].materials[0].color = color;
+							renders[j].transform.
+											parent.
+												GetComponent<InfoWall> ().color = color;
+
+						}
+					}
+				}
 			}
 			
 			// Option Texture
-			if (textureOption) {
+			if (textureOption)
+			{
 				if (wallTextures.Length > 3)
 					scrollPositionTexture = GUI.BeginScrollView(rectScrollTexture,
 																scrollPositionTexture,
@@ -338,8 +357,16 @@ public class Painter: MonoBehaviour {
 				for (int i = 0; i != wallTextures.Length; ++i) {
 					if (GUI.Button(rectTextures[i], wallTextures[i], button))
 					{
-						render.sharedMaterial.mainTexture 		 				  = wallTextures [i];
-						render.transform.parent.GetComponent<InfoWall> ().texture = wallTextures [i];
+						//Pega tudo da parede atual e troca a textura
+						Renderer[] renders = GetWallRoot (render.transform).
+																GetComponentsInChildren<Renderer>();
+						for( int j = 0; j != renders.Length; ++j )
+						{
+							renders[j].sharedMaterial.mainTexture = wallTextures [i];
+							renders[j].transform.
+											parent.
+												GetComponent<InfoWall> ().texture = wallTextures [i];
+						}
 					}
 				}
 				if (wallTextures.Length > 3)
@@ -366,9 +393,18 @@ public class Painter: MonoBehaviour {
 		GUI.depth = 0;
 	}
 	
-	IEnumerator WaitClick(float timer) {
+	IEnumerator WaitClick(float timer)
+	{
 		clicked = true;
 		yield return new WaitForSeconds(timer);
 		clicked = false;
+	}
+
+	Transform GetWallRoot(Transform trnsWall)
+	{
+		if (trnsWall.parent.name.Equals ("ParentParede"))
+			return trnsWall;
+		else
+			return GetWallRoot(trnsWall.parent);
 	}
 }

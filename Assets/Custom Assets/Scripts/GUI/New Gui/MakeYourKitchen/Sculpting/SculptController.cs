@@ -45,12 +45,12 @@ public class SculptController : MonoBehaviour
 		wallParent = GameObject.Find ("ParentParede");
 		
 		WindowPivotY = 0.7f;
-//		WindowsModels = new Vector2[6]{new Vector2 (1.0f, 1.2f), 
-//									new Vector2 (1.2f, 1.2f), 
-//									new Vector2 (1.4f, 1.2f), 
-//									new Vector2 (1.6f, 1.2f), 
-//									new Vector2 (1.8f, 1.2f), 
-//									new Vector2 (2.1f, 1.2f) };
+//		WindowsModels = new Vector2[6]{ new Vector2 (1.0f, 1.2f),
+//										new Vector2 (1.2f, 1.2f),
+//										new Vector2 (1.4f, 1.2f), 
+//										new Vector2 (1.6f, 1.2f), 
+//										new Vector2 (1.8f, 1.2f), 
+//										new Vector2 (2.1f, 1.2f) };
 		cWindowType = 0;
 	}
 	
@@ -150,7 +150,7 @@ public class SculptController : MonoBehaviour
 		rightWall.transform.localScale = new Vector3 (cRightScaleX,
     												  wallTrans.localScale.y,
     												  wallTrans.localScale.z);
-		ResizeWallMaterial (rightWall, cRightScaleX, wallTrans.localScale.y, 0, 0);
+		MaterialUtils.ResizeWallMaterial (rightWall, cRightScaleX, wallTrans.localScale.y, 0, 0);
 
 		middleWallPosition.y = 0.0f;
 		GameObject lowerWall = Instantiate (wallTrans.gameObject,
@@ -160,7 +160,11 @@ public class SculptController : MonoBehaviour
 		lowerWall.transform.localScale = new Vector3 (cMiddleScaleX,
     												  cMiddleLowerScaleY,
     												  wallTrans.localScale.z);
-		ResizeWallMaterial (lowerWall, cMiddleScaleX, cMiddleLowerScaleY, cRightScaleX, 0.003f);
+		MaterialUtils.ResizeWallMaterial (	lowerWall,
+											cMiddleScaleX,
+											cMiddleLowerScaleY,
+											cRightScaleX,
+											0.003f);
 
 		middleWallPosition.y = cWallSize.y + WindowPivotY;
 		GameObject upperWall = Instantiate (wallTrans.gameObject,
@@ -170,11 +174,11 @@ public class SculptController : MonoBehaviour
 		upperWall.transform.localScale = new Vector3 (cMiddleScaleX,
     												  cMiddleUpperScaleY,
     												  wallTrans.localScale.z);
-		ResizeWallMaterial (upperWall,
-							cMiddleScaleX,
-							cMiddleUpperScaleY,
-							cRightScaleX,
-							cMiddleLowerScaleY + cWallSize.y + 0.01f);
+		MaterialUtils.ResizeWallMaterial (	upperWall,
+											cMiddleScaleX,
+											cMiddleUpperScaleY,
+											cRightScaleX,
+											cMiddleLowerScaleY + cWallSize.y + 0.01f);
 
 		GameObject leftWall = Instantiate (wallTrans.gameObject,
     									   leftWallPosition,
@@ -183,11 +187,11 @@ public class SculptController : MonoBehaviour
 		leftWall.transform.localScale = new Vector3 (cLeftScaleX,
     												 wallTrans.localScale.y,
     												 wallTrans.localScale.z);
-		ResizeWallMaterial (leftWall,
-							cLeftScaleX,
-							wallTrans.localScale.y,
-							cRightScaleX + cMiddleScaleX,
-							0);
+		MaterialUtils.ResizeWallMaterial (	leftWall,
+											cLeftScaleX,
+											wallTrans.localScale.y,
+											cRightScaleX + cMiddleScaleX,
+											0);
 
 		GameObject wnd = Instantiate (WindowsModels [cWindowType],
 										new Vector3(middleWallPosition.x,
@@ -199,10 +203,10 @@ public class SculptController : MonoBehaviour
 		//Rotacionando para o lado correto (ao contrário da parede)
 		wnd.transform.Rotate (Vector3.up * 180);
 			
-		 leftWall.AddComponent<InfoWall> ().CopyFrom (wallTrans.GetComponent<InfoWall> ());
-		rightWall.AddComponent<InfoWall> ().CopyFrom (wallTrans.GetComponent<InfoWall> ());
-		lowerWall.AddComponent<InfoWall> ().CopyFrom (wallTrans.GetComponent<InfoWall> ());
-		upperWall.AddComponent<InfoWall> ().CopyFrom (wallTrans.GetComponent<InfoWall> ());
+		 leftWall.GetComponent<InfoWall> ().CopyFrom (wallTrans.GetComponent<InfoWall> ());
+		rightWall.GetComponent<InfoWall> ().CopyFrom (wallTrans.GetComponent<InfoWall> ());
+		lowerWall.GetComponent<InfoWall> ().CopyFrom (wallTrans.GetComponent<InfoWall> ());
+		upperWall.GetComponent<InfoWall> ().CopyFrom (wallTrans.GetComponent<InfoWall> ());
 			
 		GameObject packWall = new GameObject ("PackSculptWall");
 
@@ -225,60 +229,120 @@ public class SculptController : MonoBehaviour
 			
 		wnd.transform.parent = wnds.transform;
 
-		Debug.Break ();
-
 		Destroy (wallTrans.gameObject);
 	}
 	
 	private void RemoveWindow (Ray ray, RaycastHit hit)
 	{
 		float WallSizeX = 0.0f;
-		GameObject packWalls, newWall;
+		GameObject newWall;
+		Transform trnsPackWalls;
 		Vector3    newWallPosition = Vector3.zero;
 		Quaternion newWallRotation = Quaternion.identity;
+
 		Debug.LogWarning ("hit.name: " + hit.transform.name);
-		packWalls = hit.transform.GetComponent<SculptedWindow>().sculptedWall;
-		
-		foreach(Transform pWall in packWalls.transform)
+
+		trnsPackWalls = hit.transform.GetComponent<SculptedWindow>().sculptedWall.transform;
+
+		Transform lowerWall = trnsPackWalls.FindChild ("Lower Wall");
+		Transform leftWall  = trnsPackWalls.FindChild ("Left Wall");
+		Transform rightWall = trnsPackWalls.FindChild ("Right Wall");
+		Transform upperWall = trnsPackWalls.FindChild ("Upper Wall");
+
+		Transform packWall  = trnsPackWalls.FindChild ("PackSculptWall");
+
+		newWallRotation = trnsPackWalls.FindChild ("Lower Wall").rotation;
+		WallSizeX 		= trnsPackWalls.FindChild ("Lower Wall").localScale.x;
+
+		bool hasChild = trnsPackWalls.FindChild ("PackSculptWall");
+
+		Transform willBeParent;
+		if (!hasChild)
 		{
-			if (pWall.name.Equals ("Left Wall" ) ||
-				pWall.name.Equals ("Lower Wall"))
+			#region !hasChild And !hasParent
+
+			newWallPosition = rightWall.position;
+
+			WallSizeX += rightWall.localScale.x;
+			WallSizeX += leftWall .localScale.x;
+
+			willBeParent = trnsPackWalls.parent;
+			#endregion
+		}
+		else
+		{
+			willBeParent = trnsPackWalls.FindChild ("PackSculptWall");
+
+			bool hasLeftWall = trnsPackWalls.FindChild("Left Wall");
+
+			if (hasLeftWall)
 			{
-				WallSizeX += pWall.transform.localScale.x;
+				Transform rootNewWall = packWall.FindChild("Left Wall");
+
+				newWallPosition  = rootNewWall.position;
+
+				WallSizeX += leftWall .localScale.x +
+							 rootNewWall.localScale.x;
+
+				trnsPackWalls.FindChild ("PackSculptWall").parent = trnsPackWalls.parent;
+
+				DestroyImmediate (rootNewWall.gameObject);
 			}
-			else if (pWall.name.Equals ("Right Wall"))
+			else
 			{
-				newWallRotation = pWall.rotation;
-				newWallPosition = pWall.position;
-				WallSizeX 	   += pWall.transform.localScale.x;
+				newWallPosition = rightWall.position;
+
+				WallSizeX += rightWall.localScale.x +
+							 packWall.FindChild ("Right Wall").localScale.x;
+
+				trnsPackWalls.FindChild ("PackSculptWall").parent = trnsPackWalls.parent;
+
+				DestroyImmediate (packWall.FindChild ("Right Wall").gameObject);
 			}
 		}
-		
-		newWall = Instantiate(	packWalls.transform.GetChild(0).gameObject,
+
+		newWall = Instantiate(	trnsPackWalls.GetChild(0).gameObject,
 								newWallPosition,
 								newWallRotation) as GameObject;
+
+		newWall.transform.parent 	 = willBeParent;
 		newWall.transform.localScale = new Vector3( WallSizeX,
     												WallBuilder.WALL_HEIGHT,
     												hit.transform.localScale.z);
-    	newWall.name = "Unpacked Wall";
-    	newWall.transform.parent = packWalls.transform.parent;
-    	ResizeWallMaterial (newWall, WallSizeX, WallBuilder.WALL_HEIGHT,0,0);
-    	
-    	Destroy (hit.transform.gameObject);
-		Destroy (packWalls);
-	}
-	
-	private void ResizeWallMaterial (GameObject cWall, float wallScaleX, float wallScaleY, float offsetX, float offsetY)
-	{
-		Vector2 textScale  = new Vector2 (wallScaleX, wallScaleY);
-		Vector2 textOffset = new Vector2 (offsetX, offsetY);
+    	MaterialUtils.ResizeWallMaterial (newWall, WallSizeX, WallBuilder.WALL_HEIGHT,0,0);
 
-		foreach (Material cMaterial in cWall.transform.GetChild(0).renderer.materials)
-		{
-			cMaterial.mainTextureScale  = textScale;
-			cMaterial.mainTextureOffset = textOffset;
-			cMaterial.SetTextureScale  ("_BumpMap", textScale);
-			cMaterial.SetTextureOffset ("_BumpMap", textOffset);
-		}
+		Debug.LogWarning ("newWall.transform.parent.name: " + newWall.transform.parent.name);
+
+		if (!newWall.transform.parent.FindChild ("Right Wall"))
+				newWall.name = "Right Wall";
+		else if (!newWall.transform.parent.FindChild ("Left Wall"))
+			newWall.name = "Left Wall";
+		else if (!newWall.transform.parent.FindChild ("Front Wall"))
+			newWall.name = "Front Wall";
+		else
+			newWall.name = "Back Wall";
+
+		Destroy (trnsPackWalls.gameObject);
+    	Destroy (hit.transform.gameObject);
 	}
+
+	float GetPackSculptWallSize(Transform pack)
+	{
+		float packSize = pack.FindChild ("Lower Wall").localScale.x;
+		if (pack.FindChild ("Right Wall"))
+		{
+			packSize += pack.FindChild ("Right Wall").localScale.x;
+		}
+		if (pack.FindChild ("Left Wall"))
+		{
+			packSize += pack.FindChild ("Left Wall").localScale.x;
+		}
+		if (pack.FindChild ("PackSculptWall"))
+		{
+			packSize += GetPackSculptWallSize(pack.FindChild ("PackSculptWall"));
+		}
+
+		return packSize;
+	}
+
 }

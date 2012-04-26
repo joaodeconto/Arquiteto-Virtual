@@ -3,30 +3,6 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-[System.Serializable]
-public class InfoWall : MonoBehaviour
-{
-	public Transform wall;
-	public Transform rightWall;
-	public Transform leftWall;
-	public Color color;
-	public Texture texture;
-	
-	public void SetColor (Color color)
-	{
-		this.color = color;
-	}
-
-	public void CopyFrom (InfoWall info)
-	{
-		this.wall 		= info.wall;
-		this.rightWall	= info.rightWall;
-		this.leftWall 	= info.leftWall;
-		this.color 		= info.color;
-		this.texture	= info.texture;
-	}
-}
-
 public class WallBuilder : MonoBehaviour {
 	
 	public const float IPSLON 		= 0.0001f;
@@ -78,7 +54,8 @@ public class WallBuilder : MonoBehaviour {
 	
 	#region Unty Methods
 	void Start(){
-	
+//	new Cubemap(6, TextureFormat.ARGB32,true).SetPixels(new Color[2]{Color.blue,Color.white},CubemapFace.NegativeX);
+//	camera.RenderToCubemap
 		WallWidth = 5;
 		WallDepth = 5;
 		
@@ -160,9 +137,6 @@ public class WallBuilder : MonoBehaviour {
 		//Inicializando InfoWall em cada parede
 		foreach (GameObject cWall in GameObject.FindGameObjectsWithTag("Parede"))
 		{
-			if (cWall.GetComponent<InfoWall> () == null){
-				cWall.AddComponent<InfoWall> ();
-			}
 			cWall.GetComponent<InfoWall> ().color  	= Color.white;
 			cWall.GetComponent<InfoWall> ().wall  	= cWall.transform;
 			cWall.GetComponent<InfoWall> ().texture = cWall.transform.

@@ -67,11 +67,14 @@ public class GUICameraController : MonoBehaviour {
 		firstPersonCamera.transform.GetChild(0).transform.localPosition = new Vector3 (WallBuilder.ROOT.x		 , 1.5f, WallBuilder.ROOT.z);
 		#else
 		firstPersonCamera = GameObject.Find ("First Person Controller");
+
 		firstPersonCamera.SetActiveRecursively (false);
-		if (GameObject.Find ("First Person Controller Mobile") != null)
-			GameObject.Find ("First Person Controller Mobile").SetActiveRecursively (false);
-			
-		firstPersonCamera.transform.localPosition = new Vector3 (WallBuilder.ROOT.x		 , 1.5f, WallBuilder.ROOT.z);
+		firstPersonCamera.transform.localPosition = new Vector3 (WallBuilder.ROOT.x,
+																 1.5f,
+																 WallBuilder.ROOT.z);
+
+		GameObject.Find ("First Person Controller Mobile").SetActiveRecursively (false);
+
 		#endif
 		setFirstPerson = false;
 		
@@ -114,14 +117,14 @@ public class GUICameraController : MonoBehaviour {
 		}
 		
 		interfaceGUI.uiRootFPS.SetActiveRecursively (false);
-		
+
 		InvokeRepeating("VerifyWallVisibility", rateRefreshWallsVisibility, rateRefreshWallsVisibility);
 	}
 	
 	void Update ()
 	{
 		if (setFirstPerson) return;
-		
+		return;
 		//Show/Hide ceil and floor
 		
 		//Verify if changed state of showCeil
@@ -178,8 +181,9 @@ public class GUICameraController : MonoBehaviour {
 		
 		interfaceGUI.lists.SetActiveRecursively(false);
 		
-		foreach (Transform child in interfaceGUI.main.GetComponentsInChildren<Transform>()) {
-			print(child);
+		foreach (Transform child in interfaceGUI.main.GetComponentsInChildren<Transform>())
+		{
+//			print(child);
 			child.gameObject.SetActiveRecursively(false);
 		}
 		
@@ -333,7 +337,7 @@ public class GUICameraController : MonoBehaviour {
 		if (isPainter) {
 			mainCamera.GetComponentInChildren<Painter>().enabled = true;
 		}
-		interfaceGUI.uiRootFPS.SetActiveRecursively(false);		
+		interfaceGUI.uiRootFPS.SetActiveRecursively(false);
 	}
 	
 	private IEnumerator SendScreenshotToForm (string screenShotURL)
@@ -515,26 +519,40 @@ public class GUICameraController : MonoBehaviour {
 		Transform trnsParent = wall.transform.parent;
 
 		//Apenas paredes esculpidas serão alteradas os offsets
-		if (!"PackSculptWall".Equals (trnsParent.name))
+		if (!"PackSculptWall".Equals (trnsParent.name) ||
+			  "Unpacked Wall".Equals (trnsParent.name))
 			return Vector2.zero;
 
-		Vector2 textOffset = Vector2.zero;
+		Vector2 textOffset  = Vector2.zero;
+		float rightWallSize = 0.0f;
+
+		//verificando se a parede da direita é um pack
+		if (trnsParent.FindChild ("Right Wall") != null)
+			rightWallSize = trnsParent.FindChild ("Right Wall").localScale.x;
+		else
+		{
+			if (trnsParent.FindChild ("PackSculptWall"))
+				rightWallSize = GetPackSculptWallSize (trnsParent.FindChild ("PackSculptWall"));
+			else
+				rightWallSize = trnsParent.FindChild ("Unpacked Wall").localScale.x;
+		}
+
 
 		switch(wall.name)
 		{
 			case "Lower Wall":
-				textOffset.x = trnsParent.FindChild ("Right Wall").localScale.x;
+				textOffset.x = rightWallSize;
 				textOffset.y = 0.003f;
 				break;
 			case "Upper Wall":
 				Transform trnsWnd = trnsParent.GetComponent<SculptedWall>().sculptedWindow.transform;
-				textOffset.x = trnsParent.FindChild ("Right Wall").localScale.x;
+				textOffset.x = rightWallSize;
 				textOffset.y = trnsParent.FindChild ("Lower Wall").localScale.y +
 							   trnsWnd.localScale.y + 0.01f;
 				break;
 			case "Left Wall":
-				textOffset.x = trnsParent.FindChild ("Right Wall").localScale.x +
-							   trnsParent.FindChild ("Lower Wall").localScale.x;
+				textOffset.x = trnsParent.FindChild ("Lower Wall").localScale.x +
+							   rightWallSize;
 				break;
 			default:
 				textOffset = Vector2.zero;
@@ -542,5 +560,24 @@ public class GUICameraController : MonoBehaviour {
 		}
 
 		return textOffset;
+	}
+
+	float GetPackSculptWallSize(Transform pack)
+	{
+		float packSize = pack.FindChild ("Lower Wall").localScale.x;
+		if (pack.FindChild ("Right Wall"))
+		{
+			packSize += pack.FindChild ("Right Wall").localScale.x;
+		}
+		if (pack.FindChild ("Left Wall"))
+		{
+			packSize += pack.FindChild ("Left Wall").localScale.x;
+		}
+		if (pack.FindChild ("PackSculptWall"))
+		{
+			packSize += GetPackSculptWallSize(pack.FindChild ("PackSculptWall"));
+		}
+
+		return packSize;
 	}
 }

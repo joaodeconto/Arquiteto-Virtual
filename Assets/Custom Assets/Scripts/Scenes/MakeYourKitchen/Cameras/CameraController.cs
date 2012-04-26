@@ -15,22 +15,26 @@ public class CameraController : MonoBehaviour {
 	private GameObject[] cameras;
 	public FreeCamera3d freeCamera { get; private set; }
 	void Start () {
-		
+
 		CanMoveCamera = true;
-		
+
+		freeCamera = gameObject.AddComponent<FreeCamera3d> ()
+									.Initialize (this.camera, 1.0f, 0.3f, true, false);
+
+
 		furnitureManager = GetComponent<FurnitureManager> ();
 	
 		sCamera = GetComponent<Camera>();
 		SpeedZoom = 1.5f;
 		StepZoom  = 8f;
-		
-		infoController = GameObject.FindWithTag("GameController").GetComponentInChildren<InfoController>();
-		
-		CanMoveCamera = true;
+
+		if (GameObject.FindWithTag ("GameController"))
+		{
+			infoController = GameObject.FindWithTag("GameController").
+												GetComponentInChildren<InfoController>();
+		}
 		
 		cameras = GameObject.FindGameObjectsWithTag("GUICamera");
-		freeCamera = gameObject.AddComponent<FreeCamera3d>()
-									.Initialize(this.camera,1.0f,0.3f, true, false);
 	}
 
 	// Update is called once per frame

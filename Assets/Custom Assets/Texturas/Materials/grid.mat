@@ -18,12 +18,41 @@ Material:
           m_Texture: {fileID: 2800000, guid: 8cd5f4fc926596041b58609abbcac4fe, type: 1}
           m_Scale: {x: 100, y: 100}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Normal
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _ReflectionTex
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _FakeReflect
+        second:
+          m_Texture: {fileID: 2800000, guid: 7f630aaab214c4d1b9647dd8b764605f, type: 1}
+          m_Scale: {x: 10, y: 10}
+          m_Offset: {x: 0, y: 0}
     m_Floats: {}
     m_Colors:
       data:
         first:
           name: _Color
         second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _DirectionUv
+        second: {r: 1, g: 1, b: -.200000003, a: -.200000003}
+      data:
+        first:
+          name: _TexAtlasTiling
+        second: {r: 8, g: 8, b: 4, a: 4}
 --- !u!1002 &2100001
 EditorExtensionImpl:
   serializedVersion: 6

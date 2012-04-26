@@ -12,7 +12,7 @@ public class ClickFloor : MonoBehaviour {
 		float floorWidth = floor.transform.localScale.x;
 		float floorDepth = floor.transform.localScale.y;
 		floor.renderer.material.mainTexture = textureFloor;
-		
+
 		foreach (Material cMaterial in floor.renderer.materials)
 		{
 			cMaterial.mainTextureScale = new Vector2 (floorWidth, floorDepth);

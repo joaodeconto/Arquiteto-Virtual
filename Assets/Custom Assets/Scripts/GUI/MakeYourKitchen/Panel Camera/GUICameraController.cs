@@ -67,11 +67,14 @@ public class GUICameraController : MonoBehaviour {
 		firstPersonCamera.transform.GetChild(0).transform.localPosition = new Vector3 (WallBuilder.ROOT.x		 , 1.5f, WallBuilder.ROOT.z);
 		#else
 		firstPersonCamera = GameObject.Find ("First Person Controller");
+
 		firstPersonCamera.SetActiveRecursively (false);
-		if (GameObject.Find ("First Person Controller Mobile") != null)
-			GameObject.Find ("First Person Controller Mobile").SetActiveRecursively (false);
-			
-		firstPersonCamera.transform.localPosition = new Vector3 (WallBuilder.ROOT.x		 , 1.5f, WallBuilder.ROOT.z);
+		firstPersonCamera.transform.localPosition = new Vector3 (WallBuilder.ROOT.x,
+																 1.5f,
+																 WallBuilder.ROOT.z);
+
+		GameObject.Find ("First Person Controller Mobile").SetActiveRecursively (false);
+
 		#endif
 		setFirstPerson = false;
 		
@@ -114,14 +117,14 @@ public class GUICameraController : MonoBehaviour {
 		}
 		
 		interfaceGUI.uiRootFPS.SetActiveRecursively (false);
-		
+
 		InvokeRepeating("VerifyWallVisibility", rateRefreshWallsVisibility, rateRefreshWallsVisibility);
 	}
 	
 	void Update ()
 	{
 		if (setFirstPerson) return;
-		
+		return;
 		//Show/Hide ceil and floor
 		
 		//Verify if changed state of showCeil
@@ -178,8 +181,9 @@ public class GUICameraController : MonoBehaviour {
 		
 		interfaceGUI.lists.SetActiveRecursively(false);
 		
-		foreach (Transform child in interfaceGUI.main.GetComponentsInChildren<Transform>()) {
-			print(child);
+		foreach (Transform child in interfaceGUI.main.GetComponentsInChildren<Transform>())
+		{
+//			print(child);
 			child.gameObject.SetActiveRecursively(false);
 		}
 		
@@ -226,19 +230,22 @@ public class GUICameraController : MonoBehaviour {
 		areWallsAlwaysVisible = !areWallsAlwaysVisible;
 		if(areWallsAlwaysVisible)
 		{
-			foreach (Transform wall in wallParent.transform) 
+			foreach (GameObject wall in GameObject.FindGameObjectsWithTag("Parede"))
 			{
-				wall.GetChild(0).renderer.material = wallMaterial;
+				wall.transform.GetChild(0).renderer.material = wallMaterial;
 				
 				if (wall.name.Contains("Parede"))
-					wall.GetChild(0).renderer.material.color = wall.gameObject.GetComponent<InfoWall>().color;
+					wall.transform.GetChild(0).
+										renderer.material.
+												color = wall.GetComponent<InfoWall>().color;
 			}
 		}		
 	}
 	
 	public void Zoom (int step)
 	{			
-		Ray rayMouse = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2,Screen.height / 2,0));
+		Ray rayMouse = mainCamera.ScreenPointToRay(
+											new Vector3(Screen.width / 2,Screen.height / 2,0));
 		Vector3 cameraPos = (rayMouse.origin - mainCamera.transform.position);
 		mainCamera.transform.localPosition += cameraPos * Time.deltaTime * 10 * step;
 	}
@@ -251,31 +258,34 @@ public class GUICameraController : MonoBehaviour {
 		}
 		
 		Vector3 camForwardVector = mainCamera.transform.forward;
-		
+		Renderer cRenderer = null;
 		if (Mathf.Abs(Vector3.Distance(camForwardVector,lastCamPosition)) < 0.1f)
 			return;
 			
-		foreach (Transform wall in wallParent.transform)
+		foreach (GameObject wall in GameObject.FindGameObjectsWithTag("Parede"))
 		{
-			if (wall.name.Contains("Quina"))
+
+			if (wall.name.Contains ("Quina"))
 				continue;
+
+			cRenderer = wall.transform.GetChild(0).renderer;
 			//se a cor do InfoWall da parede for diferente da cor do material do renderer da parede
 			//atualiza a cor do InfoWall
-			if (wall.transform.GetChild(0).renderer.materials[0].color != wall.GetComponent<InfoWall> ().color)	
-				wall.GetComponent<InfoWall> ().color = wall.transform.GetChild(0).renderer.materials[0].color;
-				
-			if (Vector3.Angle (camForwardVector, wall.transform.forward) < 120f)
+			if (cRenderer.materials[0].color != wall.GetComponent<InfoWall> ().color)
 			{
-				ChangeWallMaterial (wall,
+				wall.GetComponent<InfoWall> ().color = cRenderer.materials[0].color;
+			}
+
+			if (Vector3.Angle (camForwardVector, wall.transform.forward) < 110f)
+			{
+				ChangeWallMaterial (wall.transform,
 								  	wallMaterial,
-								  	wall.GetComponent<InfoWall> ().color,
 								   	true);
 			}
 			else
 			{
-				ChangeWallMaterial (wall,
+				ChangeWallMaterial (wall.transform,
 								  	wallMaterialTransparent,
-								  	wall.GetComponent<InfoWall> ().color,
 								   	false);
 			}
 		}
@@ -327,7 +337,7 @@ public class GUICameraController : MonoBehaviour {
 		if (isPainter) {
 			mainCamera.GetComponentInChildren<Painter>().enabled = true;
 		}
-		interfaceGUI.uiRootFPS.SetActiveRecursively(false);		
+		interfaceGUI.uiRootFPS.SetActiveRecursively(false);
 	}
 	
 	private IEnumerator SendScreenshotToForm (string screenShotURL)
@@ -411,19 +421,45 @@ public class GUICameraController : MonoBehaviour {
 	
 			InformacoesMovel info = mobile.GetComponent<InformacoesMovel> ();
 	
-			if (!"Extras".Equals (info.Categoria)) {
-				if (Regex.Match(info.name, "(com cooktop|com cook top)").Success) {
-					csvString += info.Nome + ";" + info.Codigo + ";" + info.Largura + ";" + info.Altura + ";" + info.Comprimento + ";" + "\r\n";
-					if (Regex.Match(info.name, "(Balcão triplo|Balcao triplo)").Success) {
-						csvString += "Tampo cooktop triplo" + ";" + "89121" + ";" + "1200" + ";" + "30" + ";" + "520" + ";" + "\r\n";
-					} else {
-						csvString += "Tampo cooktop duplo" + ";" + "89081" + ";" + "800" + ";" + "30" + ";" + "520" + ";" + "\r\n";
-					}
-					csvString += "Cooktop" + ";" + "89150" + ";" + "NA" + ";" + "NA" + ";" + "NA" + ";" + "\r\n";
+			if ("Extras".Equals (info.Categoria))
+				continue;
+
+			if (Regex.Match(info.name, "(com cooktop|com cook top)").Success)
+			{
+				csvString += info.Nome 	+ ";" +
+							 info.Codigo + ";" +
+							 info.Largura + ";" +
+							 info.Altura + ";" +
+							 info.Comprimento + ";" + "\r\n";
+				if (Regex.Match(info.name, "(Balcão triplo|Balcao triplo)").Success)
+				{
+					csvString += "Tampo cooktop triplo" + ";" +
+								 "89121" + ";" +
+								 "1200" + ";" +
+								 "30" + ";" +
+								 "520" + ";" + "\r\n";
 				}
-				else {
-					csvString += info.Nome + ";" + info.Codigo + ";" + info.Largura + ";" + info.Altura + ";" + info.Comprimento + ";" + "\r\n";
+				else
+				{
+					csvString += "Tampo cooktop duplo" + ";" +
+								 "89081" + ";" +
+								 "800" + ";" +
+								 "30" + ";" +
+								 "520" + ";" + "\r\n";
 				}
+				csvString += "Cooktop" + ";" +
+							 "89150" + ";" +
+							 "NA" + ";" +
+							 "NA" + ";" +
+							 "NA" + ";" + "\r\n";
+			}
+			else
+			{
+				csvString += info.Nome + ";" +
+							 info.Codigo + ";" +
+							 info.Largura + ";" +
+							 info.Altura + ";" +
+							 info.Comprimento + ";" + "\r\n";
 			}
 		}
 		
@@ -441,28 +477,35 @@ public class GUICameraController : MonoBehaviour {
 	
 		if (www.error != null)
 			print (www.error);
-		else {
+		else
 			Application.ExternalCall ("tryToDownload", pathExportReport + filename);
-		}
 	}
 			
 	Transform wallChild;
-	private void ChangeWallMaterial (Transform wall, Material newMaterial, Color selectedColor, bool enableWall)
+	private void ChangeWallMaterial (Transform wall, Material newMaterial, bool enableWall)
 	{
 		wallChild = wall.transform.GetChild(0);
+
 		if (!wallChild.renderer.material.name.Equals(newMaterial.name + " (Instance)"))
 		{
-			wallChild.renderer.material 	  = newMaterial;
-			wallChild.renderer.material.color = selectedColor;
-					
-			float wallScaleX = wall.localScale.x;
-				
+			wallChild.renderer.material 	  	= newMaterial;
+			wallChild.renderer.material.color	= wall.GetComponent<InfoWall> ().color;
+
+			if (enableWall)
+			{
+				wallChild.renderer.material.mainTexture = wall.GetComponent<InfoWall> ().texture;
+			}
+
+			Vector2 textScale  = new Vector2 (wall.localScale.x,  wall.localScale.y);
+			Vector2 textOffset = GetTextOffset(wall);
 			foreach (Material cMaterial in wall.transform.GetChild(0).renderer.materials)
 			{
-				cMaterial.mainTextureScale = new Vector2 (wallScaleX, 1);
-				cMaterial.SetTextureScale ("_BumpMap", new Vector2 (wallScaleX, 1));
+				cMaterial.mainTextureScale  = textScale;
+				cMaterial.mainTextureOffset = textOffset;
+				cMaterial.SetTextureScale  ("_BumpMap", textScale);
+				cMaterial.SetTextureOffset ("_BumpMap", textOffset);
 			}
-				
+
 			if (wall.collider != null)
 			{
 				wall.collider.enabled = enableWall;
@@ -470,4 +513,71 @@ public class GUICameraController : MonoBehaviour {
 			
 		}
 	}		
+
+	Vector2 GetTextOffset (Transform wall)
+	{
+		Transform trnsParent = wall.transform.parent;
+
+		//Apenas paredes esculpidas serão alteradas os offsets
+		if (!"PackSculptWall".Equals (trnsParent.name) ||
+			  "Unpacked Wall".Equals (trnsParent.name))
+			return Vector2.zero;
+
+		Vector2 textOffset  = Vector2.zero;
+		float rightWallSize = 0.0f;
+
+		//verificando se a parede da direita é um pack
+		if (trnsParent.FindChild ("Right Wall") != null)
+			rightWallSize = trnsParent.FindChild ("Right Wall").localScale.x;
+		else
+		{
+			if (trnsParent.FindChild ("PackSculptWall"))
+				rightWallSize = GetPackSculptWallSize (trnsParent.FindChild ("PackSculptWall"));
+			else
+				rightWallSize = trnsParent.FindChild ("Unpacked Wall").localScale.x;
+		}
+
+
+		switch(wall.name)
+		{
+			case "Lower Wall":
+				textOffset.x = rightWallSize;
+				textOffset.y = 0.003f;
+				break;
+			case "Upper Wall":
+				Transform trnsWnd = trnsParent.GetComponent<SculptedWall>().sculptedWindow.transform;
+				textOffset.x = rightWallSize;
+				textOffset.y = trnsParent.FindChild ("Lower Wall").localScale.y +
+							   trnsWnd.localScale.y + 0.01f;
+				break;
+			case "Left Wall":
+				textOffset.x = trnsParent.FindChild ("Lower Wall").localScale.x +
+							   rightWallSize;
+				break;
+			default:
+				textOffset = Vector2.zero;
+				break;
+		}
+
+		return textOffset;
+	}
+
+	float GetPackSculptWallSize(Transform pack)
+	{
+		float packSize = pack.FindChild ("Lower Wall").localScale.x;
+		if (pack.FindChild ("Right Wall"))
+		{
+			packSize += pack.FindChild ("Right Wall").localScale.x;
+		}
+		if (pack.FindChild ("Left Wall"))
+		{
+			packSize += pack.FindChild ("Left Wall").localScale.x;
+		}
+		if (pack.FindChild ("PackSculptWall"))
+		{
+			packSize += GetPackSculptWallSize(pack.FindChild ("PackSculptWall"));
+		}
+
+		return packSize;
+	}
 }

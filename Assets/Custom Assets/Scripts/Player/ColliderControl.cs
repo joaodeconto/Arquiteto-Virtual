@@ -36,31 +36,34 @@ public class ColliderControl : MonoBehaviour {
 		GameObject chao = GameObject.FindWithTag("Chao");
 		if  (chao != null && chao.renderer != null)
 			chao.renderer.enabled = chao.collider.enabled = true;
-		
-		int i = 0;
-		foreach (Transform wallColor in cameraController.wallParent.transform) {
-			if (wallColor != null)
-			{
-				wallColor.GetComponent<InfoWall>().wall.transform.GetChild(0).renderer.material = cameraController.wallMaterial;
-				wallColor.GetComponent<InfoWall>().wall.transform.GetChild(0).renderer.material.color = wallColor.GetComponent<InfoWall>().color;
-				wallColor.GetComponent<InfoWall>().wall.collider.enabled = true;
-				wallColor.GetComponent<InfoWall>().wall.collider.isTrigger = false;
-				++i;
-			}
-		}
 	}
 	
 	// Update is called once per frame
 	public void Disable () {
-		
-		cameraController.interfaceGUI.uiRootFPS.SetActiveRecursively (false);
-		
+
 		SnapBehaviour.ActivateAll();
 		cameraController.mainCamera.gameObject.SetActiveRecursively(true);
 		cameraController.setFirstPerson = false;
 		cameraController.interfaceGUI.main.SetActiveRecursively(true);
 		cameraController.interfaceGUI.uiRootFPS.SetActiveRecursively (false);
-		
+
+		if (IsPanelFloor)
+		{
+			Debug.LogWarning ("Chegou ali");
+			cameraController.interfaceGUI.viewUIPiso.SetActiveRecursively (true);
+			cameraController.interfaceGUI.panelFloor.SetActiveRecursively (true);
+		}
+		else
+		{
+		Debug.LogWarning ("Chegou aqui");
+			cameraController.interfaceGUI.viewUIPiso.SetActiveRecursively (false);
+			cameraController.interfaceGUI.panelFloor.SetActiveRecursively (false);
+		}
+
+		cameraController.interfaceGUI.panelInfo.SetActiveRecursively (false);
+		cameraController.interfaceGUI.panelMobile.SetActiveRecursively (false);
+		cameraController.EnableCeilFloor ();
+
 		Screen.lockCursor = false;
 		
 		GameObject[] moveis = GameObject.FindGameObjectsWithTag("Movel");
@@ -100,18 +103,7 @@ public class ColliderControl : MonoBehaviour {
 		GameObject chao = GameObject.FindWithTag("Chao");
 		if  (chao != null && chao.renderer != null)
 			chao.renderer.enabled = chao.collider.enabled = true;
-		
-		cameraController.EnableCeilFloor();
-		
-		if (!IsPanelFloor) {
-			cameraController.interfaceGUI.viewUIPiso.SetActiveRecursively(false);
-			cameraController.interfaceGUI.panelFloor.SetActiveRecursively(false);
-		}
-		
-		//desativa sempre o panel info e o panel mobile
-		cameraController.interfaceGUI.panelInfo.SetActiveRecursively(false);
-		cameraController.interfaceGUI.panelMobile.SetActiveRecursively(false);
-		
+
 		#if UNITY_ANDROID || UNITY_IPHONE
 		transform.parent.parent.gameObject.SetActiveRecursively(false);
 		#else

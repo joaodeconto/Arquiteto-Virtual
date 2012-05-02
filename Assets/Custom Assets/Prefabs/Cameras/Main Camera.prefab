@@ -13,12 +13,12 @@ GameObject:
   - 124: {fileID: 12400000}
   - 81: {fileID: 8100000}
   - 54: {fileID: 5400000}
-  - 114: {fileID: 11400016}
   - 114: {fileID: 11400018}
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400014}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
+  - 114: {fileID: 11400006}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -199,6 +199,16 @@ MonoBehaviour:
 --- !u!1002 &11400005
 EditorExtensionImpl:
   serializedVersion: 6
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19800dfd4c45c042b925735d09be0ce, type: 1}
+  m_Name: 
 --- !u!1002 &11400007
 EditorExtensionImpl:
   serializedVersion: 6
@@ -273,16 +283,6 @@ MonoBehaviour:
 --- !u!1002 &11400015
 EditorExtensionImpl:
   serializedVersion: 6
---- !u!114 &11400016
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 639c23b7c2bb65546bbbf58382d17f9d, type: 1}
-  m_Name: 
 --- !u!1002 &11400017
 EditorExtensionImpl:
   serializedVersion: 6
@@ -610,6 +610,7 @@ MonoBehaviour:
     m_StretchHeight: 0
   dropper: {fileID: 2800000, guid: d8c964a325de5664581e1624f854fd94, type: 1}
   wallTextures:
+  - {fileID: 2800000, guid: 0d3000d0b1eb77749a34e55d09d1c270, type: 1}
   - {fileID: 2800000, guid: cead25fa329c86d48b8693cb160cad86, type: 1}
   - {fileID: 2800000, guid: 3383cd3f31ea7714fa19aeeefbd419d0, type: 1}
   - {fileID: 2800000, guid: 2ff1f96b3552dbf42a9ca2e87c650a04, type: 1}

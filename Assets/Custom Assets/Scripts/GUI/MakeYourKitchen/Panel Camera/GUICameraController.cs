@@ -64,7 +64,9 @@ public class GUICameraController : MonoBehaviour {
 		firstPersonCamera = GameObject.Find ("First Person Controller Mobile");
 		firstPersonCamera.SetActiveRecursively (false);
 		GameObject.Find ("First Person Controller").SetActiveRecursively (false);
-		firstPersonCamera.transform.GetChild(0).transform.localPosition = new Vector3 (WallBuilder.ROOT.x		 , 1.5f, WallBuilder.ROOT.z);
+		firstPersonCamera.transform.GetChild(0).localPosition = new Vector3(WallBuilder.ROOT.x,
+																			1.5f,
+																			WallBuilder.ROOT.z);
 		#else
 		firstPersonCamera = GameObject.Find ("First Person Controller");
 
@@ -80,7 +82,9 @@ public class GUICameraController : MonoBehaviour {
 		
 		//NGUI Monkey patch gonna patch...
 		mainCamera.transform.RotateAround(mainCamera.transform.right, 0.2f);//It's Rad measure
-		mainCamera.transform.position 		 	 = new Vector3 (WallBuilder.ROOT.x, 1.7f, WallBuilder.ROOT.z - 3.6f);
+		mainCamera.transform.position = new Vector3(WallBuilder.ROOT.x,
+													1.7f,
+													WallBuilder.ROOT.z - 3.6f);
 
 		ceilParent  = GameObject.Find ("ParentTeto");
 		floorParent = GameObject.Find ("ParentChao");
@@ -90,28 +94,34 @@ public class GUICameraController : MonoBehaviour {
 		showFloor = true;
 		
 		//Checking public vars
-		if (Step < 1) {
+		if (Step < 1)
+		 {
 			Step = 1;
 			Debug.LogError ("Step is a positive number and great than 1");
 		}
-		if (Angle < 1) {
+		if (Angle < 1)
+		{
 			Angle = 1;
 			Debug.LogError ("Angle is a positive number and great than 1");
 		}
-		if (ZoomSpeed < 1) {
+		if (ZoomSpeed < 1)
+		{
 			ZoomSpeed = 1;
 			Debug.LogError ("ZoomSpeed is a positive number and great than 1");
 		}
-		if (MaxHeight < 0) {
+		if (MaxHeight < 0)
+		{
 			MaxHeight = 45;
 			Debug.LogError ("MaxHeight is a positive number");
 		}
-		else if (MaxHeight < MinHeight) {
+		else if (MaxHeight < MinHeight)
+		{
 			MaxHeight = 45;
 			MinHeight = -45;
 			Debug.LogError ("MinHeight can't be greater than MaxHeight");
 		}
-		if (rateRefreshWallsVisibility < 0.01f || rateRefreshWallsVisibility > 10.0f) {
+		if (rateRefreshWallsVisibility < 0.01f || rateRefreshWallsVisibility > 10.0f)
+		{
 			rateRefreshWallsVisibility = 0.1f;
 			Debug.LogError ("The var RateRefreshWallsVisibility can't be lower than 0.01 seconds neither greater than 10 seconds");
 		}
@@ -196,6 +206,14 @@ public class GUICameraController : MonoBehaviour {
 		}
 
 		SnapBehaviour.DeactivateAll ();
+
+		#if UNITY_ANDROID || UNITY_IPHONE
+		firstPersonCamera.GetComponentInChildren<ColliderControl>().IsPanelFloor = interfaceGUI.panelFloor.active;
+		firstPersonCamera.GetComponentInChildren<ColliderControl>().Enable();
+		#else
+		firstPersonCamera.GetComponent<ColliderControl> ().IsPanelFloor = interfaceGUI.panelFloor.active;
+		firstPersonCamera.GetComponent<ColliderControl> ().Enable ();
+		#endif
 		
 		interfaceGUI.lists.SetActiveRecursively(false);
 		
@@ -209,15 +227,6 @@ public class GUICameraController : MonoBehaviour {
 		
 		setFirstPerson = true;
 		firstPersonCamera.SetActiveRecursively(true);
-		#if UNITY_ANDROID || UNITY_IPHONE
-		firstPersonCamera.GetComponentInChildren<ColliderControl>().IsPanelFloor = 
-			 interfaceGUI.panelFloor.active ? true : false;
-		firstPersonCamera.GetComponentInChildren<ColliderControl>().Enable();
-		#else
-		firstPersonCamera.GetComponent<ColliderControl>().IsPanelFloor = 
-			 interfaceGUI.panelFloor.active ? true : false;
-		firstPersonCamera.GetComponent<ColliderControl>().Enable();
-		#endif
 		
 	}
 	

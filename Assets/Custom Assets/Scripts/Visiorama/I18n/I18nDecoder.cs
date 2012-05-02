@@ -16,6 +16,7 @@ public class I18nDecoder : MonoBehaviour
 			if (labels [i] == null)
 			{
 				Debug.LogWarning (" labels[i].name: " + labels [i].name);
+				Destroy(labels[i]);
 				continue;
 			}
 			if (labels [i].gameObject.active == false)

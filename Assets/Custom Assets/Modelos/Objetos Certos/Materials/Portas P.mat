@@ -51,7 +51,7 @@ Material:
       data:
         first:
           name: _Gloss
-        second: 0
+        second: .0447761193
       data:
         first:
           name: _FrezPow

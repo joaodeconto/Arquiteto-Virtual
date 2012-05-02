@@ -19,7 +19,6 @@ GameObject:
   - 114: {fileID: 11400014}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
-  - 114: {fileID: 11400006}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -106,7 +105,7 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294938623
-  m_RenderingPath: -1
+  m_RenderingPath: 2
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
 --- !u!1002 &2000001
@@ -169,7 +168,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0923359e9e352a4b9b11c7b7161ad67, type: 1}
   m_Name: 
@@ -200,26 +199,6 @@ MonoBehaviour:
 --- !u!1002 &11400005
 EditorExtensionImpl:
   serializedVersion: 6
---- !u!114 &11400006
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25fc81614fb414ce7bc220e61e08d7c6, type: 1}
-  m_Name: 
-  reflectiveObjects: []
-  reflectionMask:
-    serializedVersion: 2
-    m_Bits: 256
-  reflectiveMaterials:
-  - {fileID: 2100000, guid: 1f046d6b15f80b0409cb0ec8594ed607, type: 2}
-  replacementShader: {fileID: 4800000, guid: f140c7e17a90a4c2c9015ed2bdb8443f, type: 1}
-  clearColor: {r: 0, g: 0, b: 0, a: 1}
-  reflectionSampler: _ReflectionTex
-  clipPlaneOffset: .0700000003
 --- !u!1002 &11400007
 EditorExtensionImpl:
   serializedVersion: 6
@@ -232,7 +211,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9aaa3f5f2d574f228e4a21aa38b61e4, type: 1}
   m_Name: 
@@ -259,7 +238,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d35a90bed98554f4d8b92c9cd3cfbafa, type: 1}
   m_Name: 
@@ -302,7 +281,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19800dfd4c45c042b925735d09be0ce, type: 1}
+  m_Script: {fileID: 11500000, guid: 639c23b7c2bb65546bbbf58382d17f9d, type: 1}
   m_Name: 
 --- !u!1002 &11400017
 EditorExtensionImpl:
@@ -631,7 +610,6 @@ MonoBehaviour:
     m_StretchHeight: 0
   dropper: {fileID: 2800000, guid: d8c964a325de5664581e1624f854fd94, type: 1}
   wallTextures:
-  - {fileID: 2800000, guid: 0d3000d0b1eb77749a34e55d09d1c270, type: 1}
   - {fileID: 2800000, guid: cead25fa329c86d48b8693cb160cad86, type: 1}
   - {fileID: 2800000, guid: 3383cd3f31ea7714fa19aeeefbd419d0, type: 1}
   - {fileID: 2800000, guid: 2ff1f96b3552dbf42a9ca2e87c650a04, type: 1}

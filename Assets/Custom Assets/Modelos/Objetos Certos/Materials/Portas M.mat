@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Portas M
-  m_Shader: {fileID: 10704, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 4d6cfc3615bbffd44b89c3f5bcb232d8, type: 1}
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:

@@ -21,7 +21,6 @@ public class ClickWindowItem : MonoBehaviour {
 
 	void OnClick ()
 	{
-	Debug.LogWarning ("Chegou 1");
 		RaycastHit hit;
 		Ray ray = camera.ScreenPointToRay (new Vector3 (Screen.width / 2, Screen.height / 2, 0));
 				
@@ -39,14 +38,12 @@ public class ClickWindowItem : MonoBehaviour {
 	
 	private void CreateWindow (Ray ray, RaycastHit hit)
 	{
-	Debug.LogWarning ("Chegou 2");
 		if (hit.transform.name.Equals ("Upper Wall") ||
 			hit.transform.name.Equals ("Lower Wall"))
 		{
 			Debug.LogWarning ("Não foi criada a janela, pois foi selecionada a paredes de cima e de baixo de uma janela pré-existente.");
 			return;
 		}
-	Debug.LogWarning ("Chegou 3");
 
 		Vector3 hitPoint = hit.point;
 		Transform wallTrans = hit.transform;
@@ -59,8 +56,9 @@ public class ClickWindowItem : MonoBehaviour {
 		
 		cWallSize = MeshUtils.FixZYFromBlender (cWallSize);
 			
-		if (cWallSize.x > Vector3.Distance (hitPoint, wallPosition) ||
-			cWallSize.x > Vector3.Distance (hitPoint, maxWallPosition)) {
+		if ( ( cWallSize.x / 2.0f ) > Vector3.Distance (hitPoint, wallPosition) ||
+			 ( cWallSize.x / 2.0f ) > Vector3.Distance (hitPoint, maxWallPosition))
+		{
 			Debug.LogWarning ("Não foi criada a janela por que foi clicado muito perto do canto da parede.");
 			return;
 		}

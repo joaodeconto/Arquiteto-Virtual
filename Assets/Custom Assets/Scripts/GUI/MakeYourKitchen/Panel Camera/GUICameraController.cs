@@ -124,7 +124,7 @@ public class GUICameraController : MonoBehaviour {
 	void Update ()
 	{
 		if (setFirstPerson) return;
-		return;
+
 		//Show/Hide ceil and floor
 		
 		//Verify if changed state of showCeil
@@ -177,6 +177,24 @@ public class GUICameraController : MonoBehaviour {
 	
 	public void Play ()
 	{
+		Renderer cRenderer = null;
+		foreach (GameObject wall in GameObject.FindGameObjectsWithTag("Parede")) {
+
+			if (wall.name.Contains ("Quina"))
+				continue;
+
+			cRenderer = wall.transform.GetChild (0).renderer;
+			//se a cor do InfoWall da parede for diferente da cor do material do renderer da parede
+			//atualiza a cor do InfoWall
+			if (cRenderer.materials [0].color != wall.GetComponent<InfoWall> ().color) {
+				wall.GetComponent<InfoWall> ().color = cRenderer.materials [0].color;
+			}
+
+			ChangeWallMaterial (wall.transform,
+							  	wallMaterial,
+							   	true);
+		}
+
 		SnapBehaviour.DeactivateAll ();
 		
 		interfaceGUI.lists.SetActiveRecursively(false);

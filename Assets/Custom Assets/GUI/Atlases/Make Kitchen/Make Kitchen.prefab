@@ -43,14 +43,14 @@ MonoBehaviour:
   - name: Telas
     outer:
       serializedVersion: 2
-      x: 558
-      y: 770
+      x: 0
+      y: 1
       width: 134
       height: 14
     inner:
       serializedVersion: 2
-      x: 558
-      y: 770
+      x: 0
+      y: 1
       width: 134
       height: 14
     paddingLeft: .0597014911
@@ -60,14 +60,14 @@ MonoBehaviour:
   - name: SliderBar
     outer:
       serializedVersion: 2
-      x: 558
-      y: 755
+      x: 167
+      y: 15
       width: 134
       height: 14
     inner:
       serializedVersion: 2
-      x: 558
-      y: 755
+      x: 167
+      y: 15
       width: 134
       height: 14
     paddingLeft: .0597014911
@@ -77,14 +77,14 @@ MonoBehaviour:
   - name: bt_wall
     outer:
       serializedVersion: 2
-      x: 693
-      y: 707
+      x: 706
+      y: 617
       width: 39
       height: 38
     inner:
       serializedVersion: 2
-      x: 693
-      y: 707
+      x: 706
+      y: 617
       width: 39
       height: 38
     paddingLeft: 0
@@ -94,14 +94,14 @@ MonoBehaviour:
   - name: bt_bt3
     outer:
       serializedVersion: 2
-      x: 837
-      y: 881
+      x: 325
+      y: 793
       width: 131
       height: 34
     inner:
       serializedVersion: 2
-      x: 837
-      y: 881
+      x: 325
+      y: 793
       width: 131
       height: 34
     paddingLeft: 0
@@ -111,14 +111,14 @@ MonoBehaviour:
   - name: bt_Mover
     outer:
       serializedVersion: 2
-      x: 837
-      y: 792
+      x: 966
+      y: 978
       width: 45
       height: 46
     inner:
       serializedVersion: 2
-      x: 837
-      y: 792
+      x: 966
+      y: 978
       width: 45
       height: 46
     paddingLeft: 0
@@ -128,14 +128,14 @@ MonoBehaviour:
   - name: bt_upBig
     outer:
       serializedVersion: 2
-      x: 889
-      y: 835
+      x: 966
+      y: 932
       width: 45
       height: 45
     inner:
       serializedVersion: 2
-      x: 889
-      y: 835
+      x: 966
+      y: 932
       width: 45
       height: 45
     paddingLeft: 0
@@ -145,14 +145,14 @@ MonoBehaviour:
   - name: bt_Rotacionar
     outer:
       serializedVersion: 2
-      x: 889
-      y: 789
+      x: 969
+      y: 811
       width: 45
       height: 45
     inner:
       serializedVersion: 2
-      x: 889
-      y: 789
+      x: 969
+      y: 811
       width: 45
       height: 45
     paddingLeft: 0
@@ -163,13 +163,13 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 995
-      y: 891
+      y: 907
       width: 24
       height: 24
     inner:
       serializedVersion: 2
       x: 995
-      y: 891
+      y: 907
       width: 24
       height: 24
     paddingLeft: .0416666679
@@ -179,14 +179,14 @@ MonoBehaviour:
   - name: SlideBarSlider
     outer:
       serializedVersion: 2
-      x: 998
-      y: 919
+      x: 990
+      y: 766
       width: 18
       height: 18
     inner:
       serializedVersion: 2
-      x: 998
-      y: 919
+      x: 990
+      y: 766
       width: 18
       height: 18
     paddingLeft: 0
@@ -196,14 +196,14 @@ MonoBehaviour:
   - name: bt_ArrowMed
     outer:
       serializedVersion: 2
-      x: 693
-      y: 746
+      x: 746
+      y: 617
       width: 39
       height: 38
     inner:
       serializedVersion: 2
-      x: 693
-      y: 746
+      x: 746
+      y: 617
       width: 39
       height: 38
     paddingLeft: .025641026
@@ -214,13 +214,13 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 837
-      y: 986
+      y: 857
       width: 162
       height: 38
     inner:
       serializedVersion: 2
       x: 837
-      y: 986
+      y: 857
       width: 162
       height: 38
     paddingLeft: 0
@@ -230,14 +230,14 @@ MonoBehaviour:
   - name: bt_Camera
     outer:
       serializedVersion: 2
-      x: 693
-      y: 667
+      x: 985
+      y: 660
       width: 37
       height: 39
     inner:
       serializedVersion: 2
-      x: 693
-      y: 667
+      x: 985
+      y: 660
       width: 37
       height: 39
     paddingLeft: 0
@@ -247,14 +247,14 @@ MonoBehaviour:
   - name: bt_Lixeira
     outer:
       serializedVersion: 2
-      x: 935
-      y: 787
+      x: 792
+      y: 835
       width: 44
       height: 46
     inner:
       serializedVersion: 2
-      x: 935
-      y: 787
+      x: 792
+      y: 835
       width: 44
       height: 46
     paddingLeft: 0
@@ -264,14 +264,14 @@ MonoBehaviour:
   - name: bt_List
     outer:
       serializedVersion: 2
-      x: 512
-      y: 657
+      x: 626
+      y: 616
       width: 39
       height: 39
     inner:
       serializedVersion: 2
-      x: 512
-      y: 657
+      x: 626
+      y: 616
       width: 39
       height: 39
     paddingLeft: 0
@@ -298,14 +298,14 @@ MonoBehaviour:
   - name: bt_bt2
     outer:
       serializedVersion: 2
-      x: 325
-      y: 793
+      x: 837
+      y: 822
       width: 131
       height: 34
     inner:
       serializedVersion: 2
-      x: 325
-      y: 793
+      x: 837
+      y: 822
       width: 131
       height: 34
     paddingLeft: 0
@@ -332,14 +332,14 @@ MonoBehaviour:
   - name: TexBut02
     outer:
       serializedVersion: 2
-      x: 980
-      y: 791
+      x: 942
+      y: 657
       width: 42
       height: 42
     inner:
       serializedVersion: 2
-      x: 980
-      y: 791
+      x: 942
+      y: 657
       width: 42
       height: 42
     paddingLeft: 0
@@ -349,14 +349,14 @@ MonoBehaviour:
   - name: TexBut03
     outer:
       serializedVersion: 2
-      x: 980
-      y: 837
+      x: 899
+      y: 694
       width: 42
       height: 43
     inner:
       serializedVersion: 2
-      x: 980
-      y: 837
+      x: 899
+      y: 694
       width: 42
       height: 43
     paddingLeft: .0238095243
@@ -366,14 +366,14 @@ MonoBehaviour:
   - name: Color02But
     outer:
       serializedVersion: 2
-      x: 969
-      y: 890
+      x: 676
+      y: 786
       width: 25
       height: 25
     inner:
       serializedVersion: 2
-      x: 969
-      y: 890
+      x: 676
+      y: 786
       width: 25
       height: 25
     paddingLeft: .119999997
@@ -383,14 +383,14 @@ MonoBehaviour:
   - name: Color03But
     outer:
       serializedVersion: 2
-      x: 808
-      y: 786
+      x: 568
+      y: 795
       width: 25
       height: 25
     inner:
       serializedVersion: 2
-      x: 808
-      y: 786
+      x: 568
+      y: 795
       width: 25
       height: 25
     paddingLeft: .159999996
@@ -400,14 +400,14 @@ MonoBehaviour:
   - name: Color04But
     outer:
       serializedVersion: 2
-      x: 733
-      y: 761
+      x: 969
+      y: 787
       width: 25
       height: 23
     inner:
       serializedVersion: 2
-      x: 733
-      y: 761
+      x: 969
+      y: 787
       width: 25
       height: 23
     paddingLeft: .119999997
@@ -417,14 +417,14 @@ MonoBehaviour:
   - name: TexBut04
     outer:
       serializedVersion: 2
-      x: 512
-      y: 697
+      x: 459
+      y: 613
       width: 42
       height: 42
     inner:
       serializedVersion: 2
-      x: 512
-      y: 697
+      x: 459
+      y: 613
       width: 42
       height: 42
     paddingLeft: .0476190485
@@ -451,13 +451,13 @@ MonoBehaviour:
   - name: PointLight
     outer:
       serializedVersion: 2
-      x: 512
+      x: 944
       y: 740
       width: 45
       height: 44
     inner:
       serializedVersion: 2
-      x: 512
+      x: 944
       y: 740
       width: 45
       height: 44
@@ -485,14 +485,14 @@ MonoBehaviour:
   - name: RadioButtonOff
     outer:
       serializedVersion: 2
-      x: 977
-      y: 917
+      x: 1000
+      y: 875
       width: 20
       height: 20
     inner:
       serializedVersion: 2
-      x: 977
-      y: 917
+      x: 1000
+      y: 875
       width: 20
       height: 20
     paddingLeft: 0
@@ -502,14 +502,14 @@ MonoBehaviour:
   - name: RadioButtonOn
     outer:
       serializedVersion: 2
-      x: 1000
-      y: 1004
+      x: 995
+      y: 790
       width: 20
       height: 20
     inner:
       serializedVersion: 2
-      x: 1000
-      y: 1004
+      x: 995
+      y: 790
       width: 20
       height: 20
     paddingLeft: .0500000007
@@ -519,14 +519,14 @@ MonoBehaviour:
   - name: CloseButton
     outer:
       serializedVersion: 2
-      x: 647
-      y: 673
+      x: 798
+      y: 794
       width: 38
       height: 39
     inner:
       serializedVersion: 2
-      x: 647
-      y: 673
+      x: 798
+      y: 794
       width: 38
       height: 39
     paddingLeft: .0526315793
@@ -536,14 +536,14 @@ MonoBehaviour:
   - name: Color01But
     outer:
       serializedVersion: 2
-      x: 568
-      y: 795
+      x: 702
+      y: 786
       width: 25
       height: 25
     inner:
       serializedVersion: 2
-      x: 568
-      y: 795
+      x: 702
+      y: 786
       width: 25
       height: 25
     paddingLeft: .119999997
@@ -553,14 +553,14 @@ MonoBehaviour:
   - name: SemTampo
     outer:
       serializedVersion: 2
-      x: 558
-      y: 717
+      x: 942
+      y: 700
       width: 48
       height: 37
     inner:
       serializedVersion: 2
-      x: 558
-      y: 717
+      x: 942
+      y: 700
       width: 48
       height: 37
     paddingLeft: .125
@@ -570,14 +570,14 @@ MonoBehaviour:
   - name: ShinyButton
     outer:
       serializedVersion: 2
-      x: 907
-      y: 916
+      x: 676
+      y: 812
       width: 69
       height: 69
     inner:
       serializedVersion: 2
-      x: 912
-      y: 921
+      x: 681
+      y: 817
       width: 59
       height: 59.1999512
     paddingLeft: .0579710156
@@ -587,14 +587,14 @@ MonoBehaviour:
   - name: SpotLight
     outer:
       serializedVersion: 2
-      x: 977
-      y: 938
+      x: 746
+      y: 834
       width: 45
       height: 47
     inner:
       serializedVersion: 2
-      x: 977
-      y: 938
+      x: 746
+      y: 834
       width: 45
       height: 47
     paddingLeft: 0
@@ -604,14 +604,14 @@ MonoBehaviour:
   - name: ComPia
     outer:
       serializedVersion: 2
-      x: 837
-      y: 839
+      x: 746
+      y: 792
       width: 51
       height: 41
     inner:
       serializedVersion: 2
-      x: 837
-      y: 839
+      x: 746
+      y: 792
       width: 51
       height: 41
     paddingLeft: .117647059
@@ -638,14 +638,14 @@ MonoBehaviour:
   - name: btn4
     outer:
       serializedVersion: 2
-      x: 676
-      y: 806
+      x: 837
+      y: 787
       width: 131
       height: 34
     inner:
       serializedVersion: 2
-      x: 676
-      y: 806
+      x: 837
+      y: 787
       width: 131
       height: 34
     paddingLeft: 0
@@ -655,14 +655,14 @@ MonoBehaviour:
   - name: Slider_Alpha
     outer:
       serializedVersion: 2
-      x: 676
-      y: 793
+      x: 167
+      y: 2
       width: 131
       height: 12
     inner:
       serializedVersion: 2
-      x: 676
-      y: 793
+      x: 167
+      y: 2
       width: 131
       height: 12
     paddingLeft: 0
@@ -689,14 +689,14 @@ MonoBehaviour:
   - name: ArrowsSilver
     outer:
       serializedVersion: 2
-      x: 808
-      y: 812
+      x: 966
+      y: 903
       width: 28
       height: 28
     inner:
       serializedVersion: 2
-      x: 808
-      y: 812
+      x: 966
+      y: 903
       width: 28
       height: 28
     paddingLeft: .0714285746
@@ -723,14 +723,14 @@ MonoBehaviour:
   - name: bt_pause
     outer:
       serializedVersion: 2
-      x: 935
-      y: 834
+      x: 899
+      y: 738
       width: 44
       height: 46
     inner:
       serializedVersion: 2
-      x: 935
-      y: 834
+      x: 899
+      y: 738
       width: 44
       height: 46
     paddingLeft: 0
@@ -757,14 +757,14 @@ MonoBehaviour:
   - name: TexBut01
     outer:
       serializedVersion: 2
-      x: 558
-      y: 674
+      x: 502
+      y: 613
       width: 41
       height: 42
     inner:
       serializedVersion: 2
-      x: 558
-      y: 674
+      x: 502
+      y: 613
       width: 41
       height: 42
     paddingLeft: .024390243
@@ -774,14 +774,14 @@ MonoBehaviour:
   - name: ComTampo
     outer:
       serializedVersion: 2
-      x: 607
-      y: 713
+      x: 544
+      y: 614
       width: 40
       height: 41
     inner:
       serializedVersion: 2
-      x: 607
-      y: 713
+      x: 544
+      y: 614
       width: 40
       height: 41
     paddingLeft: .150000006
@@ -791,14 +791,14 @@ MonoBehaviour:
   - name: HelpButton
     outer:
       serializedVersion: 2
-      x: 607
-      y: 673
+      x: 666
+      y: 616
       width: 39
       height: 39
     inner:
       serializedVersion: 2
-      x: 607
-      y: 673
+      x: 666
+      y: 616
       width: 39
       height: 39
     paddingLeft: .051282052
@@ -842,14 +842,14 @@ MonoBehaviour:
   - name: CookTop
     outer:
       serializedVersion: 2
-      x: 648
-      y: 713
+      x: 585
+      y: 614
       width: 40
       height: 41
     inner:
       serializedVersion: 2
-      x: 648
-      y: 713
+      x: 585
+      y: 614
       width: 40
       height: 41
     paddingLeft: .200000003
@@ -907,6 +907,159 @@ MonoBehaviour:
     paddingRight: .0123456791
     paddingTop: .0127795525
     paddingBottom: .0191693287
+  - name: Lajota preta
+    outer:
+      serializedVersion: 2
+      x: 837
+      y: 896
+      width: 128
+      height: 128
+    inner:
+      serializedVersion: 2
+      x: 837
+      y: 896
+      width: 128
+      height: 128
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Lajota Cinza
+    outer:
+      serializedVersion: 2
+      x: 770
+      y: 656
+      width: 128
+      height: 128
+    inner:
+      serializedVersion: 2
+      x: 770
+      y: 656
+      width: 128
+      height: 128
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Lajota Marmo
+    outer:
+      serializedVersion: 2
+      x: 330
+      y: 398
+      width: 128
+      height: 128
+    inner:
+      serializedVersion: 2
+      x: 330
+      y: 398
+      width: 128
+      height: 128
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Lajota Branca
+    outer:
+      serializedVersion: 2
+      x: 641
+      y: 656
+      width: 128
+      height: 128
+    inner:
+      serializedVersion: 2
+      x: 641
+      y: 656
+      width: 128
+      height: 128
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Lajota Bege
+    outer:
+      serializedVersion: 2
+      x: 330
+      y: 269
+      width: 128
+      height: 128
+    inner:
+      serializedVersion: 2
+      x: 330
+      y: 269
+      width: 128
+      height: 128
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Lajota Verde
+    outer:
+      serializedVersion: 2
+      x: 330
+      y: 140
+      width: 128
+      height: 128
+    inner:
+      serializedVersion: 2
+      x: 330
+      y: 140
+      width: 128
+      height: 128
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Lajota Triangulo
+    outer:
+      serializedVersion: 2
+      x: 512
+      y: 656
+      width: 128
+      height: 128
+    inner:
+      serializedVersion: 2
+      x: 512
+      y: 656
+      width: 128
+      height: 128
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Lajota Rosa
+    outer:
+      serializedVersion: 2
+      x: 330
+      y: 527
+      width: 128
+      height: 128
+    inner:
+      serializedVersion: 2
+      x: 330
+      y: 527
+      width: 128
+      height: 128
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Lajota Triangulo preto
+    outer:
+      serializedVersion: 2
+      x: 330
+      y: 11
+      width: 128
+      height: 128
+    inner:
+      serializedVersion: 2
+      x: 330
+      y: 11
+      width: 128
+      height: 128
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   mCoordinates: 0
 --- !u!1001 &100100000
 Prefab:

@@ -21,7 +21,6 @@ public class CameraController : MonoBehaviour {
 		freeCamera = gameObject.AddComponent<FreeCamera3d> ()
 									.Initialize (this.camera, 1.0f, 0.3f, true, false);
 
-
 		furnitureManager = GetComponent<FurnitureManager> ();
 	
 		sCamera = GetComponent<Camera>();

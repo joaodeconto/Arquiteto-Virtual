@@ -22,7 +22,7 @@ public class OverOrientacao : MonoBehaviour
 					 transform.parent.transform.parent.GetComponentInChildren<Camera>();
 		mainCamera = GameObject.FindWithTag("MainCamera").camera;
 	}
-	
+
 	#if UNITY_ANDROID || UNITY_IPHONE
 	void Update () {
 		if (Input.touchCount == 1) {

@@ -11,7 +11,7 @@ using Visiorama.Utils;
 public class PresetMobileData {
 	public Vector3 Position 	{ get; private set; }
 	public Quaternion Rotation 	{ get; private set; }
-	
+
 	public int Id { get; private set;}
 	public int CategoryId { get; private set; }
 	public int BrandId 	 { get; private set; }

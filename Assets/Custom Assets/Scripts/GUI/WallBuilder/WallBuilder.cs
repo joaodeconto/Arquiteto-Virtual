@@ -53,9 +53,8 @@ public class WallBuilder : MonoBehaviour {
 	#endregion
 	
 	#region Unty Methods
-	void Start(){
-//	new Cubemap(6, TextureFormat.ARGB32,true).SetPixels(new Color[2]{Color.blue,Color.white},CubemapFace.NegativeX);
-//	camera.RenderToCubemap
+	void Start()
+	{
 		WallWidth = 5;
 		WallDepth = 5;
 		
@@ -102,37 +101,42 @@ public class WallBuilder : MonoBehaviour {
 		floorSizeOffset.y = 0;
 
 		GameObject newWall;
-		
+		float factor = 0.1f;
+		float semifactor = factor / 2.0f;
+
 		//0
-		newWall = Instantiate (	wall,
-								floorPosition + (Vector3.right * (floorSizeOffset.x - 0.08f)), 
-								Quaternion.Euler (Vector3.up * 0.0f)) as GameObject;
-		ChangeWalMaterialAndScale (newWall, RealWallWidth);
-		newWall.name = "Back Wall";
-		//90
-		newWall = Instantiate (	wall,
+		newWall = Instantiate (wall,
 								floorPosition
-									+ (Vector3.right * floorSizeOffset.x) 
-										- (Vector3.forward * (floorSizeOffset.z - 0.075f)),
+									+ (Vector3.right * floorSizeOffset.x)
+									- (Vector3.forward * (floorSizeOffset.z + semifactor)),
+								Quaternion.Euler (Vector3.up * 0.0f)) as GameObject;
+		ChangeWalMaterialAndScale (newWall, RealWallWidth + factor);
+		newWall.name = "Front Wall";
+
+		//90
+		newWall = Instantiate (wall,
+								floorPosition
+									- (Vector3.right * semifactor)
+									- (Vector3.forward * floorSizeOffset.z),
 								Quaternion.Euler (Vector3.up * 90.0f)) as GameObject;
-		ChangeWalMaterialAndScale (newWall, RealWallDepth);
-		newWall.name = "Right Wall";
-		
+		ChangeWalMaterialAndScale (newWall, RealWallDepth + factor);
+		newWall.name = "Left Wall";
+
 		//180
 		newWall = Instantiate (	wall,
-								floorPosition 
-									+ (Vector3.right * 0.075f) 
-										- (Vector3.forward * (floorSizeOffset.z)),
+								floorPosition
+									+ (Vector3.forward * semifactor),
 								Quaternion.Euler (Vector3.up * 180.0f)) as GameObject;
-		ChangeWalMaterialAndScale (newWall, RealWallWidth);
-		newWall.name = "Front Wall";
-				
+		ChangeWalMaterialAndScale (newWall, RealWallWidth + factor);
+		newWall.name = "Back Wall";
+
 		//270
 		newWall = Instantiate (	wall,
-								floorPosition - (Vector3.forward * (0.075f)),
+								floorPosition
+									+ (Vector3.right * (floorSizeOffset.x + semifactor)),
 								Quaternion.Euler (Vector3.up * 270.0f)) as GameObject;
-		ChangeWalMaterialAndScale (newWall, RealWallDepth);
-		newWall.name = "Left Wall";
+		ChangeWalMaterialAndScale (newWall, RealWallDepth + factor);
+		newWall.name = "Right Wall";
 
 		//Inicializando InfoWall em cada parede
 		foreach (GameObject cWall in GameObject.FindGameObjectsWithTag("Parede"))
@@ -144,6 +148,7 @@ public class WallBuilder : MonoBehaviour {
 																	renderer.
 																		materials[0].mainTexture;
 		}
+
 		Application.LoadLevel(3);
 		
 	}

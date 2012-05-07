@@ -3,29 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class SnapBehaviour : MonoBehaviour {
-		
-	#region public variables
-	public bool canSnapTop;
-	public bool canSnapBottom;
-	#endregion
-	
-	public bool collidedWithWall = false;
-	public bool wasDragged {get; private set;}
-	private bool isSelected = false;
-	
+
+	public bool wasDragged { get; private set; }
+
 	private Camera mainCamera;
 	
 	#region temp variables
-    private Vector3 direction;
-	private GameObject collidingMobile;
+	private Ray ray;
+	private RaycastHit hit;
 	#endregion
 	
-	private float coolDownTime;
+	private float coldDownTime;
 	private bool enableDrag;
-	
-	private Vector3 p; //Pivot value -1..1, calculated from Mesh bounds
-    private Vector3 last_p; //Last used pivot
-	
+	private bool isSelected;
+
+	private Vector3 referencePoint;
+	private Transform referenceWall;
+
 	#region Unity Methods
 	
 	public static void ActivateAll(){
@@ -49,13 +43,14 @@ public class SnapBehaviour : MonoBehaviour {
 	}
 	
 	void Start(){
-		coolDownTime = 0.4f;
+		coldDownTime = 0.4f;
 		enableDrag = false;
         rigidbody.detectCollisions = true;
         rigidbody.mass = 1000.0f;
         rigidbody.drag = 100.0f;
         rigidbody.angularDrag = 100.0f;
         rigidbody.freezeRotation = true;
+		mainCamera = GameObject.FindWithTag ("MainCamera").camera;
 	}
 
 	#endregion
@@ -66,16 +61,17 @@ public class SnapBehaviour : MonoBehaviour {
 			//print("setado: " + this.name + " para " + (value == true? "selecionado" : "Não selecionado"));
 		    isSelected = value;
 		    if(isSelected){
-		    	Invoke("EnableDrag",coolDownTime);
+		    	Invoke("EnableDrag",coldDownTime);
 		    }
         }
     }
     
-    private void EnableDrag(){
+    private void EnableDrag()
+    {
     	enableDrag = true;
     }
 	
-	#if (!UNITY_ANDROID && !UNITY_IPHONE) || UNITY_EDITOR
+	#if UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_WEBPLAYER || UNITY_EDITOR
 	void OnMouseDown(){
 		SelectObject();
 	}
@@ -87,9 +83,7 @@ public class SnapBehaviour : MonoBehaviour {
 	void OnMouseUp(){
 		DropObject();
 	}
-	#endif
-	
-	#if UNITY_ANDROID || UNITY_IPHONE
+	#else
 	// Android & Iphone Method to move object
 	void Update () {
 		if (Input.touchCount == 1) {
@@ -112,7 +106,8 @@ public class SnapBehaviour : MonoBehaviour {
 	}
 	#endif
 	
-	void SelectObject () {
+	void SelectObject ()
+	{
 		if(!enabled)
 			return;
 		
@@ -121,62 +116,67 @@ public class SnapBehaviour : MonoBehaviour {
 		if(furniture.Length == 0)
 			return;
 		
-		for(int i = 0; i != furniture.Length; ++i){
+		for(int i = 0; i != furniture.Length; ++i)
+		{
 			furniture[i].rigidbody.constraints = RigidbodyConstraints.FreezeAll;
 		}
 		
 		GameObject activeFurniture = GameObject.FindGameObjectWithTag("MovelSelecionado");
 		
 		if(activeFurniture != null)
+		{
 			activeFurniture.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-		
-		/*Bounds b = GetComponentInChildren<MeshFilter>().mesh.bounds;
-        Vector3 offset = -1 * b.center;
-        p = last_p = new Vector3(offset.x / b.extents.x, offset.y / b.extents.y, offset.z / b.extents.z);
-        */
+		}
+
+		Vector2 mousePosition = Input.mousePosition;
+        ray = mainCamera.ScreenPointToRay(mousePosition);
+
+        Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.NameToLayer("Cenario"));
+
+		referencePoint = hit.point;
+		referenceWall  = hit.transform;
+		transform.rotation = hit.transform.rotation;
 	}
-	
-	float vertical,horizontal;
-	RaycastHit hit;
-	Vector2 mousePosition;
+
 	void DragObject () {
 		
 		if(!isSelected || !enabled || !enableDrag)
 			return;
-			
-        mainCamera = GameObject.FindWithTag("MainCamera").camera;
-		
-		mousePosition = Input.mousePosition;
-		//mousePosition.x += Screen.width  * 0.0050f;
-		//mousePosition.y -= Screen.height * 0.0515f;
-		
-        Ray ray = mainCamera.ScreenPointToRay(mousePosition);
-		
+
+		float vertical,horizontal;
+
+		Vector2 mousePosition = Input.mousePosition;
+        ray 			  	  = mainCamera.ScreenPointToRay(mousePosition);
+
         if(Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.NameToLayer("Cenario"))){
 			
 			if (hit.transform.tag == "Grid")
-				return;//Ignore Grid			
+				return;//Ignore Grid
 				
 			if (hit.transform.tag == "Parede" ||
 			    hit.transform.tag == "Chao" ||
-				hit.transform.tag == "Teto"){
-				
-				/*if( p != last_p) { 
-					//Detects user input on any of the three sliders
-	               	UpdatePivot(transform.GetComponentInChildren<MeshFilter>());
-            	}*/
-				if (GetComponent<InformacoesMovel>().tipoMovel != TipoMovel.MOVEL) {
-	           		transform.position = (hit.point.x * transform.parent.right)	+ 
-										 (hit.point.z * transform.parent.forward);
-				} else {
-	           		transform.position = (hit.point.x * transform.parent.right)	+ 
-										 (hit.point.y * transform.parent.up)	+ 
-										 (hit.point.z * transform.parent.forward);
+				hit.transform.tag == "Teto")
+			{
+				Vector3 vector = (referencePoint - hit.point);
+				//refresh referencePoint
+				referencePoint = hit.point;
+
+				if (GetComponent<InformacoesMovel>().tipoMovel != TipoMovel.MOVEL)
+				{
+					vector.y = 0;
+	           		//(hit.point.x * transform.parent.right)	+
+					//	 (hit.point.z * transform.parent.forward);
+				}
+
+				transform.position -= vector;
+
+				if (referenceWall != hit.transform)
+				{
+					transform.rotation = hit.transform.rotation;
+					referenceWall 	   = hit.transform;
 				}
 			}
 		
-			//transform.position += new Vector3(0,0.2f,0);
-			 
 			wasDragged = true;
 		}
 	}
@@ -185,23 +185,9 @@ public class SnapBehaviour : MonoBehaviour {
 	{
 	    return (value > min) && (value < max);
 	}
-	
-	void UpdatePivot (MeshFilter meshFilter) {
-		Vector3 diff = Vector3.Scale(meshFilter.mesh.bounds.extents, last_p - p); //Calculate difference in 3d position
-    	meshFilter.transform.position -= Vector3.Scale(diff, meshFilter.transform.localScale); //Move object position
-        last_p = p;
-		if(collider) {
-            if(collider is BoxCollider) {
-                ((BoxCollider) collider).center += diff;
-            } else if(collider is CapsuleCollider) {
-                ((CapsuleCollider) collider).center += diff;
-            } else if(collider is SphereCollider) {
-                ((SphereCollider) collider).center += diff;
-            }
-        }
-	}
-	
-	void DropObject () {
+
+	void DropObject ()
+	{
 		if(!isSelected || !enabled)
 			return;
 			
@@ -250,12 +236,15 @@ public class SnapBehaviour : MonoBehaviour {
 			                                            this.collider.bounds.center.z + 
 			                                            this.collider.bounds.size.z / 4)};
 				
-		Ray ray;
-		foreach(Vector3 origin in origins){
+
+		foreach(Vector3 origin in origins)
+		{
 			ray = new Ray(origin, Vector3.down);
 //			Debug.DrawRay(ray.origin, ray.direction * 100, Color.cyan);
-			if(Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.NameToLayer("Cenario"))){			
-				if(hit.transform.tag == "Chao" || hit.transform.tag == "Parede"){
+			if(Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.NameToLayer("Cenario")))
+			{
+				if(hit.transform.tag == "Chao" || hit.transform.tag == "Parede")
+				{
 					++foundGround;
 				} else {
 //					Debug.Log(hit.transform.tag);	
@@ -270,8 +259,8 @@ public class SnapBehaviour : MonoBehaviour {
 //		Debug.DebugBreak();
 		
 		Debug.Log("foundGround: " + foundGround.ToString());
-		if(foundGround != 4){
-			
+		if(foundGround != 4)
+		{
 			GameObject[] ground = GameObject.FindGameObjectsWithTag("ChaoVazio");
 			GameObject nearestAvailableGround = null;
 			

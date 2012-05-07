@@ -302,8 +302,8 @@ public class GUICameraController : MonoBehaviour {
 			{
 				wall.GetComponent<InfoWall> ().color = cRenderer.materials[0].color;
 			}
-
-			if (Vector3.Angle (camForwardVector, wall.transform.forward) < 110f)
+			Debug.LogWarning ("Vector3.Angle (camForwardVector, wall.transform.forward): " + Vector3.Angle (camForwardVector, wall.transform.forward));
+			if (Vector3.Angle (camForwardVector, wall.transform.forward) > 70f)
 			{
 				ChangeWallMaterial (wall.transform,
 								  	wallMaterial,

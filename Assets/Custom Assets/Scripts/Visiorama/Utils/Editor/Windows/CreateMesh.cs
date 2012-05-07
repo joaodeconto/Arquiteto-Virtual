@@ -125,6 +125,8 @@ class CreateMesh : EditorWindow {
 		    combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
 		}
 		
+		EditorUtility.ClearProgressBar();
+		
 		Object prefab = EditorUtility.CreateEmptyPrefab(path+"/"+namePath+".prefab");
 		GameObject createPrefab = new GameObject();
 		createPrefab.AddComponent<MeshFilter>();

@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 public class AssetResources
 {
-    public static string[] GetAllAssets()
+    public static string[] GetAllAssets(string path)
     {
-        string[] tmpAssets1 = Directory.GetFiles(Application.dataPath, "*.*", SearchOption.AllDirectories);
+        string[] tmpAssets1 = Directory.GetFiles(Application.dataPath + path, "*.*", SearchOption.AllDirectories);
         string[] tmpAssets2 = Array.FindAll(tmpAssets1, name => !name.EndsWith(".meta"));
         string[] allAssets;
 
@@ -26,7 +26,7 @@ public class AssetResources
 
     public static UnityEngine.Object[] GetAllAssets (Type type) {
 		List<UnityEngine.Object> objects = new List<UnityEngine.Object>();
-		foreach(string asset in AssetResources.GetAllAssets()) {
+		foreach(string asset in AssetResources.GetAllAssets("")) {
 			UnityEngine.Object obj = AssetDatabase.LoadAssetAtPath(asset, type);
 			if (obj != null) {
 				objects.Add(obj);
@@ -36,9 +36,33 @@ public class AssetResources
 		return objects.ToArray();
 	}
 	
-	public static string[] GetAllAssetsName (System.Type type) {
+	public static UnityEngine.Object[] GetAllAssets (Type type, string path) {
+		List<UnityEngine.Object> objects = new List<UnityEngine.Object>();
+		foreach(string asset in AssetResources.GetAllAssets(path)) {
+			UnityEngine.Object obj = AssetDatabase.LoadAssetAtPath(asset, type);
+			if (obj != null) {
+				objects.Add(obj);
+			}
+		}
+		
+		return objects.ToArray();
+	}
+	
+	public static string[] GetAllAssetsName (Type type) {
 		List<string> objects = new List<string>();
-		foreach(string asset in AssetResources.GetAllAssets()) {
+		foreach(string asset in AssetResources.GetAllAssets("")) {
+			UnityEngine.Object obj = AssetDatabase.LoadAssetAtPath(asset, type);
+			if (obj != null) {
+				objects.Add(obj.name);
+			}
+		}
+		
+		return objects.ToArray();
+	}
+	
+	public static string[] GetAllAssetsName (Type type, string path) {
+		List<string> objects = new List<string>();
+		foreach(string asset in AssetResources.GetAllAssets(path)) {
 			UnityEngine.Object obj = AssetDatabase.LoadAssetAtPath(asset, type);
 			if (obj != null) {
 				objects.Add(obj.name);
@@ -50,7 +74,6 @@ public class AssetResources
 	
 	public static List<string> LoadTextFile (string path) {
 		StreamReader sr = new StreamReader(path);
-        List<string> lines = new List<string>();
         string line = sr.ReadLine();
 		string[] getLines = line.Split('/');
 		sr.Close();
@@ -62,7 +85,6 @@ public class AssetResources
 		
         foreach (string v in values)
         {
-			Debug.Log("Value: " + v);
             sw.Write(v+"/");
         }
 		

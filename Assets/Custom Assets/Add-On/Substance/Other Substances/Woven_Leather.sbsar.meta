@@ -1,67 +1,37 @@
-fileFormatVersion: 1
+fileFormatVersion: 2
 guid: 7a394ca8a9de8774da78d229747d265d
 SubstanceImporter:
-  importerVersion: 1
-  materials:
-    Woven_Leather:
-      prototypeName: Woven_Leather
-      shaderName: 
-      inputs:
-        $outputsize:
-          scalar: 9 9 0 0
-        Strips:
-          scalar: 2 0 0 0
-        Warp:
-          scalar: 0.5 0 0 0
-        Relief_Balance:
-          scalar: 32 0 0 0
-        Normal:
-          scalar: 0.5 0 0 0
-        Emboss:
-          scalar: 5 0 0 0
-        Angle:
-          scalar: 0.125 0 0 0
-        Saturation:
-          scalar: 0.5 0 0 0
-        Luminosity:
-          scalar: 0.5 0 0 0
-      informations:
-        offset: 0 0
-        scale: 1 1
-        flags: 1
-      properties: {}
-      textures:
-        Woven_Leather_Diffuse:
-          alphaSource: 5
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Woven_Leather_Specular:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Woven_Leather_Normal:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Woven_Leather_Bump:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Woven_Leather_Displacement:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Woven_Leather_Height:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-      buildSettings:
-        '':
-          maxTextureSize: 512
-          textureFormat: 0
+  serializedVersion: 2
+  materialInstances:
+  - name: Woven_Leather
+    prototypeName: Woven_Leather
+    shaderName: 
+    inputs: []
+    materialInformation:
+      offset: {x: 0, y: 0}
+      scale: {x: 1, y: 1}
+      generatedAtLoading: 1
+      generateAllOutputs: 0
+      animationUpdateRate: 0
+    materialProperties:
+      serializedVersion: 2
+      texEnvs: {}
+      floats: {}
+      colors: {}
+    textureParameters:
+    - name: Woven_Leather_Diffuse
+      alphaSource: 5
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: Woven_Leather_Normal
+      alphaSource: 0
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    buildTargetSettings:
+    - serializedVersion: 2
+      buildTarget: 
+      textureWidth: 512
+      textureHeight: 512
+      textureFormat: 0

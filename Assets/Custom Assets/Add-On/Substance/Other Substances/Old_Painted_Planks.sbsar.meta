@@ -1,70 +1,37 @@
-fileFormatVersion: 1
+fileFormatVersion: 2
 guid: 5b8c69f31a676d64c87ea4cf1fca534e
 SubstanceImporter:
-  importerVersion: 1
-  materials:
-    Old_Painted_Planks:
-      prototypeName: Old_Painted_Planks
-      shaderName: 
-      inputs:
-        $outputsize:
-          scalar: 9 9 0 0
-        Planks:
-          scalar: 5 0 0 0
-        Relief_Balance:
-          scalar: 32 0 0 0
-        Normal:
-          scalar: 0.5 0 0 0
-        Emboss:
-          scalar: 5 0 0 0
-        Angle:
-          scalar: 0.125 0 0 0
-        Saturation:
-          scalar: 0.5 0 0 0
-        Luminosity:
-          scalar: 0.5 0 0 0
-      informations:
-        offset: 0 0
-        scale: 1 1
-        flags: 1
-      properties: {}
-      textures:
-        Old_Painted_Planks_Diffuse:
-          alphaSource: 5
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Old_Painted_Planks_Specular:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Old_Painted_Planks_Normal:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Old_Painted_Planks_Bump:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Old_Painted_Planks_Displacement:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Old_Painted_Planks_Height:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Old_Painted_Planks_Glossiness:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-      buildSettings:
-        '':
-          maxTextureSize: 512
-          textureFormat: 0
+  serializedVersion: 2
+  materialInstances:
+  - name: Old_Painted_Planks
+    prototypeName: Old_Painted_Planks
+    shaderName: 
+    inputs: []
+    materialInformation:
+      offset: {x: 0, y: 0}
+      scale: {x: 1, y: 1}
+      generatedAtLoading: 1
+      generateAllOutputs: 0
+      animationUpdateRate: 0
+    materialProperties:
+      serializedVersion: 2
+      texEnvs: {}
+      floats: {}
+      colors: {}
+    textureParameters:
+    - name: Old_Painted_Planks_Diffuse
+      alphaSource: 5
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: Old_Painted_Planks_Normal
+      alphaSource: 0
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    buildTargetSettings:
+    - serializedVersion: 2
+      buildTarget: 
+      textureWidth: 512
+      textureHeight: 512
+      textureFormat: 0

@@ -1,67 +1,37 @@
-fileFormatVersion: 1
+fileFormatVersion: 2
 guid: 8bfb60d3ba267904cae6ad57ec5c426c
 SubstanceImporter:
-  importerVersion: 1
-  materials:
-    Rock_Pavement_01:
-      prototypeName: Rock_Pavement_01
-      shaderName: 
-      inputs:
-        $outputsize:
-          scalar: 9 9 0 0
-        Mortar:
-          scalar: 0.6 0 0 0
-        Sharpen:
-          scalar: 0.5 0 0 0
-        Relief_Balance:
-          scalar: 32 0 0 0
-        Normal:
-          scalar: 0.5 0 0 0
-        Emboss:
-          scalar: 5 0 0 0
-        Angle:
-          scalar: 0.125 0 0 0
-        Saturation:
-          scalar: 0.5 0 0 0
-        Luminosity:
-          scalar: 0.5 0 0 0
-      informations:
-        offset: 0 0
-        scale: 1 1
-        flags: 1
-      properties: {}
-      textures:
-        Rock_Pavement_01_Diffuse:
-          alphaSource: 5
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Rock_Pavement_01_Specular:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Rock_Pavement_01_Normal:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Rock_Pavement_01_Bump:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Rock_Pavement_01_Displacement:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Rock_Pavement_01_Height:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-      buildSettings:
-        '':
-          maxTextureSize: 512
-          textureFormat: 0
+  serializedVersion: 2
+  materialInstances:
+  - name: Rock_Pavement_01
+    prototypeName: Rock_Pavement_01
+    shaderName: 
+    inputs: []
+    materialInformation:
+      offset: {x: 0, y: 0}
+      scale: {x: 1, y: 1}
+      generatedAtLoading: 1
+      generateAllOutputs: 0
+      animationUpdateRate: 0
+    materialProperties:
+      serializedVersion: 2
+      texEnvs: {}
+      floats: {}
+      colors: {}
+    textureParameters:
+    - name: Rock_Pavement_01_Diffuse
+      alphaSource: 5
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: Rock_Pavement_01_Normal
+      alphaSource: 0
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    buildTargetSettings:
+    - serializedVersion: 2
+      buildTarget: 
+      textureWidth: 512
+      textureHeight: 512
+      textureFormat: 0

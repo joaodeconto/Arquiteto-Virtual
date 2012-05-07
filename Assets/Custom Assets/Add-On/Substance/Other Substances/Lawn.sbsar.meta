@@ -1,65 +1,37 @@
-fileFormatVersion: 1
+fileFormatVersion: 2
 guid: a77544b8986c7b74ba63768c9c519254
 SubstanceImporter:
-  importerVersion: 1
-  materials:
-    Lawn:
-      prototypeName: Lawn
-      shaderName: 
-      inputs:
-        $outputsize:
-          scalar: 9 9 0 0
-        Age:
-          scalar: 0.5 0 0 0
-        Relief_Balance:
-          scalar: 32 0 0 0
-        Normal:
-          scalar: 0.5 0 0 0
-        Emboss:
-          scalar: 5 0 0 0
-        Angle:
-          scalar: 0.125 0 0 0
-        Saturation:
-          scalar: 0.5 0 0 0
-        Luminosity:
-          scalar: 0.5 0 0 0
-      informations:
-        offset: 0 0
-        scale: 1 1
-        flags: 1
-      properties: {}
-      textures:
-        Lawn_Diffuse:
-          alphaSource: 5
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Lawn_Specular:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Lawn_Normal:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Lawn_Bump:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Lawn_Displacement:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Lawn_Height:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-      buildSettings:
-        '':
-          maxTextureSize: 512
-          textureFormat: 0
+  serializedVersion: 2
+  materialInstances:
+  - name: Lawn
+    prototypeName: Lawn
+    shaderName: 
+    inputs: []
+    materialInformation:
+      offset: {x: 0, y: 0}
+      scale: {x: 1, y: 1}
+      generatedAtLoading: 1
+      generateAllOutputs: 0
+      animationUpdateRate: 0
+    materialProperties:
+      serializedVersion: 2
+      texEnvs: {}
+      floats: {}
+      colors: {}
+    textureParameters:
+    - name: Lawn_Diffuse
+      alphaSource: 5
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: Lawn_Normal
+      alphaSource: 0
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    buildTargetSettings:
+    - serializedVersion: 2
+      buildTarget: 
+      textureWidth: 512
+      textureHeight: 512
+      textureFormat: 0

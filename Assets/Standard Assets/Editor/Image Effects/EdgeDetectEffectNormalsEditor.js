@@ -29,15 +29,19 @@ class EdgeDetectEffectNormalsEditor extends Editor
     		
     function OnInspectorGUI ()
     {         
+    	serObj.Update ();
+    	
     	EditorGUILayout.PropertyField (mode, new GUIContent("Mode"));
     	
-   		EditorGUILayout.PropertyField (sensitivityDepth, new GUIContent("Depth sensitivity"));
-   		EditorGUILayout.PropertyField (sensitivityNormals, new GUIContent("Normals sensitivity"));
+    	GUILayout.Label ("Edge sensitivity");
+   		EditorGUILayout.PropertyField (sensitivityDepth, new GUIContent("Depth"));
+   		EditorGUILayout.PropertyField (sensitivityNormals, new GUIContent("Normals"));
    		    		
    		EditorGUILayout.Separator ();
    		
-   		edgesOnly.floatValue = EditorGUILayout.Slider ("Draw edges only", edgesOnly.floatValue, 0.0, 1.0);
-   		EditorGUILayout.PropertyField (edgesOnlyBgColor, new GUIContent ("Background color"));    		
+   		GUILayout.Label ("Background options");
+   		edgesOnly.floatValue = EditorGUILayout.Slider ("Edges only", edgesOnly.floatValue, 0.0, 1.0);
+   		EditorGUILayout.PropertyField (edgesOnlyBgColor, new GUIContent ("Background"));    		
     	    	
     	serObj.ApplyModifiedProperties();
     }

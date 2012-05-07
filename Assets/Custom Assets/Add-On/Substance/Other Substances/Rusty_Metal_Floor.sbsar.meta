@@ -1,63 +1,37 @@
-fileFormatVersion: 1
+fileFormatVersion: 2
 guid: fb5d9c35d26e79543a0ef077899f3bf4
 SubstanceImporter:
-  importerVersion: 1
-  materials:
-    Rusty_Metal_Floor:
-      prototypeName: Rusty_Metal_Floor
-      shaderName: 
-      inputs:
-        $outputsize:
-          scalar: 9 9 0 0
-        Relief_Balance:
-          scalar: 32 0 0 0
-        Normal:
-          scalar: 0.5 0 0 0
-        Emboss:
-          scalar: 5 0 0 0
-        Angle:
-          scalar: 0.125 0 0 0
-        Saturation:
-          scalar: 0.5 0 0 0
-        Luminosity:
-          scalar: 0.5 0 0 0
-      informations:
-        offset: 0 0
-        scale: 1 1
-        flags: 1
-      properties: {}
-      textures:
-        Rusty_Metal_Floor_Diffuse:
-          alphaSource: 5
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Rusty_Metal_Floor_Specular:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Rusty_Metal_Floor_Normal:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Rusty_Metal_Floor_Bump:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Rusty_Metal_Floor_Displacement:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-        Rusty_Metal_Floor_Height:
-          alphaSource: 0
-          filterMode: 1
-          aniso: 1
-          wrapMode: 0
-      buildSettings:
-        '':
-          maxTextureSize: 512
-          textureFormat: 0
+  serializedVersion: 2
+  materialInstances:
+  - name: Rusty_Metal_Floor
+    prototypeName: Rusty_Metal_Floor
+    shaderName: 
+    inputs: []
+    materialInformation:
+      offset: {x: 0, y: 0}
+      scale: {x: 1, y: 1}
+      generatedAtLoading: 1
+      generateAllOutputs: 0
+      animationUpdateRate: 0
+    materialProperties:
+      serializedVersion: 2
+      texEnvs: {}
+      floats: {}
+      colors: {}
+    textureParameters:
+    - name: Rusty_Metal_Floor_Diffuse
+      alphaSource: 5
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: Rusty_Metal_Floor_Normal
+      alphaSource: 0
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    buildTargetSettings:
+    - serializedVersion: 2
+      buildTarget: 
+      textureWidth: 512
+      textureHeight: 512
+      textureFormat: 0

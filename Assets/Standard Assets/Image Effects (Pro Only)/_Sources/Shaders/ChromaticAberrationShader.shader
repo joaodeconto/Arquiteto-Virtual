@@ -1,9 +1,8 @@
 Shader "Hidden/ChromaticAberrationShader" {
 	Properties {
-		_MainTex ("Base (RGB)", 2D) = "" {}
+		_MainTex ("Base", 2D) = "" {}
 	}
 	
-	// Shader code pasted into all further CGPROGRAM blocks
 	CGINCLUDE
 	
 	#include "UnityCG.cginc"
@@ -13,20 +12,17 @@ Shader "Hidden/ChromaticAberrationShader" {
 		float2 uv : TEXCOORD0;
 	};
 	
-	// the color should come from a half rezolution buffer
-	// and target a quarter resolution buffer
-	
 	sampler2D _MainTex;
 	
 	float4 _MainTex_TexelSize;
-	float chromaticAberrationIntensity;
+	float _ChromaticAberration;
 
 		
 	v2f vert( appdata_img v ) {
 		v2f o;
 		o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
 		
-		#ifdef SHADER_API_D3D9
+		#if SHADER_API_D3D9 || SHADER_API_D3D11 || SHADER_API_XBOX360
 		if (_MainTex_TexelSize.y < 0)
 			 v.texcoord.y = 1.0 - v.texcoord.y ;
 		#endif
@@ -36,10 +32,9 @@ Shader "Hidden/ChromaticAberrationShader" {
 	} 
 	
 	half4 fragSimpleCopy(v2f i) : COLOR {
-		return tex2D(_MainTex, i.uv.xy);
+		return tex2D (_MainTex, i.uv.xy);
 	}
 
-	
 	half4 frag(v2f i) : COLOR {
 		half2 coords = i.uv;
 		half2 uv = i.uv;
@@ -47,14 +42,15 @@ Shader "Hidden/ChromaticAberrationShader" {
 		coords = (coords - 0.5) * 2.0;		
 		half coordDot = dot (coords,coords);
 		
-		float2 uvG = uv - _MainTex_TexelSize.xy * chromaticAberrationIntensity * coords * coordDot;
+		float2 uvG = uv - _MainTex_TexelSize.xy * _ChromaticAberration * coords * coordDot;
 		half4 color = tex2D (_MainTex, uv);
 		#if SHADER_API_D3D9
-		// Work around Cg's code generation bug for D3D9 pixel shaders :(
-		color.g = color.g * 0.0001 + tex2D (_MainTex, uvG).g;
+			// Work around Cg's code generation bug for D3D9 pixel shaders :(
+			color.g = color.g * 0.0001 + tex2D (_MainTex, uvG).g;
 		#else
-		color.g = tex2D (_MainTex, uvG).g;
+			color.g = tex2D (_MainTex, uvG).g;
 		#endif
+		
 		return color;
 	}
 
@@ -66,8 +62,10 @@ Subshader {
 	  Fog { Mode off }      
 
       CGPROGRAM
+      
       #pragma vertex vert
       #pragma fragment fragSimpleCopy
+      
       ENDCG
   }
 Pass {
@@ -75,8 +73,10 @@ Pass {
 	  Fog { Mode off }      
 
       CGPROGRAM
+      
       #pragma vertex vert
       #pragma fragment frag
+      
       ENDCG
   }
 }

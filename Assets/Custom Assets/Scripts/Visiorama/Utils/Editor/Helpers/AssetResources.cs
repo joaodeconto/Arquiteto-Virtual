@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 public class AssetResources
 {
-    public static string[] GetAllAssets(string path)
+    public static string[] GetAllAssets()
     {
-        string[] tmpAssets1 = Directory.GetFiles(Application.dataPath + path, "*.*", SearchOption.AllDirectories);
+        string[] tmpAssets1 = Directory.GetFiles(Application.dataPath, "*.*", SearchOption.AllDirectories);
         string[] tmpAssets2 = Array.FindAll(tmpAssets1, name => !name.EndsWith(".meta"));
         string[] allAssets;
 
@@ -26,19 +26,7 @@ public class AssetResources
 
     public static UnityEngine.Object[] GetAllAssets (Type type) {
 		List<UnityEngine.Object> objects = new List<UnityEngine.Object>();
-		foreach(string asset in AssetResources.GetAllAssets("")) {
-			UnityEngine.Object obj = AssetDatabase.LoadAssetAtPath(asset, type);
-			if (obj != null) {
-				objects.Add(obj);
-			}
-		}
-		
-		return objects.ToArray();
-	}
-	
-	public static UnityEngine.Object[] GetAllAssets (Type type, string path) {
-		List<UnityEngine.Object> objects = new List<UnityEngine.Object>();
-		foreach(string asset in AssetResources.GetAllAssets(path)) {
+		foreach(string asset in AssetResources.GetAllAssets()) {
 			UnityEngine.Object obj = AssetDatabase.LoadAssetAtPath(asset, type);
 			if (obj != null) {
 				objects.Add(obj);
@@ -50,19 +38,7 @@ public class AssetResources
 	
 	public static string[] GetAllAssetsName (Type type) {
 		List<string> objects = new List<string>();
-		foreach(string asset in AssetResources.GetAllAssets("")) {
-			UnityEngine.Object obj = AssetDatabase.LoadAssetAtPath(asset, type);
-			if (obj != null) {
-				objects.Add(obj.name);
-			}
-		}
-		
-		return objects.ToArray();
-	}
-	
-	public static string[] GetAllAssetsName (Type type, string path) {
-		List<string> objects = new List<string>();
-		foreach(string asset in AssetResources.GetAllAssets(path)) {
+		foreach(string asset in AssetResources.GetAllAssets()) {
 			UnityEngine.Object obj = AssetDatabase.LoadAssetAtPath(asset, type);
 			if (obj != null) {
 				objects.Add(obj.name);

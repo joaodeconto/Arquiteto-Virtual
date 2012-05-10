@@ -1,4 +1,4 @@
-Shader "Hidden/DepthRGBA8RadialBlur" 
+Shader "Hidden/RadialBlur" 
 {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "" {}
@@ -17,8 +17,8 @@ Shader "Hidden/DepthRGBA8RadialBlur"
 		
 	sampler2D _MainTex;
 	
-	float4 blurRadius4;
-	float4 sunPosition;
+	float4 _BlurRadius4;
+	float4 _SunPosition;
 
 	float4 _MainTex_TexelSize;
 		
@@ -27,28 +27,27 @@ Shader "Hidden/DepthRGBA8RadialBlur"
 		o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
 		o.uv.xy =  v.texcoord.xy;
 		
-		o.blurVector = (sunPosition.xy - v.texcoord.xy) * blurRadius4.xy;	
+		o.blurVector = (_SunPosition.xy - v.texcoord.xy) * _BlurRadius4.xy;	
 		
 		return o; 
 	}
 	
+	#define SAMPLES_FLOAT 6.0f
+	#define SAMPLES_INT 6
+	
 	half4 frag(v2f i) : COLOR 
 	{
 		half4 color = half4(0,0,0,0);
-		
-		// we can achieve max 6 iterations for shader model 2.0
-		
-		for(int j = 0; j < 6; j++)   
+				
+		for(int j = 0; j < SAMPLES_INT; j++)   
 		{	
-			half2 vec = sunPosition.xy-i.uv.xy;
-			half dist = saturate(sunPosition.w-length(vec));
 			half4 tmpColor = tex2D(_MainTex, i.uv.xy);
-			color += tmpColor * dist;
+			color += tmpColor;
 			
 			i.uv.xy += i.blurVector; 	
 		}
 		
-		return color / 6.0;
+		return color / SAMPLES_FLOAT;
 	}
 
 	ENDCG

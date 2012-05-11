@@ -23,7 +23,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.01955223, z: 0}
+  m_LocalPosition: {x: 0, y: 3.01955199, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -44,13 +44,13 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 0
-      y: 511
+      y: 1280
       width: 1233
       height: 768
     inner:
       serializedVersion: 2
       x: 0
-      y: 511
+      y: 1280
       width: 1233
       height: 768
     paddingLeft: 0
@@ -94,14 +94,14 @@ MonoBehaviour:
   - name: brasil
     outer:
       serializedVersion: 2
-      x: 1891
-      y: 1976
+      x: 1746
+      y: 1833
       width: 87
       height: 72
     inner:
       serializedVersion: 2
-      x: 1891
-      y: 1976
+      x: 1746
+      y: 1833
       width: 87
       height: 72
     paddingLeft: .126436785
@@ -111,14 +111,14 @@ MonoBehaviour:
   - name: spain
     outer:
       serializedVersion: 2
-      x: 1834
-      y: 1833
+      x: 1746
+      y: 1922
       width: 87
       height: 72
     inner:
       serializedVersion: 2
-      x: 1834
-      y: 1833
+      x: 1746
+      y: 1922
       width: 87
       height: 72
     paddingLeft: .114942528
@@ -146,64 +146,30 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 0
-      y: 20
-      width: 1106
-      height: 490
+      y: 813
+      width: 1110
+      height: 466
     inner:
       serializedVersion: 2
       x: 0
-      y: 20
-      width: 1106
-      height: 490
-    paddingLeft: .0180831831
-    paddingRight: .0144665465
-    paddingTop: 0
-    paddingBottom: 0
-  - name: Logo
-    outer:
-      serializedVersion: 2
-      x: 1746
-      y: 1934
-      width: 125
-      height: 60
-    inner:
-      serializedVersion: 2
-      x: 1746
-      y: 1934
-      width: 125
-      height: 60
-    paddingLeft: .0240000002
-    paddingRight: .0960000008
-    paddingTop: .233333334
-    paddingBottom: .216666669
-  - name: loading2
-    outer:
-      serializedVersion: 2
-      x: 1872
-      y: 1978
-      width: 16
-      height: 16
-    inner:
-      serializedVersion: 2
-      x: 1872
-      y: 1978
-      width: 16
-      height: 16
+      y: 813
+      width: 1110
+      height: 466
     paddingLeft: 0
     paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
+    paddingTop: .00429184549
+    paddingBottom: .00429184549
   - name: eua
     outer:
       serializedVersion: 2
-      x: 1746
-      y: 1833
+      x: 1891
+      y: 1976
       width: 87
       height: 72
     inner:
       serializedVersion: 2
-      x: 1746
-      y: 1833
+      x: 1891
+      y: 1976
       width: 87
       height: 72
     paddingLeft: .0919540226
@@ -213,14 +179,14 @@ MonoBehaviour:
   - name: America
     outer:
       serializedVersion: 2
-      x: 1491
-      y: 1098
+      x: 0
+      y: 631
       width: 256
       height: 181
     inner:
       serializedVersion: 2
-      x: 1491
-      y: 1098
+      x: 0
+      y: 631
       width: 256
       height: 181
     paddingLeft: 0
@@ -230,31 +196,14 @@ MonoBehaviour:
   - name: "Diamante c\xF3pia"
     outer:
       serializedVersion: 2
-      x: 1234
+      x: 1452
       y: 1413
       width: 256
       height: 181
     inner:
       serializedVersion: 2
-      x: 1234
+      x: 1452
       y: 1413
-      width: 256
-      height: 181
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: Maxima
-    outer:
-      serializedVersion: 2
-      x: 1491
-      y: 1595
-      width: 256
-      height: 181
-    inner:
-      serializedVersion: 2
-      x: 1491
-      y: 1595
       width: 256
       height: 181
     paddingLeft: 0
@@ -264,48 +213,14 @@ MonoBehaviour:
   - name: "Cristal c\xF3pia"
     outer:
       serializedVersion: 2
-      x: 1234
+      x: 1452
       y: 1595
       width: 256
       height: 181
     inner:
       serializedVersion: 2
-      x: 1234
+      x: 1452
       y: 1595
-      width: 256
-      height: 181
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: "MaximaBlack c\xF3pia"
-    outer:
-      serializedVersion: 2
-      x: 1748
-      y: 1595
-      width: 256
-      height: 181
-    inner:
-      serializedVersion: 2
-      x: 1748
-      y: 1595
-      width: 256
-      height: 181
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: "Mirage c\xF3pia"
-    outer:
-      serializedVersion: 2
-      x: 1491
-      y: 1413
-      width: 256
-      height: 181
-    inner:
-      serializedVersion: 2
-      x: 1491
-      y: 1413
       width: 256
       height: 181
     paddingLeft: 0
@@ -315,14 +230,14 @@ MonoBehaviour:
   - name: "Novita c\xF3pia"
     outer:
       serializedVersion: 2
-      x: 1748
-      y: 1413
+      x: 1709
+      y: 1595
       width: 256
       height: 181
     inner:
       serializedVersion: 2
-      x: 1748
-      y: 1413
+      x: 1709
+      y: 1595
       width: 256
       height: 181
     paddingLeft: 0
@@ -332,33 +247,50 @@ MonoBehaviour:
   - name: "Star c\xF3pia"
     outer:
       serializedVersion: 2
-      x: 1234
-      y: 1098
+      x: 1709
+      y: 1413
       width: 256
       height: 181
     inner:
       serializedVersion: 2
-      x: 1234
-      y: 1098
+      x: 1709
+      y: 1413
       width: 256
       height: 181
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: fundoEdit02
+  - name: LogoNovo
+    outer:
+      serializedVersion: 2
+      x: 1234
+      y: 1559
+      width: 217
+      height: 217
+    inner:
+      serializedVersion: 2
+      x: 1234
+      y: 1559
+      width: 217
+      height: 217
+    paddingLeft: 0
+    paddingRight: .179723501
+    paddingTop: 0
+    paddingBottom: .179723501
+  - name: "Mirage c\xF3pia"
     outer:
       serializedVersion: 2
       x: 0
-      y: 1280
-      width: 1233
-      height: 768
+      y: 449
+      width: 256
+      height: 181
     inner:
       serializedVersion: 2
       x: 0
-      y: 1280
-      width: 1233
-      height: 768
+      y: 449
+      width: 256
+      height: 181
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0

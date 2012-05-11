@@ -21,7 +21,7 @@ public class BrandColor : MonoBehaviour {
 			return new Color (0, 0, 0, 1);
 			break;
 		case BrandColorEnum.GRAY:
-			return new Color (0.53f, 0.53f, 0.53f, 1);
+			return new Color (0.64f, 0.64f, 0.64f, 1);
 			break;
 		case BrandColorEnum.GREEN:
 			return new Color (0, 0.65f, 0, 1);

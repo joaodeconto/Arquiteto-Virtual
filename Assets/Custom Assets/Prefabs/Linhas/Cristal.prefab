@@ -25189,7 +25189,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e56906b75dfec2146894683ab0240282, type: 1}
   m_Name: 
-  colors: 04000000030000000200000000000000
+  colors: 0400000003000000020000000000000001000000
 --- !u!1002 &11400001
 EditorExtensionImpl:
   serializedVersion: 6

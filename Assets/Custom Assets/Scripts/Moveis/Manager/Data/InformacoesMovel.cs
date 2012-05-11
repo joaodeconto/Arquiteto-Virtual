@@ -23,7 +23,9 @@ public enum Top {
 public enum TipoMovel {
 	FIXO,
 	MOVEL,
-	LIVRE
+	LIVRE,
+	CANTOFIXO,
+	CANTOMOVEL,
 }
 
 public class InformacoesMovel : MonoBehaviour {
@@ -81,11 +83,10 @@ public class InformacoesMovel : MonoBehaviour {
 				}
 			}
 		}
-		
-		if (tipoMovel != TipoMovel.FIXO) {
-			rigidbody.isKinematic = true;
-		}
-		
+
+		rigidbody.useGravity  = false;
+		rigidbody.isKinematic = false;
+
 		DrawersAndGlassDoorColorIndex 	 = Line.CurrentLine.GlobalDetailColorIndex;
 		StructureAndCommonDoorColorIndex = Line.CurrentLine.GlobalBaseColorIndex;
 		

@@ -252,7 +252,9 @@ public class WallBuilder : MonoBehaviour {
 	
 	private void CreateRoof () {
 		GameObject newCeil = Instantiate(ceil, Vector3.zero, ceil.transform.rotation) as GameObject;	
-		newCeil.transform.position = WallBuilder.ROOT + new Vector3 ( (int)(- ( RealWallWidth / 2) ) - 0.5f , 2.6f , (int)( RealWallDepth / 2) + 0.5f );// + new Vector3 (- (RealWallWidth / 2 + 0.5f) , 0.01f, - (RealWallDepth / 2 + 0.5f));
+		newCeil.transform.position = WallBuilder.ROOT + new Vector3 ( (int)(- ( RealWallWidth / 2) ) - 0.5f ,
+																				2.6f ,
+																	  (int)( -  RealWallDepth / 2) - 0.5f );
 		newCeil.transform.parent = parentCeil;
 		newCeil.transform.localScale = new Vector3(RealWallWidth, RealWallDepth, 1);	
 		foreach (Material cMaterial in newCeil.renderer.materials)

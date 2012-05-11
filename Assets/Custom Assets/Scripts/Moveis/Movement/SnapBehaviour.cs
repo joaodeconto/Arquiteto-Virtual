@@ -118,11 +118,16 @@ public class SnapBehaviour : MonoBehaviour {
 	{
 		if(!isOnTheWall)
 		{
-			if ( (collision.transform.tag == "Parede") ||
-				 (collision.transform.tag == "Teto" &&
-				  GetComponent<InformacoesMovel> ().tipoMovel == TipoMovel.MOVEL))
+			if ( (collision.transform.tag == "Parede"))
 			{
 				transform.rotation = collision.transform.rotation;
+			}
+			else if ( hit.transform.tag == "Teto" &&
+					 (GetComponent<InformacoesMovel> ().tipoMovel == TipoMovel.MOVEL))
+			{
+				Vector3 nEuler = hit.transform.eulerAngles;
+				nEuler.x = - nEuler.x;
+				transform.eulerAngles = nEuler;
 			}
 
 			isOnTheWall = true;
@@ -204,12 +209,16 @@ public class SnapBehaviour : MonoBehaviour {
 
 		referenceTransform = hit.transform;
 
-		if (hit.transform.tag == "Parede" ||
-			 (hit.transform.tag == "Teto" &&
-			  GetComponent<InformacoesMovel> ().tipoMovel == TipoMovel.MOVEL)
-		   )
+		if (hit.transform.tag == "Parede")
 		{
 			transform.rotation = hit.transform.rotation;
+		}
+		else if ( hit.transform.tag == "Teto" &&
+				 (GetComponent<InformacoesMovel> ().tipoMovel == TipoMovel.MOVEL))
+		{
+			Vector3 nEuler = hit.transform.eulerAngles;
+			nEuler.x = - nEuler.x;
+			transform.eulerAngles = nEuler;
 		}
 
 		enableDrag = true;
@@ -280,7 +289,9 @@ public class SnapBehaviour : MonoBehaviour {
 				if ( hit.transform.tag == "Teto" &&
 					(GetComponent<InformacoesMovel> ().tipoMovel == TipoMovel.MOVEL))
 				{
-					transform.rotation = hit.transform.rotation;
+					Vector3 nEuler = hit.transform.eulerAngles;
+					nEuler.x = - nEuler.x;
+					transform.eulerAngles = nEuler;
 				}
 			}
 			if (isOnTheWall && hit.transform.tag == "Parede")

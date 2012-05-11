@@ -149,6 +149,24 @@ public class WallBuilder : MonoBehaviour {
 																		materials[0].mainTexture;
 		}
 
+		int depth = (int)RealWallDepth;
+		int width = (int)RealWallWidth;
+		
+		for (int i = 0; i != depth; ++i)
+		{
+			for (int j = 0; j != width; ++j)
+			{
+				GameObject emptyFloor = GameObject.CreatePrimitive (PrimitiveType.Sphere);
+				emptyFloor.name = "EmptyFloor";
+				emptyFloor.transform.position = WallBuilder.ROOT
+											 + Vector3.forward * Mathf.Ceil(i - depth / 2.0f)
+											 + Vector3.right   * Mathf.Ceil(j - width / 2.0f);
+
+				emptyFloor.tag = "ChaoVazio";
+				emptyFloor.transform.parent = parentFloor;
+			}
+		}
+
 		Application.LoadLevel(3);
 		
 	}
@@ -250,11 +268,12 @@ public class WallBuilder : MonoBehaviour {
 		}
 	}
 	
-	private void CreateRoof () {
+	private void CreateRoof ()
+	{
 		GameObject newCeil = Instantiate(ceil, Vector3.zero, ceil.transform.rotation) as GameObject;	
 		newCeil.transform.position = WallBuilder.ROOT + new Vector3 ( (int)(- ( RealWallWidth / 2) ) - 0.5f ,
 																				2.6f ,
-																	  (int)( -  RealWallDepth / 2) - 0.5f );
+																	  (int)(  RealWallDepth / 2)   + 0.5f );
 		newCeil.transform.parent = parentCeil;
 		newCeil.transform.localScale = new Vector3(RealWallWidth, RealWallDepth, 1);	
 		foreach (Material cMaterial in newCeil.renderer.materials)

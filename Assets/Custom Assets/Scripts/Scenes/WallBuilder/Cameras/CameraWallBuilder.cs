@@ -28,7 +28,10 @@ public class CameraWallBuilder : MonoBehaviour {
 		zoom -= Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime * zoomGrau * Mathf.Abs(zoom);
 		zoom = Mathf.Clamp(zoom, 2.5f, 15f);
 		camera.orthographicSize = zoom;
-		light.range = zoom * 4;
-		light.transform.position = new Vector3(light.transform.position.x, zoom - 2f, light.transform.position.z);
+		if (light)
+		{
+			light.range = zoom * 4;
+			light.transform.position = new Vector3 (light.transform.position.x, zoom - 2f, light.transform.position.z);
+		}
 	}
 }

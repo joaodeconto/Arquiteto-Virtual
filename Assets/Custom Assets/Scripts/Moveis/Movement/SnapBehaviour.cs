@@ -64,12 +64,12 @@ public class SnapBehaviour : MonoBehaviour {
 				Vector2 mousePosition = touch.position;
 				//TODO this works
 #endif
-	        ray = mainCamera.ScreenPointToRay(mousePosition);
-
-	        Physics.Raycast(ray, out hit, Mathf.Infinity);
-
-	        if (hit.transform != transform)
-	        	return;
+//	        ray = mainCamera.ScreenPointToRay(mousePosition);
+//
+//	        Physics.Raycast(ray, out hit, Mathf.Infinity);
+//
+//	        if (hit.transform != transform)
+//	        	return;
 		}
 		else
 		{
@@ -178,6 +178,13 @@ public class SnapBehaviour : MonoBehaviour {
 
 	void SelectObject ()
 	{
+        ray = mainCamera.ScreenPointToRay(mousePosition);
+
+        if (!Physics.Raycast(ray, out hit, Mathf.Infinity, scenarioLayer))
+        {
+        	return;
+        }
+
 		GameObject[] furniture 	   = GameObject.FindGameObjectsWithTag("Movel");
 		GameObject activeFurniture = GameObject.FindGameObjectWithTag ("MovelSelecionado");
 
@@ -193,10 +200,6 @@ public class SnapBehaviour : MonoBehaviour {
 		{
 			activeFurniture.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
 		}
-
-        ray = mainCamera.ScreenPointToRay(mousePosition);
-
-        Physics.Raycast(ray, out hit, Mathf.Infinity, scenarioLayer);
 
 		if (referenceTransform == hit.transform)
 		{

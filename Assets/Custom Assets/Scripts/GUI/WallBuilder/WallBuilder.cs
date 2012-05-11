@@ -156,7 +156,7 @@ public class WallBuilder : MonoBehaviour {
 		{
 			for (int j = 0; j != width; ++j)
 			{
-				GameObject emptyFloor = GameObject.CreatePrimitive (PrimitiveType.Sphere);
+				GameObject emptyFloor = new GameObject();//GameObject.CreatePrimitive (PrimitiveType.Sphere);
 				emptyFloor.name = "EmptyFloor";
 				emptyFloor.transform.position = WallBuilder.ROOT
 											 + Vector3.forward * Mathf.Ceil(i - depth / 2.0f)

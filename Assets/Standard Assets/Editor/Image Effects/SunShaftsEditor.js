@@ -1,5 +1,5 @@
 
-@script ExecuteInEditMode()
+#pragma strict
 
 @CustomEditor (SunShafts)
 
@@ -15,11 +15,13 @@ class SunShaftsEditor extends Editor
 	var useSkyBoxAlpha : SerializedProperty;
 	var useDepthTexture : SerializedProperty;
     var resolution : SerializedProperty;
-    
+    var screenBlendMode : SerializedProperty;
     var maxRadius : SerializedProperty;
 
 	function OnEnable () {
 		serObj = new SerializedObject (target);
+		
+		screenBlendMode = serObj.FindProperty("screenBlendMode");
 		
 		sunTransform = serObj.FindProperty("sunTransform");
 		sunColor = serObj.FindProperty("sunColor");
@@ -37,42 +39,58 @@ class SunShaftsEditor extends Editor
 		useDepthTexture = serObj.FindProperty("useDepthTexture");
 	}
     		
-    function OnInspectorGUI ()
-    {        
+    function OnInspectorGUI () {        
+    	serObj.Update ();
+    	
+    	EditorGUILayout.BeginHorizontal();
+    	
 		var oldVal : boolean = useDepthTexture.boolValue;
-		EditorGUILayout.PropertyField (useDepthTexture, new GUIContent("Use Depth Texture"));
+		EditorGUILayout.PropertyField (useDepthTexture, new GUIContent ("Rely on Z Buffer?"));
+		if((target as SunShafts).camera)
+			GUILayout.Label("Current camera mode: "+ (target as SunShafts).camera.depthTextureMode, EditorStyles.miniBoldLabel);
 		
-		GUILayout.Label(" Camera depth texture mode: "+target.camera.depthTextureMode);
+    	EditorGUILayout.EndHorizontal();
 		
+		// depth buffer need
+		/*
 		var newVal : boolean = useDepthTexture.boolValue;
-		if(newVal != oldVal) {
+		if (newVal != oldVal) {
 			if(newVal)
-				target.camera.depthTextureMode |= DepthTextureMode.Depth;
+				(target as SunShafts).camera.depthTextureMode |= DepthTextureMode.Depth;
 			else
-				target.camera.depthTextureMode &= ~DepthTextureMode.Depth;
+				(target as SunShafts).camera.depthTextureMode &= ~DepthTextureMode.Depth;
 		}
+		*/
 		
     	EditorGUILayout.PropertyField (resolution,  new GUIContent("Resolution"));
-        
+     	EditorGUILayout.PropertyField (screenBlendMode, new GUIContent("Blend mode"));
+       
         EditorGUILayout.Separator ();
     
-    	EditorGUILayout.PropertyField (sunTransform, new GUIContent("Sun caster", "Chose a transform that acts as a root point for the produced sun shafts"));
-    	
-    	if(target.sunTransform && target.camera) {
-    		if( GUILayout.Button("Align to viewport center")) {
-    			var ray : Ray = target.camera.ViewportPointToRay(Vector3(0.5,0.5,0));
-    			target.sunTransform.position = ray.origin + ray.direction * 500.0;
-    			target.sunTransform.LookAt(target.transform);
+    	EditorGUILayout.BeginHorizontal();
+    
+    	EditorGUILayout.PropertyField (sunTransform, new GUIContent("Shafts caster", "Chose a transform that acts as a root point for the produced sun shafts"));
+    	if((target as SunShafts).sunTransform && (target as SunShafts).camera) {
+    		if (GUILayout.Button("Center on " + (target as SunShafts).camera.name)) {
+    			 if (EditorUtility.DisplayDialog ("Move sun shafts source?", "The SunShafts caster named "+ (target as SunShafts).sunTransform.name +"\n will be centered along "+(target as SunShafts).camera.name+". Are you sure? ", "Please do", "Don't")) {
+    				var ray : Ray = (target as SunShafts).camera.ViewportPointToRay(Vector3(0.5,0.5,0));
+    				(target as SunShafts).sunTransform.position = ray.origin + ray.direction * 500.0;
+    				(target as SunShafts).sunTransform.LookAt ((target as SunShafts).transform);
+    			}
     		}
     	}
     	
-    	EditorGUILayout.PropertyField (sunColor,  new GUIContent("Sun color"));
-        EditorGUILayout.PropertyField (maxRadius,  new GUIContent("Radius"));
+    	EditorGUILayout.EndHorizontal();
+    	
+		EditorGUILayout.Separator ();
+    	
+    	EditorGUILayout.PropertyField (sunColor,  new GUIContent ("Shafts color"));
+        maxRadius.floatValue = 1.0f - EditorGUILayout.Slider ("Distance falloff", 1.0f - maxRadius.floatValue, 0.1, 1.0);
     	
     	EditorGUILayout.Separator ();
     	
-    	sunShaftBlurRadius.floatValue = EditorGUILayout.Slider ("Blur offset", sunShaftBlurRadius.floatValue, 0.0,0.1);
-    	radialBlurIterations.intValue = EditorGUILayout.IntSlider ("Blur iterations", radialBlurIterations.intValue, 0,6);
+    	sunShaftBlurRadius.floatValue = EditorGUILayout.Slider ("Blur size", sunShaftBlurRadius.floatValue, 1.0, 10.0);
+    	radialBlurIterations.intValue = EditorGUILayout.IntSlider ("Blur iterations", radialBlurIterations.intValue, 1, 3);
     	
     	EditorGUILayout.Separator ();
     	

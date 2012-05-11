@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Vidro
-  m_Shader: {fileID: 31, guid: 0000000000000000e000000000000000, type: 0}
+  m_Shader: {fileID: 10751, guid: 0000000000000000f000000000000000, type: 0}
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -22,7 +22,7 @@ Material:
         first:
           name: _BumpMap
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 2800000, guid: 9f43c0307a0894949a41cf9b040ead2e, type: 1}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -44,6 +44,10 @@ Material:
         first:
           name: _Reflection
         second: 1
+      data:
+        first:
+          name: _Cutoff
+        second: .529850781
       data:
         first:
           name: _Shininess

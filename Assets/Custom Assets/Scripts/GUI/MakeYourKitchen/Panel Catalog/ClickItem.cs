@@ -36,9 +36,12 @@ public class ClickItem : MonoBehaviour {
 		
 		newFurniture.AddComponent<SnapBehaviour>();
 		newFurniture.AddComponent<CalculateBounds>();
-		newFurniture.AddComponent<Rigidbody>();
+
+		if (newFurniture.GetComponent<Rigidbody> () == null)
+			newFurniture.AddComponent<Rigidbody>();
 		
-		if (newFurniture.GetComponent<InformacoesMovel>().tipoMovel != TipoMovel.MOVEL) {
+		if (newFurniture.GetComponent<InformacoesMovel>().tipoMovel != TipoMovel.MOVEL)
+		{
 			newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | 
 												 RigidbodyConstraints.FreezeRotation;
 		} else {

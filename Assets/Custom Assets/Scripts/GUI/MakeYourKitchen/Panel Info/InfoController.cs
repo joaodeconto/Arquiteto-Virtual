@@ -192,7 +192,7 @@ public class InfoController : MonoBehaviour {
 	
 	void ReleaseCamera ()
 	{
-		Debug.LogWarning ("Was called ReleaseCamera");
+//		Debug.LogWarning ("Was called ReleaseCamera");
 		GameObject mainCamera = GameObject.FindGameObjectWithTag ("MainCamera");
 		mainCamera.GetComponent<CameraController>().freeCamera.FreeCamera ();
 	}
@@ -329,10 +329,10 @@ public class InfoController : MonoBehaviour {
 				Debug.Break ();
 				return;
 			}
-			//colocando checkbox para o lado
-			checkBox.transform.localPosition = rootColorGuiPosition + (Vector3.right * xOffset * i);
+//			//colocando checkbox para o lado
+//			checkBox.transform.localPosition = rootColorGuiPosition + (Vector3.right * xOffset * i);
 			checkBox.gameObject.SetActiveRecursively(true);
-			
+
 			if (i == selectedColorIndex) {
 				checkBox.GetComponent<UICheckbox> ().isChecked = true;
 			}				
@@ -426,7 +426,7 @@ public class InfoController : MonoBehaviour {
 				}
 			}
 		}
-		
+
 		//Religar label do tops
 		checkBoxTops.transform.Find("Label").gameObject.active = true;
 	}
@@ -498,39 +498,39 @@ public class InfoController : MonoBehaviour {
 	
 	private void ReplaceCheckBoxes ()
 	{
-		Transform checksTransform = checkBoxCores.transform.parent;
-		
-		int yOffset = -60;
-		Vector3 rootPosition = new Vector3(0,-50, 0);
-		int activeCheckGroups = 0;
-		foreach (Transform checkGroup in checksTransform)
-		{
-			if (checkGroup.gameObject.active == true)
-			{
-				checkGroup.localPosition = rootPosition + Vector3.up * yOffset * activeCheckGroups++;
-			}
-		}
-		
-		//Arrumando scala do tween do background do menu
-		Transform background = checksTransform.parent.FindChild ("_BGMobiles");
-		
-		if (background == null)
-		{
-			Debug.LogError ("O nome do background do menu de opções está com o nome errado! Nome esperado: " + "_BGMobiles");
-			Debug.Break ();
-			return;
-		}
-		
-		Debug.Log ("Para fazer o resize do background do menu opções funcionar deve-se se ter um iTweenMotion com o nome de \"descer\"");
-		
-		Vector3 backgroundScaleRoot = new Vector3(162, 70, 0);
-		foreach (iTweenMotion motion in background.gameObject.GetComponents<iTweenMotion>())
-		{
-			if (motion.Name == "descer")
-			{
-				motion.to = backgroundScaleRoot + Vector3.up * -yOffset * activeCheckGroups;
-			}
-		}
+//		Transform checksTransform = checkBoxCores.transform.parent;
+//		
+//		int yOffset = -60;
+//		Vector3 rootPosition = new Vector3(0,-50, 0);
+//		int activeCheckGroups = 0;
+//		foreach (Transform checkGroup in checksTransform)
+//		{
+//			if (checkGroup.gameObject.active == true)
+//			{
+//				checkGroup.localPosition = rootPosition + Vector3.up * yOffset * activeCheckGroups++;
+//			}
+//		}
+//		
+//		//Arrumando scala do tween do background do menu
+//		Transform background = checksTransform.parent.FindChild ("_BGMobiles");
+//		
+//		if (background == null)
+//		{
+//			Debug.LogError ("O nome do background do menu de opções está com o nome errado! Nome esperado: " + "_BGMobiles");
+//			Debug.Break ();
+//			return;
+//		}
+//		
+////		Debug.Log ("Para fazer o resize do background do menu opções funcionar deve-se se ter um iTweenMotion com o nome de \"descer\"");
+//		
+//		Vector3 backgroundScaleRoot = new Vector3(162, 70, 0);
+//		foreach (iTweenMotion motion in background.gameObject.GetComponents<iTweenMotion>())
+//		{
+//			if (motion.Name == "descer")
+//			{
+////				motion.to = backgroundScaleRoot + Vector3.up * -yOffset * activeCheckGroups;
+//			}
+//		}
 	}
 	
 	/*public void UpdateSetting () {

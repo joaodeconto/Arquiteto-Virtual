@@ -42,7 +42,9 @@ public class InfoController : MonoBehaviour {
 	
 	private GameObject mainCamera;
 	private bool panelChange = false;
-	
+
+	private float defaultBackgroundYSize;
+
 	//Painter to Extras
 	private Painter painter;
 	
@@ -82,7 +84,7 @@ public class InfoController : MonoBehaviour {
 			Debug.Break ();
 			return;
 		}
-		
+
 		painter = mainCamera.GetComponentInChildren<Painter>();
 		
 		panelInfo.SetActiveRecursively(true);

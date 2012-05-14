@@ -9711,7 +9711,7 @@ MonoBehaviour:
   m_Name: 
   Name: descer
   type: 1
-  to: {x: 162, y: 310, z: 0}
+  to: {x: 162, y: 350, z: 0}
   duration: .200000003
   CallWhenFinish: 
 --- !u!114 &1132731213

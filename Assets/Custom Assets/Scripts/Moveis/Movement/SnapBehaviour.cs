@@ -27,6 +27,7 @@ public class SnapBehaviour : MonoBehaviour
 	private Vector3 p; //Pivot value -1..1, calculated from Mesh bounds
 	private Vector3 last_p; //Last used pivot
 	private int scenarioLayer;
+	private Transform tmpPivot;
 	#region Unity Methods
 
 	public static void ActivateAll ()
@@ -62,6 +63,17 @@ public class SnapBehaviour : MonoBehaviour
 		rigidbody.angularDrag = 100.0f;
 		rigidbody.freezeRotation = true;
 		scenarioLayer = 1 << LayerMask.NameToLayer ("Cenario");
+		mainCamera = GameObject.FindWithTag ("MainCamera").camera;
+
+		if (GameObject.Find ("tmpPivot") == null)
+		{
+			tmpPivot = new GameObject ("tmpPivot").transform;
+			tmpPivot.parent = GameObject.Find ("Moveis GO").transform;
+		}
+		else
+		{
+			tmpPivot = GameObject.Find ("tmpPivot").transform;
+		}
 	}
 
 	#endregion
@@ -121,6 +133,32 @@ public class SnapBehaviour : MonoBehaviour
 		}
 	}
 	#endif
+	Vector3 lololPos;
+	void OnCollisionEnter (Collision collision)
+	{
+		if (tmpPivot && isSelected && collision.transform.tag != "Movel")
+		{
+			transform.parent = tmpPivot.parent;
+//			tmpPivot.DetachChildren ();
+//			lololPos =
+			tmpPivot.position = collision.contacts [0].point;
+			tmpPivot.position -= Vector3.up * tmpPivot.position.y;
+//			if ()
+//			transform.rotation = collision.transform.rotation;
+//			transform.position -= (transform.forward * collider.bounds.size.z ) / 1.8f;
+							     // (transform.right * collider.bounds.size.x) 	/ 2.0f;
+			transform.parent  = tmpPivot;
+//			tmpPivot = null;
+//			Invoke ("test",0.1f);
+		}
+	}
+
+	void test ()
+	{
+		tmpPivot = GameObject.Find ("tmpPivot").transform;
+		tmpPivot.position = lololPos;
+		transform.parent  = tmpPivot;
+	}
 
 	void SelectObject ()
 	{
@@ -141,6 +179,29 @@ public class SnapBehaviour : MonoBehaviour
 		if (activeFurniture != null)
 			activeFurniture.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
 
+		mousePosition = Input.mousePosition;
+
+		Ray ray = mainCamera.ScreenPointToRay (mousePosition);
+
+		if (Physics.Raycast (ray, out hit, Mathf.Infinity, scenarioLayer)) {
+
+			transform.parent = tmpPivot.parent;
+//			tmpPivot.DetachChildren ();
+
+			if (GetComponent<InformacoesMovel> ().tipoMovel != TipoMovel.MOVEL) {
+				tmpPivot.position = (hit.point.x * transform.parent.right) +
+									(hit.point.z * transform.parent.forward);
+			}
+			else
+			{
+				tmpPivot.position = (hit.point.x * transform.parent.right) +
+									(hit.point.y * transform.parent.up) +
+									(hit.point.z * transform.parent.forward);
+			}
+
+			transform.parent = tmpPivot;
+		}
+
 		/*Bounds b = GetComponentInChildren<MeshFilter>().mesh.bounds;
         Vector3 offset = -1 * b.center;
         p = last_p = new Vector3(offset.x / b.extents.x, offset.y / b.extents.y, offset.z / b.extents.z);
@@ -153,11 +214,8 @@ public class SnapBehaviour : MonoBehaviour
 
 	void DragObject ()
 	{
-
-		if (!isSelected || !enabled || !enableDrag)
+		if (!isSelected || !enabled || !enableDrag || tmpPivot == null)
 			return;
-
-		mainCamera = GameObject.FindWithTag ("MainCamera").camera;
 
 		mousePosition = Input.mousePosition;
 		//mousePosition.x += Screen.width  * 0.0050f;
@@ -172,19 +230,20 @@ public class SnapBehaviour : MonoBehaviour
 
 			if (hit.transform.tag == "Parede" ||
 			    hit.transform.tag == "Chao" ||
-				hit.transform.tag == "Teto") {
+				hit.transform.tag == "Teto")
+				{
 
 				/*if( p != last_p) { 
 					//Detects user input on any of the three sliders
 	               	UpdatePivot(transform.GetComponentInChildren<MeshFilter>());
             	}*/
 				if (GetComponent<InformacoesMovel> ().tipoMovel != TipoMovel.MOVEL) {
-					transform.position = (hit.point.x * transform.parent.right) + 
-										 (hit.point.z * transform.parent.forward);
+					tmpPivot.position = (hit.point.x * transform.parent.right) +
+										(hit.point.z * transform.parent.forward);
 				} else {
-					transform.position = (hit.point.x * transform.parent.right) + 
-										 (hit.point.y * transform.parent.up) + 
-										 (hit.point.z * transform.parent.forward);
+					tmpPivot.position = (hit.point.x * transform.parent.right) +
+										(hit.point.y * transform.parent.up) +
+										(hit.point.z * transform.parent.forward);
 				}
 			}
 
@@ -235,6 +294,9 @@ public class SnapBehaviour : MonoBehaviour
 		*/
 		//need to refresh wasDragged 
 		wasDragged = false;
+
+			transform.parent = tmpPivot.parent;
+//		tmpPivot.DetachChildren ();
 
 		Invoke ("VerifyGround", 0.2f);
 	}

@@ -13,6 +13,10 @@ public class CheckBoxTopHandler : MonoBehaviour {
 		infoController = GameObject.FindWithTag("GameController").GetComponentInChildren<InfoController>();
 		thisCheckbox = GetComponent<UICheckbox>();
 		cCamera = GameObject.FindWithTag("MainCamera");
+
+		TooltipHandler tipHandler = gameObject.AddComponent<TooltipHandler> ();
+		tipHandler.gameObject = this.gameObject;
+		tipHandler.SetTooltip (I18n.t (gameObject.name.ToLower ()));
 	}
 	
 	void OnClick ()

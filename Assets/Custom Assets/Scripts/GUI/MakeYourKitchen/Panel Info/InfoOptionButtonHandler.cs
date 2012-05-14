@@ -44,7 +44,7 @@ public class InfoOptionButtonHandler : MonoBehaviour {
 			{
 				if (checkGroup.gameObject.active == true)
 				{
-					checkGroup.localPosition = rootPosition + Vector3.up * yOffset * activeCheckGroups++;
+					//checkGroup.localPosition = rootPosition + Vector3.up * yOffset * activeCheckGroups++;
 				}
 			}
 			
@@ -53,7 +53,7 @@ public class InfoOptionButtonHandler : MonoBehaviour {
 			{
 				if (motion.Name == "descer")
 				{
-					motion.to = backgroundScaleRoot + Vector3.up * -yOffset * activeCheckGroups;
+					//motion.to = backgroundScaleRoot + Vector3.up * -yOffset * activeCheckGroups;
 					motion.Play(true);
 				}
 			}

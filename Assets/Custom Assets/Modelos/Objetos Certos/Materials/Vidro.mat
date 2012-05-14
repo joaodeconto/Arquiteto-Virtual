@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Vidro
-  m_Shader: {fileID: 4800000, guid: 0e75855bb22c0b14dbbf6e86b518a508, type: 1}
+  m_Shader: {fileID: 4800000, guid: a2a5a18e214b62a4fae2d6d5630136fe, type: 1}
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:

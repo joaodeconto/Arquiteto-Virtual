@@ -43,14 +43,14 @@ MonoBehaviour:
   - name: 81129A
     outer:
       serializedVersion: 2
-      x: 1466
-      y: 1657
+      x: 1130
+      y: 1729
       width: 113
       height: 68
     inner:
       serializedVersion: 2
-      x: 1466
-      y: 1657
+      x: 1130
+      y: 1729
       width: 113
       height: 68
     paddingLeft: .0707964599
@@ -60,14 +60,14 @@ MonoBehaviour:
   - name: 82005A
     outer:
       serializedVersion: 2
-      x: 1661
-      y: 1281
+      x: 605
+      y: 167
       width: 51
       height: 81
     inner:
       serializedVersion: 2
-      x: 1661
-      y: 1281
+      x: 605
+      y: 167
       width: 51
       height: 81
     paddingLeft: .745098054
@@ -77,14 +77,14 @@ MonoBehaviour:
   - name: 82242A
     outer:
       serializedVersion: 2
-      x: 1937
-      y: 1745
+      x: 770
+      y: 1642
       width: 96
       height: 82
     inner:
       serializedVersion: 2
-      x: 1937
-      y: 1745
+      x: 770
+      y: 1642
       width: 96
       height: 82
     paddingLeft: .239583328
@@ -94,14 +94,14 @@ MonoBehaviour:
   - name: 82240A
     outer:
       serializedVersion: 2
-      x: 1840
-      y: 1745
+      x: 964
+      y: 1642
       width: 96
       height: 82
     inner:
       serializedVersion: 2
-      x: 1840
-      y: 1745
+      x: 964
+      y: 1642
       width: 96
       height: 82
     paddingLeft: .239583328
@@ -111,14 +111,14 @@ MonoBehaviour:
   - name: 81144A
     outer:
       serializedVersion: 2
-      x: 105
-      y: 2
+      x: 1888
+      y: 1578
       width: 110
       height: 62
     inner:
       serializedVersion: 2
-      x: 105
-      y: 2
+      x: 1888
+      y: 1578
       width: 110
       height: 62
     paddingLeft: .0909090936
@@ -128,14 +128,14 @@ MonoBehaviour:
   - name: 82238A
     outer:
       serializedVersion: 2
-      x: 1743
-      y: 1745
+      x: 673
+      y: 1642
       width: 96
       height: 82
     inner:
       serializedVersion: 2
-      x: 1743
-      y: 1745
+      x: 673
+      y: 1642
       width: 96
       height: 82
     paddingLeft: .239583328
@@ -145,14 +145,14 @@ MonoBehaviour:
   - name: 81092A
     outer:
       serializedVersion: 2
-      x: 1486
-      y: 1448
+      x: 605
+      y: 1368
       width: 86
       height: 69
     inner:
       serializedVersion: 2
-      x: 1486
-      y: 1448
+      x: 605
+      y: 1368
       width: 86
       height: 69
     paddingLeft: .244186044
@@ -162,14 +162,14 @@ MonoBehaviour:
   - name: 81050A e 81051A
     outer:
       serializedVersion: 2
-      x: 734
-      y: 137
+      x: 1428
+      y: 1368
       width: 52
       height: 69
     inner:
       serializedVersion: 2
-      x: 734
-      y: 137
+      x: 1428
+      y: 1368
       width: 52
       height: 69
     paddingLeft: .673076928
@@ -179,14 +179,14 @@ MonoBehaviour:
   - name: 81142A
     outer:
       serializedVersion: 2
-      x: 1612
-      y: 1539
+      x: 1346
+      y: 1572
       width: 110
       height: 68
     inner:
       serializedVersion: 2
-      x: 1612
-      y: 1539
+      x: 1346
+      y: 1572
       width: 110
       height: 68
     paddingLeft: .100000001
@@ -196,14 +196,14 @@ MonoBehaviour:
   - name: 82211A
     outer:
       serializedVersion: 2
-      x: 1163
-      y: 1366
+      x: 1518
+      y: 1474
       width: 76
       height: 81
     inner:
       serializedVersion: 2
-      x: 1163
-      y: 1366
+      x: 1518
+      y: 1474
       width: 76
       height: 81
     paddingLeft: .328947365
@@ -213,13 +213,13 @@ MonoBehaviour:
   - name: 82094A
     outer:
       serializedVersion: 2
-      x: 1129
+      x: 1050
       y: 1837
       width: 112
       height: 82
     inner:
       serializedVersion: 2
-      x: 1129
+      x: 1050
       y: 1837
       width: 112
       height: 82
@@ -230,14 +230,14 @@ MonoBehaviour:
   - name: 82028A e 82029A
     outer:
       serializedVersion: 2
-      x: 1609
-      y: 1281
+      x: 605
+      y: 249
       width: 51
       height: 81
     inner:
       serializedVersion: 2
-      x: 1609
-      y: 1281
+      x: 605
+      y: 249
       width: 51
       height: 81
     paddingLeft: .745098054
@@ -247,14 +247,14 @@ MonoBehaviour:
   - name: 82244A
     outer:
       serializedVersion: 2
-      x: 1266
-      y: 1744
+      x: 576
+      y: 1641
       width: 96
       height: 83
     inner:
       serializedVersion: 2
-      x: 1266
-      y: 1744
+      x: 576
+      y: 1641
       width: 96
       height: 83
     paddingLeft: .229166672
@@ -264,14 +264,14 @@ MonoBehaviour:
   - name: 82069A
     outer:
       serializedVersion: 2
-      x: 830
-      y: 1365
+      x: 1185
+      y: 1473
       width: 77
       height: 82
     inner:
       serializedVersion: 2
-      x: 830
-      y: 1365
+      x: 1185
+      y: 1473
       width: 77
       height: 82
     paddingLeft: .298701286
@@ -281,14 +281,14 @@ MonoBehaviour:
   - name: 81130A
     outer:
       serializedVersion: 2
-      x: 1723
-      y: 1539
+      x: 1235
+      y: 1572
       width: 110
       height: 68
     inner:
       serializedVersion: 2
-      x: 1723
-      y: 1539
+      x: 1235
+      y: 1572
       width: 110
       height: 68
     paddingLeft: .0818181783
@@ -298,14 +298,14 @@ MonoBehaviour:
   - name: 82253A
     outer:
       serializedVersion: 2
-      x: 1053
-      y: 1744
+      x: 478
+      y: 1641
       width: 97
       height: 83
     inner:
       serializedVersion: 2
-      x: 1053
-      y: 1744
+      x: 478
+      y: 1641
       width: 97
       height: 83
     paddingLeft: .226804122
@@ -315,14 +315,14 @@ MonoBehaviour:
   - name: 81143A
     outer:
       serializedVersion: 2
-      x: 1059
-      y: 1455
+      x: 1777
+      y: 1578
       width: 110
       height: 62
     inner:
       serializedVersion: 2
-      x: 1059
-      y: 1455
+      x: 1777
+      y: 1578
       width: 110
       height: 62
     paddingLeft: .0909090936
@@ -332,14 +332,14 @@ MonoBehaviour:
   - name: 82093A
     outer:
       serializedVersion: 2
-      x: 593
-      y: 1643
+      x: 867
+      y: 1642
       width: 96
       height: 82
     inner:
       serializedVersion: 2
-      x: 593
-      y: 1643
+      x: 867
+      y: 1642
       width: 96
       height: 82
     paddingLeft: .239583328
@@ -349,14 +349,14 @@ MonoBehaviour:
   - name: 82160A
     outer:
       serializedVersion: 2
-      x: 997
-      y: 1376
+      x: 1352
+      y: 1484
       width: 87
       height: 71
     inner:
       serializedVersion: 2
-      x: 997
-      y: 1376
+      x: 1352
+      y: 1484
       width: 87
       height: 71
     paddingLeft: .264367819
@@ -366,14 +366,14 @@ MonoBehaviour:
   - name: 87093A
     outer:
       serializedVersion: 2
-      x: 620
-      y: 858
+      x: 550
+      y: 1077
       width: 53
       height: 116
     inner:
       serializedVersion: 2
-      x: 620
-      y: 858
+      x: 550
+      y: 1077
       width: 53
       height: 116
     paddingLeft: .264150947
@@ -383,14 +383,14 @@ MonoBehaviour:
   - name: 87085A
     outer:
       serializedVersion: 2
-      x: 517
-      y: 929
+      x: 462
+      y: 916
       width: 54
       height: 125
     inner:
       serializedVersion: 2
-      x: 517
-      y: 929
+      x: 462
+      y: 916
       width: 54
       height: 125
     paddingLeft: .259259254
@@ -400,14 +400,14 @@ MonoBehaviour:
   - name: 88140A
     outer:
       serializedVersion: 2
-      x: 228
-      y: 831
+      x: 227
+      y: 801
       width: 72
       height: 124
     inner:
       serializedVersion: 2
-      x: 228
-      y: 831
+      x: 227
+      y: 801
       width: 72
       height: 124
     paddingLeft: .0416666679
@@ -417,14 +417,14 @@ MonoBehaviour:
   - name: 88137A
     outer:
       serializedVersion: 2
-      x: 228
-      y: 581
+      x: 227
+      y: 551
       width: 72
       height: 124
     inner:
       serializedVersion: 2
-      x: 228
-      y: 581
+      x: 227
+      y: 551
       width: 72
       height: 124
     paddingLeft: .055555556
@@ -434,14 +434,14 @@ MonoBehaviour:
   - name: 88051A
     outer:
       serializedVersion: 2
-      x: 228
-      y: 1203
+      x: 227
+      y: 1298
       width: 73
       height: 124
     inner:
       serializedVersion: 2
-      x: 228
-      y: 1203
+      x: 227
+      y: 1298
       width: 73
       height: 124
     paddingLeft: .0410958901
@@ -451,14 +451,14 @@ MonoBehaviour:
   - name: 88029A
     outer:
       serializedVersion: 2
-      x: 447
-      y: 622
+      x: 376
+      y: 549
       width: 57
       height: 124
     inner:
       serializedVersion: 2
-      x: 447
-      y: 622
+      x: 376
+      y: 549
       width: 57
       height: 124
     paddingLeft: .157894731
@@ -468,14 +468,14 @@ MonoBehaviour:
   - name: 88056A
     outer:
       serializedVersion: 2
-      x: 447
-      y: 747
+      x: 376
+      y: 424
       width: 57
       height: 124
     inner:
       serializedVersion: 2
-      x: 447
-      y: 747
+      x: 376
+      y: 424
       width: 57
       height: 124
     paddingLeft: .157894731
@@ -485,14 +485,14 @@ MonoBehaviour:
   - name: 87089A
     outer:
       serializedVersion: 2
-      x: 517
-      y: 1055
+      x: 462
+      y: 790
       width: 54
       height: 125
     inner:
       serializedVersion: 2
-      x: 517
-      y: 1055
+      x: 462
+      y: 790
       width: 54
       height: 125
     paddingLeft: .259259254
@@ -502,14 +502,14 @@ MonoBehaviour:
   - name: 88059A
     outer:
       serializedVersion: 2
-      x: 228
-      y: 1453
+      x: 227
+      y: 1173
       width: 73
       height: 124
     inner:
       serializedVersion: 2
-      x: 228
-      y: 1453
+      x: 227
+      y: 1173
       width: 73
       height: 124
     paddingLeft: .0410958901
@@ -519,14 +519,14 @@ MonoBehaviour:
   - name: 87039A e 87040A
     outer:
       serializedVersion: 2
-      x: 676
-      y: 10
+      x: 605
+      y: 720
       width: 34
       height: 125
     inner:
       serializedVersion: 2
-      x: 676
-      y: 10
+      x: 605
+      y: 720
       width: 34
       height: 125
     paddingLeft: .647058845
@@ -536,14 +536,14 @@ MonoBehaviour:
   - name: 88030A
     outer:
       serializedVersion: 2
-      x: 447
-      y: 872
+      x: 376
+      y: 924
       width: 57
       height: 124
     inner:
       serializedVersion: 2
-      x: 447
-      y: 872
+      x: 376
+      y: 924
       width: 57
       height: 124
     paddingLeft: .157894731
@@ -553,14 +553,14 @@ MonoBehaviour:
   - name: 88052A
     outer:
       serializedVersion: 2
-      x: 228
-      y: 1328
+      x: 227
+      y: 1423
       width: 73
       height: 124
     inner:
       serializedVersion: 2
-      x: 228
-      y: 1328
+      x: 227
+      y: 1423
       width: 73
       height: 124
     paddingLeft: .0410958901
@@ -570,14 +570,14 @@ MonoBehaviour:
   - name: 87037A e 87038A
     outer:
       serializedVersion: 2
-      x: 676
-      y: 259
+      x: 605
+      y: 969
       width: 35
       height: 126
     inner:
       serializedVersion: 2
-      x: 676
-      y: 259
+      x: 605
+      y: 969
       width: 35
       height: 126
     paddingLeft: .600000024
@@ -587,14 +587,14 @@ MonoBehaviour:
   - name: 88055A
     outer:
       serializedVersion: 2
-      x: 378
-      y: 244
+      x: 376
+      y: 674
       width: 57
       height: 124
     inner:
       serializedVersion: 2
-      x: 378
-      y: 244
+      x: 376
+      y: 674
       width: 57
       height: 124
     paddingLeft: .157894731
@@ -604,14 +604,14 @@ MonoBehaviour:
   - name: 88060A
     outer:
       serializedVersion: 2
-      x: 228
-      y: 1578
+      x: 227
+      y: 1548
       width: 73
       height: 124
     inner:
       serializedVersion: 2
-      x: 228
-      y: 1578
+      x: 227
+      y: 1548
       width: 73
       height: 124
     paddingLeft: .0410958901
@@ -621,14 +621,14 @@ MonoBehaviour:
   - name: 87007A e 87008A
     outer:
       serializedVersion: 2
-      x: 734
-      y: 607
+      x: 517
+      y: 797
       width: 32
       height: 118
     inner:
       serializedVersion: 2
-      x: 734
-      y: 607
+      x: 517
+      y: 797
       width: 32
       height: 118
     paddingLeft: .65625
@@ -638,14 +638,14 @@ MonoBehaviour:
   - name: 87086A
     outer:
       serializedVersion: 2
-      x: 620
-      y: 1092
+      x: 550
+      y: 1314
       width: 54
       height: 119
     inner:
       serializedVersion: 2
-      x: 620
-      y: 1092
+      x: 550
+      y: 1314
       width: 54
       height: 119
     paddingLeft: .240740746
@@ -655,14 +655,14 @@ MonoBehaviour:
   - name: 87090A
     outer:
       serializedVersion: 2
-      x: 620
-      y: 739
+      x: 550
+      y: 958
       width: 52
       height: 118
     inner:
       serializedVersion: 2
-      x: 620
-      y: 739
+      x: 550
+      y: 958
       width: 52
       height: 118
     paddingLeft: .25
@@ -672,14 +672,14 @@ MonoBehaviour:
   - name: 87025A e 87026A
     outer:
       serializedVersion: 2
-      x: 734
-      y: 489
+      x: 516
+      y: 672
       width: 32
       height: 117
     inner:
       serializedVersion: 2
-      x: 734
-      y: 489
+      x: 516
+      y: 672
       width: 32
       height: 117
     paddingLeft: .6875
@@ -706,14 +706,14 @@ MonoBehaviour:
   - name: 88024A
     outer:
       serializedVersion: 2
-      x: 447
-      y: 253
+      x: 376
+      y: 300
       width: 57
       height: 123
     inner:
       serializedVersion: 2
-      x: 447
-      y: 253
+      x: 376
+      y: 300
       width: 57
       height: 123
     paddingLeft: .210526317
@@ -723,14 +723,14 @@ MonoBehaviour:
   - name: 88141A
     outer:
       serializedVersion: 2
-      x: 228
-      y: 458
+      x: 227
+      y: 428
       width: 73
       height: 122
     inner:
       serializedVersion: 2
-      x: 228
-      y: 458
+      x: 227
+      y: 428
       width: 73
       height: 122
     paddingLeft: .0273972601
@@ -740,14 +740,14 @@ MonoBehaviour:
   - name: 88023A
     outer:
       serializedVersion: 2
-      x: 378
-      y: 119
+      x: 376
+      y: 799
       width: 57
       height: 124
     inner:
       serializedVersion: 2
-      x: 378
-      y: 119
+      x: 376
+      y: 799
       width: 57
       height: 124
     paddingLeft: .175438598
@@ -757,14 +757,14 @@ MonoBehaviour:
   - name: 88080A
     outer:
       serializedVersion: 2
-      x: 517
-      y: 1181
+      x: 462
+      y: 1042
       width: 56
       height: 122
     inner:
       serializedVersion: 2
-      x: 517
-      y: 1181
+      x: 462
+      y: 1042
       width: 56
       height: 122
     paddingLeft: .232142851
@@ -774,14 +774,14 @@ MonoBehaviour:
   - name: 82246A
     outer:
       serializedVersion: 2
-      x: 931
-      y: 1527
+      x: 1735
+      y: 1644
       width: 95
       height: 80
     inner:
       serializedVersion: 2
-      x: 931
-      y: 1527
+      x: 1735
+      y: 1644
       width: 95
       height: 80
     paddingLeft: .200000003
@@ -791,14 +791,14 @@ MonoBehaviour:
   - name: 82248A
     outer:
       serializedVersion: 2
-      x: 1677
-      y: 1645
+      x: 1444
+      y: 1644
       width: 96
       height: 80
     inner:
       serializedVersion: 2
-      x: 1677
-      y: 1645
+      x: 1444
+      y: 1644
       width: 96
       height: 80
     paddingLeft: .208333328
@@ -808,14 +808,14 @@ MonoBehaviour:
   - name: 88064A
     outer:
       serializedVersion: 2
-      x: 228
-      y: 335
+      x: 227
+      y: 305
       width: 73
       height: 122
     inner:
       serializedVersion: 2
-      x: 228
-      y: 335
+      x: 227
+      y: 305
       width: 73
       height: 122
     paddingLeft: .0273972601
@@ -825,14 +825,14 @@ MonoBehaviour:
   - name: 82009A
     outer:
       serializedVersion: 2
-      x: 1896
-      y: 1283
+      x: 605
+      y: 5
       width: 50
       height: 79
     inner:
       serializedVersion: 2
-      x: 1896
-      y: 1283
+      x: 605
+      y: 5
       width: 50
       height: 79
     paddingLeft: .699999988
@@ -842,14 +842,14 @@ MonoBehaviour:
   - name: 82064A
     outer:
       serializedVersion: 2
-      x: 1328
-      y: 1367
+      x: 1758
+      y: 1475
       width: 76
       height: 80
     inner:
       serializedVersion: 2
-      x: 1328
-      y: 1367
+      x: 1758
+      y: 1475
       width: 76
       height: 80
     paddingLeft: .328947365
@@ -859,14 +859,14 @@ MonoBehaviour:
   - name: 82254A
     outer:
       serializedVersion: 2
-      x: 1774
-      y: 1645
+      x: 1638
+      y: 1644
       width: 96
       height: 80
     inner:
       serializedVersion: 2
-      x: 1774
-      y: 1645
+      x: 1638
+      y: 1644
       width: 96
       height: 80
     paddingLeft: .229166672
@@ -876,14 +876,14 @@ MonoBehaviour:
   - name: 82002A
     outer:
       serializedVersion: 2
-      x: 1947
-      y: 1283
+      x: 665
+      y: 1208
       width: 49
       height: 79
     inner:
       serializedVersion: 2
-      x: 1947
-      y: 1283
+      x: 665
+      y: 1208
       width: 49
       height: 79
     paddingLeft: .734693885
@@ -893,13 +893,13 @@ MonoBehaviour:
   - name: 82096A
     outer:
       serializedVersion: 2
-      x: 1242
+      x: 1163
       y: 1838
       width: 112
       height: 81
     inner:
       serializedVersion: 2
-      x: 1242
+      x: 1163
       y: 1838
       width: 112
       height: 81
@@ -910,14 +910,14 @@ MonoBehaviour:
   - name: 82226A
     outer:
       serializedVersion: 2
-      x: 690
-      y: 1644
+      x: 1061
+      y: 1643
       width: 97
       height: 81
     inner:
       serializedVersion: 2
-      x: 690
-      y: 1644
+      x: 1061
+      y: 1643
       width: 97
       height: 81
     paddingLeft: .206185564
@@ -927,14 +927,14 @@ MonoBehaviour:
   - name: 82228A
     outer:
       serializedVersion: 2
-      x: 1580
-      y: 1645
+      x: 1347
+      y: 1644
       width: 96
       height: 80
     inner:
       serializedVersion: 2
-      x: 1580
-      y: 1645
+      x: 1347
+      y: 1644
       width: 96
       height: 80
     paddingLeft: .208333328
@@ -944,14 +944,14 @@ MonoBehaviour:
   - name: 88083A
     outer:
       serializedVersion: 2
-      x: 228
-      y: 1703
+      x: 227
+      y: 1673
       width: 74
       height: 124
     inner:
       serializedVersion: 2
-      x: 228
-      y: 1703
+      x: 227
+      y: 1673
       width: 74
       height: 124
     paddingLeft: .0270270277
@@ -961,14 +961,14 @@ MonoBehaviour:
   - name: 82204A
     outer:
       serializedVersion: 2
-      x: 1085
-      y: 1367
+      x: 1440
+      y: 1475
       width: 77
       height: 80
     inner:
       serializedVersion: 2
-      x: 1085
-      y: 1367
+      x: 1440
+      y: 1475
       width: 77
       height: 80
     paddingLeft: .311688304
@@ -978,14 +978,14 @@ MonoBehaviour:
   - name: 82084A
     outer:
       serializedVersion: 2
-      x: 1871
-      y: 1645
+      x: 1541
+      y: 1644
       width: 96
       height: 80
     inner:
       serializedVersion: 2
-      x: 1871
-      y: 1645
+      x: 1541
+      y: 1644
       width: 96
       height: 80
     paddingLeft: .208333328
@@ -995,14 +995,14 @@ MonoBehaviour:
   - name: 88079A
     outer:
       serializedVersion: 2
-      x: 447
-      y: 497
+      x: 376
+      y: 1049
       width: 57
       height: 124
     inner:
       serializedVersion: 2
-      x: 447
-      y: 497
+      x: 376
+      y: 1049
       width: 57
       height: 124
     paddingLeft: .19298245
@@ -1012,14 +1012,14 @@ MonoBehaviour:
   - name: 82043A e 82044A
     outer:
       serializedVersion: 2
-      x: 1845
-      y: 1283
+      x: 665
+      y: 1288
       width: 50
       height: 79
     inner:
       serializedVersion: 2
-      x: 1845
-      y: 1283
+      x: 665
+      y: 1288
       width: 50
       height: 79
     paddingLeft: .699999988
@@ -1029,14 +1029,14 @@ MonoBehaviour:
   - name: 81133A
     outer:
       serializedVersion: 2
-      x: 788
-      y: 1659
+      x: 1010
+      y: 1731
       width: 119
       height: 66
     inner:
       serializedVersion: 2
-      x: 788
-      y: 1659
+      x: 1010
+      y: 1731
       width: 119
       height: 66
     paddingLeft: .0504201688
@@ -1046,14 +1046,14 @@ MonoBehaviour:
   - name: 81136A
     outer:
       serializedVersion: 2
-      x: 732
-      y: 1453
+      x: 1457
+      y: 1576
       width: 114
       height: 64
     inner:
       serializedVersion: 2
-      x: 732
-      y: 1453
+      x: 1457
+      y: 1576
       width: 114
       height: 64
     paddingLeft: .0789473653
@@ -1063,14 +1063,14 @@ MonoBehaviour:
   - name: 81123A
     outer:
       serializedVersion: 2
-      x: 794
-      y: 1310
+      x: 1058
+      y: 1385
       width: 87
       height: 52
     inner:
       serializedVersion: 2
-      x: 794
-      y: 1310
+      x: 1058
+      y: 1385
       width: 87
       height: 52
     paddingLeft: .241379306
@@ -1080,14 +1080,14 @@ MonoBehaviour:
   - name: 81084A
     outer:
       serializedVersion: 2
-      x: 1240
-      y: 1377
+      x: 1670
+      y: 1485
       width: 87
       height: 70
     inner:
       serializedVersion: 2
-      x: 1240
-      y: 1377
+      x: 1670
+      y: 1485
       width: 87
       height: 70
     paddingLeft: .264367819
@@ -1097,14 +1097,14 @@ MonoBehaviour:
   - name: 81085A
     outer:
       serializedVersion: 2
-      x: 908
-      y: 1376
+      x: 1263
+      y: 1484
       width: 88
       height: 71
     inner:
       serializedVersion: 2
-      x: 908
-      y: 1376
+      x: 1263
+      y: 1484
       width: 88
       height: 71
     paddingLeft: .25
@@ -1114,14 +1114,14 @@ MonoBehaviour:
   - name: 81063A e 81064A
     outer:
       serializedVersion: 2
-      x: 734
-      y: 347
+      x: 878
+      y: 1297
       width: 53
       height: 70
     inner:
       serializedVersion: 2
-      x: 734
-      y: 347
+      x: 878
+      y: 1297
       width: 53
       height: 70
     paddingLeft: .754716992
@@ -1131,14 +1131,14 @@ MonoBehaviour:
   - name: 81045A e 81046A
     outer:
       serializedVersion: 2
-      x: 734
-      y: 418
+      x: 824
+      y: 1297
       width: 53
       height: 70
     inner:
       serializedVersion: 2
-      x: 734
-      y: 418
+      x: 824
+      y: 1297
       width: 53
       height: 70
     paddingLeft: .716981113
@@ -1148,14 +1148,14 @@ MonoBehaviour:
   - name: 81105A
     outer:
       serializedVersion: 2
-      x: 1151
-      y: 1757
+      x: 895
+      y: 1727
       width: 114
       height: 70
     inner:
       serializedVersion: 2
-      x: 1151
-      y: 1757
+      x: 895
+      y: 1727
       width: 114
       height: 70
     paddingLeft: .0526315793
@@ -1165,14 +1165,14 @@ MonoBehaviour:
   - name: 81107A
     outer:
       serializedVersion: 2
-      x: 850
-      y: 1757
+      x: 778
+      y: 1727
       width: 116
       height: 70
     inner:
       serializedVersion: 2
-      x: 850
-      y: 1757
+      x: 778
+      y: 1727
       width: 116
       height: 70
     paddingLeft: .0517241396
@@ -1182,14 +1182,14 @@ MonoBehaviour:
   - name: 81106A
     outer:
       serializedVersion: 2
-      x: 732
-      y: 1757
+      x: 660
+      y: 1727
       width: 117
       height: 70
     inner:
       serializedVersion: 2
-      x: 732
-      y: 1757
+      x: 660
+      y: 1727
       width: 117
       height: 70
     paddingLeft: .0427350439
@@ -1199,14 +1199,14 @@ MonoBehaviour:
   - name: 87094A
     outer:
       serializedVersion: 2
-      x: 620
-      y: 628
+      x: 550
+      y: 728
       width: 53
       height: 110
     inner:
       serializedVersion: 2
-      x: 620
-      y: 628
+      x: 550
+      y: 728
       width: 53
       height: 110
     paddingLeft: .226415098
@@ -1216,14 +1216,14 @@ MonoBehaviour:
   - name: 88084A
     outer:
       serializedVersion: 2
-      x: 228
-      y: 1080
+      x: 227
+      y: 1050
       width: 74
       height: 122
     inner:
       serializedVersion: 2
-      x: 228
-      y: 1080
+      x: 227
+      y: 1050
       width: 74
       height: 122
     paddingLeft: .0135135138
@@ -1233,14 +1233,14 @@ MonoBehaviour:
   - name: 88142A
     outer:
       serializedVersion: 2
-      x: 228
-      y: 956
+      x: 227
+      y: 926
       width: 73
       height: 123
     inner:
       serializedVersion: 2
-      x: 228
-      y: 956
+      x: 227
+      y: 926
       width: 73
       height: 123
     paddingLeft: .01369863
@@ -1250,14 +1250,14 @@ MonoBehaviour:
   - name: 82148A
     outer:
       serializedVersion: 2
-      x: 630
-      y: 1744
+      x: 376
+      y: 1641
       width: 101
       height: 83
     inner:
       serializedVersion: 2
-      x: 630
-      y: 1744
+      x: 376
+      y: 1641
       width: 101
       height: 83
     paddingLeft: .168316826
@@ -1267,14 +1267,14 @@ MonoBehaviour:
   - name: 81077
     outer:
       serializedVersion: 2
-      x: 1834
-      y: 1539
+      x: 1124
+      y: 1572
       width: 110
       height: 68
     inner:
       serializedVersion: 2
-      x: 1834
-      y: 1539
+      x: 1124
+      y: 1572
       width: 110
       height: 68
     paddingLeft: .0727272704
@@ -1284,14 +1284,14 @@ MonoBehaviour:
   - name: 81076
     outer:
       serializedVersion: 2
-      x: 1573
-      y: 1448
+      x: 692
+      y: 1368
       width: 86
       height: 69
     inner:
       serializedVersion: 2
-      x: 1573
-      y: 1448
+      x: 692
+      y: 1368
       width: 86
       height: 69
     paddingLeft: .255813956
@@ -1301,14 +1301,14 @@ MonoBehaviour:
   - name: 88147
     outer:
       serializedVersion: 2
-      x: 303
-      y: 747
+      x: 302
+      y: 1371
       width: 73
       height: 117
     inner:
       serializedVersion: 2
-      x: 303
-      y: 747
+      x: 302
+      y: 1371
       width: 73
       height: 117
     paddingLeft: .0547945201
@@ -1318,14 +1318,14 @@ MonoBehaviour:
   - name: 88146
     outer:
       serializedVersion: 2
-      x: 303
-      y: 1608
+      x: 1621
+      y: 1802
       width: 74
       height: 117
     inner:
       serializedVersion: 2
-      x: 303
-      y: 1608
+      x: 1621
+      y: 1802
       width: 74
       height: 117
     paddingLeft: .0135135138
@@ -1335,14 +1335,14 @@ MonoBehaviour:
   - name: 82288
     outer:
       serializedVersion: 2
-      x: 1458
-      y: 1743
+      x: 557
+      y: 1556
       width: 94
       height: 84
     inner:
       serializedVersion: 2
-      x: 1458
-      y: 1743
+      x: 557
+      y: 1556
       width: 94
       height: 84
     paddingLeft: .202127665
@@ -1352,14 +1352,14 @@ MonoBehaviour:
   - name: 82286
     outer:
       serializedVersion: 2
-      x: 1648
-      y: 1743
+      x: 747
+      y: 1556
       width: 94
       height: 84
     inner:
       serializedVersion: 2
-      x: 1648
-      y: 1743
+      x: 747
+      y: 1556
       width: 94
       height: 84
     paddingLeft: .202127665
@@ -1369,14 +1369,14 @@ MonoBehaviour:
   - name: 82287
     outer:
       serializedVersion: 2
-      x: 1363
-      y: 1743
+      x: 462
+      y: 1556
       width: 94
       height: 84
     inner:
       serializedVersion: 2
-      x: 1363
-      y: 1743
+      x: 462
+      y: 1556
       width: 94
       height: 84
     paddingLeft: .202127665
@@ -1386,14 +1386,14 @@ MonoBehaviour:
   - name: 82285
     outer:
       serializedVersion: 2
-      x: 1002
-      y: 1641
+      x: 936
+      y: 1556
       width: 93
       height: 84
     inner:
       serializedVersion: 2
-      x: 1002
-      y: 1641
+      x: 936
+      y: 1556
       width: 93
       height: 84
     paddingLeft: .204301074
@@ -1403,14 +1403,14 @@ MonoBehaviour:
   - name: 82282
     outer:
       serializedVersion: 2
-      x: 908
-      y: 1641
+      x: 842
+      y: 1556
       width: 93
       height: 84
     inner:
       serializedVersion: 2
-      x: 908
-      y: 1641
+      x: 842
+      y: 1556
       width: 93
       height: 84
     paddingLeft: .204301074
@@ -1420,14 +1420,14 @@ MonoBehaviour:
   - name: 82295
     outer:
       serializedVersion: 2
-      x: 1945
-      y: 1528
+      x: 1948
+      y: 1645
       width: 92
       height: 79
     inner:
       serializedVersion: 2
-      x: 1945
-      y: 1528
+      x: 1948
+      y: 1645
       width: 92
       height: 79
     paddingLeft: .184782609
@@ -1437,13 +1437,13 @@ MonoBehaviour:
   - name: 82293
     outer:
       serializedVersion: 2
-      x: 890
+      x: 811
       y: 1833
       width: 109
       height: 86
     inner:
       serializedVersion: 2
-      x: 890
+      x: 811
       y: 1833
       width: 109
       height: 86
@@ -1454,14 +1454,14 @@ MonoBehaviour:
   - name: 82290
     outer:
       serializedVersion: 2
-      x: 1096
-      y: 1641
+      x: 1030
+      y: 1556
       width: 93
       height: 84
     inner:
       serializedVersion: 2
-      x: 1096
-      y: 1641
+      x: 1030
+      y: 1556
       width: 93
       height: 84
     paddingLeft: .204301074
@@ -1471,14 +1471,14 @@ MonoBehaviour:
   - name: 82291
     outer:
       serializedVersion: 2
-      x: 1372
-      y: 1642
+      x: 1253
+      y: 1641
       width: 93
       height: 83
     inner:
       serializedVersion: 2
-      x: 1372
-      y: 1642
+      x: 1253
+      y: 1641
       width: 93
       height: 83
     paddingLeft: .204301074
@@ -1488,14 +1488,14 @@ MonoBehaviour:
   - name: 82213
     outer:
       serializedVersion: 2
-      x: 753
-      y: 1363
+      x: 917
+      y: 1471
       width: 76
       height: 84
     inner:
       serializedVersion: 2
-      x: 753
-      y: 1363
+      x: 917
+      y: 1471
       width: 76
       height: 84
     paddingLeft: .342105269
@@ -1505,14 +1505,14 @@ MonoBehaviour:
   - name: 82059
     outer:
       serializedVersion: 2
-      x: 1553
-      y: 1743
+      x: 652
+      y: 1556
       width: 94
       height: 84
     inner:
       serializedVersion: 2
-      x: 1553
-      y: 1743
+      x: 652
+      y: 1556
       width: 94
       height: 84
     paddingLeft: .202127665
@@ -1522,14 +1522,14 @@ MonoBehaviour:
   - name: 82056
     outer:
       serializedVersion: 2
-      x: 676
-      y: 1363
+      x: 1052
+      y: 1471
       width: 76
       height: 84
     inner:
       serializedVersion: 2
-      x: 676
-      y: 1363
+      x: 1052
+      y: 1471
       width: 76
       height: 84
     paddingLeft: .328947365
@@ -1539,14 +1539,14 @@ MonoBehaviour:
   - name: 82057
     outer:
       serializedVersion: 2
-      x: 228
-      y: 11
+      x: 1595
+      y: 1472
       width: 74
       height: 83
     inner:
       serializedVersion: 2
-      x: 228
-      y: 11
+      x: 1595
+      y: 1472
       width: 74
       height: 83
     paddingLeft: .364864856
@@ -1556,14 +1556,14 @@ MonoBehaviour:
   - name: 82054
     outer:
       serializedVersion: 2
-      x: 1507
-      y: 1278
+      x: 550
+      y: 26
       width: 50
       height: 84
     inner:
       serializedVersion: 2
-      x: 1507
-      y: 1278
+      x: 550
+      y: 26
       width: 50
       height: 84
     paddingLeft: .74000001
@@ -1573,14 +1573,14 @@ MonoBehaviour:
   - name: 82052
     outer:
       serializedVersion: 2
-      x: 1992
-      y: 1835
+      x: 605
+      y: 510
       width: 50
       height: 84
     inner:
       serializedVersion: 2
-      x: 1992
-      y: 1835
+      x: 605
+      y: 510
       width: 50
       height: 84
     paddingLeft: .74000001
@@ -1590,14 +1590,14 @@ MonoBehaviour:
   - name: 82060
     outer:
       serializedVersion: 2
-      x: 1278
-      y: 1642
+      x: 1159
+      y: 1641
       width: 93
       height: 83
     inner:
       serializedVersion: 2
-      x: 1278
-      y: 1642
+      x: 1159
+      y: 1641
       width: 93
       height: 83
     paddingLeft: .215053767
@@ -1607,14 +1607,14 @@ MonoBehaviour:
   - name: 88037
     outer:
       serializedVersion: 2
-      x: 520
-      y: 1609
+      x: 302
+      y: 377
       width: 72
       height: 116
     inner:
       serializedVersion: 2
-      x: 520
-      y: 1609
+      x: 302
+      y: 377
       width: 72
       height: 116
     paddingLeft: .0694444478
@@ -1624,14 +1624,14 @@ MonoBehaviour:
   - name: 88036
     outer:
       serializedVersion: 2
-      x: 447
-      y: 1608
+      x: 302
+      y: 494
       width: 72
       height: 117
     inner:
       serializedVersion: 2
-      x: 447
-      y: 1608
+      x: 302
+      y: 494
       width: 72
       height: 117
     paddingLeft: .0694444478
@@ -1641,14 +1641,14 @@ MonoBehaviour:
   - name: 88038
     outer:
       serializedVersion: 2
-      x: 303
-      y: 511
+      x: 302
+      y: 1489
       width: 73
       height: 117
     inner:
       serializedVersion: 2
-      x: 303
-      y: 511
+      x: 302
+      y: 1489
       width: 73
       height: 117
     paddingLeft: .0547945201
@@ -1658,14 +1658,14 @@ MonoBehaviour:
   - name: 88033
     outer:
       serializedVersion: 2
-      x: 620
-      y: 975
+      x: 1129
+      y: 1439
       width: 55
       height: 116
     inner:
       serializedVersion: 2
-      x: 620
-      y: 975
+      x: 1129
+      y: 1439
       width: 55
       height: 116
     paddingLeft: .218181819
@@ -1675,14 +1675,14 @@ MonoBehaviour:
   - name: 88032
     outer:
       serializedVersion: 2
-      x: 1968
-      y: 1608
+      x: 462
+      y: 49
       width: 56
       height: 117
     inner:
       serializedVersion: 2
-      x: 1968
-      y: 1608
+      x: 462
+      y: 49
       width: 56
       height: 117
     paddingLeft: .214285716
@@ -1692,14 +1692,14 @@ MonoBehaviour:
   - name: 88035
     outer:
       serializedVersion: 2
-      x: 303
-      y: 629
+      x: 302
+      y: 1607
       width: 73
       height: 117
     inner:
       serializedVersion: 2
-      x: 303
-      y: 629
+      x: 302
+      y: 1607
       width: 73
       height: 117
     paddingLeft: .0684931502
@@ -1709,14 +1709,14 @@ MonoBehaviour:
   - name: 88034
     outer:
       serializedVersion: 2
-      x: 620
-      y: 1330
+      x: 605
+      y: 1438
       width: 55
       height: 117
     inner:
       serializedVersion: 2
-      x: 620
-      y: 1330
+      x: 605
+      y: 1438
       width: 55
       height: 117
     paddingLeft: .236363634
@@ -1726,14 +1726,14 @@ MonoBehaviour:
   - name: 88031
     outer:
       serializedVersion: 2
-      x: 620
-      y: 1212
+      x: 661
+      y: 1438
       width: 55
       height: 117
     inner:
       serializedVersion: 2
-      x: 620
-      y: 1212
+      x: 661
+      y: 1438
       width: 55
       height: 117
     paddingLeft: .218181819
@@ -1743,14 +1743,14 @@ MonoBehaviour:
   - name: 87107
     outer:
       serializedVersion: 2
-      x: 676
-      y: 1250
+      x: 994
+      y: 1443
       width: 57
       height: 112
     inner:
       serializedVersion: 2
-      x: 676
-      y: 1250
+      x: 994
+      y: 1443
       width: 57
       height: 112
     paddingLeft: .157894731
@@ -1760,14 +1760,14 @@ MonoBehaviour:
   - name: 87106
     outer:
       serializedVersion: 2
-      x: 378
-      y: 369
+      x: 376
+      y: 1174
       width: 58
       height: 123
     inner:
       serializedVersion: 2
-      x: 378
-      y: 369
+      x: 376
+      y: 1174
       width: 58
       height: 123
     paddingLeft: .137931034
@@ -1777,14 +1777,14 @@ MonoBehaviour:
   - name: 87105
     outer:
       serializedVersion: 2
-      x: 447
-      y: 12
+      x: 462
+      y: 1165
       width: 57
       height: 120
     inner:
       serializedVersion: 2
-      x: 447
-      y: 12
+      x: 462
+      y: 1165
       width: 57
       height: 120
     paddingLeft: .175438598
@@ -1794,14 +1794,14 @@ MonoBehaviour:
   - name: 81177
     outer:
       serializedVersion: 2
-      x: 1383
-      y: 1539
+      x: 1840
+      y: 1729
       width: 111
       height: 68
     inner:
       serializedVersion: 2
-      x: 1383
-      y: 1539
+      x: 1840
+      y: 1729
       width: 111
       height: 68
     paddingLeft: .0900900885
@@ -1811,14 +1811,14 @@ MonoBehaviour:
   - name: 81176
     outer:
       serializedVersion: 2
-      x: 1027
-      y: 1538
+      x: 1484
+      y: 1728
       width: 110
       height: 69
     inner:
       serializedVersion: 2
-      x: 1027
-      y: 1538
+      x: 1484
+      y: 1728
       width: 110
       height: 69
     paddingLeft: .0727272704
@@ -1828,14 +1828,14 @@ MonoBehaviour:
   - name: 81180
     outer:
       serializedVersion: 2
-      x: 947
-      y: 1311
+      x: 1146
+      y: 1386
       width: 86
       height: 51
     inner:
       serializedVersion: 2
-      x: 947
-      y: 1311
+      x: 1146
+      y: 1386
       width: 86
       height: 51
     paddingLeft: .255813956
@@ -1845,14 +1845,14 @@ MonoBehaviour:
   - name: 81183
     outer:
       serializedVersion: 2
-      x: 1138
-      y: 1541
+      x: 1595
+      y: 1731
       width: 115
       height: 66
     inner:
       serializedVersion: 2
-      x: 1138
-      y: 1541
+      x: 1595
+      y: 1731
       width: 115
       height: 66
     paddingLeft: .0695652142
@@ -1862,14 +1862,14 @@ MonoBehaviour:
   - name: 81182
     outer:
       serializedVersion: 2
-      x: 1495
-      y: 1542
+      x: 1831
+      y: 1659
       width: 116
       height: 65
     inner:
       serializedVersion: 2
-      x: 1495
-      y: 1542
+      x: 1831
+      y: 1659
       width: 116
       height: 65
     paddingLeft: .0603448264
@@ -1879,14 +1879,14 @@ MonoBehaviour:
   - name: 87103 e 87104
     outer:
       serializedVersion: 2
-      x: 676
-      y: 513
+      x: 550
+      y: 238
       width: 39
       height: 122
     inner:
       serializedVersion: 2
-      x: 676
-      y: 513
+      x: 550
+      y: 238
       width: 39
       height: 122
     paddingLeft: .538461566
@@ -1896,14 +1896,14 @@ MonoBehaviour:
   - name: 81073 e 81074
     outer:
       serializedVersion: 2
-      x: 734
-      y: 207
+      x: 1320
+      y: 1368
       width: 53
       height: 69
     inner:
       serializedVersion: 2
-      x: 734
-      y: 207
+      x: 1320
+      y: 1368
       width: 53
       height: 69
     paddingLeft: .773584902
@@ -1913,14 +1913,14 @@ MonoBehaviour:
   - name: 82049 e 82050
     outer:
       serializedVersion: 2
-      x: 1558
-      y: 1278
+      x: 605
+      y: 425
       width: 50
       height: 84
     inner:
       serializedVersion: 2
-      x: 1558
-      y: 1278
+      x: 605
+      y: 425
       width: 50
       height: 84
     paddingLeft: .74000001
@@ -1930,14 +1930,14 @@ MonoBehaviour:
   - name: 87101 e 87102
     outer:
       serializedVersion: 2
-      x: 676
-      y: 136
+      x: 605
+      y: 846
       width: 35
       height: 122
     inner:
       serializedVersion: 2
-      x: 676
-      y: 136
+      x: 605
+      y: 846
       width: 35
       height: 122
     paddingLeft: .714285731
@@ -1947,14 +1947,14 @@ MonoBehaviour:
   - name: 81075
     outer:
       serializedVersion: 2
-      x: 1399
-      y: 1448
+      x: 1954
+      y: 1486
       width: 86
       height: 69
     inner:
       serializedVersion: 2
-      x: 1399
-      y: 1448
+      x: 1954
+      y: 1486
       width: 86
       height: 69
     paddingLeft: .255813956
@@ -1964,132 +1964,47 @@ MonoBehaviour:
   - name: 81071 e 81072
     outer:
       serializedVersion: 2
-      x: 734
-      y: 277
+      x: 1374
+      y: 1368
       width: 53
       height: 69
     inner:
       serializedVersion: 2
-      x: 734
-      y: 277
+      x: 1374
+      y: 1368
       width: 53
       height: 69
     paddingLeft: .773584902
     paddingRight: .641509414
     paddingTop: .0724637657
     paddingBottom: .0724637657
-  - name: 51022
-    outer:
-      serializedVersion: 2
-      x: 1966
-      y: 1448
-      width: 64
-      height: 69
-    inner:
-      serializedVersion: 2
-      x: 1966
-      y: 1448
-      width: 64
-      height: 69
-    paddingLeft: .53125
-    paddingRight: .46875
-    paddingTop: .0434782617
-    paddingBottom: .101449274
-  - name: 68001
-    outer:
-      serializedVersion: 2
-      x: 378
-      y: 1106
-      width: 68
-      height: 119
-    inner:
-      serializedVersion: 2
-      x: 378
-      y: 1106
-      width: 68
-      height: 119
-    paddingLeft: .0735294148
-    paddingRight: .0882352963
-    paddingTop: .0420168079
-    paddingBottom: .0336134471
   - name: 33557
     outer:
       serializedVersion: 2
-      x: 460
-      y: 1830
+      x: 105
+      y: 102
       width: 107
       height: 89
     inner:
       serializedVersion: 2
-      x: 460
-      y: 1830
+      x: 105
+      y: 102
       width: 107
       height: 89
     paddingLeft: .121495329
     paddingRight: .0747663528
     paddingTop: .0674157292
     paddingBottom: .0449438207
-  - name: 62010
-    outer:
-      serializedVersion: 2
-      x: 1405
-      y: 1364
-      width: 67
-      height: 83
-    inner:
-      serializedVersion: 2
-      x: 1405
-      y: 1364
-      width: 67
-      height: 83
-    paddingLeft: .477611929
-    paddingRight: .432835817
-    paddingTop: .108433738
-    paddingBottom: .0843373463
-  - name: 62011
-    outer:
-      serializedVersion: 2
-      x: 1541
-      y: 1363
-      width: 66
-      height: 84
-    inner:
-      serializedVersion: 2
-      x: 1541
-      y: 1363
-      width: 66
-      height: 84
-    paddingLeft: .484848499
-    paddingRight: .454545468
-    paddingTop: .107142858
-    paddingBottom: .0714285746
-  - name: 61002
-    outer:
-      serializedVersion: 2
-      x: 593
-      y: 1609
-      width: 62
-      height: 33
-    inner:
-      serializedVersion: 2
-      x: 593
-      y: 1609
-      width: 62
-      height: 33
-    paddingLeft: .580645144
-    paddingRight: .483870953
-    paddingTop: .666666687
-    paddingBottom: .727272749
   - name: 33526
     outer:
       serializedVersion: 2
-      x: 676
+      x: 704
       y: 1830
       width: 106
       height: 89
     inner:
       serializedVersion: 2
-      x: 676
+      x: 704
       y: 1830
       width: 106
       height: 89
@@ -2097,51 +2012,17 @@ MonoBehaviour:
     paddingRight: .094339624
     paddingTop: .0561797768
     paddingBottom: .0561797768
-  - name: 61011
-    outer:
-      serializedVersion: 2
-      x: 1379
-      y: 1295
-      width: 63
-      height: 67
-    inner:
-      serializedVersion: 2
-      x: 1379
-      y: 1295
-      width: 63
-      height: 67
-    paddingLeft: .460317463
-    paddingRight: .571428597
-    paddingTop: .0597014911
-    paddingBottom: .119402982
-  - name: 67008
-    outer:
-      serializedVersion: 2
-      x: 574
-      y: 1183
-      width: 43
-      height: 120
-    inner:
-      serializedVersion: 2
-      x: 574
-      y: 1183
-      width: 43
-      height: 120
-    paddingLeft: .395348847
-    paddingRight: .441860467
-    paddingTop: .0416666679
-    paddingBottom: .0250000004
   - name: 80126
     outer:
       serializedVersion: 2
       x: 105
-      y: 1553
+      y: 1675
       width: 120
       height: 121
     inner:
       serializedVersion: 2
       x: 105
-      y: 1553
+      y: 1675
       width: 120
       height: 121
     paddingLeft: .0416666679
@@ -2151,37 +2032,20 @@ MonoBehaviour:
   - name: 33250 e 33251
     outer:
       serializedVersion: 2
-      x: 734
-      y: 966
+      x: 605
+      y: 595
       width: 34
       height: 124
     inner:
       serializedVersion: 2
-      x: 734
-      y: 966
+      x: 605
+      y: 595
       width: 34
       height: 124
     paddingLeft: .617647052
     paddingRight: .70588237
     paddingTop: .0161290318
     paddingBottom: .0161290318
-  - name: 57008
-    outer:
-      serializedVersion: 2
-      x: 571
-      y: 805
-      width: 45
-      height: 123
-    inner:
-      serializedVersion: 2
-      x: 571
-      y: 805
-      width: 45
-      height: 123
-    paddingLeft: .311111122
-    paddingRight: .444444448
-    paddingTop: .024390243
-    paddingBottom: .016260162
   - name: 82313
     outer:
       serializedVersion: 2
@@ -2199,153 +2063,34 @@ MonoBehaviour:
     paddingRight: .0961538479
     paddingTop: .0206185561
     paddingBottom: 0
-  - name: 67004
-    outer:
-      serializedVersion: 2
-      x: 571
-      y: 308
-      width: 45
-      height: 123
-    inner:
-      serializedVersion: 2
-      x: 571
-      y: 308
-      width: 45
-      height: 123
-    paddingLeft: .377777785
-    paddingRight: .377777785
-    paddingTop: .032520324
-    paddingBottom: .008130081
   - name: 88176
     outer:
       serializedVersion: 2
-      x: 303
-      y: 865
+      x: 227
+      y: 50
       width: 68
       height: 126
     inner:
       serializedVersion: 2
-      x: 303
-      y: 865
+      x: 227
+      y: 50
       width: 68
       height: 126
     paddingLeft: .0882352963
     paddingRight: .0735294148
     paddingTop: 0
     paddingBottom: .0158730168
-  - name: 58002
-    outer:
-      serializedVersion: 2
-      x: 303
-      y: 388
-      width: 70
-      height: 122
-    inner:
-      serializedVersion: 2
-      x: 303
-      y: 388
-      width: 70
-      height: 122
-    paddingLeft: .0714285746
-    paddingRight: .0571428575
-    paddingTop: .0409836061
-    paddingBottom: .00819672085
-  - name: 52010
-    outer:
-      serializedVersion: 2
-      x: 1805
-      y: 1363
-      width: 63
-      height: 84
-    inner:
-      serializedVersion: 2
-      x: 1805
-      y: 1363
-      width: 63
-      height: 84
-    paddingLeft: .666666687
-    paddingRight: .365079373
-    paddingTop: .119047619
-    paddingBottom: .0595238097
-  - name: 62021
-    outer:
-      serializedVersion: 2
-      x: 1608
-      y: 1364
-      width: 66
-      height: 83
-    inner:
-      serializedVersion: 2
-      x: 1608
-      y: 1364
-      width: 66
-      height: 83
-    paddingLeft: .5
-    paddingRight: .439393938
-    paddingTop: .108433738
-    paddingBottom: .0843373463
-  - name: 61120
-    outer:
-      serializedVersion: 2
-      x: 847
-      y: 1450
-      width: 105
-      height: 67
-    inner:
-      serializedVersion: 2
-      x: 847
-      y: 1450
-      width: 105
-      height: 67
-    paddingLeft: .142857149
-    paddingRight: .0761904791
-    paddingTop: .0895522386
-    paddingBottom: .0895522386
-  - name: 52021
-    outer:
-      serializedVersion: 2
-      x: 1675
-      y: 1363
-      width: 64
-      height: 84
-    inner:
-      serializedVersion: 2
-      x: 1675
-      y: 1363
-      width: 64
-      height: 84
-    paddingLeft: .59375
-    paddingRight: .40625
-    paddingTop: .095238097
-    paddingBottom: .0833333358
-  - name: 51011
-    outer:
-      serializedVersion: 2
-      x: 1034
-      y: 1294
-      width: 64
-      height: 68
-    inner:
-      serializedVersion: 2
-      x: 1034
-      y: 1294
-      width: 64
-      height: 68
-    paddingLeft: .5
-    paddingRight: .5
-    paddingTop: .0588235296
-    paddingBottom: .102941178
   - name: 33428
     outer:
       serializedVersion: 2
-      x: 734
-      y: 1091
+      x: 605
+      y: 1096
       width: 58
       height: 90
     inner:
       serializedVersion: 2
-      x: 734
-      y: 1091
+      x: 605
+      y: 1096
       width: 58
       height: 90
     paddingLeft: .689655185
@@ -2355,81 +2100,47 @@ MonoBehaviour:
   - name: 88171
     outer:
       serializedVersion: 2
-      x: 303
-      y: 260
+      x: 302
+      y: 1243
       width: 67
       height: 127
     inner:
       serializedVersion: 2
-      x: 303
-      y: 260
+      x: 302
+      y: 1243
       width: 67
       height: 127
     paddingLeft: .0895522386
     paddingRight: .0895522386
     paddingTop: .00787401572
     paddingBottom: 0
-  - name: 67010
-    outer:
-      serializedVersion: 2
-      x: 572
-      y: 185
-      width: 43
-      height: 120
-    inner:
-      serializedVersion: 2
-      x: 572
-      y: 185
-      width: 43
-      height: 120
-    paddingLeft: .395348847
-    paddingRight: .441860467
-    paddingTop: .0416666679
-    paddingBottom: .0250000004
   - name: 86047
     outer:
       serializedVersion: 2
-      x: 1746
-      y: 1466
+      x: 717
+      y: 1444
       width: 109
       height: 51
     inner:
       serializedVersion: 2
-      x: 1746
-      y: 1466
+      x: 717
+      y: 1444
       width: 109
       height: 51
     paddingLeft: .100917429
     paddingRight: .0733944923
     paddingTop: .294117659
     paddingBottom: .254901975
-  - name: 51120
-    outer:
-      serializedVersion: 2
-      x: 517
-      y: 1448
-      width: 107
-      height: 69
-    inner:
-      serializedVersion: 2
-      x: 517
-      y: 1448
-      width: 107
-      height: 69
-    paddingLeft: .121495329
-    paddingRight: .0747663528
-    paddingTop: .0724637657
-    paddingBottom: .0724637657
   - name: 33562
     outer:
       serializedVersion: 2
-      x: 228
+      x: 473
       y: 1828
       width: 123
       height: 91
     inner:
       serializedVersion: 2
-      x: 228
+      x: 473
       y: 1828
       width: 123
       height: 91
@@ -2437,67 +2148,33 @@ MonoBehaviour:
     paddingRight: .016260162
     paddingTop: .0439560451
     paddingBottom: .0439560451
-  - name: 58003
-    outer:
-      serializedVersion: 2
-      x: 447
-      y: 1485
-      width: 69
-      height: 122
-    inner:
-      serializedVersion: 2
-      x: 447
-      y: 1485
-      width: 69
-      height: 122
-    paddingLeft: .0869565234
-    paddingRight: .0579710156
-    paddingTop: .0409836061
-    paddingBottom: .00819672085
   - name: 88168
     outer:
       serializedVersion: 2
-      x: 303
-      y: 8
+      x: 302
+      y: 991
       width: 68
       height: 125
     inner:
       serializedVersion: 2
-      x: 303
-      y: 8
+      x: 302
+      y: 991
       width: 68
       height: 125
     paddingLeft: .102941178
     paddingRight: .0588235296
     paddingTop: .0160000008
     paddingBottom: .00800000038
-  - name: 51110
-    outer:
-      serializedVersion: 2
-      x: 625
-      y: 1448
-      width: 106
-      height: 69
-    inner:
-      serializedVersion: 2
-      x: 625
-      y: 1448
-      width: 106
-      height: 69
-    paddingLeft: .094339624
-    paddingRight: .113207549
-    paddingTop: .0724637657
-    paddingBottom: .0724637657
   - name: 33451
     outer:
       serializedVersion: 2
-      x: 1355
+      x: 1276
       y: 1834
       width: 105
       height: 85
     inner:
       serializedVersion: 2
-      x: 1355
+      x: 1276
       y: 1834
       width: 105
       height: 85
@@ -2508,14 +2185,14 @@ MonoBehaviour:
   - name: 88175
     outer:
       serializedVersion: 2
-      x: 378
-      y: 1600
+      x: 302
+      y: 739
       width: 68
       height: 125
     inner:
       serializedVersion: 2
-      x: 378
-      y: 1600
+      x: 302
+      y: 739
       width: 68
       height: 125
     paddingLeft: .102941178
@@ -2525,14 +2202,14 @@ MonoBehaviour:
   - name: 81186
     outer:
       serializedVersion: 2
-      x: 1765
-      y: 1312
+      x: 376
+      y: 12
       width: 79
       height: 50
     inner:
       serializedVersion: 2
-      x: 1765
-      y: 1312
+      x: 376
+      y: 12
       width: 79
       height: 50
     paddingLeft: .354430377
@@ -2542,14 +2219,14 @@ MonoBehaviour:
   - name: 88173
     outer:
       serializedVersion: 2
-      x: 378
-      y: 1474
+      x: 302
+      y: 865
       width: 68
       height: 125
     inner:
       serializedVersion: 2
-      x: 378
-      y: 1474
+      x: 302
+      y: 865
       width: 68
       height: 125
     paddingLeft: .102941178
@@ -2559,14 +2236,14 @@ MonoBehaviour:
   - name: 33900
     outer:
       serializedVersion: 2
-      x: 967
-      y: 1732
+      x: 376
+      y: 1545
       width: 85
       height: 95
     inner:
       serializedVersion: 2
-      x: 967
-      y: 1732
+      x: 376
+      y: 1545
       width: 85
       height: 95
     paddingLeft: .31764707
@@ -2576,14 +2253,14 @@ MonoBehaviour:
   - name: 86046
     outer:
       serializedVersion: 2
-      x: 1856
-      y: 1466
+      x: 1835
+      y: 1452
       width: 109
       height: 51
     inner:
       serializedVersion: 2
-      x: 1856
-      y: 1466
+      x: 1835
+      y: 1452
       width: 109
       height: 51
     paddingLeft: .100917429
@@ -2593,14 +2270,14 @@ MonoBehaviour:
   - name: 81188
     outer:
       serializedVersion: 2
-      x: 517
-      y: 1304
+      x: 1675
+      y: 1569
       width: 101
       height: 71
     inner:
       serializedVersion: 2
-      x: 517
-      y: 1304
+      x: 1675
+      y: 1569
       width: 101
       height: 71
     paddingLeft: .168316826
@@ -2628,80 +2305,29 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 105
-      y: 1675
+      y: 1797
       width: 121
       height: 122
     inner:
       serializedVersion: 2
       x: 105
-      y: 1675
+      y: 1797
       width: 121
       height: 122
     paddingLeft: .0330578499
     paddingRight: .0247933883
     paddingTop: .0491803288
     paddingBottom: 0
-  - name: 57007
-    outer:
-      serializedVersion: 2
-      x: 676
-      y: 878
-      width: 45
-      height: 123
-    inner:
-      serializedVersion: 2
-      x: 676
-      y: 878
-      width: 45
-      height: 123
-    paddingLeft: .311111122
-    paddingRight: .444444448
-    paddingTop: .024390243
-    paddingBottom: .016260162
-  - name: 57002
-    outer:
-      serializedVersion: 2
-      x: 676
-      y: 1002
-      width: 45
-      height: 123
-    inner:
-      serializedVersion: 2
-      x: 676
-      y: 1002
-      width: 45
-      height: 123
-    paddingLeft: .244444445
-    paddingRight: .51111114
-    paddingTop: .024390243
-    paddingBottom: .016260162
-  - name: 51101
-    outer:
-      serializedVersion: 2
-      x: 1466
-      y: 1621
-      width: 105
-      height: 35
-    inner:
-      serializedVersion: 2
-      x: 1466
-      y: 1621
-      width: 105
-      height: 35
-    paddingLeft: .123809524
-    paddingRight: .095238097
-    paddingTop: .514285743
-    paddingBottom: .742857158
   - name: 80129
     outer:
       serializedVersion: 2
-      x: 105
+      x: 227
       y: 1798
       width: 122
       height: 121
     inner:
       serializedVersion: 2
-      x: 105
+      x: 227
       y: 1798
       width: 122
       height: 121
@@ -2709,40 +2335,6 @@ MonoBehaviour:
     paddingRight: .0163934417
     paddingTop: .0495867766
     paddingBottom: .00826446246
-  - name: 57003
-    outer:
-      serializedVersion: 2
-      x: 676
-      y: 1126
-      width: 45
-      height: 123
-    inner:
-      serializedVersion: 2
-      x: 676
-      y: 1126
-      width: 45
-      height: 123
-    paddingLeft: .355555564
-    paddingRight: .400000006
-    paddingTop: .024390243
-    paddingBottom: .016260162
-  - name: 52011
-    outer:
-      serializedVersion: 2
-      x: 1869
-      y: 1363
-      width: 63
-      height: 84
-    inner:
-      serializedVersion: 2
-      x: 1869
-      y: 1363
-      width: 63
-      height: 84
-    paddingLeft: .666666687
-    paddingRight: .365079373
-    paddingTop: .119047619
-    paddingBottom: .0595238097
   - name: 82309
     outer:
       serializedVersion: 2
@@ -2760,136 +2352,51 @@ MonoBehaviour:
     paddingRight: .129999995
     paddingTop: .03125
     paddingBottom: 0
-  - name: 51001
-    outer:
-      serializedVersion: 2
-      x: 1580
-      y: 1608
-      width: 65
-      height: 36
-    inner:
-      serializedVersion: 2
-      x: 1580
-      y: 1608
-      width: 65
-      height: 36
-    paddingLeft: .492307693
-    paddingRight: .476923078
-    paddingTop: .527777791
-    paddingBottom: .666666687
   - name: 33555
     outer:
       serializedVersion: 2
       x: 105
-      y: 65
+      y: 192
       width: 107
       height: 90
     inner:
       serializedVersion: 2
       x: 105
-      y: 65
+      y: 192
       width: 107
       height: 90
     paddingLeft: .112149529
     paddingRight: .0841121525
     paddingTop: .055555556
     paddingBottom: .0444444455
-  - name: 68004
-    outer:
-      serializedVersion: 2
-      x: 447
-      y: 997
-      width: 69
-      height: 120
-    inner:
-      serializedVersion: 2
-      x: 447
-      y: 997
-      width: 69
-      height: 120
-    paddingLeft: .0869565234
-    paddingRight: .0579710156
-    paddingTop: .0416666679
-    paddingBottom: .0250000004
   - name: 88169
     outer:
       serializedVersion: 2
-      x: 303
-      y: 1480
+      x: 227
+      y: 177
       width: 68
       height: 127
     inner:
       serializedVersion: 2
-      x: 303
-      y: 1480
+      x: 227
+      y: 177
       width: 68
       height: 127
     paddingLeft: .0882352963
     paddingRight: .0735294148
     paddingTop: .00787401572
     paddingBottom: 0
-  - name: 61021
-    outer:
-      serializedVersion: 2
-      x: 1251
-      y: 1295
-      width: 63
-      height: 67
-    inner:
-      serializedVersion: 2
-      x: 1251
-      y: 1295
-      width: 63
-      height: 67
-    paddingLeft: .523809552
-    paddingRight: .507936537
-    paddingTop: .0895522386
-    paddingBottom: .0895522386
-  - name: 61101
-    outer:
-      serializedVersion: 2
-      x: 793
-      y: 1238
-      width: 104
-      height: 34
-    inner:
-      serializedVersion: 2
-      x: 793
-      y: 1238
-      width: 104
-      height: 34
-    paddingLeft: .173076928
-    paddingRight: .057692308
-    paddingTop: .735294104
-    paddingBottom: .588235319
-  - name: 52040
-    outer:
-      serializedVersion: 2
-      x: 1562
-      y: 1834
-      width: 103
-      height: 85
-    inner:
-      serializedVersion: 2
-      x: 1562
-      y: 1834
-      width: 103
-      height: 85
-    paddingLeft: .184466019
-    paddingRight: .0582524277
-    paddingTop: .105882354
-    paddingBottom: .0588235296
   - name: 33276
     outer:
       serializedVersion: 2
-      x: 378
-      y: 2
+      x: 376
+      y: 183
       width: 60
       height: 116
     inner:
       serializedVersion: 2
-      x: 378
-      y: 2
+      x: 376
+      y: 183
       width: 60
       height: 116
     paddingLeft: .166666672
@@ -2917,13 +2424,13 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 105
-      y: 1075
+      y: 1082
       width: 121
       height: 114
     inner:
       serializedVersion: 2
       x: 105
-      y: 1075
+      y: 1082
       width: 121
       height: 114
     paddingLeft: .0247933883
@@ -2933,14 +2440,14 @@ MonoBehaviour:
   - name: 87115
     outer:
       serializedVersion: 2
-      x: 517
-      y: 306
+      x: 462
+      y: 167
       width: 53
       height: 125
     inner:
       serializedVersion: 2
-      x: 517
-      y: 306
+      x: 462
+      y: 167
       width: 53
       height: 125
     paddingLeft: .283018857
@@ -2968,13 +2475,13 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 105
-      y: 960
+      y: 1197
       width: 121
       height: 114
     inner:
       serializedVersion: 2
       x: 105
-      y: 960
+      y: 1197
       width: 121
       height: 114
     paddingLeft: .0247933883
@@ -2998,51 +2505,17 @@ MonoBehaviour:
     paddingRight: .109999999
     paddingTop: .0206185561
     paddingBottom: 0
-  - name: 58004
-    outer:
-      serializedVersion: 2
-      x: 447
-      y: 1362
-      width: 69
-      height: 122
-    inner:
-      serializedVersion: 2
-      x: 447
-      y: 1362
-      width: 69
-      height: 122
-    paddingLeft: .0869565234
-    paddingRight: .0579710156
-    paddingTop: .0409836061
-    paddingBottom: .00819672085
-  - name: 62040
-    outer:
-      serializedVersion: 2
-      x: 1769
-      y: 1834
-      width: 102
-      height: 85
-    inner:
-      serializedVersion: 2
-      x: 1769
-      y: 1834
-      width: 102
-      height: 85
-    paddingLeft: .14705883
-    paddingRight: .107843138
-    paddingTop: .0941176489
-    paddingBottom: .0705882385
   - name: 82182
     outer:
       serializedVersion: 2
-      x: 734
-      y: 872
+      x: 605
+      y: 331
       width: 45
       height: 93
     inner:
       serializedVersion: 2
-      x: 734
-      y: 872
+      x: 605
+      y: 331
       width: 45
       height: 93
     paddingLeft: .955555558
@@ -3052,37 +2525,20 @@ MonoBehaviour:
   - name: 81187
     outer:
       serializedVersion: 2
-      x: 788
-      y: 1608
+      x: 865
+      y: 1387
       width: 102
       height: 50
     inner:
       serializedVersion: 2
-      x: 788
-      y: 1608
+      x: 865
+      y: 1387
       width: 102
       height: 50
     paddingLeft: .156862751
     paddingRight: .0980392173
     paddingTop: .300000012
     paddingBottom: .280000001
-  - name: 61022
-    outer:
-      serializedVersion: 2
-      x: 1443
-      y: 1295
-      width: 63
-      height: 67
-    inner:
-      serializedVersion: 2
-      x: 1443
-      y: 1295
-      width: 63
-      height: 67
-    paddingLeft: .523809552
-    paddingRight: .507936537
-    paddingTop: .0895522386
-    paddingBottom: .0895522386
   - name: 80136
     outer:
       serializedVersion: 2
@@ -3100,119 +2556,34 @@ MonoBehaviour:
     paddingRight: .0336134471
     paddingTop: .00800000038
     paddingBottom: .0160000008
-  - name: 62030
-    outer:
-      serializedVersion: 2
-      x: 1666
-      y: 1834
-      width: 102
-      height: 85
-    inner:
-      serializedVersion: 2
-      x: 1666
-      y: 1834
-      width: 102
-      height: 85
-    paddingLeft: .14705883
-    paddingRight: .107843138
-    paddingTop: .0941176489
-    paddingBottom: .0705882385
-  - name: 57004
-    outer:
-      serializedVersion: 2
-      x: 571
-      y: 434
-      width: 45
-      height: 123
-    inner:
-      serializedVersion: 2
-      x: 571
-      y: 434
-      width: 45
-      height: 123
-    paddingLeft: .355555564
-    paddingRight: .400000006
-    paddingTop: .024390243
-    paddingBottom: .016260162
-  - name: 52030
-    outer:
-      serializedVersion: 2
-      x: 0
-      y: 12
-      width: 103
-      height: 86
-    inner:
-      serializedVersion: 2
-      x: 0
-      y: 12
-      width: 103
-      height: 86
-    paddingLeft: .174757287
-    paddingRight: .0679611638
-    paddingTop: .104651161
-    paddingBottom: .0465116277
-  - name: 67001
-    outer:
-      serializedVersion: 2
-      x: 676
-      y: 757
-      width: 43
-      height: 120
-    inner:
-      serializedVersion: 2
-      x: 676
-      y: 757
-      width: 43
-      height: 120
-    paddingLeft: .395348847
-    paddingRight: .441860467
-    paddingTop: .0416666679
-    paddingBottom: .0250000004
   - name: 33402 e 33403
     outer:
       serializedVersion: 2
-      x: 734
-      y: 1273
+      x: 605
+      y: 1278
       width: 59
       height: 89
     inner:
       serializedVersion: 2
-      x: 734
-      y: 1273
+      x: 605
+      y: 1278
       width: 59
       height: 89
     paddingLeft: .694915235
     paddingRight: .474576265
     paddingTop: .078651689
     paddingBottom: .0337078646
-  - name: 58001
-    outer:
-      serializedVersion: 2
-      x: 447
-      y: 1118
-      width: 69
-      height: 121
-    inner:
-      serializedVersion: 2
-      x: 447
-      y: 1118
-      width: 69
-      height: 121
-    paddingLeft: .130434781
-    paddingRight: .0144927539
-    paddingTop: .0247933883
-    paddingBottom: .0330578499
   - name: 33275
     outer:
       serializedVersion: 2
-      x: 378
-      y: 613
+      x: 376
+      y: 1418
       width: 61
       height: 126
     inner:
       serializedVersion: 2
-      x: 378
-      y: 613
+      x: 376
+      y: 1418
       width: 61
       height: 126
     paddingLeft: .163934425
@@ -3222,14 +2593,14 @@ MonoBehaviour:
   - name: 81052A e 81053A
     outer:
       serializedVersion: 2
-      x: 734
-      y: 67
+      x: 1481
+      y: 1368
       width: 52
       height: 69
     inner:
       serializedVersion: 2
-      x: 734
-      y: 67
+      x: 1481
+      y: 1368
       width: 52
       height: 69
     paddingLeft: .673076928
@@ -3239,14 +2610,14 @@ MonoBehaviour:
   - name: 82007A
     outer:
       serializedVersion: 2
-      x: 1713
-      y: 1281
+      x: 605
+      y: 85
       width: 51
       height: 81
     inner:
       serializedVersion: 2
-      x: 1713
-      y: 1281
+      x: 605
+      y: 85
       width: 51
       height: 81
     paddingLeft: .725490212
@@ -3257,13 +2628,13 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 105
-      y: 430
+      y: 648
       width: 106
       height: 106
     inner:
       serializedVersion: 2
       x: 105
-      y: 430
+      y: 648
       width: 106
       height: 106
     paddingLeft: .094339624
@@ -3273,48 +2644,31 @@ MonoBehaviour:
   - name: 88177
     outer:
       serializedVersion: 2
-      x: 378
-      y: 860
+      x: 302
+      y: 254
       width: 66
       height: 122
     inner:
       serializedVersion: 2
-      x: 378
-      y: 860
+      x: 302
+      y: 254
       width: 66
       height: 122
     paddingLeft: .121212125
     paddingRight: .075757578
     paddingTop: .0327868834
     paddingBottom: .0163934417
-  - name: 68003
-    outer:
-      serializedVersion: 2
-      x: 378
-      y: 1226
-      width: 68
-      height: 120
-    inner:
-      serializedVersion: 2
-      x: 378
-      y: 1226
-      width: 68
-      height: 120
-    paddingLeft: .102941178
-    paddingRight: .0588235296
-    paddingTop: .0583333336
-    paddingBottom: .00833333377
   - name: 33426
     outer:
       serializedVersion: 2
-      x: 734
-      y: 1182
+      x: 605
+      y: 1187
       width: 58
       height: 90
     inner:
       serializedVersion: 2
-      x: 734
-      y: 1182
+      x: 605
+      y: 1187
       width: 58
       height: 90
     paddingLeft: .706896544
@@ -3325,13 +2679,13 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 105
-      y: 1310
+      y: 1432
       width: 120
       height: 120
     inner:
       serializedVersion: 2
       x: 105
-      y: 1310
+      y: 1432
       width: 120
       height: 120
     paddingLeft: .0416666679
@@ -3341,14 +2695,14 @@ MonoBehaviour:
   - name: 33476
     outer:
       serializedVersion: 2
-      x: 517
-      y: 1518
+      x: 462
+      y: 1286
       width: 86
       height: 89
     inner:
       serializedVersion: 2
-      x: 517
-      y: 1518
+      x: 462
+      y: 1286
       width: 86
       height: 89
     paddingLeft: .279069781
@@ -3358,14 +2712,14 @@ MonoBehaviour:
   - name: 88174
     outer:
       serializedVersion: 2
-      x: 303
-      y: 134
+      x: 302
+      y: 1117
       width: 68
       height: 125
     inner:
       serializedVersion: 2
-      x: 303
-      y: 134
+      x: 302
+      y: 1117
       width: 68
       height: 125
     paddingLeft: .102941178
@@ -3393,13 +2747,13 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 105
-      y: 247
+      y: 465
       width: 108
       height: 90
     inner:
       serializedVersion: 2
       x: 105
-      y: 247
+      y: 465
       width: 108
       height: 90
     paddingLeft: .120370373
@@ -3410,53 +2764,19 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 105
-      y: 1431
+      y: 1553
       width: 120
       height: 121
     inner:
       serializedVersion: 2
       x: 105
-      y: 1431
+      y: 1553
       width: 120
       height: 121
     paddingLeft: .0333333351
     paddingRight: .0333333351
     paddingTop: .0495867766
     paddingBottom: .00826446246
-  - name: 67007
-    outer:
-      serializedVersion: 2
-      x: 573
-      y: 681
-      width: 43
-      height: 120
-    inner:
-      serializedVersion: 2
-      x: 573
-      y: 681
-      width: 43
-      height: 120
-    paddingLeft: .395348847
-    paddingRight: .441860467
-    paddingTop: .0416666679
-    paddingBottom: .0250000004
-  - name: 57001
-    outer:
-      serializedVersion: 2
-      x: 620
-      y: 389
-      width: 45
-      height: 123
-    inner:
-      serializedVersion: 2
-      x: 620
-      y: 389
-      width: 45
-      height: 123
-    paddingLeft: .244444445
-    paddingRight: .51111114
-    paddingTop: .024390243
-    paddingBottom: .016260162
   - name: 82304
     outer:
       serializedVersion: 2
@@ -3477,13 +2797,13 @@ MonoBehaviour:
   - name: 33527
     outer:
       serializedVersion: 2
-      x: 783
+      x: 597
       y: 1830
       width: 106
       height: 89
     inner:
       serializedVersion: 2
-      x: 783
+      x: 597
       y: 1830
       width: 106
       height: 89
@@ -3491,34 +2811,17 @@ MonoBehaviour:
     paddingRight: .103773586
     paddingTop: .0674157292
     paddingBottom: .0449438207
-  - name: 61001
-    outer:
-      serializedVersion: 2
-      x: 690
-      y: 1610
-      width: 62
-      height: 33
-    inner:
-      serializedVersion: 2
-      x: 690
-      y: 1610
-      width: 62
-      height: 33
-    paddingLeft: .580645144
-    paddingRight: .483870953
-    paddingTop: .666666687
-    paddingBottom: .727272749
   - name: 33560
     outer:
       serializedVersion: 2
-      x: 568
-      y: 1830
+      x: 105
+      y: 12
       width: 107
       height: 89
     inner:
       serializedVersion: 2
-      x: 568
-      y: 1830
+      x: 105
+      y: 12
       width: 107
       height: 89
     paddingLeft: .130841121
@@ -3528,14 +2831,14 @@ MonoBehaviour:
   - name: 88170
     outer:
       serializedVersion: 2
-      x: 378
-      y: 1347
+      x: 302
+      y: 612
       width: 67
       height: 126
     inner:
       serializedVersion: 2
-      x: 378
-      y: 1347
+      x: 302
+      y: 612
       width: 67
       height: 126
     paddingLeft: .104477614
@@ -3545,14 +2848,14 @@ MonoBehaviour:
   - name: 87114
     outer:
       serializedVersion: 2
-      x: 517
-      y: 432
+      x: 462
+      y: 293
       width: 53
       height: 125
     inner:
       serializedVersion: 2
-      x: 517
-      y: 432
+      x: 462
+      y: 293
       width: 53
       height: 125
     paddingLeft: .283018857
@@ -3562,14 +2865,14 @@ MonoBehaviour:
   - name: 86001A
     outer:
       serializedVersion: 2
-      x: 1997
-      y: 1288
+      x: 1999
+      y: 1566
       width: 42
       height: 74
     inner:
       serializedVersion: 2
-      x: 1997
-      y: 1288
+      x: 1999
+      y: 1566
       width: 42
       height: 74
     paddingLeft: .976190448
@@ -3579,14 +2882,14 @@ MonoBehaviour:
   - name: 88172
     outer:
       serializedVersion: 2
-      x: 378
-      y: 493
+      x: 376
+      y: 1298
       width: 64
       height: 119
     inner:
       serializedVersion: 2
-      x: 378
-      y: 493
+      x: 376
+      y: 1298
       width: 64
       height: 119
     paddingLeft: .140625
@@ -3596,122 +2899,37 @@ MonoBehaviour:
   - name: 88179
     outer:
       serializedVersion: 2
-      x: 378
-      y: 740
+      x: 302
+      y: 11
       width: 65
       height: 119
     inner:
       serializedVersion: 2
-      x: 378
-      y: 740
+      x: 302
+      y: 11
       width: 65
       height: 119
     paddingLeft: .138461545
     paddingRight: .0769230798
     paddingTop: .0504201688
     paddingBottom: .0252100844
-  - name: 62020
-    outer:
-      serializedVersion: 2
-      x: 1473
-      y: 1364
-      width: 67
-      height: 83
-    inner:
-      serializedVersion: 2
-      x: 1473
-      y: 1364
-      width: 67
-      height: 83
-    paddingLeft: .49253732
-    paddingRight: .417910457
-    paddingTop: .108433738
-    paddingBottom: .0843373463
-  - name: 61110
-    outer:
-      serializedVersion: 2
-      x: 953
-      y: 1450
-      width: 105
-      height: 67
-    inner:
-      serializedVersion: 2
-      x: 953
-      y: 1450
-      width: 105
-      height: 67
-    paddingLeft: .142857149
-    paddingRight: .0761904791
-    paddingTop: .0895522386
-    paddingBottom: .0895522386
-  - name: 67003
-    outer:
-      serializedVersion: 2
-      x: 620
-      y: 141
-      width: 45
-      height: 123
-    inner:
-      serializedVersion: 2
-      x: 620
-      y: 141
-      width: 45
-      height: 123
-    paddingLeft: .377777785
-    paddingRight: .377777785
-    paddingTop: .032520324
-    paddingBottom: .008130081
-  - name: 67009
-    outer:
-      serializedVersion: 2
-      x: 676
-      y: 636
-      width: 43
-      height: 120
-    inner:
-      serializedVersion: 2
-      x: 676
-      y: 636
-      width: 43
-      height: 120
-    paddingLeft: .395348847
-    paddingRight: .441860467
-    paddingTop: .0416666679
-    paddingBottom: .0250000004
   - name: 33556
     outer:
       serializedVersion: 2
       x: 105
-      y: 156
+      y: 374
       width: 108
       height: 90
     inner:
       serializedVersion: 2
       x: 105
-      y: 156
+      y: 374
       width: 108
       height: 90
     paddingLeft: .111111112
     paddingRight: .0740740746
     paddingTop: .055555556
     paddingBottom: .0444444455
-  - name: 57010
-    outer:
-      serializedVersion: 2
-      x: 620
-      y: 17
-      width: 45
-      height: 123
-    inner:
-      serializedVersion: 2
-      x: 620
-      y: 17
-      width: 45
-      height: 123
-    paddingLeft: .311111122
-    paddingRight: .444444448
-    paddingTop: .024390243
-    paddingBottom: .016260162
   - name: 80122
     outer:
       serializedVersion: 2
@@ -3729,68 +2947,34 @@ MonoBehaviour:
     paddingRight: .0160000008
     paddingTop: .0160000008
     paddingBottom: .00800000038
-  - name: 51021
-    outer:
-      serializedVersion: 2
-      x: 882
-      y: 1293
-      width: 64
-      height: 69
-    inner:
-      serializedVersion: 2
-      x: 882
-      y: 1293
-      width: 64
-      height: 69
-    paddingLeft: .53125
-    paddingRight: .46875
-    paddingTop: .0434782617
-    paddingBottom: .101449274
   - name: 88178
     outer:
       serializedVersion: 2
-      x: 378
-      y: 983
+      x: 302
+      y: 131
       width: 66
       height: 122
     inner:
       serializedVersion: 2
-      x: 378
-      y: 983
+      x: 302
+      y: 131
       width: 66
       height: 122
     paddingLeft: .121212125
     paddingRight: .075757578
     paddingTop: .0327868834
     paddingBottom: .0163934417
-  - name: 68002
-    outer:
-      serializedVersion: 2
-      x: 447
-      y: 1240
-      width: 69
-      height: 121
-    inner:
-      serializedVersion: 2
-      x: 447
-      y: 1240
-      width: 69
-      height: 121
-    paddingLeft: .101449274
-    paddingRight: .0434782617
-    paddingTop: .0330578499
-    paddingBottom: .0247933883
   - name: 33225 e 33226
     outer:
       serializedVersion: 2
-      x: 676
-      y: 386
+      x: 550
+      y: 111
       width: 37
       height: 126
     inner:
       serializedVersion: 2
-      x: 676
-      y: 386
+      x: 550
+      y: 111
       width: 37
       height: 126
     paddingLeft: .64864862
@@ -3800,14 +2984,14 @@ MonoBehaviour:
   - name: 87116
     outer:
       serializedVersion: 2
-      x: 620
-      y: 513
+      x: 550
+      y: 361
       width: 49
       height: 114
     inner:
       serializedVersion: 2
-      x: 620
-      y: 513
+      x: 550
+      y: 361
       width: 49
       height: 114
     paddingLeft: .285714298
@@ -3817,133 +3001,65 @@ MonoBehaviour:
   - name: 88186
     outer:
       serializedVersion: 2
-      x: 517
-      y: 802
+      x: 462
+      y: 663
       width: 53
       height: 126
     inner:
       serializedVersion: 2
-      x: 517
-      y: 802
+      x: 462
+      y: 663
       width: 53
       height: 126
     paddingLeft: .433962256
     paddingRight: .433962256
     paddingTop: .00793650839
     paddingBottom: .00793650839
-  - name: 52020
-    outer:
-      serializedVersion: 2
-      x: 1740
-      y: 1363
-      width: 64
-      height: 84
-    inner:
-      serializedVersion: 2
-      x: 1740
-      y: 1363
-      width: 64
-      height: 84
-    paddingLeft: .59375
-    paddingRight: .40625
-    paddingTop: .095238097
-    paddingBottom: .0833333358
-  - name: 57009
-    outer:
-      serializedVersion: 2
-      x: 620
-      y: 265
-      width: 45
-      height: 123
-    inner:
-      serializedVersion: 2
-      x: 620
-      y: 265
-      width: 45
-      height: 123
-    paddingLeft: .311111122
-    paddingRight: .444444448
-    paddingTop: .024390243
-    paddingBottom: .016260162
   - name: 86042
     outer:
       serializedVersion: 2
-      x: 1280
-      y: 1466
+      x: 1835
+      y: 1504
       width: 118
       height: 51
     inner:
       serializedVersion: 2
-      x: 1280
-      y: 1466
+      x: 1835
+      y: 1504
       width: 118
       height: 51
     paddingLeft: .0423728824
     paddingRight: .0423728824
     paddingTop: .294117659
     paddingBottom: .254901975
-  - name: 51002
-    outer:
-      serializedVersion: 2
-      x: 1677
-      y: 1608
-      width: 65
-      height: 36
-    inner:
-      serializedVersion: 2
-      x: 1677
-      y: 1608
-      width: 65
-      height: 36
-    paddingLeft: .492307693
-    paddingRight: .476923078
-    paddingTop: .527777791
-    paddingBottom: .666666687
   - name: 33559
     outer:
       serializedVersion: 2
-      x: 352
-      y: 1829
+      x: 105
+      y: 283
       width: 107
       height: 90
     inner:
       serializedVersion: 2
-      x: 352
-      y: 1829
+      x: 105
+      y: 283
       width: 107
       height: 90
     paddingLeft: .121495329
     paddingRight: .0747663528
     paddingTop: .055555556
     paddingBottom: .0444444455
-  - name: 51010
-    outer:
-      serializedVersion: 2
-      x: 1099
-      y: 1294
-      width: 64
-      height: 68
-    inner:
-      serializedVersion: 2
-      x: 1099
-      y: 1294
-      width: 64
-      height: 68
-    paddingLeft: .5
-    paddingRight: .5
-    paddingTop: .0588235296
-    paddingBottom: .102941178
   - name: 80128
     outer:
       serializedVersion: 2
       x: 105
-      y: 1190
+      y: 1312
       width: 121
       height: 119
     inner:
       serializedVersion: 2
       x: 105
-      y: 1190
+      y: 1312
       width: 121
       height: 119
     paddingLeft: .0330578499
@@ -3953,14 +3069,14 @@ MonoBehaviour:
   - name: 33300
     outer:
       serializedVersion: 2
-      x: 517
-      y: 184
+      x: 550
+      y: 1434
       width: 54
       height: 121
     inner:
       serializedVersion: 2
-      x: 517
-      y: 184
+      x: 550
+      y: 1434
       width: 54
       height: 121
     paddingLeft: .240740746
@@ -3970,65 +3086,31 @@ MonoBehaviour:
   - name: 33477
     outer:
       serializedVersion: 2
-      x: 604
-      y: 1518
+      x: 462
+      y: 1376
       width: 86
       height: 89
     inner:
       serializedVersion: 2
-      x: 604
-      y: 1518
+      x: 462
+      y: 1376
       width: 86
       height: 89
     paddingLeft: .279069781
     paddingRight: .209302321
     paddingTop: .0674157292
     paddingBottom: .0449438207
-  - name: 67002
-    outer:
-      serializedVersion: 2
-      x: 573
-      y: 559
-      width: 43
-      height: 120
-    inner:
-      serializedVersion: 2
-      x: 573
-      y: 559
-      width: 43
-      height: 120
-    paddingLeft: .395348847
-    paddingRight: .441860467
-    paddingTop: .0416666679
-    paddingBottom: .0250000004
-  - name: 61010
-    outer:
-      serializedVersion: 2
-      x: 1315
-      y: 1295
-      width: 63
-      height: 67
-    inner:
-      serializedVersion: 2
-      x: 1315
-      y: 1295
-      width: 63
-      height: 67
-    paddingLeft: .460317463
-    paddingRight: .571428597
-    paddingTop: .0597014911
-    paddingBottom: .119402982
   - name: 33551
     outer:
       serializedVersion: 2
       x: 105
-      y: 338
+      y: 556
       width: 107
       height: 91
     inner:
       serializedVersion: 2
       x: 105
-      y: 338
+      y: 556
       width: 107
       height: 91
     paddingLeft: .121495329
@@ -4038,14 +3120,14 @@ MonoBehaviour:
   - name: 33501
     outer:
       serializedVersion: 2
-      x: 1190
-      y: 1636
+      x: 462
+      y: 1466
       width: 87
       height: 89
     inner:
       serializedVersion: 2
-      x: 1190
-      y: 1636
+      x: 462
+      y: 1466
       width: 87
       height: 89
     paddingLeft: .264367819
@@ -4055,14 +3137,14 @@ MonoBehaviour:
   - name: 81189
     outer:
       serializedVersion: 2
-      x: 517
-      y: 1376
+      x: 1572
+      y: 1569
       width: 102
       height: 71
     inner:
       serializedVersion: 2
-      x: 517
-      y: 1376
+      x: 1572
+      y: 1569
       width: 102
       height: 71
     paddingLeft: .176470593
@@ -4073,13 +3155,13 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 105
-      y: 537
+      y: 755
       width: 106
       height: 106
     inner:
       serializedVersion: 2
       x: 105
-      y: 537
+      y: 755
       width: 106
       height: 106
     paddingLeft: .094339624
@@ -4089,13 +3171,13 @@ MonoBehaviour:
   - name: 83026
     outer:
       serializedVersion: 2
-      x: 1782
+      x: 1659
       y: 1926
       width: 122
       height: 122
     inner:
       serializedVersion: 2
-      x: 1782
+      x: 1659
       y: 1926
       width: 122
       height: 122
@@ -4107,13 +3189,13 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 0
-      y: 1455
+      y: 1765
       width: 104
       height: 154
     inner:
       serializedVersion: 2
       x: 0
-      y: 1455
+      y: 1765
       width: 104
       height: 154
     paddingLeft: .134615391
@@ -4140,14 +3222,14 @@ MonoBehaviour:
   - name: 81091A
     outer:
       serializedVersion: 2
-      x: 1660
-      y: 1449
+      x: 779
+      y: 1369
       width: 85
       height: 68
     inner:
       serializedVersion: 2
-      x: 1660
-      y: 1449
+      x: 779
+      y: 1369
       width: 85
       height: 68
     paddingLeft: .247058824
@@ -4157,14 +3239,14 @@ MonoBehaviour:
   - name: 81126A
     outer:
       serializedVersion: 2
-      x: 1164
-      y: 1312
+      x: 1233
+      y: 1387
       width: 86
       height: 50
     inner:
       serializedVersion: 2
-      x: 1164
-      y: 1312
+      x: 1233
+      y: 1387
       width: 86
       height: 50
     paddingLeft: .244186044
@@ -4175,13 +3257,13 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 105
-      y: 740
+      y: 862
       width: 106
       height: 115
     inner:
       serializedVersion: 2
       x: 105
-      y: 740
+      y: 862
       width: 106
       height: 115
     paddingLeft: .0754716992
@@ -4192,13 +3274,13 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 0
-      y: 731
+      y: 614
       width: 89
       height: 116
     inner:
       serializedVersion: 2
       x: 0
-      y: 731
+      y: 614
       width: 89
       height: 116
     paddingLeft: .202247187
@@ -4208,14 +3290,14 @@ MonoBehaviour:
   - name: Porta1
     outer:
       serializedVersion: 2
-      x: 572
-      y: 929
+      x: 550
+      y: 476
       width: 46
       height: 125
     inner:
       serializedVersion: 2
-      x: 572
-      y: 929
+      x: 550
+      y: 476
       width: 46
       height: 125
     paddingLeft: .978260875
@@ -4225,13 +3307,13 @@ MonoBehaviour:
   - name: Exaustor
     outer:
       serializedVersion: 2
-      x: 1000
+      x: 921
       y: 1846
       width: 128
       height: 73
     inner:
       serializedVersion: 2
-      x: 1000
+      x: 921
       y: 1846
       width: 128
       height: 73
@@ -4242,14 +3324,14 @@ MonoBehaviour:
   - name: Porta2
     outer:
       serializedVersion: 2
-      x: 572
-      y: 1055
+      x: 550
+      y: 602
       width: 46
       height: 125
     inner:
       serializedVersion: 2
-      x: 572
-      y: 1055
+      x: 550
+      y: 602
       width: 46
       height: 125
     paddingLeft: .978260875
@@ -4276,14 +3358,14 @@ MonoBehaviour:
   - name: Mesa
     outer:
       serializedVersion: 2
-      x: 105
-      y: 644
+      x: 350
+      y: 1824
       width: 122
       height: 95
     inner:
       serializedVersion: 2
-      x: 105
-      y: 644
+      x: 350
+      y: 1824
       width: 122
       height: 95
     paddingLeft: 0
@@ -4293,14 +3375,14 @@ MonoBehaviour:
   - name: microondas
     outer:
       serializedVersion: 2
-      x: 1461
-      y: 1831
+      x: 0
+      y: 10
       width: 100
       height: 88
     inner:
       serializedVersion: 2
-      x: 1461
-      y: 1831
+      x: 0
+      y: 10
       width: 100
       height: 88
     paddingLeft: .129999995
@@ -4311,13 +3393,13 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 0
-      y: 614
+      y: 731
       width: 89
       height: 116
     inner:
       serializedVersion: 2
       x: 0
-      y: 614
+      y: 731
       width: 89
       height: 116
     paddingLeft: .202247187
@@ -4327,14 +3409,14 @@ MonoBehaviour:
   - name: Geladeira
     outer:
       serializedVersion: 2
-      x: 228
-      y: 706
+      x: 227
+      y: 676
       width: 72
       height: 124
     inner:
       serializedVersion: 2
-      x: 228
-      y: 706
+      x: 227
+      y: 676
       width: 72
       height: 124
     paddingLeft: .347222209
@@ -4345,13 +3427,13 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 105
-      y: 856
+      y: 978
       width: 121
       height: 103
     inner:
       serializedVersion: 2
       x: 105
-      y: 856
+      y: 978
       width: 121
       height: 103
     paddingLeft: .0413223132
@@ -4361,13 +3443,13 @@ MonoBehaviour:
   - name: Lajota Branca
     outer:
       serializedVersion: 2
-      x: 1032
+      x: 258
       y: 1920
       width: 128
       height: 128
     inner:
       serializedVersion: 2
-      x: 1032
+      x: 258
       y: 1920
       width: 128
       height: 128
@@ -4395,13 +3477,13 @@ MonoBehaviour:
   - name: Lajota Cinza
     outer:
       serializedVersion: 2
-      x: 387
+      x: 1032
       y: 1920
       width: 128
       height: 128
     inner:
       serializedVersion: 2
-      x: 387
+      x: 1032
       y: 1920
       width: 128
       height: 128
@@ -4446,13 +3528,13 @@ MonoBehaviour:
   - name: Lajota Rosa
     outer:
       serializedVersion: 2
-      x: 645
+      x: 387
       y: 1920
       width: 128
       height: 128
     inner:
       serializedVersion: 2
-      x: 645
+      x: 387
       y: 1920
       width: 128
       height: 128
@@ -4463,13 +3545,13 @@ MonoBehaviour:
   - name: Lajota Triangulo
     outer:
       serializedVersion: 2
-      x: 516
+      x: 774
       y: 1920
       width: 128
       height: 128
     inner:
       serializedVersion: 2
-      x: 516
+      x: 774
       y: 1920
       width: 128
       height: 128
@@ -4480,13 +3562,13 @@ MonoBehaviour:
   - name: Lajota Triangulo preto
     outer:
       serializedVersion: 2
-      x: 774
+      x: 645
       y: 1920
       width: 128
       height: 128
     inner:
       serializedVersion: 2
-      x: 774
+      x: 645
       y: 1920
       width: 128
       height: 128
@@ -4497,13 +3579,13 @@ MonoBehaviour:
   - name: Lajota Verde
     outer:
       serializedVersion: 2
-      x: 258
+      x: 516
       y: 1920
       width: 128
       height: 128
     inner:
       serializedVersion: 2
-      x: 258
+      x: 516
       y: 1920
       width: 128
       height: 128
@@ -4514,14 +3596,14 @@ MonoBehaviour:
   - name: 33100
     outer:
       serializedVersion: 2
-      x: 517
-      y: 38
+      x: 827
+      y: 1483
       width: 89
       height: 72
     inner:
       serializedVersion: 2
-      x: 517
-      y: 38
+      x: 827
+      y: 1483
       width: 89
       height: 72
     paddingLeft: .23595506
@@ -4531,14 +3613,14 @@ MonoBehaviour:
   - name: 33201
     outer:
       serializedVersion: 2
-      x: 1872
-      y: 1847
+      x: 302
+      y: 1725
       width: 119
       height: 72
     inner:
       serializedVersion: 2
-      x: 1872
-      y: 1847
+      x: 302
+      y: 1725
       width: 119
       height: 72
     paddingLeft: .0420168079
@@ -4565,14 +3647,14 @@ MonoBehaviour:
   - name: 33150
     outer:
       serializedVersion: 2
-      x: 392
-      y: 1755
+      x: 422
+      y: 1725
       width: 118
       height: 72
     inner:
       serializedVersion: 2
-      x: 392
-      y: 1755
+      x: 422
+      y: 1725
       width: 118
       height: 72
     paddingLeft: .0508474559
@@ -4616,14 +3698,14 @@ MonoBehaviour:
   - name: 33200
     outer:
       serializedVersion: 2
-      x: 511
-      y: 1755
+      x: 541
+      y: 1725
       width: 118
       height: 72
     inner:
       serializedVersion: 2
-      x: 511
-      y: 1755
+      x: 541
+      y: 1725
       width: 118
       height: 72
     paddingLeft: .0508474559
@@ -4633,14 +3715,14 @@ MonoBehaviour:
   - name: 33101
     outer:
       serializedVersion: 2
-      x: 1933
-      y: 1395
+      x: 968
+      y: 1385
       width: 89
       height: 52
     inner:
       serializedVersion: 2
-      x: 1933
-      y: 1395
+      x: 968
+      y: 1385
       width: 89
       height: 52
     paddingLeft: .23595506
@@ -4650,14 +3732,14 @@ MonoBehaviour:
   - name: 33125
     outer:
       serializedVersion: 2
-      x: 517
-      y: 111
+      x: 1952
+      y: 1725
       width: 90
       height: 72
     inner:
       serializedVersion: 2
-      x: 517
-      y: 111
+      x: 1952
+      y: 1725
       width: 90
       height: 72
     paddingLeft: .222222224
@@ -4667,14 +3749,14 @@ MonoBehaviour:
   - name: 33050
     outer:
       serializedVersion: 2
-      x: 691
-      y: 1543
+      x: 1364
+      y: 1733
       width: 119
       height: 64
     inner:
       serializedVersion: 2
-      x: 691
-      y: 1543
+      x: 1364
+      y: 1733
       width: 119
       height: 64
     paddingLeft: .0504201688
@@ -4685,13 +3767,13 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 0
-      y: 1765
+      y: 1455
       width: 104
       height: 154
     inner:
       serializedVersion: 2
       x: 0
-      y: 1765
+      y: 1455
       width: 104
       height: 154
     paddingLeft: .134615391
@@ -4701,13 +3783,13 @@ MonoBehaviour:
   - name: 83027
     outer:
       serializedVersion: 2
-      x: 1659
+      x: 1782
       y: 1926
       width: 122
       height: 122
     inner:
       serializedVersion: 2
-      x: 1659
+      x: 1782
       y: 1926
       width: 122
       height: 122
@@ -4718,14 +3800,14 @@ MonoBehaviour:
   - name: 33075
     outer:
       serializedVersion: 2
-      x: 811
-      y: 1543
+      x: 1244
+      y: 1733
       width: 119
       height: 64
     inner:
       serializedVersion: 2
-      x: 811
-      y: 1543
+      x: 1244
+      y: 1733
       width: 119
       height: 64
     paddingLeft: .0504201688
@@ -4735,14 +3817,14 @@ MonoBehaviour:
   - name: 33000 e 33001
     outer:
       serializedVersion: 2
-      x: 734
-      y: 726
+      x: 770
+      y: 1295
       width: 53
       height: 72
     inner:
       serializedVersion: 2
-      x: 734
-      y: 726
+      x: 770
+      y: 1295
       width: 53
       height: 72
     paddingLeft: .716981113
@@ -4769,14 +3851,14 @@ MonoBehaviour:
   - name: 33025 e 33026
     outer:
       serializedVersion: 2
-      x: 734
-      y: 799
+      x: 716
+      y: 1295
       width: 53
       height: 72
     inner:
       serializedVersion: 2
-      x: 734
-      y: 799
+      x: 716
+      y: 1295
       width: 53
       height: 72
     paddingLeft: .716981113
@@ -4786,14 +3868,14 @@ MonoBehaviour:
   - name: tapete
     outer:
       serializedVersion: 2
-      x: 1254
-      y: 1548
+      x: 1711
+      y: 1738
       width: 128
       height: 59
     inner:
       serializedVersion: 2
-      x: 1254
-      y: 1548
+      x: 1711
+      y: 1738
       width: 128
       height: 59
     paddingLeft: 0
@@ -4803,14 +3885,14 @@ MonoBehaviour:
   - name: Painel
     outer:
       serializedVersion: 2
-      x: 1170
-      y: 1458
+      x: 717
+      y: 1496
       width: 109
       height: 59
     inner:
       serializedVersion: 2
-      x: 1170
-      y: 1458
+      x: 717
+      y: 1496
       width: 109
       height: 59
     paddingLeft: .137614682
@@ -4820,14 +3902,14 @@ MonoBehaviour:
   - name: Persiana
     outer:
       serializedVersion: 2
-      x: 303
-      y: 1726
+      x: 1382
+      y: 1818
       width: 88
       height: 101
     inner:
       serializedVersion: 2
-      x: 303
-      y: 1726
+      x: 1382
+      y: 1818
       width: 88
       height: 101
     paddingLeft: .215909094
@@ -4837,14 +3919,14 @@ MonoBehaviour:
   - name: 33625
     outer:
       serializedVersion: 2
-      x: 517
-      y: 558
+      x: 462
+      y: 541
       width: 55
       height: 121
     inner:
       serializedVersion: 2
-      x: 517
-      y: 558
+      x: 462
+      y: 541
       width: 55
       height: 121
     paddingLeft: .218181819
@@ -4854,14 +3936,14 @@ MonoBehaviour:
   - name: 33750
     outer:
       serializedVersion: 2
-      x: 303
-      y: 992
+      x: 1912
+      y: 1798
       width: 71
       height: 121
     inner:
       serializedVersion: 2
-      x: 303
-      y: 992
+      x: 1912
+      y: 1798
       width: 71
       height: 121
     paddingLeft: .0563380271
@@ -4871,14 +3953,14 @@ MonoBehaviour:
   - name: 33675
     outer:
       serializedVersion: 2
-      x: 228
-      y: 215
+      x: 1546
+      y: 1800
       width: 74
       height: 119
     inner:
       serializedVersion: 2
-      x: 228
-      y: 215
+      x: 1546
+      y: 1800
       width: 74
       height: 119
     paddingLeft: .0405405387
@@ -4888,14 +3970,14 @@ MonoBehaviour:
   - name: 33601
     outer:
       serializedVersion: 2
-      x: 447
-      y: 133
+      x: 376
+      y: 63
       width: 58
       height: 119
     inner:
       serializedVersion: 2
-      x: 447
-      y: 133
+      x: 376
+      y: 63
       width: 58
       height: 119
     paddingLeft: .137931034
@@ -4905,14 +3987,14 @@ MonoBehaviour:
   - name: 33600
     outer:
       serializedVersion: 2
-      x: 447
-      y: 377
+      x: 1984
+      y: 1800
       width: 59
       height: 119
     inner:
       serializedVersion: 2
-      x: 447
-      y: 377
+      x: 1984
+      y: 1800
       width: 59
       height: 119
     paddingLeft: .118644066
@@ -4922,14 +4004,14 @@ MonoBehaviour:
   - name: 33700
     outer:
       serializedVersion: 2
-      x: 303
-      y: 1358
+      x: 1768
+      y: 1798
       width: 71
       height: 121
     inner:
       serializedVersion: 2
-      x: 303
-      y: 1358
+      x: 1768
+      y: 1798
       width: 71
       height: 121
     paddingLeft: .0563380271
@@ -4939,14 +4021,14 @@ MonoBehaviour:
   - name: 33701
     outer:
       serializedVersion: 2
-      x: 303
-      y: 1236
+      x: 1840
+      y: 1798
       width: 71
       height: 121
     inner:
       serializedVersion: 2
-      x: 303
-      y: 1236
+      x: 1840
+      y: 1798
       width: 71
       height: 121
     paddingLeft: .0563380271
@@ -4956,14 +4038,14 @@ MonoBehaviour:
   - name: 33751
     outer:
       serializedVersion: 2
-      x: 303
-      y: 1114
+      x: 1696
+      y: 1798
       width: 71
       height: 121
     inner:
       serializedVersion: 2
-      x: 303
-      y: 1114
+      x: 1696
+      y: 1798
       width: 71
       height: 121
     paddingLeft: .0563380271
@@ -4973,14 +4055,14 @@ MonoBehaviour:
   - name: 33624
     outer:
       serializedVersion: 2
-      x: 517
-      y: 680
+      x: 462
+      y: 419
       width: 55
       height: 121
     inner:
       serializedVersion: 2
-      x: 517
-      y: 680
+      x: 462
+      y: 419
       width: 55
       height: 121
     paddingLeft: .218181819
@@ -4990,14 +4072,14 @@ MonoBehaviour:
   - name: 33650
     outer:
       serializedVersion: 2
-      x: 228
-      y: 95
+      x: 1471
+      y: 1800
       width: 74
       height: 119
     inner:
       serializedVersion: 2
-      x: 228
-      y: 95
+      x: 1471
+      y: 1800
       width: 74
       height: 119
     paddingLeft: .0405405387

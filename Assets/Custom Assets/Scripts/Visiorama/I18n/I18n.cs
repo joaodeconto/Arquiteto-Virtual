@@ -98,6 +98,12 @@ public class I18n {
 		hashWords [0] ["tip-modulo-rotacao"] = "Rotacionar módulo selecionado.";
 		hashWords [0] ["tip-modulo-focar"] 	 = "Focar câmera no módulo selecionado.";
 		hashWords [0] ["tip-modulo-remover"] = "Remover módulo selecionado da cena.";
+
+		hashWords [0] ["black"] = "Preto";
+		hashWords [0] ["gray"] = "Cinza";
+		hashWords [0] ["green"] = "Verde";
+		hashWords [0] ["violet"] = "Violeta";
+		hashWords [0] ["white"] = "Branco";
 		
 	}
 	static private void InitializeEnglish(){
@@ -157,6 +163,12 @@ public class I18n {
 		hashWords [1] ["tip-modulo-rotacao"] = "Rotate selected module.";
 		hashWords [1] ["tip-modulo-focar"] 	 = "Focus camera on selected module.";
 		hashWords [1] ["tip-modulo-remover"] = "Delete selected module.";
+
+		hashWords [1] ["black"]	= "Black";
+		hashWords [1] ["gray"] 	= "Gray";
+		hashWords [1] ["green"] = "Green";
+		hashWords [1] ["violet"]= "Violet";
+		hashWords [1] ["white"] = "White";
 	}
 	static private void InitializeSpanish ()
 	{
@@ -216,6 +228,12 @@ public class I18n {
 		hashWords [2] ["tip-modulo-rotacao"] = "Rotate selected module.";
 		hashWords [2] ["tip-modulo-focar"] 	 = "Focus camera on selected module.";
 		hashWords [2] ["tip-modulo-remover"] = "Delete selected module.";
+
+		hashWords [2] ["black"]	= "Black";
+		hashWords [2] ["gray"] 	= "Gray";
+		hashWords [2] ["green"] = "Green";
+		hashWords [2] ["violet"]= "Violet";
+		hashWords [2] ["white"] = "White";
 	}
 	#endregion
 

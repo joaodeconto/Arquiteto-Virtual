@@ -1,11 +1,12 @@
 fileFormatVersion: 2
-guid: 3fbfbcce0da6c9240935b2719e546814
+guid: c2afa07b9c72b4048a7644884093bbda
 ModelImporter:
   fileIDToRecycleName:
-    4300000: mesh63
+    4300000: Cube
+    7400000: Default Take //// fogao 1
   serializedVersion: 10
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
   animations:
@@ -20,7 +21,7 @@ ModelImporter:
     clipAnimations: []
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: .100000001
     meshCompression: 0
     addColliders: 0
     swapUVChannels: 0
@@ -40,10 +41,16 @@ ModelImporter:
     //RootNode:
       data:
         first: 1
-        second: a2860100
+        second: a0860100
       data:
         first: 4
-        second: 821a0600
+        second: 801a0600
+      data:
+        first: 23
+        second: 60182300
+      data:
+        first: 33
+        second: a05a3200
       data:
         first: 111
         second: 605fa900

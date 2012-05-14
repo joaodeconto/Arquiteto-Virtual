@@ -241,6 +241,10 @@ public class SnapBehaviour : MonoBehaviour
 
 	void VerifyGround ()
 	{
+		if (GetComponent<InformacoesMovel> ().tipoMovel == TipoMovel.LIVRE) {
+			return;
+		}
+		
 		uint foundGround = 0;
 
 		Vector3[] origins = new Vector3[4]{new Vector3 (this.collider.bounds.center.x - 

@@ -5,6 +5,8 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/_Scenes/MakeYourKitchen.unity
   - enabled: 1
     path: Assets/_Scenes/SelectLanguage.unity
   - enabled: 1
@@ -12,4 +14,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/WallBuilder.unity
   - enabled: 1
-    path: Assets/_Scenes/MakeYourKitchen.unity
+    path: Assets/_Scenes/JV/MakeYourKitchenJV.unity

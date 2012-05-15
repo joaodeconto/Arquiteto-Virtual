@@ -5,11 +5,12 @@ using System.Collections.Generic;
 
 public class WallBuilder : MonoBehaviour {
 	
-	public const float IPSLON 		= 0.0001f;
-	public const float WALL_HEIGHT 	= 2.6f;
-	
+	public const  float IPSLON 		= 0.0001f;
+	public static float WALL_HEIGHT = 2.6f;
+
+	public float WallHeight;
+
 	#region Parents
-	public InfoWall[] 	walls;
 	public Transform 	parentFloor;
 	public Transform 	parentCeil;
 	public Transform	parentWalls;
@@ -19,7 +20,7 @@ public class WallBuilder : MonoBehaviour {
 	public Camera 		mainCamera;
 	public GameObject 	grid;
 	public GameObject 	floor;
-	public GameObject 	wall, wall95, wall90, corner;
+	public GameObject 	wall;
 	public GameObject 	ceil;
 	#endregion
 	
@@ -55,6 +56,16 @@ public class WallBuilder : MonoBehaviour {
 	#region Unty Methods
 	void Start()
 	{
+		if (Mathf.Approximately(WallHeight,0) || WallHeight < 0)
+		{
+			Debug.LogError ("WallHeight não é um número positivo.");
+			WallHeight = WALL_HEIGHT;
+		}
+		else
+		{
+			WALL_HEIGHT = WallHeight;
+		}
+
 		WallWidth = 5;
 		WallDepth = 5;
 		
@@ -272,7 +283,7 @@ public class WallBuilder : MonoBehaviour {
 	{
 		GameObject newCeil = Instantiate(ceil, Vector3.zero, ceil.transform.rotation) as GameObject;	
 		newCeil.transform.position = WallBuilder.ROOT + new Vector3 ( (int)(- ( RealWallWidth / 2) ) - 0.5f ,
-																				2.6f ,
+																				WallBuilder.WALL_HEIGHT ,
 																	  (int)(  RealWallDepth / 2)   + 0.5f );
 		newCeil.transform.parent = parentCeil;
 		newCeil.transform.localScale = new Vector3(RealWallWidth, RealWallDepth, 1);	

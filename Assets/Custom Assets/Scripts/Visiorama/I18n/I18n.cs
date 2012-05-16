@@ -98,7 +98,26 @@ public class I18n {
 		hashWords [0] ["tip-modulo-rotacao"] = "Rotacionar módulo selecionado.";
 		hashWords [0] ["tip-modulo-focar"] 	 = "Focar câmera no módulo selecionado.";
 		hashWords [0] ["tip-modulo-remover"] = "Remover módulo selecionado da cena.";
-		
+
+		//Cores
+		hashWords [0] ["black"] = "Preto";
+		hashWords [0] ["gray"] = "Cinza";
+		hashWords [0] ["green"] = "Verde";
+		hashWords [0] ["violet"] = "Violeta";
+		hashWords [0] ["white"] = "Branco";
+
+		//Tipos de tops
+		hashWords [0] ["cooktop"] = "Cooktop";
+		hashWords [0] ["com pia"] = "Pia";
+		hashWords [0] ["com tampo"] = "Com Tampo";
+		hashWords [0] ["sem tampo"] = "Sem Tampo";
+
+		//Texturas de tampos
+		hashWords [0] ["labrador"] 		= "Labrador";
+		hashWords [0] ["marmore cinza"] = "Mármore Cinza";
+		hashWords [0] ["marmore preto"] = "Mármore Preto";
+		hashWords [0] ["onix bianco"]	= "Onix Bianco";
+
 	}
 	static private void InitializeEnglish(){
 		//Escolha cozinha
@@ -157,6 +176,24 @@ public class I18n {
 		hashWords [1] ["tip-modulo-rotacao"] = "Rotate selected module.";
 		hashWords [1] ["tip-modulo-focar"] 	 = "Focus camera on selected module.";
 		hashWords [1] ["tip-modulo-remover"] = "Delete selected module.";
+
+		hashWords [1] ["black"]	= "Black";
+		hashWords [1] ["gray"] 	= "Gray";
+		hashWords [1] ["green"] = "Green";
+		hashWords [1] ["violet"]= "Violet";
+		hashWords [1] ["white"] = "White";
+
+		//Tipos de tops
+		hashWords [1] ["cooktop"] = "Cooktop";
+		hashWords [1] ["com pia"] = "Sink";
+		hashWords [1] ["com tampo"] = "With top";
+		hashWords [1] ["sem tampo"] = "Without top";
+
+		//Texturas de tampos
+		hashWords [1] ["labrador"] 		= "Labrador";
+		hashWords [1] ["marmore cinza"] = "Gray Marble";
+		hashWords [1] ["marmore preto"] = "Black Marble";
+		hashWords [1] ["onix bianco"] 	= "Onix Bianco";
 	}
 	static private void InitializeSpanish ()
 	{
@@ -216,6 +253,24 @@ public class I18n {
 		hashWords [2] ["tip-modulo-rotacao"] = "Rotate selected module.";
 		hashWords [2] ["tip-modulo-focar"] 	 = "Focus camera on selected module.";
 		hashWords [2] ["tip-modulo-remover"] = "Delete selected module.";
+
+		hashWords [2] ["black"]	= "Black";
+		hashWords [2] ["gray"] 	= "Gray";
+		hashWords [2] ["green"] = "Green";
+		hashWords [2] ["violet"]= "Violet";
+		hashWords [2] ["white"] = "White";
+
+		//Tipos de tops
+		hashWords [2] ["cooktop"] = "Cooktop";
+		hashWords [2] ["com pia"] = "Sink";
+		hashWords [2] ["com tampo"] = "With top";
+		hashWords [2] ["sem tampo"] = "Without top";
+
+		//Texturas de tampos
+		hashWords [2] ["labrador"] 		= "Labrador";
+		hashWords [2] ["marmore cinza"] = "Mármol Gris";
+		hashWords [2] ["marmore preto"] = "Mármol Negro";
+		hashWords [2] ["onix bianco"] 	= "Onix Bianco";
 	}
 	#endregion
 

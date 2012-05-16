@@ -42,7 +42,9 @@ public class InfoController : MonoBehaviour {
 	
 	private GameObject mainCamera;
 	private bool panelChange = false;
-	
+
+	private float defaultBackgroundYSize;
+
 	//Painter to Extras
 	private Painter painter;
 	
@@ -82,7 +84,7 @@ public class InfoController : MonoBehaviour {
 			Debug.Break ();
 			return;
 		}
-		
+
 		painter = mainCamera.GetComponentInChildren<Painter>();
 		
 		panelInfo.SetActiveRecursively(true);
@@ -402,13 +404,13 @@ public class InfoController : MonoBehaviour {
 				
 				//If this is true, in the GUI, show the option
 				if (tampoTypeRegexPrefix.Equals("sem tampo") || tampoTypeRegexPrefix.Equals("s tampo"))
-					checkBox = checkBoxTops.transform.Find ("Check1");
+					checkBox = checkBoxTops.transform.Find ("Sem Tampo");
 				if (tampoTypeRegexPrefix.Equals("com tampo") || tampoTypeRegexPrefix.Equals("c tampo"))
-					checkBox = checkBoxTops.transform.Find ("Check2");
+					checkBox = checkBoxTops.transform.Find ("Com Tampo");
 				if (tampoTypeRegexPrefix.Equals("com cooktop") || tampoTypeRegexPrefix.Equals("com cook top"))
-					checkBox = checkBoxTops.transform.Find ("Check3");
+					checkBox = checkBoxTops.transform.Find ("Cooktop");
 				if (tampoTypeRegexPrefix.Equals("com pia") || tampoTypeRegexPrefix.Equals("para pia"))
-					checkBox = checkBoxTops.transform.Find ("Check4");
+					checkBox = checkBoxTops.transform.Find ("Com Pia");
 				
 				if (checkBox == null) {
 					Debug.LogError ("WTF? Ele nao achou nenhum check dos TOPS o.o");
@@ -428,7 +430,7 @@ public class InfoController : MonoBehaviour {
 		}
 
 		//Religar label do tops
-		checkBoxTops.transform.Find("Label").gameObject.active = true;
+		checkBoxTops.transform.Find("_Label").gameObject.active = true;
 	}
 
 	private void ResolveCheckBoxDoorSide ()
@@ -476,8 +478,7 @@ public class InfoController : MonoBehaviour {
 					
 		checkBoxTextures.SetActiveRecursively(false);
 		
-		if( currentTop.Equals("com tampo") || currentTop.Equals("c tampo") || 
-			currentTop.Equals("com cooktop") || currentTop.Equals("com cook top"))
+		if( Regex.Match(currentTop, "tampo|cook|pia").Success)
 		{
 			checkBoxTextures.active = true;
 			

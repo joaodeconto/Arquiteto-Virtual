@@ -48,12 +48,12 @@ public class InfoOptionButtonHandler : MonoBehaviour {
 				}
 			}
 			
-			backgroundScaleRoot.y = 70;
+			backgroundScaleRoot.y = 350;
 			foreach (iTweenMotion motion in background.gameObject.GetComponents<iTweenMotion>())
 			{
 				if (motion.Name == "descer")
 				{
-					//motion.to = backgroundScaleRoot + Vector3.up * -yOffset * activeCheckGroups;
+					motion.to = backgroundScaleRoot;// + Vector3.up * -yOffset * activeCheckGroups;
 					motion.Play(true);
 				}
 			}

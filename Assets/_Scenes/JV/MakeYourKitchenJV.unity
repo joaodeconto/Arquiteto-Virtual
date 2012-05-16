@@ -390,7 +390,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 66791105}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.575539589, y: .575539589, z: 321.600006}
+  m_LocalPosition: {x: -1.08016872, y: 1.08108115, z: 321.600006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -2940,9 +2940,9 @@ Camera:
   m_BackGroundColor: {r: .5, g: .5, b: .5, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: .0167669058
-    y: .734961808
-    width: .143740356
+    x: .00573596358
+    y: .735751688
+    width: .146874934
     height: 0
   near clip plane: .100000001
   far clip plane: 10
@@ -4265,7 +4265,7 @@ GameObject:
   - 114: {fileID: 360214216}
   - 114: {fileID: 360214217}
   m_Layer: 12
-  m_Name: Check4
+  m_Name: Com Pia
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6003,7 +6003,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 497391926}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.575539589, y: .575539589, z: 321.600037}
+  m_LocalPosition: {x: -1.08016872, y: 1.08108115, z: 321.600037}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -6740,7 +6740,7 @@ GameObject:
   - 114: {fileID: 547841577}
   - 114: {fileID: 547841578}
   m_Layer: 12
-  m_Name: Check3
+  m_Name: Cooktop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8010,7 +8010,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 665805632}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.719424546, y: .719424486, z: 402}
+  m_LocalPosition: {x: -1.35021091, y: 1.35135138, z: 402}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -8855,7 +8855,7 @@ GameObject:
   - 114: {fileID: 725099749}
   - 114: {fileID: 725099750}
   m_Layer: 12
-  m_Name: Check3
+  m_Name: Marmore Cinza
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9484,7 +9484,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 761155668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.719424546, y: .719424486, z: 402}
+  m_LocalPosition: {x: -1.35021091, y: 1.35135138, z: 402}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -9619,7 +9619,7 @@ GameObject:
   - 4: {fileID: 774413233}
   - 114: {fileID: 774413234}
   m_Layer: 12
-  m_Name: Label
+  m_Name: _Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9905,7 +9905,7 @@ GameObject:
   - 114: {fileID: 785838404}
   - 114: {fileID: 785838405}
   m_Layer: 12
-  m_Name: Check2
+  m_Name: Com Tampo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10430,15 +10430,15 @@ Camera:
   m_BackGroundColor: {r: .5, g: .5, b: .5, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: .227632686
-    y: .122290343
+    x: .221200198
+    y: .123080254
     width: 0
-    height: .817671359
+    height: .817671418
   near clip plane: -10
   far clip plane: 10
   field of view: 60
   orthographic: 1
-  orthographic size: .817671359
+  orthographic size: .817671418
   m_Depth: 2
   m_CullingMask:
     serializedVersion: 2
@@ -12332,7 +12332,7 @@ GameObject:
   - 114: {fileID: 909448661}
   - 114: {fileID: 909448662}
   m_Layer: 12
-  m_Name: Check1
+  m_Name: Marmore Preto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13044,9 +13044,9 @@ Camera:
   m_BackGroundColor: {r: .5, g: .5, b: .5, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: .0167669058
-    y: .905614018
-    width: .143740356
+    x: .00573596358
+    y: .906403899
+    width: .146874934
     height: 0
   near clip plane: .100000001
   far clip plane: 10
@@ -14493,7 +14493,7 @@ GameObject:
   - 114: {fileID: 1047751282}
   - 114: {fileID: 1047751283}
   m_Layer: 12
-  m_Name: Check1
+  m_Name: Sem Tampo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15871,7 +15871,7 @@ MonoBehaviour:
   m_Name: 
   Name: descer
   type: 1
-  to: {x: 162, y: 310, z: 0}
+  to: {x: 162, y: 350, z: 0}
   duration: .200000003
   CallWhenFinish: 
 --- !u!114 &1132731213
@@ -16279,9 +16279,9 @@ Camera:
   m_BackGroundColor: {r: .5, g: .5, b: .5, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: .842055917
-    y: .120613731
-    width: .142403007
+    x: .849022567
+    y: .121403627
+    width: .145508453
     height: .755285561
   near clip plane: .100000001
   far clip plane: 10
@@ -16446,7 +16446,7 @@ GameObject:
   - 114: {fileID: 1195516190}
   - 114: {fileID: 1195516191}
   m_Layer: 12
-  m_Name: Check2
+  m_Name: Onix Bianco
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17066,7 +17066,7 @@ GameObject:
   - 114: {fileID: 1242863349}
   - 114: {fileID: 1242863350}
   m_Layer: 12
-  m_Name: Check4
+  m_Name: Labrador
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17980,9 +17980,9 @@ Camera:
   m_BackGroundColor: {r: .5, g: .5, b: .5, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: .0167667866
-    y: .789875627
-    width: .143740416
+    x: .00573581504
+    y: .790665507
+    width: .146875054
     height: 0
   near clip plane: .100000001
   far clip plane: 10
@@ -19979,7 +19979,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1513702682}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.575539589, y: .575539589, z: 321.600006}
+  m_LocalPosition: {x: -1.08016872, y: 1.08108115, z: 321.600006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -20961,7 +20961,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1573784228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.719424546, y: .719424486, z: 402}
+  m_LocalPosition: {x: -1.35021091, y: 1.35135138, z: 402}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -21575,7 +21575,7 @@ GameObject:
   - 4: {fileID: 1631094193}
   - 114: {fileID: 1631094194}
   m_Layer: 12
-  m_Name: Label
+  m_Name: _Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23412,7 +23412,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1808111177}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.575539589, y: .575539589, z: 321.600006}
+  m_LocalPosition: {x: -1.08016872, y: 1.08108115, z: 321.600006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -25578,7 +25578,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1995852662}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.719424546, y: .719424486, z: 402}
+  m_LocalPosition: {x: -1.35021091, y: 1.35135138, z: 402}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -26950,7 +26950,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2107165997}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.719424546, y: .719424486, z: 402}
+  m_LocalPosition: {x: -1.35021091, y: 1.35135138, z: 402}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:

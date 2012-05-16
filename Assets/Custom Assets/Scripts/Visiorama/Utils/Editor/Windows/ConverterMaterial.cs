@@ -275,6 +275,9 @@ public class ConverterMaterial : EditorWindow {
 			++k;
 		}
 		EditorUtility.ClearProgressBar();
+		
+		selections = new Object[0];
+		
 		SetShaders ();
 		
 		Verify ();
@@ -312,6 +315,8 @@ public class ConverterMaterial : EditorWindow {
 		
 		string[] values = materialsLog.ToArray();
 		AssetResources.SaveTextFile(path, values);
+		materialsLog.Clear();
+		values = new string[0];
 	}
 	
 	void LoadConfiguration (string path) {
@@ -379,6 +384,7 @@ public class ConverterMaterial : EditorWindow {
 					}
 				}
 			}
+			allMaterials.Clear();
 		}
 		
 		EditorUtility.ClearProgressBar();

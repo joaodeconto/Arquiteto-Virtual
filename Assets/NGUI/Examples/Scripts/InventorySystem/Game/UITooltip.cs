@@ -116,24 +116,19 @@ public class UITooltip : MonoBehaviour
 					Transform textTrans = text.transform;
 					Vector3 offset = textTrans.localPosition;
 					Vector3 textScale = textTrans.localScale;
-				
+
 //					mSize = text.font.CalculatePrintedSize(text.font.WrapText(tooltipText, textScale.x / text.cachedTransform.localScale.y, true, false).Replace("\\n", "\n"), true);
 					
 					// Calculate the dimensions of the printed text
-					mSize = text.font.CalculatePrintedSize(tooltipText, true);
+					mSize = text.font.CalculatePrintedSize(tooltipText, false);
+					mSize.x *= textScale.x;
 
 					// Scale by the transform and adjust by the padding offset
-					mSize.x *= textScale.x;
-					mSize.y *= textScale.y;
-					mSize.x += offset.x * 4f;
+					mSize.x = (mSize.x > 150f) ? 150f : mSize.x;
+					mSize.y = text.relativeSize.y * transform.Find ("Label").localScale.y;
+					mSize.x += offset.x;
 					mSize.y -= offset.y * 4f;
 					mSize.z = 1f;
-					
-					if (mSize.x > text.lineWidth && text.lineWidth != 0) {
-						int newLines = (int)(mSize.x / text.lineWidth) + 1;
-						mSize.x = text.lineWidth;
-						mSize.y *= newLines;
-					}
 
 					backgroundTrans.localScale = mSize;
 				}

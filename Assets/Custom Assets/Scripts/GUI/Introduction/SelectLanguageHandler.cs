@@ -25,11 +25,8 @@ public class SelectLanguageHandler : MonoBehaviour {
 				break;
 		}
 		
-		Application.LoadLevel(1);
+		ScenesIntroductionController.SelectKitchen.SetActiveRecursively(true);
+		ScenesIntroductionController.SelectLanguage.SetActiveRecursively(false);
 		
-	}
-	
-	void Start () {
-		QualitySettings.currentLevel = QualityLevel.Fastest;
 	}
 }

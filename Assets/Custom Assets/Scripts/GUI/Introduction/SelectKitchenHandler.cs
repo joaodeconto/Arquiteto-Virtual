@@ -53,7 +53,7 @@ public class SelectKitchenHandler : MonoBehaviour {
 				break;
 		}
 		
-		ao = Application.LoadLevelAsync(2);
+		ao = Application.LoadLevelAsync(1);
 		
 	}
 }

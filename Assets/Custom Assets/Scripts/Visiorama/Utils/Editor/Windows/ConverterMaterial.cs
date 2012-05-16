@@ -15,6 +15,7 @@ public class ConverterMaterial : EditorWindow {
 	private bool[] getMaterial;
 	private Vector2 scrollPosition;
 	private string searchField;
+	private bool refresh;
 	
 	// File access
 	private string path, subpath, file;
@@ -34,7 +35,7 @@ public class ConverterMaterial : EditorWindow {
 		plataform = new string[2]{ "PC", "Mobile" };
 		searchField = "";
 		materials = new List<Object>();
-		Refresh ();
+		refresh = false;
 	}
 	
 	void OnGUI () {
@@ -53,6 +54,7 @@ public class ConverterMaterial : EditorWindow {
 		GUI.backgroundColor = Color.white;
 		GUILayout.Space(15);
 		
+		GUI.enabled = refresh;
 		GUILayout.BeginHorizontal();
 		if (GUILayout.Button("Get select materials")) {
 			GetSelectMaterials ();
@@ -123,6 +125,7 @@ public class ConverterMaterial : EditorWindow {
 				SaveConfiguration(path+file);
 			}
 		}
+		GUI.enabled = File.Exists (path+file) && refresh;
 		if (GUILayout.Button("Load")) {
 			if (EditorUtility.DisplayDialog("Are you sure load?",
 				"Are you sure do you want load?", "Yes", "No")) {
@@ -135,6 +138,7 @@ public class ConverterMaterial : EditorWindow {
 		GUILayout.BeginHorizontal();
 		if (GUILayout.Button("Refresh")) {
 			Refresh ();
+			refresh = true;
 		}
 		GUI.enabled = (materials.Count != 0);
 		GUI.backgroundColor = Color.blue;
@@ -150,6 +154,51 @@ public class ConverterMaterial : EditorWindow {
 	void Refresh () {
 		VerifyVersion ();
 		
+		SetShaders ();
+		
+		Verify ();
+	}
+	
+	void Verify () {
+		if (!File.Exists (path+file)) {
+			File.Create (path+file).Close();
+			
+			SaveConfiguration (path+file);
+		} else {
+			LoadConfiguration (path+file);
+		}
+	}
+	
+	void VerifyVersion () {
+		optionFrom = 	EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android || 
+						EditorUserBuildSettings.activeBuildTarget == BuildTarget.iPhone ? 0 : 1;
+		optionTo = 		EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android || 
+						EditorUserBuildSettings.activeBuildTarget == BuildTarget.iPhone ? 1 : 0;
+	}
+	
+	string[] GetShaders () {
+		List<string> listShaders = new List<string>();
+		Object[] allShaders = Resources.FindObjectsOfTypeAll(typeof(Shader)) as Object[];
+		int k = 0;
+		foreach (Shader thisShader in allShaders) {
+			EditorUtility.DisplayCancelableProgressBar(	"Get Shaders",
+														"Shader: " + thisShader.name,
+														(float)k/allShaders.Length);
+			if (!thisShader.name.Contains("Hidden") &&
+				!thisShader.name.Contains("EDITOR") &&
+				!thisShader.name.Contains("__") &&
+				thisShader.name.Length != 0 &&
+				!listShaders.Contains(thisShader.name)) {
+				listShaders.Add(thisShader.name);
+			}
+			++k;
+		}
+		listShaders.Sort();
+		EditorUtility.ClearProgressBar();
+		return listShaders.ToArray();
+	}
+	
+	void SetShaders () {
 		shadersNames = GetShaders ();
 		
 		PC_ShaderChoose = new int[materials.Count];
@@ -205,47 +254,6 @@ public class ConverterMaterial : EditorWindow {
 		}
 		
 		EditorUtility.ClearProgressBar();
-		
-		Verify ();
-	}
-	
-	void Verify () {
-		if (!File.Exists (path+file)) {
-			File.Create (path+file).Close();
-			
-			SaveConfiguration (path+file);
-		} else {
-			LoadConfiguration (path+file);
-		}
-	}
-	
-	void VerifyVersion () {
-		optionFrom = 	EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android || 
-						EditorUserBuildSettings.activeBuildTarget == BuildTarget.iPhone ? 0 : 1;
-		optionTo = 		EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android || 
-						EditorUserBuildSettings.activeBuildTarget == BuildTarget.iPhone ? 1 : 0;
-	}
-	
-	string[] GetShaders () {
-		List<string> listShaders = new List<string>();
-		Object[] allShaders = Resources.FindObjectsOfTypeAll(typeof(Shader)) as Object[];
-		int k = 0;
-		foreach (Shader thisShader in allShaders) {
-			EditorUtility.DisplayCancelableProgressBar(	"Get Shaders",
-														"Shader: " + thisShader.name,
-														(float)k/allShaders.Length);
-			if (!thisShader.name.Contains("Hidden") &&
-				!thisShader.name.Contains("EDITOR") &&
-				!thisShader.name.Contains("__") &&
-				thisShader.name.Length != 0 &&
-				!listShaders.Contains(thisShader.name)) {
-				listShaders.Add(thisShader.name);
-			}
-			++k;
-		}
-		listShaders.Sort();
-		EditorUtility.ClearProgressBar();
-		return listShaders.ToArray();
 	}
 	
 	void GetSelectMaterials () {
@@ -267,6 +275,9 @@ public class ConverterMaterial : EditorWindow {
 			++k;
 		}
 		EditorUtility.ClearProgressBar();
+		SetShaders ();
+		
+		Verify ();
 	}
 	
 	void GetAllMaterials () {
@@ -280,6 +291,9 @@ public class ConverterMaterial : EditorWindow {
 			++k;
 		}
 		EditorUtility.ClearProgressBar();
+		SetShaders ();
+		
+		Verify ();
 	}
 	
 	void SaveConfiguration (string path) {

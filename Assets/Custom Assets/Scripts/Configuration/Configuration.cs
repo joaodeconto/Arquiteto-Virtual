@@ -2,44 +2,25 @@ using UnityEngine;
 
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Serialization;
 
 using Visiorama.Utils;
 
-[System.Serializable]
-public class PresetMobileData {
-	public Vector3 Position 	{ get; private set; }
-	public Quaternion Rotation 	{ get; private set; }
-
-	public int Id { get; private set;}
-	public int CategoryId { get; private set; }
-	public int BrandId 	 { get; private set; }
-	public PresetMobileData(Vector3 position, Quaternion rotation, int id, int categoryId, int brandId){
-		this.Position = position;
-		this.Rotation = Rotation;
-		this.Id 		= id;
-		this.CategoryId	= categoryId;
-		this.BrandId	= brandId;
-	}
-}
-
-public class ConfigurationPreset {
-	public Texture2D image { get; set; }
-	public List<PresetMobileData> PresetDataMobiles { get; set; }
-	public Color WallCeilColor { get; set; }
-	public int WallCeilHueColor { get; set; }
-	public int GroundTextureIndex { get; set; }
-}
-
 public class Configuration : MonoBehaviour {
-	
+
+	public Texture2D[] availableTopTextures;
+
+	public GameObject[] availableLamps;
+
 	public List<string> PresetNames { get; private set; }
 	public List<ConfigurationPreset> Presets { get; private set; } 
 	
 	public void Initialize(){
-		
-//		System.Xml.Serialization.XmlSerializer
 		
 		PresetNames = new List<string>();
 		PresetNames.Add("www.visiorama360.com.br/Telasul/Teste/Presets/configuracao1.xml");
@@ -48,6 +29,25 @@ public class Configuration : MonoBehaviour {
 			StartCoroutine("LoadStateWeb",filepath);
 		}	
 	}
+
+	#region UnityMethods
+	void Update ()
+	{
+		if (Input.GetKeyDown (KeyCode.C) &&
+			Input.GetKeyDown (KeyCode.S))
+		{
+			Debug.Log ("Chegou");
+			//save scene
+			SaveCurrentState("teste1.xml",false);
+		}
+
+		if (Input.GetKeyDown (KeyCode.C) &&
+			Input.GetKeyDown (KeyCode.L)) {
+			//load scene
+			LoadState ("teste1.xml", false);
+		}
+	}
+	#endregion
 	
 	public bool SaveCurrentState(string path, bool isWeb){
 				
@@ -64,7 +64,66 @@ public class Configuration : MonoBehaviour {
 			Debug.LogError ("Nao ha moveis na cena");
 			return false;
 		}
-		
+		bool someModuleHasTop = false;
+		ConfigurationPreset cfgPreset  = new ConfigurationPreset();
+
+		foreach(GameObject mobile in mobiles)
+		{
+			if (mobile.GetComponent<InformacoesMovel>().Categoria == "Extras")
+			{
+				cfgPreset.AddPreset(new PresetModuleData(mobile.transform.position,
+														 mobile.transform.rotation,
+														 mobile.name,
+														 mobile.GetComponent<InformacoesMovel>().Categoria,
+														 Line.CurrentLine.Name,
+														 mobile.transform.GetComponentInChildren<Renderer>().materials[0].color));
+			}
+			else
+			{
+				cfgPreset.AddPreset(new PresetModuleData(mobile.transform.position,
+														 mobile.transform.rotation,
+														 mobile.name,
+														 mobile.GetComponent<InformacoesMovel>().Categoria,
+														 Line.CurrentLine.Name));
+
+				#region Verificando a textura de top escolhida
+
+				//Se não tiver guardado o nome da textura de tampo, a guarda
+				if (cfgPreset.TopTextureName == "")
+				{
+					Renderer[] renders = mobile.GetComponentsInChildren<Renderer> ();
+
+					Regex regexType = new Regex (@"Tampos.+", RegexOptions.IgnoreCase);
+
+					foreach (Renderer r in renders)
+					{
+						if (regexType.Match (r.material.name).Success)
+						{
+							cfgPreset.TopTextureName = r.material.mainTexture.name;
+						}
+					}
+				}
+				#endregion
+			}
+		}
+
+		cfgPreset.GroundTextureIndex = 2;
+		cfgPreset.RotationOfIllumination = new SerializableVec4( GameObject.Find("Sol").transform.rotation);
+		cfgPreset.SetColor (Line.CurrentDetailColor);
+
+//		System.IO.MemoryStream stream = new System.IO.MemoryStream ();
+		System.IO.Stream stream = File.Open(path, FileMode.Create);
+		BinaryFormatter bFormatter = new BinaryFormatter();
+		bFormatter.Serialize(stream, cfgPreset);
+
+//		byte[] b = stream.ToArray ();
+//		string s = System.Text.Encoding.UTF8.GetString (b);
+//		Debug.Log ("Serialized Objects: " + s.Length);
+
+		stream.Close();
+
+		/*
+
 		XmlDocument xmlDoc = new XmlDocument ();
 		
 		XmlNode docNode = xmlDoc.CreateXmlDeclaration ("1.0", "UTF-8", null);
@@ -127,7 +186,8 @@ public class Configuration : MonoBehaviour {
 		wallCeilingNode.Attributes.Append(wallCeilingAttr);
 		sceneNode.AppendChild(wallCeilingNode);
 		*/
-				
+
+		/*//TODO remember me
 		XmlNode floorNode = xmlDoc.CreateElement("piso");
 		XmlAttribute floorIndexTextureAttr = xmlDoc.CreateAttribute("indicetextura");
 		Transform parentTextureBtns = GameObject.Find("Lists").transform.FindChild ("View UI Piso").GetChild(0).GetChild(0);
@@ -139,12 +199,20 @@ public class Configuration : MonoBehaviour {
 		System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding ();
 		
 		FileUtils.WriteFile(path, enc.GetBytes(xmlDoc.OuterXml),true);
-				
+				*/
 		return false;
 	}
-	
 	public void LoadState(string path, bool isWeb){
-			
+
+		ConfigurationPreset cfgPreset;
+		Stream stream = File.Open (path, FileMode.Open);
+		BinaryFormatter bFormatter = new BinaryFormatter ();
+		cfgPreset = (ConfigurationPreset)bFormatter.Deserialize (stream);
+		stream.Close();
+
+		RunPreset (cfgPreset);
+
+		/*
 		if(isWeb){
 			StartCoroutine("LoadStateWeb",path);
 		} else {
@@ -153,40 +221,197 @@ public class Configuration : MonoBehaviour {
 			XmlDocument xmlDoc = new XmlDocument();
 			xmlDoc.LoadXml(enc.GetString (FileUtils.LoadFile(path,true)));
 			LoadState(xmlDoc);
+		}*/
+	}
+
+	public void RunPreset(int index)
+	{
+		RunPreset(Presets[index]);
+	}
+
+	private void RunPreset (ConfigurationPreset preset)
+	{
+		GameObject.Find("Sol").transform.rotation = preset.RotationOfIllumination.ToQuaternion ();
+
+		int topTextureIndex    = -1;
+		int selectedColorIndex = -1;
+
+		if (preset.TopTextureName != "")
+		{
+			for (int i = 0; i != availableTopTextures.Length; ++i)
+			{
+				if (availableTopTextures[i].name == preset.TopTextureName)
+				{
+					topTextureIndex = i;
+				}
+			}
+		}
+
+		//verificando validade do índice da textura
+		if (topTextureIndex == -1)
+			topTextureIndex = 0;
+
+		BrandColorEnum[] colors  = Line.CurrentLine.colors;
+		BrandColorEnum brandEnumColor = BrandColor.GetEnumColor(preset.BrandDetailColor.ToColor());
+		for(int i = 0; i != colors.Length; ++i)
+		{
+			if (brandEnumColor == colors[i])
+			{
+				selectedColorIndex = i;
+			}
+		}
+
+		GameObject moveisGO = GameObject.Find ("Moveis GO");
+		if (moveisGO == null)
+		{
+			moveisGO = new GameObject ("Moveis GO");
+		}
+
+		GameObject extras = GameObject
+								.Find ("View UI Extras")
+									.GetComponentInChildren<CatalogExtrasButtonHandler>().extras;
+
+		foreach(PresetModuleData data in preset.PresetDataModules)
+		{
+			GameObject module = null;
+			if (data.CategoryName == "Extras")
+			{
+				foreach (Transform extraModule in extras.transform)
+				{
+					if (data.Name.LastIndexOf ("(") != -1) {//Retirar o "(Clone)" de trás do objeto
+						data.Name = data.Name.Substring (0, data.Name.LastIndexOf ("("));
+					}
+
+					if (data.Name == extraModule.name)
+					{
+						module = Instantiate (extraModule.gameObject,
+											  data.Position.ToVector3 (),
+											  data.Rotation.ToQuaternion ()) as GameObject;
+
+						module.GetComponentInChildren<Renderer>().materials[0].color = data.color.ToColor ();
+
+						if (module.rigidbody == null)
+							module.AddComponent<Rigidbody> ();
+
+						module.GetComponent<InformacoesMovel> ().Initialize ();
+						break;
+					}
+				}
+			}
+			else if (data.CategoryName == "")
+			{
+				foreach (GameObject lamp in availableLamps)
+				{
+					if (lamp.name == data.Name)
+					{
+						module = Instantiate (lamp,
+											  data.Position.ToVector3 (),
+											  data.Rotation.ToQuaternion ()) as GameObject;
+
+						if (module.rigidbody == null)
+							module.AddComponent<Rigidbody> ();
+
+						module.GetComponent<InformacoesMovel> ().Initialize ();
+					}
+				}
+			}
+			else
+			{
+				module = Instantiate (Line.Lines [0]//getBrandId (data.BrandName)]
+										.categories [getCategoryId (data.CategoryName, data.BrandName)]
+											.Furniture [getMobileId (data.Name, data.CategoryName, data.BrandName)],
+									  data.Position.ToVector3 (),
+									  data.Rotation.ToQuaternion ()) as GameObject;
+
+				if (module.rigidbody == null)
+					module.AddComponent<Rigidbody> ();
+
+				module.GetComponent<InformacoesMovel> ().Initialize ();
+				module.GetComponent<InformacoesMovel> ().ChangeDetailColor (selectedColorIndex);
+			}
+
+			module.layer = LayerMask.NameToLayer ("Moveis");
+			module.tag = "Movel";
+			module.AddComponent<SnapBehaviour> ();
+			module.AddComponent<CalculateBounds> ();
+			module.GetComponent<InformacoesMovel> ().Categoria = data.CategoryName;
+			module.GetComponent<InformacoesMovel> ().ChangeTexture (availableTopTextures[topTextureIndex], "Tampos");
+
+			foreach (Animation anim in module.GetComponentsInChildren<Animation>()) {
+				anim.Stop ();
+				anim.playAutomatically = false;
+			}
+
+
+			if (module.GetComponent<InformacoesMovel> ().tipoMovel != TipoMovel.MOVEL)
+			{
+				module.rigidbody.constraints = RigidbodyConstraints.FreezePositionY
+											 | RigidbodyConstraints.FreezeRotation;
+			}
+			else
+			{
+				module.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+			}
+
+			module.transform.parent = moveisGO.transform;
 		}
 	}
-	
-	public void RunPreset(int index){
-		foreach(PresetMobileData data in Presets[index].PresetDataMobiles){
-		
-			GameObject mobile = Instantiate(Line.Lines[data.BrandId].categories[data.CategoryId].Furniture[data.Id],data.Position,data.Rotation) as GameObject;
-		
-			mobile.AddComponent<SnapBehaviour> ();
-			mobile.AddComponent<CalculateBounds> ();
-			mobile.GetComponent<InformacoesMovel> ().Initialize ();
-			mobile.GetComponent<InformacoesMovel> ().Categoria = Line.CurrentLine.categories[data.CategoryId].Name;
-			mobile.AddComponent<Rigidbody> ();
-			if (mobile.GetComponent<InformacoesMovel> ().tipoMovel != TipoMovel.MOVEL) {
-				mobile.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
-			} else {
-				mobile.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-			}
-			
-			GameObject MoveisGO = GameObject.Find ("Moveis GO");
-			
-			if (MoveisGO == null) {
-				MoveisGO = new GameObject ("Moveis GO");
-			}
-		}
-	}
-	
-	private int getMobileId(GameObject mobile){
-		
-		Category category = Line.CurrentLine.categories[getCategoryId(mobile)];
+
+	private int getMobileId	  (string mobileName, string categoryName, string brandName)
+	{
 		int index = 0;
-		
-		foreach(GameObject cMobile in category.Furniture){
-			if(cMobile.name.Equals(mobile.name.Substring(0,mobile.name.LastIndexOf("(")))){//Retirar o "(Clone)" de trás do objeto
+		if (mobileName.LastIndexOf("(") != -1)//Retirar o "(Clone)" de trás do objeto
+		{
+			mobileName = mobileName.Substring (0, mobileName.LastIndexOf ("("));
+		}
+
+		Category category = Line.Lines[getBrandId(brandName)]
+									.categories [getCategoryId (categoryName, brandName)];
+
+		foreach (GameObject cMobile in category.Furniture)
+		{
+			if (cMobile.name.Equals (mobileName))
+			{
+				break;
+			}
+			++index;
+		}
+		return index;
+	}
+	private int getCategoryId (string categoryName, string brandName)
+	{
+		int index = 0;
+		foreach (Category category in Line.Lines[getBrandId(brandName)].categories)
+		{
+			if (category.Name.Equals (categoryName))
+			{
+				break;
+			}
+			++index;
+		}
+		return index;
+	}
+	private int getBrandId 	  (string brandName)
+	{
+		int index = 0;
+		foreach (Line line in Line.Lines)
+		{
+			if (line.Name.Equals (brandName))
+			{
+				break;
+			}
+			++index;
+		}
+		return 0;
+	}
+
+	private int getMobileId   (GameObject mobile)
+	{
+		Category category = Line.CurrentLine.categories [getCategoryId (mobile)];
+		int index = 0;
+
+		foreach (GameObject cMobile in category.Furniture) {
+			if (cMobile.name.Equals (mobile.name.Substring (0, mobile.name.LastIndexOf ("(")))) {//Retirar o "(Clone)" de trás do objeto
 				break;
 			}
 			++index;
@@ -194,8 +419,8 @@ public class Configuration : MonoBehaviour {
 //		Debug.LogError ("index: " + index);
 		return index;
 	}
-	
-	private int getCategoryId(GameObject mobile){
+	private int getCategoryId (GameObject mobile)
+	{
 		
 		string categoryName = mobile.GetComponent<InformacoesMovel>().Categoria;
 		int index = 0;
@@ -208,9 +433,8 @@ public class Configuration : MonoBehaviour {
 		}
 		return index;
 	}
-	
-	private int getBrandId(GameObject mobile){
-		
+	private int getBrandId	  (GameObject mobile)
+	{
 		Line cLine = Line.CurrentLine;
 		int index = 0;
 		
@@ -223,8 +447,8 @@ public class Configuration : MonoBehaviour {
 		return index;
 	}
 	
-	private IEnumerator LoadStateWeb(string path){
-	
+	private IEnumerator LoadStateWeb(string path)
+	{
 		WWW www;
 				
 		XmlDocument xmlDoc;
@@ -240,9 +464,9 @@ public class Configuration : MonoBehaviour {
 		
 		xmlDoc = new XmlDocument();
 		xmlDoc.LoadXml(www.text);
-	
 	}
-		
+
+	/*
 	private void LoadState(XmlDocument xml){
 		
 		XmlNode rootNode;
@@ -302,5 +526,5 @@ public class Configuration : MonoBehaviour {
 		}
 		Presets.Add(preset);		
 	}
-		
+	*/
 }

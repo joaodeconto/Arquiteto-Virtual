@@ -16,6 +16,14 @@ public class SelectKitchenHandler : MonoBehaviour {
 	
 	public KitchenEnum selectedKitchen;
 	
+	private AsyncOperation ao;
+	
+	void OnGUI () {
+		if (ao != null) {
+			GUI.Box(new Rect(50, (Screen.height - 25) - 50, 200, 25), "Carregando: " + (int)(ao.progress * 100f) + "%");
+		}
+	}
+	
 	private void OnClick (){
 	
 		switch (selectedKitchen) {
@@ -45,7 +53,7 @@ public class SelectKitchenHandler : MonoBehaviour {
 				break;
 		}
 		
-		Application.LoadLevel (2);
+		ao = Application.LoadLevelAsync(1);
 		
 	}
 }

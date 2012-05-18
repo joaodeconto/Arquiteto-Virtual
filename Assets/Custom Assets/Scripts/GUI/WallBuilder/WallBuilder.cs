@@ -7,7 +7,8 @@ public class WallBuilder : MonoBehaviour {
 	
 	public const  float IPSLON 		= 0.0001f;
 	public static float WALL_HEIGHT = 2.6f;
-
+
+
 	public float WallHeight;
 
 	#region Parents
@@ -53,6 +54,8 @@ public class WallBuilder : MonoBehaviour {
 	public static Vector3 ROOT { get; private set; }
 	#endregion
 	
+	private AsyncOperation ao;
+	
 	#region Unty Methods
 	void Start()
 	{
@@ -79,6 +82,12 @@ public class WallBuilder : MonoBehaviour {
 		
 		mov = transform.position;
 		zoom = GameObject.FindWithTag("MainCamera").camera.orthographicSize;
+	}
+	
+	void OnGUI () {
+		if (ao != null) {
+			GUI.Box(new Rect(50, (Screen.height - 25) - 50, 200, 25), "Carregando: " + (int)(ao.progress * 100f) + "%");
+		}
 	}
 	#endregion
 		
@@ -178,7 +187,7 @@ public class WallBuilder : MonoBehaviour {
 			}
 		}
 
-		Application.LoadLevel(3);
+		ao = Application.LoadLevelAsync(2);
 		
 	}
 	

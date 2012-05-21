@@ -13112,6 +13112,16 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22d96010b3d48264f9164bd2b76d7119, type: 1}
   m_Name: 
+  availableFloorTextures:
+  - {fileID: 2800000, guid: 5c3caddca366ab14dbff6f7057c08a25, type: 1}
+  - {fileID: 2800000, guid: 240944794ed447e42ba1e4b426dce6a1, type: 1}
+  - {fileID: 2800000, guid: 1b3f95bc849e0f14d8ca5dc35bd1cf74, type: 1}
+  - {fileID: 2800000, guid: 05fce73c2930f294e8a3beaf03454733, type: 1}
+  - {fileID: 2800000, guid: f4049d946f3fc0645b1fb3bf17c8a72d, type: 1}
+  - {fileID: 2800000, guid: cc128538ce1797c40afa0c9b832d22d6, type: 1}
+  - {fileID: 2800000, guid: 57d0f49ddebbc9d46a7d42d672f1b315, type: 1}
+  - {fileID: 2800000, guid: 54fcb551cc355a84d8759eee71b3c696, type: 1}
+  - {fileID: 2800000, guid: c519f10f170c8434cb8e514265f9fca1, type: 1}
   availableTopTextures:
   - {fileID: 2800000, guid: 52a3e41a93a80cc48b97930096218e6a, type: 1}
   - {fileID: 2800000, guid: d6f2f6d38bb92f14592478522dac5297, type: 1}
@@ -13120,6 +13130,8 @@ MonoBehaviour:
   availableLamps:
   - {fileID: 100000, guid: 1f7afa3673570aa4488767d4f9e96083, type: 2}
   - {fileID: 100000, guid: 18ccb78c9a6e155479ac0c077a61f68d, type: 2}
+  wall: {fileID: 100000, guid: 8af1669798055ca41962b28f06d079a2, type: 2}
+  floor: {fileID: 100000, guid: ae2ed511cfff5d3438396d0546e09044, type: 2}
 --- !u!1 &1626414127
 GameObject:
   m_ObjectHideFlags: 0

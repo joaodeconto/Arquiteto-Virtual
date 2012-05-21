@@ -19,11 +19,25 @@ public class MaterialUtils
 		Vector2 textScale  = new Vector2 (textScaleX, textScaleY);
 		Vector2 textOffset = new Vector2 (textOffsetX,textOffsetY);
 
-		foreach (Material cMaterial in obj.transform.GetChild(0).renderer.materials) {
-			cMaterial.mainTextureScale  = textScale;
-			cMaterial.mainTextureOffset = textOffset;
-			cMaterial.SetTextureScale  ("_BumpMap", textScale);
-			cMaterial.SetTextureOffset ("_BumpMap", textOffset);
+		if (obj.transform.childCount > 0)
+		{
+			foreach (Material cMaterial in obj.transform.GetChild(0).renderer.materials)
+			{
+				cMaterial.mainTextureScale  = textScale;
+				cMaterial.mainTextureOffset = textOffset;
+				cMaterial.SetTextureScale  ("_BumpMap", textScale);
+				cMaterial.SetTextureOffset ("_BumpMap", textOffset);
+			}
+		}
+		else
+		{
+			foreach (Material cMaterial in obj.renderer.materials)
+			{
+				cMaterial.mainTextureScale = textScale;
+				cMaterial.mainTextureOffset = textOffset;
+				cMaterial.SetTextureScale ("_BumpMap", textScale);
+				cMaterial.SetTextureOffset ("_BumpMap", textOffset);
+			}
 		}
 	}
 }

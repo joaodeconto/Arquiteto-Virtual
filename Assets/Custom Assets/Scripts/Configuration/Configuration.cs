@@ -13,61 +13,89 @@ using Visiorama.Utils;
 
 public class Configuration : MonoBehaviour {
 
-	public Texture2D[] availableTopTextures;
+	private string testFilename = "teste.xml";
 
+	public Texture2D[] availableFloorTextures;
+	public Texture2D[] availableTopTextures;
 	public GameObject[] availableLamps;
+	public GameObject wall, floor;
 
 	public List<string> PresetNames { get; private set; }
-	public List<ConfigurationPreset> Presets { get; private set; } 
-	
-	public void Initialize(){
-		
+	public List<ConfigurationPreset> Presets { get; private set; }
+
+	private Dictionary<string, Texture2D> availableWallTextures;
+	private Dictionary<string, Texture2D> availableFloorTexturesHash;
+
+	public void Initialize()
+	{
 		PresetNames = new List<string>();
 		PresetNames.Add("www.visiorama360.com.br/Telasul/Teste/Presets/configuracao1.xml");
-		
-		foreach(string filepath in PresetNames){
+
+		foreach(string filepath in PresetNames)
+		{
 			StartCoroutine("LoadStateWeb",filepath);
-		}	
+		}
 	}
 
 	#region UnityMethods
+	void Start ()
+	{
+		Texture2D[] textures = GameObject.FindWithTag ("MainCamera").GetComponentInChildren<Painter>().wallTextures;
+
+		availableWallTextures = new Dictionary<string, Texture2D>();
+		foreach (Texture2D tex in textures)
+		{
+			availableWallTextures.Add (tex.name, tex);
+		}
+
+		availableFloorTexturesHash = new Dictionary<string, Texture2D>();
+		foreach (Texture2D floorTex in availableFloorTextures)
+		{
+			availableFloorTexturesHash.Add (floorTex.name, floorTex);
+		}
+	}
+
 	void Update ()
 	{
 		if (Input.GetKeyDown (KeyCode.C) &&
 			Input.GetKeyDown (KeyCode.S))
 		{
-			Debug.Log ("Chegou");
 			//save scene
-			SaveCurrentState("teste1.xml",false);
+			SaveCurrentState(testFilename ,false);
+			Debug.Log ("Salvou cena");
 		}
 
 		if (Input.GetKeyDown (KeyCode.C) &&
 			Input.GetKeyDown (KeyCode.L)) {
 			//load scene
-			LoadState ("teste1.xml", false);
+			LoadState (testFilename, false);
 		}
 	}
 	#endregion
-	
-	public bool SaveCurrentState(string path, bool isWeb){
-				
-		List<GameObject> mobiles = new List<GameObject>(GameObject.FindGameObjectsWithTag("Movel"));
-		GameObject selectedMobile = GameObject.FindGameObjectWithTag("MovelSelecionado");
-		
+
+	public bool SaveCurrentState(string path, bool isWeb)
+	{
+		List<GameObject> modules= new List<GameObject> (GameObject.FindGameObjectsWithTag ("Movel"));
+		List<GameObject> floors	= new List<GameObject> (GameObject.FindGameObjectsWithTag ("Chao"));
+
+		GameObject selectedMobile = GameObject.FindGameObjectWithTag ("MovelSelecionado");
+		Transform trnsWallParent  = GameObject.Find ("ParentParede").transform;
+
 		if (selectedMobile != null)
 		{
-			mobiles.Add(selectedMobile);
+			modules.Add(selectedMobile);
 		}
-		
-		if (mobiles.Count == 0)
+
+		if (modules.Count == 0)
 		{
 			Debug.LogError ("Nao ha moveis na cena");
 			return false;
 		}
+
 		bool someModuleHasTop = false;
 		ConfigurationPreset cfgPreset  = new ConfigurationPreset();
 
-		foreach(GameObject mobile in mobiles)
+		foreach(GameObject mobile in modules)
 		{
 			if (mobile.GetComponent<InformacoesMovel>().Categoria == "Extras")
 			{
@@ -107,8 +135,28 @@ public class Configuration : MonoBehaviour {
 			}
 		}
 
-		cfgPreset.GroundTextureIndex = 2;
-		cfgPreset.RotationOfIllumination = new SerializableVec4( GameObject.Find("Sol").transform.rotation);
+		foreach (Transform wall in trnsWallParent)
+		{
+			cfgPreset.AddPreset (new PresetWallData (wall.position,
+													 wall.rotation,
+													 wall.localScale,
+													 wall.name,
+													 wall.GetComponentInChildren<InfoWall>().color,
+													 wall.GetComponentInChildren<InfoWall>().texture.name));
+		}
+
+		foreach (GameObject floor in floors)
+		{
+			cfgPreset.AddPreset(new PresetFloorData (floor.transform.position,
+													 floor.transform.rotation,
+													 floor.transform.localScale,
+													 floor.transform.name,
+													 floor.transform.GetComponentInChildren<Renderer>().materials[0].mainTexture.name));
+		}
+
+
+//		cfgPreset.GroundTextureIndex = 2;
+		cfgPreset.RotationOfIllumination = new SerializableVec4( GameObject.Find("Sol").transform.rotation );
 		cfgPreset.SetColor (Line.CurrentDetailColor);
 
 //		System.IO.MemoryStream stream = new System.IO.MemoryStream ();
@@ -125,62 +173,62 @@ public class Configuration : MonoBehaviour {
 		/*
 
 		XmlDocument xmlDoc = new XmlDocument ();
-		
+
 		XmlNode docNode = xmlDoc.CreateXmlDeclaration ("1.0", "UTF-8", null);
 		xmlDoc.AppendChild (docNode);
-		
+
 		//Nodo principal
 		XmlNode rootNode = xmlDoc.CreateElement ("configuracao");
 		xmlDoc.AppendChild (rootNode);
-		
+
 		//Nodo móveis
 		XmlNode furnitureNode = xmlDoc.CreateElement ("moveis");
 		rootNode.AppendChild(furnitureNode);
-				
+
 		//Acrescentando móveis da cena
 		foreach(GameObject mobile in mobiles){
-			
+
 			XmlNode mobileNode = xmlDoc.CreateElement ("movel");
-			
+
 			XmlAttribute idAttr 		= xmlDoc.CreateAttribute("id");
 			XmlAttribute idCategoryAttr = xmlDoc.CreateAttribute("idcategoria");
 			XmlAttribute idBrandAttr 	= xmlDoc.CreateAttribute("idlinha");
 			XmlAttribute posAttr		= xmlDoc.CreateAttribute("pos");
 			XmlAttribute rotAttr		= xmlDoc.CreateAttribute("rot");
 			Vector3 position = mobile.transform.position;
-			
+
 			idAttr.Value 		= getMobileId(mobile).ToString();
 			idCategoryAttr.Value= getCategoryId(mobile).ToString();
 			idBrandAttr.Value	= getBrandId(mobile).ToString();
 			posAttr.Value		= position.x + "x" + position.y + "x" + position.z;
 			rotAttr.Value		= mobile.transform.rotation.eulerAngles.y.ToString();
-			
+
 			mobileNode.Attributes.Append (idAttr);
 			mobileNode.Attributes.Append (idCategoryAttr);
 			mobileNode.Attributes.Append (idBrandAttr);
 			mobileNode.Attributes.Append (posAttr);
 			mobileNode.Attributes.Append (rotAttr);
-			
+
 			furnitureNode.AppendChild(mobileNode);
-		
+
 		}
-		
+
 		//Adicionando nodo cena
 		XmlNode sceneNode 		= xmlDoc.CreateElement ("cena");
 		rootNode.AppendChild (sceneNode);
-		
-		//Cor cena		
+
+		//Cor cena
 		XmlNode wallCeilingNode	= xmlDoc.CreateElement ("parede-teto");
-		
+
 		//Cor das paredes
 		/*Color wallCeilingColor = wallCeilingColorPicker.getColorRGB();
 		XmlAttribute wallCeilingAttr = xmlDoc.CreateAttribute("color");
 		wallCeilingAttr.Value =	wallCeilingColorPicker.getColorRGB().r + "x" +
 								wallCeilingColorPicker.getColorRGB().g + "x" +
 								wallCeilingColorPicker.getColorRGB().b;
-									 
+
 		wallCeilingNode.Attributes.Append(wallCeilingAttr);
-		
+
 		wallCeilingAttr = xmlDoc.CreateAttribute("saturation");
 		wallCeilingAttr.Value = wallCeilingColorPicker.getSaturation().ToString();
 		wallCeilingNode.Attributes.Append(wallCeilingAttr);
@@ -194,16 +242,17 @@ public class Configuration : MonoBehaviour {
 		floorIndexTextureAttr.Value = parentTextureBtns.GetComponent<CatalogFloorButtonHandler> ().SelectedFloorIndex.ToString();
 		floorNode.Attributes.Append(floorIndexTextureAttr);
 		sceneNode.AppendChild(floorNode);
-		
-		Debug.LogError (xmlDoc.OuterXml);	
+
+		Debug.LogError (xmlDoc.OuterXml);
 		System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding ();
-		
+
 		FileUtils.WriteFile(path, enc.GetBytes(xmlDoc.OuterXml),true);
 				*/
 		return false;
 	}
-	public void LoadState(string path, bool isWeb){
 
+	public void LoadState(string path, bool isWeb)
+	{
 		ConfigurationPreset cfgPreset;
 		Stream stream = File.Open (path, FileMode.Open);
 		BinaryFormatter bFormatter = new BinaryFormatter ();
@@ -270,6 +319,52 @@ public class Configuration : MonoBehaviour {
 		GameObject extras = GameObject
 								.Find ("View UI Extras")
 									.GetComponentInChildren<CatalogExtrasButtonHandler>().extras;
+
+		foreach (PresetFloorData data in preset.PresetDataFloors)
+		{
+			GameObject cFloor = Instantiate (floor,
+										    data.Position.ToVector3 (),
+										  	data.Rotation.ToQuaternion ()) as GameObject;
+
+			if (data.Name.LastIndexOf ("(") != -1) {//Retirar o "(Clone)" de trás do objeto
+				data.Name = data.Name.Substring (0, data.Name.LastIndexOf ("("));
+			}
+
+			cFloor.name = data.Name;
+			cFloor.transform.localScale = data.Scale.ToVector3 ();
+			cFloor.transform.parent = GameObject.Find ("ParentChao").transform;
+
+			Renderer r = cFloor.transform.GetComponentInChildren<Renderer> ();
+			r.materials [0].color = data.color.ToColor ();
+			r.materials [0].mainTexture = availableFloorTexturesHash [data.TextureName];//Utilizado Hash para melhor performance e entendimento do code :D
+
+			MaterialUtils.ResizeWallMaterial (cFloor,
+											  data.Scale.x,
+											  data.Scale.y);
+		}
+
+		foreach ( PresetWallData data in preset.PresetDataWalls)
+		{
+			GameObject cWall = Instantiate (wall,
+										    data.Position.ToVector3 (),
+										  	data.Rotation.ToQuaternion ()) as GameObject;
+
+			if (data.Name.LastIndexOf ("(") != -1) {//Retirar o "(Clone)" de trás do objeto
+				data.Name = data.Name.Substring (0, data.Name.LastIndexOf ("("));
+			}
+
+			cWall.name = data.Name;
+			cWall.transform.localScale = data.Scale.ToVector3 ();
+			cWall.transform.parent 	   = GameObject.Find ("ParentParede").transform;
+
+			Renderer r = cWall.transform.GetComponentInChildren<Renderer> ();
+			r.materials [0].color 		= data.color.ToColor ();
+			r.materials [0].mainTexture = availableWallTextures [data.TextureName];//Utilizado Hash para melhor performance e entendimento do code :D
+
+			MaterialUtils.ResizeWallMaterial (cWall,
+											  data.Scale.x,
+											  data.Scale.y);
+		}
 
 		foreach(PresetModuleData data in preset.PresetDataModules)
 		{
@@ -421,10 +516,10 @@ public class Configuration : MonoBehaviour {
 	}
 	private int getCategoryId (GameObject mobile)
 	{
-		
+
 		string categoryName = mobile.GetComponent<InformacoesMovel>().Categoria;
 		int index = 0;
-		
+
 		foreach(Category category in Line.CurrentLine.categories){
 			if(category.Name.Equals(categoryName)){
 				break;
@@ -437,7 +532,7 @@ public class Configuration : MonoBehaviour {
 	{
 		Line cLine = Line.CurrentLine;
 		int index = 0;
-		
+
 		foreach(Line line in Line.Lines){
 			if(line.Name.Equals(cLine.Name)){
 				break;
@@ -446,29 +541,29 @@ public class Configuration : MonoBehaviour {
 		}
 		return index;
 	}
-	
+
 	private IEnumerator LoadStateWeb(string path)
 	{
 		WWW www;
-				
+
 		XmlDocument xmlDoc;
-		
+
 		www = new WWW(path);
-		
+
 		yield return www;
-			
+
 		if (www.error != null){
 			Debug.Log("Nao pode baixar o arquivo de configuracao.");
 			Debug.Log(www.error);
 		}
-		
+
 		xmlDoc = new XmlDocument();
 		xmlDoc.LoadXml(www.text);
 	}
 
 	/*
 	private void LoadState(XmlDocument xml){
-		
+
 		XmlNode rootNode;
 		ConfigurationPreset preset;
 		List<PresetMobileData> presetDataMobiles;
@@ -478,41 +573,41 @@ public class Configuration : MonoBehaviour {
 		string[] splitedStr;
 
 		rootNode = xml.GetElementsByTagName("configuracao")[0];
-		
+
 		preset			 = new ConfigurationPreset();
 		presetDataMobiles= new List<PresetMobileData>();
 		preset.PresetDataMobiles = presetDataMobiles;
-		
+
 		foreach(XmlNode child in rootNode.ChildNodes){
 			if(child.Name.Equals("moveis")){
 				foreach(XmlNode mobileNode in child.ChildNodes){
 					//<movel id="0" idcategoria="0" idlinha="0" pos="0.0x0.0x0.0" rot="0.0" />
 					splitedStr = mobileNode.Attributes["pos"].Value.Split('x');
-					
+
 					tmpVec3 	  = new Vector3(float.Parse(splitedStr[0]),float.Parse(splitedStr[1]),float.Parse(splitedStr[2]));
 					tmpQuaternion = Quaternion.Euler(0,float.Parse(mobileNode.Attributes["rot"].Value),0);
-					
+
 					tmpPresetMobileData = new PresetMobileData(	tmpVec3,
 																tmpQuaternion,
 																int.Parse(mobileNode.Attributes["id"].Value),
 																int.Parse(mobileNode.Attributes["idcategoria"].Value),
 																int.Parse(mobileNode.Attributes["idlinha"].Value));
-																
+
 					presetDataMobiles.Add(tmpPresetMobileData);
 				}
 			}
-			
+
 			if(child.Name.Equals("cena")){
 				foreach(XmlNode roomConfigNode in child.ChildNodes){
 					if(roomConfigNode.Name.Equals("parede-teto")){
-					
+
 						//<parede-teto r="255" g="255" b="255" hue="0" />
-						splitedStr = roomConfigNode.Attributes["color"].Value.Split('x'); 
-						
+						splitedStr = roomConfigNode.Attributes["color"].Value.Split('x');
+
 						preset.WallCeilColor = new Color(float.Parse(splitedStr[0]),
 														 float.Parse(splitedStr[1]),
 														 float.Parse(splitedStr[2]));
-														 
+
 						preset.WallCeilHueColor = int.Parse(roomConfigNode.Attributes["saturation"].Value);
 					} else if(roomConfigNode.Name.Equals("piso")){
 						//<piso indicetextura="0" />
@@ -524,7 +619,7 @@ public class Configuration : MonoBehaviour {
 		if(Presets == null){
 			Presets = new List<ConfigurationPreset>();
 		}
-		Presets.Add(preset);		
+		Presets.Add(preset);
 	}
 	*/
 }

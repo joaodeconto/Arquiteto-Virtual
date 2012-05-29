@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 using System.Collections;
 
 public class ChangeColor : MonoBehaviour {
@@ -60,3 +60,4 @@ public class ChangeColor : MonoBehaviour {
 		dropperBool	= !dropperBool;
 	}
 }
+*/

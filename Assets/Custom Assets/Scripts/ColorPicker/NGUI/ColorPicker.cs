@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Visiorama.Utils;
@@ -141,3 +141,4 @@ public class ColorPicker : MonoBehaviour {
 	    color = realColor - new Color(whiteblack, whiteblack, whiteblack, 0f);
 	}
 }
+*/

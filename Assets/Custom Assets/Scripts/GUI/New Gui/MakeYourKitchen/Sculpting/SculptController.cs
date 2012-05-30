@@ -129,18 +129,17 @@ public class SculptController : MonoBehaviour
 		InfoWall infoWall = wallTrans.GetComponent<InfoWall> ();
         	
 		float cRightScaleX	= Vector3.Distance (wallPosition, hitPoint) - (cWallSize.x / 2.0f); 
-		float cLeftScaleX 	= (wallTrans.localScale.x - cRightScaleX) 	- (cWallSize.x);
-		float cMiddleScaleX = wallTrans.localScale.x - cRightScaleX - cLeftScaleX;
+		float cLeftScaleX 	= (wallTrans.localScale.x - cRightScaleX) - cWallSize.x;
+		float cMiddleScaleX = (wallTrans.localScale.x - cRightScaleX) - cLeftScaleX;
 		
 		float cMiddleUpperScaleY = wallTrans.localScale.y - cWallSize.y - WindowPivotY - monkeyPatchUpperWallYScale;
 		float cMiddleLowerScaleY = WindowPivotY;
 
 			
-		Vector3 leftWallPosition = wallPosition - 
-									   	(wallTrans.transform.right.normalized *
-										(cRightScaleX + cWallSize.x));
+		Vector3 leftWallPosition = 	 wallPosition -
+								   	(wallTrans.transform.right.normalized * (cRightScaleX + cWallSize.x));
 		Vector3 middleWallPosition = wallPosition - 
-									   	(wallTrans.transform.right.normalized * cRightScaleX);
+									(wallTrans.transform.right.normalized * cRightScaleX);
 		leftWallPosition.y = 0.0f;
 
 		GameObject rightWall = Instantiate (wallTrans.gameObject,
@@ -150,7 +149,11 @@ public class SculptController : MonoBehaviour
 		rightWall.transform.localScale = new Vector3 (cRightScaleX,
     												  wallTrans.localScale.y,
     												  wallTrans.localScale.z);
-		MaterialUtils.ResizeWallMaterial (rightWall, cRightScaleX, wallTrans.localScale.y, 0, 0);
+		MaterialUtils.ResizeMaterial (	rightWall.transform.GetChild (0),
+										cRightScaleX,
+										wallTrans.localScale.y,
+										0,
+										0);
 
 		middleWallPosition.y = 0.0f;
 		GameObject lowerWall = Instantiate (wallTrans.gameObject,
@@ -160,11 +163,11 @@ public class SculptController : MonoBehaviour
 		lowerWall.transform.localScale = new Vector3 (cMiddleScaleX,
     												  cMiddleLowerScaleY,
     												  wallTrans.localScale.z);
-		MaterialUtils.ResizeWallMaterial (	lowerWall,
-											cMiddleScaleX,
-											cMiddleLowerScaleY,
-											cRightScaleX,
-											0.003f);
+		MaterialUtils.ResizeMaterial (	lowerWall.transform.GetChild(0),
+										cMiddleScaleX,
+										cMiddleLowerScaleY,
+										cRightScaleX,
+										0.003f);
 
 		middleWallPosition.y = cWallSize.y + WindowPivotY;
 		GameObject upperWall = Instantiate (wallTrans.gameObject,
@@ -174,11 +177,11 @@ public class SculptController : MonoBehaviour
 		upperWall.transform.localScale = new Vector3 (cMiddleScaleX,
     												  cMiddleUpperScaleY,
     												  wallTrans.localScale.z);
-		MaterialUtils.ResizeWallMaterial (	upperWall,
-											cMiddleScaleX,
-											cMiddleUpperScaleY,
-											cRightScaleX,
-											cMiddleLowerScaleY + cWallSize.y + 0.01f);
+		MaterialUtils.ResizeMaterial (	upperWall.transform.GetChild (0),
+										cMiddleScaleX,
+										cMiddleUpperScaleY,
+										cRightScaleX,
+										cMiddleLowerScaleY + cWallSize.y + 0.01f);
 
 		GameObject leftWall = Instantiate (wallTrans.gameObject,
     									   leftWallPosition,
@@ -187,11 +190,12 @@ public class SculptController : MonoBehaviour
 		leftWall.transform.localScale = new Vector3 (cLeftScaleX,
     												 wallTrans.localScale.y,
     												 wallTrans.localScale.z);
-		MaterialUtils.ResizeWallMaterial (	leftWall,
-											cLeftScaleX,
-											wallTrans.localScale.y,
-											cRightScaleX + cMiddleScaleX,
-											0);
+
+		MaterialUtils.ResizeMaterial (	leftWall.transform.GetChild (0),
+										cLeftScaleX,
+										wallTrans.localScale.y,
+										cRightScaleX + cMiddleScaleX,
+										0);
 
 		GameObject wnd = Instantiate (WindowsModels [cWindowType],
 										new Vector3(middleWallPosition.x,
@@ -309,7 +313,7 @@ public class SculptController : MonoBehaviour
 		newWall.transform.localScale = new Vector3( WallSizeX,
     												WallBuilder.WALL_HEIGHT,
     												hit.transform.localScale.z);
-    	MaterialUtils.ResizeWallMaterial (newWall, WallSizeX, WallBuilder.WALL_HEIGHT,0,0);
+    	MaterialUtils.ResizeMaterial (newWall, WallSizeX, WallBuilder.WALL_HEIGHT,0,0);
 
 		Debug.LogWarning ("newWall.transform.parent.name: " + newWall.transform.parent.name);
 

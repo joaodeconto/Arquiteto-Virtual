@@ -8,12 +8,11 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Serialization;
-
 using Visiorama.Utils;
 
-public class Configuration : MonoBehaviour {
-
-	private string testFilename = "teste.xml";
+public class Configuration : MonoBehaviour
+{
+	private string testFilename = "testao.xml";
 
 	public Texture2D[] availableFloorTextures;
 	public Texture2D[] availableTopTextures;
@@ -21,7 +20,7 @@ public class Configuration : MonoBehaviour {
 	public GameObject wall, floor;
 
 	public List<string> PresetNames { get; private set; }
-//	public List<ConfigurationPreset> Presets { get; private set; }
+	public List<ConfigurationPreset> Presets { get; private set; }
 
 	private Dictionary<string, Texture2D> availableWallTextures;
 	private Dictionary<string, Texture2D> availableFloorTexturesHash;
@@ -75,7 +74,7 @@ public class Configuration : MonoBehaviour {
 
 	public bool SaveCurrentState(string path, bool isWeb)
 	{
-		/*List<GameObject> modules= new List<GameObject> (GameObject.FindGameObjectsWithTag ("Movel"));
+		List<GameObject> modules= new List<GameObject> (GameObject.FindGameObjectsWithTag ("Movel"));
 		List<GameObject> floors	= new List<GameObject> (GameObject.FindGameObjectsWithTag ("Chao"));
 
 		GameObject selectedMobile = GameObject.FindGameObjectWithTag ("MovelSelecionado");
@@ -159,10 +158,35 @@ public class Configuration : MonoBehaviour {
 		cfgPreset.RotationOfIllumination = new SerializableVec4( GameObject.Find("Sol").transform.rotation );
 		cfgPreset.SetColor (Line.CurrentDetailColor);
 
-//		System.IO.MemoryStream stream = new System.IO.MemoryStream ();
+#if UNITY_ANDROID || UNITY_IPHONE
 		System.IO.Stream stream = File.Open(path, FileMode.Create);
+#else
+		System.IO.MemoryStream stream = new System.IO.MemoryStream ();
+#endif
+		FormatterConverter a = new FormatterConverter();
+
 		BinaryFormatter bFormatter = new BinaryFormatter();
 		bFormatter.Serialize(stream, cfgPreset);
+//		a.ToString (bFormatter);
+
+		byte[] byteArray   = stream.GetBuffer();
+//		string message = System.Text.Encoding.UTF8.GetString (bytes);
+
+#if UNITY_ANDROID || UNITY_IPHONE
+//		System.IO.Stream stream = File.Open(path, FileMode.Create);
+#else
+		Client client = new Client();
+		client.firstname 	  = "Mr. Facero";
+		client.lastname 	  = "Wolfstein";
+		client.dt_birth		  = System.DateTime.Now;
+		client.dt_registration= System.DateTime.Now;
+		client.email 		  = "asd@asd.com";
+		client.Projects = new List<Project>();
+		client.Projects.Add (new Project (byteArray));
+
+		gameObject.AddComponent<Factory>().SaveWeb("http://www.meulocalhost.com/arquiteto-mock-site/public/load_data.php", client);
+#endif
+
 
 //		byte[] b = stream.ToArray ();
 //		string s = System.Text.Encoding.UTF8.GetString (b);
@@ -170,94 +194,31 @@ public class Configuration : MonoBehaviour {
 
 		stream.Close();
 
-		/*
-
-		XmlDocument xmlDoc = new XmlDocument ();
-
-		XmlNode docNode = xmlDoc.CreateXmlDeclaration ("1.0", "UTF-8", null);
-		xmlDoc.AppendChild (docNode);
-
-		//Nodo principal
-		XmlNode rootNode = xmlDoc.CreateElement ("configuracao");
-		xmlDoc.AppendChild (rootNode);
-
-		//Nodo móveis
-		XmlNode furnitureNode = xmlDoc.CreateElement ("moveis");
-		rootNode.AppendChild(furnitureNode);
-
-		//Acrescentando móveis da cena
-		foreach(GameObject mobile in mobiles){
-
-			XmlNode mobileNode = xmlDoc.CreateElement ("movel");
-
-			XmlAttribute idAttr 		= xmlDoc.CreateAttribute("id");
-			XmlAttribute idCategoryAttr = xmlDoc.CreateAttribute("idcategoria");
-			XmlAttribute idBrandAttr 	= xmlDoc.CreateAttribute("idlinha");
-			XmlAttribute posAttr		= xmlDoc.CreateAttribute("pos");
-			XmlAttribute rotAttr		= xmlDoc.CreateAttribute("rot");
-			Vector3 position = mobile.transform.position;
-
-			idAttr.Value 		= getMobileId(mobile).ToString();
-			idCategoryAttr.Value= getCategoryId(mobile).ToString();
-			idBrandAttr.Value	= getBrandId(mobile).ToString();
-			posAttr.Value		= position.x + "x" + position.y + "x" + position.z;
-			rotAttr.Value		= mobile.transform.rotation.eulerAngles.y.ToString();
-
-			mobileNode.Attributes.Append (idAttr);
-			mobileNode.Attributes.Append (idCategoryAttr);
-			mobileNode.Attributes.Append (idBrandAttr);
-			mobileNode.Attributes.Append (posAttr);
-			mobileNode.Attributes.Append (rotAttr);
-
-			furnitureNode.AppendChild(mobileNode);
-
-		}
-
-		//Adicionando nodo cena
-		XmlNode sceneNode 		= xmlDoc.CreateElement ("cena");
-		rootNode.AppendChild (sceneNode);
-
-		//Cor cena
-		XmlNode wallCeilingNode	= xmlDoc.CreateElement ("parede-teto");
-
-		//Cor das paredes
-		/*Color wallCeilingColor = wallCeilingColorPicker.getColorRGB();
-		XmlAttribute wallCeilingAttr = xmlDoc.CreateAttribute("color");
-		wallCeilingAttr.Value =	wallCeilingColorPicker.getColorRGB().r + "x" +
-								wallCeilingColorPicker.getColorRGB().g + "x" +
-								wallCeilingColorPicker.getColorRGB().b;
-
-		wallCeilingNode.Attributes.Append(wallCeilingAttr);
-
-		wallCeilingAttr = xmlDoc.CreateAttribute("saturation");
-		wallCeilingAttr.Value = wallCeilingColorPicker.getSaturation().ToString();
-		wallCeilingNode.Attributes.Append(wallCeilingAttr);
-		sceneNode.AppendChild(wallCeilingNode);
-		*/
-
-		/*//TODO remember me
-		XmlNode floorNode = xmlDoc.CreateElement("piso");
-		XmlAttribute floorIndexTextureAttr = xmlDoc.CreateAttribute("indicetextura");
-		Transform parentTextureBtns = GameObject.Find("Lists").transform.FindChild ("View UI Piso").GetChild(0).GetChild(0);
-		floorIndexTextureAttr.Value = parentTextureBtns.GetComponent<CatalogFloorButtonHandler> ().SelectedFloorIndex.ToString();
-		floorNode.Attributes.Append(floorIndexTextureAttr);
-		sceneNode.AppendChild(floorNode);
-
-		Debug.LogError (xmlDoc.OuterXml);
-		System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding ();
-
-		FileUtils.WriteFile(path, enc.GetBytes(xmlDoc.OuterXml),true);
-				*/
 		return false;
 	}
 
 	public void LoadState(string path, bool isWeb)
 	{
-		/*ConfigurationPreset cfgPreset;
-		Stream stream = File.Open (path, FileMode.Open);
+//		ConfigurationPreset cfgPreset;
+//		Stream stream = File.Open (Application.persistentDataPath + '/' + path, FileMode.Open);
+//		BinaryFormatter bFormatter = new BinaryFormatter ();
+//		cfgPreset = (ConfigurationPreset)bFormatter.Deserialize (stream);
+//		stream.Close();
+
+		FileStream fileReader = File.Open (Application.persistentDataPath + '/' + path, FileMode.Open);
+				
+		//read and return file in a byte array
+		byte[] data = new byte[fileReader.Length];
+		fileReader.Read (data, 0, data.Length);
+		fileReader.Flush ();
+		fileReader.Close ();
+
+		System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding ();
+		string message =  enc.GetString (data);//FileUtils.LoadFile(path,true));
 		BinaryFormatter bFormatter = new BinaryFormatter ();
-		cfgPreset = (ConfigurationPreset)bFormatter.Deserialize (stream);
-		stream.Close();
+		Client client = (Client)Factory.XmlDeserialize (message,typeof (Client));
+		MemoryStream ms = new MemoryStream(client.Projects[0].data);
+		ConfigurationPreset cfgPreset = (ConfigurationPreset)(bFormatter.Deserialize (ms));
 
 		RunPreset (cfgPreset);
 
@@ -275,10 +236,10 @@ public class Configuration : MonoBehaviour {
 
 	public void RunPreset(int index)
 	{
-		//RunPreset(Presets[index]);
+		RunPreset(Presets[index]);
 	}
 
-	/*private void RunPreset (ConfigurationPreset preset)
+	private void RunPreset (ConfigurationPreset preset)
 	{
 		GameObject.Find("Sol").transform.rotation = preset.RotationOfIllumination.ToQuaternion ();
 
@@ -338,12 +299,12 @@ public class Configuration : MonoBehaviour {
 			r.materials [0].color = data.color.ToColor ();
 			r.materials [0].mainTexture = availableFloorTexturesHash [data.TextureName];//Utilizado Hash para melhor performance e entendimento do code :D
 
-			MaterialUtils.ResizeWallMaterial (cFloor,
+			MaterialUtils.ResizeMaterial (cFloor,
 											  data.Scale.x,
 											  data.Scale.y);
 		}
 
-		foreach ( PresetWallData data in preset.PresetDataWalls)
+		foreach ( PresetWallData data in preset.PresetDataWalls)	
 		{
 			GameObject cWall = Instantiate (wall,
 										    data.Position.ToVector3 (),
@@ -361,9 +322,9 @@ public class Configuration : MonoBehaviour {
 			r.materials [0].color 		= data.color.ToColor ();
 			r.materials [0].mainTexture = availableWallTextures [data.TextureName];//Utilizado Hash para melhor performance e entendimento do code :D
 
-			MaterialUtils.ResizeWallMaterial (cWall,
-											  data.Scale.x,
-											  data.Scale.y);
+			MaterialUtils.ResizeMaterial (cWall.transform.GetChild (0),
+										  data.Scale.x,
+										  data.Scale.y);
 		}
 
 		foreach(PresetModuleData data in preset.PresetDataModules)

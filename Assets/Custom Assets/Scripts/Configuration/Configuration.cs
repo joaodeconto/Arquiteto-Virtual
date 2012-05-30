@@ -21,7 +21,7 @@ public class Configuration : MonoBehaviour {
 	public GameObject wall, floor;
 
 	public List<string> PresetNames { get; private set; }
-	public List<ConfigurationPreset> Presets { get; private set; }
+//	public List<ConfigurationPreset> Presets { get; private set; }
 
 	private Dictionary<string, Texture2D> availableWallTextures;
 	private Dictionary<string, Texture2D> availableFloorTexturesHash;
@@ -75,7 +75,7 @@ public class Configuration : MonoBehaviour {
 
 	public bool SaveCurrentState(string path, bool isWeb)
 	{
-		List<GameObject> modules= new List<GameObject> (GameObject.FindGameObjectsWithTag ("Movel"));
+		/*List<GameObject> modules= new List<GameObject> (GameObject.FindGameObjectsWithTag ("Movel"));
 		List<GameObject> floors	= new List<GameObject> (GameObject.FindGameObjectsWithTag ("Chao"));
 
 		GameObject selectedMobile = GameObject.FindGameObjectWithTag ("MovelSelecionado");
@@ -253,7 +253,7 @@ public class Configuration : MonoBehaviour {
 
 	public void LoadState(string path, bool isWeb)
 	{
-		ConfigurationPreset cfgPreset;
+		/*ConfigurationPreset cfgPreset;
 		Stream stream = File.Open (path, FileMode.Open);
 		BinaryFormatter bFormatter = new BinaryFormatter ();
 		cfgPreset = (ConfigurationPreset)bFormatter.Deserialize (stream);
@@ -275,10 +275,10 @@ public class Configuration : MonoBehaviour {
 
 	public void RunPreset(int index)
 	{
-		RunPreset(Presets[index]);
+		//RunPreset(Presets[index]);
 	}
 
-	private void RunPreset (ConfigurationPreset preset)
+	/*private void RunPreset (ConfigurationPreset preset)
 	{
 		GameObject.Find("Sol").transform.rotation = preset.RotationOfIllumination.ToQuaternion ();
 

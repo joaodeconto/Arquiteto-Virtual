@@ -430,7 +430,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc7acf976ba336a44b798a37c3da77a0, type: 1}
   m_Name: 
-  walls: []
+  WallHeight: 2.79999995
   parentFloor: {fileID: 1035008696}
   parentCeil: {fileID: 972926975}
   parentWalls: {fileID: 860748067}
@@ -438,9 +438,6 @@ MonoBehaviour:
   grid: {fileID: 861336557}
   floor: {fileID: 100000, guid: ae2ed511cfff5d3438396d0546e09044, type: 2}
   wall: {fileID: 100000, guid: 8af1669798055ca41962b28f06d079a2, type: 2}
-  wall95: {fileID: 100000, guid: b8eb5181c7c516843abe19c17b0958ce, type: 2}
-  wall90: {fileID: 100000, guid: e54eb0b36fb5979438ba9e3a8ce13028, type: 2}
-  corner: {fileID: 100000, guid: 947fdaba853a0954fa957c5a8a886fc4, type: 2}
   ceil: {fileID: 100000, guid: 6913624e742a3f04fbe4be7c6b579008, type: 2}
 --- !u!1 &336761517
 GameObject:

@@ -24,31 +24,35 @@ public class ClickItem : MonoBehaviour {
 		}
 		#endregion
 		
-		GameObject newFurniture = Instantiate(gameObject) as GameObject;
+		GameObject newModule = Instantiate(gameObject) as GameObject;
 							
-		newFurniture.tag = "Movel";
-		newFurniture.layer = LayerMask.NameToLayer("Moveis");
+		newModule.tag = "Movel";
+		newModule.layer = LayerMask.NameToLayer("Moveis");
 		
-		foreach (Animation anim in newFurniture.GetComponentsInChildren<Animation>()) {
+		foreach (Animation anim in newModule.GetComponentsInChildren<Animation>()) {
 			anim.Stop();
 			anim.playAutomatically = false;
 		}
-		
-		newFurniture.AddComponent<SnapBehaviour>();
-		newFurniture.AddComponent<CalculateBounds>();
 
-		if (newFurniture.GetComponent<Rigidbody> () == null)
-			newFurniture.AddComponent<Rigidbody>();
+		if (newModule.name.LastIndexOf ("(") != -1) {//Retirar o "(Clone)" de trás do objeto
+			newModule.name = newModule.name.Substring (0, newModule.name.LastIndexOf ("("));
+		}
 		
-		if (newFurniture.GetComponent<InformacoesMovel>().tipoMovel != TipoMovel.MOVEL)
+		newModule.AddComponent<SnapBehaviour>();
+		newModule.AddComponent<CalculateBounds>();
+
+		if (newModule.GetComponent<Rigidbody> () == null)
+			newModule.AddComponent<Rigidbody>();
+		
+		if (newModule.GetComponent<InformacoesMovel>().tipoMovel != TipoMovel.MOVEL)
 		{
-			newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | 
+			newModule.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | 
 												 RigidbodyConstraints.FreezeRotation;
 		} else {
-			newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+			newModule.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 		}
 						
-		newFurniture.GetComponent<InformacoesMovel>().Initialize();
+		newModule.GetComponent<InformacoesMovel>().Initialize();
 		
 		GameObject MoveisGO = GameObject.Find("Moveis GO");
 	
@@ -75,7 +79,7 @@ public class ClickItem : MonoBehaviour {
 			nearestAvailableGround.y = 0.0f;
 		}
 	
-		newFurniture.transform.position = nearestAvailableGround;
+		newModule.transform.position = nearestAvailableGround;
 		#endregion
 		
 		#region colocar objeto virado para a câmera
@@ -84,19 +88,19 @@ public class ClickItem : MonoBehaviour {
 		Debug.Log("yRotation: " + yRotation);
 		
 		if(yRotation < 55 || yRotation > 325) {
-			newFurniture.transform.eulerAngles = new Vector3(0,180,0);
+			newModule.transform.eulerAngles = new Vector3(0,180,0);
 		}
 		else if(yRotation < 145 && yRotation > 55) {
-			newFurniture.transform.eulerAngles = new Vector3(0,270,0);
+			newModule.transform.eulerAngles = new Vector3(0,270,0);
 		}
 		else if(yRotation < 235 && yRotation > 145) {
-			newFurniture.transform.eulerAngles = new Vector3(0,0,0);
+			newModule.transform.eulerAngles = new Vector3(0,0,0);
 		}
 		else if(yRotation < 325 && yRotation > 235) {
-			newFurniture.transform.eulerAngles = new Vector3(0,90,0);
+			newModule.transform.eulerAngles = new Vector3(0,90,0);
 		} else { Debug.LogError(" Something gone wrong! ");}
 		#endregion
 		
-		newFurniture.transform.parent = MoveisGO.transform;
+		newModule.transform.parent = MoveisGO.transform;
 	}
 }

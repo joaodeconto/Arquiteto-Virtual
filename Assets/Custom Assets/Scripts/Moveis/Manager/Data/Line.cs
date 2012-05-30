@@ -20,6 +20,14 @@ public class Line {
 	{
 		return CurrentLine = Lines[index];
 	}
+
+	public static Color CurrentDetailColor
+	{
+		get
+		{
+			return BrandColor.GetRealColor( CurrentLine.colors[CurrentLine.GlobalDetailColorIndex]);
+		}
+	}
 	#endregion
 	
 	public int GlobalDetailColorIndex { get; set; }

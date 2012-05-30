@@ -9,7 +9,12 @@ public class AssetResources
 {
     public static string[] GetAllAssets()
     {
-        string[] tmpAssets1 = Directory.GetFiles(Application.dataPath, "*.*", SearchOption.AllDirectories);
+        return GetAllAssets("*");
+    }
+	
+	public static string[] GetAllAssets(string extension)
+    {
+        string[] tmpAssets1 = Directory.GetFiles(Application.dataPath, "*."+extension, SearchOption.AllDirectories);
         string[] tmpAssets2 = Array.FindAll(tmpAssets1, name => !name.EndsWith(".meta"));
         string[] allAssets;
 

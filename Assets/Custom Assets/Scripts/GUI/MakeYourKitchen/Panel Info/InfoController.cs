@@ -287,18 +287,18 @@ public class InfoController : MonoBehaviour {
 	
 	private void DrawEmptyWindow (){
 	
-		infoLabels[0].SetLabels(I18n.t("C√≥digo"), "");
+		infoLabels[0].SetLabels(I18n.t("CÛdigo"), "");
 		infoLabels[1].SetLabels(I18n.t("LXPXA"), "");
-		infoLabels[2].SetLabels(I18n.t("Descri√ß√£o"), "");
+		infoLabels[2].SetLabels(I18n.t("DescriÁ„o"), "");
 		infoLabels[3].SetLabels(I18n.t("Linha"), "");
 		infoLabels[4].SetLabels(I18n.t("Categoria"), "");
 	}
 	
 	private void SetInfo (InformacoesMovel furnitureData) {
 		this.furnitureData = furnitureData;
-		infoLabels[0].SetLabels(I18n.t("C√≥digo"), furnitureData.Codigo);
+		infoLabels[0].SetLabels(I18n.t("CÛdigo"), furnitureData.Codigo);
 		infoLabels[1].SetLabels(I18n.t("LXPXA"), furnitureData.Medidas);
-		infoLabels[2].SetLabels(I18n.t("Descri√ß√£o"), furnitureData.Nome);
+		infoLabels[2].SetLabels(I18n.t("DescriÁ„o"), furnitureData.Nome);
 		infoLabels[3].SetLabels(I18n.t("Linha"), Line.CurrentLine.Name);
 		infoLabels[4].SetLabels(I18n.t("Categoria"), furnitureData.Categoria);
 	}
@@ -327,7 +327,7 @@ public class InfoController : MonoBehaviour {
 			if (checkBox == null)
 			{
 				Debug.LogError ("Verifique os nomes das checkbox de cores. " + 
-								"\n Cor pedida e n√£o encontrada: " + BrandColor.GetColorName (brandColors [i]));
+								"\n Cor pedida e n„o encontrada: " + BrandColor.GetColorName (brandColors [i]));
 				Debug.Break ();
 				return;
 			}
@@ -351,7 +351,7 @@ public class InfoController : MonoBehaviour {
 		string regStrings = "(sem tampo|s tampo|com tampo|c tampo|com cooktop|com cook top|com pia|para pia)";
 		if (!Regex.Match(item.name,regStrings).Success)
 		{
-			//M√≥dulo n√£o possui tampo
+			//MÛdulo n„o possui tampo
 			checkBoxTops.SetActiveRecursively(false);
 			return;
 		}
@@ -373,7 +373,7 @@ public class InfoController : MonoBehaviour {
 		
 		if (categoryIndex == -1)
 		{
-			Debug.LogError ("Categoria do m√≥dulo n√£o existe: " + furnitureData.Categoria);
+			Debug.LogError ("Categoria do mÛdulo n„o existe: " + furnitureData.Categoria);
 			Debug.Break ();
 		}
 		
@@ -446,7 +446,7 @@ public class InfoController : MonoBehaviour {
 		
 		if (!Regex.Match(item.name, ".*(direita|esquerda).*").Success)
 		{
-			//M√≥dulo n√£o possui lado de porta
+			//MÛdulo n„o possui lado de porta
 			checkBoxDoorSide.SetActiveRecursively(false);
 			return;	
 		}
@@ -517,12 +517,12 @@ public class InfoController : MonoBehaviour {
 //		
 //		if (background == null)
 //		{
-//			Debug.LogError ("O nome do background do menu de op√ß√µes est√° com o nome errado! Nome esperado: " + "_BGMobiles");
+//			Debug.LogError ("O nome do background do menu de opÁıes est· com o nome errado! Nome esperado: " + "_BGMobiles");
 //			Debug.Break ();
 //			return;
 //		}
 //		
-////		Debug.Log ("Para fazer o resize do background do menu op√ß√µes funcionar deve-se se ter um iTweenMotion com o nome de \"descer\"");
+////		Debug.Log ("Para fazer o resize do background do menu opÁıes funcionar deve-se se ter um iTweenMotion com o nome de \"descer\"");
 //		
 //		Vector3 backgroundScaleRoot = new Vector3(162, 70, 0);
 //		foreach (iTweenMotion motion in background.gameObject.GetComponents<iTweenMotion>())
@@ -561,7 +561,7 @@ public class InfoController : MonoBehaviour {
 			
 			if (categoryIndex == -1)
 			{
-				Debug.LogError ("Categoria do m√≥dulo n√£o existe: " + furnitureData.Categoria);
+				Debug.LogError ("Categoria do mÛdulo n„o existe: " + furnitureData.Categoria);
 				Debug.Break ();
 			}
 			

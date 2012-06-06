@@ -11,8 +11,8 @@ public class ConverterMaterial : EditorWindow {
 	private int optionFrom, optionTo;
 	private string[] plataform, shadersNames;
 	private List<Object> materials;
-	private int[] PC_ShaderChoose, Mobile_ShaderChoose;
-	private bool[] getMaterial;
+	List<int> PC_ShaderChoose, Mobile_ShaderChoose;
+	List<bool> getMaterial;
 	private Vector2 scrollPosition;
 	private string searchField;
 	
@@ -35,6 +35,9 @@ public class ConverterMaterial : EditorWindow {
 		searchField = "";
 		materials = new List<Object>();
 		Refresh ();
+		PC_ShaderChoose = new List<int>();
+		Mobile_ShaderChoose = new List<int>();
+		getMaterial = new List<bool>();
 	}
 	
 	void OnGUI () {
@@ -54,13 +57,19 @@ public class ConverterMaterial : EditorWindow {
 		GUILayout.Space(15);
 		
 		GUILayout.BeginHorizontal();
+		GUI.enabled = (Selection.objects.Length > 0);
 		if (GUILayout.Button("Get select materials")) {
 			GetSelectMaterials ();
 		}
+		GUI.enabled = (materials.Count > 0);
 		if (GUILayout.Button("Remove materials")) {
 			materials.Clear();
+			PC_ShaderChoose.Clear();
+			Mobile_ShaderChoose.Clear();
+			getMaterial.Clear();
 		}
 		GUILayout.Space(15);
+		GUI.enabled = true;
 		if (GUILayout.Button("Get all materials")) {
 			GetAllMaterials ();
 		}
@@ -79,13 +88,13 @@ public class ConverterMaterial : EditorWindow {
 			if (GUILayout.Button("Checked All")) {
 				if (EditorUtility.DisplayDialog("Are you sure checked all?",
 					"Are you sure do you checked all?", "Yes", "No")) {
-					for (int j = 0; j != getMaterial.Length; ++j) getMaterial[j] = true;
+					for (int j = 0; j != getMaterial.Count; ++j) getMaterial[j] = true;
 				}
 			}
 			if (GUILayout.Button("Unchecked All")) {
 				if (EditorUtility.DisplayDialog("Are you sure unchecked all?",
 					"Are you sure do you unchecked all?", "Yes", "No")) {
-					for (int j = 0; j != getMaterial.Length; ++j) getMaterial[j] = false;
+					for (int j = 0; j != getMaterial.Count; ++j) getMaterial[j] = false;
 				}
 			}
 			GUILayout.EndHorizontal();
@@ -154,18 +163,6 @@ public class ConverterMaterial : EditorWindow {
 		shadersNames = GetShaders ();
 		
 		SetShaders ();
-		
-		Verify ();
-	}
-	
-	void Verify () {
-		if (!File.Exists (path+file)) {
-			File.Create (path+file).Close();
-			
-			SaveConfiguration (path+file);
-		} else {
-			LoadConfiguration (path+file);
-		}
 	}
 	
 	void VerifyVersion () {
@@ -177,12 +174,96 @@ public class ConverterMaterial : EditorWindow {
 	
 	string[] GetShaders () {
 		List<string> listShaders = new List<string>();
-		Object[] allShaders = Resources.FindObjectsOfTypeAll(typeof(Shader)) as Object[];
+		
+		#region Shaders Unity
+		listShaders.Add("Bumped Diffuse");
+		listShaders.Add("Bumped Specular");
+		listShaders.Add("Decal");
+		listShaders.Add("Diffuse");
+		listShaders.Add("Diffuse Detail");
+		listShaders.Add("Parallax Diffuse");
+		listShaders.Add("Parallax Specular");
+		listShaders.Add("Specular");
+		listShaders.Add("VertexLit");
+		listShaders.Add("FX/Flare");
+		listShaders.Add("GUI/TextShader");
+		listShaders.Add("Mobile/Bumped Diffuse");
+		listShaders.Add("Mobile/Bumped Specular");
+		listShaders.Add("Mobile/Bumped Specular (1 Directional Light)");
+		listShaders.Add("Mobile/Diffuse");
+		listShaders.Add("Mobile/Particles/Additive");
+		listShaders.Add("Mobile/Particles/Alpha Blended");
+		listShaders.Add("Mobile/Particles/Multiply");
+		listShaders.Add("Mobile/Particles/VertexLit Blended");
+		listShaders.Add("Mobile/Skybox");
+		listShaders.Add("Mobile/Unlit (Supports Lightmap)");
+		listShaders.Add("Mobile/VertexLit");
+		listShaders.Add("Mobile/VertexLit (Only Directional Lights)");
+		listShaders.Add("Nature/Tree Creator Bark");
+		listShaders.Add("Nature/Tree Creator Leaves");
+		listShaders.Add("Nature/Tree Creator Leaves Fast");
+		listShaders.Add("Nature/Tree Soft Occlusion Bark");
+		listShaders.Add("Nature/Tree Soft Occlusion Leaves");
+		listShaders.Add("Particles/Additive");
+		listShaders.Add("Particles/Additive (Soft)");
+		listShaders.Add("Particles/Alpha Blended");
+		listShaders.Add("Particles/Alpha Blended Premultiply");
+		listShaders.Add("Particles/Multiply");
+		listShaders.Add("Particles/Multiply (Double)");
+		listShaders.Add("Particles/VertexLit Blended");
+		listShaders.Add("Particles/~Additive-Multiply");
+		listShaders.Add("Reflective/Bumped Diffuse");
+		listShaders.Add("Reflective/Bumped Specular");
+		listShaders.Add("Reflective/Bumped Unlit");
+		listShaders.Add("Reflective/Bumped VertexLit");
+		listShaders.Add("Reflective/Diffuse");
+		listShaders.Add("Reflective/Parallax Diffuse");
+		listShaders.Add("Reflective/Parallax Specular");
+		listShaders.Add("Reflective/Specular");
+		listShaders.Add("Reflective/VertexLit");
+		listShaders.Add("RenderFX/Skybox");
+		listShaders.Add("RenderFX/Skybox Cubed");
+		listShaders.Add("Self-Illumin/Bumped Diffuse");
+		listShaders.Add("Self-Illumin/Bumped Specular");
+		listShaders.Add("Self-Illumin/Diffuse");
+		listShaders.Add("Self-Illumin/Parallax Diffuse");
+		listShaders.Add("Self-Illumin/Parallax Specular");
+		listShaders.Add("Self-Illumin/Specular");
+		listShaders.Add("Self-Illumin/VertexLit");
+		listShaders.Add("Transparent/Bumped Diffuse");
+		listShaders.Add("Transparent/Bumped Specular");
+		listShaders.Add("Transparent/Cutout/Bumped Diffuse");
+		listShaders.Add("Transparent/Cutout/Bumped Specular");
+		listShaders.Add("Transparent/Cutout/Diffuse");
+		listShaders.Add("Transparent/Cutout/Soft Edge Unlit");
+		listShaders.Add("Transparent/Cutout/Specular");
+		listShaders.Add("Transparent/Cutout/VertexLit");
+		listShaders.Add("Transparent/Diffuse");
+		listShaders.Add("Transparent/Parallax Diffuse");
+		listShaders.Add("Transparent/Parallax Specular");
+		listShaders.Add("Transparent/Refractive");
+		listShaders.Add("Transparent/Specular");
+		listShaders.Add("Transparent/VertexLit");
+		listShaders.Add("Unlit/Additive Colored");
+		listShaders.Add("Unlit/Masked Colored");
+		listShaders.Add("Unlit/Texture");
+		listShaders.Add("Unlit/Transparent");
+		listShaders.Add("Unlit/Transparent Colored");
+		listShaders.Add("Unlit/Transparent Colored (AlphaClip)");
+		listShaders.Add("Unlit/Transparent Colored (HardClip)");
+		listShaders.Add("Unlit/Transparent Colored (SoftClip)");
+		listShaders.Add("Unlit/Transparent Colored Overlay");
+		listShaders.Add("Unlit/Transparent Cutout");
+		#endregion
+		
+		string[] allShaders = AssetResources.GetAllAssets("shader");
+		
 		int k = 0;
-		foreach (Shader thisShader in allShaders) {
-			EditorUtility.DisplayCancelableProgressBar(	"Get Shaders",
-														"Shader: " + thisShader.name,
-														k);
+		foreach (string shaderPath in allShaders) {
+			EditorUtility.DisplayProgressBar(	"Get Shaders",
+												"Shader: " + shaderPath,
+												k);
+			Shader thisShader = AssetDatabase.LoadAssetAtPath(shaderPath, typeof(Shader)) as Shader;
 			if (!thisShader.name.Contains("Hidden") &&
 				!thisShader.name.Contains("EDITOR") &&
 				!thisShader.name.Contains("__") &&
@@ -192,29 +273,27 @@ public class ConverterMaterial : EditorWindow {
 			}
 			++k;
 		}
-		listShaders.Sort();
 		EditorUtility.ClearProgressBar();
 		return listShaders.ToArray();
 	}
 	
 	void SetShaders () {
-		PC_ShaderChoose = new int[materials.Count];
-		Mobile_ShaderChoose = new int[materials.Count];
-		getMaterial = new bool[materials.Count];
-		
 		int k = 0;
 		foreach (Material material in materials) {
-			EditorUtility.DisplayCancelableProgressBar(	"Load Materials",
-														"Material: " + material.name,
-														k);
+			EditorUtility.DisplayProgressBar(	"Configuration new materials",
+												"Material: " + material.name,
+												k);
+			if (k >= getMaterial.Count) {
+				PC_ShaderChoose.Add(-1);
+				Mobile_ShaderChoose.Add(-1);
+				getMaterial.Add(true);
+			}
 			int i = 0;
-			PC_ShaderChoose[k] = -1;
-			Mobile_ShaderChoose[k] = -1;
 			foreach (string sn in shadersNames) {
 				if (PC_ShaderChoose[k] == -1) {
 					int intPathShader = material.shader.name.IndexOf("Mobile/");
 					if (intPathShader != -1) {
-						string pathShader = material.shader.name.Substring(0, intPathShader);
+						string pathShader = material.shader.name.Remove(intPathShader, intPathShader+7);
 						if (sn.Equals(pathShader)) {
 							PC_ShaderChoose[k] = i;
 						}
@@ -228,7 +307,7 @@ public class ConverterMaterial : EditorWindow {
 					int intPathShader = material.shader.name.IndexOf("Mobile/");
 					if (intPathShader != -1) {
 						if (sn.Equals(material.shader.name)) {
-							PC_ShaderChoose[k] = i;
+							Mobile_ShaderChoose[k] = i;
 						}
 					} else {
 						if (sn.Equals("Mobile/"+material.shader.name)) {
@@ -237,16 +316,16 @@ public class ConverterMaterial : EditorWindow {
 					}
 				}
 				i++;
-				if (PC_ShaderChoose[k] != -1 
+				if (PC_ShaderChoose[k] != -1
 					&& Mobile_ShaderChoose[k] != -1)
 					break;
 			}
+			
 			if (PC_ShaderChoose[k] == -1)
-				PC_ShaderChoose[k] = Mobile_ShaderChoose[k];
+				PC_ShaderChoose.Add(Mobile_ShaderChoose[k]);
 			if (Mobile_ShaderChoose[k] == -1)
 				Mobile_ShaderChoose[k] = PC_ShaderChoose[k];
 			
-			getMaterial[k] = true;
 			++k;
 		}
 		
@@ -257,11 +336,13 @@ public class ConverterMaterial : EditorWindow {
 		int k = 0;
 		Object[] selections = Selection.objects;
 		foreach(Object material in selections) {
-			EditorUtility.DisplayCancelableProgressBar(	"Get Materials",
-														"Material: " + material.name,
-														k);
+			EditorUtility.DisplayProgressBar(	"Get Materials",
+												"Material: " + material.name,
+												k);
 			if (material.GetType() == typeof(Material)) {
-				materials.Add(material);
+				if (!materials.Contains(material)) {
+					materials.Add(material);
+				}
 			}
 			
 			//TODO: Verificar em pastas selecionadas.
@@ -276,36 +357,33 @@ public class ConverterMaterial : EditorWindow {
 		}
 		EditorUtility.ClearProgressBar();
 		
-		selections = new Object[0];
-		
 		SetShaders ();
 		
-		Verify ();
+		selections = new Object[0];
 	}
 	
 	void GetAllMaterials () {
 		materials = new List<Object>();
 		int k = 0;
-		foreach(Material material in AssetResources.GetAllAssets(typeof(Material)) as Object[]) {
-			EditorUtility.DisplayCancelableProgressBar(	"Get Materials",
-														"Material: " + material.name,
-														k);
-			materials.Add(material);
+		foreach(string material in AssetResources.GetAllAssets("mat")) {
+			EditorUtility.DisplayProgressBar(	"Get Materials",
+												"Material: " + material,
+												k);
+			materials.Add(AssetDatabase.LoadAssetAtPath(material, typeof(Material)));
 			++k;
 		}
 		EditorUtility.ClearProgressBar();
-		SetShaders ();
 		
-		Verify ();
+		SetShaders ();
 	}
 	
 	void SaveConfiguration (string path) {
 		List<string> materialsLog = new List<string>();
 		int k = 0;
 		foreach (Material material in materials) {
-			EditorUtility.DisplayCancelableProgressBar(	"Save Materials Configuration",
-														"Material: " + material.name,
-														k);
+			EditorUtility.DisplayProgressBar(	"Save Materials Configuration",
+												"Material: " + material.name,
+												k);
 			
 			materialsLog.Add(material.GetInstanceID()+"-PcShader="+PC_ShaderChoose[k]+"-MobileShader="+Mobile_ShaderChoose[k]+"-get="+getMaterial[k]);
 			
@@ -319,13 +397,67 @@ public class ConverterMaterial : EditorWindow {
 		values = new string[0];
 	}
 	
-	void LoadConfiguration (string path) {
+	void LoadConfigurationButton (string path) {
+		List<string> configurations = AssetResources.LoadTextFile (path);
+		if (configurations.Count != 0) {
+			shadersNames = GetShaders();
+			
+			materials = new List<Object>();
+			
+			PC_ShaderChoose = new List<int>();
+			Mobile_ShaderChoose = new List<int>();
+			getMaterial = new List<bool>();
+			
+			List<Object> allMaterials = new List<Object>();
+			
+			int j = 0;
+			foreach(string material in AssetResources.GetAllAssets("mat")) {
+				EditorUtility.DisplayProgressBar(	"Get Materials",
+													"Material: " + material,
+													j);
+				allMaterials.Add(AssetDatabase.LoadAssetAtPath(material, typeof(Material)));
+				++j;
+			}
+			
+			for (int k = 0; k != allMaterials.Count; ++k) {
+				EditorUtility.DisplayProgressBar(	"Load Materials Configuration",
+													"Loading: " + allMaterials[k].name,
+													k);
+				for (int i = 0; i != configurations.Count; ++i) {
+					string idInstance = configurations[i].Split('-')[0];
+					
+					if (idInstance.Length != 0) {
+						int id = System.Convert.ToInt32(idInstance);
+						if (allMaterials[k].GetInstanceID() == id) {
+							materials.Add(allMaterials[k]);
+							string pc = configurations[i].Split('-')[1];
+							string mb = configurations[i].Split('-')[2];
+							string getMat = configurations[i].Split('-')[3];
+							int pcId = System.Convert.ToInt32(pc.Split('=')[1]);
+							int mbId = System.Convert.ToInt32(mb.Split('=')[1]);
+							bool getMatBool = System.Convert.ToBoolean(getMat.Split('=')[1]);
+							PC_ShaderChoose.Add(pcId);
+							Mobile_ShaderChoose.Add(mbId);
+							getMaterial.Add(getMatBool);
+							break;
+						}
+					}
+				}
+			}
+			allMaterials.Clear();
+		}
+		EditorUtility.ClearProgressBar();
+		
+		//LoadConfiguration (path);
+	}
+	
+	/*void LoadConfiguration (string path) {
 		List<string> configurations = AssetResources.LoadTextFile (path);
 		if (configurations.Count != 0) {
 			for (int k = 0; k != materials.Count; ++k) {
-				EditorUtility.DisplayCancelableProgressBar(	"Load Materials Configuration",
-															"Loading: " + materials[k].name,
-															k);
+				EditorUtility.DisplayProgressBar(	"Load Materials Configuration",
+													"Loading: " + materials[k].name,
+													k);
 				for (int i = 0; i != configurations.Count; ++i) {
 					string idInstance = configurations[i].Split('-')[0];
 					
@@ -350,54 +482,12 @@ public class ConverterMaterial : EditorWindow {
 		}
 		
 		EditorUtility.ClearProgressBar();
-	}
-	
-	void LoadConfigurationButton (string path) {
-		List<string> configurations = AssetResources.LoadTextFile (path);
-		if (configurations.Count != 0) {
-			List<Material> allMaterials = new List<Material>();
-			int j = 0;
-			foreach(Material material in AssetResources.GetAllAssets(typeof(Material)) as Object[]) {
-				EditorUtility.DisplayCancelableProgressBar(	"Get All Materials",
-															"Material: " + material.name,
-															j);
-				allMaterials.Add(material);
-				++j;
-			}
-			PC_ShaderChoose = new int[allMaterials.Count];
-			Mobile_ShaderChoose = new int[allMaterials.Count];
-			getMaterial = new bool[allMaterials.Count];			
-			materials = new List<Object>();
-			for (int k = 0; k != allMaterials.Count; ++k) {
-				EditorUtility.DisplayCancelableProgressBar(	"Load Materials Configuration",
-															"Loading: " + allMaterials[k].name,
-															k);
-				for (int i = 0; i != configurations.Count; ++i) {
-					string idInstance = configurations[i].Split('-')[0];
-					
-					if (idInstance.Length != 0) {
-						int id = System.Convert.ToInt32(idInstance);
-						if (allMaterials[k].GetInstanceID() == id) {
-							materials.Add(allMaterials[k]);
-							break;
-						}
-					}
-				}
-			}
-			allMaterials.Clear();
-		}
-		
-		EditorUtility.ClearProgressBar();
-		
-		shadersNames = GetShaders();
-		
-		LoadConfiguration (path);
-	}
+	}*/
 	
 	void ConverterChange () {
 		int k = 0;
 		foreach (Material material in materials) {
-			EditorUtility.DisplayCancelableProgressBar(	"Converter Materials",
+			EditorUtility.DisplayProgressBar(	"Converter Materials",
 														"Loading: " + (int)((float)(k/materials.Count)*100) + "%",
 														k);
 			if (getMaterial[k]) {

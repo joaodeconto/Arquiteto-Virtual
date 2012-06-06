@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: chao
-  m_Shader: {fileID: 4800000, guid: 919e8e20619a39b408ba34e6929e201a, type: 1}
+  m_Shader: {fileID: 4800000, guid: c23f566e0d940b742915dcf4a2f57756, type: 1}
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -22,8 +22,8 @@ Material:
         first:
           name: _BumpMap
         second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
+          m_Texture: {fileID: 2800000, guid: 62c3011855828b6408af41b7bcee5147, type: 1}
+          m_Scale: {x: 3, y: 3}
           m_Offset: {x: 0, y: 0}
       data:
         first:
@@ -85,31 +85,31 @@ Material:
       data:
         first:
           name: _Reflection
-        second: .269230843
+        second: .134615451
       data:
         first:
           name: _Shininess
-        second: 1.60339916
+        second: 3.00000072
       data:
         first:
           name: _Gloss
-        second: .19575201
+        second: 0
       data:
         first:
           name: _FrezPow
-        second: 354.461517
+        second: 0
       data:
         first:
           name: _FrezFalloff
-        second: 5.18369675
+        second: 0
       data:
         first:
           name: _EdgeAlpha
-        second: .795350075
+        second: 0
       data:
         first:
           name: _Metalics
-        second: .711538434
+        second: 0
     m_Colors:
       data:
         first:
@@ -118,7 +118,7 @@ Material:
       data:
         first:
           name: _SpecColor
-        second: {r: .695804238, g: .695804238, b: .695804238, a: 1}
+        second: {r: .611940265, g: .611940265, b: .611940265, a: 1}
       data:
         first:
           name: _ReflectColor

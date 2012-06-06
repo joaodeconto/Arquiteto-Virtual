@@ -101,9 +101,9 @@ public class I18n {
 
 		//Cores
 		hashWords [0] ["black"] = "Preto";
-		hashWords [0] ["gray"] = "Cinza";
+		hashWords [0] ["gray"] 	= "Titanium";
 		hashWords [0] ["green"] = "Verde";
-		hashWords [0] ["violet"] = "Violeta";
+		hashWords [0] ["violet"]= "Vinho";
 		hashWords [0] ["white"] = "Branco";
 
 		//Tipos de tops
@@ -178,9 +178,9 @@ public class I18n {
 		hashWords [1] ["tip-modulo-remover"] = "Delete selected module.";
 
 		hashWords [1] ["black"]	= "Black";
-		hashWords [1] ["gray"] 	= "Gray";
+		hashWords [1] ["gray"] 	= "Titanium";
 		hashWords [1] ["green"] = "Green";
-		hashWords [1] ["violet"]= "Violet";
+		hashWords [1] ["violet"]= "Wine";
 		hashWords [1] ["white"] = "White";
 
 		//Tipos de tops
@@ -254,11 +254,11 @@ public class I18n {
 		hashWords [2] ["tip-modulo-focar"] 	 = "Focus camera on selected module.";
 		hashWords [2] ["tip-modulo-remover"] = "Delete selected module.";
 
-		hashWords [2] ["black"]	= "Black";
-		hashWords [2] ["gray"] 	= "Gray";
-		hashWords [2] ["green"] = "Green";
-		hashWords [2] ["violet"]= "Violet";
-		hashWords [2] ["white"] = "White";
+		hashWords [2] ["black"]	= "Negro";
+		hashWords [2] ["gray"] 	= "Titanium";
+		hashWords [2] ["green"] = "Verde";
+		hashWords [2] ["violet"]= "Vino";
+		hashWords [2] ["white"] = "Blanco";
 
 		//Tipos de tops
 		hashWords [2] ["cooktop"] = "Cooktop";

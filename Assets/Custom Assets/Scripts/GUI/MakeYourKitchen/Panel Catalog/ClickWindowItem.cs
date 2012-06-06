@@ -87,7 +87,7 @@ public class ClickWindowItem : MonoBehaviour {
 		rightWall.transform.localScale = new Vector3 (cRightScaleX,
     												  wallTrans.localScale.y,
     												  wallTrans.localScale.z);
-		MaterialUtils.ResizeWallMaterial (rightWall, cRightScaleX, wallTrans.localScale.y, 0, 0);
+		MaterialUtils.ResizeMaterial (rightWall, cRightScaleX, wallTrans.localScale.y, 0, 0);
 
 		middleWallPosition.y = 0.0f;
 		GameObject lowerWall = Instantiate (wallTrans.gameObject,
@@ -97,7 +97,7 @@ public class ClickWindowItem : MonoBehaviour {
 		lowerWall.transform.localScale = new Vector3 (cMiddleScaleX,
     												  cMiddleLowerScaleY,
     												  wallTrans.localScale.z);
-		MaterialUtils.ResizeWallMaterial (lowerWall,
+		MaterialUtils.ResizeMaterial (lowerWall,
 											cMiddleScaleX,
 											cMiddleLowerScaleY,
 											cRightScaleX,
@@ -111,7 +111,7 @@ public class ClickWindowItem : MonoBehaviour {
 		upperWall.transform.localScale = new Vector3 (cMiddleScaleX,
     												  cMiddleUpperScaleY,
     												  wallTrans.localScale.z);
-		MaterialUtils.ResizeWallMaterial (upperWall,
+		MaterialUtils.ResizeMaterial (upperWall,
 											cMiddleScaleX,
 											cMiddleUpperScaleY,
 											cRightScaleX,
@@ -124,7 +124,7 @@ public class ClickWindowItem : MonoBehaviour {
 		leftWall.transform.localScale = new Vector3 (cLeftScaleX,
     												 wallTrans.localScale.y,
     												 wallTrans.localScale.z);
-		MaterialUtils.ResizeWallMaterial (leftWall,
+		MaterialUtils.ResizeMaterial (leftWall,
 											cLeftScaleX,
 											wallTrans.localScale.y,
 											cRightScaleX + cMiddleScaleX,

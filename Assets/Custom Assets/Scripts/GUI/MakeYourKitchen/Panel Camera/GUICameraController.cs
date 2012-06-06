@@ -22,6 +22,9 @@ public class GUICameraController : MonoBehaviour {
 	private const string pathExportReport = "upload/export/";
 	private const string pathExportImage = "upload/images/";
 	
+	private const string reportUploadFile = "uploadReport.php";
+	private const string screenshotUploadFile = "uploadScreenshot.php";
+	
 	public float Step;
 	public float Angle;
 	public float ZoomSpeed;
@@ -238,7 +241,7 @@ public class GUICameraController : MonoBehaviour {
 		//GameObject.Find("cfg").GetComponent<Configuration>().RunPreset(0);
 		
 		#if UNITY_WEBPLAYER
-		StartCoroutine ("SendScreenshotToForm", "http://www.visiorama360.com.br/Telasul/uploadScreenshot.php");
+		StartCoroutine ("SendScreenshotToForm", screenshotUploadFile);
 		#else
 		StartCoroutine (GetScreenshot());
 		#endif
@@ -248,7 +251,7 @@ public class GUICameraController : MonoBehaviour {
 	{
 		//TODO make this method works
 		#if !UNITY_ANDROID && !UNITY_IPHONE
-		StartCoroutine(SendReportData("http://www.visiorama360.com.br/Telasul/uploadReport.php"));
+		StartCoroutine(SendReportData(reportUploadFile));
 		#endif
 	}
 	

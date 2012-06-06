@@ -30,7 +30,7 @@ public class CatalogItemButtonHandler : MonoBehaviour {
 			newItem.GetComponent<UIDragCamera>().target = cameraTarget;
 			newItem.GetComponent<UIDragCamera>().rootForBounds = rootForBounds;
 			newItem.transform.parent = transform;
-			newItem.transform.localPosition = new Vector3(0, (j * -160), 0);
+			newItem.transform.localPosition = new Vector3(0, (j * (-160 * item.transform.localScale.y)), 0);
 			newItem.transform.localScale = item.transform.localScale;
 			newItem.AddComponent<ClickItem>();
 			newItem.GetComponent<ClickItem>().item = items[i];

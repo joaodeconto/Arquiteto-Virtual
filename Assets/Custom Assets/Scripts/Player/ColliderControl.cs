@@ -113,7 +113,7 @@ public class ColliderControl : MonoBehaviour {
 	
 	#if !UNITY_ANDROID && !UNITY_IPHONE
 	void Update () {
-		if (Input.GetKeyUp(KeyCode.Escape)) {
+		if (Input.GetKeyUp(KeyCode.Space)) {
 			Disable();
 		}
 	}

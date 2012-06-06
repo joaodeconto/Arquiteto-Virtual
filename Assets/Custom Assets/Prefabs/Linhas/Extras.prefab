@@ -1393,7 +1393,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 1a520538bad15f1459df46537b126f05, type: 2}
+  - {fileID: 0}
   - {fileID: 2100000, guid: 55513536a8e135f4cbe10f8cc2ed9c4b, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
@@ -2314,7 +2314,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.98000002, y: .720000029, z: .0299999993}
-  m_Center: {x: 0, y: 1.11000001, z: 0}
+  m_Center: {x: 0, y: 1.11000001, z: -.0199999996}
 --- !u!65 &6500030
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2847,7 +2847,7 @@ MonoBehaviour:
   Codigo: Janela1
   Imagem: {fileID: 2800000, guid: 42e24d92fb586424d9f82a9ebf5660e8, type: 1}
   top: 0
-  tipoMovel: 2
+  tipoMovel: 1
   Categoria: Extras
 --- !u!114 &11400026
 MonoBehaviour:
@@ -2866,7 +2866,7 @@ MonoBehaviour:
   Codigo: Painel
   Imagem: {fileID: 0}
   top: 0
-  tipoMovel: 2
+  tipoMovel: 1
   Categoria: Extras
 --- !u!114 &11400028
 MonoBehaviour:
@@ -2885,7 +2885,7 @@ MonoBehaviour:
   Codigo: Painel
   Imagem: {fileID: 0}
   top: 0
-  tipoMovel: 2
+  tipoMovel: 1
   Categoria: Extras
 --- !u!114 &11400032
 MonoBehaviour:

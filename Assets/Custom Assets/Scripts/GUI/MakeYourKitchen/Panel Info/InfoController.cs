@@ -348,26 +348,33 @@ public class InfoController : MonoBehaviour {
 		currentTop = "";
 		
 		//Quando termina de abrir a janela seleciona o objeto
-		string regStrings = "(sem tampo|s tampo|com tampo|c tampo|com cooktop|com cook top|com pia|para pia)";
-		if (!Regex.Match(item.name,regStrings).Success)
+		string regexStrTopName = "(sem tampo|s tampo|com tampo|c tampo|com cooktop|com cook top|com pia|para pia)";
+		string regexStrName    = ".*(?=sem tampo|s tampo|com tampo|c tampo|com cooktop|com cook top|com pia|para pia)";
+		if (!Regex.Match(item.name,regexStrName).Success)
 		{
 			//Módulo não possui tampo
 			checkBoxTops.SetActiveRecursively(false);
 			return;
 		}
 		
-		string nameItemRegexPrefix = Regex.Match(item.name,".*(?=sem tampo|s tampo|com tampo|c tampo|com cooktop|com cook top|com pia|para pia)", RegexOptions.IgnoreCase).Value;
-		string currentTampoTypeRegexPrefix = Regex.Match(item.name,regStrings, RegexOptions.IgnoreCase).Value;
-		currentTop = currentTampoTypeRegexPrefix;
-		currentTampoTypeRegexPrefix.ToLower();
+		string nameItem = Regex.Match(item.name, regexStrName, RegexOptions.IgnoreCase).Value;
+		string cTopName = Regex.Match(item.name,regexStrTopName, RegexOptions.IgnoreCase).Value;
+		
+		Debug.Log("nameItem: " + nameItem);
+		Debug.Log("cTopName: " + cTopName);
+				
+		currentTop = cTopName;
+		cTopName.ToLower();
 		
 		int categoryIndex = 0;
 		
 		//Find index of mobile's category 
 		List<Category> categories = Line.CurrentLine.categories;
-		for( categoryIndex = Line.CurrentLine.categories.Count - 1; categoryIndex != -1; --categoryIndex ){
-			if(categories[categoryIndex].Name.Equals(furnitureData.Categoria)){
-				break;		
+		for( categoryIndex = Line.CurrentLine.categories.Count - 1; categoryIndex != -1; --categoryIndex )
+		{
+			if(categories[categoryIndex].Name.Equals(furnitureData.Categoria))
+			{
+				break;
 			}
 		}
 		
@@ -394,25 +401,33 @@ public class InfoController : MonoBehaviour {
 		List<GameObject> furniture = Line.CurrentLine.categories[categoryIndex].Furniture;
 		
 		foreach(GameObject mobile in furniture){
-			string nameMobileRegexPrefix = Regex.Match(mobile.name,".*(?=sem tampo|s tampo|com tampo|c tampo|com cooktop|com cook top|com pia|para pia)", RegexOptions.IgnoreCase).Value;
-			if(nameItemRegexPrefix.Equals(nameMobileRegexPrefix) && 
-				Regex.Match(mobile.name, regStrings, RegexOptions.IgnoreCase).Success){
-				string tampoTypeRegexPrefix = Regex.Match(mobile.name,regStrings, RegexOptions.IgnoreCase).Value;
-				tampoTypeRegexPrefix.ToLower();
+			
+			string nameMobile = Regex.Match(mobile.name,regexStrName, RegexOptions.IgnoreCase).Value;
+			
+			Debug.Log("nameMobile: " + nameMobile);
+			
+			//Se o nome do modulo selecionado e o nome do modulo a ser iterado forem iguais
+			//verifica se possue tampo se possue tampo verifica qual tampo possue e habilita no check box a escolha desse tampo
+			if(nameItem.Equals(nameMobile) && Regex.Match(mobile.name, regexStrTopName, RegexOptions.IgnoreCase).Success)
+			{
+				string moduleTopName = Regex.Match(mobile.name,regexStrTopName, RegexOptions.IgnoreCase).Value;
+				moduleTopName.ToLower();
 				
+				Debug.Log("moduleTopName: " + moduleTopName);
 				checkBox = null;
 				
 				//If this is true, in the GUI, show the option
-				if (tampoTypeRegexPrefix.Equals("sem tampo") || tampoTypeRegexPrefix.Equals("s tampo"))
+				if (moduleTopName.Equals("sem tampo") || moduleTopName.Equals("s tampo"))
 					checkBox = checkBoxTops.transform.Find ("Sem Tampo");
-				if (tampoTypeRegexPrefix.Equals("com tampo") || tampoTypeRegexPrefix.Equals("c tampo"))
+				if (moduleTopName.Equals("com tampo") || moduleTopName.Equals("c tampo"))
 					checkBox = checkBoxTops.transform.Find ("Com Tampo");
-				if (tampoTypeRegexPrefix.Equals("com cooktop") || tampoTypeRegexPrefix.Equals("com cook top"))
+				if (moduleTopName.Equals("com cooktop") || moduleTopName.Equals("com cook top"))
 					checkBox = checkBoxTops.transform.Find ("Cooktop");
-				if (tampoTypeRegexPrefix.Equals("com pia") || tampoTypeRegexPrefix.Equals("para pia"))
+				if (moduleTopName.Equals("com pia") || moduleTopName.Equals("para pia"))
 					checkBox = checkBoxTops.transform.Find ("Com Pia");
 				
-				if (checkBox == null) {
+				if (checkBox == null)
+				{
 					Debug.LogError ("WTF? Ele nao achou nenhum check dos TOPS o.o");
 					Debug.Break ();
 					return;
@@ -422,8 +437,9 @@ public class InfoController : MonoBehaviour {
 				checkBox.GetComponent<CheckBoxTopHandler>().item = mobile;
 				
 				//Checks if the this "Tampo" has the same name as current "Tampo" a little while ago
-				if (currentTampoTypeRegexPrefix.Equals(tampoTypeRegexPrefix)) {
-					print("currentTampoTypeRegexPrefix: " + currentTampoTypeRegexPrefix + " - tampoTypeRegexPrefix: " + tampoTypeRegexPrefix);
+				if (cTopName.Equals(moduleTopName))
+				{
+//					print("currentTampoTypeRegexPrefix: " + moduleTopName + " - tampoTypeRegexPrefix: " + moduleTopName);
 					checkBox.GetComponent<UICheckbox>().isChecked = true;
 				}
 			}

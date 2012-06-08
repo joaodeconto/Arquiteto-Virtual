@@ -1868,9 +1868,9 @@ Camera:
   m_BackGroundColor: {r: .5, g: .5, b: .5, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: .0628463328
-    y: .801761389
-    width: .092531234
+    x: .0626465678
+    y: .802910924
+    width: .0925312564
     height: 0
   near clip plane: .100000001
   far clip plane: 10
@@ -2573,7 +2573,7 @@ GameObject:
   - 114: {fileID: 360214216}
   - 114: {fileID: 360214217}
   m_Layer: 12
-  m_Name: Check4
+  m_Name: Com Pia
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3567,7 +3567,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 497391926}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.875752568, y: .875752568, z: 459.42865}
+  m_LocalPosition: {x: -1.20044076, y: 0, z: 459.42865}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -3998,15 +3998,15 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d35a90bed98554f4d8b92c9cd3cfbafa, type: 1}
   m_Name: 
-  tweakMode: 1
+  tweakMode: 0
   screenBlendMode: 1
   hdr: 0
   sepBlurSpread: 1.5
   useSrcAlphaAsMask: 0
-  bloomIntensity: .430000007
+  bloomIntensity: .109999999
   bloomThreshhold: .5
   bloomBlurIterations: 2
-  lensflares: 1
+  lensflares: 0
   hollywoodFlareBlurIterations: 2
   lensflareMode: 1
   hollyStretchWidth: 3.5
@@ -4041,7 +4041,7 @@ GameObject:
   - 114: {fileID: 547841577}
   - 114: {fileID: 547841578}
   m_Layer: 12
-  m_Name: Check3
+  m_Name: Cooktop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4586,7 +4586,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 665805632}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.766283512, y: .766283512, z: 402}
+  m_LocalPosition: {x: -1.05038559, y: 0, z: 402}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -5494,7 +5494,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 761155668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.766283512, y: .766283512, z: 402}
+  m_LocalPosition: {x: -1.05038559, y: 0, z: 402}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -5866,7 +5866,7 @@ GameObject:
   - 114: {fileID: 785838404}
   - 114: {fileID: 785838405}
   m_Layer: 12
-  m_Name: Check2
+  m_Name: Com Tampo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6263,15 +6263,15 @@ Camera:
   m_BackGroundColor: {r: .5, g: .5, b: .5, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: .198588818
-    y: .372891337
+    x: .198389068
+    y: .372912228
     width: 0
-    height: .572370052
+    height: .573876262
   near clip plane: -10
   far clip plane: 10
   field of view: 60
   orthographic: 1
-  orthographic size: .801318049
+  orthographic size: .803426743
   m_Depth: 2
   m_CullingMask:
     serializedVersion: 2
@@ -7946,9 +7946,9 @@ Camera:
   m_BackGroundColor: {r: .5, g: .5, b: .5, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: .0628463328
-    y: .921217918
-    width: .092531234
+    x: .0626465678
+    y: .922681808
+    width: .0925312564
     height: 0
   near clip plane: .100000001
   far clip plane: 10
@@ -8850,7 +8850,7 @@ GameObject:
   - 114: {fileID: 1047751282}
   - 114: {fileID: 1047751283}
   m_Layer: 12
-  m_Name: Check1
+  m_Name: Sem Tampo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9863,15 +9863,15 @@ Camera:
   m_BackGroundColor: {r: .5, g: .5, b: .5, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: .854710996
-    y: .359727085
-    width: .0916703343
-    height: .528699875
+    x: .854511321
+    y: .359713376
+    width: .0916702971
+    height: .530091166
   near clip plane: .100000001
   far clip plane: 10
   field of view: 60
   orthographic: 1
-  orthographic size: .740179837
+  orthographic size: .742127597
   m_Depth: 2
   m_CullingMask:
     serializedVersion: 2
@@ -11246,9 +11246,9 @@ Camera:
   m_BackGroundColor: {r: .5, g: .5, b: .5, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: .0628462732
-    y: .84020102
-    width: .0925312638
+    x: .062646538
+    y: .841451705
+    width: .0925312713
     height: 0
   near clip plane: .100000001
   far clip plane: 10
@@ -12380,7 +12380,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1513702682}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.613026798, y: .613026798, z: 321.600006}
+  m_LocalPosition: {x: -.840308547, y: 0, z: 321.600006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -12659,7 +12659,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 0ed8b97e110a3e848992d72c9f726f5e, type: 2}
       propertyPath: bloomIntensity
-      value: .430000007
+      value: .109999999
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: 0ed8b97e110a3e848992d72c9f726f5e, type: 2}
       propertyPath: m_HDR
@@ -12671,11 +12671,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 0ed8b97e110a3e848992d72c9f726f5e, type: 2}
       propertyPath: tweakMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 0ed8b97e110a3e848992d72c9f726f5e, type: 2}
       propertyPath: lensflares
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 0ed8b97e110a3e848992d72c9f726f5e, type: 2}
       propertyPath: flareColorA.r
@@ -12939,7 +12939,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1573784228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.766283512, y: .766283512, z: 402}
+  m_LocalPosition: {x: -1.05038559, y: 0, z: 402}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -13310,7 +13310,7 @@ GameObject:
   - 4: {fileID: 1631094193}
   - 114: {fileID: 1631094194}
   m_Layer: 12
-  m_Name: Label
+  m_Name: _Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14431,7 +14431,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1808111177}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.613026798, y: .613026798, z: 321.600006}
+  m_LocalPosition: {x: -.840308547, y: 0, z: 321.600006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -15786,7 +15786,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1995852662}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.766283512, y: .766283512, z: 402}
+  m_LocalPosition: {x: -1.05038559, y: 0, z: 402}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -16349,7 +16349,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2107165997}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.766283512, y: .766283512, z: 402}
+  m_LocalPosition: {x: -1.05038559, y: 0, z: 402}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:

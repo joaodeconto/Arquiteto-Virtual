@@ -340,7 +340,9 @@ public class ConverterMaterial : EditorWindow {
 												"Material: " + material.name,
 												k);
 			if (material.GetType() == typeof(Material)) {
-				materials.Add(material);
+				if (!materials.Contains(material)) {
+					materials.Add(material);
+				}
 			}
 			
 			//TODO: Verificar em pastas selecionadas.

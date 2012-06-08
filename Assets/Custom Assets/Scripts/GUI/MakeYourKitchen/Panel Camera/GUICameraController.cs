@@ -239,19 +239,15 @@ public class GUICameraController : MonoBehaviour {
 		//GameObject.Find("cfg").GetComponent<Configuration>().SaveCurrentState("lolol",true);
 		//GameObject.Find("cfg").GetComponent<Configuration>().LoadState("teste/teste.xml",false);
 		//GameObject.Find("cfg").GetComponent<Configuration>().RunPreset(0);
-		
-		#if UNITY_WEBPLAYER
-		StartCoroutine ("SendScreenshotToForm", screenshotUploadFile);
-		#else
-		StartCoroutine (GetScreenshot());
-		#endif
+
+		StartCoroutine ("MakeScreenshot");
 	}
 	
 	public void Report ()
 	{
 		//TODO make this method works
 		#if !UNITY_ANDROID && !UNITY_IPHONE
-		StartCoroutine(SendReportData(reportUploadFile));
+		StartCoroutine ("ReportData");
 		#endif
 	}
 	
@@ -319,75 +315,26 @@ public class GUICameraController : MonoBehaviour {
 			}
 		}
 	}
-	
-	private IEnumerator GetScreenshot () {
-		bool isPanelFloor = interfaceGUI.panelFloor.active ? true : false;
-		
-		bool isPanelInfo = interfaceGUI.panelInfo.active ? true : false;
-		
-		bool isPainter = mainCamera.GetComponentInChildren<Painter>().enabled ? true : false;
-		
-		interfaceGUI.lists.SetActiveRecursively(false);
-		mainCamera.GetComponentInChildren<Painter>().enabled = false;
-		
-		Transform[] allchids = interfaceGUI.main.GetComponentsInChildren<Transform>();
-		foreach (Transform child in allchids) {
-			child.gameObject.SetActiveRecursively(false);
-		}
-		
-		yield return new WaitForSeconds(0.2f);
-		
-		int screenshotCount = 0;
-		string screenshotFilename;
-		string directory = Application.dataPath + "/Screenshots/";
-		if (!System.IO.Directory.Exists(directory)) 
-			System.IO.Directory.CreateDirectory(directory);
-		do
-        {
-			if (screenshotCount != 0) screenshotFilename = "arquiteto-virtual" + screenshotCount + ".jpg";
-			else screenshotFilename = "arquiteto-virtual.jpg";
-            screenshotCount++;
-        } while (System.IO.File.Exists(directory + screenshotFilename));
-		Application.CaptureScreenshot(directory + screenshotFilename);
-		
-		yield return new WaitForSeconds(0.2f);
-		
-		foreach (Transform child in allchids) {
-				child.gameObject.SetActiveRecursively(true);
-		}
-		if (!isPanelFloor) {
-			interfaceGUI.viewUIPiso.SetActiveRecursively(false);
-			interfaceGUI.panelFloor.SetActiveRecursively(false);
-		}
-		if (!isPanelInfo) {
-			interfaceGUI.panelInfo.SetActiveRecursively(false);
-			interfaceGUI.panelMobile.SetActiveRecursively(false);
-		}
-		if (isPainter) {
-			mainCamera.GetComponentInChildren<Painter>().enabled = true;
-		}
-		interfaceGUI.uiRootFPS.SetActiveRecursively(false);
-	}
-	
-	private IEnumerator SendScreenshotToForm (string screenShotURL)
+
+	private IEnumerator MakeScreenshot ()
 	{
-		bool isPanelFloor = interfaceGUI.panelFloor.active ? true : false;
+		bool isPanelFloor = interfaceGUI.panelFloor.active;
+		bool isPanelInfo = interfaceGUI.panelInfo.active;
+		bool isPainter = mainCamera.GetComponentInChildren<Painter> ().enabled;
 		
-		bool isPanelInfo = interfaceGUI.panelInfo.active ? true : false;
+		interfaceGUI.lists.SetActiveRecursively (false);
+		mainCamera.GetComponentInChildren<Painter> ().enabled = false;
 		
-		bool isPainter = mainCamera.GetComponentInChildren<Painter>().enabled ? true : false;
-		
-		interfaceGUI.lists.SetActiveRecursively(false);
-		mainCamera.GetComponentInChildren<Painter>().enabled = false;
-		
-		Transform[] allchids = interfaceGUI.main.GetComponentsInChildren<Transform>();
-		foreach (Transform child in allchids) {
-			child.gameObject.SetActiveRecursively(false);
+		Transform[] allchids = interfaceGUI.main.GetComponentsInChildren<Transform> ();
+		foreach (Transform child in allchids)
+		{
+			child.gameObject.SetActiveRecursively (false);
 		}
 		
-		yield return new WaitForSeconds(0.1f);
+		yield return new WaitForSeconds(0.2f);
 		yield return new WaitForEndOfFrame();
-	    
+
+#if UNITY_WEBPLAYER
 		// Create a texture the size of the screen, RGB24 format
 		int width = Screen.width;
 		int height = Screen.height;
@@ -409,35 +356,55 @@ public class GUICameraController : MonoBehaviour {
 	    
 		form.AddBinaryData ("file", bytes, filename, "multipart/form-data");
 		
-		WWW www = new WWW (screenShotURL, form);
+		WWW www = new WWW (screenshotUploadFile, form);
 	
 		yield return www;
 	    
-		if (www.error != null)
+		if (www.error != null){
 			print (www.error);
-		else {
+		} else {
 			print ("Finished Uploading Screenshot"); 
 			Application.ExternalCall ("tryToDownload", pathExportImage + filename);
 		}
-		
-		foreach (Transform child in allchids) {
-				child.gameObject.SetActiveRecursively(true);
+#else
+		int screenshotCount = 0;
+		string screenshotFilename;
+		string directory = "Screenshots/";
+		if (!System.IO.Directory.Exists (directory))
+			System.IO.Directory.CreateDirectory (directory);
+		do {
+			if (screenshotCount == 0)
+				screenshotFilename = "arquiteto-virtual.jpg";
+			else
+				screenshotFilename = "arquiteto-virtual" + screenshotCount + ".jpg";
+
+			++screenshotCount;
+		} while (System.IO.File.Exists(directory + screenshotFilename));
+
+		Application.CaptureScreenshot (directory + screenshotFilename);
+#endif
+
+		foreach (Transform child in allchids)
+			child.gameObject.SetActiveRecursively (true);
+
+		if (!isPanelFloor)
+		{
+			interfaceGUI.viewUIPiso.SetActiveRecursively (false);
+			interfaceGUI.panelFloor.SetActiveRecursively (false);
 		}
-		if (!isPanelFloor) {
-			interfaceGUI.viewUIPiso.SetActiveRecursively(false);
-			interfaceGUI.panelFloor.SetActiveRecursively(false);
+		if (!isPanelInfo)
+		{
+			interfaceGUI.panelInfo.SetActiveRecursively (false);
+			interfaceGUI.panelMobile.SetActiveRecursively (false);
 		}
-		if (!isPanelInfo) {
-			interfaceGUI.panelInfo.SetActiveRecursively(false);
-			interfaceGUI.panelMobile.SetActiveRecursively(false);
-		}
-		if (isPainter) {
-			mainCamera.GetComponentInChildren<Painter>().enabled = true;
+		if (isPainter)
+		{
+			mainCamera.GetComponentInChildren<Painter> ().enabled = true;
 		}
 		interfaceGUI.uiRootFPS.SetActiveRecursively(false);
 	}
-	
-	private IEnumerator SendReportData (string urlForm)
+
+	private IEnumerator ReportData ()
 	{
 		GameObject[] mobiles = GameObject.FindGameObjectsWithTag ("Movel");
 	
@@ -492,11 +459,13 @@ public class GUICameraController : MonoBehaviour {
 			}
 		}
 		
-		print(csvString);
-		
-		WWWForm form = new WWWForm ();
-		
+//		print(csvString);
+
 		byte[] utf8String = Encoding.UTF8.GetBytes (csvString);
+
+#if UNITY_WEBPLAYER
+		WWWForm form = new WWWForm ();
+
 		form.AddField ("CSV-FILE", Encoding.UTF8.GetString (utf8String));
 		form.AddField ("CSV-FILE-NAME", filename);
 	
@@ -508,6 +477,27 @@ public class GUICameraController : MonoBehaviour {
 			print (www.error);
 		else
 			Application.ExternalCall ("tryToDownload", pathExportReport + filename);
+#else
+		int screenshotCount = 0;
+		string screenshotFilename;
+		string directory = "Reports/";
+		if (!System.IO.Directory.Exists (directory))
+			System.IO.Directory.CreateDirectory (directory);
+		do {
+			if (screenshotCount == 0)
+				screenshotFilename = "arquiteto-virtual.csv";
+			else
+				screenshotFilename = "arquiteto-virtual" + screenshotCount + ".csv";
+
+			++screenshotCount;
+		} while (System.IO.File.Exists(directory + screenshotFilename));
+
+		System.IO.File.WriteAllText(directory + screenshotFilename, Encoding.UTF8.GetString (utf8String));
+
+		yield return new WaitForEndOfFrame();
+
+#endif
+
 	}
 			
 	Transform wallChild;

@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Cristal
+  m_Shader: {fileID: 4800000, guid: 4d6cfc3615bbffd44b89c3f5bcb232d8, type: 1}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+      data:
+        first:
+          name: _MainTex
+        second:
+          m_Texture: {fileID: 2800000, guid: dd1857320e514cd43af2ac9382f5ec08, type: 1}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _BumpMap
+        second:
+          m_Texture: {fileID: 2800000, guid: 9dd1439e111b7054bb8e8b483866c5cb, type: 1}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Spec_Gloss_Reflec_Masks
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Cube
+        second:
+          m_Texture: {fileID: 8900000, guid: 2050805fae8b203419aed58c9832e5cb, type: 1}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+    m_Floats:
+      data:
+        first:
+          name: _Reflection
+        second: .25373134
+      data:
+        first:
+          name: _Shininess
+        second: .342596024
+      data:
+        first:
+          name: _Gloss
+        second: .0298507437
+      data:
+        first:
+          name: _FrezPow
+        second: 1024
+      data:
+        first:
+          name: _FrezFalloff
+        second: 6.44948339
+      data:
+        first:
+          name: _EdgeAlpha
+        second: .925373137
+      data:
+        first:
+          name: _Metalics
+        second: .66991967
+    m_Colors:
+      data:
+        first:
+          name: _Color
+        second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _SpecColor
+        second: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1002 &2100001
+EditorExtensionImpl:
+  serializedVersion: 6

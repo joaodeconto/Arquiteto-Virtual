@@ -22,7 +22,7 @@ Material:
         first:
           name: _BumpMap
         second:
-          m_Texture: {fileID: 2800000, guid: 0931cf84012aae7409a2a401111831aa, type: 1}
+          m_Texture: {fileID: 2800000, guid: edd91a348439f70448a62da11abfb30c, type: 1}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -63,11 +63,11 @@ Material:
       data:
         first:
           name: _EdgeAlpha
-        second: .925373137
+        second: 1
       data:
         first:
           name: _Metalics
-        second: .656716406
+        second: .701492548
     m_Colors:
       data:
         first:

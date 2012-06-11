@@ -410,51 +410,77 @@ public class GUICameraController : MonoBehaviour {
 	
 		string filename = String.Format ("{0:yyyy-MM-dd-HH-mm-ss}", DateTime.Now) + ".csv";
 		string csvString = "LINHA: " + Line.CurrentLine.Name + "\r\n";
-	
+
+		string shortenedBrandColorName = null;
+
+		//obtendo tipo de tampo
+		foreach (Transform check in GameObject.Find ("InfoController").GetComponent<InfoController>().checkBoxTextures.transform)
+		{
+			if (check.name == "Label")
+				continue;
+
+			if (check.GetComponent<UICheckbox>().isChecked)
+			{
+				csvString += "Tampo;" + check.GetComponent<CheckBoxTextureHandler> ().texture.name + "\r\n";
+				break;
+			}
+		}
+
 		csvString += "NOME;CODIGO;LARGURA;ALTURA;PROFUNDIDADE;\r\n";
-	
+
 		foreach (GameObject mobile in mobiles) {
 	
 			InformacoesMovel info = mobile.GetComponent<InformacoesMovel> ();
-	
-			if ("Extras".Equals (info.Categoria))
+
+			//Se for um item extra ou se for algum item que não possua código, como as lâmpadas, não adicionada no arquivo.
+			if ("Extras".Equals (info.Categoria) || String.IsNullOrEmpty(info.Codigo.Trim()))
 				continue;
+
+			if (info.HasDetailMaterial())
+			{
+				shortenedBrandColorName = BrandColor.GetShortenedColorName(Line.CurrentLine.colors[Line.CurrentLine.GlobalDetailColorIndex]);
+			}
+			else
+			{
+				shortenedBrandColorName = "";
+			}
 
 			if (Regex.Match(info.name, "(com cooktop|com cook top)").Success)
 			{
-				csvString += info.Nome 	+ ";" +
-							 info.Codigo + ";" +
-							 info.Largura + ";" +
-							 info.Altura + ";" +
+				csvString += info.Nome 		+ ";" +
+							 info.Codigo 	+ ";" +
+							 info.Largura 	+ ";" +
+							 info.Altura 	+ ";" +
 							 info.Comprimento + ";" + "\r\n";
+
 				if (Regex.Match(info.name, "(Balcão triplo|Balcao triplo)").Success)
 				{
 					csvString += "Tampo cooktop triplo" + ";" +
 								 "89121" + ";" +
-								 "1200" + ";" +
-								 "30" + ";" +
-								 "520" + ";" + "\r\n";
+								 "1200"  + ";" +
+								 "30" 	 + ";" +
+								 "520" 	 + ";" + "\r\n";
 				}
 				else
 				{
 					csvString += "Tampo cooktop duplo" + ";" +
 								 "89081" + ";" +
-								 "800" + ";" +
-								 "30" + ";" +
-								 "520" + ";" + "\r\n";
+								 "800" 	 + ";" +
+								 "30" 	 + ";" +
+								 "520" 	 + ";" + "\r\n";
 				}
 				csvString += "Cooktop" + ";" +
-							 "89150" + ";" +
-							 "NA" + ";" +
-							 "NA" + ";" +
-							 "NA" + ";" + "\r\n";
+							 "89150"   + ";" +
+							 "NA"	   + ";" +
+							 "NA" 	   + ";" +
+							 "NA" 	   + ";" + "\r\n";
 			}
 			else
 			{
-				csvString += info.Nome + ";" +
-							 info.Codigo + ";" +
-							 info.Largura + ";" +
-							 info.Altura + ";" +
+				csvString += info.Nome 		  + ";" +
+							 info.Codigo 	  + shortenedBrandColorName + ";" +
+							 info.Largura	  + ";" +
+							 info.Altura 	  + ";" +
 							 info.Comprimento + ";" + "\r\n";
 			}
 		}
@@ -466,7 +492,7 @@ public class GUICameraController : MonoBehaviour {
 #if UNITY_WEBPLAYER
 		WWWForm form = new WWWForm ();
 
-		form.AddField ("CSV-FILE", Encoding.UTF8.GetString (utf8String));
+		form.AddField ("CSV-FILE", 		Encoding.ASCII.GetString (utf8String));
 		form.AddField ("CSV-FILE-NAME", filename);
 	
 		WWW www = new WWW (urlForm, form);

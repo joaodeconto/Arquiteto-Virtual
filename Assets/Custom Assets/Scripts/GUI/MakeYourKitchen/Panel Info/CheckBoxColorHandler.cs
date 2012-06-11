@@ -24,19 +24,17 @@ public class CheckBoxColorHandler : MonoBehaviour {
 		{
 			if (colorName.Equals(BrandColor.GetColorName(colors[selectedColorIndex])))
 			{
-				GameObject selectedModule = GameObject.FindWithTag("MovelSelecionado");
-				if (selectedModule == null) break;
+				GameObject selectedMobile = GameObject.FindGameObjectWithTag ("MovelSelecionado");
+				if (selectedMobile == null) break;
 								
 				Line.CurrentLine.GlobalDetailColorIndex = selectedColorIndex;
-				
-				GameObject selectedMobile = GameObject.FindGameObjectWithTag ("MovelSelecionado");
-				if (selectedMobile != null) {
-					selectedMobile.GetComponent<InformacoesMovel> ().ChangeDetailColor (selectedColorIndex);										
-				}
-							
+				selectedMobile.GetComponent<InformacoesMovel> ().ChangeDetailColor (selectedColorIndex);
+
 				GameObject[] furniture = GameObject.FindGameObjectsWithTag ("Movel");
-				if (furniture != null && furniture.Length != 0) {
-					foreach (GameObject mobile in furniture) {
+				if (furniture != null && furniture.Length != 0)
+				{
+					foreach (GameObject mobile in furniture)
+					{
 						mobile.GetComponent<InformacoesMovel> ().ChangeDetailColor (selectedColorIndex);										
 					}
 				}

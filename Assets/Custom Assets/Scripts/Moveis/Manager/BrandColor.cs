@@ -10,9 +10,28 @@ public enum BrandColorEnum
 	WHITE,
 }
 
-public class BrandColor : MonoBehaviour {
-	
+public class BrandColor : MonoBehaviour
+{
 	public BrandColorEnum[] colors;
+
+	public static string GetShortenedColorName (BrandColorEnum color)
+	{
+		switch (color)
+		{
+			case BrandColorEnum.BLACK:
+				return "PR";
+			case BrandColorEnum.GRAY:
+				return "TT";
+			case BrandColorEnum.GREEN:
+				return "VD";
+			case BrandColorEnum.VIOLET:
+				return "VI";
+			case BrandColorEnum.WHITE:
+				return "";
+			default:
+				return "";
+		}
+	}
 
 	public static BrandColorEnum GetEnumColor (Color color)
 	{

@@ -49,6 +49,7 @@ public class Initialization : MonoBehaviour {
 		List<Line> lines = new List<Line>();
 		List<Category> categories = new List<Category>();
 		List<GameObject> furniture = new List<GameObject>();
+		List<string> topTextureNames = new List<string> ();
 		
 		colors 			= root.GetComponent<BrandColor>().colors;		
 		colorsTextures 	= root.GetComponent<LineColorsPrefab>().colorTextures;		
@@ -61,9 +62,15 @@ public class Initialization : MonoBehaviour {
 			}
 			categories.Add(new Category(categoriesTransform.name,furniture,categoriesTransform.GetComponent<MakeCategory>().imageReference));
 		}
-		
+
+		//obtendo texturas dos tampos
+		foreach (Transform check in GameObject.Find ("InfoController").GetComponent<InfoController>().checkBoxTextures.transform) {
+			Debug.Log ("name: " + check.name);
+			topTextureNames.Add (check.GetComponent<CheckBoxTextureHandler> ().texture.name);
+		}
+
 		print("categories.Count: " + categories.Count);
-		lines.Add(new Line(colors,categories, root.name));
+		lines.Add (new Line (colors, categories, root.name, topTextureNames.ToArray ()));
 		Line.Initialize(lines);
 		#endregion	
 	}

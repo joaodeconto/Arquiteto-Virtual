@@ -334,7 +334,6 @@ public class GUICameraController : MonoBehaviour {
 		yield return new WaitForSeconds(0.2f);
 		yield return new WaitForEndOfFrame();
 
-#if UNITY_WEBPLAYER
 		// Create a texture the size of the screen, RGB24 format
 		int width = Screen.width;
 		int height = Screen.height;
@@ -347,6 +346,8 @@ public class GUICameraController : MonoBehaviour {
 		// Encode texture into PNG
 		byte[] bytes = tex.EncodeToPNG ();
 		Destroy (tex);
+
+#if UNITY_WEBPLAYER
 	
 		// Create a Web Form
 		WWWForm form = new WWWForm ();
@@ -381,7 +382,7 @@ public class GUICameraController : MonoBehaviour {
 			++screenshotCount;
 		} while (System.IO.File.Exists(directory + screenshotFilename));
 
-		Application.CaptureScreenshot (directory + screenshotFilename);
+		System.IO.File.WriteAllBytes(directory + screenshotFilename, bytes);
 #endif
 
 		foreach (Transform child in allchids)

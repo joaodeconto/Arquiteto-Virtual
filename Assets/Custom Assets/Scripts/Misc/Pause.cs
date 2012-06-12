@@ -1,8 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PauseButtonHandler : MonoBehaviour
-{
+public class Pause : MonoBehaviour {
 	public Texture2D textureMask;
 
 	private GameObject mainCamera;
@@ -13,14 +12,14 @@ public class PauseButtonHandler : MonoBehaviour
 	private bool IsPaused;
 	private bool AlreadyTakePhoto;
 	
-	void Start ()
+	public void Initialize ()
 	{
 		IsPaused = false;
 		menuCamera = GameObject.Find("UI Root (2D)").transform.FindChild("CameraMenus").gameObject;
 		mainCamera = GameObject.FindWithTag("MainCamera");
 	}
 	
-	void OnClick ()
+	public void PauseCamera ()
 	{
 		if (IsPaused)
 		{
@@ -76,12 +75,11 @@ public class PauseButtonHandler : MonoBehaviour
 		}
 	}
 	
-	void OnGUI ()
+	public void GUIDraw ()
 	{
 		if (IsPaused && AlreadyTakePhoto)
 		{
 			GUI.DrawTexture(new Rect (0, 0, Screen.width, Screen.height),pauseTexture);
-			GUI.DrawTexture(new Rect (0, 0, Screen.width, Screen.height), textureMask);
 		}
 	}
 }

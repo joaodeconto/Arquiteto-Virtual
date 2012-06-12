@@ -39,6 +39,8 @@ public class GUICameraController : MonoBehaviour {
 	
 	public InterfaceGUI interfaceGUI;
 
+	public Pause pause;
+	
 	public bool areWallsAlwaysVisible { get; private set; }
 	
 	public Camera mainCamera { get; private set; }
@@ -71,6 +73,8 @@ public class GUICameraController : MonoBehaviour {
 		
 	void Start ()
 	{
+		pause.Initialize();
+		
 		mainCamera 		  = GameObject.FindWithTag ("MainCamera").camera;
 		//disable other cam
 		#if UNITY_ANDROID || UNITY_IPHONE
@@ -181,6 +185,7 @@ public class GUICameraController : MonoBehaviour {
 	{
 		if (m_fileBrowser != null) {
 	        GUI.skin = m_guiSkin;
+			pause.GUIDraw ();
 			m_fileBrowser.OnGUI ();
 		}
 	}
@@ -263,12 +268,13 @@ public class GUICameraController : MonoBehaviour {
 #if UNITY_WEBPLAYER
 		StartCoroutine ("MakeScreenshot");
 #else
+		pause.PauseCamera();
 		m_textPath = "";
 		m_fileBrowser = new FileBrowserSave (
-                ScreenUtils.ScaledRectInSenseHeight(50, 50, 500, 400),
-                "Salvar Screenshot",
-                ImageSelectedCallback
-            );
+            ScreenUtils.ScaledRectInSenseHeight(50, 50, 500, 400),
+            "Salvar Screenshot",
+            ImageSelectedCallback
+        );
 		m_fileBrowser.SelectionPattern = "*.png";
 		m_fileBrowser.DirectoryImage = m_directoryImage;
 		m_fileBrowser.FileImage = m_fileImage;
@@ -280,6 +286,7 @@ public class GUICameraController : MonoBehaviour {
 		m_fileBrowser = null;
         m_textPath = path;
 		if (m_textPath != "" && m_textPath != null) {
+			pause.PauseCamera();
 			if (m_textPath.Contains(".jpg")) {
 				StartCoroutine ("MakeScreenshot");
 			} else {
@@ -295,16 +302,16 @@ public class GUICameraController : MonoBehaviour {
 #if UNITY_WEBPLAYER
 		StartCoroutine ("ReportData");
 #elif !UNITY_ANDROID && !UNITY_IPHONE
+		pause.PauseCamera();
 		m_textPath = "";
-				m_fileBrowser = new FileBrowserSave (
-                ScreenUtils.ScaledRectInSenseHeight(50, 50, 500, 400),
-                "Salvar Configuração",
-                FileSelectedCallback
-            );
+		m_fileBrowser = new FileBrowserSave (
+			ScreenUtils.ScaledRectInSenseHeight(50, 50, 500, 400),
+			"Salvar Configuração",
+			FileSelectedCallback
+		);
 		m_fileBrowser.SelectionPattern = "*.csv";
 		m_fileBrowser.DirectoryImage = m_directoryImage;
 		m_fileBrowser.FileImage = m_fileImage;
-
 #endif
 	}
 	
@@ -313,6 +320,7 @@ public class GUICameraController : MonoBehaviour {
 		m_fileBrowser = null;
         m_textPath = path;
 		if (m_textPath != "" && m_textPath != null) {
+			pause.PauseCamera();
 			if (m_textPath.Contains(".csv")) {
 				StartCoroutine ("ReportData");
 			} else {

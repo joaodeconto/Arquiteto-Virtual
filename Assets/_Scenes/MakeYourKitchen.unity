@@ -12827,6 +12827,9 @@ MonoBehaviour:
     panelInfo: {fileID: 2076815839}
     lists: {fileID: 1605762183}
     panelMobile: {fileID: 790388719}
+  m_guiSkin: {fileID: 11400000, guid: c9133c91cd117417d0000cf8a220b639, type: 2}
+  m_directoryImage: {fileID: 2800000, guid: 2476ee68b8d18fe4aa1eb69f9339b9a0, type: 1}
+  m_fileImage: {fileID: 2800000, guid: a6b3518da31ecec468b7f4ab658f259e, type: 1}
 --- !u!1 &1605762183
 GameObject:
   m_ObjectHideFlags: 0

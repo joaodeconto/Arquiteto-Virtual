@@ -58,6 +58,16 @@ public class GUICameraController : MonoBehaviour {
 	private bool isGuiLocked;
 	
 	private Vector3 lastCamPosition;
+	
+	#region Save Screenshot GUI vars
+	private string m_textPath;
+	private FileBrowserSave m_fileBrowser;
+	[SerializeField]
+	protected GUISkin m_guiSkin;
+	[SerializeField]
+	protected Texture2D m_directoryImage,
+                        m_fileImage;
+	#endregion
 		
 	void Start ()
 	{
@@ -166,6 +176,16 @@ public class GUICameraController : MonoBehaviour {
 		}
 	}
 	
+	#region GUI only File Browser Save
+	void OnGUI ()
+	{
+		if (m_fileBrowser != null) {
+	        GUI.skin = m_guiSkin;
+			m_fileBrowser.OnGUI ();
+		}
+	}
+	#endregion
+	
 	public void EnableCeilFloor () {
 		showCeil = showFloor = true;
 	}
@@ -239,17 +259,68 @@ public class GUICameraController : MonoBehaviour {
 		//GameObject.Find("cfg").GetComponent<Configuration>().SaveCurrentState("lolol",true);
 		//GameObject.Find("cfg").GetComponent<Configuration>().LoadState("teste/teste.xml",false);
 		//GameObject.Find("cfg").GetComponent<Configuration>().RunPreset(0);
-
+		
+#if UNITY_WEBPLAYER
 		StartCoroutine ("MakeScreenshot");
+#else
+		m_textPath = "";
+		m_fileBrowser = new FileBrowserSave (
+                ScreenUtils.ScaledRectInSenseHeight(50, 50, 500, 400),
+                "Salvar Screenshot",
+                ImageSelectedCallback
+            );
+		m_fileBrowser.SelectionPattern = "*.png";
+		m_fileBrowser.DirectoryImage = m_directoryImage;
+		m_fileBrowser.FileImage = m_fileImage;
+#endif
 	}
+    
+	void ImageSelectedCallback (string path)
+	{
+		m_fileBrowser = null;
+        m_textPath = path;
+		if (m_textPath != "" && m_textPath != null) {
+			if (m_textPath.Contains(".png")) {
+				StartCoroutine ("MakeScreenshot");
+			} else {
+				m_textPath += ".png";
+				StartCoroutine ("MakeScreenshot");
+			}
+		}
+    }
 	
 	public void Report ()
 	{
 		//TODO make this method works
-		#if !UNITY_ANDROID && !UNITY_IPHONE
+#if UNITY_WEBPLAYER
 		StartCoroutine ("ReportData");
-		#endif
+#elif !UNITY_ANDROID && !UNITY_IPHONE
+		m_textPath = "";
+				m_fileBrowser = new FileBrowserSave (
+                ScreenUtils.ScaledRectInSenseHeight(50, 50, 500, 400),
+                "Salvar Configuração",
+                FileSelectedCallback
+            );
+		m_fileBrowser.SelectionPattern = "*.csv";
+		m_fileBrowser.DirectoryImage = m_directoryImage;
+		m_fileBrowser.FileImage = m_fileImage;
+
+#endif
 	}
+	
+	void FileSelectedCallback (string path)
+	{
+		m_fileBrowser = null;
+        m_textPath = path;
+		if (m_textPath != "" && m_textPath != null) {
+			if (m_textPath.Contains(".csv")) {
+				StartCoroutine ("ReportData");
+			} else {
+				m_textPath += ".csv";
+				StartCoroutine ("ReportData");
+			}
+		}
+    }
 	
 	public void ShowHideWalls ()
 	{
@@ -367,7 +438,7 @@ public class GUICameraController : MonoBehaviour {
 			Application.ExternalCall ("tryToDownload", pathExportImage + filename);
 		}
 #else
-		int screenshotCount = 0;
+		/*int screenshotCount = 0;
 		string screenshotFilename;
 		string directory = "Screenshots/";
 		if (!System.IO.Directory.Exists (directory))
@@ -379,9 +450,9 @@ public class GUICameraController : MonoBehaviour {
 				screenshotFilename = "arquiteto-virtual" + screenshotCount + ".jpg";
 
 			++screenshotCount;
-		} while (System.IO.File.Exists(directory + screenshotFilename));
+		} while (System.IO.File.Exists(directory + screenshotFilename));*/
 
-		Application.CaptureScreenshot (directory + screenshotFilename);
+		Application.CaptureScreenshot (m_textPath);
 #endif
 
 		foreach (Transform child in allchids)
@@ -478,21 +549,21 @@ public class GUICameraController : MonoBehaviour {
 		else
 			Application.ExternalCall ("tryToDownload", pathExportReport + filename);
 #else
-		int screenshotCount = 0;
-		string screenshotFilename;
-		string directory = "Reports/";
-		if (!System.IO.Directory.Exists (directory))
-			System.IO.Directory.CreateDirectory (directory);
-		do {
-			if (screenshotCount == 0)
-				screenshotFilename = "arquiteto-virtual.csv";
-			else
-				screenshotFilename = "arquiteto-virtual" + screenshotCount + ".csv";
+//		int screenshotCount = 0;
+//		string screenshotFilename;
+//		string directory = "Reports/";
+//		if (!System.IO.Directory.Exists (directory))
+//			System.IO.Directory.CreateDirectory (directory);
+//		do {
+//			if (screenshotCount == 0)
+//				screenshotFilename = "arquiteto-virtual.csv";
+//			else
+//				screenshotFilename = "arquiteto-virtual" + screenshotCount + ".csv";
+//
+//			++screenshotCount;
+//		} while (System.IO.File.Exists(directory + screenshotFilename));
 
-			++screenshotCount;
-		} while (System.IO.File.Exists(directory + screenshotFilename));
-
-		System.IO.File.WriteAllText(directory + screenshotFilename, Encoding.UTF8.GetString (utf8String));
+		System.IO.File.WriteAllText(m_textPath, Encoding.UTF8.GetString (utf8String));
 
 		yield return new WaitForEndOfFrame();
 

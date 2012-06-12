@@ -3,20 +3,14 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
-
-public class FileBrowser
+public class FileBrowserSave
 {
-    
-	/*
-	    File browser for selecting files or folders at runtime.
-	 */
-	
 	public enum FileBrowserType
 	{
 		File,
 		Directory
 	}
-	
+    
 	// Called when the user clicks cancel or select
 	public delegate void FinishedCallback (string path);
 	// Defaults to working directory
@@ -88,6 +82,7 @@ public class FileBrowser
 	protected string m_newDirectory;
 	protected string[] m_currentDirectoryParts;
 	protected string[] m_files;
+	protected string m_file = "", m_lastFile = "'";
 	protected GUIContent[] m_filesWithImages;
 	protected int m_selectedFile;
 	protected string[] m_nonMatchingFiles;
@@ -118,7 +113,7 @@ public class FileBrowser
 	protected FinishedCallback m_callback;
     
 	// Browsers need at least a rect, name and callback
-	public FileBrowser (Rect screenRect, string name, FinishedCallback callback)
+	public FileBrowserSave (Rect screenRect, string name, FinishedCallback callback)
 	{
 		m_name = name;
 		m_screenRect = screenRect;
@@ -297,14 +292,20 @@ public class FileBrowser
                 );
 		GUI.enabled = true;
 		GUILayout.EndScrollView ();
+		if (m_selectedFile != -1) {
+			if (m_files[m_selectedFile] != m_lastFile) {
+				m_file = m_files[m_selectedFile];
+				m_lastFile = m_file;
+			}
+		}
+		m_file = GUILayout.TextField (m_file);
 		GUILayout.BeginHorizontal ();
 		GUILayout.FlexibleSpace ();
-		if (GUILayout.Button ("Cancel", GUILayout.Width (50))) {
+		if (GUILayout.Button ("Cancel", GUILayout.Width (75))) {
 			m_callback (null);
 		}
-		if (BrowserType == FileBrowserType.File) {
-			GUI.enabled = m_selectedFile > -1;
-		} else {
+		GUI.enabled = m_file != "";
+		if (BrowserType != FileBrowserType.File) {
 			if (SelectionPattern == null) {
 				GUI.enabled = m_selectedDirectory > -1;
 			} else {
@@ -316,9 +317,9 @@ public class FileBrowser
                                         );
 			}
 		}
-		if (GUILayout.Button ("Select", GUILayout.Width (50))) {
+		if (GUILayout.Button ("Save", GUILayout.Width (75))) {
 			if (BrowserType == FileBrowserType.File) {
-				m_callback (Path.Combine (m_currentDirectory, m_files [m_selectedFile]));
+				m_callback (Path.Combine (m_currentDirectory, m_file));
 			} else {
 				if (m_selectedDirectory > -1) {
 					m_callback (Path.Combine (m_currentDirectory, m_directories [m_selectedDirectory]));
@@ -339,16 +340,18 @@ public class FileBrowser
 	protected void FileDoubleClickCallback (int i)
 	{
 		if (BrowserType == FileBrowserType.File) {
-			m_callback (Path.Combine (m_currentDirectory, m_files [i]));
+			m_callback (Path.Combine (m_currentDirectory, m_file));
 		}
     }
     
     protected void DirectoryDoubleClickCallback(int i) {
         SetNewDirectory(Path.Combine(m_currentDirectory, m_directories[i]));
+		SwitchDirectoryNow ();
     }
     
     protected void NonMatchingDirectoryDoubleClickCallback(int i) {
         SetNewDirectory(Path.Combine(m_currentDirectory, m_nonMatchingDirectories[i]));
+		SwitchDirectoryNow ();
     }
 
 }

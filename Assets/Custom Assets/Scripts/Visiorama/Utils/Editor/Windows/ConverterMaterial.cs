@@ -385,7 +385,7 @@ public class ConverterMaterial : EditorWindow {
 												"Material: " + material.name,
 												k);
 			
-			materialsLog.Add(material.GetInstanceID()+"-PcShader="+PC_ShaderChoose[k]+"-MobileShader="+Mobile_ShaderChoose[k]+"-get="+getMaterial[k]);
+			materialsLog.Add(material.name+":PcShader="+PC_ShaderChoose[k]+":MobileShader="+Mobile_ShaderChoose[k]+":get="+getMaterial[k]);
 			
 			k++;
 		}
@@ -424,15 +424,14 @@ public class ConverterMaterial : EditorWindow {
 													"Loading: " + allMaterials[k].name,
 													k);
 				for (int i = 0; i != configurations.Count; ++i) {
-					string idInstance = configurations[i].Split('-')[0];
+					string nameInstance = configurations[i].Split(':')[0];
 					
-					if (idInstance.Length != 0) {
-						int id = System.Convert.ToInt32(idInstance);
-						if (allMaterials[k].GetInstanceID() == id) {
+					if (nameInstance.Length != 0 && nameInstance != null) {
+						if (allMaterials[k].name.Equals(nameInstance)) {
 							materials.Add(allMaterials[k]);
-							string pc = configurations[i].Split('-')[1];
-							string mb = configurations[i].Split('-')[2];
-							string getMat = configurations[i].Split('-')[3];
+							string pc = configurations[i].Split(':')[1];
+							string mb = configurations[i].Split(':')[2];
+							string getMat = configurations[i].Split(':')[3];
 							int pcId = System.Convert.ToInt32(pc.Split('=')[1]);
 							int mbId = System.Convert.ToInt32(mb.Split('=')[1]);
 							bool getMatBool = System.Convert.ToBoolean(getMat.Split('=')[1]);

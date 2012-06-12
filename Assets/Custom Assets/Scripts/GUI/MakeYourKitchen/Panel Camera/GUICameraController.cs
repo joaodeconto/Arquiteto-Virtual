@@ -58,6 +58,16 @@ public class GUICameraController : MonoBehaviour {
 	private bool isGuiLocked;
 	
 	private Vector3 lastCamPosition;
+	
+	#region Save Screenshot GUI vars
+	private string m_textPath;
+	private FileBrowserSave m_fileBrowser;
+	[SerializeField]
+	protected GUISkin m_guiSkin;
+	[SerializeField]
+	protected Texture2D m_directoryImage,
+                        m_fileImage;
+	#endregion
 		
 	void Start ()
 	{
@@ -166,6 +176,16 @@ public class GUICameraController : MonoBehaviour {
 		}
 	}
 	
+	#region GUI only File Browser Save
+	void OnGUI ()
+	{
+		if (m_fileBrowser != null) {
+	        GUI.skin = m_guiSkin;
+			m_fileBrowser.OnGUI ();
+		}
+	}
+	#endregion
+	
 	public void EnableCeilFloor () {
 		showCeil = showFloor = true;
 	}
@@ -239,17 +259,68 @@ public class GUICameraController : MonoBehaviour {
 		//GameObject.Find("cfg").GetComponent<Configuration>().SaveCurrentState("lolol",true);
 		//GameObject.Find("cfg").GetComponent<Configuration>().LoadState("teste/teste.xml",false);
 		//GameObject.Find("cfg").GetComponent<Configuration>().RunPreset(0);
-
+		
+#if UNITY_WEBPLAYER
 		StartCoroutine ("MakeScreenshot");
+#else
+		m_textPath = "";
+		m_fileBrowser = new FileBrowserSave (
+                ScreenUtils.ScaledRectInSenseHeight(50, 50, 500, 400),
+                "Salvar Screenshot",
+                ImageSelectedCallback
+            );
+		m_fileBrowser.SelectionPattern = "*.png";
+		m_fileBrowser.DirectoryImage = m_directoryImage;
+		m_fileBrowser.FileImage = m_fileImage;
+#endif
 	}
+    
+	void ImageSelectedCallback (string path)
+	{
+		m_fileBrowser = null;
+        m_textPath = path;
+		if (m_textPath != "" && m_textPath != null) {
+			if (m_textPath.Contains(".jpg")) {
+				StartCoroutine ("MakeScreenshot");
+			} else {
+				m_textPath += ".jpg";
+				StartCoroutine ("MakeScreenshot");
+			}
+		}
+    }
 	
 	public void Report ()
 	{
 		//TODO make this method works
-		#if !UNITY_ANDROID && !UNITY_IPHONE
+#if UNITY_WEBPLAYER
 		StartCoroutine ("ReportData");
-		#endif
+#elif !UNITY_ANDROID && !UNITY_IPHONE
+		m_textPath = "";
+				m_fileBrowser = new FileBrowserSave (
+                ScreenUtils.ScaledRectInSenseHeight(50, 50, 500, 400),
+                "Salvar Configuração",
+                FileSelectedCallback
+            );
+		m_fileBrowser.SelectionPattern = "*.csv";
+		m_fileBrowser.DirectoryImage = m_directoryImage;
+		m_fileBrowser.FileImage = m_fileImage;
+
+#endif
 	}
+	
+	void FileSelectedCallback (string path)
+	{
+		m_fileBrowser = null;
+        m_textPath = path;
+		if (m_textPath != "" && m_textPath != null) {
+			if (m_textPath.Contains(".csv")) {
+				StartCoroutine ("ReportData");
+			} else {
+				m_textPath += ".csv";
+				StartCoroutine ("ReportData");
+			}
+		}
+    }
 	
 	public void ShowHideWalls ()
 	{
@@ -334,7 +405,6 @@ public class GUICameraController : MonoBehaviour {
 		yield return new WaitForSeconds(0.2f);
 		yield return new WaitForEndOfFrame();
 
-#if UNITY_WEBPLAYER
 		// Create a texture the size of the screen, RGB24 format
 		int width = Screen.width;
 		int height = Screen.height;
@@ -347,6 +417,8 @@ public class GUICameraController : MonoBehaviour {
 		// Encode texture into PNG
 		byte[] bytes = tex.EncodeToPNG ();
 		Destroy (tex);
+
+#if UNITY_WEBPLAYER
 	
 		// Create a Web Form
 		WWWForm form = new WWWForm ();
@@ -367,7 +439,7 @@ public class GUICameraController : MonoBehaviour {
 			Application.ExternalCall ("tryToDownload", pathExportImage + filename);
 		}
 #else
-		int screenshotCount = 0;
+		/*int screenshotCount = 0;
 		string screenshotFilename;
 		string directory = "Screenshots/";
 		if (!System.IO.Directory.Exists (directory))
@@ -376,13 +448,12 @@ public class GUICameraController : MonoBehaviour {
 			if (screenshotCount == 0)
 				screenshotFilename = "arquiteto-virtual.jpg";
 			else
-				screenshotFilename = "arquiteto-virtual" + screenshotCount + ".png";
+				screenshotFilename = "arquiteto-virtual" + screenshotCount + ".jpg";
 
 			++screenshotCount;
-		} while (System.IO.File.Exists(directory + screenshotFilename));
+		} while (System.IO.File.Exists(directory + screenshotFilename));*/
 
-		Application.CaptureScreenshot (directory + screenshotFilename);
-		Debug.Log("Chegou");
+		System.IO.File.WriteAllBytes(m_textPath, bytes);
 #endif
 
 		foreach (Transform child in allchids)
@@ -411,51 +482,78 @@ public class GUICameraController : MonoBehaviour {
 	
 		string filename = String.Format ("{0:yyyy-MM-dd-HH-mm-ss}", DateTime.Now) + ".csv";
 		string csvString = "LINHA: " + Line.CurrentLine.Name + "\r\n";
-	
+
+		string shortenedBrandColorName = null;
+
+		//obtendo tipo de tampo
+		foreach (Transform check in GameObject.Find ("InfoController").GetComponent<InfoController>().checkBoxTextures.transform)
+		{
+			if (check.name == "Label")
+				continue;
+
+			if (check.GetComponent<UICheckbox>().isChecked)
+			{
+				csvString += "Tampo;" + check.GetComponent<CheckBoxTextureHandler> ().texture.name + "\r\n";
+				break;
+			}
+		}
+
+
 		csvString += "NOME;CODIGO;LARGURA;ALTURA;PROFUNDIDADE;\r\n";
-	
+
 		foreach (GameObject mobile in mobiles) {
 	
 			InformacoesMovel info = mobile.GetComponent<InformacoesMovel> ();
-	
-			if ("Extras".Equals (info.Categoria))
+
+			//Se for um item extra ou se for algum item que não possua código, como as lâmpadas, não adicionada no arquivo.
+			if ("Extras".Equals (info.Categoria) || String.IsNullOrEmpty(info.Codigo.Trim()))
 				continue;
+
+			if (info.HasDetailMaterial())
+			{
+				shortenedBrandColorName = BrandColor.GetShortenedColorName(Line.CurrentLine.colors[Line.CurrentLine.GlobalDetailColorIndex]);
+			}
+			else
+			{
+				shortenedBrandColorName = "";
+			}
 
 			if (Regex.Match(info.name, "(com cooktop|com cook top)").Success)
 			{
-				csvString += info.Nome 	+ ";" +
-							 info.Codigo + ";" +
-							 info.Largura + ";" +
-							 info.Altura + ";" +
+				csvString += info.Nome 		+ ";" +
+							 info.Codigo 	+ ";" +
+							 info.Largura 	+ ";" +
+							 info.Altura 	+ ";" +
 							 info.Comprimento + ";" + "\r\n";
-				if (Regex.Match(info.name, "(BalcÃ£o triplo|Balcao triplo)").Success)
+
+				if (Regex.Match(info.name, "(Balcão triplo|Balcao triplo)").Success)
 				{
 					csvString += "Tampo cooktop triplo" + ";" +
 								 "89121" + ";" +
-								 "1200" + ";" +
-								 "30" + ";" +
-								 "520" + ";" + "\r\n";
+								 "1200"  + ";" +
+								 "30" 	 + ";" +
+								 "520" 	 + ";" + "\r\n";
 				}
 				else
 				{
 					csvString += "Tampo cooktop duplo" + ";" +
 								 "89081" + ";" +
-								 "800" + ";" +
-								 "30" + ";" +
-								 "520" + ";" + "\r\n";
+								 "800" 	 + ";" +
+								 "30" 	 + ";" +
+								 "520" 	 + ";" + "\r\n";
 				}
 				csvString += "Cooktop" + ";" +
-							 "89150" + ";" +
-							 "NA" + ";" +
-							 "NA" + ";" +
-							 "NA" + ";" + "\r\n";
+							 "89150"   + ";" +
+							 "NA"	   + ";" +
+							 "NA" 	   + ";" +
+							 "NA" 	   + ";" + "\r\n";
 			}
 			else
 			{
-				csvString += info.Nome + ";" +
-							 info.Codigo + ";" +
-							 info.Largura + ";" +
-							 info.Altura + ";" +
+				csvString += info.Nome 		  + ";" +
+							 info.Codigo 	  + shortenedBrandColorName + ";" +
+							 info.Largura	  + ";" +
+							 info.Altura 	  + ";" +
 							 info.Comprimento + ";" + "\r\n";
 			}
 		}
@@ -467,7 +565,7 @@ public class GUICameraController : MonoBehaviour {
 #if UNITY_WEBPLAYER
 		WWWForm form = new WWWForm ();
 
-		form.AddField ("CSV-FILE", Encoding.UTF8.GetString (utf8String));
+		form.AddField ("CSV-FILE", 		Encoding.ASCII.GetString (utf8String));
 		form.AddField ("CSV-FILE-NAME", filename);
 	
 		WWW www = new WWW (urlForm, form);
@@ -479,21 +577,21 @@ public class GUICameraController : MonoBehaviour {
 		else
 			Application.ExternalCall ("tryToDownload", pathExportReport + filename);
 #else
-		int screenshotCount = 0;
-		string screenshotFilename;
-		string directory = "Reports/";
-		if (!System.IO.Directory.Exists (directory))
-			System.IO.Directory.CreateDirectory (directory);
-		do {
-			if (screenshotCount == 0)
-				screenshotFilename = "arquiteto-virtual.csv";
-			else
-				screenshotFilename = "arquiteto-virtual" + screenshotCount + ".csv";
+//		int screenshotCount = 0;
+//		string screenshotFilename;
+//		string directory = "Reports/";
+//		if (!System.IO.Directory.Exists (directory))
+//			System.IO.Directory.CreateDirectory (directory);
+//		do {
+//			if (screenshotCount == 0)
+//				screenshotFilename = "arquiteto-virtual.csv";
+//			else
+//				screenshotFilename = "arquiteto-virtual" + screenshotCount + ".csv";
+//
+//			++screenshotCount;
+//		} while (System.IO.File.Exists(directory + screenshotFilename));
 
-			++screenshotCount;
-		} while (System.IO.File.Exists(directory + screenshotFilename));
-
-		System.IO.File.WriteAllText(directory + screenshotFilename, Encoding.UTF8.GetString (utf8String));
+		System.IO.File.WriteAllText(m_textPath, Encoding.UTF8.GetString (utf8String));
 
 		yield return new WaitForEndOfFrame();
 
@@ -538,7 +636,7 @@ public class GUICameraController : MonoBehaviour {
 	{
 		Transform trnsParent = wall.transform.parent;
 
-		//Apenas paredes esculpidas serÃ£o alteradas os offsets
+		//Apenas paredes esculpidas serão alteradas os offsets
 		if (!"PackSculptWall".Equals (trnsParent.name) ||
 			  "Unpacked Wall".Equals (trnsParent.name))
 			return Vector2.zero;
@@ -546,7 +644,7 @@ public class GUICameraController : MonoBehaviour {
 		Vector2 textOffset  = Vector2.zero;
 		float rightWallSize = 0.0f;
 
-		//verificando se a parede da direita Ã© um pack
+		//verificando se a parede da direita é um pack
 		if (trnsParent.FindChild ("Right Wall") != null)
 			rightWallSize = trnsParent.FindChild ("Right Wall").localScale.x;
 		else

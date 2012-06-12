@@ -36,12 +36,16 @@ public class Line {
 	public Texture[] colorsImg { get; private set; }
 	public List<Category> categories { get; private set; }
 	public string Name { get; private set; }
+	public string cTopTexture;
+	public string[] topTextureNames;
 	
-	public Line(BrandColorEnum[] colors, List<Category> categories, string name)
+	public Line(BrandColorEnum[] colors, List<Category> categories, string name, string[] topTextureNames)
 	{
-		this.colors    	= colors;
-		this.colorsImg 	= colorsImg;
-		this.categories = categories;
-		this.Name 	   	= name;
+		this.colors    		= colors;
+		this.colorsImg 		= colorsImg;
+		this.categories 	= categories;
+		this.Name 	   		= name;
+		this.topTextureNames= topTextureNames;
+		this.cTopTexture	= topTextureNames[0];
 	}
 }

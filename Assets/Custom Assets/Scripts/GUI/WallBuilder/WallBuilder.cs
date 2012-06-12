@@ -8,7 +8,6 @@ public class WallBuilder : MonoBehaviour {
 	public const  float IPSLON 		= 0.0001f;
 	public static float WALL_HEIGHT = 2.6f;
 
-
 	public float WallHeight;
 
 	#region Parents
@@ -97,13 +96,18 @@ public class WallBuilder : MonoBehaviour {
 
 		GameObject newTile = Instantiate (floor, Vector3.zero, floor.transform.rotation) as GameObject;
 		newTile.transform.position = WallBuilder.ROOT + new Vector3 ( (int)(- ( RealWallWidth / 2) ) - 0.5f ,0.0f, (int)( RealWallDepth / 2) + 0.5f );// + new Vector3 (- (RealWallWidth / 2 + 0.5f) , 0.01f, - (RealWallDepth / 2 + 0.5f));
-		newTile.transform.parent = parentFloor;
-		newTile.transform.localScale = new Vector3(RealWallWidth, RealWallDepth, 1);	
+		newTile.transform.parent   = parentFloor;
+		newTile.transform.localScale = new Vector3(RealWallWidth, RealWallDepth, 1);
 		foreach (Material cMaterial in newTile.renderer.materials)
 		{
-			Debug.LogWarning ("materials - cMaterial.name: " + cMaterial.name);
-			cMaterial.mainTextureScale = new Vector2 (RealWallWidth, RealWallDepth);
-			cMaterial.SetTextureScale ("_BumpMap", new Vector2 (RealWallWidth, RealWallDepth));
+//			Debug.LogWarning ("materials - cMaterial.name: " + cMaterial.name);
+			float a = Mathf.CeilToInt(RealWallWidth) - RealWallWidth;
+			float b = Mathf.CeilToInt(RealWallDepth) - RealWallDepth;
+
+			cMaterial.mainTextureScale  = new Vector2 (RealWallWidth, RealWallDepth);
+			cMaterial.mainTextureOffset = new Vector2 (a, 0);
+			cMaterial.SetTextureScale  ("_BumpMap", new Vector2 (RealWallWidth, RealWallDepth));
+			cMaterial.SetTextureOffset ("_BumpMap", new Vector2 (a, 0));
 		}
 	}
 	

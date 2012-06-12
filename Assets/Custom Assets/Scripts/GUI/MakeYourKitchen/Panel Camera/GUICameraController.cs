@@ -376,12 +376,13 @@ public class GUICameraController : MonoBehaviour {
 			if (screenshotCount == 0)
 				screenshotFilename = "arquiteto-virtual.jpg";
 			else
-				screenshotFilename = "arquiteto-virtual" + screenshotCount + ".jpg";
+				screenshotFilename = "arquiteto-virtual" + screenshotCount + ".png";
 
 			++screenshotCount;
 		} while (System.IO.File.Exists(directory + screenshotFilename));
 
 		Application.CaptureScreenshot (directory + screenshotFilename);
+		Debug.Log("Chegou");
 #endif
 
 		foreach (Transform child in allchids)

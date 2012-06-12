@@ -156,7 +156,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 100988042}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.532667518, y: .532445908, z: 0}
+  m_LocalPosition: {x: -.782515705, y: .782396138, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -561,7 +561,7 @@ Light:
   serializedVersion: 3
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: .5
+  m_Intensity: .910000026
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -609,7 +609,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 408957750}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.532667518, y: .532445908, z: 0}
+  m_LocalPosition: {x: -.782515705, y: .782396138, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -865,7 +865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d33c6354b54fb847b16b36e1391868d, type: 1}
   m_Name: 
   mMat: {fileID: 2100000, guid: de7eb8d0f3c295040802aebe7b3708a1, type: 2}
-  mColor: {r: .223529413, g: .4627451, b: .631372571, a: 1}
+  mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mDepth: 1
   mAtlas: {fileID: 11400000, guid: 5af1a8c674cd7f44aadab96ae19d39ff, type: 2}
@@ -1085,7 +1085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b3dc54f924693f41b5cbecb267e647a, type: 1}
   m_Name: 
   mMat: {fileID: 2100000, guid: de7eb8d0f3c295040802aebe7b3708a1, type: 2}
-  mColor: {r: .23137255, g: .470588237, b: .639215708, a: 1}
+  mColor: {r: 0, g: .201348975, b: .343283594, a: 1}
   mPivot: 4
   mDepth: 0
   mAtlas: {fileID: 11400000, guid: 5af1a8c674cd7f44aadab96ae19d39ff, type: 2}
@@ -1151,51 +1151,6 @@ MonoBehaviour:
   mMultiline: 0
   mPassword: 0
   mShowLastChar: 0
---- !u!1 &642951696
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 3
-  m_Component:
-  - 4: {fileID: 642951697}
-  - 114: {fileID: 642951698}
-  m_Layer: 12
-  m_Name: Sprite(Meters)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &642951697
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 642951696}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -400.872955, y: 29.1869698, z: 0}
-  m_LocalScale: {x: 185.542389, y: 7.13151979, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 1812651113}
---- !u!114 &642951698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 642951696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d33c6354b54fb847b16b36e1391868d, type: 1}
-  m_Name: 
-  mMat: {fileID: 2100000, guid: de7eb8d0f3c295040802aebe7b3708a1, type: 2}
-  mColor: {r: 1, g: 1, b: 1, a: 1}
-  mPivot: 4
-  mDepth: 1
-  mAtlas: {fileID: 11400000, guid: 5af1a8c674cd7f44aadab96ae19d39ff, type: 2}
-  mSpriteName: windowParameters
-  mFillCenter: 1
 --- !u!1 &688074884
 GameObject:
   m_ObjectHideFlags: 0
@@ -1500,7 +1455,7 @@ Transform:
   m_PrefabInternal: {fileID: 1072726631}
   m_GameObject: {fileID: 806572100}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.532667518, y: .532445908, z: 0}
+  m_LocalPosition: {x: -.782515705, y: .782396138, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -2600,7 +2555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d33c6354b54fb847b16b36e1391868d, type: 1}
   m_Name: 
   mMat: {fileID: 2100000, guid: de7eb8d0f3c295040802aebe7b3708a1, type: 2}
-  mColor: {r: .23137255, g: .470588237, b: .639215708, a: .882352948}
+  mColor: {r: 1, g: 1, b: 1, a: .882352948}
   mPivot: 4
   mDepth: 1
   mAtlas: {fileID: 11400000, guid: 5af1a8c674cd7f44aadab96ae19d39ff, type: 2}
@@ -2819,7 +2774,6 @@ Transform:
   - {fileID: 1535416191}
   - {fileID: 544197299}
   - {fileID: 1895966952}
-  - {fileID: 642951697}
   m_Father: {fileID: 1118579776}
 --- !u!1 &1838302819
 GameObject:
@@ -2860,7 +2814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d33c6354b54fb847b16b36e1391868d, type: 1}
   m_Name: 
   mMat: {fileID: 2100000, guid: de7eb8d0f3c295040802aebe7b3708a1, type: 2}
-  mColor: {r: .239215687, g: .474509805, b: .643137276, a: .886274517}
+  mColor: {r: 1, g: 1, b: 1, a: .886274517}
   mPivot: 4
   mDepth: 1
   mAtlas: {fileID: 11400000, guid: 5af1a8c674cd7f44aadab96ae19d39ff, type: 2}
@@ -2993,7 +2947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d33c6354b54fb847b16b36e1391868d, type: 1}
   m_Name: 
   mMat: {fileID: 2100000, guid: de7eb8d0f3c295040802aebe7b3708a1, type: 2}
-  mColor: {r: .211764708, g: .454901963, b: .623529434, a: 1}
+  mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mDepth: 1
   mAtlas: {fileID: 11400000, guid: 5af1a8c674cd7f44aadab96ae19d39ff, type: 2}
@@ -3148,7 +3102,6 @@ GameObject:
   - 92: {fileID: 1921363223}
   - 81: {fileID: 1921363222}
   - 114: {fileID: 1921363225}
-  - 114: {fileID: 1921363226}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3227,46 +3180,6 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e055734563b8add40b398d1f4427be55, type: 1}
   m_Name: 
---- !u!114 &1921363226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1921363219}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3433daf007994da9a3abeabdb79db4e, type: 1}
-  m_Name: 
-  tweakMode: 1
-  bloomThisTag: 
-  sepBlurSpread: 1.5
-  useSrcAlphaAsMask: .5
-  bloomIntensity: 1
-  bloomThreshhold: .400000006
-  bloomBlurIterations: 3
-  lensflares: 1
-  hollywoodFlareBlurIterations: 4
-  lensflareMode: 0
-  hollyStretchWidth: 2.5
-  lensflareIntensity: .75
-  lensflareThreshhold: .5
-  flareColorA: {r: .400000006, g: .400000006, b: .800000012, a: .75}
-  flareColorB: {r: .400000006, g: .800000012, b: .800000012, a: .75}
-  flareColorC: {r: .800000012, g: .400000006, b: .800000012, a: .75}
-  flareColorD: {r: .800000012, g: .400000006, b: 0, a: .75}
-  blurWidth: 1
-  addAlphaHackShader: {fileID: 4800000, guid: b708c6968aee044a79ee006e3e270d2d, type: 1}
-  lensFlareShader: {fileID: 4800000, guid: 459fe69d2f6d74ddb92f04dbf45a866b, type: 1}
-  vignetteShader: {fileID: 4800000, guid: 562f620336e024ac99992ff05725a89a, type: 1}
-  separableBlurShader: {fileID: 4800000, guid: a9df009a214e24a5ebbf271595f8d5b6, type: 1}
-  addBrightStuffOneOneShader: {fileID: 4800000, guid: f7898d203e9b94c0dbe2bf9dd5cb32c0,
-    type: 1}
-  hollywoodFlareBlurShader: {fileID: 4800000, guid: 75b73252d2ed04d20935d6a73fcbb815,
-    type: 1}
-  hollywoodFlareStretchShader: {fileID: 4800000, guid: 52f841dce792140a0830c80d0b11ac82,
-    type: 1}
-  brightPassFilterShader: {fileID: 4800000, guid: 186c4c0d31e314f049595dcbaf4ca129,
-    type: 1}
 --- !u!1 &1958213239
 GameObject:
   m_ObjectHideFlags: 0
@@ -3328,7 +3241,6 @@ GameObject:
   - 81: {fileID: 1993561258}
   - 114: {fileID: 1993561259}
   - 114: {fileID: 1993561260}
-  - 114: {fileID: 1993561261}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -3406,47 +3318,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42d0f3ddc82ac849955710fd93b10a6, type: 1}
   m_Name: 
   wallBuilder: {fileID: 309594645}
---- !u!114 &1993561261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1993561255}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d35a90bed98554f4d8b92c9cd3cfbafa, type: 1}
-  m_Name: 
-  tweakMode: 1
-  screenBlendMode: 1
-  hdr: 0
-  sepBlurSpread: 1.5
-  useSrcAlphaAsMask: 0
-  bloomIntensity: .5
-  bloomThreshhold: .5
-  bloomBlurIterations: 2
-  lensflares: 0
-  hollywoodFlareBlurIterations: 2
-  lensflareMode: 1
-  hollyStretchWidth: 3.5
-  lensflareIntensity: 1
-  lensflareThreshhold: .300000012
-  flareColorA: {r: .400000006, g: .400000006, b: .800000012, a: .75}
-  flareColorB: {r: .400000006, g: .800000012, b: .800000012, a: .75}
-  flareColorC: {r: .800000012, g: .400000006, b: .800000012, a: .75}
-  flareColorD: {r: .800000012, g: .400000006, b: 0, a: .75}
-  blurWidth: 1
-  lensFlareVignetteMask: {fileID: 2800000, guid: 95ef4804fe0be4c999ddaa383536cde8,
-    type: 1}
-  lensFlareShader: {fileID: 4800000, guid: 459fe69d2f6d74ddb92f04dbf45a866b, type: 1}
-  vignetteShader: {fileID: 4800000, guid: 562f620336e024ac99992ff05725a89a, type: 1}
-  separableBlurShader: {fileID: 4800000, guid: a9df009a214e24a5ebbf271595f8d5b6, type: 1}
-  addBrightStuffOneOneShader: {fileID: 4800000, guid: f7898d203e9b94c0dbe2bf9dd5cb32c0,
-    type: 1}
-  screenBlendShader: {fileID: 4800000, guid: 53b3960ee3d3d4a5caa8d5473d120187, type: 1}
-  hollywoodFlaresShader: {fileID: 4800000, guid: e2baf3cae8edc4daf94c9adc2154be00,
-    type: 1}
-  brightPassFilterShader: {fileID: 4800000, guid: 186c4c0d31e314f049595dcbaf4ca129,
-    type: 1}
 --- !u!1 &2090256945
 GameObject:
   m_ObjectHideFlags: 0

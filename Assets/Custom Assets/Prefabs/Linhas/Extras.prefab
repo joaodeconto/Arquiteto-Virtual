@@ -89,7 +89,6 @@ GameObject:
   serializedVersion: 3
   m_Component:
   - 4: {fileID: 400036}
-  - 111: {fileID: 11100004}
   - 114: {fileID: 11400004}
   - 65: {fileID: 6500004}
   m_Layer: 8
@@ -436,7 +435,6 @@ GameObject:
   serializedVersion: 3
   m_Component:
   - 4: {fileID: 400048}
-  - 111: {fileID: 11100016}
   - 114: {fileID: 11400022}
   - 65: {fileID: 6500020}
   m_Layer: 8
@@ -477,7 +475,6 @@ GameObject:
   serializedVersion: 3
   m_Component:
   - 4: {fileID: 400050}
-  - 111: {fileID: 11100006}
   - 65: {fileID: 6500010}
   - 114: {fileID: 11400010}
   - 54: {fileID: 5400008}
@@ -519,7 +516,6 @@ GameObject:
   serializedVersion: 3
   m_Component:
   - 4: {fileID: 400052}
-  - 111: {fileID: 11100010}
   - 65: {fileID: 6500014}
   - 114: {fileID: 11400016}
   - 54: {fileID: 5400012}
@@ -619,7 +615,6 @@ GameObject:
   serializedVersion: 3
   m_Component:
   - 4: {fileID: 400060}
-  - 111: {fileID: 11100008}
   - 114: {fileID: 11400026}
   - 65: {fileID: 6500024}
   m_Layer: 0
@@ -881,7 +876,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100022}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .845387578, z: .00865316391}
+  m_LocalPosition: {x: 0, y: .845387518, z: .0029566288}
   m_LocalScale: {x: .830831707, y: .636044621, z: .636044621}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -910,8 +905,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100028}
-  m_LocalRotation: {x: -1.13446405e-16, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.63731456, z: -.0100178719}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: .845387518, z: .00295662903}
   m_LocalScale: {x: .830831707, y: .636044621, z: .636044621}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -926,7 +921,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100030}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.89043951, y: 0, z: 0}
+  m_LocalPosition: {x: 5.77165413, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1033,7 +1028,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.35501289, y: 0, z: -.848986864}
+  m_LocalPosition: {x: 5.77165413, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1083,7 +1078,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100020}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.35501289, y: 0, z: 0}
+  m_LocalPosition: {x: 5.77165413, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1099,7 +1094,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100026}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -.593016267}
+  m_LocalPosition: {x: 5.77165413, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1115,7 +1110,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100032}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.51151061, z: 0}
+  m_LocalPosition: {x: 5.77165413, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1255,7 +1250,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 5.77165413, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1280,7 +1275,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100064}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 5.77165413, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1393,7 +1388,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: ae37c24f905a10b45bf4802e050e9ef3, type: 2}
   - {fileID: 2100000, guid: 55513536a8e135f4cbe10f8cc2ed9c4b, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
@@ -2289,8 +2284,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 1.12843657, z: .0419516563}
-  m_Center: {x: 0, y: 1.41021681, z: -.0198564529}
+  m_Size: {x: 1.5, y: 1.12843657, z: .0927207768}
+  m_Center: {x: 0, y: 1.41021705, z: 0}
 --- !u!65 &6500024
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2301,7 +2296,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.98000002, y: .720000029, z: .00999999978}
+  m_Size: {x: 1.98000002, y: .720000029, z: .0500000007}
   m_Center: {x: 0, y: 1.11000001, z: 0}
 --- !u!65 &6500026
 BoxCollider:
@@ -2313,8 +2308,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.98000002, y: .720000029, z: .0299999993}
-  m_Center: {x: 0, y: 1.11000001, z: -.0199999996}
+  m_Size: {x: 1.98000002, y: .720000029, z: .0500000007}
+  m_Center: {x: 0, y: 1.11000001, z: 0}
 --- !u!65 &6500030
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2396,83 +2391,15 @@ Animation:
 --- !u!1002 &11100003
 EditorExtensionImpl:
   serializedVersion: 6
---- !u!111 &11100004
-Animation:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100008}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
-  m_UserAABB:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!1002 &11100005
 EditorExtensionImpl:
   serializedVersion: 6
---- !u!111 &11100006
-Animation:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100046}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
-  m_UserAABB:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!1002 &11100007
 EditorExtensionImpl:
   serializedVersion: 6
---- !u!111 &11100008
-Animation:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100060}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
-  m_UserAABB:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!1002 &11100009
 EditorExtensionImpl:
   serializedVersion: 6
---- !u!111 &11100010
-Animation:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100050}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
-  m_UserAABB:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!1002 &11100011
 EditorExtensionImpl:
   serializedVersion: 6
@@ -2499,23 +2426,6 @@ EditorExtensionImpl:
 --- !u!1002 &11100015
 EditorExtensionImpl:
   serializedVersion: 6
---- !u!111 &11100016
-Animation:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100042}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
-  m_UserAABB:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!1002 &11100017
 EditorExtensionImpl:
   serializedVersion: 6

@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Gaveta&portas de vidro
-  m_Shader: {fileID: 4800000, guid: 017d148005ee48b4ca5fc627f91e3cc6, type: 1}
+  m_Name: fogao2text
+  m_Shader: {fileID: 4800000, guid: 4c8c3fad8bba60a4fb2c17717a6e92e6, type: 1}
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -15,7 +15,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 2800000, guid: 67741ec3ea89e62409e92e961b9f2fb2, type: 1}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -29,7 +29,7 @@ Material:
         first:
           name: _Cube
         second:
-          m_Texture: {fileID: 8900000, guid: ee5e1b302633aca49b73728ec38e3c37, type: 1}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -48,7 +48,7 @@ Material:
       data:
         first:
           name: _FrezPow
-        second: .25
+        second: 512
       data:
         first:
           name: _FrezFalloff
@@ -65,11 +65,8 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0, g: 0, b: 0, a: 1}
+        second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
           name: _SpecColor
         second: {r: 1, g: 1, b: 1, a: 1}
---- !u!1002 &2100001
-EditorExtensionImpl:
-  serializedVersion: 6

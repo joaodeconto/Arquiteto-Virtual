@@ -25,14 +25,14 @@ public class InfoOptionButtonHandler : MonoBehaviour {
 		switch (infoOptionButton) {
 		case InfoOptionButtonEnum.Info :
 			backgroundScaleRoot.y = 280;
-			foreach (iTweenMotion motion in background.gameObject.GetComponents<iTweenMotion>())
-			{
-				if (motion.Name == "descer")
-				{
-					motion.to = backgroundScaleRoot;
-					motion.Play(true);
-				}
-			}
+//			foreach (iTweenMotion motion in background.gameObject.GetComponents<iTweenMotion>())
+//			{
+//				if (motion.Name == "descer")
+//				{
+//					motion.to = backgroundScaleRoot;
+//					motion.Play(true);
+//				}
+//			}
 			break;
 		case InfoOptionButtonEnum.Opcoes :
 			Transform checksTransform = transform.parent.FindChild ("Checks");
@@ -49,14 +49,14 @@ public class InfoOptionButtonHandler : MonoBehaviour {
 			}
 			
 			backgroundScaleRoot.y = 350;
-			foreach (iTweenMotion motion in background.gameObject.GetComponents<iTweenMotion>())
-			{
-				if (motion.Name == "descer")
-				{
-					motion.to = backgroundScaleRoot;// + Vector3.up * -yOffset * activeCheckGroups;
-					motion.Play(true);
-				}
-			}
+//			foreach (iTweenMotion motion in background.gameObject.GetComponents<iTweenMotion>())
+//			{
+//				if (motion.Name == "descer")
+//				{
+//					motion.to = backgroundScaleRoot;// + Vector3.up * -yOffset * activeCheckGroups;
+//					motion.Play(true);
+//				}
+//			}
 			break;
 		}
 		

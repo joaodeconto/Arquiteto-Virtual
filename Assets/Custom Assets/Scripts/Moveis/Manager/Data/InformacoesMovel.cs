@@ -253,7 +253,29 @@ public class InformacoesMovel : MonoBehaviour {
 		
 		ReColorize();
 	}
-	
+
+	public bool HasDetailMaterial ()
+	{
+		bool hasDetailMaterial = false;
+
+		Regex regexPorta   = new Regex(@"portas vidro", RegexOptions.IgnoreCase);
+		Renderer[] renders = this.GetComponentsInChildren<Renderer>();
+
+		foreach (Renderer r in renders)
+		{
+			foreach (Material rm in r.materials)
+			{
+				if(regexPorta.Match(rm.name).Success)
+				{
+					hasDetailMaterial = true;
+				}
+			}
+		}
+
+
+		return hasDetailMaterial;
+	}
+
 	public void ReColorize(){
 		
 		Renderer[] renders = this.GetComponentsInChildren<Renderer>();

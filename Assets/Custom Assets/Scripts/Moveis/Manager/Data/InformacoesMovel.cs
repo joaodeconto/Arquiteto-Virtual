@@ -39,6 +39,10 @@ public class InformacoesMovel : MonoBehaviour {
 	public string 		NomeI;
 	public string 		NomeE;	
 	public string 		Codigo;
+	public string		PesoLiquido;
+	public string		PesoBruto;
+	public string		Volume;
+	public string		Cubagem;
 	public Texture2D 	Imagem;
 	public Top			top;
 	public TipoMovel	tipoMovel;

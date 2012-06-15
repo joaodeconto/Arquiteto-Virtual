@@ -285,8 +285,8 @@ public class GUICameraController : MonoBehaviour {
 	{
 		m_fileBrowser = null;
         m_textPath = path;
+		pause.PauseCamera();
 		if (m_textPath != "" && m_textPath != null) {
-			pause.PauseCamera();
 			if (m_textPath.Contains(".jpg")) {
 				StartCoroutine ("MakeScreenshot");
 			} else {
@@ -319,8 +319,8 @@ public class GUICameraController : MonoBehaviour {
 	{
 		m_fileBrowser = null;
         m_textPath = path;
+		pause.PauseCamera();
 		if (m_textPath != "" && m_textPath != null) {
-			pause.PauseCamera();
 			if (m_textPath.Contains(".csv")) {
 				StartCoroutine ("ReportData");
 			} else {
@@ -567,13 +567,15 @@ public class GUICameraController : MonoBehaviour {
 		}
 		
 //		print(csvString);
-
+		Debug.Log("csvString: " + csvString);
 		byte[] utf8String = Encoding.UTF8.GetBytes (csvString);
-
+		string data 	  = Encoding.UTF8.GetString (utf8String);
+		
+//		Debug.Log("csvString: " + new String());
 #if UNITY_WEBPLAYER
 		WWWForm form = new WWWForm ();
 
-		form.AddField ("CSV-FILE", 		Encoding.ASCII.GetString (utf8String));
+		form.AddField ("CSV-FILE", 		data);
 		form.AddField ("CSV-FILE-NAME", filename);
 	
 		WWW www = new WWW (urlForm, form);
@@ -585,21 +587,7 @@ public class GUICameraController : MonoBehaviour {
 		else
 			Application.ExternalCall ("tryToDownload", pathExportReport + filename);
 #else
-//		int screenshotCount = 0;
-//		string screenshotFilename;
-//		string directory = "Reports/";
-//		if (!System.IO.Directory.Exists (directory))
-//			System.IO.Directory.CreateDirectory (directory);
-//		do {
-//			if (screenshotCount == 0)
-//				screenshotFilename = "arquiteto-virtual.csv";
-//			else
-//				screenshotFilename = "arquiteto-virtual" + screenshotCount + ".csv";
-//
-//			++screenshotCount;
-//		} while (System.IO.File.Exists(directory + screenshotFilename));
-
-		System.IO.File.WriteAllText(m_textPath, Encoding.UTF8.GetString (utf8String));
+		System.IO.File.WriteAllText(m_textPath, data);
 
 		yield return new WaitForEndOfFrame();
 

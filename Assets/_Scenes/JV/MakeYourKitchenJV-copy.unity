@@ -2716,6 +2716,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c80f8c867cac58a49a11a3deed643bad, type: 1}
   m_Name: 
   orientacao: 0
+--- !u!1 &364164197
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 3
+  m_Component:
+  - 4: {fileID: 364164198}
+  - 114: {fileID: 364164199}
+  m_Layer: 0
+  m_Name: PauseController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &364164198
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 364164197}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1911918447}
+--- !u!114 &364164199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 364164197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 799a734ceaec39344b9c5540d673278c, type: 1}
+  m_Name: 
+  textureMask: {fileID: 2800000, guid: cb8b12540aefa7d4d8dcbb9122e05465, type: 1}
 --- !u!1 &369809316
 GameObject:
   m_ObjectHideFlags: 0
@@ -13023,6 +13062,10 @@ MonoBehaviour:
     panelInfo: {fileID: 2076815839}
     lists: {fileID: 1605762183}
     panelMobile: {fileID: 790388719}
+  pause: {fileID: 364164199}
+  m_guiSkin: {fileID: 11400000, guid: c9133c91cd117417d0000cf8a220b639, type: 2}
+  m_directoryImage: {fileID: 2800000, guid: 2476ee68b8d18fe4aa1eb69f9339b9a0, type: 1}
+  m_fileImage: {fileID: 2800000, guid: a6b3518da31ecec468b7f4ab658f259e, type: 1}
 --- !u!1 &1605762183
 GameObject:
   m_ObjectHideFlags: 0
@@ -15215,6 +15258,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1599799068}
+  - {fileID: 364164198}
   - {fileID: 996875311}
   - {fileID: 1209945963}
   - {fileID: 1986218927}

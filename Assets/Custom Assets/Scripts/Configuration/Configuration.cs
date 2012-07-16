@@ -159,7 +159,7 @@ public class Configuration : MonoBehaviour
 		cfgPreset.SetColor (Line.CurrentDetailColor);
 
 #if UNITY_ANDROID || UNITY_IPHONE
-		System.IO.Stream stream = File.Open(path, FileMode.Create);
+		System.IO.FileStream stream = File.Open(path, FileMode.Create);
 #else
 		System.IO.MemoryStream stream = new System.IO.MemoryStream ();
 #endif
@@ -169,7 +169,7 @@ public class Configuration : MonoBehaviour
 		bFormatter.Serialize(stream, cfgPreset);
 //		a.ToString (bFormatter);
 
-		byte[] byteArray   = stream.GetBuffer();
+//		byte[] byteArray   = stream.GetBuffer ();
 //		string message = System.Text.Encoding.UTF8.GetString (bytes);
 
 #if UNITY_ANDROID || UNITY_IPHONE

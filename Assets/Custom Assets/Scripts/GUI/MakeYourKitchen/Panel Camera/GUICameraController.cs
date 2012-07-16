@@ -234,7 +234,9 @@ public class GUICameraController : MonoBehaviour {
 		}
 
 		SnapBehaviour.DeactivateAll ();
-
+		
+		firstPersonCamera.SetActiveRecursively(true);
+		
 		#if UNITY_ANDROID || UNITY_IPHONE
 		firstPersonCamera.GetComponentInChildren<ColliderControl>().IsPanelFloor = interfaceGUI.panelFloor.active;
 		firstPersonCamera.GetComponentInChildren<ColliderControl>().Enable();
@@ -254,7 +256,6 @@ public class GUICameraController : MonoBehaviour {
 		mainCamera.gameObject.SetActiveRecursively(false);
 		
 		setFirstPerson = true;
-		firstPersonCamera.SetActiveRecursively(true);
 		
 	}
 	

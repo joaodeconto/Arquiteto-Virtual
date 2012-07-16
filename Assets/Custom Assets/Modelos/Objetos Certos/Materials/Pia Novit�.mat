@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: "Pia Novit\xE1"
-  m_Shader: {fileID: 4800000, guid: c23f566e0d940b742915dcf4a2f57756, type: 1}
+  m_Shader: {fileID: 25, guid: 0000000000000000e000000000000000, type: 0}
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -27,16 +27,16 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _Spec_Gloss_Reflec_Masks
+          name: _Cube
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 8900000, guid: 2050805fae8b203419aed58c9832e5cb, type: 1}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _Cube
+          name: _Spec_Gloss_Reflec_Masks
         second:
-          m_Texture: {fileID: 8900000, guid: 2050805fae8b203419aed58c9832e5cb, type: 1}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -77,6 +77,10 @@ Material:
         first:
           name: _SpecColor
         second: {r: .793706298, g: .793706298, b: .793706298, a: 1}
+      data:
+        first:
+          name: _ReflectColor
+        second: {r: .701960802, g: .701960802, b: .701960802, a: .501960814}
 --- !u!1002 &2100001
 EditorExtensionImpl:
   serializedVersion: 6

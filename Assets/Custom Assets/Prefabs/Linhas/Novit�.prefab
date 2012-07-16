@@ -110917,6 +110917,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 81188
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: 217c9ca9ec3461c4d87b55e9fe3f52bc, type: 1}
   top: 0
   tipoMovel: 0
@@ -110939,6 +110943,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 88176
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: c53ba25fe39e928418b502bc0b9b9149, type: 1}
   top: 5
   tipoMovel: 0
@@ -110989,6 +110997,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 88177
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: d7c43bc30458deb409d130e072f867cc, type: 1}
   top: 5
   tipoMovel: 0
@@ -111011,6 +111023,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 88170
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: 6bfc3d798836a704dadb8673d3a8ccd3, type: 1}
   top: 5
   tipoMovel: 0
@@ -111033,6 +111049,10 @@ MonoBehaviour:
   NomeI: Kitchen organizer with 2 baskets, 910mm
   NomeE: Frutera 910mm
   Codigo: 80143
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: 396a116f2048b7147bb625d1a0d0cdeb, type: 1}
   top: 0
   tipoMovel: 0
@@ -111055,6 +111075,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 88174
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: 6bfc3d798836a704dadb8673d3a8ccd3, type: 1}
   top: 5
   tipoMovel: 0
@@ -111077,6 +111101,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 82309
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: cd95552bb7d3dbf409b47319f0c3a089, type: 1}
   top: 5
   tipoMovel: 0
@@ -111099,6 +111127,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 88171
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: 2bdf6882a0e9728438466295887893c1, type: 1}
   top: 5
   tipoMovel: 0
@@ -111121,6 +111153,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 88173
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: 2bdf6882a0e9728438466295887893c1, type: 1}
   top: 5
   tipoMovel: 0
@@ -111143,6 +111179,10 @@ MonoBehaviour:
   NomeI: Kitchen organizer for microwave with 2 drawers, 660mm
   NomeE: Frutera 660mm p/ microonads y 2 cajones alambrados
   Codigo: 80142
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: 396a116f2048b7147bb625d1a0d0cdeb, type: 1}
   top: 0
   tipoMovel: 0
@@ -111165,6 +111205,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 88172
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: c53ba25fe39e928418b502bc0b9b9149, type: 1}
   top: 5
   tipoMovel: 0
@@ -111187,6 +111231,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 82314
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: 19a69d843a14c91469da83b6b829fa74, type: 1}
   top: 6
   tipoMovel: 0
@@ -111209,6 +111257,10 @@ MonoBehaviour:
   NomeI: Compact 6
   NomeE: Compacta 6
   Codigo: 80129
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: e10594f676e19be429cd31b402299ff3, type: 1}
   top: 0
   tipoMovel: 0
@@ -111231,6 +111283,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 87114
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: b82bb671281c9d34b8c7a8d781fb0d75, type: 1}
   top: 0
   tipoMovel: 0
@@ -111253,6 +111309,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 82308
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: 15224292276699e45a84492d71f9c7ef, type: 1}
   top: 5
   tipoMovel: 0
@@ -111275,6 +111335,10 @@ MonoBehaviour:
   NomeI: Compact 12
   NomeE: Compacta 12
   Codigo: 80136
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: e10594f676e19be429cd31b402299ff3, type: 1}
   top: 0
   tipoMovel: 0
@@ -111311,6 +111375,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 82315
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: aeaa36b0cc97ce243906c81d60df4d83, type: 1}
   top: 6
   tipoMovel: 0
@@ -111333,6 +111401,10 @@ MonoBehaviour:
   NomeI: Doble Bajo
   NomeE: Low Double Wall Cabinet
   Codigo: 81186
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: e338e1ec61a338c48b48a1b104eb5988, type: 1}
   top: 0
   tipoMovel: 0
@@ -111355,6 +111427,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 88175
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: 814dfc276afed2d41b5a793108bb4b44, type: 1}
   top: 5
   tipoMovel: 0
@@ -111377,6 +111453,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 881769
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: 43c15ce151b88104f94c5b2ddb5ac8a6, type: 1}
   top: 5
   tipoMovel: 0
@@ -111413,6 +111493,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 81189
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: e5bba62f50c1bb249843e1d0018bebb7, type: 1}
   top: 0
   tipoMovel: 0
@@ -111435,6 +111519,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 82311
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: a15564afc11df854a98a9af0de91a542, type: 1}
   top: 0
   tipoMovel: 0
@@ -111457,6 +111545,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 88178
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: 6bfc3d798836a704dadb8673d3a8ccd3, type: 1}
   top: 5
   tipoMovel: 0
@@ -111493,6 +111585,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 82310
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: 38de3249d624e2f4b924464dea6b7cd8, type: 1}
   top: 0
   tipoMovel: 0
@@ -111529,6 +111625,10 @@ MonoBehaviour:
   NomeI: Niche with glass
   NomeE: 'Nicho con vidrio 700mm '
   Codigo: 86047
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: c3118c19569cd9c4b8d350283538e749, type: 1}
   top: 0
   tipoMovel: 0
@@ -111551,6 +111651,10 @@ MonoBehaviour:
   NomeI: Corner shelf unit
   NomeE: Modulo esquinero de 1800mm
   Codigo: 86026A
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: 2d4c34e74e3542a4db138cc0079333d0, type: 1}
   top: 0
   tipoMovel: 0
@@ -111587,6 +111691,10 @@ MonoBehaviour:
   NomeI: Niche
   NomeE: Nicho 800mm
   Codigo: 86042
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: 206312fdb6eeefd4895341e9f22f830d, type: 1}
   top: 0
   tipoMovel: 0
@@ -111623,6 +111731,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 88168
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: c53ba25fe39e928418b502bc0b9b9149, type: 1}
   top: 5
   tipoMovel: 0
@@ -111645,6 +111757,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 88179
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: 814dfc276afed2d41b5a793108bb4b44, type: 1}
   top: 5
   tipoMovel: 0
@@ -111667,6 +111783,10 @@ MonoBehaviour:
   NomeI: Single cabinet with shekf without top
   NomeE: Modulo con estantes y sin tapa
   Codigo: 82181
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: de3321171d7207a4d9e6a5905cdb4eff, type: 1}
   top: 0
   tipoMovel: 0
@@ -111689,6 +111809,10 @@ MonoBehaviour:
   NomeI: Niche without glass
   NomeE: 'Nicho sin vidrio 700mm '
   Codigo: 86046
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: 22bc6836387b1af40b853d20c3f10e61, type: 1}
   top: 0
   tipoMovel: 0
@@ -111735,6 +111859,10 @@ MonoBehaviour:
   NomeI: Single cabinet with shekf with top
   NomeE: Modulo con estantes y con tapa
   Codigo: 82182
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: de3321171d7207a4d9e6a5905cdb4eff, type: 1}
   top: 5
   tipoMovel: 0
@@ -111757,6 +111885,10 @@ MonoBehaviour:
   NomeI: Medium cabinet with shelf
   NomeE: Armario medio con estantes
   Codigo: 86001A
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: 22bc6836387b1af40b853d20c3f10e61, type: 1}
   top: 0
   tipoMovel: 0
@@ -111776,6 +111908,10 @@ MonoBehaviour:
   NomeI: Compact Exclusive
   NomeE: Compacta Exclusive
   Codigo: 88136
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: e10594f676e19be429cd31b402299ff3, type: 1}
   top: 0
   tipoMovel: 0
@@ -111795,6 +111931,10 @@ MonoBehaviour:
   NomeI: Compact 3
   NomeE: Compacta 3
   Codigo: 80126
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: e10594f676e19be429cd31b402299ff3, type: 1}
   top: 0
   tipoMovel: 0
@@ -111814,6 +111954,10 @@ MonoBehaviour:
   NomeI: Compact 1
   NomeE: Compacta 1
   Codigo: 80124
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: e10594f676e19be429cd31b402299ff3, type: 1}
   top: 0
   tipoMovel: 0
@@ -111833,6 +111977,10 @@ MonoBehaviour:
   NomeI: Compact 2
   NomeE: Compacta 2
   Codigo: 80125
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: e10594f676e19be429cd31b402299ff3, type: 1}
   top: 0
   tipoMovel: 0
@@ -111852,6 +112000,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 87115
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: d70cf3c13c5ea90439b2a057f0d1337e, type: 1}
   top: 0
   tipoMovel: 0
@@ -111871,6 +112023,10 @@ MonoBehaviour:
   NomeI: Compact 11
   NomeE: Compacta 11
   Codigo: 80131
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: e10594f676e19be429cd31b402299ff3, type: 1}
   top: 0
   tipoMovel: 0
@@ -111890,6 +112046,10 @@ MonoBehaviour:
   NomeI: Compact 5
   NomeE: Compacta 5
   Codigo: 80128
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: e10594f676e19be429cd31b402299ff3, type: 1}
   top: 0
   tipoMovel: 0
@@ -111909,6 +112069,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 87116
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: 046897dcd0214d945a5ff2e66e0fffb2, type: 1}
   top: 0
   tipoMovel: 0
@@ -111928,6 +112092,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 81187
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: 5aac3634c324df348b12d274b584f0ab, type: 1}
   top: 0
   tipoMovel: 0
@@ -111947,6 +112115,10 @@ MonoBehaviour:
   NomeI: Compact 4
   NomeE: Compacta 4
   Codigo: 80127
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: e10594f676e19be429cd31b402299ff3, type: 1}
   top: 0
   tipoMovel: 0
@@ -111966,6 +112138,10 @@ MonoBehaviour:
   NomeI: "Kit Novit\xE1 Exclusive"
   NomeE: "Kit Novit\xE1 Exclusive"
   Codigo: 88186
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: ac2f7b0e45b19fb4f9d110df3ebd340e, type: 1}
   top: 0
   tipoMovel: 0

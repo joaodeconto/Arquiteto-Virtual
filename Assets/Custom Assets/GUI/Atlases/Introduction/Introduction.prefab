@@ -57,51 +57,17 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: verdana-bold_0
-    outer:
-      serializedVersion: 2
-      x: 1234
-      y: 1906
-      width: 511
-      height: 142
-    inner:
-      serializedVersion: 2
-      x: 1234
-      y: 1906
-      width: 511
-      height: 142
-    paddingLeft: 0
-    paddingRight: .00195694715
-    paddingTop: 0
-    paddingBottom: .802816927
-  - name: verdana_0
-    outer:
-      serializedVersion: 2
-      x: 1234
-      y: 1777
-      width: 511
-      height: 128
-    inner:
-      serializedVersion: 2
-      x: 1234
-      y: 1777
-      width: 511
-      height: 128
-    paddingLeft: 0
-    paddingRight: .00195694715
-    paddingTop: 0
-    paddingBottom: 1
   - name: brasil
     outer:
       serializedVersion: 2
-      x: 1746
-      y: 1833
+      x: 1735
+      y: 1726
       width: 87
       height: 72
     inner:
       serializedVersion: 2
-      x: 1746
-      y: 1833
+      x: 1735
+      y: 1726
       width: 87
       height: 72
     paddingLeft: .126436785
@@ -111,14 +77,14 @@ MonoBehaviour:
   - name: spain
     outer:
       serializedVersion: 2
-      x: 1746
-      y: 1922
+      x: 1880
+      y: 1780
       width: 87
       height: 72
     inner:
       serializedVersion: 2
-      x: 1746
-      y: 1922
+      x: 1880
+      y: 1780
       width: 87
       height: 72
     paddingLeft: .114942528
@@ -128,14 +94,14 @@ MonoBehaviour:
   - name: VisioramaLogo
     outer:
       serializedVersion: 2
-      x: 1746
-      y: 1995
+      x: 1735
+      y: 1799
       width: 144
       height: 53
     inner:
       serializedVersion: 2
-      x: 1746
-      y: 1995
+      x: 1735
+      y: 1799
       width: 144
       height: 53
     paddingLeft: .055555556
@@ -162,14 +128,14 @@ MonoBehaviour:
   - name: eua
     outer:
       serializedVersion: 2
-      x: 1891
-      y: 1976
+      x: 1880
+      y: 1707
       width: 87
       height: 72
     inner:
       serializedVersion: 2
-      x: 1891
-      y: 1976
+      x: 1880
+      y: 1707
       width: 87
       height: 72
     paddingLeft: .0919540226
@@ -179,84 +145,16 @@ MonoBehaviour:
   - name: America
     outer:
       serializedVersion: 2
-      x: 0
-      y: 631
-      width: 256
-      height: 181
+      x: 1725
+      y: 860
+      width: 306
+      height: 419
     inner:
       serializedVersion: 2
-      x: 0
-      y: 631
-      width: 256
-      height: 181
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: "Diamante c\xF3pia"
-    outer:
-      serializedVersion: 2
-      x: 1452
-      y: 1413
-      width: 256
-      height: 181
-    inner:
-      serializedVersion: 2
-      x: 1452
-      y: 1413
-      width: 256
-      height: 181
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: "Cristal c\xF3pia"
-    outer:
-      serializedVersion: 2
-      x: 1452
-      y: 1595
-      width: 256
-      height: 181
-    inner:
-      serializedVersion: 2
-      x: 1452
-      y: 1595
-      width: 256
-      height: 181
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: "Novita c\xF3pia"
-    outer:
-      serializedVersion: 2
-      x: 1709
-      y: 1595
-      width: 256
-      height: 181
-    inner:
-      serializedVersion: 2
-      x: 1709
-      y: 1595
-      width: 256
-      height: 181
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: "Star c\xF3pia"
-    outer:
-      serializedVersion: 2
-      x: 1709
-      y: 1413
-      width: 256
-      height: 181
-    inner:
-      serializedVersion: 2
-      x: 1709
-      y: 1413
-      width: 256
-      height: 181
+      x: 1725
+      y: 860
+      width: 306
+      height: 419
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0
@@ -264,33 +162,237 @@ MonoBehaviour:
   - name: LogoNovo
     outer:
       serializedVersion: 2
-      x: 1234
-      y: 1559
+      x: 1735
+      y: 1287
       width: 217
       height: 217
     inner:
       serializedVersion: 2
-      x: 1234
-      y: 1559
+      x: 1735
+      y: 1287
       width: 217
       height: 217
     paddingLeft: 0
     paddingRight: .179723501
     paddingTop: 0
     paddingBottom: .179723501
-  - name: "Mirage c\xF3pia"
+  - name: Din_0
+    outer:
+      serializedVersion: 2
+      x: 1735
+      y: 1853
+      width: 255
+      height: 195
+    inner:
+      serializedVersion: 2
+      x: 1735
+      y: 1853
+      width: 255
+      height: 195
+    paddingLeft: 0
+    paddingRight: .00392156886
+    paddingTop: 0
+    paddingBottom: .312820524
+  - name: DinBlack_0
+    outer:
+      serializedVersion: 2
+      x: 1735
+      y: 1505
+      width: 255
+      height: 192
+    inner:
+      serializedVersion: 2
+      x: 1735
+      y: 1505
+      width: 255
+      height: 192
+    paddingLeft: 0
+    paddingRight: .00392156886
+    paddingTop: 0
+    paddingBottom: .333333343
+  - name: Star
+    outer:
+      serializedVersion: 2
+      x: 1111
+      y: 440
+      width: 305
+      height: 419
+    inner:
+      serializedVersion: 2
+      x: 1111
+      y: 440
+      width: 305
+      height: 419
+    paddingLeft: 0
+    paddingRight: .00327868853
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Cristal
+    outer:
+      serializedVersion: 2
+      x: 1111
+      y: 20
+      width: 270
+      height: 419
+    inner:
+      serializedVersion: 2
+      x: 1111
+      y: 20
+      width: 270
+      height: 419
+    paddingLeft: .0629629642
+    paddingRight: .0703703687
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Novita
+    outer:
+      serializedVersion: 2
+      x: 1417
+      y: 440
+      width: 267
+      height: 419
+    inner:
+      serializedVersion: 2
+      x: 1417
+      y: 440
+      width: 267
+      height: 419
+    paddingLeft: .0524344556
+    paddingRight: .0936329588
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Diamante
+    outer:
+      serializedVersion: 2
+      x: 1111
+      y: 860
+      width: 306
+      height: 419
+    inner:
+      serializedVersion: 2
+      x: 1111
+      y: 860
+      width: 306
+      height: 419
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Mirage
+    outer:
+      serializedVersion: 2
+      x: 1418
+      y: 860
+      width: 306
+      height: 419
+    inner:
+      serializedVersion: 2
+      x: 1418
+      y: 860
+      width: 306
+      height: 419
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: 3.6. Cristal
     outer:
       serializedVersion: 2
       x: 0
-      y: 449
-      width: 256
-      height: 181
+      y: 111
+      width: 500
+      height: 350
     inner:
       serializedVersion: 2
       x: 0
-      y: 449
-      width: 256
-      height: 181
+      y: 111
+      width: 500
+      height: 350
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: 3.2. Star
+    outer:
+      serializedVersion: 2
+      x: 1234
+      y: 1347
+      width: 500
+      height: 350
+    inner:
+      serializedVersion: 2
+      x: 1234
+      y: 1347
+      width: 500
+      height: 350
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "3.4. Am\xE9rica"
+    outer:
+      serializedVersion: 2
+      x: 501
+      y: 462
+      width: 500
+      height: 350
+    inner:
+      serializedVersion: 2
+      x: 501
+      y: 462
+      width: 500
+      height: 350
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: 3.3. Diamante
+    outer:
+      serializedVersion: 2
+      x: 501
+      y: 111
+      width: 500
+      height: 350
+    inner:
+      serializedVersion: 2
+      x: 501
+      y: 111
+      width: 500
+      height: 350
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: 3.1. Mirage
+    outer:
+      serializedVersion: 2
+      x: 1234
+      y: 1698
+      width: 500
+      height: 350
+    inner:
+      serializedVersion: 2
+      x: 1234
+      y: 1698
+      width: 500
+      height: 350
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "3.5. Novit\xE1"
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 462
+      width: 500
+      height: 350
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 462
+      width: 500
+      height: 350
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0

@@ -25,7 +25,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3.01955199, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!114 &11400000
@@ -40,34 +39,17 @@ MonoBehaviour:
   m_Name: 
   material: {fileID: 2100000, guid: b08da9736249a074bae98e3d482b5dbb, type: 2}
   sprites:
-  - name: Fundo
-    outer:
-      serializedVersion: 2
-      x: 0
-      y: 1280
-      width: 1233
-      height: 768
-    inner:
-      serializedVersion: 2
-      x: 0
-      y: 1280
-      width: 1233
-      height: 768
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
   - name: brasil
     outer:
       serializedVersion: 2
-      x: 1735
-      y: 1726
+      x: 1155
+      y: 1625
       width: 87
       height: 72
     inner:
       serializedVersion: 2
-      x: 1735
-      y: 1726
+      x: 1155
+      y: 1625
       width: 87
       height: 72
     paddingLeft: .126436785
@@ -77,14 +59,14 @@ MonoBehaviour:
   - name: spain
     outer:
       serializedVersion: 2
-      x: 1880
-      y: 1780
+      x: 1302
+      y: 1625
       width: 87
       height: 72
     inner:
       serializedVersion: 2
-      x: 1880
-      y: 1780
+      x: 1302
+      y: 1625
       width: 87
       height: 72
     paddingLeft: .114942528
@@ -94,14 +76,14 @@ MonoBehaviour:
   - name: VisioramaLogo
     outer:
       serializedVersion: 2
-      x: 1735
-      y: 1799
+      x: 1010
+      y: 1644
       width: 144
       height: 53
     inner:
       serializedVersion: 2
-      x: 1735
-      y: 1799
+      x: 1010
+      y: 1644
       width: 144
       height: 53
     paddingLeft: .055555556
@@ -112,30 +94,30 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 0
-      y: 813
-      width: 1110
-      height: 466
+      y: 1578
+      width: 800
+      height: 470
     inner:
       serializedVersion: 2
       x: 0
-      y: 813
-      width: 1110
-      height: 466
+      y: 1578
+      width: 800
+      height: 470
     paddingLeft: 0
     paddingRight: 0
-    paddingTop: .00429184549
-    paddingBottom: .00429184549
+    paddingTop: 0
+    paddingBottom: 0
   - name: eua
     outer:
       serializedVersion: 2
-      x: 1880
-      y: 1707
+      x: 1390
+      y: 1625
       width: 87
       height: 72
     inner:
       serializedVersion: 2
-      x: 1880
-      y: 1707
+      x: 1390
+      y: 1625
       width: 87
       height: 72
     paddingLeft: .0919540226
@@ -145,14 +127,14 @@ MonoBehaviour:
   - name: America
     outer:
       serializedVersion: 2
-      x: 1725
-      y: 860
+      x: 513
+      y: 548
       width: 306
       height: 419
     inner:
       serializedVersion: 2
-      x: 1725
-      y: 860
+      x: 513
+      y: 548
       width: 306
       height: 419
     paddingLeft: 0
@@ -162,65 +144,31 @@ MonoBehaviour:
   - name: LogoNovo
     outer:
       serializedVersion: 2
-      x: 1735
-      y: 1287
-      width: 217
-      height: 217
+      x: 0
+      y: 1065
+      width: 512
+      height: 512
     inner:
       serializedVersion: 2
-      x: 1735
-      y: 1287
-      width: 217
-      height: 217
+      x: 0
+      y: 1088
+      width: 512
+      height: 354.699829
     paddingLeft: 0
-    paddingRight: .179723501
+    paddingRight: 0
     paddingTop: 0
-    paddingBottom: .179723501
-  - name: Din_0
-    outer:
-      serializedVersion: 2
-      x: 1735
-      y: 1853
-      width: 255
-      height: 195
-    inner:
-      serializedVersion: 2
-      x: 1735
-      y: 1853
-      width: 255
-      height: 195
-    paddingLeft: 0
-    paddingRight: .00392156886
-    paddingTop: 0
-    paddingBottom: .312820524
-  - name: DinBlack_0
-    outer:
-      serializedVersion: 2
-      x: 1735
-      y: 1505
-      width: 255
-      height: 192
-    inner:
-      serializedVersion: 2
-      x: 1735
-      y: 1505
-      width: 255
-      height: 192
-    paddingLeft: 0
-    paddingRight: .00392156886
-    paddingTop: 0
-    paddingBottom: .333333343
+    paddingBottom: 0
   - name: Star
     outer:
       serializedVersion: 2
-      x: 1111
-      y: 440
+      x: 1332
+      y: 807
       width: 305
       height: 419
     inner:
       serializedVersion: 2
-      x: 1111
-      y: 440
+      x: 1332
+      y: 807
       width: 305
       height: 419
     paddingLeft: 0
@@ -230,14 +178,14 @@ MonoBehaviour:
   - name: Cristal
     outer:
       serializedVersion: 2
-      x: 1111
-      y: 20
+      x: 1638
+      y: 807
       width: 270
       height: 419
     inner:
       serializedVersion: 2
-      x: 1111
-      y: 20
+      x: 1638
+      y: 807
       width: 270
       height: 419
     paddingLeft: .0629629642
@@ -247,14 +195,14 @@ MonoBehaviour:
   - name: Novita
     outer:
       serializedVersion: 2
-      x: 1417
-      y: 440
+      x: 1025
+      y: 387
       width: 267
       height: 419
     inner:
       serializedVersion: 2
-      x: 1417
-      y: 440
+      x: 1025
+      y: 387
       width: 267
       height: 419
     paddingLeft: .0524344556
@@ -264,14 +212,14 @@ MonoBehaviour:
   - name: Diamante
     outer:
       serializedVersion: 2
-      x: 1111
-      y: 860
+      x: 513
+      y: 128
       width: 306
       height: 419
     inner:
       serializedVersion: 2
-      x: 1111
-      y: 860
+      x: 513
+      y: 128
       width: 306
       height: 419
     paddingLeft: 0
@@ -281,48 +229,133 @@ MonoBehaviour:
   - name: Mirage
     outer:
       serializedVersion: 2
-      x: 1418
-      y: 860
+      x: 1025
+      y: 807
       width: 306
       height: 419
     inner:
       serializedVersion: 2
-      x: 1418
-      y: 860
+      x: 1025
+      y: 807
       width: 306
       height: 419
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: 3.6. Cristal
+  - name: bt_bt2
     outer:
       serializedVersion: 2
-      x: 0
-      y: 111
-      width: 500
-      height: 350
+      x: 1803
+      y: 1631
+      width: 128
+      height: 127
     inner:
       serializedVersion: 2
-      x: 0
-      y: 111
-      width: 500
-      height: 350
+      x: 1823.90002
+      y: 1650.90002
+      width: 83.6999512
+      height: 87
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: .00787401572
+    paddingBottom: 0
+  - name: BarraSuperior
+    outer:
+      serializedVersion: 2
+      x: 1803
+      y: 1888
+      width: 240
+      height: 160
+    inner:
+      serializedVersion: 2
+      x: 1803
+      y: 1888
+      width: 240
+      height: 160
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: 3.2. Star
+  - name: ArialBold_0
     outer:
       serializedVersion: 2
-      x: 1234
+      x: 1544
       y: 1347
+      width: 255
+      height: 230
+    inner:
+      serializedVersion: 2
+      x: 1544
+      y: 1347
+      width: 255
+      height: 230
+    paddingLeft: 0
+    paddingRight: .00392156886
+    paddingTop: 0
+    paddingBottom: .11304348
+  - name: Logo_Branco
+    outer:
+      serializedVersion: 2
+      x: 801
+      y: 1612
+      width: 208
+      height: 85
+    inner:
+      serializedVersion: 2
+      x: 801
+      y: 1612
+      width: 208
+      height: 85
+    paddingLeft: .0961538479
+    paddingRight: .057692308
+    paddingTop: .0823529437
+    paddingBottom: .117647059
+  - name: bt_bt3
+    outer:
+      serializedVersion: 2
+      x: 1803
+      y: 1759
+      width: 128
+      height: 128
+    inner:
+      serializedVersion: 2
+      x: 1824
+      y: 1780
+      width: 85
+      height: 86
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: ArialBold50_0
+    outer:
+      serializedVersion: 2
+      x: 513
+      y: 968
+      width: 511
+      height: 258
+    inner:
+      serializedVersion: 2
+      x: 513
+      y: 968
+      width: 511
+      height: 258
+    paddingLeft: 0
+    paddingRight: .00195694715
+    paddingTop: 0
+    paddingBottom: .984496117
+  - name: 3.1. Mirage
+    outer:
+      serializedVersion: 2
+      x: 801
+      y: 1698
       width: 500
       height: 350
     inner:
       serializedVersion: 2
-      x: 1234
-      y: 1347
+      x: 801
+      y: 1698
       width: 500
       height: 350
     paddingLeft: 0
@@ -332,48 +365,31 @@ MonoBehaviour:
   - name: "3.4. Am\xE9rica"
     outer:
       serializedVersion: 2
-      x: 501
-      y: 462
+      x: 1302
+      y: 1698
       width: 500
       height: 350
     inner:
       serializedVersion: 2
-      x: 501
-      y: 462
+      x: 1302
+      y: 1698
       width: 500
       height: 350
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: 3.3. Diamante
+  - name: 3.6. Cristal
     outer:
       serializedVersion: 2
-      x: 501
-      y: 111
+      x: 0
+      y: 714
       width: 500
       height: 350
     inner:
       serializedVersion: 2
-      x: 501
-      y: 111
-      width: 500
-      height: 350
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: 3.1. Mirage
-    outer:
-      serializedVersion: 2
-      x: 1234
-      y: 1698
-      width: 500
-      height: 350
-    inner:
-      serializedVersion: 2
-      x: 1234
-      y: 1698
+      x: 0
+      y: 714
       width: 500
       height: 350
     paddingLeft: 0
@@ -384,15 +400,100 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 0
-      y: 462
+      y: 363
       width: 500
       height: 350
     inner:
       serializedVersion: 2
       x: 0
-      y: 462
+      y: 363
       width: 500
       height: 350
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: 3.2. Star
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 12
+      width: 500
+      height: 350
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 12
+      width: 500
+      height: 350
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: 3.3. Diamante
+    outer:
+      serializedVersion: 2
+      x: 513
+      y: 1227
+      width: 500
+      height: 350
+    inner:
+      serializedVersion: 2
+      x: 513
+      y: 1227
+      width: 500
+      height: 350
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: StarRedonda
+    outer:
+      serializedVersion: 2
+      x: 1014
+      y: 1250
+      width: 529
+      height: 327
+    inner:
+      serializedVersion: 2
+      x: 1014
+      y: 1250
+      width: 529
+      height: 327
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Paginador
+    outer:
+      serializedVersion: 2
+      x: 1478
+      y: 1623
+      width: 74
+      height: 74
+    inner:
+      serializedVersion: 2
+      x: 1478
+      y: 1623
+      width: 74
+      height: 74
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: Barra_Linhas
+    outer:
+      serializedVersion: 2
+      x: 1293
+      y: 656
+      width: 300
+      height: 150
+    inner:
+      serializedVersion: 2
+      x: 1293
+      y: 656
+      width: 300
+      height: 150
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0

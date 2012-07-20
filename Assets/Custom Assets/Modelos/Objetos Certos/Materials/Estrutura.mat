@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Estrutura
-  m_Shader: {fileID: 10704, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 9862276b871ea4448adc97fc88d49fb9, type: 1}
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:

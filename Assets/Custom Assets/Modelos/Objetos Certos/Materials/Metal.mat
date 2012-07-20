@@ -72,7 +72,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .13636364, g: .13636364, b: .13636364, a: 1}
+        second: {r: 0, g: 0, b: 0, a: 1}
       data:
         first:
           name: _SpecColor
@@ -80,7 +80,7 @@ Material:
       data:
         first:
           name: _ReflectColor
-        second: {r: .541176498, g: .541176498, b: .541176498, a: .501960814}
+        second: {r: .970149279, g: .970149279, b: .970149279, a: .709803939}
 --- !u!1002 &2100001
 EditorExtensionImpl:
   serializedVersion: 6

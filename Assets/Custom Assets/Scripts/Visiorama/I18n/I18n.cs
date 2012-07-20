@@ -45,6 +45,9 @@ public class I18n {
 		//Escolha cozinha
 		hashWords [0] ["Escolha sua linha favorita"] = "Escolha sua linha favorita";
 		
+		//Intro
+		hashWords [0] ["Iniciar"] 	  = "Iniciar";
+		
 		//Montar paredes
 		hashWords [0] ["Medidas"] 	  = "Medidas";
 		hashWords [0] ["Profundidade"]= "Profundidade";
@@ -123,6 +126,9 @@ public class I18n {
 		//Escolha cozinha
 		hashWords [1] ["Escolha sua linha favorita"] = "Choose your favorite kitchen";
 		
+		//Intro
+		hashWords [1] ["Iniciar"] 	  = "Start";
+		
 		//Montar paredes
 		hashWords [1] ["Medidas"] = "Measures";
 		hashWords [1] ["Profundidade"]= "Depth";
@@ -199,6 +205,9 @@ public class I18n {
 	{
 		//Escolha cozinha
 		hashWords [2] ["Escolha sua linha favorita"] = "Choose your favorite kitchen";
+		
+		//Intro
+		hashWords [2] ["Iniciar"] 	  = "Iniciar";
 		
 		//Montar paredes
 		hashWords [2] ["Medidas"] = "Measures";

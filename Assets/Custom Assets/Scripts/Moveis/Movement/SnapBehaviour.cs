@@ -205,6 +205,8 @@ public class SnapBehaviour : MonoBehaviour
 	{
 		uint foundGround = 0;
 		
+		if (this.collider.gameObject.layer == LayerMask.NameToLayer ("Painel")) return;
+		
 		Vector3[] origins = new Vector3[4]{new Vector3 (this.collider.bounds.center.x - 
 			                                            this.collider.bounds.size.x / 4,
 						                             	2,

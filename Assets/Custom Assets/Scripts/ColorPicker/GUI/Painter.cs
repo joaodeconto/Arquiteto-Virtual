@@ -44,7 +44,7 @@ public class Painter: MonoBehaviour {
 	#endregion
 	
 	private string nameObject, tagObject;
-	private GUIStyle groupStyle, topColorGroupStyle, topTextureGroupStyle, labelStyle;
+	private GUIStyle groupStyle, topColorGroupStyle, topTextureGroupStyle, labelStyle, thumbVerticalStyle;
 	private int fontSizeGroup, fontSizeButton, fontSizeLabel, thumbSize;
 	
 	private GameObject[] cameras;
@@ -98,7 +98,11 @@ public class Painter: MonoBehaviour {
 		
 		button.fontSize = (int)Mathf.Ceil(ScreenUtils.ScaleHeight(fontSizeButton));
 		labelStyle.fontSize = (int)Mathf.Ceil(ScreenUtils.ScaleHeight(fontSizeLabel));
-		thumb.padding.top = thumb.padding.bottom = thumb.padding.left = thumb.padding.right = ScreenUtils.ScaledInt(thumbSize/2);
+		thumbVerticalStyle.fixedWidth = thumb.fixedWidth = ScreenUtils.ScaleHeight(16f);
+		thumbVerticalStyle.fixedHeight = thumb.fixedHeight = ScreenUtils.ScaleHeight(32f);
+		thumbVerticalStyle.padding.left = thumbVerticalStyle.padding.right = thumb.padding.left = thumb.padding.right = ScreenUtils.ScaledInt(thumbSize/2);
+		thumbVerticalStyle.padding.top = thumbVerticalStyle.padding.bottom = thumb.padding.top = thumb.padding.bottom = ScreenUtils.ScaledInt(thumbSize);
+		thumbVerticalStyle.contentOffset = new Vector2(5f, 0f);
 	}
 	
 	void Start () {
@@ -129,7 +133,9 @@ public class Painter: MonoBehaviour {
 		labelStyle = new GUIStyle("label");
 		labelStyle.font = font;
 		labelStyle.fontStyle = FontStyle.Bold;
-		labelStyle.normal.textColor = Color.white;
+		labelStyle.normal.textColor = Color.black;
+		
+		thumbVerticalStyle = new GUIStyle(thumb);
 		
 		thumbSize = thumb.normal.background.height;
 		thumb.fixedWidth = thumb.fixedHeight = 0;
@@ -313,7 +319,7 @@ public class Painter: MonoBehaviour {
 			
 			// Option Color
 			if (colorOption) {
-				color = GUIControls.RGBCircle (position, color, "", colorCircle, pickerColor, sliderColorPicker, thumb);
+				color = GUIControls.RGBCircle (position, color, "", colorCircle, pickerColor, sliderColorPicker, thumbVerticalStyle);
 				if (GUI.Button(rectReset, I18n.t("Descolorir"), button)) { color = Color.white; }
 				GUI.Label(rectGetAll, "RGB:", labelStyle);
 				color.r = GUI.HorizontalSlider(rectRGBA[0], color.r, 0f, 1f, slider, thumb);

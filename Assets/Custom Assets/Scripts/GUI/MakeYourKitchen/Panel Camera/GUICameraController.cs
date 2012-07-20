@@ -574,7 +574,7 @@ public class GUICameraController : MonoBehaviour {
 		
 //		Debug.Log("csvString: " + new String());
 #if UNITY_WEBPLAYER
-		WWWForm form = new WWWForm ();
+		/*WWWForm form = new WWWForm ();
 
 		form.AddField ("CSV-FILE", 		data);
 		form.AddField ("CSV-FILE-NAME", filename);
@@ -586,7 +586,8 @@ public class GUICameraController : MonoBehaviour {
 		if (www.error != null)
 			print (www.error);
 		else
-			Application.ExternalCall ("tryToDownload", pathExportReport + filename);
+			Application.ExternalCall ("tryToDownload", pathExportReport + filename);*/
+		yield return new WaitForSeconds(0.1f);
 #else
 		System.IO.File.WriteAllText(m_textPath, data);
 

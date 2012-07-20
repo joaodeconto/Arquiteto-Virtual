@@ -27,7 +27,18 @@ public class ClickItem : MonoBehaviour {
 		GameObject newModule = Instantiate(gameObject) as GameObject;
 							
 		newModule.tag = "Movel";
-		newModule.layer = LayerMask.NameToLayer("Moveis");
+		Debug.Log(newModule.layer);
+		if (!newModule.name.Contains("Painel") &&
+			!newModule.name.Contains("Janela") &&
+			!newModule.name.Contains("Porta") &&
+			!newModule.name.Contains("Persiana"))
+		{
+			newModule.layer = LayerMask.NameToLayer("Moveis");
+		}
+		else
+		{
+			newModule.layer = LayerMask.NameToLayer("Painel");
+		}
 		
 		foreach (Animation anim in newModule.GetComponentsInChildren<Animation>()) {
 			anim.Stop();

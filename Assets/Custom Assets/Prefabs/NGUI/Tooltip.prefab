@@ -116,7 +116,7 @@ MonoBehaviour:
   mPivot: 4
   mDepth: 1
   mAtlas: {fileID: 11400000, guid: 5af1a8c674cd7f44aadab96ae19d39ff, type: 2}
-  mSpriteName: T_tooltipBase
+  mSpriteName: bt_bt2
   mFillCenter: 1
 --- !u!114 &11400004
 MonoBehaviour:
@@ -128,11 +128,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 1}
   m_Name: 
-  mMat: {fileID: 2100000, guid: de7eb8d0f3c295040802aebe7b3708a1, type: 2}
+  mMat: {fileID: 2100000, guid: b08da9736249a074bae98e3d482b5dbb, type: 2}
   mColor: {r: 0, g: 0, b: 0, a: 1}
   mPivot: 4
   mDepth: 2
-  mFont: {fileID: 11400000, guid: 928452452164e0844ad9e114e53d1d3e, type: 2}
+  mFont: {fileID: 11400000, guid: 63904a9e6612bc34bb5e34bd9c41c898, type: 2}
   mText: New Label
   mEncoding: 1
   mLineWidth: 150

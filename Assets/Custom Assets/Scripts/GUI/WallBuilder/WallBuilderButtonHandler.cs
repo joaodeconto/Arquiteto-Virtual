@@ -25,9 +25,9 @@ public class WallBuilderButtonHandler : MonoBehaviour {
 	
 	void OnClick(){
 		switch(wallBuilderButton){
-			case WallBuilderButtonEnum.BuildGround:
-				wallBuilder.BuildGround();
-				break;
+//			case WallBuilderButtonEnum.BuildGround:
+//				wallBuilder.BuildGround();
+//				break;
 			case WallBuilderButtonEnum.BuildWalls:
 				wallBuilder.BuildWalls ();
 				break;

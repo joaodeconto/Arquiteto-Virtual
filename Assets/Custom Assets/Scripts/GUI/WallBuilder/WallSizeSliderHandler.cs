@@ -51,5 +51,7 @@ public class WallSizeSliderHandler : MonoBehaviour {
 				label.text = (wallBuilder.WallWidth / 10) + "," + (wallBuilder.WallWidth % 10) + "m";
 				break;
 		}
+		
+		wallBuilder.BuildGround();
 	}
 }

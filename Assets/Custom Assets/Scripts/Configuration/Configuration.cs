@@ -175,16 +175,16 @@ public class Configuration : MonoBehaviour
 #if UNITY_ANDROID || UNITY_IPHONE
 //		System.IO.Stream stream = File.Open(path, FileMode.Create);
 #else
-		Client client = new Client();
-		client.firstname 	  = "Mr. Facero";
-		client.lastname 	  = "Wolfstein";
-		client.dt_birth		  = System.DateTime.Now;
-		client.dt_registration= System.DateTime.Now;
-		client.email 		  = "asd@asd.com";
-		client.Projects = new List<Project>();
-		client.Projects.Add (new Project (byteArray));
-
-		gameObject.AddComponent<Factory>().SaveWeb("http://www.meulocalhost.com/arquiteto-mock-site/public/load_data.php", client);
+//		Client client = new Client();
+//		client.firstname 	  = "Mr. Facero";
+//		client.lastname 	  = "Wolfstein";
+//		client.dt_birth		  = System.DateTime.Now;
+//		client.dt_registration= System.DateTime.Now;
+//		client.email 		  = "asd@asd.com";
+//		client.Projects = new List<Project>();
+//		client.Projects.Add (new Project (byteArray));
+//
+//		gameObject.AddComponent<Factory>().SaveWeb("http://www.meulocalhost.com/arquiteto-mock-site/public/load_data.php", client);
 #endif
 
 

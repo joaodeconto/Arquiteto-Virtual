@@ -35,15 +35,17 @@ public class Category {
 	public string Name { get; private set; }
 	public string ImageReference { get; private set; }
 //	public Texture2D SelectedImage { get; private set; }
+	public int Id { get; set; }
 	public List<GameObject> Furniture { get; private set; }
 //	public void SetImages(Texture2D image, Texture2D selectedImage){
 //		Image = image;
 //		SelectedImage = selectedImage;
 //	}
-	public Category(string name, List<GameObject> furniture, string imageReference){
+	public Category(string name, List<GameObject> furniture, string imageReference, int id){
 		Name  	 		= name;
 		ImageReference	= imageReference;
 		Furniture		= furniture;
+		Id		= id;
 	}
 			
 }

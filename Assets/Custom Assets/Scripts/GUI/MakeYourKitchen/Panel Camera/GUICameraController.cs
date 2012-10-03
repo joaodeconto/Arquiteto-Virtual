@@ -91,9 +91,6 @@ public class GUICameraController : MonoBehaviour {
 		firstPersonCamera.transform.localPosition = new Vector3 (WallBuilder.ROOT.x,
 																 1.5f,
 																 WallBuilder.ROOT.z);
-
-		GameObject.Find ("First Person Controller Mobile").SetActiveRecursively (false);
-
 		#endif
 		setFirstPerson = false;
 		
@@ -574,19 +571,19 @@ public class GUICameraController : MonoBehaviour {
 		
 //		Debug.Log("csvString: " + new String());
 #if UNITY_WEBPLAYER
-		/*WWWForm form = new WWWForm ();
+		WWWForm form = new WWWForm ();
 
 		form.AddField ("CSV-FILE", 		data);
 		form.AddField ("CSV-FILE-NAME", filename);
 	
-		WWW www = new WWW (urlForm, form);
+		WWW www = new WWW (reportUploadFile, form);
 	
 		yield return www;
 	
 		if (www.error != null)
 			print (www.error);
 		else
-			Application.ExternalCall ("tryToDownload", pathExportReport + filename);*/
+			Application.ExternalCall ("tryToDownload", pathExportReport + filename);
 		yield return new WaitForSeconds(0.1f);
 #else
 		System.IO.File.WriteAllText(m_textPath, data);

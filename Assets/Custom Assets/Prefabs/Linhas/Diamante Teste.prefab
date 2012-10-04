@@ -126093,6 +126093,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fedc98e696905f4a89efeb22527fa3d, type: 1}
   m_Name: 
+  id: 0
+  name: 
   imageReference: 80026A
 --- !u!114 &11400008
 MonoBehaviour:
@@ -126426,6 +126428,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fedc98e696905f4a89efeb22527fa3d, type: 1}
   m_Name: 
+  id: 0
+  name: 
   imageReference: 88063A
 --- !u!114 &11400038
 MonoBehaviour:
@@ -126598,6 +126602,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fedc98e696905f4a89efeb22527fa3d, type: 1}
   m_Name: 
+  id: 0
+  name: 
   imageReference: 87090A
 --- !u!114 &11400054
 MonoBehaviour:
@@ -126678,6 +126684,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fedc98e696905f4a89efeb22527fa3d, type: 1}
   m_Name: 
+  id: 0
+  name: 
   imageReference: 83026
 --- !u!114 &11400062
 MonoBehaviour:
@@ -126701,7 +126709,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: 2d4c34e74e3542a4db138cc0079333d0, type: 1}
   top: 0
   tipoMovel: 0
-  Categoria: Complementos
+  Categoria: 
 --- !u!114 &11400064
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -126747,7 +126755,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: de3321171d7207a4d9e6a5905cdb4eff, type: 1}
   top: 5
   tipoMovel: 0
-  Categoria: Complementos
+  Categoria: 
 --- !u!114 &11400068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -126770,7 +126778,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: 22bc6836387b1af40b853d20c3f10e61, type: 1}
   top: 0
   tipoMovel: 0
-  Categoria: Complementos
+  Categoria: 
 --- !u!114 &11400070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -126793,7 +126801,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: 22bc6836387b1af40b853d20c3f10e61, type: 1}
   top: 0
   tipoMovel: 0
-  Categoria: Complementos
+  Categoria: 
 --- !u!114 &11400072
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -126816,7 +126824,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: c3118c19569cd9c4b8d350283538e749, type: 1}
   top: 0
   tipoMovel: 0
-  Categoria: Complementos
+  Categoria: 
 --- !u!114 &11400074
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -126827,6 +126835,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fedc98e696905f4a89efeb22527fa3d, type: 1}
   m_Name: 
+  id: 0
+  name: 
   imageReference: 86046
 --- !u!114 &11400076
 MonoBehaviour:
@@ -127581,6 +127591,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fedc98e696905f4a89efeb22527fa3d, type: 1}
   m_Name: 
+  id: 0
+  name: 
   imageReference: 82226A
 --- !u!114 &11400146
 MonoBehaviour:
@@ -127604,7 +127616,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: d001ecccf1e87d34dbe6cf84dc376057, type: 1}
   top: 0
   tipoMovel: 0
-  Categoria: "Arm\xE1rios"
+  Categoria: 
 --- !u!114 &11400148
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127627,7 +127639,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: 63c4b935a4ae55340b2f03db2248b8b4, type: 1}
   top: 0
   tipoMovel: 0
-  Categoria: "Arm\xE1rios"
+  Categoria: 
 --- !u!114 &11400150
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127650,7 +127662,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: d6c86a56362de2d47be3edd991632648, type: 1}
   top: 0
   tipoMovel: 0
-  Categoria: "Arm\xE1rios"
+  Categoria: 
 --- !u!114 &11400152
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127696,7 +127708,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: fa891fb859867fb4eac247be17d1c078, type: 1}
   top: 0
   tipoMovel: 0
-  Categoria: "Arm\xE1rios"
+  Categoria: 
 --- !u!114 &11400156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127742,7 +127754,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: bd232dc2b5273594a8ceb2f79fd27f04, type: 1}
   top: 0
   tipoMovel: 0
-  Categoria: "Arm\xE1rios"
+  Categoria: 
 --- !u!114 &11400160
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127765,7 +127777,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: dad9cf6201615544086c64e6f33877b4, type: 1}
   top: 0
   tipoMovel: 0
-  Categoria: "Arm\xE1rios"
+  Categoria: 
 --- !u!114 &11400162
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127788,7 +127800,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: ec2ffe22ae4df30498ad84010e5b1e0a, type: 1}
   top: 0
   tipoMovel: 0
-  Categoria: "Arm\xE1rios"
+  Categoria: 
 --- !u!114 &11400164
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127811,7 +127823,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: d60fb0fe62e5af746a6a341827628d77, type: 1}
   top: 0
   tipoMovel: 0
-  Categoria: "Arm\xE1rios"
+  Categoria: 
 --- !u!114 &11400166
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127834,7 +127846,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: bacf226d71e966b45a0137c71f22003a, type: 1}
   top: 0
   tipoMovel: 0
-  Categoria: "Arm\xE1rios"
+  Categoria: 
 --- !u!114 &11400168
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127857,7 +127869,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: 751ac3b11b983bd49ac2cc4b5f90a399, type: 1}
   top: 0
   tipoMovel: 0
-  Categoria: "Arm\xE1rios"
+  Categoria: 
 --- !u!114 &11400170
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127868,6 +127880,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fedc98e696905f4a89efeb22527fa3d, type: 1}
   m_Name: 
+  id: 0
+  name: 
   imageReference: 81105A
 --- !u!114 &11400172
 MonoBehaviour:
@@ -127923,7 +127937,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: de3321171d7207a4d9e6a5905cdb4eff, type: 1}
   top: 0
   tipoMovel: 0
-  Categoria: Complementos
+  Categoria: 
 --- !u!114 &11400178
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127946,7 +127960,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: de3321171d7207a4d9e6a5905cdb4eff, type: 1}
   top: 0
   tipoMovel: 0
-  Categoria: Complementos
+  Categoria: 
 --- !u!114 &11400180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127969,7 +127983,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: de3321171d7207a4d9e6a5905cdb4eff, type: 1}
   top: 0
   tipoMovel: 0
-  Categoria: Complementos
+  Categoria: 
 --- !u!114 &11400182
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127992,7 +128006,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: de3321171d7207a4d9e6a5905cdb4eff, type: 1}
   top: 0
   tipoMovel: 0
-  Categoria: Complementos
+  Categoria: 
 --- !u!114 &11400184
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -128015,7 +128029,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: de3321171d7207a4d9e6a5905cdb4eff, type: 1}
   top: 0
   tipoMovel: 0
-  Categoria: Complementos
+  Categoria: 
 --- !u!114 &11400186
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -128038,7 +128052,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: de3321171d7207a4d9e6a5905cdb4eff, type: 1}
   top: 0
   tipoMovel: 0
-  Categoria: Complementos
+  Categoria: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

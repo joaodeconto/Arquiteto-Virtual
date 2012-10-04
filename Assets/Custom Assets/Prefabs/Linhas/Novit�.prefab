@@ -86828,7 +86828,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: .0500000007
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -86864,7 +86864,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: .0500000007
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -86882,7 +86882,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: .0500000007
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -87410,7 +87410,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: .0500000007
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -87455,7 +87455,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: .0500000007
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -97434,7 +97434,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: 217c9ca9ec3461c4d87b55e9fe3f52bc, type: 1}
   top: 0
   tipoMovel: 0
-  Categoria: "Arm\xE1rios"
+  Categoria: 
 --- !u!1002 &11400001
 EditorExtensionImpl:
   serializedVersion: 6
@@ -97474,7 +97474,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fedc98e696905f4a89efeb22527fa3d, type: 1}
   m_Name: 
-  imageReference: 88175
+  id: 0
+  name: 
+  imageReference: NoviKit
 --- !u!1002 &11400005
 EditorExtensionImpl:
   serializedVersion: 6
@@ -97488,7 +97490,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fedc98e696905f4a89efeb22527fa3d, type: 1}
   m_Name: 
-  imageReference: 80143
+  id: 0
+  name: 
+  imageReference: Novi
 --- !u!1002 &11400007
 EditorExtensionImpl:
   serializedVersion: 6
@@ -97618,7 +97622,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: cd95552bb7d3dbf409b47319f0c3a089, type: 1}
   top: 5
   tipoMovel: 0
-  Categoria: "Balc\xF5es"
+  Categoria: 
 --- !u!1002 &11400017
 EditorExtensionImpl:
   serializedVersion: 6
@@ -97835,7 +97839,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: 15224292276699e45a84492d71f9c7ef, type: 1}
   top: 5
   tipoMovel: 0
-  Categoria: "Balc\xF5es"
+  Categoria: 
 --- !u!1002 &11400033
 EditorExtensionImpl:
   serializedVersion: 6
@@ -97878,7 +97882,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fedc98e696905f4a89efeb22527fa3d, type: 1}
   m_Name: 
-  imageReference: 87115
+  id: 0
+  name: 
+  imageReference: NoviPane
 --- !u!1002 &11400037
 EditorExtensionImpl:
   serializedVersion: 6
@@ -97930,7 +97936,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: e338e1ec61a338c48b48a1b104eb5988, type: 1}
   top: 0
   tipoMovel: 0
-  Categoria: "Arm\xE1rios"
+  Categoria: 
 --- !u!1002 &11400041
 EditorExtensionImpl:
   serializedVersion: 6
@@ -97996,7 +98002,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fedc98e696905f4a89efeb22527fa3d, type: 1}
   m_Name: 
-  imageReference: 82291
+  id: 0
+  name: 
+  imageReference: NoviBalc
 --- !u!1002 &11400047
 EditorExtensionImpl:
   serializedVersion: 6
@@ -98022,7 +98030,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: e5bba62f50c1bb249843e1d0018bebb7, type: 1}
   top: 0
   tipoMovel: 0
-  Categoria: "Arm\xE1rios"
+  Categoria: 
 --- !u!1002 &11400049
 EditorExtensionImpl:
   serializedVersion: 6
@@ -98088,7 +98096,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fedc98e696905f4a89efeb22527fa3d, type: 1}
   m_Name: 
-  imageReference: 81177
+  id: 0
+  name: 
+  imageReference: NoviArm
 --- !u!1002 &11400055
 EditorExtensionImpl:
   serializedVersion: 6
@@ -98194,7 +98204,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fedc98e696905f4a89efeb22527fa3d, type: 1}
   m_Name: 
-  imageReference: 90015
+  id: 0
+  name: 
+  imageReference: NoviComple
 --- !u!1002 &11400065
 EditorExtensionImpl:
   serializedVersion: 6
@@ -98234,7 +98246,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fedc98e696905f4a89efeb22527fa3d, type: 1}
   m_Name: 
-  imageReference: 80130
+  id: 0
+  name: 
+  imageReference: NoviCompact
 --- !u!1002 &11400069
 EditorExtensionImpl:
   serializedVersion: 6
@@ -98819,7 +98833,7 @@ MonoBehaviour:
   Imagem: {fileID: 2800000, guid: 5aac3634c324df348b12d274b584f0ab, type: 1}
   top: 0
   tipoMovel: 0
-  Categoria: "Arm\xE1rios"
+  Categoria: 
 --- !u!114 &11400136
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -22,7 +22,8 @@
 
 *.apk
 *.exe
-/[Bb]uild[s].*s?/
+/[Bb]uild[s]/
+/[Bb]uild/
 
 *.sln
 *.pidb

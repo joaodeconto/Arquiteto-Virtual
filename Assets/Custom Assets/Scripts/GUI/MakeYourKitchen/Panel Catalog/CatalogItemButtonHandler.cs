@@ -30,7 +30,19 @@ public class CatalogItemButtonHandler : MonoBehaviour {
 			newItem.GetComponent<UIDragCamera>().target = cameraTarget;
 			newItem.GetComponent<UIDragCamera>().rootForBounds = rootForBounds;
 			newItem.transform.parent = transform;
-			newItem.transform.localPosition = new Vector3(0, (j * (-160 * item.transform.localScale.y)), 0);
+			int position = 0;
+			string[] separatorThisItem = iM.Codigo.Split('A');
+			int codeThisItem = System.Convert.ToInt32(separatorThisItem[0]);
+			foreach (GameObject it in items)
+			{
+				if (Regex.Match(it.name,".*(sem tampo|s tampo|cook top|cooktop|com pia|esquerda).*",RegexOptions.IgnoreCase).Success) {
+					continue;
+				}
+				string[] separator = it.GetComponent<InformacoesMovel>().Codigo.Split('A');
+				int code = System.Convert.ToInt32(separator[0]);
+				if (codeThisItem > code) position++;
+			}
+			newItem.transform.localPosition = new Vector3(0, (position * (-160 * item.transform.localScale.y)), 0);
 			newItem.transform.localScale = item.transform.localScale;
 			newItem.AddComponent<ClickItem>();
 			newItem.GetComponent<ClickItem>().item = items[i];

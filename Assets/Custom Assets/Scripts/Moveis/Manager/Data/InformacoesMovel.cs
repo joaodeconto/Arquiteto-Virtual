@@ -82,7 +82,7 @@ public class InformacoesMovel : MonoBehaviour {
 		
 		foreach (Category c in Line.CurrentLine.categories) {
 			foreach (GameObject f in c.Furniture) {
-				if (f.transform == this.transform) {
+				if (f.GetComponent<InformacoesMovel> ().Codigo == this.GetComponent<InformacoesMovel> ().Codigo) {
 					Categoria = c.Name;
 				}
 			}
@@ -326,6 +326,33 @@ public class InformacoesMovel : MonoBehaviour {
 		newFurniture.AddComponent<CalculateBounds>();
 		newFurniture.GetComponent<InformacoesMovel>().Initialize();
 		newFurniture.GetComponent<InformacoesMovel>().CloneInfo(info);
+		if (tipoMovel != TipoMovel.MOVEL) {
+			newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | 
+												 RigidbodyConstraints.FreezeRotation;
+		}
+		else {
+			newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+		}
+		newFurniture.transform.parent = GameObject.Find("Moveis GO").transform;
+		Destroy(this.gameObject);
+		return newFurniture;
+	}
+	
+	public GameObject ChangeGameObject(GameObject changeObject, string tag)		{
+	
+		GameObject newFurniture = Instantiate(changeObject,this.transform.position,this.transform.rotation) as GameObject;
+							
+		newFurniture.tag = tag;
+		newFurniture.layer = LayerMask.NameToLayer("Moveis");
+		
+		foreach (Animation anim in newFurniture.GetComponentsInChildren<Animation>()) {
+			anim.Stop();
+			anim.playAutomatically = false;
+		}
+		
+		newFurniture.AddComponent<SnapBehaviour>();
+		newFurniture.AddComponent<CalculateBounds>();
+		newFurniture.GetComponent<InformacoesMovel>().Initialize();
 		if (tipoMovel != TipoMovel.MOVEL) {
 			newFurniture.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | 
 												 RigidbodyConstraints.FreezeRotation;

@@ -7443,6 +7443,7 @@ Transform:
   m_LocalScale: {x: 1.42857146, y: 1, z: 44.1706009}
   m_Children:
   - {fileID: 400024}
+  - {fileID: 402112}
   m_Father: {fileID: 400030}
 --- !u!1002 &400029
 EditorExtensionImpl:
@@ -7458,7 +7459,6 @@ Transform:
   m_LocalScale: {x: .699999988, y: 1, z: .0226394925}
   m_Children:
   - {fileID: 400028}
-  - {fileID: 402118}
   m_Father: {fileID: 402148}
 --- !u!1002 &400031
 EditorExtensionImpl:
@@ -12242,6 +12242,7 @@ Transform:
   m_LocalScale: {x: 1.42857146, y: 1, z: 44.1706009}
   m_Children:
   - {fileID: 402082}
+  - {fileID: 402118}
   m_Father: {fileID: 402128}
 --- !u!1002 &402087
 EditorExtensionImpl:
@@ -12401,11 +12402,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 102112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.22477496, y: .0190999508, z: 1.20491362}
-  m_LocalScale: {x: 1.42857146, y: 1, z: 44.1706009}
+  m_LocalPosition: {x: .00349837984, y: .51324141, z: .0310517531}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 402110}
-  m_Father: {fileID: 402128}
+  m_Father: {fileID: 400028}
 --- !u!1002 &402113
 EditorExtensionImpl:
   serializedVersion: 6
@@ -12444,11 +12445,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 102118}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.22787619, y: .0191001892, z: 1.2326827}
-  m_LocalScale: {x: 1.42857146, y: 1, z: 44.1706009}
+  m_LocalPosition: {x: -.000446438789, y: .51324141, z: .0310517568}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 402116}
-  m_Father: {fileID: 400030}
+  m_Father: {fileID: 402086}
 --- !u!1002 &402119
 EditorExtensionImpl:
   serializedVersion: 6
@@ -12509,7 +12510,6 @@ Transform:
   m_LocalScale: {x: .699999988, y: 1, z: .0226394925}
   m_Children:
   - {fileID: 402086}
-  - {fileID: 402112}
   m_Father: {fileID: 402148}
 --- !u!1002 &402129
 EditorExtensionImpl:
@@ -24537,7 +24537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fedc98e696905f4a89efeb22527fa3d, type: 1}
   m_Name: 
   id: 0
-  name: 
+  name: "Balc\xF5es"
   imageReference: Cristal_Balc
 --- !u!1002 &11400003
 EditorExtensionImpl:
@@ -24604,8 +24604,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fedc98e696905f4a89efeb22527fa3d, type: 1}
   m_Name: 
-  id: 0
-  name: 
+  id: 1
+  name: Compactas
   imageReference: Cristal_Compac
 --- !u!1002 &11400009
 EditorExtensionImpl:
@@ -24958,7 +24958,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fedc98e696905f4a89efeb22527fa3d, type: 1}
   m_Name: 
-  id: 0
+  id: 2
   name: Complementos
   imageReference: Ame_Comple
 --- !u!1002 &11400035

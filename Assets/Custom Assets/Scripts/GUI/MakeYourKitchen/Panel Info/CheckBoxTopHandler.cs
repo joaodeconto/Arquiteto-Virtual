@@ -22,7 +22,7 @@ public class CheckBoxTopHandler : MonoBehaviour {
 	void OnClick ()
 	{
 		GameObject furniture = GameObject.FindWithTag("MovelSelecionado");
-		GameObject newFurniture = furniture.GetComponent<InformacoesMovel>().CloneGameObject(item, furniture.GetComponent<InformacoesMovel>(), "MovelSelecionado");
+		GameObject newFurniture = furniture.GetComponent<InformacoesMovel>().ChangeGameObject (item, "MovelSelecionado");
 		newFurniture.GetComponent<SnapBehaviour>().Select = true;
 		newFurniture.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 		cCamera.GetComponent<RenderBounds>().Display = true;

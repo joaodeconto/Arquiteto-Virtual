@@ -70,7 +70,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.9003917, y: .333250493, z: 10.9453125}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 400002}
   - {fileID: 400004}
@@ -87,7 +86,6 @@ Transform:
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106829}
   m_LocalPosition: {x: 0, y: 2.45000005, z: 0}
   m_LocalScale: {x: 1.65285397, y: 1.65285397, z: 1.65285397}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 400000}
 --- !u!1002 &400003
@@ -102,7 +100,6 @@ Transform:
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
   m_LocalPosition: {x: 0, y: 2.45000005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 400000}
 --- !u!1002 &400005
@@ -183,8 +180,8 @@ Light:
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: .200000003
-  m_Range: 7.15260839
-  m_SpotAngle: 121
+  m_Range: 8.86999989
+  m_SpotAngle: 138.199997
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -243,6 +240,10 @@ MonoBehaviour:
   NomeI: 
   NomeE: 
   Codigo: 
+  PesoLiquido: 
+  PesoBruto: 
+  Volume: 
+  Cubagem: 
   Imagem: {fileID: 2800000, guid: 069d084c13274d648869081b650452cb, type: 1}
   top: 0
   tipoMovel: 0

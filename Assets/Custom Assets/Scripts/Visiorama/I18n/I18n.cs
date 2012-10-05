@@ -11,7 +11,7 @@ public class I18n {
 	#region initialize translations
 	static public void Initialize(){
 		selectedLanguage  = 0;
-		availableLanguages = new string[3]{"PortuguÍs","English","EspaÒol"};
+		availableLanguages = new string[3]{"Portugu√™s","English","Espa√±ol"};
 		hashWords = new Hashtable[3];
 		hashWords[0] = new Hashtable();
 		hashWords[1] = new Hashtable();
@@ -34,7 +34,7 @@ public class I18n {
 		if (checkPhrasesNumberArray[0] != checkPhrasesNumberArray[1] ||
 			checkPhrasesNumberArray[0] != checkPhrasesNumberArray[2])
 		{
-			Debug.LogError ("Alguma lÌngua no I18n est· com mais frases que outras. Por favor verifique o arquivo.");
+			Debug.LogError ("Alguma l√≠ngua no I18n est√° com mais frases que outras. Por favor verifique o arquivo.");
 			Debug.Break ();
 		}
 		#endregion
@@ -43,21 +43,18 @@ public class I18n {
 	static private void InitializePortuguese ()
 	{
 		//Escolha cozinha
-		hashWords [0] ["Escolha sua linha favorita"] = "Escolha sua linha favorita";
+		hashWords [0] ["Escolha sua cozinha favorita"] = "Escolha sua cozinha favorita";
 		
 		//Intro
 		hashWords [0] ["Iniciar"] 	  = "Iniciar";
+		hashWords [0] ["Medidas da sua cozinha"] 	  = "Medidas da sua cozinha";
 		
 		//Montar paredes
 		hashWords [0] ["Medidas"] 	  = "Medidas";
 		hashWords [0] ["Profundidade"]= "Profundidade";
 		hashWords [0] ["Comprimento"] = "Comprimento";
 		
-		hashWords [0] ["AÁıes"] 	  	  = "AÁıes";
-		hashWords [0] ["Preencher ¡rea"]  = "Preencher ¡rea";
-		hashWords [0] ["Colocar Paredes"] = "Colocar Paredes";
-		hashWords [0] ["Reiniciar"]		  = "Reiniciar";
-		
+				
 		//Color Picker
 		hashWords [0] ["Cor"] = "Cor";
 		hashWords [0] ["Teto"] = "Teto";
@@ -65,42 +62,50 @@ public class I18n {
 		hashWords [0] ["Descolorir"] = "Descolorir";
 		
 		//Monte sua cozinha
-		hashWords [0] ["MÛdulos"] 	 = "MÛdulos";
-		hashWords [0] ["IluminaÁ„o"] = "IluminaÁ„o";
+		hashWords [0] ["M√≥dulos"] 	 = "M√≥dulos";
+		hashWords [0] ["Ilumina√ß√£o"] = "Ilumina√ß√£o";
 		hashWords [0] ["Extras"] 	 = "Extras";
+		hashWords [0] ["Op√ß√µes"] = "Op√ß√µes";
+		hashWords [0] ["Piso"] = "Piso";
 		
-		hashWords [0] ["CÛdigo"] = "CÛdigo";
+		hashWords [0] ["Lustre"] = "Lustre";
+		hashWords [0] ["Spot"] = "Spot";
+		hashWords [0] ["Cores"] = "Cores";
+		hashWords [0] ["Portas"] = "Portas";
+		hashWords [0] ["Tampos"] = "Tampos";
+		hashWords [0] ["Pressione ESPA√áO para voltar"] = "Pressione ESPA√áO para voltar";
+		
+		hashWords [0] ["C√≥digo"] = "C√≥digo";
 		hashWords [0] ["LXPXA"] = "LXPXA";
-		hashWords [0] ["DescriÁ„o"] = "DescriÁ„o";
+		hashWords [0] ["Descri√ß√£o"] = "Descri√ß√£o";
 		hashWords [0] ["Linha"] = "Linha";
 		hashWords [0] ["Categoria"] = "Categoria";
 		
 		//Montar paredes - Tooltips
-		hashWords [0] ["tip-profundidade"]	= "Selecionar a profundidade (em metros) que o ch„o da sua cozinha ter·.";
-		hashWords [0] ["tip-largura"]		= "Selecionar a largura (em metros) que o ch„o da sua cozinha ter·.";
-		hashWords [0] ["tip-preencher-area"]= "Preencher a ·rea escolhida acima com ch„o.";
-		hashWords [0] ["tip-colocar-paredes"] = "Colocar paredes ao redor do ch„o criado.";
-		hashWords [0] ["tip-reiniciar"] 	  = "Retirar o ch„o anteriormente colocado.";
+		hashWords [0] ["tip-profundidade"]	= "Selecionar a profundidade (em metros)";
+		hashWords [0] ["tip-largura"]		= "Selecionar a largura (em metros)";
+		hashWords [0] ["tip-colocar-paredes"] = "Ap√≥s colocar as medidas pressione iniciar.";
+		
 		
 		//Montar cozinha - Tooltips
-		hashWords [0] ["tip-modulos"] 	 = "Selecionar os mÛdulos para a sua cozinha.";
-		hashWords [0] ["tip-iluminaÁ„o"] = "Ajustar a iluminaÁ„o da cena.";
-		hashWords [0] ["tip-extras"]	 = "Selecionar acessÛrios extras para sua cozinha.";
+		hashWords [0] ["tip-modulos"] 	 = "Selecionar os m√≥dulos para a sua cozinha.";
+		hashWords [0] ["tip-ilumina√ß√£o"] = "Ajustar a ilumina√ß√£o da cena.";
+		hashWords [0] ["tip-extras"]	 = "Selecionar acess√≥rios extras para sua cozinha.";
 		hashWords [0] ["tip-play"] 		 = "Habilitar modo primeira-pessoa.";
 		hashWords [0] ["tip-screenshot"] = "Tirar uma foto da cozinha.";
-		hashWords [0] ["tip-screenshot"] = "Fazer o download do relatÛrio dos mÛdulos da sua cozinha.";
-		hashWords [0] ["tip-paredes"] 	 = "Ativar/Desativar paredes sempre visÌveis.";
+		hashWords [0] ["tip-screenshot"] = "Fazer o download do relat√≥rio dos m√≥dulos da sua cozinha.";
+		hashWords [0] ["tip-paredes"] 	 = "Ativar/Desativar paredes sempre vis√≠veis.";
 		
-		hashWords [0] ["tip-mover-vertical"]   = "Mover c‚mera na direÁ„o vertical.";
-		hashWords [0] ["tip-mover-horizontal"] = "Mover c‚mera na direÁ„o horizontal.";
-		hashWords [0] ["tip-rotacionar-horizontal"] = "Rotacionar c‚mera na direÁ„o horizontal.";
-		hashWords [0] ["tip-rotacionar-vertical"]   = "Rotacionar c‚mera na direÁ„o vertical.";
-		hashWords [0] ["tip-zoom-mais"]  = "Mover c‚mera para frente.";
-		hashWords [0] ["tip-zoom-menos"] = "Mover c‚mera para tr·s.";
+		hashWords [0] ["tip-mover-vertical"]   = "Mover c√¢mera na dire√ß√£o vertical.";
+		hashWords [0] ["tip-mover-horizontal"] = "Mover c√¢mera na dire√ß√£o horizontal.";
+		hashWords [0] ["tip-rotacionar-horizontal"] = "Rotacionar c√¢mera na dire√ß√£o horizontal.";
+		hashWords [0] ["tip-rotacionar-vertical"]   = "Rotacionar c√¢mera na dire√ß√£o vertical.";
+		hashWords [0] ["tip-zoom-mais"]  = "Mover c√¢mera para frente.";
+		hashWords [0] ["tip-zoom-menos"] = "Mover c√¢mera para tr√°s.";
 		
-		hashWords [0] ["tip-modulo-rotacao"] = "Rotacionar mÛdulo selecionado.";
-		hashWords [0] ["tip-modulo-focar"] 	 = "Focar c‚mera no mÛdulo selecionado.";
-		hashWords [0] ["tip-modulo-remover"] = "Remover mÛdulo selecionado da cena.";
+		hashWords [0] ["tip-modulo-rotacao"] = "Rotacionar m√≥dulo selecionado.";
+		hashWords [0] ["tip-modulo-focar"] 	 = "Focar c√¢mera no m√≥dulo selecionado.";
+		hashWords [0] ["tip-modulo-remover"] = "Remover m√≥dulo selecionado da cena.";
 
 		//Cores
 		hashWords [0] ["black"] = "Preto";
@@ -117,28 +122,25 @@ public class I18n {
 
 		//Texturas de tampos
 		hashWords [0] ["labrador"] 		= "Labrador";
-		hashWords [0] ["marmore cinza"] = "M·rmore Cinza";
-		hashWords [0] ["marmore preto"] = "M·rmore Preto";
+		hashWords [0] ["marmore cinza"] = "M√°rmore Cinza";
+		hashWords [0] ["marmore preto"] = "M√°rmore Preto";
 		hashWords [0] ["onix bianco"]	= "Onix Bianco";
 
 	}
 	static private void InitializeEnglish(){
 		//Escolha cozinha
-		hashWords [1] ["Escolha sua linha favorita"] = "Choose your favorite kitchen";
+		hashWords [1] ["Escolha sua cozinha favorita"] = "Choose your favorite kitchen";
 		
 		//Intro
 		hashWords [1] ["Iniciar"] 	  = "Start";
+		hashWords [1] ["Medidas da sua cozinha"] 	  = "Kitchen Measures";
 		
 		//Montar paredes
 		hashWords [1] ["Medidas"] = "Measures";
 		hashWords [1] ["Profundidade"]= "Depth";
 		hashWords [1] ["Comprimento"] = "Width";
 		
-		hashWords [1] ["AÁıes"] 		  = "Actions";
-		hashWords [1] ["Preencher ¡rea"]  = "Fill area";
-		hashWords [1] ["Colocar Paredes"] = "Build walls";
-		hashWords [1] ["Reiniciar"] 	  = "Restart";
-		
+				
 		//Color Picker
 		hashWords [1] ["Cor"] = "Color";
 		hashWords [1] ["Teto"] = "Roof";
@@ -146,26 +148,33 @@ public class I18n {
 		hashWords [1] ["Descolorir"] = "Discolor";
 		
 		//Monte sua cozinha
-		hashWords [1] ["MÛdulos"] = "Modules";
-		hashWords [1] ["IluminaÁ„o"] = "Illumination";
+		hashWords [1] ["M√≥dulos"] = "Modules";
+		hashWords [1] ["Ilumina√ß√£o"] = "Illumination";
 		hashWords [1] ["Extras"] = "Extras";
+		hashWords [1] ["Op√ß√µes"] = "Options";
+		hashWords [1] ["Piso"] = "Floor";
 		
-		hashWords [1] ["CÛdigo"] = "Reference";
-		hashWords [1] ["LXPXA"] = "WXDXH";
-		hashWords [1] ["DescriÁ„o"] = "Description";
+		hashWords [1] ["Lustre"] = "Chandelier";
+		hashWords [1] ["Spot"] = "Spot";
+		hashWords [1] ["Cores"] = "Colors";
+		hashWords [1] ["Portas"] = "Doors";
+		hashWords [1] ["Tampos"] = "Tos";
+		hashWords [1] ["Pressione ESPA√áO para voltar"] = "Press SPACE to return";
+		
+		hashWords [1] ["C√≥digo"] = "Reference";
+		hashWords [1] ["LXPXA"] = " WXDXH";
+		hashWords [1] ["Descri√ß√£o"] = "Description";
 		hashWords [1] ["Linha"] = "Line";
 		hashWords [1] ["Categoria"] = "Category";
 		
 		//Montar paredes - Tooltips
 		hashWords [1] ["tip-profundidade"] = "Choose the depth (in meters) that the floor of your kitchen will have.";
 		hashWords [1] ["tip-largura"] 	   = "Choose the width (in meters) that the floor of your kitchen will have.";
-		hashWords [1] ["tip-preencher-area"]  = "Fill the selected area above with floor.";
 		hashWords [1] ["tip-colocar-paredes"] = "Build walls around the floor.";
-		hashWords [1] ["tip-reiniciar"] 	  = "Removing the previously placed floor.";
-		
+				
 		//Montar cozinha - Tooltips
 		hashWords [1] ["tip-modulos"] 	 = "Choose the modules for your kitchen.";
-		hashWords [1] ["tip-iluminaÁ„o"] = "Set the lighting of the scene.";
+		hashWords [1] ["tip-ilumina√ß√£o"] = "Set the lighting of the scene.";
 		hashWords [1] ["tip-extras"] 	 = "Select additional accessories for your kitchen.";
 		hashWords [1] ["tip-play"] 		 = "Enable first-person mode.";
 		hashWords [1] ["tip-screenshot"] = "Take a picture of the kitchen.";
@@ -204,64 +213,68 @@ public class I18n {
 	static private void InitializeSpanish ()
 	{
 		//Escolha cozinha
-		hashWords [2] ["Escolha sua linha favorita"] = "Choose your favorite kitchen";
+		hashWords [2] ["Escolha sua cozinha favorita"] = "Escoja su cocina favorita";
 		
 		//Intro
 		hashWords [2] ["Iniciar"] 	  = "Iniciar";
+		hashWords [2] ["Medidas da sua cozinha"] 	  = "Medidas de su cocina";
 		
 		//Montar paredes
-		hashWords [2] ["Medidas"] = "Measures";
-		hashWords [2] ["Largura"] = "Width";
-		hashWords [2] ["Comprimento"] = "Depth";
+		hashWords [2] ["Medidas"] = "Medidas";
+		hashWords [2] ["Comprimento"] = "Anchura";
+		hashWords [2] ["Profundidade"] = "Longitud";
 		
-		hashWords [2] ["AÁıes"] = "Actions";
-		hashWords [2] ["Preencher ¡rea"]  = "Fill area";
-		hashWords [2] ["Colocar Paredes"] = "Build walls";
-		hashWords [2] ["Reiniciar"] 	  = "Restart";
-		
+				
 		//Color Picker
-		hashWords [2] ["Cor"] = "Color";
-		hashWords [2] ["Teto"] = "Roof";
-		hashWords [2] ["Parede"] = "Wall";
-		hashWords [2] ["Descolorir"] = "Discolor";
+		hashWords [2] ["Cor"] = "Cor";
+		hashWords [2] ["Teto"] = "Techo";
+		hashWords [2] ["Parede"] = "Pared";
+		hashWords [2] ["Descolorir"] = "Descolorar";
 		
 		//Monte sua cozinha
-		hashWords [2] ["MÛdulos"] = "Modules";
-		hashWords [2] ["IluminaÁ„o"] = "Illumination";
+		hashWords [2] ["M√≥dulos"] = "M√≥dulos";
+		hashWords [2] ["Ilumina√ß√£o"] = "Iluminaci√≥n";
 		hashWords [2] ["Extras"] = "Extras";
+		hashWords [2] ["Op√ß√µes"] = "Opciones";
+		hashWords [2] ["Piso"] = "Piso";
 		
-		hashWords [2] ["CÛdigo"] = "Reference";
-		hashWords [2] ["LXPXA"] = "WXDXH";
-		hashWords [2] ["DescriÁ„o"] = "Description";
-		hashWords [2] ["Linha"] = "Line";
-		hashWords [2] ["Categoria"] = "Category";
+		hashWords [2] ["Lustre"] = "L√°mpara";
+		hashWords [2] ["Spot"] = "Spot";
+		hashWords [2] ["Cores"] = "Colores";
+		hashWords [2] ["Portas"] = "Puertas";
+		hashWords [2] ["Tampos"] = "Tapas";
+		hashWords [2] ["Pressione ESPA√áO para voltar"] = "Oprima SPACE para volver";
+		
+		hashWords [2] ["C√≥digo"] = "C√≥digo";
+		hashWords [2] ["LXPXA"] = "AXLXA";
+		hashWords [2] ["Descri√ß√£o"] = "Descripci√≥n";
+		hashWords [2] ["Linha"] = "L√≠nea";
+		hashWords [2] ["Categoria"] = "Categor√≠a";
 		
 		//Montar paredes - Tooltips
-		hashWords [2] ["tip-profundidade"] = "Choose the depth (in meters) that the floor of your kitchen will have.";
-		hashWords [2] ["tip-largura"] 	   = "Choose the width (in meters) that the floor of your kitchen will have.";
-		hashWords [2] ["tip-preencher-area"]  = "Fill the selected area above with floor.";
-		hashWords [2] ["tip-colocar-paredes"] = "Build walls around the floor.";
-		hashWords [2] ["tip-reiniciar"] 	  = "Removing the previously placed floor.";
-		
+		hashWords [2] ["tip-profundidade"] = "Seleccione la profundidad (en metros)";
+		hashWords [2] ["tip-largura"] 	   = "Seleccione la largura (en metros)";
+		hashWords [2] ["tip-colocar-paredes"] = "Despu√©s de poner las medidas pulse Iniciar.";
+				
 		//Montar cozinha - Tooltips
-		hashWords [2] ["tip-modulos"] 	 = "Choose the modules for your kitchen.";
-		hashWords [2] ["tip-iluminaÁ„o"] = "Set the lighting of the scene.";
-		hashWords [2] ["tip-extras"] 	 = "Select additional accessories for your kitchen.";
-		hashWords [2] ["tip-play"] 		 = "Enable first-person mode.";
-		hashWords [2] ["tip-screenshot"] = "Take a picture of the kitchen.";
-		hashWords [2] ["tip-screenshot"] = "Download the report of the modules in your kitchen.";
-		hashWords [2] ["tip-paredes"] = "Enable/Disable always visible walls.";
+		hashWords [2] ["tip-modulos"] 	 = "Elija los m√≥dulos para su cocina.";
+		hashWords [2] ["tip-ilumina√ß√£o"] = "Ajuste la iluminaci√≥n de la escena.";
+		hashWords [2] ["tip-extras"] 	 = "Seleccione los accesorios adicionales para su cocina.";
+		hashWords [2] ["tip-play"] 		 = "Habilitar modo de primera persona.";
+		hashWords [2] ["tip-screenshot"] = "Tome una fotograf√≠a de la cocina.";
+		hashWords [2] ["tip-screenshot"] = "Descargue el informe de los m√≥dulos en su cocina.";
+		hashWords [2] ["tip-paredes"]    = "Activar / Desactivar paredes siempre visibles.";
 		
-		hashWords [2] ["tip-mover-vertical"]   = "Move camera on vertical direction.";
-		hashWords [2] ["tip-mover-horizontal"] = "Move camera on horizontal direction.";
-		hashWords [2] ["tip-rotacionar-horizontal"] = "Rotate camera on horizontal direction.";
-		hashWords [2] ["tip-rotacionar-vertical"]	= "Rotate camera on vertical direction.";
-		hashWords [2] ["tip-zoom-mais"]  = "Move camera forward.";
-		hashWords [2] ["tip-zoom-menos"] = "Move camera backwards.";
+		hashWords [2] ["tip-mover-vertical"]   = "Mover la c√°mara en direcci√≥n vertical.";
+		hashWords [2] ["tip-mover-horizontal"] = "Mover la c√°mara en direcci√≥n horizontal.";
+		hashWords [2] ["tip-rotacionar-horizontal"] = "Rotar la c√°mara en direcci√≥n horizontal.";
+		hashWords [2] ["tip-rotacionar-vertical"]	= "Rotar la c√°mara en direcci√≥n vertical.";
+		hashWords [2] ["tip-zoom-mais"]  = "Mover c√°mara hacia delante.";
+		hashWords [2] ["tip-zoom-menos"] = "Mueve la c√°mara hacia atr√°s.";
 		
-		hashWords [2] ["tip-modulo-rotacao"] = "Rotate selected module.";
-		hashWords [2] ["tip-modulo-focar"] 	 = "Focus camera on selected module.";
-		hashWords [2] ["tip-modulo-remover"] = "Delete selected module.";
+		hashWords [2] ["tip-modulo-rotacao"] = "Gira m√≥dulo seleccionado.";
+		hashWords [2] ["tip-modulo-focar"] 	 = "Enfoque en el m√≥dulo seleccionado.";
+		hashWords [2] ["tip-modulo-remover"] = "Eliminar m√≥dulo seleccionado.";
 
 		hashWords [2] ["black"]	= "Negro";
 		hashWords [2] ["gray"] 	= "Titanium";
@@ -271,14 +284,14 @@ public class I18n {
 
 		//Tipos de tops
 		hashWords [2] ["cooktop"] = "Cooktop";
-		hashWords [2] ["com pia"] = "Sink";
-		hashWords [2] ["com tampo"] = "With top";
-		hashWords [2] ["sem tampo"] = "Without top";
+		hashWords [2] ["com pia"] = "Lavabo";
+		hashWords [2] ["com tampo"] = "Tapa";
+		hashWords [2] ["sem tampo"] = "sin Tapa";
 
 		//Texturas de tampos
 		hashWords [2] ["labrador"] 		= "Labrador";
-		hashWords [2] ["marmore cinza"] = "M·rmol Gris";
-		hashWords [2] ["marmore preto"] = "M·rmol Negro";
+		hashWords [2] ["marmore cinza"] = "M√°rmol Gris";
+		hashWords [2] ["marmore preto"] = "M√°rmol Negro";
 		hashWords [2] ["onix bianco"] 	= "Onix Bianco";
 	}
 	#endregion

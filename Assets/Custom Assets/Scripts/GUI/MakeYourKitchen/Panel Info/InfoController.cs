@@ -221,6 +221,7 @@ public class InfoController : MonoBehaviour {
 	}
 	
 	public void UpdateInfo(InformacoesMovel furnitureData) {
+		Debug.Log("UPDATE INFO furnitureData: " + furnitureData.Nome);
 		SetInfo(furnitureData);
 		item = furnitureData.gameObject;
 		UpdatePainelMobile ();

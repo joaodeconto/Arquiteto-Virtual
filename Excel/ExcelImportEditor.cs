@@ -295,22 +295,24 @@ public class ExcelImportEditor : EditorWindow {
 							int j = 0; 
 							if (component.GetType() == monoScript.GetClass()) {
 								
-								if ((component.GetType().GetField(fields[referenceField]).GetValue(component).ToString() != 
-									data.Rows[i][data.Columns[referenceColumn]].ToString()))
-									continue;
-								
-								foreach (FieldInfo f in component.GetType().GetFields())
+								if ((component.GetType().GetField(fields[referenceField]).GetValue(component).ToString().Equals( 
+										data.Rows[i][data.Columns[referenceColumn]].ToString()))
+									)
 								{
-									if (f.FieldType == string.Empty.GetType())
+									
+									foreach (FieldInfo f in component.GetType().GetFields())
 									{
-										if (f.IsPublic) {
-											if (boolFieldsMonoScript[j])
-												f.SetValue(component, data.Rows[i][data.Columns[fieldsMonoScript[j]]].ToString());
-											j++;
+										if (f.FieldType == string.Empty.GetType())
+										{
+											if (f.IsPublic) {
+												if (boolFieldsMonoScript[j])
+													f.SetValue(component, data.Rows[i][data.Columns[fieldsMonoScript[j]]].ToString());
+												j++;
+											}
 										}
 									}
+									break;
 								}
-								break;
 							}
 						}
 						k++;
@@ -318,6 +320,11 @@ public class ExcelImportEditor : EditorWindow {
 				}
 			}
 			EditorUtility.ClearProgressBar();
+		}
+		
+		for (int i = 0; i < data.Rows.Count; i++) {
+			Debug.Log ("COLUNA 1: " + data.Rows[i][data.Columns[0]].ToString());
+			Debug.Log ("COLUNA 2: " + data.Rows[i][data.Columns[1]].ToString());
 		}
 	}
 	

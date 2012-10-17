@@ -37,3 +37,7 @@
 Thumbs.db
 Thumbs.db.meta
 
+tags
+tags.meta
+*.sw[a-z]
+

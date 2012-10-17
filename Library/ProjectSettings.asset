@@ -11,7 +11,7 @@ PlayerSettings:
   targetResolution: 0
   accelerometerFrequency: 60
   companyName: Visiorama
-  productName: 'Arquiteto Virtual '
+  productName: Arquiteto Virtual
   AndroidLicensePublicKey: 
   defaultScreenWidth: 1280
   defaultScreenHeight: 720
@@ -58,6 +58,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 0
+  debugUnloadMode: 0
   iPhoneBundleIdentifier: com.Visiorama.ArquitetoVirtual
   iPhoneBundleVersion: 1.1.2
   AndroidBundleVersionCode: 3
@@ -80,6 +81,7 @@ PlayerSettings:
   uIStatusBarStyle: 0
   iPhoneSplashScreen: {fileID: 2800000, guid: 1078c148f9f3dbf41a06054c9df0fb95, type: 1}
   iPhoneHighResSplashScreen: {fileID: 0}
+  iPhoneTallHighResSplashScreen: {fileID: 0}
   iPadPortraitSplashScreen: {fileID: 0}
   iPadHighResPortraitSplashScreen: {fileID: 0}
   iPadLandscapeSplashScreen: {fileID: 0}
@@ -87,8 +89,8 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidTargetGraphics: 1
   AndroidSplashScreenScale: 0
-  AndroidKeystoreName: C:/Users/JV/Documents/Repositorios/Arquiteto-Virtual/Key/visiorama.keystore
-  AndroidKeyaliasName: visiorama
+  AndroidKeystoreName: 
+  AndroidKeyaliasName: 
   resolutionDialogBanner: {fileID: 2800000, guid: c5fb1f44ba1bb0c40b151bdb5003bc37,
     type: 1}
   m_BuildTargetIcons:
@@ -142,7 +144,10 @@ PlayerSettings:
   ps3TrophyCommId: 
   ps3TrophyPackagePath: 
   ps3ReservedMemorySizeMB: 2
-  ps3ReservedHDDSizeMB: 128
+  ps3BootCheckMaxSaveGameSizeKB: 128
+  ps3TrophyCommSig: 
+  ps3SaveGameSlots: 1
+  ps3TrialMode: 0
   flashStrippingLevel: 2
   firstStreamedLevelWithResources: 0
   unityRebuildLibraryVersion: 9

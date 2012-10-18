@@ -321,11 +321,6 @@ public class ExcelImportEditor : EditorWindow {
 			}
 			EditorUtility.ClearProgressBar();
 		}
-		
-		for (int i = 0; i < data.Rows.Count; i++) {
-			Debug.Log ("COLUNA 1: " + data.Rows[i][data.Columns[0]].ToString());
-			Debug.Log ("COLUNA 2: " + data.Rows[i][data.Columns[1]].ToString());
-		}
 	}
 	
 	void ClearLog () {

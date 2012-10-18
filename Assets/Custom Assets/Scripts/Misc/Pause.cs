@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-public class Pause : MonoBehaviour {
+public class Pause : MonoBehaviour
+{
 	public Texture2D textureMask;
 
 	private GameObject mainCamera;
@@ -11,6 +12,12 @@ public class Pause : MonoBehaviour {
 	private Texture2D pauseTexture;
 	private bool IsPaused;
 	private bool AlreadyTakePhoto;
+		
+	public void Initialize (Texture2D textureMask)
+	{
+		this.textureMask = textureMask;
+		Initialize ();
+	}
 	
 	public void Initialize ()
 	{
@@ -19,7 +26,7 @@ public class Pause : MonoBehaviour {
 		mainCamera = GameObject.FindWithTag("MainCamera");
 	}
 	
-	public void PauseCamera ()
+	public void TogglePause ()
 	{
 		if (IsPaused)
 		{

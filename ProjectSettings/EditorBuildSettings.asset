@@ -13,3 +13,5 @@ EditorBuildSettings:
     path: Assets/_Scenes/Desktop/MakeYourKitchen.unity
   - enabled: 0
     path: Assets/_Scenes/Android/MakeAndroid.unity
+  - enabled: 0
+    path: Assets/_Scenes/teste/test.unity

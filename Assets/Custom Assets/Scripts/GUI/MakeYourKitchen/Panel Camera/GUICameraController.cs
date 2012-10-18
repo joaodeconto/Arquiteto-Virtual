@@ -70,12 +70,15 @@ public class GUICameraController : MonoBehaviour {
 	protected Texture2D m_directoryImage,
                         m_fileImage;
 	#endregion
+	void Awake ()
+	{
+		mainCamera		   = GameObject.FindWithTag ("MainCamera").camera;
+	}
 
 	void Start ()
 	{
 		pause.Initialize();
 
-		mainCamera 		  = GameObject.FindWithTag ("MainCamera").camera;
 		//disable other cam
 		#if (UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR
 		GameObject.Find ("First Person Controller").SetActiveRecursively (false);
@@ -205,6 +208,7 @@ public class GUICameraController : MonoBehaviour {
 
 	public void Rotate (float x, float y)
 	{
+		Debug.Log ("Chegou");
 		float horizontalAngle = Angle * x * Time.deltaTime;
 		float verticalAngle   = Angle * y * Time.deltaTime;
 
@@ -406,7 +410,6 @@ public class GUICameraController : MonoBehaviour {
 	{
 		SaveLastGUIState ();
 
-		yield return new WaitForSeconds(0.2f);
 		yield return new WaitForEndOfFrame();
 
 		// Create a texture the size of the screen, RGB24 format
@@ -552,7 +555,6 @@ public class GUICameraController : MonoBehaviour {
 			print (www.error);
 		else
 			Application.ExternalCall ("tryToDownload", pathExportReport + filename);
-		yield return new WaitForSeconds(0.1f);
 #else
 		//System.IO.File.WriteAllText(m_textPath, data);
 
@@ -587,7 +589,6 @@ public class GUICameraController : MonoBehaviour {
 		yield return new WaitForEndOfFrame();
 
 #endif
-
 		LoadLastGUIState ();
 	}
 
@@ -708,6 +709,8 @@ public class GUICameraController : MonoBehaviour {
 		foreach (Transform child in allchids) {
 			child.gameObject.SetActiveRecursively (false);
 		}
+
+		Time.timeScale = 0.0f;
 	}
 
 	private void LoadLastGUIState ()
@@ -729,5 +732,6 @@ public class GUICameraController : MonoBehaviour {
 		}
 		interfaceGUI.uiRootFPS.SetActiveRecursively(false);
 
+		Time.timeScale = 0.0f;
 	}
 }

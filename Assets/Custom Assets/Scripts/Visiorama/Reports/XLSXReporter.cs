@@ -40,10 +40,11 @@ public class XLSXReporter : MonoBehaviour
 		sharedStringsFilepath = Application.persistentDataPath + "/temp/xl/sharedStrings.xml";
 		sheetFilepath         = Application.persistentDataPath + "/temp/xl/worksheets/sheet1.xml";
 
-		CreateCommonXLSX (new string[2,2]{	{"uma cozinha bunitona","cozinha massa mesmo"},
-											{"uhulll","lol"}},
-						  Application.persistentDataPath + "/temp-file.xlsx");
-	}
+		//teste
+		//CreateCommonXLSX (new string[2,2]{	{"uma cozinha bunitona","cozinha massa mesmo"},
+											//{"uhulll","lol"}},
+						  //Application.persistentDataPath + "/temp-file.xlsx");
+}
 
 	public bool CreateCommonXLSX (string[,] datatable, string filePath)
 	{

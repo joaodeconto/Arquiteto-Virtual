@@ -18,7 +18,8 @@ public class CameraButtonHandler : MonoBehaviour {
 		CameraReport,
 		CameraHideShowWalls,
 		CameraZoomMinus,
-		CameraZoomPlus,	
+		CameraZoomPlus,
+		CameraPause
 	}
 	
 	public CameraButtonHandlerEnum cameraButtonHandler;
@@ -109,6 +110,9 @@ public class CameraButtonHandler : MonoBehaviour {
 				break;
 			case CameraButtonHandlerEnum.CameraHideShowWalls:
 				cameraController.ShowHideWalls();
+				break;
+			case CameraButtonHandlerEnum.CameraPause:
+				GameController.GetInstance().GetInterfaceManager().SetInterface("Pause");
 				break;
 			#endregion
 		/*

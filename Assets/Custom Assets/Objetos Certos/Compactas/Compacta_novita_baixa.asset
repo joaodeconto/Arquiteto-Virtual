@@ -5,7 +5,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: "Compacta_novit\xE1_baixa"
+  m_Name: Compacta_novita_baixa
   serializedVersion: 6
   m_SubMeshes:
   - firstByte: 0

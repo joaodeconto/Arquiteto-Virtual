@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: "Pia Novit\xE1"
+  m_Name: Pia Novita
   m_Shader: {fileID: 4800000, guid: 9862276b871ea4448adc97fc88d49fb9, type: 1}
   m_SavedProperties:
     serializedVersion: 2

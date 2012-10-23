@@ -199,6 +199,7 @@ public class Configuration : MonoBehaviour
 
 	public void LoadState(string path, bool isWeb)
 	{
+	#if !UNITY_WEBPLAYER
 //		ConfigurationPreset cfgPreset;
 //		Stream stream = File.Open (Application.persistentDataPath + '/' + path, FileMode.Open);
 //		BinaryFormatter bFormatter = new BinaryFormatter ();
@@ -232,6 +233,7 @@ public class Configuration : MonoBehaviour
 			xmlDoc.LoadXml(enc.GetString (FileUtils.LoadFile(path,true)));
 			LoadState(xmlDoc);
 		}*/
+#endif
 	}
 
 	public void RunPreset(int index)

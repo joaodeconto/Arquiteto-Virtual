@@ -4,13 +4,16 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 
+using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
+#if !UNITY_WEBPLAYER
 using ICSharpCode.SharpZipLib;
 using ICSharpCode.SharpZipLib.Zip;
 using ICSharpCode.SharpZipLib.Zip.Compression;
 using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
+#endif
 
 public class XLSXReporter : MonoBehaviour
 {
@@ -34,40 +37,88 @@ public class XLSXReporter : MonoBehaviour
 	private string sharedStringsFilepath;
 	private string sheetFilepath;
 
-	void Start ()
+	private string sharedStrings;
+	private string sheet1;
+
+	public XLSXReporter Init ()
 	{
 		baseXlsxUnzippedDir   = Application.persistentDataPath + "/temp";
 		sharedStringsFilepath = Application.persistentDataPath + "/temp/xl/sharedStrings.xml";
 		sheetFilepath         = Application.persistentDataPath + "/temp/xl/worksheets/sheet1.xml";
 
-		//teste
-		//CreateCommonXLSX (new string[2,2]{	{"uma cozinha bunitona","cozinha massa mesmo"},
-											//{"uhulll","lol"}},
-						  //Application.persistentDataPath + "/temp-file.xlsx");
-}
+		sharedStrings = "";
+        sheet1        = "";
 
-	public bool CreateCommonXLSX (string[,] datatable, string filePath)
+		//teste
+		//BuildXLSX (new string[2,2]{	{"uma cozinha bunitona","cozinha massa mesmo"},
+											//{"uhulll","lol"}});
+		//SaveXLSXToFile(Application.persistentDataPath + "/temp-file.xlsx");
+
+		UnzipBaseXlsxFile ();
+
+		return this;
+	}
+
+	public string GetSharedStrings () { return sharedStrings; }
+	public string GetSheet1 ()        { return sheet1; }
+
+#if UNITY_WEBPLAYER
+	public bool SaveXLSXToFile (string filePath) { return false; }
+#else
+	public bool SaveXLSXToFile (string filePath)
 	{
+		//unzip file
+		UnzipBaseXlsxFile ();
+
+		if (File.Exists (sharedStringsFilepath))
+			File.Delete (sharedStringsFilepath);
+
+		if (File.Exists (sheetFilepath))
+			File.Delete (sheetFilepath);
+
+		System.IO.File.WriteAllText(sharedStringsFilepath, GetSharedStrings());
+		System.IO.File.WriteAllText(sheetFilepath, GetSheet1());
+
+		//After decompress and modify file
+		ZipWrapper.CompressDirectoryToFile (baseXlsxUnzippedDir,
+											filePath);
+
+		DirectoryInfo di = new DirectoryInfo(baseXlsxUnzippedDir);
+
+		foreach (FileInfo file in di.GetFiles())
+			file.Delete();
+
+		foreach (DirectoryInfo dir in di.GetDirectories())
+			dir.Delete(true);
+
+		di.Delete (true);
+
+		return true;
+	}
+#endif
+
+	public bool BuildXLSX (string[,] datatable)
+	{
+		sharedStrings = "";
+        sheet1        = "";
+
 		if (datatable == null ||
 			datatable.GetLength (0) < 2 ||
 			datatable.GetLength (1) < 2)
 		{
-			Debug.LogError ("é necessário ter mais do que uma coluna e uma linha na tabela a ser criada");
+			Debug.LogError ("eh necessário ter mais do que uma coluna e uma linha na tabela a ser criada");
 			return false;
 		}
-
-		//unzip file
-		UnzipBaseXlsxFile ();
-
-		File.Delete (sharedStringsFilepath);
 
 		int cellCount = datatable.GetLength (0) * datatable.GetLength (1);
 
 		int maxColumns  = datatable.GetLength (0);
 		int maxRows		= datatable.GetLength (1);
 
+		MemoryStream ms = new MemoryStream ();
+
 		//criando arquivo sharedStrings
-		using (XmlWriter writer = XmlWriter.Create(sharedStringsFilepath))
+		using (XmlWriter writer = XmlWriter.Create(ms))
 		{
 			writer.WriteStartDocument (true);
 			writer.WriteStartElement ("sst", "http://schemas.openxmlformats.org/spreadsheetml/2006/main");
@@ -85,8 +136,13 @@ public class XLSXReporter : MonoBehaviour
 			writer.WriteEndDocument();
 		}
 
+		sharedStrings = Encoding.UTF8.GetString (ms.ToArray ());
+		sharedStrings = sharedStrings.Substring (1);
+
+		ms = new MemoryStream ();
+
 		//criando xml de relatório
-		using (XmlWriter writer = XmlWriter.Create(sheetFilepath))
+		using (XmlWriter writer = XmlWriter.Create(ms))
 		{
 			writer.WriteStartDocument (true);
 			{
@@ -106,7 +162,7 @@ public class XLSXReporter : MonoBehaviour
 
 					writer.WriteStartElement ("dimension");
 					{
-						writer.WriteAttributeString ("ref", "A1" + ":" + GetColumnName (maxColumns) + maxRows);
+						writer.WriteAttributeString ("ref", "A1" + ":" + GetColumnName (maxColumns - 1) + maxRows);
 					}
 					writer.WriteEndElement();
 					writer.WriteStartElement ("sheetViews");
@@ -147,26 +203,26 @@ public class XLSXReporter : MonoBehaviour
 
 					writer.WriteStartElement ("cols");
 					{
-						for (int i = 0; i != maxColumns; ++i)
-						{
-							writer.WriteStartElement ("col");
-							{
-								writer.WriteAttributeString("collapsed","false");
-								writer.WriteAttributeString("hidden","false");
-								writer.WriteAttributeString("max", i.ToString ());
-								writer.WriteAttributeString("min", i.ToString ());
-								writer.WriteAttributeString("style","0");
-								writer.WriteAttributeString("width","13.5");
-							}
-							writer.WriteEndElement();
-						}
+						//for (int i = 0; i != maxColumns; ++i)
+						//{
+							//writer.WriteStartElement ("col");
+							//{
+								//writer.WriteAttributeString("collapsed","false");
+								//writer.WriteAttributeString("hidden","false");
+								//writer.WriteAttributeString("max", i.ToString ());
+								//writer.WriteAttributeString("min", i.ToString ());
+								//writer.WriteAttributeString("style","0");
+								//writer.WriteAttributeString("width","13.5");
+							//}
+							//writer.WriteEndElement();
+						//}
 
 						writer.WriteStartElement ("col");
 						{
 							writer.WriteAttributeString("collapsed","false");
 							writer.WriteAttributeString("hidden","false");
 							writer.WriteAttributeString("max", 1025.ToString ());
-							writer.WriteAttributeString("min", (maxColumns).ToString ());
+							writer.WriteAttributeString("min", (1).ToString ());
 							writer.WriteAttributeString("style","0");
 							writer.WriteAttributeString("width","13.5");
 						}
@@ -259,7 +315,7 @@ public class XLSXReporter : MonoBehaviour
 
 						writer.WriteStartElement ("oddHeader");
 						{
-							writer.WriteString ("&amp;C&amp;&quot;Times New Roman,Normal&quot;&amp;12&amp;A");
+							writer.WriteString ("&amp;C&amp;Amp;C&amp;Amp;uot;Times New Roman,Normaluot;&amp;Amp;12&amp;Amp;A&amp;Amp;C&amp;Amp;uot;Times New Roman,Normaluot;&amp;Amp;12PÃ¡gina &amp;Amp;P");
 						}
 						writer.WriteEndElement();
 
@@ -276,20 +332,8 @@ public class XLSXReporter : MonoBehaviour
 			writer.WriteEndDocument();
 		}
 
-		//After decompress and modify file
-		ZipWrapper.CompressDirectoryToFile (baseXlsxUnzippedDir,
-											filePath);
-
-		DirectoryInfo di = new DirectoryInfo(baseXlsxUnzippedDir);
-
-		foreach (FileInfo file in di.GetFiles())
-			file.Delete();
-
-		foreach (DirectoryInfo dir in di.GetDirectories())
-			dir.Delete(true);
-
-		di.Delete (true);
-
+		sheet1 = Encoding.UTF8.GetString (ms.ToArray ());
+		sheet1 = sheet1.Substring (1);
 		return true;
 	}
 
@@ -303,3 +347,4 @@ public class XLSXReporter : MonoBehaviour
 									excludeFromDecompression);
 	}
 }
+

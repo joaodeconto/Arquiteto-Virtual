@@ -22,7 +22,7 @@ public class GUICameraController : MonoBehaviour {
 	private const string pathExportReport = "upload/export/";
 	private const string pathExportImage = "upload/images/";
 
-	private const string reportUploadFile = "uploadReport.php";
+	private const string reportUploadFileUrl = "uploadReport.php";
 	private const string screenshotUploadFile = "uploadScreenshot.php";
 
 	public float Step;
@@ -458,7 +458,7 @@ public class GUICameraController : MonoBehaviour {
 
 		GameObject[] mobiles = GameObject.FindGameObjectsWithTag ("Movel");
 
-		string filename = String.Format ("{0:yyyy-MM-dd-HH-mm-ss}", DateTime.Now) + ".csv";
+		string filename = String.Format ("{0:yyyy-MM-dd-HH-mm-ss}", DateTime.Now) + ".xlsx";
 		string csvString = "LINHA: " + Line.CurrentLine.Name + "\n";
 
 		string shortenedBrandColorName = null;
@@ -535,32 +535,12 @@ public class GUICameraController : MonoBehaviour {
 			}
 		}
 
-//		print(csvString);
-		Debug.Log("csvString: " + csvString);
 		byte[] utf8String = Encoding.UTF8.GetBytes (csvString);
 		string data 	  = Encoding.UTF8.GetString (utf8String);
 
-//		Debug.Log("csvString: " + new String());
-#if UNITY_WEBPLAYER
-		WWWForm form = new WWWForm ();
-
-		form.AddField ("CSV-FILE", 		data);
-		form.AddField ("CSV-FILE-NAME", filename);
-
-		WWW www = new WWW (reportUploadFile, form);
-
-		yield return www;
-
-		if (www.error != null)
-			print (www.error);
-		else
-			Application.ExternalCall ("tryToDownload", pathExportReport + filename);
-#else
-		//System.IO.File.WriteAllText(m_textPath, data);
-
+		int maxRowSize = 1;
 		string[] rows = data.Split ('\n');
 		List<List<string>> cells = new List<List<string>> ();
-		int maxRowSize = 1;
 
 		foreach (string row in rows)
 		{
@@ -580,11 +560,35 @@ public class GUICameraController : MonoBehaviour {
 				if (cells.Count > j && cells[j].Count > i)
 					datatable[j,i] = cells[j][i];
 				else
-					datatable[j,i] = "";
+					datatable[j,i] = " ";
 			}
 		}
 
-		GameObject.Find ("XLSXReporter").GetComponent<XLSXReporter>().CreateCommonXLSX (datatable, m_textPath);
+		XLSXReporter reporter = GameObject.Find ("XLSXReporter").GetComponent<XLSXReporter>();
+		
+		reporter.Init ();
+		reporter.BuildXLSX (datatable);
+
+#if UNITY_WEBPLAYER
+
+		WWWForm form = new WWWForm ();
+
+		form.AddField ("shared-strings-data", 		reporter.GetSharedStrings ());
+		form.AddField ("sheet1-data",				reporter.GetSheet1());
+		form.AddField ("filename", filename);
+
+		WWW www = new WWW (reportUploadFileUrl, form);
+
+		yield return www;
+
+		if (www.error != null)
+			print (www.error);
+		else
+			Application.ExternalCall ("tryToDownload", pathExportReport + filename);
+#else
+		//System.IO.File.WriteAllText(m_textPath, data);
+
+		reporter.SaveXLSXToFile (m_textPath);
 
 		yield return new WaitForEndOfFrame();
 

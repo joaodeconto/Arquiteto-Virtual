@@ -896,7 +896,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07e0ca63ae47bc642ae4d12dad55d278, type: 1}
   m_Name: 
   wallBuilderButton: 1
-  TooltipString: tip-colocar-paredes
 --- !u!1 &589164254
 GameObject:
   m_ObjectHideFlags: 0

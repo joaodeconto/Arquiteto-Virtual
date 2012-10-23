@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [AddComponentMenu("Game/Controllers/Interface Manager")]
 public class InterfaceManager : MonoBehaviour
@@ -11,13 +12,12 @@ public class InterfaceManager : MonoBehaviour
 		public string name;
 		public GameObject main;
 		public GameObject[] mobileInterfaces;
+		public string[] transformManagers;
 		public bool initializeWithThis;
-		public GameObject[] gosDeactived;
+		public List<GameObject> gosDeactived { get; set; }
 	}
 	
 	public InterfaceObject[] interfaceObjects;
-	
-	public bool saveAnchorsSetting, savePanelsSetting, savePanelChildrenSetting;
 	
 	private string currentInterface = "";
 	public string GetCurrentInterface
@@ -32,6 +32,8 @@ public class InterfaceManager : MonoBehaviour
 	{
 		foreach (InterfaceObject io in interfaceObjects)
 		{
+			if (io.transformManagers.Length != 0) io.gosDeactived = new List<GameObject> ();
+			
 			if (io.initializeWithThis)
 			{
 				SetInterface (io.name);
@@ -52,41 +54,31 @@ public class InterfaceManager : MonoBehaviour
 	{
 		bool interfaceExists = false;
 		
-		if (currentInterface != "")
+		
+		foreach (InterfaceObject io in interfaceObjects)
 		{
-			foreach (InterfaceObject io in interfaceObjects)
+			if (currentInterface.Equals(""))
 			{
-				if (currentInterface.Equals (io.name))
+				if (name.ToLower().Equals (io.name.ToLower ()))	currentInterface = io.name;
+			}
+			
+			if (currentInterface.Equals (io.name))
+			{
+				if (io.transformManagers.Length != 0)
 				{
-					if (saveAnchorsSetting)
+					foreach (string tm in io.transformManagers)
 					{
-						foreach (UIAnchor anchor in io.main.GetComponentsInChildren<UIAnchor>())
+						foreach (Transform t in io.main.GetComponentsInChildren<Transform>())
 						{
-							if (!anchor.gameObject.active)
+							Transform tmObject = t.name.Equals(tm) ? t : null;
+							
+							if (tmObject == null) continue;
+							
+							for (int i = 0; i < tmObject.GetChildCount(); i++)
 							{
-								Visiorama.Utils.ArrayUtils.Add (io.gosDeactived, anchor.gameObject);
-							}
-						}
-					}
-					else if (savePanelsSetting)
-					{
-						foreach (UIPanel panel in io.main.GetComponentsInChildren<UIPanel>())
-						{
-							if (!panel.gameObject.active)
-							{
-								Visiorama.Utils.ArrayUtils.Add (io.gosDeactived, panel.gameObject);
-							}
-						}
-					}
-					else if (savePanelChildrenSetting)
-					{
-						foreach (UIPanel panel in io.main.GetComponentsInChildren<UIPanel>())
-						{
-							for (int i = 0; i < panel.transform.GetChildCount(); i++)
-							{
-								if (!panel.transform.GetChild(i).gameObject.active)
+								if (!tmObject.GetChild(i).gameObject.active)
 								{
-									Visiorama.Utils.ArrayUtils.Add (io.gosDeactived, panel.transform.GetChild(i).gameObject);
+									io.gosDeactived.Add (tmObject.GetChild(i).gameObject);
 								}
 							}
 						}
@@ -102,34 +94,25 @@ public class InterfaceManager : MonoBehaviour
 				interfaceExists = true;
 				
 				io.main.SetActiveRecursively (true);
+				
 #if	!(UNITY_ANDROID || UNITY_IPHONE) || UNITY_EDITOR
 				foreach (GameObject mi in io.mobileInterfaces)
 				{
 					mi.SetActiveRecursively (false);
 				}
 #endif
-				if (currentInterface != "")
+				if (io.transformManagers.Length != 0)
 				{
-					if (saveAnchorsSetting || savePanelsSetting || savePanelChildrenSetting)
+					if (io.gosDeactived.Count != 0)
 					{
-						if (io.gosDeactived.Length != 0)
+						foreach (GameObject goDeactived in io.gosDeactived)
 						{
-							foreach (GameObject goDeactived in io.gosDeactived)
-							{
-								goDeactived.SetActiveRecursively (false);
-							}
-							io.gosDeactived = new GameObject[0];
+							goDeactived.SetActiveRecursively (false);
 						}
+						io.gosDeactived = new List<GameObject> ();
 					}
 				}
-				else
-				{
-					if (saveAnchorsSetting || savePanelsSetting || savePanelChildrenSetting)
-					{
-						io.gosDeactived = new GameObject[0];
-					}
-				}
-				
+
 				currentInterface = io.name;
 			}
 			else

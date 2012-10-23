@@ -113,6 +113,7 @@ public class CameraButtonHandler : MonoBehaviour {
 				break;
 			case CameraButtonHandlerEnum.CameraPause:
 				GameController.GetInstance().GetInterfaceManager().SetInterface("Pause");
+				mainCamera.GetComponent<CameraController>().freeCamera.FreezeCamera();
 				break;
 			#endregion
 		/*

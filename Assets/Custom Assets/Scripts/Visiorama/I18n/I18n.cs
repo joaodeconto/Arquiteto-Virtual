@@ -126,14 +126,31 @@ public class I18n {
 		hashWords [0] ["marmore preto"] = "Mármore Preto";
 		hashWords [0] ["onix bianco"]	= "Onix Bianco";
 
+		//Pause menu
+		hashWords [0] ["Retomar"] 			= "Retomar";
+		hashWords [0] ["Relatório"] 		= "Relatório";
+		hashWords [0] ["Captura de tela"] 	= "Captura de Tela";
+		hashWords [0] ["Idioma"]			= "Idioma";
+		hashWords [0] ["Qualidade"]			= "Qualidade";
+		hashWords [0] ["Sobre"]				= "Sobre";
+		
+		//Outras opções do pause
+		hashWords [0] ["Voltar"]= "Voltar";
+		hashWords [0] ["OK"] 	= "OK";
+		hashWords [0] ["Baixa"] = "Baixa";
+		hashWords [0] ["Boa"]	= "Boa";
+		hashWords [0] ["Alta"]	= "Alta";
+		
+		//Texto do sobre
+		hashWords [0] ["Texto sobre"]= "Texto sobre BLALVLALSDLADLASODLODLDADS SDLAODLOODSAdA\n SASJISJIAISAIJSIJAIS.";
 	}
 	static private void InitializeEnglish(){
 		//Escolha cozinha
 		hashWords [1] ["Escolha sua cozinha favorita"] = "Choose your favorite kitchen";
 		
 		//Intro
-		hashWords [1] ["Iniciar"] 	  = "Start";
-		hashWords [1] ["Medidas da sua cozinha"] 	  = "Kitchen Measures";
+		hashWords [1] ["Iniciar"] 	  				= "Start";
+		hashWords [1] ["Medidas da sua cozinha"] 	= "Kitchen Measures";
 		
 		//Montar paredes
 		hashWords [1] ["Medidas"] = "Measures";
@@ -209,6 +226,24 @@ public class I18n {
 		hashWords [1] ["marmore cinza"] = "Gray Marble";
 		hashWords [1] ["marmore preto"] = "Black Marble";
 		hashWords [1] ["onix bianco"] 	= "Onix Bianco";
+		
+		//Pause menu
+		hashWords [1] ["Retomar"] 			= "Resume";
+		hashWords [1] ["Relatório"] 		= "Report";
+		hashWords [1] ["Captura de tela"] 	= "Screenshot";
+		hashWords [1] ["Idioma"]			= "Language";
+		hashWords [1] ["Qualidade"]			= "Quality";
+		hashWords [1] ["Sobre"]				= "About";
+		
+		//Outras opções do pause
+		hashWords [1] ["Voltar"]= "Back";
+		hashWords [1] ["OK"] 	= "OK";
+		hashWords [1] ["Baixa"] = "Low";
+		hashWords [1] ["Boa"]	= "Good";
+		hashWords [1] ["Alta"]	= "High";
+		
+		//Texto do sobre
+		hashWords [1] ["Texto sobre"]= "About text BLALVLALSDLADLASODLODLDADS SDLAODLOODSAdA\n SASJISJIAISAIJSIJAIS.";
 	}
 	static private void InitializeSpanish ()
 	{
@@ -293,6 +328,24 @@ public class I18n {
 		hashWords [2] ["marmore cinza"] = "Mármol Gris";
 		hashWords [2] ["marmore preto"] = "Mármol Negro";
 		hashWords [2] ["onix bianco"] 	= "Onix Bianco";
+		
+		//Pause menu
+		hashWords [2] ["Retomar"] 			= "Retomar";
+		hashWords [2] ["Relatório"] 		= "Relatório";
+		hashWords [2] ["Captura de tela"] 	= "Captura de Tela";
+		hashWords [2] ["Idioma"]			= "Idioma";
+		hashWords [2] ["Qualidade"]			= "Qualidade";
+		hashWords [2] ["Sobre"]				= "Sobre";
+		
+		//Outras opções do pause
+		hashWords [2] ["Voltar"]= "Voltar";
+		hashWords [2] ["OK"] 	= "OK";
+		hashWords [2] ["Baixa"] = "Baixa";
+		hashWords [2] ["Boa"]	= "Boa";
+		hashWords [2] ["Alta"]	= "Alta";
+		
+		//Texto do sobre
+		hashWords [2] ["Texto sobre"]= "Texto sobre BLALVLALSDLADLASODLODLDADS SDLAODLOODSAdA\n SASJISJIAISAIJSIJAIS.";
 	}
 	#endregion
 

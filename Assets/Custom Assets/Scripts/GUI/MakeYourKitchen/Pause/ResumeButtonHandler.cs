@@ -6,6 +6,6 @@ public class ResumeButtonHandler : MonoBehaviour {
 	void OnClick ()
 	{
 		GameController.GetInstance ().GetInterfaceManager ().SetInterface ("Main");
-		Time.timeScale = 1f;
+		Camera.main.GetComponent<CameraController>().freeCamera.FreeCamera ();
 	}
 }

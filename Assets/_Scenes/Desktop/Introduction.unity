@@ -201,6 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dbbeac202f9c2b47941a71d1c55a51b, type: 1}
   m_Name: 
   selectedLanguage: 2
+  sendMessageObject: {fileID: 0}
 --- !u!114 &134944948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,7 +216,7 @@ MonoBehaviour:
   style: 0
   duration: 2
   tweenGroup: 0
-  eventReceiver: {fileID: 0}
+  eventReceiver: {fileID: 1505256699}
   callWhenFinished: 
   from: {x: -149.657898, y: -400, z: 0}
   to: {x: -149.657898, y: -282.7854, z: 0}
@@ -1820,6 +1821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dbbeac202f9c2b47941a71d1c55a51b, type: 1}
   m_Name: 
   selectedLanguage: 1
+  sendMessageObject: {fileID: 0}
 --- !u!114 &1305720002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1834,7 +1836,7 @@ MonoBehaviour:
   style: 0
   duration: 2
   tweenGroup: 0
-  eventReceiver: {fileID: 0}
+  eventReceiver: {fileID: 1505256699}
   callWhenFinished: 
   from: {x: -269.657898, y: -400, z: 0}
   to: {x: -269.657898, y: -282.7854, z: 0}
@@ -2113,6 +2115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dbbeac202f9c2b47941a71d1c55a51b, type: 1}
   m_Name: 
   selectedLanguage: 0
+  sendMessageObject: {fileID: 0}
 --- !u!114 &1635414585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2127,7 +2130,7 @@ MonoBehaviour:
   style: 0
   duration: 2
   tweenGroup: 0
-  eventReceiver: {fileID: 0}
+  eventReceiver: {fileID: 1505256699}
   callWhenFinished: 
   from: {x: -394.657898, y: -400, z: 0}
   to: {x: -394.657898, y: -282.7854, z: 0}

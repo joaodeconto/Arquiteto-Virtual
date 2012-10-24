@@ -22,7 +22,26 @@ public class CheckBoxTopHandler : MonoBehaviour {
 	void OnClick ()
 	{
 		GameObject furniture = GameObject.FindWithTag("MovelSelecionado");
+		
+		bool isDoorOpen = furniture.GetComponent<InformacoesMovel>().portas == Portas.ABERTAS ? true : false;
+		
 		GameObject newFurniture = furniture.GetComponent<InformacoesMovel>().ChangeGameObject (item, "MovelSelecionado");
+		
+		#region Abrir porta quando trocado por novo item
+		if (isDoorOpen)
+		{
+			Animation[] animations = newFurniture.GetComponentsInChildren<Animation>();
+			foreach (Animation anim in animations) {
+				if (anim.clip != null) {
+					anim[anim.clip.name].speed = 1;
+					anim[anim.clip.name].time = 0;
+					anim.Play();
+				}
+			}
+			newFurniture.GetComponent<InformacoesMovel>().portas = Portas.ABERTAS;
+		}
+		#endregion
+		
 		newFurniture.GetComponent<SnapBehaviour>().Select = true;
 		newFurniture.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 		cCamera.GetComponent<RenderBounds>().Display = true;

@@ -13,8 +13,10 @@ public class InterfaceManager : MonoBehaviour
 		public GameObject main;
 		public GameObject[] mobileInterfaces;
 		public string[] transformManagers;
+		public MonoBehaviour[] scriptManagers;
 		public bool initializeWithThis;
 		public List<GameObject> gosDeactived { get; set; }
+		public List<bool> scriptsDeactived { get; set; }
 	}
 	
 	public InterfaceObject[] interfaceObjects;
@@ -33,6 +35,7 @@ public class InterfaceManager : MonoBehaviour
 		foreach (InterfaceObject io in interfaceObjects)
 		{
 			if (io.transformManagers.Length != 0) io.gosDeactived = new List<GameObject> ();
+			if (io.scriptManagers.Length != 0) io.scriptsDeactived = new List<bool> ();
 			
 			if (io.initializeWithThis)
 			{
@@ -84,6 +87,13 @@ public class InterfaceManager : MonoBehaviour
 						}
 					}
 				}
+				if (io.scriptManagers.Length != 0)
+				{
+					foreach (MonoBehaviour sm in io.scriptManagers)
+					{
+						io.scriptsDeactived.Add(sm.enabled);
+					}
+				}
 			}
 		}
 		
@@ -112,12 +122,29 @@ public class InterfaceManager : MonoBehaviour
 						io.gosDeactived = new List<GameObject> ();
 					}
 				}
+				
+				if (io.scriptManagers.Length != 0)
+				{
+					if (io.scriptsDeactived.Count != 0)
+					{
+						for (int i = 0; i != io.scriptManagers.Length; i++)
+						{
+							io.scriptManagers[i].enabled = io.scriptsDeactived[i];
+						}
+						io.scriptsDeactived = new List<bool> ();
+					}
+				}
 
 				currentInterface = io.name;
 			}
 			else
 			{
 				io.main.SetActiveRecursively (false);
+				
+				for (int i = 0; i != io.scriptManagers.Length; i++)
+				{
+					io.scriptManagers[i].enabled = false;
+				}
 			}
 		}
 		

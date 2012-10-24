@@ -6,28 +6,54 @@ public class ScreenshotButtonHandler : MonoBehaviour {
 
 	private const string pathExportImage = "upload/images/";
 	private const string screenshotUploadFile = "uploadScreenshot.php";
-	
+
+	FileBrowserComponent fileBrowser;
+	private string path;
+
 	void OnClick ()
 	{
+		//TODO colocar isso no lugar certo
+		//GameObject.Find("cfg").GetComponent<Configuration>().SaveCurrentState("lolol",true);
+		//GameObject.Find("cfg").GetComponent<Configuration>().LoadState("teste/teste.xml",false);
+		//GameObject.Find("cfg").GetComponent<Configuration>().RunPreset(0);
+
 #if UNITY_WEBPLAYER
 		StartCoroutine ("MakeScreenshot");
 #elif !(UNITY_ANDROID || UNITY_IPHONE) || UNITY_EDITOR
-//		m_textPath = "";
-//		m_fileBrowser = new FileBrowserSave (
-//            ScreenUtils.ScaledRectInSenseHeight(50, 50, 500, 400),
-//            "Salvar Screenshot",
-//            ImageSelectedCallback
-//        );
-//		m_fileBrowser.SelectionPattern = "*.png";
-//		m_fileBrowser.DirectoryImage = m_directoryImage;
-//		m_fileBrowser.FileImage = m_fileImage;
+		fileBrowser = new GameObject().AddComponent<FileBrowserComponent>();
+		fileBrowser.Init (
+            ScreenUtils.ScaledRectInSenseHeight(50, 50, 500, 400),
+            "Salvar Screenshot",
+            ImageSelectedCallback,
+			"*.png"
+        );
+
+		GameController
+			.GetInstance ().
+				GetInterfaceManager ()
+					.SetInterface ("DeactivateAll");
 #endif
 	}
-	
+
+	void ImageSelectedCallback (string path)
+	{
+		if (string.IsNullOrEmpty(path))
+			path = "screenshot.png";
+
+		if (!path.Contains(".png"))
+			path += ".png";
+
+		this.path = path;
+
+		Destroy(fileBrowser.gameObject);
+
+		this.gameObject.active = true;
+
+		StartCoroutine ("MakeScreenshot");
+    }
+
 	private IEnumerator MakeScreenshot ()
 	{
-		GameController.GetInstance ().GetInterfaceManager().SetInterface("DeactiveAll");
-
 		yield return new WaitForEndOfFrame();
 
 		// Create a texture the size of the screen, RGB24 format
@@ -64,9 +90,13 @@ public class ScreenshotButtonHandler : MonoBehaviour {
 			Application.ExternalCall ("tryToDownload", pathExportImage + filename);
 		}
 #else
-		System.IO.File.WriteAllBytes(m_textPath, bytes);
+		System.IO.File.WriteAllBytes(path, bytes);
 #endif
 
-		GameController.GetInstance ().GetInterfaceManager().SetInterface("Pause");
+		GameController
+			.GetInstance ().
+				GetInterfaceManager ()
+					.SetInterface ("Pause");
+
 	}
 }

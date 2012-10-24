@@ -1,4 +1,4 @@
-using UnityEngine;/*{*/
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -61,15 +61,6 @@ public class GUICameraController : MonoBehaviour {
 
 	private Vector3 lastCamPosition;
 
-	#region Save Screenshot GUI vars
-	private string m_textPath;
-	private FileBrowserSave m_fileBrowser;
-	[SerializeField]
-	protected GUISkin m_guiSkin;
-	[SerializeField]
-	protected Texture2D m_directoryImage,
-                        m_fileImage;
-	#endregion
 	void Awake ()
 	{
 		mainCamera		   = GameObject.FindWithTag ("MainCamera").camera;
@@ -148,9 +139,9 @@ public class GUICameraController : MonoBehaviour {
 		interfaceGUI.uiRootFPS.SetActiveRecursively (false);
 
 		InvokeRepeating("VerifyWallVisibility", rateRefreshWallsVisibility, rateRefreshWallsVisibility);
-		
+
 		yield return new WaitForSeconds(rateRefreshWallsVisibility);
-		
+
 		interfaceGUI.viewUIPiso.SetActiveRecursively (false);
 		interfaceGUI.panelFloor.SetActiveRecursively (false);
 	}
@@ -187,16 +178,6 @@ public class GUICameraController : MonoBehaviour {
 		}
 	}
 
-	#region GUI only File Browser Save
-	void OnGUI ()
-	{
-		if (m_fileBrowser != null) {
-	        GUI.skin = m_guiSkin;
-			pause.GUIDraw ();
-			m_fileBrowser.OnGUI ();
-		}
-	}
-	#endregion
 
 	public void EnableCeilFloor () {
 		showCeil = showFloor = true;
@@ -270,80 +251,7 @@ public class GUICameraController : MonoBehaviour {
 	public void Screenshot ()
 	{
 		pause.TogglePause();
-
-		//TODO colocar isso no lugar certo
-		//GameObject.Find("cfg").GetComponent<Configuration>().SaveCurrentState("lolol",true);
-		//GameObject.Find("cfg").GetComponent<Configuration>().LoadState("teste/teste.xml",false);
-		//GameObject.Find("cfg").GetComponent<Configuration>().RunPreset(0);
-
-#if UNITY_WEBPLAYER
-		StartCoroutine ("MakeScreenshot");
-#elif !(UNITY_ANDROID || UNITY_IPHONE) || UNITY_EDITOR
-		m_textPath = "";
-		m_fileBrowser = new FileBrowserSave (
-            ScreenUtils.ScaledRectInSenseHeight(50, 50, 500, 400),
-            "Salvar Screenshot",
-            ImageSelectedCallback
-        );
-		m_fileBrowser.SelectionPattern = "*.png";
-		m_fileBrowser.DirectoryImage = m_directoryImage;
-		m_fileBrowser.FileImage = m_fileImage;
-#endif
 	}
-
-	void ImageSelectedCallback (string path)
-	{
-		m_fileBrowser = null;
-        m_textPath = path;
-
-		pause.TogglePause();
-
-		if (String.IsNullOrEmpty(m_textPath))
-			m_textPath = "screenshot.png";
-
-		if (!m_textPath.Contains(".png"))
-			m_textPath += ".png";
-
-		StartCoroutine ("MakeScreenshot");
-    }
-
-	public void Report ()
-	{
-		pause.TogglePause();
-
-		//TODO make this method works
-#if UNITY_WEBPLAYER
-		StartCoroutine ("ReportData");
-#elif !(UNITY_ANDROID || UNITY_IPHONE) || UNITY_EDITOR
-
-		m_textPath = "";
-		m_fileBrowser = new FileBrowserSave (
-			ScreenUtils.ScaledRectInSenseHeight(50, 50, 500, 400),
-			"Salvar Relatório",
-			FileSelectedCallback
-		);
-
-		m_fileBrowser.SelectionPattern = "*.xlsx";
-		m_fileBrowser.DirectoryImage = m_directoryImage;
-		m_fileBrowser.FileImage = m_fileImage;
-#endif
-	}
-
-	void FileSelectedCallback (string path)
-	{
-		m_fileBrowser = null;
-        m_textPath = path;
-
-		pause.TogglePause();
-
-		if (String.IsNullOrEmpty(m_textPath))
-			m_textPath = "relatório.xlsx";
-
-		if (!m_textPath.Contains(".xlsx"))
-			m_textPath += ".xlsx";
-
-		StartCoroutine ("ReportData");
-    }
 
 	public void ShowHideWalls ()
 	{
@@ -369,12 +277,12 @@ public class GUICameraController : MonoBehaviour {
 		Vector3 cameraPos = (rayMouse.origin - mainCamera.transform.position);
 		mainCamera.transform.localPosition += cameraPos * Time.deltaTime * 10 * step;
 	}
-	
+
 	public void PlayDoors () {
 		List<GameObject> mobiles = new List<GameObject>();
 		mobiles.AddRange(GameObject.FindGameObjectsWithTag("Movel"));
 		if (GameObject.FindGameObjectWithTag("MovelSelecionado")) mobiles.Add(GameObject.FindGameObjectWithTag("MovelSelecionado"));
-		
+
 		foreach (GameObject mb in mobiles)
 		{
 			InformacoesMovel infoMobile = mb.GetComponent<InformacoesMovel>();
@@ -444,198 +352,6 @@ public class GUICameraController : MonoBehaviour {
 								   	false);
 			}
 		}
-	}
-
-	private IEnumerator MakeScreenshot ()
-	{
-		SaveLastGUIState ();
-
-		yield return new WaitForEndOfFrame();
-
-		// Create a texture the size of the screen, RGB24 format
-		int width = Screen.width;
-		int height = Screen.height;
-		Texture2D tex = new Texture2D (width, height, TextureFormat.RGB24, false);
-
-		// Read screen contents into the texture
-		tex.ReadPixels (new Rect (0, 0, width, height), 0, 0);
-		tex.Apply ();
-
-		// Encode texture into PNG
-		byte[] bytes = tex.EncodeToPNG ();
-		Destroy (tex);
-
-#if UNITY_WEBPLAYER
-
-		// Create a Web Form
-		WWWForm form = new WWWForm ();
-//	    Debug.LogError( String.Format("{0:yyyy-MM-dd-HH-mm-ss-}", DateTime.Now) + "screenshot.png");
-
-		string filename = String.Format ("{0:yyyy-MM-dd-HH-mm-ss-}", DateTime.Now) + "screenshot.png";
-
-		form.AddBinaryData ("file", bytes, filename, "multipart/form-data");
-
-		WWW www = new WWW (screenshotUploadFile, form);
-
-		yield return www;
-
-		if (www.error != null){
-			print (www.error);
-		} else {
-			print ("Finished Uploading Screenshot");
-			Application.ExternalCall ("tryToDownload", pathExportImage + filename);
-		}
-#else
-		System.IO.File.WriteAllBytes(m_textPath, bytes);
-#endif
-
-		LoadLastGUIState ();
-	}
-
-	private IEnumerator ReportData ()
-	{
-		SaveLastGUIState ();
-
-		GameObject[] mobiles = GameObject.FindGameObjectsWithTag ("Movel");
-
-		string filename = String.Format ("{0:yyyy-MM-dd-HH-mm-ss}", DateTime.Now) + ".xlsx";
-		string csvString = "LINHA: " + Line.CurrentLine.Name + "\n";
-
-		string shortenedBrandColorName = null;
-
-		//obtendo tipo de tampo
-		foreach (Transform check in GameObject.Find ("InfoController").GetComponent<InfoController>().checkBoxTextures.transform)
-		{
-			if (check.name == "Label")
-				continue;
-
-			if (check.GetComponent<UICheckbox>().isChecked)
-			{
-				csvString += "Tampo;" + check.GetComponent<CheckBoxTextureHandler> ().texture.name + "\n";
-				break;
-			}
-		}
-
-		csvString += "NOME;CODIGO;LARGURA;ALTURA;PROFUNDIDADE\n";
-
-		foreach (GameObject mobile in mobiles) {
-
-			InformacoesMovel info = mobile.GetComponent<InformacoesMovel> ();
-
-			//Se for um item extra ou se for algum item que não possua código, como as lâmpadas, não adicionada no arquivo.
-			if ("Extras".Equals (info.Categoria) || String.IsNullOrEmpty(info.Codigo.Trim()))
-				continue;
-
-			if (info.HasDetailMaterial())
-			{
-				shortenedBrandColorName = BrandColor.GetShortenedColorName(Line.CurrentLine.colors[Line.CurrentLine.GlobalDetailColorIndex]);
-			}
-			else
-			{
-				shortenedBrandColorName = "";
-			}
-
-			if (Regex.Match(info.name, "(com cooktop|com cook top)").Success)
-			{
-				csvString += info.Nome 		+ ";" +
-							 info.Codigo 	+ ";" +
-							 info.Largura 	+ ";" +
-							 info.Altura 	+ ";" +
-							 info.Comprimento + "\n";
-
-				if (Regex.Match(info.name, "(Balcão triplo|Balcao triplo)").Success)
-				{
-					csvString += "Tampo cooktop triplo" + ";" +
-								 "89121" + ";" +
-								 "1200"  + ";" +
-								 "30" 	 + ";" +
-								 "520" 	 + "\n";
-				}
-				else
-				{
-					csvString += "Tampo cooktop duplo" + ";" +
-								 "89081" + ";" +
-								 "800" 	 + ";" +
-								 "30" 	 + ";" +
-								 "520" 	 + "\n";
-				}
-				csvString += "Cooktop" + ";" +
-							 "89150"   + ";" +
-							 "NA"	   + ";" +
-							 "NA" 	   + ";" +
-							 "NA" 	   + "\n";
-			}
-			else
-			{
-				csvString += info.Nome 		  + ";" +
-							 info.Codigo 	  + shortenedBrandColorName + ";" +
-							 info.Largura	  + ";" +
-							 info.Altura 	  + ";" +
-							 info.Comprimento + "\n";
-			}
-		}
-
-		byte[] utf8String = Encoding.UTF8.GetBytes (csvString);
-		string data 	  = Encoding.UTF8.GetString (utf8String);
-
-		int maxRowSize = 1;
-		string[] rows = data.Split ('\n');
-		List<List<string>> cells = new List<List<string>> ();
-
-		foreach (string row in rows)
-		{
-			string[] col = row.Split(';');
-			cells.Add ( new List<string> (col));
-
-			if (maxRowSize < col.Length)
-				maxRowSize = col.Length;
-		}
-
-		string[,] datatable = new string[rows.Length, maxRowSize];
-
-		for (int i = 0; i != maxRowSize; ++i)
-		{
-			for (int j = 0; j != rows.Length; ++j)
-			{
-				if(cells.Count > j && cells[j].Count > i)
-					datatable[j,i] = cells[j][i];
-
-				//se a célula está vazia ou não foi preenchida, a preenche
-				if(string.IsNullOrEmpty(datatable[j,i]))
-					datatable[j,i] = " ";
-			}
-		}
-
-		XLSXReporter reporter = GameObject.Find ("XLSXReporter").GetComponent<XLSXReporter>();
-
-		reporter.Init ();
-		reporter.BuildXLSX (datatable);
-
-#if UNITY_WEBPLAYER
-
-		WWWForm form = new WWWForm ();
-
-		form.AddField ("shared-strings-data", 		reporter.GetSharedStrings ());
-		form.AddField ("sheet1-data",				reporter.GetSheet1());
-		form.AddField ("filename", filename);
-
-		WWW www = new WWW (reportUploadFileUrl, form);
-
-		yield return www;
-
-		if (www.error != null)
-			print (www.error);
-		else
-			Application.ExternalCall ("tryToDownload", pathExportReport + filename);
-#else
-		//System.IO.File.WriteAllText(m_textPath, data);
-
-		reporter.SaveXLSXToFile (m_textPath);
-
-		yield return new WaitForEndOfFrame();
-
-#endif
-		LoadLastGUIState ();
 	}
 
 	Transform wallChild;
@@ -764,10 +480,10 @@ public class GUICameraController : MonoBehaviour {
 		Debug.Log ("veio");
 
 		interfaceGUI.main.gameObject.SetActiveRecursively (true);
-		
+
 		interfaceGUI.viewUIPiso.SetActiveRecursively (isPanelFloor);
 		interfaceGUI.panelFloor.SetActiveRecursively (isPanelFloor);
-		
+
 		if (!isPanelInfo) {
 			interfaceGUI.panelInfo.SetActiveRecursively (false);
 			interfaceGUI.panelMobile.SetActiveRecursively (false);

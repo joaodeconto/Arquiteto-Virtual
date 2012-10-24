@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class CameraButtonHandler : MonoBehaviour {
-	
+
 	public enum CameraButtonHandlerEnum
 	{
 		CameraMoveUp,
@@ -22,44 +22,44 @@ public class CameraButtonHandler : MonoBehaviour {
 		CameraPause,
 		CameraOpenMobileDoors,
 	}
-	
+
 	public CameraButtonHandlerEnum cameraButtonHandler;
 	public bool IsRepeatButton;
-	
+
 	private GUICameraController cameraController;
-	
+
 	#region NGUI monkey patch vars :P
 	private float repeatInterval = 0.01f;
 	private float mNextUpdate = 0f;
 	private bool mIsPressed = false;
 	private GameObject mainCamera;
-	
+
 	#endregion
-		
+
 	void Start()
 	{
 		cameraController = GameObject.Find("CameraController").GetComponent<GUICameraController>();
 		mainCamera = GameObject.FindWithTag("MainCamera");
 	}
- 
+
 	void OnPress (bool val)
 	{
 		mIsPressed = val;
 	}
- 
+
 	void Update ()
 	{
-		if (IsRepeatButton && mIsPressed && mNextUpdate < Time.realtimeSinceStartup) 
+		if (IsRepeatButton && mIsPressed && mNextUpdate < Time.realtimeSinceStartup)
 		{
 			mNextUpdate = Time.realtimeSinceStartup + repeatInterval;
 			SendMessage ("OnClick", SendMessageOptions.DontRequireReceiver);
 		}
 	}
-	
+
 	void OnClick()
 	{
 		if (!mainCamera.GetComponent<CameraController>().freeCamera.CanMoveCamera) return;
-		
+
 		switch (cameraButtonHandler) {
 		//para mover a câmera uso coordenadas x,y
 			#region move
@@ -103,9 +103,9 @@ public class CameraButtonHandler : MonoBehaviour {
 			case CameraButtonHandlerEnum.CameraPlay:
 				cameraController.Play();
 				break;
-			case CameraButtonHandlerEnum.CameraReport:
-				cameraController.Report();
-				break;
+			//case CameraButtonHandlerEnum.CameraReport:
+				//cameraController.Report();
+				//break;
 			case CameraButtonHandlerEnum.CameraScreenshot:
 				cameraController.Screenshot();
 				break;
@@ -115,7 +115,7 @@ public class CameraButtonHandler : MonoBehaviour {
 			case CameraButtonHandlerEnum.CameraPause:
 				GameController.GetInstance().GetInterfaceManager().SetInterface("Pause");
 				mainCamera.GetComponent<CameraController>().freeCamera.FreezeCamera();
-			
+
 				List<GameObject> furnitures = new List<GameObject>();
 				furnitures.AddRange(GameObject.FindGameObjectsWithTag("Movel"));
 				if (GameObject.FindGameObjectWithTag("MovelSelecionado")) furnitures.Add(GameObject.FindGameObjectWithTag("MovelSelecionado"));

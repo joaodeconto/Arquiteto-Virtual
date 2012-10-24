@@ -14,4 +14,4 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Scenes/Android/MakeAndroid.unity
   - enabled: 0
-    path: Assets/_Scenes/teste/test.unity
+    path: Assets/_Scenes/Tests/test.unity

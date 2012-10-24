@@ -11,8 +11,13 @@ public class StartKitchenSceneHandler : MonoBehaviour {
 		}
 	}
 	
+	private bool onClick;
 	void OnClick ()
 	{
-		ao = Application.LoadLevelAsync(1);
+		if (!onClick)
+		{
+			ao = Application.LoadLevelAsync(1);
+			onClick = true;
+		}
 	}
 }

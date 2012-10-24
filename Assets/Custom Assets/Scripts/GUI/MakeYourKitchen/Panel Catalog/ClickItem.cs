@@ -112,6 +112,27 @@ public class ClickItem : MonoBehaviour {
 		} else { Debug.LogError(" Something gone wrong! ");}
 		#endregion
 		
+		#region Fechar todas as portas de todos os objetos quando adicionado novo item
+		GameObject mobileSelected = GameObject.FindGameObjectWithTag("MovelSelecionado");
+		if (mobileSelected != null) mobileSelected.tag = "Movel";
+		GameObject[] mobiles = GameObject.FindGameObjectsWithTag("Movel");
+		if (mobiles.Length != 0) {
+			foreach (GameObject mb in mobiles) {
+				if (mb.GetComponent<InformacoesMovel>().portas != Portas.FECHADAS) {
+					Animation[] animations = mb.GetComponentsInChildren<Animation>();
+					foreach (Animation anim in animations) {
+						if (anim.clip != null) {
+							anim[anim.clip.name].speed = -1;
+							anim[anim.clip.name].time = anim[anim.clip.name].length;
+							anim.Play();
+						}
+					}
+					mb.GetComponent<InformacoesMovel>().portas = Portas.FECHADAS;
+				}
+			}
+		}
+		#endregion
+		
 		newModule.transform.parent = MoveisGO.transform;
 	}
 }

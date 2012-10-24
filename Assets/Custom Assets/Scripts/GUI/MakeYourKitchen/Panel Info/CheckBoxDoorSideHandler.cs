@@ -29,9 +29,26 @@ public class CheckBoxDoorSideHandler : MonoBehaviour {
 		{
 			Debug.LogError ("Não foi possível encontrar o móvel selecionado!");
 		}
-					
+		
+		bool isDoorOpen = selectedModule.GetComponent<InformacoesMovel>().portas == Portas.ABERTAS ? true : false;
+		
 		GameObject newModule = selectedModule.GetComponent<InformacoesMovel>().ToggleDoorSide();
-				
+		
+		#region Abrir porta quando trocado por novo item
+		if (isDoorOpen)
+		{
+			Animation[] animations = newModule.GetComponentsInChildren<Animation>();
+			foreach (Animation anim in animations) {
+				if (anim.clip != null) {
+					anim[anim.clip.name].speed = 1;
+					anim[anim.clip.name].time = 0;
+					anim.Play();
+				}
+			}
+			newModule.GetComponent<InformacoesMovel>().portas = Portas.ABERTAS;
+		}
+		#endregion
+		
 		newModule.GetComponent<SnapBehaviour>().Select = true;
 		newModule.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 		cCamera.GetComponent<RenderBounds>().Display = true;

@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class CameraButtonHandler : MonoBehaviour {
 	
@@ -19,7 +19,8 @@ public class CameraButtonHandler : MonoBehaviour {
 		CameraHideShowWalls,
 		CameraZoomMinus,
 		CameraZoomPlus,
-		CameraPause
+		CameraPause,
+		CameraOpenMobileDoors,
 	}
 	
 	public CameraButtonHandlerEnum cameraButtonHandler;
@@ -114,6 +115,17 @@ public class CameraButtonHandler : MonoBehaviour {
 			case CameraButtonHandlerEnum.CameraPause:
 				GameController.GetInstance().GetInterfaceManager().SetInterface("Pause");
 				mainCamera.GetComponent<CameraController>().freeCamera.FreezeCamera();
+			
+				List<GameObject> furnitures = new List<GameObject>();
+				furnitures.AddRange(GameObject.FindGameObjectsWithTag("Movel"));
+				if (GameObject.FindGameObjectWithTag("MovelSelecionado")) furnitures.Add(GameObject.FindGameObjectWithTag("MovelSelecionado"));
+				foreach (GameObject furniture in furnitures)
+				{
+					furniture.GetComponent<SnapBehaviour> ().enabled = false;
+				}
+				break;
+			case CameraButtonHandlerEnum.CameraOpenMobileDoors:
+				cameraController.PlayDoors ();
 				break;
 			#endregion
 		/*

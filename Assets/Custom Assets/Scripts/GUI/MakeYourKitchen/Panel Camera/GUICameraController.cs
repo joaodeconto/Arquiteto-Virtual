@@ -369,6 +369,41 @@ public class GUICameraController : MonoBehaviour {
 		Vector3 cameraPos = (rayMouse.origin - mainCamera.transform.position);
 		mainCamera.transform.localPosition += cameraPos * Time.deltaTime * 10 * step;
 	}
+	
+	public void PlayDoors () {
+		List<GameObject> mobiles = new List<GameObject>();
+		mobiles.AddRange(GameObject.FindGameObjectsWithTag("Movel"));
+		if (GameObject.FindGameObjectWithTag("MovelSelecionado")) mobiles.Add(GameObject.FindGameObjectWithTag("MovelSelecionado"));
+		
+		foreach (GameObject mb in mobiles)
+		{
+			InformacoesMovel infoMobile = mb.GetComponent<InformacoesMovel>();
+			Animation[] animations = mb.transform.GetComponentsInChildren<Animation>();
+			foreach (Animation anim in animations) {
+				if (anim.isPlaying)
+					return;
+			}
+			foreach (Animation anim in animations) {
+				if (anim.clip != null) {
+					if (infoMobile.portas == Portas.FECHADAS)
+					{
+						anim[anim.clip.name].speed = 1;
+						anim[anim.clip.name].time = 0;
+						anim.Play();
+					}
+					else {
+						anim[anim.clip.name].speed = -1;
+						anim[anim.clip.name].time = anim[anim.clip.name].length;
+						anim.Play();
+					}
+				}
+			}
+			if (infoMobile.portas == Portas.FECHADAS)
+				infoMobile.portas = Portas.ABERTAS;
+			else
+				infoMobile.portas = Portas.FECHADAS;
+		}
+	}
 	#endregion
 
 	private void VerifyWallVisibility ()

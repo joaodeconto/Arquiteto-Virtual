@@ -10,6 +10,7 @@ public class SelectLanguageHandler : MonoBehaviour {
 	}
 	
 	public LanguageEnum selectedLanguage;
+	public GameObject sendMessageObject;
 	
 	private void OnClick(){
 	
@@ -25,6 +26,6 @@ public class SelectLanguageHandler : MonoBehaviour {
 				break;
 		}
 		
-		Application.LoadLevel(0);
+		sendMessageObject.SendMessage("ChangeLanguage");
 	}
 }

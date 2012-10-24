@@ -97,7 +97,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 13430205}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.864055276, y: .864055276, z: 376.875}
+  m_LocalPosition: {x: -1.02214646, y: 1.02179837, z: 376.875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1530284197}
@@ -201,6 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dbbeac202f9c2b47941a71d1c55a51b, type: 1}
   m_Name: 
   selectedLanguage: 2
+  sendMessageObject: {fileID: 0}
 --- !u!114 &134944948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,7 +216,7 @@ MonoBehaviour:
   style: 0
   duration: 2
   tweenGroup: 0
-  eventReceiver: {fileID: 0}
+  eventReceiver: {fileID: 1505256699}
   callWhenFinished: 
   from: {x: -149.657898, y: -400, z: 0}
   to: {x: -149.657898, y: -282.7854, z: 0}
@@ -1204,15 +1205,15 @@ Camera:
   m_BackGroundColor: {r: .5, g: .5, b: .5, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: .210368544
-    y: .137459099
-    width: .577516615
-    height: .627746224
+    x: .172605038
+    y: .137669444
+    width: .652588367
+    height: .627746165
   near clip plane: .100000001
   far clip plane: 10
   field of view: 60
   orthographic: 1
-  orthographic size: .627746224
+  orthographic size: .627746165
   m_Depth: 2
   m_CullingMask:
     serializedVersion: 2
@@ -1820,6 +1821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dbbeac202f9c2b47941a71d1c55a51b, type: 1}
   m_Name: 
   selectedLanguage: 1
+  sendMessageObject: {fileID: 0}
 --- !u!114 &1305720002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1834,7 +1836,7 @@ MonoBehaviour:
   style: 0
   duration: 2
   tweenGroup: 0
-  eventReceiver: {fileID: 0}
+  eventReceiver: {fileID: 1505256699}
   callWhenFinished: 
   from: {x: -269.657898, y: -400, z: 0}
   to: {x: -269.657898, y: -282.7854, z: 0}
@@ -1918,7 +1920,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1499453754}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.864055276, y: .864055276, z: 376.875}
+  m_LocalPosition: {x: -1.02214646, y: 1.02179837, z: 376.875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1206859452}
@@ -2113,6 +2115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dbbeac202f9c2b47941a71d1c55a51b, type: 1}
   m_Name: 
   selectedLanguage: 0
+  sendMessageObject: {fileID: 0}
 --- !u!114 &1635414585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2127,7 +2130,7 @@ MonoBehaviour:
   style: 0
   duration: 2
   tweenGroup: 0
-  eventReceiver: {fileID: 0}
+  eventReceiver: {fileID: 1505256699}
   callWhenFinished: 
   from: {x: -394.657898, y: -400, z: 0}
   to: {x: -394.657898, y: -282.7854, z: 0}

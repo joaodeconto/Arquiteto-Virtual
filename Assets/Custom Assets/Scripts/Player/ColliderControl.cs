@@ -10,6 +10,7 @@ public class ColliderControl : MonoBehaviour {
 
 	void Start () {
 		cameraController = GameObject.FindWithTag("GameController").GetComponentInChildren<GUICameraController>();
+		
 	}
 	
 	public void Enable () {
@@ -47,18 +48,8 @@ public class ColliderControl : MonoBehaviour {
 		cameraController.interfaceGUI.main.SetActiveRecursively(true);
 		cameraController.interfaceGUI.uiRootFPS.SetActiveRecursively (false);
 
-		if (IsPanelFloor)
-		{
-			Debug.LogWarning ("Chegou ali");
-			cameraController.interfaceGUI.viewUIPiso.SetActiveRecursively (true);
-			cameraController.interfaceGUI.panelFloor.SetActiveRecursively (true);
-		}
-		else
-		{
-		Debug.LogWarning ("Chegou aqui");
-			cameraController.interfaceGUI.viewUIPiso.SetActiveRecursively (false);
-			cameraController.interfaceGUI.panelFloor.SetActiveRecursively (false);
-		}
+		cameraController.interfaceGUI.viewUIPiso.SetActiveRecursively (IsPanelFloor);
+		cameraController.interfaceGUI.panelFloor.SetActiveRecursively (IsPanelFloor);
 
 		cameraController.interfaceGUI.panelInfo.SetActiveRecursively (false);
 		cameraController.interfaceGUI.panelMobile.SetActiveRecursively (false);

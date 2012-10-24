@@ -8,6 +8,11 @@ public class I18nDecoder : MonoBehaviour
 	
 	void Awake ()
 	{
+		ChangeLanguage ();
+	}
+	
+	void ChangeLanguage ()
+	{
 		I18n.Initialize();
 		I18n.ChangeLanguage(PlayerPrefs.GetInt("SelectedLanguage"));
 		
@@ -29,5 +34,6 @@ public class I18nDecoder : MonoBehaviour
 				labels [i].text = I18n.t (labels [i].text);
 			}
 		}
+
 	}
 }

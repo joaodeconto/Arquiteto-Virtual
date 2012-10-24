@@ -75,7 +75,7 @@ public class GUICameraController : MonoBehaviour {
 		mainCamera		   = GameObject.FindWithTag ("MainCamera").camera;
 	}
 
-	void Start ()
+	IEnumerator Start ()
 	{
 		pause.Initialize();
 
@@ -148,6 +148,11 @@ public class GUICameraController : MonoBehaviour {
 		interfaceGUI.uiRootFPS.SetActiveRecursively (false);
 
 		InvokeRepeating("VerifyWallVisibility", rateRefreshWallsVisibility, rateRefreshWallsVisibility);
+		
+		yield return new WaitForSeconds(rateRefreshWallsVisibility);
+		
+		interfaceGUI.viewUIPiso.SetActiveRecursively (false);
+		interfaceGUI.panelFloor.SetActiveRecursively (false);
 	}
 
 	void Update ()
@@ -724,11 +729,10 @@ public class GUICameraController : MonoBehaviour {
 		Debug.Log ("veio");
 
 		interfaceGUI.main.gameObject.SetActiveRecursively (true);
-
-		if (!isPanelFloor) {
-			interfaceGUI.viewUIPiso.SetActiveRecursively (false);
-			interfaceGUI.panelFloor.SetActiveRecursively (false);
-		}
+		
+		interfaceGUI.viewUIPiso.SetActiveRecursively (isPanelFloor);
+		interfaceGUI.panelFloor.SetActiveRecursively (isPanelFloor);
+		
 		if (!isPanelInfo) {
 			interfaceGUI.panelInfo.SetActiveRecursively (false);
 			interfaceGUI.panelMobile.SetActiveRecursively (false);

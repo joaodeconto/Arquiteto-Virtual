@@ -476,7 +476,7 @@ public class GUICameraController : MonoBehaviour {
 			}
 		}
 
-		csvString += "NOME;CODIGO;LARGURA;ALTURA;PROFUNDIDADE;\n";
+		csvString += "NOME;CODIGO;LARGURA;ALTURA;PROFUNDIDADE\n";
 
 		foreach (GameObject mobile in mobiles) {
 
@@ -501,7 +501,7 @@ public class GUICameraController : MonoBehaviour {
 							 info.Codigo 	+ ";" +
 							 info.Largura 	+ ";" +
 							 info.Altura 	+ ";" +
-							 info.Comprimento + ";" + "\n";
+							 info.Comprimento + "\n";
 
 				if (Regex.Match(info.name, "(Balcão triplo|Balcao triplo)").Success)
 				{
@@ -509,7 +509,7 @@ public class GUICameraController : MonoBehaviour {
 								 "89121" + ";" +
 								 "1200"  + ";" +
 								 "30" 	 + ";" +
-								 "520" 	 + ";" + "\n";
+								 "520" 	 + "\n";
 				}
 				else
 				{
@@ -517,13 +517,13 @@ public class GUICameraController : MonoBehaviour {
 								 "89081" + ";" +
 								 "800" 	 + ";" +
 								 "30" 	 + ";" +
-								 "520" 	 + ";" + "\n";
+								 "520" 	 + "\n";
 				}
 				csvString += "Cooktop" + ";" +
 							 "89150"   + ";" +
 							 "NA"	   + ";" +
 							 "NA" 	   + ";" +
-							 "NA" 	   + ";" + "\n";
+							 "NA" 	   + "\n";
 			}
 			else
 			{
@@ -531,7 +531,7 @@ public class GUICameraController : MonoBehaviour {
 							 info.Codigo 	  + shortenedBrandColorName + ";" +
 							 info.Largura	  + ";" +
 							 info.Altura 	  + ";" +
-							 info.Comprimento + ";" + "\n";
+							 info.Comprimento + "\n";
 			}
 		}
 
@@ -557,15 +557,17 @@ public class GUICameraController : MonoBehaviour {
 		{
 			for (int j = 0; j != rows.Length; ++j)
 			{
-				if (cells.Count > j && cells[j].Count > i)
+				if(cells.Count > j && cells[j].Count > i)
 					datatable[j,i] = cells[j][i];
-				else
+
+				//se a célula está vazia ou não foi preenchida, a preenche
+				if(string.IsNullOrEmpty(datatable[j,i]))
 					datatable[j,i] = " ";
 			}
 		}
 
 		XLSXReporter reporter = GameObject.Find ("XLSXReporter").GetComponent<XLSXReporter>();
-		
+
 		reporter.Init ();
 		reporter.BuildXLSX (datatable);
 

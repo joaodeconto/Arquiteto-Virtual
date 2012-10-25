@@ -21,7 +21,7 @@ public class ReportButtonHandler : MonoBehaviour {
 		fileBrowser = new GameObject().AddComponent<FileBrowserComponent>();
 		fileBrowser.Init (
 			ScreenUtils.ScaledRectInSenseHeight(50, 50, 500, 400),
-			"Salvar Relat√≥rio",
+			"Salvar RelatÛrio",
 			FileSelectedCallback,
 			"*.xlsx"
 		);
@@ -35,7 +35,7 @@ public class ReportButtonHandler : MonoBehaviour {
 	void FileSelectedCallback (string path)
 	{
 		if (string.IsNullOrEmpty(path))
-			path = "relat√≥rio.xlsx";
+			path = "relatÛrio.xlsx";
 
 		if (!path.Contains(".xlsx"))
 			path += ".xlsx";
@@ -54,8 +54,8 @@ public class ReportButtonHandler : MonoBehaviour {
 		GameObject[] mobiles = GameObject.FindGameObjectsWithTag ("Movel");
 
 		string filename = string.Format ("{0:yyyy-MM-dd-HH-mm-ss}", DateTime.Now) + ".xlsx";
-		string csvString = ";<b>Cozinhas Telasul A√ßo</b>";
-		csvString += ";<b>Linha</b>: " + Line.CurrentLine.Name + "\n";
+		string csvString = " ;Cozinhas Telasul AÁo ; # # ";
+		csvString += "Linha: ;" + Line.CurrentLine.Name + " ; ; # ";
 
 		string shortenedBrandColorName = null;
 
@@ -67,18 +67,18 @@ public class ReportButtonHandler : MonoBehaviour {
 
 			if (check.GetComponent<UICheckbox>().isChecked)
 			{
-				csvString += ";<b>Tampo</b>;" + check.GetComponent<CheckBoxTextureHandler> ().texture.name + "\n";
+				csvString += " Tampo: ;" + check.GetComponent<CheckBoxTextureHandler> ().texture.name + " ; ; # ";
 				break;
 			}
 		}
 
-		csvString += "<b>REF.</b>;Descri√ß√£o\r<b>PORTUGU√äS</b>;MEDIDAS\r(LxAxP);PESO L√çQ. (Kg); Observa√ß√µes\n";
+		csvString += " # REF.;DescriÁ„o;MEDIDAS (LxAxP);PESO LÕQ. (Kg) ; # ";
 
-		foreach (GameObject mobile in mobiles) {
-
+		foreach (GameObject mobile in mobiles)
+		{
 			InformacoesMovel info = mobile.GetComponent<InformacoesMovel> ();
 
-			//Se for um item extra ou se for algum item que n√£o possua c√≥digo, como as l√¢mpadas, n√£o adicionada no arquivo.
+			//Se for um item extra ou se for algum item que n„o possua cÛdigo, como as l‚mpadas, n„o adicionada no arquivo.
 			if ("Extras".Equals (info.Categoria) || String.IsNullOrEmpty(info.Codigo.Trim()))
 				continue;
 
@@ -93,45 +93,46 @@ public class ReportButtonHandler : MonoBehaviour {
 
 			if (Regex.Match(info.name, "(com cooktop|com cook top)").Success)
 			{
-				csvString += info.Codigo		+ ";" +
-							 info.NomeP			+ ";" +
-							 info.Largura		+ "x" + info.Altura	+ "x" + info.Comprimento + ";" +
-							 info.PesoLiquido	+ "\n";
+				csvString += info.Codigo		+ " ; " +
+							 info.NomeP			+ " ; " +
+							 info.Largura		+ "x" + info.Altura	+ "x" + info.Comprimento + " ; " +
+							 info.PesoLiquido	+ " ; #";
 
-				if (Regex.Match(info.name, "(Balc√£o triplo|Balcao triplo)").Success)
+				if (Regex.Match(info.name, "(Balc„o triplo|Balcao triplo)").Success)
 				{
-					csvString += "89121" + ";" +
-								 "Tampo cooktop triplo" + ";" +
-								 "1200" + "x" + "30" + "x" + "520;" +
-								 "33,56" + "\n";
+					csvString += "89121" + " ; " +
+								 "Tampo cooktop triplo" + " ; " +
+								 "1200" + "x" + "30" + "x" + "520 ; " +
+								 "33,56" + " ; #";
 				}
 				else
 				{
 					csvString += "89081" + ";" +
 								 "Tampo cooktop duplo" + ";" +
-								 "800" + "x" + "30"  + "x" + "520" +
-								 "24,08;" + "\n";
+								 "800" + "x" + "30"  + "x" + "520;" +
+								 "24,08" + " ; #";
 				}
-				csvString += "Cooktop" + ";" +
-							 "89150"   + ";" +
-							 "NA" +
-							 "NA" + "x" + "NA" + "x" + "NA" + ";" +
-							 "NA" + "\n";
+				csvString += "Cooktop" + " ; " +
+							 "89150"   + " ; " +
+							 "NA" + "x" + "NA" + "x" + "NA" + " ; " +
+							 "NA" + " ; #";
 			}
 			else
 			{
-				csvString += info.Codigo 	  + shortenedBrandColorName + ";" +
-							 info.NomeP		  + ";" +
-							 info.Largura	  + "x" + info.Altura 	  + "x" + info.Comprimento + ";" +
-							 info.PesoLiquido + "\n";
+				csvString += info.Codigo 	  + shortenedBrandColorName + " ; " +
+							 info.NomeP		  + " ; " +
+							 info.Largura	  + "x" + info.Altura 	  + "x" + info.Comprimento + " ; " +
+							 info.PesoLiquido + " ; #";
 			}
 		}
 
-		byte[] utf8String = Encoding.UTF8.GetBytes (csvString);
-		string data 	  = Encoding.UTF8.GetString (utf8String);
+		//Debug.Log ("csvString: " + csvString);
+
+		//removing newlines
+		csvString = csvString.Replace("\n"," , ");
 
 		int maxRowSize = 1;
-		string[] rows = data.Split ('\n');
+		string[] rows = csvString.Split ('#');
 		List<List<string>> cells = new List<List<string>> ();
 
 		foreach (string row in rows)
@@ -143,18 +144,28 @@ public class ReportButtonHandler : MonoBehaviour {
 				maxRowSize = col.Length;
 		}
 
-		string[,] datatable = new string[rows.Length, maxRowSize];
+		string[,] datatable = new string[rows.Length - 1, maxRowSize - 1];
 
-		for (int i = 0; i != maxRowSize; ++i)
+
+		for (int j = 0; j != rows.Length - 1; ++j)
 		{
-			for (int j = 0; j != rows.Length; ++j)
+			for (int i = 0; i != maxRowSize - 1; ++i)
 			{
 				if(cells.Count > j && cells[j].Count > i)
 					datatable[j,i] = cells[j][i];
 
-				//se a c√©lula est√° vazia ou n√£o foi preenchida, a preenche
+				//se a cÈlula est· vazia ou n„o foi preenchida, a preenche
 				if(string.IsNullOrEmpty(datatable[j,i]))
 					datatable[j,i] = " ";
+			}
+		}
+
+
+		for (int j = 0; j != rows.Length- 1; ++j)
+		{
+			for (int i = 0; i != maxRowSize - 1; ++i)
+			{
+				Debug.Log (" j:" + j + " i:" + i + " - " + datatable[j,i]);
 			}
 		}
 

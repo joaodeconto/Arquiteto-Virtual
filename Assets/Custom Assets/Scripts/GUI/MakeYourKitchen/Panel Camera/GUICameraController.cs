@@ -19,12 +19,6 @@ public class GUICameraController : MonoBehaviour {
 		public GameObject panelMobile;
 	}
 
-	private const string pathExportReport = "upload/export/";
-	private const string pathExportImage = "upload/images/";
-
-	private const string reportUploadFileUrl = "uploadReport.php";
-	private const string screenshotUploadFile = "uploadScreenshot.php";
-
 	public float Step;
 	public float Angle;
 	public float ZoomSpeed;

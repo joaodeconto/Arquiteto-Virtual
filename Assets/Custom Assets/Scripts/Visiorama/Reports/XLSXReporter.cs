@@ -76,8 +76,8 @@ public class XLSXReporter : MonoBehaviour
 		if (File.Exists (sheetFilepath))
 			File.Delete (sheetFilepath);
 
-		System.IO.File.WriteAllText(sharedStringsFilepath, GetSharedStrings());
-		System.IO.File.WriteAllText(sheetFilepath, GetSheet1());
+		System.IO.File.WriteAllText(sharedStringsFilepath, GetSharedStrings(), Encoding.UTF8);
+		System.IO.File.WriteAllText(sheetFilepath, GetSheet1(), Encoding.UTF8);
 
 		//After decompress and modify file
 		ZipWrapper.CompressDirectoryToFile (baseXlsxUnzippedDir,
@@ -106,14 +106,24 @@ public class XLSXReporter : MonoBehaviour
 			datatable.GetLength (0) < 2 ||
 			datatable.GetLength (1) < 2)
 		{
-			Debug.LogError ("eh necessÃ¡rio ter mais do que uma coluna e uma linha na tabela a ser criada");
+			Debug.LogError ("eh necessário ter mais do que uma coluna e uma linha na tabela a ser criada");
 			return false;
 		}
 
 		int cellCount = datatable.GetLength (0) * datatable.GetLength (1);
 
-		int maxColumns  = datatable.GetLength (0);
-		int maxRows		= datatable.GetLength (1);
+		// x = rows & y = columns
+		int maxRows		= datatable.GetLength (0);
+		int maxColumns  = datatable.GetLength (1);
+
+		//Gambaichon
+		List<float> columnsSizes = new List<float>();
+
+		columnsSizes.Add(45.5019607843137f);
+		columnsSizes.Add(7.79607843137255f);
+		columnsSizes.Add(45.5019607843137f);
+		columnsSizes.Add(18.9921568627451f);
+		columnsSizes.Add(30.5647058823529f);
 
 		MemoryStream ms = new MemoryStream ();
 
@@ -203,19 +213,19 @@ public class XLSXReporter : MonoBehaviour
 
 					writer.WriteStartElement ("cols");
 					{
-						//for (int i = 0; i != maxColumns; ++i)
-						//{
-							//writer.WriteStartElement ("col");
-							//{
-								//writer.WriteAttributeString("collapsed","false");
-								//writer.WriteAttributeString("hidden","false");
-								//writer.WriteAttributeString("max", i.ToString ());
-								//writer.WriteAttributeString("min", i.ToString ());
-								//writer.WriteAttributeString("style","0");
-								//writer.WriteAttributeString("width","13.5");
-							//}
-							//writer.WriteEndElement();
-						//}
+						for (int i = 0; i != maxColumns; ++i)
+						{
+							writer.WriteStartElement ("col");
+							{
+								writer.WriteAttributeString("collapsed","false");
+								writer.WriteAttributeString("hidden","false");
+								writer.WriteAttributeString("max", i.ToString ());
+								writer.WriteAttributeString("min", i.ToString ());
+								writer.WriteAttributeString("style","0");
+								writer.WriteAttributeString("width", columnsSizes[i].ToString());
+							}
+							writer.WriteEndElement();
+						}
 
 						writer.WriteStartElement ("col");
 						{
@@ -240,7 +250,7 @@ public class XLSXReporter : MonoBehaviour
 								writer.WriteAttributeString("customFormat","false");
 								writer.WriteAttributeString("customHeight","false");
 								writer.WriteAttributeString("hidden","false");
-								writer.WriteAttributeString("ht","12.85");
+								writer.WriteAttributeString("ht", i == 5 ? "22.25" : "13.85" );
 								writer.WriteAttributeString("outlineLevel","0");
 								writer.WriteAttributeString("r",(i + 1).ToString ());
 
@@ -249,7 +259,8 @@ public class XLSXReporter : MonoBehaviour
 									writer.WriteStartElement ("c");
 									{
 										writer.WriteAttributeString("r", ( GetColumnName (j) + (i + 1).ToString ()));
-										writer.WriteAttributeString("s","0");
+										//code venenoso huasuhsahusahu
+										writer.WriteAttributeString("s", i == 5 ? "3" : i > 5 ? "7" : j == 0 ? "2" : "1");
 										writer.WriteAttributeString("t","s");
 
 										writer.WriteStartElement ("v");

@@ -127,7 +127,7 @@ public class I18n {
 		hashWords [0] ["onix bianco"]	= "Onix Bianco";
 
 		//Pause menu
-		hashWords [0] ["Retomar"] 			= "Retomar";
+		hashWords [0] ["Retomar"] 			= "Retornar";
 		hashWords [0] ["Relatório"] 		= "Relatório";
 		hashWords [0] ["Captura de tela"] 	= "Captura de Tela";
 		hashWords [0] ["Idioma"]			= "Idioma";
@@ -142,7 +142,7 @@ public class I18n {
 		hashWords [0] ["Alta"]	= "Alta";
 		
 		//Texto do sobre
-		hashWords [0] ["Texto sobre"]= "Texto sobre BLALVLALSDLADLASODLODLDADS SDLAODLOODSAdA\n SASJISJIAISAIJSIJAIS.";
+		hashWords [0] ["Texto sobre"]= "Texto sobre BLALVLALSDLA\nDLASODLODLDADS SDLAODLOODSAdA\nSASJISJIAISAIJSIJAIS.";
 	}
 	static private void InitializeEnglish(){
 		//Escolha cozinha
@@ -243,7 +243,7 @@ public class I18n {
 		hashWords [1] ["Alta"]	= "High";
 		
 		//Texto do sobre
-		hashWords [1] ["Texto sobre"]= "About text BLALVLALSDLADLASODLODLDADS SDLAODLOODSAdA\n SASJISJIAISAIJSIJAIS.";
+		hashWords [1] ["Texto sobre"]= "About text BLALVLALSDLA\nDLASODLODLDADS SDLAODLOODSAdA\nSASJISJIAISAIJSIJAIS.";
 	}
 	static private void InitializeSpanish ()
 	{
@@ -330,7 +330,7 @@ public class I18n {
 		hashWords [2] ["onix bianco"] 	= "Onix Bianco";
 		
 		//Pause menu
-		hashWords [2] ["Retomar"] 			= "Retomar";
+		hashWords [2] ["Retomar"] 			= "Retornar";
 		hashWords [2] ["Relatório"] 		= "Relatório";
 		hashWords [2] ["Captura de tela"] 	= "Captura de Tela";
 		hashWords [2] ["Idioma"]			= "Idioma";
@@ -345,7 +345,7 @@ public class I18n {
 		hashWords [2] ["Alta"]	= "Alta";
 		
 		//Texto do sobre
-		hashWords [2] ["Texto sobre"]= "Texto sobre BLALVLALSDLADLASODLODLDADS SDLAODLOODSAdA\n SASJISJIAISAIJSIJAIS.";
+		hashWords [2] ["Texto sobre"]= "Texto sobre BLALVLALSDLA\nDLASODLODLDADS SDLAODLOODSAdA\nSASJISJIAISAIJSIJAIS.";
 	}
 	#endregion
 

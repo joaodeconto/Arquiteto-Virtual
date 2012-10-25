@@ -19,24 +19,23 @@ public class WallBuilderButtonHandler : MonoBehaviour {
 	}
 	
 	void OnClick(){
-		switch(wallBuilderButton){
-//			case WallBuilderButtonEnum.BuildGround:
-//				wallBuilder.BuildGround();
-//				break;
-			case WallBuilderButtonEnum.BuildWalls:
-				wallBuilder.BuildWalls ();
-				break;
-			case WallBuilderButtonEnum.Restart:
-				wallBuilder.Restart();
-				break;
-		}
-	}
-	
-	void Update()
-	{
-		if(Input.GetKey(KeyCode.P))
+		if (this.enabled)
 		{
-			Debug.Break();
+			switch(wallBuilderButton){
+	//			case WallBuilderButtonEnum.BuildGround:
+	//				wallBuilder.BuildGround();
+	//				break;
+				case WallBuilderButtonEnum.BuildWalls:
+					wallBuilder.BuildWalls ();
+					foreach (MonoBehaviour component in transform.GetComponents(typeof(MonoBehaviour)))
+					{
+						component.enabled = false;
+					}
+					break;
+				case WallBuilderButtonEnum.Restart:
+					wallBuilder.Restart();
+					break;
+			}
 		}
 	}
 }

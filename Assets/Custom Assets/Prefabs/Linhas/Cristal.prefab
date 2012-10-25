@@ -25010,14 +25010,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
   Medidas: 1050x840x445
-  NomeP: "Balc\xE3o triplo - 1 gaveta interna e com tampo"
-  NomeI: Triple base cabinet - 1 inside drawer and with top
-  NomeE: "Triple - 1 caj\xF3n interno y con tapa"
+  NomeP: "Balc\xE3o triplo - 3 gavetas e com tampo"
+  NomeI: Triple base cabinet - 3 drawers and with top
+  NomeE: Triple - 3 cajones y con tapa
   Codigo: 82313
-  PesoLiquido: 21.06
-  PesoBruto: 22.2
+  PesoLiquido: 23.62
+  PesoBruto: 24.38
   Volume: 1
-  Cubagem: 0.104
+  Cubagem: 0.143254
   Imagem: {fileID: 2800000, guid: cd95552bb7d3dbf409b47319f0c3a089, type: 1}
   top: 5
   tipoMovel: 0
@@ -25036,14 +25036,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
   Medidas: 1050x840x445
-  NomeP: "Balc\xE3o triplo - 3 gavetas e com tampo"
-  NomeI: Triple base cabinet - 3 drawers and with top
-  NomeE: Triple - 3 cajones y con tapa
+  NomeP: "Balc\xE3o triplo - 1 gaveta interna e com tampo"
+  NomeI: Triple base cabinet - 1 inside drawer and with top
+  NomeE: "Triple - 1 caj\xF3n interno y con tapa"
   Codigo: 82304
-  PesoLiquido: 23.62
-  PesoBruto: 24.38
+  PesoLiquido: 21.06
+  PesoBruto: 22.2
   Volume: 1
-  Cubagem: 0.143254
+  Cubagem: 0.104
   Imagem: {fileID: 2800000, guid: 15224292276699e45a84492d71f9c7ef, type: 1}
   top: 5
   tipoMovel: 0

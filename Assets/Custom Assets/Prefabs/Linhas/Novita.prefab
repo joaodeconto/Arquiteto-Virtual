@@ -96460,7 +96460,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 1050x550x290
+  Medidas: 81188
   NomeP: "Arm\xE1rio triplo"
   NomeI: Triple wall cabinet
   NomeE: Triple medio
@@ -96486,7 +96486,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 1050x1940x445
+  Medidas: 88176
   NomeP: Kit triplo - 3 gavetas
   NomeI: Triple Buffet & hutch - 3 drawer
   NomeE: Kit triple - 3 cajones
@@ -96554,7 +96554,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 1050x1940x445
+  Medidas: 88177
   NomeP: 'Kit triplo - 3 gavetas e 3 portas com vidro '
   NomeI: Triple Buffet & hutch - 3 drawer and 3 doors with glass
   NomeE: Kit triple - 3 cajones y 3 puertas con vidrio
@@ -96580,7 +96580,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 1050x1940x445
+  Medidas: 88170
   NomeP: Kit triplo - 1 gaveta interna e cristaleira
   NomeI: Triple Buffet & hutch - 1 inside drawer and sliding glass
   NomeE: "Kit triple - 1 caj\xF3n interno  y nicho intermedio con vidrio"
@@ -96632,7 +96632,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 1050x1940x445
+  Medidas: 88174
   NomeP: Kit triplo - 1 gaveta e cristaleira
   NomeI: Triple Buffet & hutch - 1 drawer and sliding glass
   NomeE: "Kit triple - 1 caj\xF3n y nicho intermedio con vidrio"
@@ -96658,7 +96658,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 1050x840x445
+  Medidas: 82309
   NomeP: "Balc\xE3o triplo - 3 gaveta e com tampo"
   NomeI: Triple base cabinet - 3 drawers and with top
   NomeE: Triple - 3 cajones y con tapa
@@ -96684,7 +96684,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 1050x1940x445
+  Medidas: 88171
   NomeP: Kit triplo - 1 gaveta interna, 3 portas com vidro e cristaleira
   NomeI: Triple Buffet & hutch - 1 inside drawer, 3 doors with glass and sliding glass
   NomeE: "Kit triple - 1 caj\xF3n interno, 3 puertas con vidrio y nicho intermedio
@@ -96711,7 +96711,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 1050x1940x445
+  Medidas: 88173
   NomeP: Kit triplo - 1 gaveta e 3 portas com vidro
   NomeI: Triple Buffet & hutch - 1 drawer and 3 doors with glass
   NomeE: "Kit triple - 1 caj\xF3n y 3 puertas con vidrio"
@@ -96763,7 +96763,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 1050x1940x445
+  Medidas: 88172
   NomeP: Kit triplo - 1 gaveta
   NomeI: Triple Buffet & hutch - 1 drawer
   NomeE: "Kit triple - 1 caj\xF3n"
@@ -96789,7 +96789,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 1050x840x445
+  Medidas: 82314
   NomeP: "Balc\xE3o triplo - 1 gaveta interna para pia 1050mm de cuba central"
   NomeI: Triple base cabinet - 1 inside drawer, ready for single bowl sink 1050mm
   NomeE: "Triple - 1 caj\xF3n interno,  listo para lavaplatos de 1050mm"
@@ -96815,7 +96815,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 2450x1940x290
+  Medidas: 80129
   NomeP: "Cozinha compacta 06\n87115 - Paneleiro duplo - 2 portas centrais com vidro\n81188
     - Arm\xE1rio triplo\n86043 - Arm\xE1rio nicho com vidro"
   NomeI: 'Compact kitchen 06
@@ -96849,7 +96849,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 700x1940x290
+  Medidas: 87114
   NomeP: Paneleiro duplo
   NomeI: Double high cabinet
   NomeE: Despensero doble
@@ -96875,7 +96875,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 1050x840x445
+  Medidas: 82308
   NomeP: "Balc\xE3o triplo - 1 gaveta interna e com tampo"
   NomeI: Triple base cabinet - 1 inside drawer and with top
   NomeE: "Triple - 1 caj\xF3n interno y con tapa"
@@ -96901,18 +96901,28 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 2450x1940x445
-  NomeP: "Cozinha compacta Novit\xE1 Exclusive\n88186 - Kit duplo\n81188 - Arm\xE1rio
-    triplo\n86044 - Arm\xE1rio nicho sem vidro"
-  NomeI: "Compact kitchen Novit\xE1 Exclusive\n88186 - Double Buffet & hutch\n81188
-    - Triple wall cabinet\n86044 - Wall cabinet - niche horizontal without glass"
-  NomeE: "Cocina compacta Novit\xE1 Exclusive\n88186 - Kit doble\n81188 - Triple medio\n86044
-    - Nicho horizontal sin vidrio"
+  Medidas: 80130
+  NomeP: "Cozinha compacta 11\n87116 - Paneleiro duplo - 4 portas\n81187 - Arm\xE1rio
+    triplo baixo\n86043 - Arm\xE1rio nicho com vidro"
+  NomeI: 'Compact kitchen 11
+
+    87116 - Double high cabinet - 4 doors
+
+    81187 - Low triple wall cabinet
+
+    86043 - Wall cabinet - niche horizontal with glass'
+  NomeE: 'Cocina compacta 11
+
+    87116 - Despensero doble - 4 puertas
+
+    81187 - Triple bajo
+
+    86043 - Nicho horizontal con vidrio'
   Codigo: 80130
-  PesoLiquido: 42.81
-  PesoBruto: 44.87
-  Volume: 2
-  Cubagem: 0.147
+  PesoLiquido: 31.32
+  PesoBruto: 33
+  Volume: 1
+  Cubagem: 0.107
   Imagem: {fileID: 2800000, guid: e10594f676e19be429cd31b402299ff3, type: 1}
   top: 0
   tipoMovel: 0
@@ -96946,7 +96956,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 1050x840x445
+  Medidas: 82315
   NomeP: "Balc\xE3o triplo - 2 gavetas e 1 frente falsa para pia 1050mm de cuba central"
   NomeI: Triple base cabinet - 2 drawers, ready for single bowl sink 1050mm
   NomeE: Triple - 2 cajones, listo para lavaplatos de 1050mm
@@ -96972,7 +96982,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 700x400x290
+  Medidas: 81186
   NomeP: "Arm\xE1rio duplo baixo"
   NomeI: Low double wall cabinet
   NomeE: Doble bajo
@@ -96998,7 +97008,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 1050x1940x445
+  Medidas: 88175
   NomeP: Kit triplo - 1 gaveta, 3 portas com vidro e cristaleira
   NomeI: Triple Buffet & hutch - 1 drawer, 3 doors with glass and sliding glass
   NomeE: "Kit triple - 1 caj\xF3n, 3 puertas con vidrio y nicho intermedio con vidrio"
@@ -97024,15 +97034,15 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 1050x1940x445
-  NomeP: Kit triplo gaveta interna portas de vidro
-  NomeI: 
-  NomeE: 
+  Medidas: 88169
+  NomeP: Kit triplo - 1 gaveta interna e 3 portas com vidro
+  NomeI: Triple Buffet & hutch - 1 inside drawer and 3 doors with glass
+  NomeE: "Kit triple - 1 caj\xF3n interno y 3 puertas con vidrio"
   Codigo: 88169
-  PesoLiquido: 
-  PesoBruto: 
-  Volume: 
-  Cubagem: 
+  PesoLiquido: 38.6
+  PesoBruto: 40.9
+  Volume: 3
+  Cubagem: 0.1896
   Imagem: {fileID: 2800000, guid: 43c15ce151b88104f94c5b2ddb5ac8a6, type: 1}
   top: 5
   tipoMovel: 0
@@ -97066,7 +97076,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 1050x550x290
+  Medidas: 81189
   NomeP: "Arm\xE1rio triplo - 3 portas com vidro"
   NomeI: Triple wall cabinet - 3 glass doors
   NomeE: Triple medio - 1 puerta con vidrio
@@ -97092,7 +97102,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 1050x840x445
+  Medidas: 82311
   NomeP: "Balc\xE3o triplo - 3 gavetas e sem tampo"
   NomeI: Triple base cabinet - 3 drawers and without top
   NomeE: Triple - 3 cajones y sin tapa
@@ -97118,7 +97128,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 1050x1940x445
+  Medidas: 88178
   NomeP: Kit triplo - 3 gavetas e cristaleira
   NomeI: Triple Buffet & hutch - 3 drawer and sliding glass
   NomeE: Kit triple - 3 cajones y nicho intermedio con vidrio
@@ -97160,7 +97170,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 1050x840x445
+  Medidas: 82310
   NomeP: "Balc\xE3o triplo - 1 gaveta interna e sem tampo"
   NomeI: Triple base cabinet - 1 inside drawer and without top
   NomeE: "Triple - 1 caj\xF3n interno y sin tapa"
@@ -97320,7 +97330,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 1050x1940x445
+  Medidas: 88168
   NomeP: Kit triplo - 1 gaveta interna
   NomeI: Triple Buffet & hutch - 1 inside drawer
   NomeE: "Kit triple - 1 caj\xF3n interno"
@@ -97346,7 +97356,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 1050x1940x445
+  Medidas: 88179
   NomeP: Kit triplo - 3 gavetas, 3 portas com vidro e cristaleira
   NomeI: Triple Buffet & hutch - 3 drawer, 3 doors with glass and sliding glass
   NomeE: Kit triple - 3 cajones, 3 puertas con vidrio y nicho intermedio con vidrio
@@ -97533,7 +97543,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 700x1940x445
+  Medidas: 88186
   NomeP: "Kit duplo - Novit\xE1 Exclusive"
   NomeI: "Double Buffet & hutch - Novit\xE1 Exclusive"
   NomeE: "Kit doble - Novit\xE1 Exclusive"
@@ -97556,15 +97566,18 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 2450x1800x290
-  NomeP: Compacta Exclusive
-  NomeI: Compact Exclusive
-  NomeE: Compacta Exclusive
+  Medidas: 80136
+  NomeP: "Cozinha compacta Novit\xE1 Exclusive\n88186 - Kit duplo\n81188 - Arm\xE1rio
+    triplo\n86044 - Arm\xE1rio nicho sem vidro"
+  NomeI: "Compact kitchen Novit\xE1 Exclusive\n88186 - Double Buffet & hutch\n81188
+    - Triple wall cabinet\n86044 - Wall cabinet - niche horizontal without glass"
+  NomeE: "Cocina compacta Novit\xE1 Exclusive\n88186 - Kit doble\n81188 - Triple medio\n86044
+    - Nicho horizontal sin vidrio"
   Codigo: 80136
-  PesoLiquido: 
-  PesoBruto: 
-  Volume: 
-  Cubagem: 
+  PesoLiquido: 42.81
+  PesoBruto: 44.87
+  Volume: 2
+  Cubagem: 0.147
   Imagem: {fileID: 2800000, guid: e10594f676e19be429cd31b402299ff3, type: 1}
   top: 0
   tipoMovel: 0
@@ -97579,7 +97592,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 2450x1940x290
+  Medidas: 80126
   NomeP: "Cozinha compacta 03\n87115 - Paneleiro duplo - 2 portas centrais com vidro\n81188
     - Arm\xE1rio triplo\n81186 - Arm\xE1rio duplo baixo"
   NomeI: 'Compact kitchen 03
@@ -97610,7 +97623,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 2450x1940x290
+  Medidas: 80124
   NomeP: "Cozinha compacta 01\n87114 - Paneleiro duplo\n81188 - Arm\xE1rio triplo\n81186
     - Arm\xE1rio duplo baixo"
   NomeI: 'Compact kitchen 01
@@ -97646,7 +97659,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 2450x1940x290
+  Medidas: 80125
   NomeP: "Cozinha compacta 02\n87114 - Paneleiro duplo\n81189 - Arm\xE1rio triplo
     - 3 portas com vidro\n81186 - Arm\xE1rio duplo baixo"
   NomeI: 'Compact kitchen 02
@@ -97682,7 +97695,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 700x1940x290
+  Medidas: 87115
   NomeP: Paneleiro duplo - 2 portas centrais com vidro
   NomeI: Double high cabinet - 2 central glass doors
   NomeE: 'Despensero doble - 2 puertas con vidrio '
@@ -97705,7 +97718,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 2450x1600x290
+  Medidas: 80131
   NomeP: "Cozinha compacta 12\n87116 - Paneleiro duplo - 4 portas\n81187 - Arm\xE1rio
     triplo baixo\n86044 - Arm\xE1rio nicho sem vidro"
   NomeI: 'Compact kitchen 12
@@ -97741,7 +97754,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 2450x1940x290
+  Medidas: 80128
   NomeP: "Cozinha compacta 05\n87114 - Paneleiro duplo\n81189 - Arm\xE1rio triplo
     - 3 portas com vidro\n86043 - Arm\xE1rio nicho com vidro"
   NomeI: 'Compact kitchen 05
@@ -97777,7 +97790,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 700x1600x290
+  Medidas: 87116
   NomeP: Paneleiro duplo - 4 portas
   NomeI: Double high cabinet - 4 doors
   NomeE: Despensero doble - 4 puertas
@@ -97800,7 +97813,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 1050x400x290
+  Medidas: 81187
   NomeP: "Arm\xE1rio triplo baixo"
   NomeI: Low triple wall cabinet
   NomeE: Triple bajo
@@ -97823,7 +97836,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 1}
   m_Name: 
-  Medidas: 2450x1940x290
+  Medidas: 80127
   NomeP: "Cozinha compacta 04\n87114 - Paneleiro duplo\n81188 - Arm\xE1rio triplo\n86043
     - Arm\xE1rio nicho com vidro"
   NomeI: 'Compact kitchen 04

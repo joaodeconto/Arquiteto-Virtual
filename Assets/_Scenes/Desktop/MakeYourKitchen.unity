@@ -4574,6 +4574,7 @@ GameObject:
   - 114: {fileID: 541163384}
   - 114: {fileID: 541163381}
   - 114: {fileID: 541163382}
+  - 114: {fileID: 541163385}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -4741,6 +4742,19 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e19800dfd4c45c042b925735d09be0ce, type: 1}
   m_Name: 
+--- !u!114 &541163385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 541163373}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34382083ad114a07d000fbfb8d76c639, type: 1}
+  m_Name: 
+  iterations: 2
+  blurSpread: .600000024
+  blurShader: {fileID: 4800000, guid: 57e6deea7c2924e22a5138e2b70bb4dc, type: 1}
 --- !u!1 &547841574
 GameObject:
   m_ObjectHideFlags: 0
@@ -18207,6 +18221,18 @@ Prefab:
     - target: {fileID: 2000000, guid: 6c725421d73502e4b9beb831ab050df1, type: 2}
       propertyPath: m_CullingMask.m_Bits
       value: 4294963199
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 6c725421d73502e4b9beb831ab050df1, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6c725421d73502e4b9beb831ab050df1, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 6c725421d73502e4b9beb831ab050df1, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6c725421d73502e4b9beb831ab050df1, type: 2}

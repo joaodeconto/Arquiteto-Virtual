@@ -115,7 +115,8 @@ public class CameraButtonHandler : MonoBehaviour {
 			case CameraButtonHandlerEnum.CameraPause:
 				GameController.GetInstance().GetInterfaceManager().SetInterface("Pause");
 				mainCamera.GetComponent<CameraController>().freeCamera.FreezeCamera();
-
+				mainCamera.GetComponent<BlurEffect>().enabled = true;
+			
 				List<GameObject> furnitures = new List<GameObject>();
 				furnitures.AddRange(GameObject.FindGameObjectsWithTag("Movel"));
 				if (GameObject.FindGameObjectWithTag("MovelSelecionado")) furnitures.Add(GameObject.FindGameObjectWithTag("MovelSelecionado"));

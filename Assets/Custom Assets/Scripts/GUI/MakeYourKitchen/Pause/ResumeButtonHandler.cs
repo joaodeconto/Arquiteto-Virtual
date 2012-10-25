@@ -6,6 +6,7 @@ public class ResumeButtonHandler : MonoBehaviour {
 	void OnClick ()
 	{
 		GameController.GetInstance ().GetInterfaceManager ().SetInterface ("Main");
+		Camera.main.GetComponent<BlurEffect>().enabled = false;
 		Camera.main.GetComponent<CameraController>().freeCamera.FreeCamera ();
 		
 		List<GameObject> furnitures = new List<GameObject>();

@@ -85,7 +85,7 @@ public class WallBuilder : MonoBehaviour {
 	
 	void OnGUI () {
 		if (ao != null) {
-			GUI.Box(new Rect(50, (Screen.height - 25) - 50, 200, 25), "Carregando: " + (int)(ao.progress * 100f) + "%");
+			GUI.Box(new Rect((Screen.width / 2) - 100f, (Screen.height / 2) - 12.5f, 200f, 25f), "Carregando: " + (int)(ao.progress * 100f) + "%");
 		}
 	}
 	#endregion

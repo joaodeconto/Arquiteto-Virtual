@@ -229,14 +229,14 @@ MonoBehaviour:
   - name: bt_Lixeira
     outer:
       serializedVersion: 2
-      x: 835
-      y: 556
+      x: 900
+      y: 589
       width: 44
       height: 46
     inner:
       serializedVersion: 2
-      x: 835
-      y: 556
+      x: 900
+      y: 589
       width: 44
       height: 46
     paddingLeft: 0
@@ -280,14 +280,14 @@ MonoBehaviour:
   - name: TexBut02
     outer:
       serializedVersion: 2
-      x: 945
-      y: 548
+      x: 900
+      y: 546
       width: 42
       height: 42
     inner:
       serializedVersion: 2
-      x: 945
-      y: 548
+      x: 900
+      y: 546
       width: 42
       height: 42
     paddingLeft: 0
@@ -314,14 +314,14 @@ MonoBehaviour:
   - name: Color02But
     outer:
       serializedVersion: 2
-      x: 648
-      y: 515
+      x: 997
+      y: 738
       width: 25
       height: 25
     inner:
       serializedVersion: 2
-      x: 648
-      y: 515
+      x: 997
+      y: 738
       width: 25
       height: 25
     paddingLeft: .119999997
@@ -331,14 +331,14 @@ MonoBehaviour:
   - name: Color03But
     outer:
       serializedVersion: 2
-      x: 997
-      y: 803
+      x: 648
+      y: 515
       width: 25
       height: 25
     inner:
       serializedVersion: 2
-      x: 997
-      y: 803
+      x: 648
+      y: 515
       width: 25
       height: 25
     paddingLeft: .159999996
@@ -365,14 +365,14 @@ MonoBehaviour:
   - name: TexBut04
     outer:
       serializedVersion: 2
-      x: 900
-      y: 546
+      x: 945
+      y: 548
       width: 42
       height: 42
     inner:
       serializedVersion: 2
-      x: 900
-      y: 546
+      x: 945
+      y: 548
       width: 42
       height: 42
     paddingLeft: .0476190485
@@ -620,14 +620,14 @@ MonoBehaviour:
   - name: bt_pause
     outer:
       serializedVersion: 2
-      x: 900
-      y: 589
+      x: 835
+      y: 556
       width: 44
       height: 46
     inner:
       serializedVersion: 2
-      x: 900
-      y: 589
+      x: 835
+      y: 556
       width: 44
       height: 46
     paddingLeft: 0
@@ -774,13 +774,13 @@ MonoBehaviour:
     outer:
       serializedVersion: 2
       x: 997
-      y: 738
+      y: 803
       width: 25
       height: 25
     inner:
       serializedVersion: 2
       x: 997
-      y: 738
+      y: 803
       width: 25
       height: 25
     paddingLeft: .119999997
@@ -858,14 +858,14 @@ MonoBehaviour:
   - name: btn-lixo-p
     outer:
       serializedVersion: 2
-      x: 988
-      y: 559
+      x: 991
+      y: 604
       width: 31
       height: 31
     inner:
       serializedVersion: 2
-      x: 988
-      y: 559
+      x: 991
+      y: 604
       width: 31
       height: 31
     paddingLeft: 0
@@ -875,14 +875,14 @@ MonoBehaviour:
   - name: btn-foco-p
     outer:
       serializedVersion: 2
-      x: 991
-      y: 604
+      x: 988
+      y: 559
       width: 31
       height: 31
     inner:
       serializedVersion: 2
-      x: 991
-      y: 604
+      x: 988
+      y: 559
       width: 31
       height: 31
     paddingLeft: 0
@@ -892,14 +892,14 @@ MonoBehaviour:
   - name: btn-informacoes-p
     outer:
       serializedVersion: 2
-      x: 900
-      y: 513
+      x: 642
+      y: 633
       width: 32
       height: 32
     inner:
       serializedVersion: 2
-      x: 900
-      y: 513
+      x: 642
+      y: 633
       width: 32
       height: 32
     paddingLeft: 0
@@ -926,16 +926,33 @@ MonoBehaviour:
   - name: btn-snap
     outer:
       serializedVersion: 2
-      x: 642
-      y: 633
+      x: 900
+      y: 513
       width: 32
       height: 32
     inner:
       serializedVersion: 2
-      x: 642
-      y: 633
+      x: 900
+      y: 513
       width: 32
       height: 32
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: umpixecinza
+    outer:
+      serializedVersion: 2
+      x: 642
+      y: 597
+      width: 2
+      height: 2
+    inner:
+      serializedVersion: 2
+      x: 642
+      y: 597
+      width: 2
+      height: 2
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0

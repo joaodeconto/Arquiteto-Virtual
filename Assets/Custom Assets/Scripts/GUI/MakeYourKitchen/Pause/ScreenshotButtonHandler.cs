@@ -4,7 +4,6 @@ using System;
 
 public class ScreenshotButtonHandler : MonoBehaviour {
 
-	private const string pathExportImage = "upload/images/";
 	private const string screenshotUploadFile = "uploadScreenshot.php";
 
 	FileBrowserComponent fileBrowser;
@@ -17,9 +16,13 @@ public class ScreenshotButtonHandler : MonoBehaviour {
 		//GameObject.Find("cfg").GetComponent<Configuration>().LoadState("teste/teste.xml",false);
 		//GameObject.Find("cfg").GetComponent<Configuration>().RunPreset(0);
 
+		GameController
+			.GetInstance ().
+				GetInterfaceManager ()
+					.SetInterface ("DeactivateAll");
 #if UNITY_WEBPLAYER
-		StartCoroutine ("MakeScreenshot");
-#elif !(UNITY_ANDROID || UNITY_IPHONE) || UNITY_EDITOR
+		MakeScreenshot();
+#elif !(UNITY_ANDROID || UNITY_IPHONE)
 		fileBrowser = new GameObject().AddComponent<FileBrowserComponent>();
 		fileBrowser.Init (
             ScreenUtils.ScaledRectInSenseHeight(50, 50, 500, 400),
@@ -27,11 +30,6 @@ public class ScreenshotButtonHandler : MonoBehaviour {
             ImageSelectedCallback,
 			"*.png"
         );
-
-		GameController
-			.GetInstance ().
-				GetInterfaceManager ()
-					.SetInterface ("DeactivateAll");
 #endif
 	}
 
@@ -47,56 +45,53 @@ public class ScreenshotButtonHandler : MonoBehaviour {
 
 		Destroy(fileBrowser.gameObject);
 
-		this.gameObject.active = true;
-
-		StartCoroutine ("MakeScreenshot");
+		MakeScreenshot();
     }
 
-	private IEnumerator MakeScreenshot ()
+	private void MakeScreenshot ()
 	{
-		yield return new WaitForEndOfFrame();
+		ScreenShootter ss = new GameObject().AddComponent<ScreenShootter>();
 
-		// Create a texture the size of the screen, RGB24 format
-		int width = Screen.width;
-		int height = Screen.height;
-		Texture2D tex = new Texture2D (width, height, TextureFormat.RGB24, false);
+		ss.TakePhoto(IsDoneScreenshot);
+	}
 
-		// Read screen contents into the texture
-		tex.ReadPixels (new Rect (0, 0, width, height), 0, 0);
-		tex.Apply ();
-
-		// Encode texture into PNG
-		byte[] bytes = tex.EncodeToPNG ();
-		Destroy (tex);
-
-#if UNITY_WEBPLAYER
-
-		// Create a Web Form
-		WWWForm form = new WWWForm ();
-//	    Debug.LogError( String.Format("{0:yyyy-MM-dd-HH-mm-ss-}", DateTime.Now) + "screenshot.png");
-
-		string filename = String.Format ("{0:yyyy-MM-dd-HH-mm-ss-}", DateTime.Now) + "screenshot.png";
-
-		form.AddBinaryData ("file", bytes, filename, "multipart/form-data");
-
-		WWW www = new WWW (screenshotUploadFile, form);
-
-		yield return www;
-
-		if (www.error != null){
-			print (www.error);
-		} else {
-			print ("Finished Uploading Screenshot");
-			Application.ExternalCall ("tryToDownload", pathExportImage + filename);
-		}
-#else
-		System.IO.File.WriteAllBytes(path, bytes);
-#endif
-
+	byte[] imageData;
+	public void IsDoneScreenshot(byte[] imageData)
+	{
 		GameController
 			.GetInstance ().
 				GetInterfaceManager ()
 					.SetInterface ("Pause");
 
+		this.imageData = imageData;
+
+#if UNITY_WEBPLAYER
+		StartCoroutine("UploadScreenshot");
+#else
+		System.IO.File.WriteAllBytes(path, imageData);
+#endif
+	}
+
+	private IEnumerator UploadScreenshot()
+	{
+		WWWForm form = new WWWForm ();
+
+		string filename = String.Format ("{0:yyyy-MM-dd-HH-mm-ss-}", DateTime.Now) + "screenshot.png";
+
+		form.AddBinaryData ("file", imageData, filename, "multipart/form-data");
+
+		WWW www = new WWW (screenshotUploadFile, form);
+
+		yield return www;
+
+		if (www.error != null)
+		{
+			print (www.error);
+		}
+		else
+		{
+			print ("Finished Uploading Screenshot");
+			Application.ExternalCall ("tryToDownload", filename);
+		}
 	}
 }

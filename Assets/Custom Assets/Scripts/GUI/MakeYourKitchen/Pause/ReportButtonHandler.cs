@@ -7,7 +7,6 @@ using System.Text.RegularExpressions;
 
 public class ReportButtonHandler : MonoBehaviour {
 
-	private const string pathExportReport    = "upload/export/";
 	private const string reportUploadFileUrl = "uploadReport.php";
 
 	FileBrowserComponent fileBrowser;
@@ -21,7 +20,7 @@ public class ReportButtonHandler : MonoBehaviour {
 		fileBrowser = new GameObject().AddComponent<FileBrowserComponent>();
 		fileBrowser.Init (
 			ScreenUtils.ScaledRectInSenseHeight(50, 50, 500, 400),
-			"Salvar RelatÛrio",
+			"Salvar Relat√≥rio",
 			FileSelectedCallback,
 			"*.xlsx"
 		);
@@ -35,7 +34,7 @@ public class ReportButtonHandler : MonoBehaviour {
 	void FileSelectedCallback (string path)
 	{
 		if (string.IsNullOrEmpty(path))
-			path = "relatÛrio.xlsx";
+			path = "relat√≥rio.xlsx";
 
 		if (!path.Contains(".xlsx"))
 			path += ".xlsx";
@@ -54,7 +53,7 @@ public class ReportButtonHandler : MonoBehaviour {
 		GameObject[] mobiles = GameObject.FindGameObjectsWithTag ("Movel");
 
 		string filename = string.Format ("{0:yyyy-MM-dd-HH-mm-ss}", DateTime.Now) + ".xlsx";
-		string csvString = " ;Cozinhas Telasul AÁo ; # # ";
+		string csvString = " ;Cozinhas Telasul A√ßo ; # # ";
 		csvString += "Linha: ;" + Line.CurrentLine.Name + " ; ; # ";
 
 		string shortenedBrandColorName = null;
@@ -72,13 +71,13 @@ public class ReportButtonHandler : MonoBehaviour {
 			}
 		}
 
-		csvString += " # REF.;DescriÁ„o;MEDIDAS (LxAxP);PESO LÕQ. (Kg) ; # ";
+		csvString += " # REF.;Descri√ß√£o;MEDIDAS (LxAxP);PESO L√çQ. (Kg) ; # ";
 
 		foreach (GameObject mobile in mobiles)
 		{
 			InformacoesMovel info = mobile.GetComponent<InformacoesMovel> ();
 
-			//Se for um item extra ou se for algum item que n„o possua cÛdigo, como as l‚mpadas, n„o adicionada no arquivo.
+			//Se for um item extra ou se for algum item que n√£o possua c√≥digo, como as l√¢mpadas, n√£o adicionada no arquivo.
 			if ("Extras".Equals (info.Categoria) || String.IsNullOrEmpty(info.Codigo.Trim()))
 				continue;
 
@@ -98,7 +97,7 @@ public class ReportButtonHandler : MonoBehaviour {
 							 info.Largura		+ "x" + info.Altura	+ "x" + info.Comprimento + " ; " +
 							 info.PesoLiquido	+ " ; #";
 
-				if (Regex.Match(info.name, "(Balc„o triplo|Balcao triplo)").Success)
+				if (Regex.Match(info.name, "(Balc√£o triplo|Balcao triplo)").Success)
 				{
 					csvString += "89121" + " ; " +
 								 "Tampo cooktop triplo" + " ; " +
@@ -154,7 +153,7 @@ public class ReportButtonHandler : MonoBehaviour {
 				if(cells.Count > j && cells[j].Count > i)
 					datatable[j,i] = cells[j][i];
 
-				//se a cÈlula est· vazia ou n„o foi preenchida, a preenche
+				//se a c√©lula est√° vazia ou n√£o foi preenchida, a preenche
 				if(string.IsNullOrEmpty(datatable[j,i]))
 					datatable[j,i] = " ";
 			}
@@ -189,7 +188,7 @@ public class ReportButtonHandler : MonoBehaviour {
 		if (www.error != null)
 			print (www.error);
 		else
-			Application.ExternalCall ("tryToDownload", pathExportReport + filename);
+			Application.ExternalCall ("tryToDownload", filename);
 #else
 		//System.IO.File.WriteAllText(m_textPath, data);
 

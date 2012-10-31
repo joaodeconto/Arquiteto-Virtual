@@ -10,7 +10,7 @@ public class CheckBoxColorHandler : MonoBehaviour {
 
 		TooltipHandler tipHandler = gameObject.AddComponent<TooltipHandler> ();
 		tipHandler.gameObject 	  = this.gameObject;
-		tipHandler.SetTooltip (I18n.t (gameObject.name.Split (' ')[1].ToLower()));
+		tipHandler.SetTooltip (I18n.GetInstance().t (gameObject.name.Split (' ')[1].ToLower()));
 	}
 	
 	void OnClick ()

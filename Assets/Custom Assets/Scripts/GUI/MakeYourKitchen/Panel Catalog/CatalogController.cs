@@ -8,10 +8,13 @@ public class CatalogController : MonoBehaviour
 	// Use this for initialization of the static classes
 	void Start ()
 	{
+//		I18n i18n = I18n.GetInstance();
+//		i18n.Initialize ();
+//		i18n.ChangeLanguage (PlayerPrefs.GetInt ("SelectedLanguage"));
+		
 		//Inicializar classe ScreenUtils
 		ScreenUtils.Initialize (1024, 640);
-		I18n.Initialize ();
-		I18n.ChangeLanguage (PlayerPrefs.GetInt ("SelectedLanguage"));
+		
 		LoadObjects (PlayerPrefs.GetInt ("SelectedKitchen"));
 
 		/* Combine meshs for while */

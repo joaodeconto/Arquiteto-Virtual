@@ -13,8 +13,10 @@ public class Initialization : MonoBehaviour {
 		
 		//Inicializar classe ScreenUtils
 		ScreenUtils.Initialize(1024,640);
-		I18n.Initialize();
-		I18n.ChangeLanguage(PlayerPrefs.GetInt("SelectedLanguage"));
+		
+		I18n i18n = I18n.GetInstance();
+		i18n.Initialize();
+		i18n.ChangeLanguage(PlayerPrefs.GetInt("SelectedLanguage"));
 		LoadObjects(PlayerPrefs.GetInt("SelectedKitchen"));
 
 		/* Combine meshs for while */

@@ -48,6 +48,7 @@ public class Painter: MonoBehaviour {
 	private int fontSizeGroup, fontSizeButton, fontSizeLabel, thumbSize;
 	
 	private GameObject[] cameras;
+	private I18n i18n;
 	
 	// Setando posições (Chamar ela no Start e no ScreenSizeChange)
 	void SetPositions () {
@@ -106,6 +107,9 @@ public class Painter: MonoBehaviour {
 	}
 	
 	void Start () {
+	
+		i18n = I18n.GetInstance();
+		
 		ScreenUtils.Initialize(1024, 640);
 
 		dropperBool = colorOption = textureOption = false;
@@ -239,11 +243,11 @@ public class Painter: MonoBehaviour {
 								if (hit.transform.tag.Equals(tag)) {
 									print("render: " + render);
 									if (hit.transform.tag.Equals("Parede")) {
-										nameObject = I18n.t("Parede");
+										nameObject = i18n.t("Parede");
 										render = hit.transform.GetComponentInChildren<Renderer>();
 									}
 									else if (hit.transform.tag.Equals("Teto")) {
-										nameObject = I18n.t("Teto");
+										nameObject = i18n.t("Teto");
 										render = hit.transform.renderer;
 									}
 									color = render.material.color;
@@ -290,7 +294,7 @@ public class Painter: MonoBehaviour {
 			rectWindow.x = Screen.width - rectWindow.width;
 			GUI.BeginGroup(rectWindow, "", groupStyle);
 			// Buttons Options
-			if (GUI.Button(rectTopColor, I18n.t("Cor"), topColorGroupStyle)) { 
+			if (GUI.Button(rectTopColor, i18n.t("Cor"), topColorGroupStyle)) { 
 				colorOption = !colorOption; 
 				textureOption = false;
 				if (colorOption) {
@@ -320,7 +324,7 @@ public class Painter: MonoBehaviour {
 			// Option Color
 			if (colorOption) {
 				color = GUIControls.RGBCircle (position, color, "", colorCircle, pickerColor, sliderColorPicker, thumbVerticalStyle);
-				if (GUI.Button(rectReset, I18n.t("Descolorir"), button)) { color = Color.white; }
+				if (GUI.Button(rectReset, i18n.t("Descolorir"), button)) { color = Color.white; }
 				GUI.Label(rectGetAll, "RGB:", labelStyle);
 				color.r = GUI.HorizontalSlider(rectRGBA[0], color.r, 0f, 1f, slider, thumb);
 				GUI.Label(rectFieldRGBA[0], Convert.ToString((int)Mathf.Ceil(color.r * 255)), labelStyle);

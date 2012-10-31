@@ -14,7 +14,7 @@ public class CheckBoxTextureHandler : MonoBehaviour {
 
 		TooltipHandler tipHandler = gameObject.AddComponent<TooltipHandler> ();
 		tipHandler.gameObject = this.gameObject;
-		tipHandler.SetTooltip (I18n.t (gameObject.name.ToLower ()));
+		tipHandler.SetTooltip (I18n.GetInstance().t (gameObject.name.ToLower ()));
 	}
 	
 	void OnClick ()

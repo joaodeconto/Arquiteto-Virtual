@@ -31,7 +31,7 @@ public class TooltipHandler : MonoBehaviour
 	private bool isOver;
 	
 	void Start () {
-		label = useI18n ? I18n.t(label) : label;
+		label = useI18n ? I18n.GetInstance().t(label) : label;
 	}
 	
 	void OnHover (bool isOver)

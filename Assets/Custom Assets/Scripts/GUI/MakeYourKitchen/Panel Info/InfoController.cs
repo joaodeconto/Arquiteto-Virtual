@@ -47,9 +47,12 @@ public class InfoController : MonoBehaviour {
 
 	//Painter to Extras
 	private Painter painter;
+	private I18n i18n;
 	
 	void Awake ()
 	{
+		i18n = I18n.GetInstance();
+	
 		mainCamera = GameObject.FindWithTag("MainCamera");
 		
 		if (checkBoxCores == null)
@@ -288,20 +291,20 @@ public class InfoController : MonoBehaviour {
 	
 	private void DrawEmptyWindow (){
 	
-		infoLabels[0].SetLabels(I18n.t("Código"), "");
-		infoLabels[1].SetLabels(I18n.t("LXPXA"), "");
-		infoLabels[2].SetLabels(I18n.t("Descrição"), "");
-		infoLabels[3].SetLabels(I18n.t("Linha"), "");
-		infoLabels[4].SetLabels(I18n.t("Categoria"), "");
+		infoLabels[0].SetLabels(i18n.t("Código"), "");
+		infoLabels[1].SetLabels(i18n.t("LXPXA"), "");
+		infoLabels[2].SetLabels(i18n.t("Descrição"), "");
+		infoLabels[3].SetLabels(i18n.t("Linha"), "");
+		infoLabels[4].SetLabels(i18n.t("Categoria"), "");
 	}
 	
 	private void SetInfo (InformacoesMovel furnitureData) {
 		this.furnitureData = furnitureData;
-		infoLabels[0].SetLabels(I18n.t("Código"), furnitureData.Codigo);
-		infoLabels[1].SetLabels(I18n.t("LXPXA"), furnitureData.Medidas);
-		infoLabels[2].SetLabels(I18n.t("Descrição"), furnitureData.Nome);
-		infoLabels[3].SetLabels(I18n.t("Linha"), Line.CurrentLine.Name);
-		infoLabels[4].SetLabels(I18n.t("Categoria"), furnitureData.Categoria);
+		infoLabels[0].SetLabels(i18n.t("Código"), furnitureData.Codigo);
+		infoLabels[1].SetLabels(i18n.t("LXPXA"), furnitureData.Medidas);
+		infoLabels[2].SetLabels(i18n.t("Descrição"), furnitureData.Nome);
+		infoLabels[3].SetLabels(i18n.t("Linha"), Line.CurrentLine.Name);
+		infoLabels[4].SetLabels(i18n.t("Categoria"), furnitureData.Categoria);
 	}
 	#endregion
 		

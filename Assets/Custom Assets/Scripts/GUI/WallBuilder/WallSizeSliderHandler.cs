@@ -32,7 +32,7 @@ public class WallSizeSliderHandler : MonoBehaviour {
 			
 			TooltipHandler tipHandler = objectLabel.AddComponent<TooltipHandler> ();
 			tipHandler.gameObject = objectLabel;
-			tipHandler.SetTooltip (I18n.t (TooltipString));	
+			tipHandler.SetTooltip (I18n.GetInstance().t (TooltipString));	
 		}
 	}
 	

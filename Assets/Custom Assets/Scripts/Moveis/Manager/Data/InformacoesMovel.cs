@@ -31,7 +31,7 @@ public enum TipoMovel {
 public class InformacoesMovel : MonoBehaviour {
 	
 	public string[] 	Names { get; set; }
-	public string 		Nome { get { return Names[I18n.GetCurrentLanguageIndex()]; } }
+	public string 		Nome { get { return Names[I18n.GetInstance().GetCurrentLanguageIndex()]; } }
 	
 	/* Setted In Visual */
 	public string 		Medidas;
@@ -68,7 +68,7 @@ public class InformacoesMovel : MonoBehaviour {
 		
 		wasInitialized = true;
 		
-		Names = new string[I18n.GetAvailableLanguages().Length];
+		Names = new string[I18n.GetInstance().GetAvailableLanguages().Length];
 		Names[0] = NomeP;
 		Names[1] = NomeI;
 		Names[2] = NomeE;

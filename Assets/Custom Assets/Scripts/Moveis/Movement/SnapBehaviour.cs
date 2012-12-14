@@ -246,15 +246,16 @@ public class SnapBehaviour : MonoBehaviour
 				if (bf.Intersects (bounds))
 				{
 					colliding = true;
-					collisionPrecision = hit.point;
-					collisionPrecision.y = transform.position.y;
+					collisionPrecision = point;
 					
 //					BoxDebug(bounds.center, bounds.size, Color.magenta);
 					
-					if (Mathf.Abs(hit.point.x - f.transform.position.x) >= Mathf.Abs(hit.point.z - f.transform.position.z))
+					if (Mathf.Abs(point.x - f.transform.position.x) >= Mathf.Abs(point.z - f.transform.position.z))
 					{
-						float temp = f.collider.bounds.min.x - (f.collider.bounds.min.x - f.transform.position.x);
-						if (hit.point.x < f.transform.position.x)
+//						float temp = f.collider.bounds.min.x - (f.collider.bounds.min.x - f.transform.position.x);
+//						float temp = f.collider.bounds.center.x;
+						float temp = f.collider.bounds.size.x - (f.collider.bounds.size.x - f.transform.localPosition.x);
+						if (point.x < f.transform.position.x)
 						{
 							collisionPrecision.x = (temp - f.collider.bounds.size.x - ((collider.bounds.size.x - f.collider.bounds.size.x) / 2));
 							GameObject otherFurnitureCollider = VerifyCollisionInFurniture (collisionPrecision);
@@ -278,7 +279,8 @@ public class SnapBehaviour : MonoBehaviour
 					else
 					{
 						float temp = f.collider.bounds.min.z - (f.collider.bounds.min.z - f.transform.position.z);
-						if (hit.point.z < f.transform.position.z)
+						//float temp = f.collider.bounds.center.z;
+						if (point.z < f.transform.position.z)
 						{
 							collisionPrecision.z = (temp - collider.bounds.size.z);
 							if (VerifyCollisionInFurniture (collisionPrecision) != null)

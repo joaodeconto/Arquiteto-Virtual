@@ -61,6 +61,7 @@ public class SnapBehaviour : MonoBehaviour
 		rigidbody.drag = 100.0f;
 		rigidbody.angularDrag = 100.0f;
 		rigidbody.freezeRotation = true;
+		rigidbody.isKinematic = true;
 
 		mainCamera = GameObject.FindWithTag ("MainCamera").camera;
 
@@ -124,29 +125,34 @@ public class SnapBehaviour : MonoBehaviour
 	}
 	#endif
 	
+	List<GameObject> furniture = new List<GameObject>();
+	
 	void SelectObject ()
 	{
 		if (!enabled)
 			return;
 		
-		GameObject[] furniture = GameObject.FindGameObjectsWithTag ("Movel");
+		furniture.Clear ();
 		
-		if (furniture.Length == 0)
-			return;
-		
-		for (int i = 0; i != furniture.Length; ++i) {
-			furniture [i].rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+		foreach (GameObject f in GameObject.FindGameObjectsWithTag ("Movel"))
+		{
+			furniture.Add (f);
 		}
 		
-		GameObject activeFurniture = GameObject.FindGameObjectWithTag ("MovelSelecionado");
+		if (furniture.Count == 0)
+			return;
 		
-		if (activeFurniture != null)
-			activeFurniture.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+		GameObject activeFurniture = GameObject.FindGameObjectWithTag ("MovelSelecionado");
+		if (activeFurniture)
+		{
+			furniture.Remove(activeFurniture);
+		}
 	}
 	
 	float vertical, horizontal;
 	RaycastHit hit;
 	Vector2 mousePosition;
+	Vector3 lastPosition;
 
 	void DragObject ()
 	{
@@ -155,23 +161,56 @@ public class SnapBehaviour : MonoBehaviour
 
 		Ray ray = mainCamera.ScreenPointToRay (Input.mousePosition);
 		
-		if (Physics.Raycast (ray, out hit, Mathf.Infinity, 1 << LayerMask.NameToLayer ("Cenario"))) {
+		if (Physics.Raycast (ray, out hit, Mathf.Infinity, 1 << LayerMask.NameToLayer ("Cenario")))
+		{
 
 			if (hit.transform.tag == "Parede" ||
 			    hit.transform.tag == "Chao" ||
 				hit.transform.tag == "Teto") {
-
+				
 				if (GetComponent<InformacoesMovel> ().tipoMovel != TipoMovel.MOVEL) {
-					transform.position = (hit.point.x * transform.parent.right) + 
-										 (hit.point.z * transform.parent.forward);
-				} else {
+					/*if (furniture.Count != 0)
+					{
+						foreach (GameObject f in furniture)
+						{
+							transform.position = (Mathf.Clamp(	hit.point.x, 
+															  	f.collider.bounds.min.x,
+															  	f.collider.bounds.max.x) * transform.parent.right) + 
+												 (Mathf.Clamp(	hit.point.z, 
+																f.collider.bounds.min.z,
+																f.collider.bounds.max.z) * transform.parent.forward);
+						}
+					}
+					else
+					{*/
+					bool colliding = false;
+					Vector3 collisionPrecision = Vector3.zero;
+					if (furniture.Count != 0)
+					{
+						Vector3 hitPoint = hit.point;
+						hitPoint.y = transform.localPosition.y;
+						SnapFunction (hitPoint, ref collisionPrecision, ref colliding);
+					}
+					
+					if (!colliding)
+					{
+						transform.localPosition = (hit.point.x * transform.parent.right) + 
+										 	 (hit.point.z * transform.parent.forward);
+					}
+					else
+					{
+						transform.localPosition = collisionPrecision;
+						lastPosition = transform.localPosition;
+					}
+					//}
+				}
+				else
+				{
 					transform.position = (hit.point.x * transform.parent.right) + 
 										 (hit.point.y * transform.parent.up) + 
 										 (hit.point.z * transform.parent.forward);
 				}
 			}
-		
-			//transform.position += new Vector3(0,0.2f,0);
 			 
 			wasDragged = true;
 		}
@@ -184,12 +223,6 @@ public class SnapBehaviour : MonoBehaviour
 			
 		enableDrag = false;
 		
-		if (GetComponent<InformacoesMovel> ().tipoMovel != TipoMovel.MOVEL) {
-			this.rigidbody.constraints = RigidbodyConstraints.FreezePositionY |
-											RigidbodyConstraints.FreezeRotation;
-		} else {
-			this.rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-		}
 		/*		
 		if(wasDragged){
 			transform.position -= new Vector3(0,0.2f,0);
@@ -198,79 +231,156 @@ public class SnapBehaviour : MonoBehaviour
 		//need to refresh wasDragged 
 		wasDragged = false;
 		
-		Invoke ("VerifyGround", 0.2f);
+		//Invoke ("VerifyGround", 0.2f);
 	}
 	
-	void VerifyGround ()
+	void SnapFunction (Vector3 point, ref Vector3 collisionPrecision, ref bool colliding)
 	{
-		uint foundGround = 0;
-		
-		if (this.collider.gameObject.layer == LayerMask.NameToLayer ("Painel")) return;
-		
-		Vector3[] origins = new Vector3[4]{new Vector3 (this.collider.bounds.center.x - 
-			                                            this.collider.bounds.size.x / 4,
-						                             	2,
-			                                            this.collider.bounds.center.z - 
-			                                            this.collider.bounds.size.z / 4),
-											new Vector3 (this.collider.bounds.center.x - 
-			                                            this.collider.bounds.size.x / 4,
-						                             	2,
-			                                            this.collider.bounds.center.z + 
-			                                            this.collider.bounds.size.z / 4),
-											new Vector3 (this.collider.bounds.center.x + 
-			                                            this.collider.bounds.size.x / 4,
-						                             	2,
-			                                            this.collider.bounds.center.z - 
-			                                            this.collider.bounds.size.z / 4),
-											new Vector3 (this.collider.bounds.center.x + 
-			                                            this.collider.bounds.size.x / 4,
-						                             	2,
-			                                            this.collider.bounds.center.z + 
-			                                            this.collider.bounds.size.z / 4)};
-				
-		Ray ray;
-		foreach (Vector3 origin in origins) {
-			ray = new Ray (origin, Vector3.down);
-//			Debug.DrawRay(ray.origin, ray.direction * 100, Color.cyan);
-			if (Physics.Raycast (ray, out hit, Mathf.Infinity, 1 << LayerMask.NameToLayer ("Cenario"))) {			
-				if (hit.transform.tag == "Chao" || hit.transform.tag == "Parede") {
-					++foundGround;
-				} else {
-//					Debug.Log(hit.transform.tag);	
+		Bounds bounds = new Bounds(point + (collider.bounds.center - transform.localPosition), collider.bounds.size);
+		foreach (GameObject f in furniture)
+		{
+			if (transform != f.transform)
+			{
+				Vector3 tempCenter = f.collider.bounds.center;
+				Bounds bf = new Bounds(tempCenter, f.collider.bounds.size);
+				if (bf.Intersects (bounds))
+				{
+					colliding = true;
+					collisionPrecision = hit.point;
+					collisionPrecision.y = transform.position.y;
+					
+//					BoxDebug(bounds.center, bounds.size, Color.magenta);
+					
+					if (Mathf.Abs(hit.point.x - f.transform.position.x) >= Mathf.Abs(hit.point.z - f.transform.position.z))
+					{
+						float temp = f.collider.bounds.min.x - (f.collider.bounds.min.x - f.transform.position.x);
+						if (hit.point.x < f.transform.position.x)
+						{
+							collisionPrecision.x = (temp - f.collider.bounds.size.x - ((collider.bounds.size.x - f.collider.bounds.size.x) / 2));
+							GameObject otherFurnitureCollider = VerifyCollisionInFurniture (collisionPrecision);
+							if (otherFurnitureCollider != null)
+							{
+//								collisionPrecision.x = transform.localPosition.x;
+								SnapFunction (otherFurnitureCollider.transform.localPosition, ref collisionPrecision, ref colliding);
+							}
+						}
+						else
+						{
+							collisionPrecision.x = (temp + f.collider.bounds.size.x + ((collider.bounds.size.x - f.collider.bounds.size.x) / 2));
+							GameObject otherFurnitureCollider = VerifyCollisionInFurniture (collisionPrecision);
+							if (otherFurnitureCollider != null)
+							{
+//								collisionPrecision.x = transform.localPosition.x;
+								SnapFunction (otherFurnitureCollider.transform.localPosition, ref collisionPrecision, ref colliding);
+							}
+						}
+					}
+					else
+					{
+						float temp = f.collider.bounds.min.z - (f.collider.bounds.min.z - f.transform.position.z);
+						if (hit.point.z < f.transform.position.z)
+						{
+							collisionPrecision.z = (temp - collider.bounds.size.z);
+							if (VerifyCollisionInFurniture (collisionPrecision) != null)
+							{
+//								collisionPrecision.z = (temp + f.collider.bounds.size.z);
+							}
+						}
+						else
+						{
+							collisionPrecision.z = (temp + collider.bounds.size.z);
+							if (VerifyCollisionInFurniture (collisionPrecision) != null)
+							{
+//								collisionPrecision.z = (temp - f.collider.bounds.size.z);
+							}
+						}
+					}
 				}
-			} else {
-//				Debug.LogError ("Whata? Não pegou em nada?");
 			}
 		}
-//		Debug.Break();
-//		Debug.DebugBreak();
-		
-		Debug.Log ("foundGround: " + foundGround.ToString ());
-		if (foundGround != 4) {
-			
-			GameObject[] ground = GameObject.FindGameObjectsWithTag ("ChaoVazio");
-			GameObject nearestAvailableGround = null;
-			
-			float shortestDistance = float.MaxValue;
-			float distance;
-			foreach (GameObject groundPiece in ground) {
-				distance = Vector3.Distance (groundPiece.transform.position, hit.point);
-				if (distance < shortestDistance) {
-					shortestDistance = distance;
-					nearestAvailableGround = groundPiece;
+	}
+	
+	GameObject VerifyCollisionInFurniture (Vector3 position)
+	{
+		Bounds newBoundPosition = new Bounds(position + (collider.bounds.center - transform.localPosition), collider.bounds.size - (Vector3.one * 0.001f));
+//		BoxDebug(newBoundPosition.center, newBoundPosition.size, Color.red);
+		foreach (GameObject newTest in furniture)
+		{
+			if (transform != newTest.transform)
+			{
+				Vector3 newTestTempCenter = newTest.collider.bounds.center;
+				Bounds newTestBounds = new Bounds(newTestTempCenter, newTest.collider.bounds.size);
+//				BoxDebug(newTestBounds.center, newTestBounds.size, Color.blue);
+				if (newTestBounds.Intersects (newBoundPosition))
+				{
+					return newTest;
 				}
 			}
-			
-			if (GetComponent<InformacoesMovel> ().tipoMovel != TipoMovel.MOVEL)
-			{
-				this.transform.position  = nearestAvailableGround.transform.position;
-			}
-			else 
-			{
-				Vector3 positionMobile = nearestAvailableGround.transform.position;
-				positionMobile.y = this.transform.position.y;
-				this.transform.position  = positionMobile;
-			}
 		}
+		return null;
+	}
+	
+	/*void BoxDebug (Vector3 positionMax, Vector3 postionMin, Color color)
+	{
+		Debug.DrawLine((Vector3.right * postionMin.x) + (Vector3.up * postionMin.y) + (Vector3.forward * postionMin.z), (Vector3.right * positionMax.x) + (Vector3.up * postionMin.y) + (Vector3.forward * postionMin.z), color);
+		Debug.DrawLine((Vector3.right * postionMin.x) + (Vector3.up * postionMin.y) + (Vector3.forward * positionMax.z), (Vector3.right * positionMax.x) + (Vector3.up * postionMin.y) + (Vector3.forward * positionMax.z), color);
+		Debug.DrawLine((Vector3.right * postionMin.x) + (Vector3.up * postionMin.y) + (Vector3.forward * postionMin.z), (Vector3.right * postionMin.x) + (Vector3.up * postionMin.y) + (Vector3.forward * positionMax.z), color);
+		Debug.DrawLine((Vector3.right * positionMax.x) + (Vector3.up * postionMin.y) + (Vector3.forward * postionMin.z), (Vector3.right * positionMax.x) + (Vector3.up * postionMin.y) + (Vector3.forward * positionMax.z), color);
+		Debug.DrawLine((Vector3.right * postionMin.x) + (Vector3.up * positionMax.y) + (Vector3.forward * postionMin.z), (Vector3.right * positionMax.x) + (Vector3.up * positionMax.y) + (Vector3.forward * postionMin.z), color);
+		Debug.DrawLine((Vector3.right * postionMin.x) + (Vector3.up * positionMax.y) + (Vector3.forward * positionMax.z), (Vector3.right * positionMax.x) + (Vector3.up * positionMax.y) + (Vector3.forward * positionMax.z), color);
+		Debug.DrawLine((Vector3.right * postionMin.x) + (Vector3.up * positionMax.y) + (Vector3.forward * postionMin.z), (Vector3.right * postionMin.x) + (Vector3.up * positionMax.y) + (Vector3.forward * positionMax.z), color);
+		Debug.DrawLine((Vector3.right * positionMax.x) + (Vector3.up * positionMax.y) + (Vector3.forward * postionMin.z), (Vector3.right * positionMax.x) + (Vector3.up * positionMax.y) + (Vector3.forward * positionMax.z), color);
+		Debug.DrawLine((Vector3.right * postionMin.x) + (Vector3.up * postionMin.y) + (Vector3.forward * positionMax.z), (Vector3.right * postionMin.x) + (Vector3.up * positionMax.y) + (Vector3.forward * positionMax.z), color);
+		Debug.DrawLine((Vector3.right * postionMin.x) + (Vector3.up * postionMin.y) + (Vector3.forward * postionMin.z), (Vector3.right * postionMin.x) + (Vector3.up * positionMax.y) + (Vector3.forward * postionMin.z), color);
+		Debug.DrawLine((Vector3.right * positionMax.x) + (Vector3.up * postionMin.y) + (Vector3.forward * positionMax.z), (Vector3.right * positionMax.x) + (Vector3.up * positionMax.y) + (Vector3.forward * positionMax.z), color);
+		Debug.DrawLine((Vector3.right * positionMax.x) + (Vector3.up * postionMin.y) + (Vector3.forward * postionMin.z), (Vector3.right * positionMax.x) + (Vector3.up * positionMax.y) + (Vector3.forward * postionMin.z), color);
+	}*/
+	
+	/*void BoxDebug (Vector3 center, Vector3 positionMin, Vector3 positionMax, Color color)
+	{
+		Debug.DrawLine((Vector3.right * (center.x - positionMin.x)) + (Vector3.up * (center.y - positionMin.y)) + (Vector3.forward * (center.z - positionMin.z)), (Vector3.right * (center.x + positionMax.x)) + (Vector3.up * (center.y - positionMin.y)) + (Vector3.forward * (center.z - positionMin.z)), color);
+		Debug.DrawLine((Vector3.right * (center.x - positionMin.x)) + (Vector3.up * (center.y - positionMin.y)) + (Vector3.forward * (center.z + positionMax.z)), (Vector3.right * (center.x + positionMax.x)) + (Vector3.up * (center.y - positionMin.y)) + (Vector3.forward * (center.z + positionMax.z)), color);
+		Debug.DrawLine((Vector3.right * (center.x - positionMin.x)) + (Vector3.up * (center.y - positionMin.y)) + (Vector3.forward * (center.z - positionMin.z)), (Vector3.right * (center.x - positionMin.x)) + (Vector3.up * (center.y - positionMin.y)) + (Vector3.forward * (center.z + positionMax.z)), color);
+		Debug.DrawLine((Vector3.right * (center.x + positionMax.x)) + (Vector3.up * (center.y - positionMin.y)) + (Vector3.forward * (center.z - positionMin.z)), (Vector3.right * (center.x + positionMax.x)) + (Vector3.up * (center.y - positionMin.y)) + (Vector3.forward * (center.z + positionMax.z)), color);
+		Debug.DrawLine((Vector3.right * (center.x - positionMin.x)) + (Vector3.up * (center.y + positionMax.y)) + (Vector3.forward * (center.z - positionMin.z)), (Vector3.right * (center.x + positionMax.x)) + (Vector3.up * (center.y + positionMax.y)) + (Vector3.forward * (center.z - positionMin.z)), color);
+		Debug.DrawLine((Vector3.right * (center.x - positionMin.x)) + (Vector3.up * (center.y + positionMax.y)) + (Vector3.forward * (center.z + positionMax.z)), (Vector3.right * (center.x + positionMax.x)) + (Vector3.up * (center.y + positionMax.y)) + (Vector3.forward * (center.z + positionMax.z)), color);
+		Debug.DrawLine((Vector3.right * (center.x - positionMin.x)) + (Vector3.up * (center.y + positionMax.y)) + (Vector3.forward * (center.z - positionMin.z)), (Vector3.right * (center.x - positionMin.x)) + (Vector3.up * (center.y + positionMax.y)) + (Vector3.forward * (center.z + positionMax.z)), color);
+		Debug.DrawLine((Vector3.right * (center.x + positionMax.x)) + (Vector3.up * (center.y + positionMax.y)) + (Vector3.forward * (center.z - positionMin.z)), (Vector3.right * (center.x + positionMax.x)) + (Vector3.up * (center.y + positionMax.y)) + (Vector3.forward * (center.z + positionMax.z)), color);
+		Debug.DrawLine((Vector3.right * (center.x - positionMin.x)) + (Vector3.up * (center.y - positionMin.y)) + (Vector3.forward * (center.z + positionMax.z)), (Vector3.right * (center.x - positionMin.x)) + (Vector3.up * (center.y + positionMax.y)) + (Vector3.forward * (center.z + positionMax.z)), color);
+		Debug.DrawLine((Vector3.right * (center.x - positionMin.x)) + (Vector3.up * (center.y - positionMin.y)) + (Vector3.forward * (center.z - positionMin.z)), (Vector3.right * (center.x - positionMin.x)) + (Vector3.up * (center.y + positionMax.y)) + (Vector3.forward * (center.z - positionMin.z)), color);
+		Debug.DrawLine((Vector3.right * (center.x + positionMax.x)) + (Vector3.up * (center.y - positionMin.y)) + (Vector3.forward * (center.z + positionMax.z)), (Vector3.right * (center.x + positionMax.x)) + (Vector3.up * (center.y + positionMax.y)) + (Vector3.forward * (center.z + positionMax.z)), color);
+		Debug.DrawLine((Vector3.right * (center.x + positionMax.x)) + (Vector3.up * (center.y - positionMin.y)) + (Vector3.forward * (center.z - positionMin.z)), (Vector3.right * (center.x + positionMax.x)) + (Vector3.up * (center.y + positionMax.y)) + (Vector3.forward * (center.z - positionMin.z)), color);
+	}*/
+	
+	void BoxDebug (Vector3 center, Vector3 size, Color color)
+	{
+		size /= 2;
+		Debug.DrawLine((Vector3.right * (center.x - size.x)) + (Vector3.up * (center.y - size.y)) + (Vector3.forward * (center.z - size.z)), (Vector3.right * (center.x + size.x)) + (Vector3.up * (center.y - size.y)) + (Vector3.forward * (center.z - size.z)), color);
+		Debug.DrawLine((Vector3.right * (center.x - size.x)) + (Vector3.up * (center.y - size.y)) + (Vector3.forward * (center.z + size.z)), (Vector3.right * (center.x + size.x)) + (Vector3.up * (center.y - size.y)) + (Vector3.forward * (center.z + size.z)), color);
+		Debug.DrawLine((Vector3.right * (center.x - size.x)) + (Vector3.up * (center.y - size.y)) + (Vector3.forward * (center.z - size.z)), (Vector3.right * (center.x - size.x)) + (Vector3.up * (center.y - size.y)) + (Vector3.forward * (center.z + size.z)), color);
+		Debug.DrawLine((Vector3.right * (center.x + size.x)) + (Vector3.up * (center.y - size.y)) + (Vector3.forward * (center.z - size.z)), (Vector3.right * (center.x + size.x)) + (Vector3.up * (center.y - size.y)) + (Vector3.forward * (center.z + size.z)), color);
+		Debug.DrawLine((Vector3.right * (center.x - size.x)) + (Vector3.up * (center.y + size.y)) + (Vector3.forward * (center.z - size.z)), (Vector3.right * (center.x + size.x)) + (Vector3.up * (center.y + size.y)) + (Vector3.forward * (center.z - size.z)), color);
+		Debug.DrawLine((Vector3.right * (center.x - size.x)) + (Vector3.up * (center.y + size.y)) + (Vector3.forward * (center.z + size.z)), (Vector3.right * (center.x + size.x)) + (Vector3.up * (center.y + size.y)) + (Vector3.forward * (center.z + size.z)), color);
+		Debug.DrawLine((Vector3.right * (center.x - size.x)) + (Vector3.up * (center.y + size.y)) + (Vector3.forward * (center.z - size.z)), (Vector3.right * (center.x - size.x)) + (Vector3.up * (center.y + size.y)) + (Vector3.forward * (center.z + size.z)), color);
+		Debug.DrawLine((Vector3.right * (center.x + size.x)) + (Vector3.up * (center.y + size.y)) + (Vector3.forward * (center.z - size.z)), (Vector3.right * (center.x + size.x)) + (Vector3.up * (center.y + size.y)) + (Vector3.forward * (center.z + size.z)), color);
+		Debug.DrawLine((Vector3.right * (center.x - size.x)) + (Vector3.up * (center.y - size.y)) + (Vector3.forward * (center.z + size.z)), (Vector3.right * (center.x - size.x)) + (Vector3.up * (center.y + size.y)) + (Vector3.forward * (center.z + size.z)), color);
+		Debug.DrawLine((Vector3.right * (center.x - size.x)) + (Vector3.up * (center.y - size.y)) + (Vector3.forward * (center.z - size.z)), (Vector3.right * (center.x - size.x)) + (Vector3.up * (center.y + size.y)) + (Vector3.forward * (center.z - size.z)), color);
+		Debug.DrawLine((Vector3.right * (center.x + size.x)) + (Vector3.up * (center.y - size.y)) + (Vector3.forward * (center.z + size.z)), (Vector3.right * (center.x + size.x)) + (Vector3.up * (center.y + size.y)) + (Vector3.forward * (center.z + size.z)), color);
+		Debug.DrawLine((Vector3.right * (center.x + size.x)) + (Vector3.up * (center.y - size.y)) + (Vector3.forward * (center.z - size.z)), (Vector3.right * (center.x + size.x)) + (Vector3.up * (center.y + size.y)) + (Vector3.forward * (center.z - size.z)), color);
+	}
+	
+	public bool AABBContains (Vector3 min, Vector3 max)
+	{
+		Vector3 _tempVec;
+		
+		_tempVec = collider.bounds.min;
+		if (min.x < _tempVec.x || min.y < _tempVec.y || min.z < _tempVec.z)
+			return false;
+
+		_tempVec = collider.bounds.max;
+		if (max.x > _tempVec.x || max.y > _tempVec.y || max.z > _tempVec.z)
+			return false;
+
+		return true;
 	}
 }

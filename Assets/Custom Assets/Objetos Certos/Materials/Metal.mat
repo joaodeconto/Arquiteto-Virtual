@@ -27,16 +27,16 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _Cube
+          name: _Spec_Gloss_Reflec_Masks
         second:
-          m_Texture: {fileID: 8900000, guid: 2050805fae8b203419aed58c9832e5cb, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _Spec_Gloss_Reflec_Masks
+          name: _Cube
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 8900000, guid: 53e912a3c974cd745964006493b5162c, type: 2}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -72,11 +72,11 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .24626863, g: .24626863, b: .24626863, a: 1}
+        second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
           name: _SpecColor
-        second: {r: .26119405, g: .26119405, b: .26119405, a: 1}
+        second: {r: .479020953, g: .479020953, b: .479020953, a: 1}
       data:
         first:
           name: _ReflectColor

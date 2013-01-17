@@ -19,10 +19,11 @@ TextureImporter:
   isReadable: 1
   grayScaleToAlpha: 0
   generateCubemap: 0
-  textureFormat: -3
+  seamlessCubemap: 0
+  textureFormat: 5
   maxTextureSize: 4096
   textureSettings:
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: -1
     wrapMode: 1
@@ -31,3 +32,4 @@ TextureImporter:
   compressionQuality: 50
   textureType: 2
   buildTargetSettings: []
+  userData: 

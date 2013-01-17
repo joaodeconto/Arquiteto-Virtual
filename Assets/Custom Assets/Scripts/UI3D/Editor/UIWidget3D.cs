@@ -3,11 +3,6 @@ using UnityEditor;
 
 public class UIWidget3D : EditorWindow  {
 	
-	string myString = "Hello World";
-    bool groupEnabled;
-    bool myBool = true;
-    float myFloat = 1.23f;
-    
     [MenuItem ("BlackBugio/GUI/Widget")]
     static void Init ()
 	{

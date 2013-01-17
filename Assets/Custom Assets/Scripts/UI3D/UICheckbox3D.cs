@@ -130,6 +130,7 @@ public class UICheckbox3D : MonoBehaviour
 				}
 				isChecked = true;
 			}
+			gameObject.SendMessage  ("OnChecked", SendMessageOptions.DontRequireReceiver);
 			tweenTarget.SendMessage ("OnChecked", SendMessageOptions.DontRequireReceiver);
 			SendMessageUpwards ("OnChecked", SendMessageOptions.RequireReceiver);
 		}
@@ -151,6 +152,8 @@ public class UICheckbox3D : MonoBehaviour
 				}
 				isChecked = false;
 			}
+			Debug.Log ("teste");
+			gameObject.SendMessage ("OnDeschecked", SendMessageOptions.DontRequireReceiver);
 			tweenTarget.SendMessage ("OnDeschecked", SendMessageOptions.DontRequireReceiver);
 		}
 	}

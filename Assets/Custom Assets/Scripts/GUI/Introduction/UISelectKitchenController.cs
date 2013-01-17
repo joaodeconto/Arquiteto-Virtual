@@ -13,6 +13,7 @@ public class UISelectKitchenController : MonoBehaviour
 	
 	protected Transform[] kitchens;
 	protected int CurrentIndex = -1;
+	protected int LastIndex;
 	
 //	void Start ()
 //	{
@@ -45,21 +46,29 @@ public class UISelectKitchenController : MonoBehaviour
 			}
 			else
 			{
+				
+				LastIndex = CurrentIndex;
+				
 				iTween.MoveTo (	kitchens[CurrentIndex].gameObject, 
 								iTween.Hash (iT.MoveTo.position, otherPosition.position,
 											 iT.MoveTo.time, time,
-											 iT.MoveTo.easetype, easeType));
+											 iT.MoveTo.easetype, easeType,
+											 iT.MoveTo.oncomplete, "DisableKitchen"));
 				
 				iTween.MoveTo (	kitchens[index].gameObject,
 								iTween.Hash (iT.MoveTo.position, mainPosition.position,
 											 iT.MoveTo.time, time,
 											 iT.MoveTo.easetype, easeType));
 				
-				kitchens[CurrentIndex].gameObject.SetActive (false);
 				kitchens[index].gameObject.SetActive (true);
 			}
 			
 			CurrentIndex = index;
 		}
+	}
+	
+	void DisableKitchen ()
+	{
+		kitchens[LastIndex].gameObject.SetActive (false);
 	}
 }

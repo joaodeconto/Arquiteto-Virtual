@@ -137,19 +137,22 @@ public class UICheckbox3D : MonoBehaviour
 	
 	public void Deschecked ()
 	{
-		if (enabled)
+		if (isChecked)
 		{
-			if (hasColor && changeColor)
+			if (enabled)
 			{
-				for (int i = 0; i != materials.Count; i++)
+				if (hasColor && changeColor)
 				{
-					to[i] = isHighlighted ? hover : currentColors[i];
-					factors[i] = 0f;
+					for (int i = 0; i != materials.Count; i++)
+					{
+						to[i] = isHighlighted ? hover : currentColors[i];
+						factors[i] = 0f;
+					}
 				}
+				isChecked = false;
 			}
-			isChecked = false;
+			tweenTarget.SendMessage ("OnDeschecked", SendMessageOptions.DontRequireReceiver);
 		}
-		tweenTarget.SendMessage ("OnDeschecked", SendMessageOptions.DontRequireReceiver);
 	}
 	
 	void Update ()

@@ -23,30 +23,29 @@ public class MakeBrandIntroduction : MonoBehaviour
 		{
 			foreach (Material m in r.materials)
 			{
-				Regex regexType = new Regex(".*("+materialPortaP.name+").*", RegexOptions.IgnoreCase);
-				//TODO Fazer REGEX dos m com os materials
-				if (regexType.Match(m.name).Success)
+				Regex regexType;
+				if (materialPortaP != null && normalMapPortaP != null)
 				{
-					if (materialPortaP != null && normalMapPortaP != null)
+					regexType = new Regex(".*("+materialPortaP.name+").*", RegexOptions.IgnoreCase);
+					if (regexType.Match(m.name).Success)
 					{
 						m.SetTexture("_BumpMap", normalMapPortaP);
 					}
 					continue;
 				}
-				regexType = new Regex(".*("+materialPortaM.name+").*", RegexOptions.IgnoreCase);
-				if (regexType.Match(m.name).Success)
+				if (materialPortaM != null && normalMapPortaM != null)
 				{
-					if (materialPortaM != null && normalMapPortaM != null)
+					regexType = new Regex(".*("+materialPortaM.name+").*", RegexOptions.IgnoreCase);
+					if (regexType.Match(m.name).Success)
 					{
 						m.SetTexture("_BumpMap", normalMapPortaM);
 					}
 					continue;
 				}
-				regexType = new Regex(".*("+materialPortaG.name+").*", RegexOptions.IgnoreCase);
-				if (regexType.Match(m.name).Success)
+				if (materialPortaG != null && normalMapPortaG != null)
 				{
-
-					if (materialPortaG != null && normalMapPortaG != null)
+					regexType = new Regex(".*("+materialPortaG.name+").*", RegexOptions.IgnoreCase);
+					if (regexType.Match(m.name).Success)
 					{
 						m.SetTexture("_BumpMap", normalMapPortaG);
 					}

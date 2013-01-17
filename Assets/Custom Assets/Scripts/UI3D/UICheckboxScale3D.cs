@@ -42,7 +42,7 @@ public class UICheckboxScale3D : MonoBehaviour {
 		}
 	}
 	
-	void OnMouseDown ()
+	void OnChecked ()
 	{
 		if (enabled)
 		{
@@ -51,14 +51,6 @@ public class UICheckboxScale3D : MonoBehaviour {
 		}
 	}
 	
-	void OnChecked ()
-	{
-		if (enabled)
-		{
-			TweenScale.Begin(tweenTarget.gameObject, duration, Vector3.Scale(mScale, hover)).method = UITweener.Method.EaseInOut;
-		}
-	}
-
 	void OnDeschecked ()
 	{
 		if (enabled)

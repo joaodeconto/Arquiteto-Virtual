@@ -12,23 +12,12 @@ public class UISelectKitchenController : MonoBehaviour
 	public float time = 3f;
 	
 	protected Transform[] kitchens;
-	protected int CurrentIndex;
+	protected int CurrentIndex = -1;
 	
-	void Start ()
-	{
-		CurrentIndex = PlayerPrefs.GetInt ("SelectedKitchen", 0);
-		
-		kitchens = new Transform[transform.GetChildCount ()];
-		for (int i = 0; i < kitchens.Length; i++)
-		{
-			kitchens[i] = transform.GetChild (i);
-		}
-		
-		iTween.MoveTo (	kitchens[CurrentIndex].gameObject,
-						iTween.Hash (iT.MoveTo.position, mainPosition.position,
-									 iT.MoveTo.time, time,
-									 iT.MoveTo.easetype, easeType));
-	}
+//	void Start ()
+//	{
+//		CurrentIndex = PlayerPrefs.GetInt ("SelectedKitchen", 0);
+//	}
 	
 	void ChangeKitchen (int index)
 	{
@@ -36,7 +25,25 @@ public class UISelectKitchenController : MonoBehaviour
 		{
 			PlayerPrefs.SetInt ("SelectedKitchen", index);
 			
-			if (kitchens != null)
+			if (kitchens == null)
+			{
+				kitchens = new Transform[transform.GetChildCount ()];
+				for (int i = 0; i < kitchens.Length; i++)
+				{
+					kitchens[i] = transform.GetChild (i);
+					if (index != i)
+					{
+						kitchens[i].gameObject.SetActive (false);
+					}
+				}
+				
+				iTween.MoveTo (	kitchens[index].gameObject,
+				iTween.Hash (iT.MoveTo.position, mainPosition.position,
+							 iT.MoveTo.time, time,
+							 iT.MoveTo.easetype, easeType));
+
+			}
+			else
 			{
 				iTween.MoveTo (	kitchens[CurrentIndex].gameObject, 
 								iTween.Hash (iT.MoveTo.position, otherPosition.position,
@@ -47,6 +54,9 @@ public class UISelectKitchenController : MonoBehaviour
 								iTween.Hash (iT.MoveTo.position, mainPosition.position,
 											 iT.MoveTo.time, time,
 											 iT.MoveTo.easetype, easeType));
+				
+				kitchens[CurrentIndex].gameObject.SetActive (false);
+				kitchens[index].gameObject.SetActive (true);
 			}
 			
 			CurrentIndex = index;

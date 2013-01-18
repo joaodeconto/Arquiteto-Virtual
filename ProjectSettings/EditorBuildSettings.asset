@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scenes/Tests/IntroTest3.unity
+    path: Assets/Scenes/IntroTest3.unity
   - enabled: 0
     path: Assets/_Scenes/Desktop/Introduction.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/Desktop/WallBuilder.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Scenes/Desktop/MakeYourKitchen.unity
   - enabled: 0
     path: Assets/_Scenes/Android/MakeAndroid.unity

@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Cor_Diamante
-  m_Shader: {fileID: 30, guid: 0000000000000000e000000000000000, type: 0}
+  m_Shader: {fileID: 7, guid: 0000000000000000e000000000000000, type: 0}
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -45,7 +45,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .171334222, g: .0689549819, b: .0146253398, a: .721568644}
+        second: {r: .304195791, g: .304195791, b: .304195791, a: 1}
       data:
         first:
           name: _SpecColor

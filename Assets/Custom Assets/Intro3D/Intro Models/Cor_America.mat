@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Cor_America
-  m_Shader: {fileID: 7, guid: 0000000000000000e000000000000000, type: 0}
+  m_Shader: {fileID: 30, guid: 0000000000000000e000000000000000, type: 0}
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -38,7 +38,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .083986707, g: .150355011, b: .117848292, a: .556862772}
+        second: {r: .083986707, g: .150355011, b: .117848292, a: .858823538}
       data:
         first:
           name: _SpecColor

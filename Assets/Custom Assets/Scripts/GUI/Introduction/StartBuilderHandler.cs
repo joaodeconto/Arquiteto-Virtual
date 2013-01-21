@@ -15,7 +15,7 @@ public class StartBuilderHandler : MonoBehaviour
 	
 	void Awake ()
 	{
-		Invoke ("DeactiveOthersScenes", 0.1f);
+		Invoke ("DeactiveOthersScenes", 0.001f);
 	}
 	
 	void OnClick ()

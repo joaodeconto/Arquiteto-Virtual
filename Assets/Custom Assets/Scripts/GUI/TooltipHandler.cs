@@ -38,9 +38,23 @@ public class TooltipHandler : MonoBehaviour
 	void OnHover (bool isOver)
 	{
 		if (isOver)
+		{
 			UITooltip.ShowText (label);
+		}
 		else
+		{
 			UITooltip.ShowText (null);
+		}
+		
+		this.isOver = isOver;
+	}
+	
+	void OnClick ()
+	{
+		if (isOver)
+		{
+			UITooltip.ShowText (null);
+		}
 	}
 	
 	public void SetTooltip (string label)

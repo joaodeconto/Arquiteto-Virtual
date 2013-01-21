@@ -50,7 +50,7 @@ Material:
         first:
           name: _Fresnel
         second:
-          m_Texture: {fileID: 2800000, guid: 5f01463d8ad9d91439c4ceac5ef1503d, type: 3}
+          m_Texture: {fileID: 2800000, guid: 5b5c5575fd4c74abd9f7b30862fb76a3, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -93,7 +93,7 @@ Material:
       data:
         first:
           name: _RefrColor
-        second: {r: 1, g: 1, b: 1, a: .898039222}
+        second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
           name: _Fresnel_ST
@@ -109,7 +109,7 @@ Material:
       data:
         first:
           name: _HorizonColor
-        second: {r: 0, g: .37644431, b: .99999994, a: .113725491}
+        second: {r: .99999994, g: .99999994, b: .99999994, a: .113725491}
       data:
         first:
           name: _RefractionTex_ST

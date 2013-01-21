@@ -131,6 +131,11 @@ public class WallBuilder : MonoBehaviour {
 		RemoveRoof();
 		RemoveWalls();
 		
+		//TODO Por enquanto só fazendo inversão dos valores
+		float temp = RealWallWidth;
+		RealWallWidth = RealWallDepth;
+		RealWallDepth = temp;
+		
 		CreateRoof();
 		
 		GameObject floor = GameObject.FindWithTag ("Chao");

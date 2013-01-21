@@ -24,6 +24,6 @@ public class UISelectKitchen : MonoBehaviour
 	void OnChecked ()
 	{
 		if (selectKitchenController == null) selectKitchenController = GameObject.FindObjectOfType (typeof(UISelectKitchenController)) as UISelectKitchenController;
-		selectKitchenController.SendMessage ("ChangeKitchen", index, SendMessageOptions.RequireReceiver);
+		selectKitchenController.SendMessage ("ChangeKitchen", index, SendMessageOptions.DontRequireReceiver);
 	}
 }

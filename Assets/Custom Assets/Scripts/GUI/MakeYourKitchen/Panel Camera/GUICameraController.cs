@@ -163,7 +163,7 @@ public class GUICameraController : MonoBehaviour {
 			showFloor = !showFloor;
 			foreach (Transform floor in floorParent.transform)
 			{
-				if (!floor.name.Contains("Fantasma"))
+				if (!floor.name.Contains("EmptyFloor"))
 				{
 					floor.renderer.enabled = showFloor;
 					floor.collider.enabled = showFloor;

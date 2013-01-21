@@ -9,18 +9,23 @@ public class FreeCamera3d : MonoBehaviour
 	public float StepTime;
 	public bool CanMoveCamera {get; private set;}
 	public bool ZoomFollowMousePosition;
+	public Vector3 Limit, InitialPosition;
 	
 	public FreeCamera3d Initialize (Camera camera, 
 									float step, 
 									float stepTime, 
 									bool canMoveCamera, 
-									bool zoomFollowMousePosition)
+									bool zoomFollowMousePosition,
+									Vector3 limit,
+									Vector3 initialPosition)
 	{
 		ThisCamera 				= camera;
 		Step 					= step;
 		StepTime				= stepTime;
 		CanMoveCamera 			= canMoveCamera;
 		ZoomFollowMousePosition	= zoomFollowMousePosition;
+		Limit					= limit;
+		InitialPosition			= initialPosition;
 		return this;
 	}
 
@@ -69,9 +74,9 @@ public class FreeCamera3d : MonoBehaviour
 			ThisCamera.transform.localPosition += ThisCamera.transform.TransformDirection(new Vector3(x, y, 0));
 		}
 		
-		ThisCamera.transform.localPosition = new Vector3( Mathf.Clamp(ThisCamera.transform.localPosition.x, 955f, 1045f), 
-					                                      Mathf.Clamp(ThisCamera.transform.localPosition.y, -10f, 10f), 
-					                                      Mathf.Clamp(ThisCamera.transform.localPosition.z, 955f, 1045f));
+		ThisCamera.transform.localPosition = new Vector3( Mathf.Clamp(ThisCamera.transform.localPosition.x, InitialPosition.x - Limit.x, InitialPosition.x + Limit.x), 
+					                                      Mathf.Clamp(ThisCamera.transform.localPosition.y, InitialPosition.y - Limit.y, InitialPosition.y + Limit.y), 
+					                                      Mathf.Clamp(ThisCamera.transform.localPosition.z, InitialPosition.z - Limit.z, InitialPosition.z + Limit.z));
 		
 		// Mouse wheel moving forward
 		if(Input.GetAxisRaw("Mouse ScrollWheel") > 0f && ThisCamera.transform.position.y > -10f)

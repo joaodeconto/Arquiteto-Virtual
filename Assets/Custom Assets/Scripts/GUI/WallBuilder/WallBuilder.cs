@@ -24,6 +24,11 @@ public class WallBuilder : MonoBehaviour {
 	public GameObject 	ceil;
 	#endregion
 	
+	#region Rulers
+	public LineRenderer lineDepth;
+	public LineRenderer lineWidth;
+	#endregion
+	
 	#region Camera Data
 	private bool 		wasInitialized = false;
 	private bool 		activeGrid = false;
@@ -77,10 +82,13 @@ public class WallBuilder : MonoBehaviour {
 		MinWallWidth = 30;
 		MinWallDepth = 30;
 		
-		ROOT = new Vector3(1000,0,1000);
+		//ROOT = new Vector3(1000,0,1000);
+		
+		ROOT = GameObject.Find ("Scenario").transform.localPosition;
 		
 		mov = transform.position;
 		zoom = GameObject.FindWithTag("MainCamera").camera.orthographicSize;
+		
 	}
 	
 	void OnGUI () {
@@ -95,20 +103,27 @@ public class WallBuilder : MonoBehaviour {
 		RemoveGround();
 
 		GameObject newTile = Instantiate (floor, Vector3.zero, floor.transform.rotation) as GameObject;
-		newTile.transform.position = WallBuilder.ROOT + new Vector3 ( (int)(- ( RealWallWidth / 2) ) - 0.5f ,0.0f, (int)( RealWallDepth / 2) + 0.5f );// + new Vector3 (- (RealWallWidth / 2 + 0.5f) , 0.01f, - (RealWallDepth / 2 + 0.5f));
+		newTile.transform.position = WallBuilder.ROOT  + new Vector3 (- (RealWallDepth / 2) , 0.0f, (RealWallWidth / 2));/*+ new Vector3 ( (int)(- ( RealWallWidth / 2) ) - 0.5f ,0.0f, (int)( RealWallDepth / 2) + 0.5f );*/
 		newTile.transform.parent   = parentFloor;
-		newTile.transform.localScale = new Vector3(RealWallWidth, RealWallDepth, 1);
+		newTile.transform.localScale = new Vector3(RealWallDepth, RealWallWidth, 1);
 		foreach (Material cMaterial in newTile.renderer.materials)
 		{
 //			Debug.LogWarning ("materials - cMaterial.name: " + cMaterial.name);
-			float a = Mathf.CeilToInt(RealWallWidth) - RealWallWidth;
-			float b = Mathf.CeilToInt(RealWallDepth) - RealWallDepth;
+			float a = Mathf.CeilToInt(RealWallDepth) - RealWallDepth;
+			float b = Mathf.CeilToInt(RealWallWidth) - RealWallWidth;
 
-			cMaterial.mainTextureScale  = new Vector2 (RealWallWidth, RealWallDepth);
+			cMaterial.mainTextureScale  = new Vector2 (RealWallDepth, RealWallWidth);
 			cMaterial.mainTextureOffset = new Vector2 (a, 0);
-			cMaterial.SetTextureScale  ("_BumpMap", new Vector2 (RealWallWidth, RealWallDepth));
+			cMaterial.SetTextureScale  ("_BumpMap", new Vector2 (RealWallDepth, RealWallWidth));
 			cMaterial.SetTextureOffset ("_BumpMap", new Vector2 (a, 0));
 		}
+		
+		#region Line Renderer Ruler
+		lineDepth.SetPosition (0, (Vector3.forward * -RealWallDepth / 2) + (Vector3.right * (RealWallWidth / 2 + 1f)));
+		lineDepth.SetPosition (1, (Vector3.forward * RealWallDepth / 2) + (Vector3.right * (RealWallWidth / 2 + 1f)));
+		lineWidth.SetPosition (0, (Vector3.forward * (RealWallDepth / 2 + 1f)) + (Vector3.right * -RealWallWidth / 2));
+		lineWidth.SetPosition (1, (Vector3.forward * (RealWallDepth / 2 + 1f)) + (Vector3.right * RealWallWidth / 2));
+		#endregion
 	}
 	
 	public void BuildWalls (){
@@ -120,7 +135,7 @@ public class WallBuilder : MonoBehaviour {
 		
 		GameObject floor = GameObject.FindWithTag ("Chao");
 		Vector3 floorSizeOffset = floor.transform.localScale;
-		Vector3 floorPosition   = floor.transform.localPosition;
+		Vector3 floorPosition   = floor.transform.position;
 		floorSizeOffset.z = floorSizeOffset.y;
 		floorSizeOffset.y = 0;
 
@@ -191,7 +206,7 @@ public class WallBuilder : MonoBehaviour {
 			}
 		}
 
-		ao = Application.LoadLevelAsync(2);
+		ao = Application.LoadLevelAsync(1);
 		
 	}
 	
@@ -295,9 +310,12 @@ public class WallBuilder : MonoBehaviour {
 	private void CreateRoof ()
 	{
 		GameObject newCeil = Instantiate(ceil, Vector3.zero, ceil.transform.rotation) as GameObject;	
-		newCeil.transform.position = WallBuilder.ROOT + new Vector3 ( (int)(- ( RealWallWidth / 2) ) - 0.5f ,
+		/*newCeil.transform.position = WallBuilder.ROOT + new Vector3 ( (int)(- ( RealWallWidth / 2) ) - 0.5f ,
 																				WallBuilder.WALL_HEIGHT ,
-																	  (int)(  RealWallDepth / 2)   + 0.5f );
+																	  (int)(  RealWallDepth / 2)   + 0.5f );*/
+		newCeil.transform.position = WallBuilder.ROOT  + new Vector3 (- (RealWallWidth / 2) , 
+																		WallBuilder.WALL_HEIGHT, 
+																		(RealWallDepth / 2));
 		newCeil.transform.parent = parentCeil;
 		newCeil.transform.localScale = new Vector3(RealWallWidth, RealWallDepth, 1);	
 		foreach (Material cMaterial in newCeil.renderer.materials)

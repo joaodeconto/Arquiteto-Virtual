@@ -10,10 +10,13 @@ public class UISelectKitchen : MonoBehaviour
 	
 	void Awake ()
 	{
-		Debug.Log (PlayerPrefs.GetInt ("SelectedKitchen", 0));
+		Invoke ("Init", 0.3f);
+	}
+	
+	void Init ()
+	{
 		if (index == PlayerPrefs.GetInt ("SelectedKitchen", 0))
 		{
-			if (GetComponent<UICheckbox3D> ().tweenTarget == null) GetComponent<UICheckbox3D> ().tweenTarget = gameObject;
 			GetComponent<UICheckbox3D> ().Checked ();
 		}
 	}

@@ -19,7 +19,8 @@ public class CameraController : MonoBehaviour {
 		CanMoveCamera = true;
 
 		freeCamera = gameObject.AddComponent<FreeCamera3d> ()
-									.Initialize (this.camera, 1.0f, 0.3f, true, false);
+									.Initialize (this.camera, 1.0f, 0.3f, true, false, new Vector3 (45, 10, 45), 
+												GameObject.Find ("Scenario").transform.localPosition);
 
 		furnitureManager = GetComponent<FurnitureManager> ();
 	

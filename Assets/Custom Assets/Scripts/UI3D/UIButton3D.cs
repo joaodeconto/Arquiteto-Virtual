@@ -152,6 +152,7 @@ public class UIButton3D : MonoBehaviour {
 	
 	void OnMouseUpAsButton ()
 	{
+		gameObject.SendMessage ("OnClick", SendMessageOptions.DontRequireReceiver);
 		tweenTarget.SendMessage ("OnClick", SendMessageOptions.DontRequireReceiver);
 	}
 	

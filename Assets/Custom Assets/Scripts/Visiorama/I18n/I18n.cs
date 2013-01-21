@@ -51,8 +51,8 @@ public class I18n {
 
 		//Montar paredes
 		hashWords [0] ["Medidas"]                      	= "Medidas";
-		hashWords [0] ["Comprimento"]                  	= "Profundidade";
-		hashWords [0] ["Profundidade"]                 	= "Comprimento";
+		hashWords [0] ["Comprimento"]                  	= "Comprimento";
+		hashWords [0] ["Profundidade"]                 	= "Profundidade";
 
         //Color Picker
 		hashWords [0] ["Cor"]							= "Cor";

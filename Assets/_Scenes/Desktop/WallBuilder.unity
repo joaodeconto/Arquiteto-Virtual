@@ -275,6 +275,7 @@ GameObject:
   - 4: {fileID: 283455210}
   - 114: {fileID: 283455214}
   - 65: {fileID: 283455211}
+  - 114: {fileID: 283455212}
   m_Layer: 12
   m_Name: Thumb
   m_TagString: Untagged
@@ -305,6 +306,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .999998987, y: 1.00000024, z: 0}
   m_Center: {x: -8.64267349e-07, y: .227272809, z: -1.25}
+--- !u!114 &283455212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 283455209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68f3d139e2473748be33564dbf324ef, type: 3}
+  m_Name: 
+  label: tip-largura
+  getViaCode: 0
+  getViaLabel: 1
+  useI18n: 1
+  gameObject: {fileID: 283455209}
+  selectedComp: 0
+  selectedVar: 0
 --- !u!114 &283455214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,7 +539,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 408957750}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.03519678, y: 1.03591168, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1898601698}
@@ -1345,7 +1363,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 806572100}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.03519678, y: 1.03591168, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 590296986}
@@ -1713,7 +1731,7 @@ MonoBehaviour:
   text: {fileID: 239653270}
   background: {fileID: 1313740142}
   appearSpeed: 10
-  scalingTransitions: 1
+  scalingTransitions: 0
   offsetSize: {x: 25, y: 25}
   appearTime: 1
   withFade: 1
@@ -2044,6 +2062,7 @@ GameObject:
   - 4: {fileID: 1589015482}
   - 114: {fileID: 1589015484}
   - 65: {fileID: 1589015483}
+  - 114: {fileID: 1589015485}
   m_Layer: 12
   m_Name: Thumb
   m_TagString: Untagged
@@ -2058,7 +2077,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1589015481}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 164.999893, y: -65.8415985, z: -60}
+  m_LocalPosition: {x: 160, y: -65.8415985, z: -60}
   m_LocalScale: {x: 32, y: 42, z: 1}
   m_Children: []
   m_Father: {fileID: 688074885}
@@ -2091,6 +2110,23 @@ MonoBehaviour:
   mDepth: 4
   mAtlas: {fileID: 11400000, guid: 5af1a8c674cd7f44aadab96ae19d39ff, type: 2}
   mSpriteName: SlideBarSlider
+--- !u!114 &1589015485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1589015481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68f3d139e2473748be33564dbf324ef, type: 3}
+  m_Name: 
+  label: tip-profundidade
+  getViaCode: 0
+  getViaLabel: 1
+  useI18n: 1
+  gameObject: {fileID: 1589015481}
+  selectedComp: 0
+  selectedVar: 0
 --- !u!1 &1654943801
 GameObject:
   m_ObjectHideFlags: 0
@@ -2425,7 +2461,7 @@ Transform:
   m_GameObject: {fileID: 1913508284}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 987.364136, y: -273, z: -73}
-  m_LocalScale: {x: 170, y: 170, z: 1}
+  m_LocalScale: {x: 170, y: 135, z: 1}
   m_Children: []
   m_Father: {fileID: 336761518}
 --- !u!114 &1913508286

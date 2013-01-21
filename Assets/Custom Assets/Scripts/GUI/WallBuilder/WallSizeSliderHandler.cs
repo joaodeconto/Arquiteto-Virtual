@@ -12,11 +12,13 @@ public class WallSizeSliderHandler : MonoBehaviour {
 	public UILabel label;
 	public string TooltipString;
 	
+	public TextMesh label3d;
+	
 	private WallBuilder wallBuilder;
 	
 	void Awake ()
 	{
-		wallBuilder = GameObject.Find ("WallBuilder").GetComponent<WallBuilder> ();
+		wallBuilder = GameObject.FindWithTag ("GameController").transform.FindChild ("WallBuilder").GetComponent<WallBuilder> ();
 		
 		if (TooltipString.Length == 0)
 		{
@@ -32,8 +34,32 @@ public class WallSizeSliderHandler : MonoBehaviour {
 			
 			TooltipHandler tipHandler = objectLabel.AddComponent<TooltipHandler> ();
 			tipHandler.gameObject = objectLabel;
+			tipHandler.getViaCode = true;
 			tipHandler.SetTooltip (I18n.GetInstance().t (TooltipString));
 		}
+		
+		Invoke ("SetGround", 0.5f);
+	}
+	
+	void SetGround ()
+	{
+		switch(sliderWallMeasureType)
+		{
+			case SliderWallMeasureType.Depth:
+				wallBuilder.WallDepth 	  = (int)(wallBuilder.MinWallDepth + GetComponent<UISlider>().sliderValue * ( wallBuilder.MaxWallDepth - wallBuilder.MinWallDepth ) );
+				wallBuilder.RealWallDepth = wallBuilder.WallDepth / 10.0f;
+				label.text = (wallBuilder.WallDepth / 10) + "," + (wallBuilder.WallDepth % 10) + "m";
+				label3d.text = label.text;
+				break;
+			case SliderWallMeasureType.Width:
+				wallBuilder.WallWidth 	  = (int)(wallBuilder.MinWallWidth + GetComponent<UISlider>().sliderValue * ( wallBuilder.MaxWallWidth - wallBuilder.MinWallWidth ) );	
+				wallBuilder.RealWallWidth = wallBuilder.WallWidth / 10.0f;
+				label.text = (wallBuilder.WallWidth / 10) + "," + (wallBuilder.WallWidth % 10) + "m";
+				label3d.text = label.text;
+				break;
+		}
+		
+		wallBuilder.BuildGround();
 	}
 	
 	void OnSliderChange(float val)
@@ -44,11 +70,13 @@ public class WallSizeSliderHandler : MonoBehaviour {
 				wallBuilder.WallDepth 	  = (int)(wallBuilder.MinWallDepth + val * ( wallBuilder.MaxWallDepth - wallBuilder.MinWallDepth ) );
 				wallBuilder.RealWallDepth = wallBuilder.WallDepth / 10.0f;
 				label.text = (wallBuilder.WallDepth / 10) + "," + (wallBuilder.WallDepth % 10) + "m";
+				label3d.text = label.text;
 				break;
 			case SliderWallMeasureType.Width:
 				wallBuilder.WallWidth 	  = (int)(wallBuilder.MinWallWidth + val * ( wallBuilder.MaxWallWidth - wallBuilder.MinWallWidth ) );	
 				wallBuilder.RealWallWidth = wallBuilder.WallWidth / 10.0f;
 				label.text = (wallBuilder.WallWidth / 10) + "," + (wallBuilder.WallWidth % 10) + "m";
+				label3d.text = label.text;
 				break;
 		}
 		

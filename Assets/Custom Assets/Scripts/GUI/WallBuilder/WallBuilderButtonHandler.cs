@@ -13,9 +13,9 @@ public class WallBuilderButtonHandler : MonoBehaviour {
 	
 	private WallBuilder wallBuilder;
 	
-	void Start(){
-	
-		wallBuilder = GameObject.Find("WallBuilder").GetComponent<WallBuilder>();
+	void Start()
+	{
+		wallBuilder = GameObject.FindWithTag ("GameController").transform.FindChild ("WallBuilder").GetComponent<WallBuilder> ();
 	}
 	
 	void OnClick(){

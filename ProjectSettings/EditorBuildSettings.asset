@@ -21,3 +21,5 @@ EditorBuildSettings:
     path: Assets/_Scenes/Tests/test.unity
   - enabled: 0
     path: Assets/_Scenes/Tests/IntroTest5.unity
+  - enabled: 1
+    path: Assets/_Scenes/Tests/IntroTest4.unity

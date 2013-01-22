@@ -119,10 +119,18 @@ public class WallBuilder : MonoBehaviour {
 		}
 		
 		#region Line Renderer Ruler
-		lineDepth.SetPosition (0, (Vector3.forward * -RealWallDepth / 2) + (Vector3.right * (RealWallWidth / 2 + 1f)));
-		lineDepth.SetPosition (1, (Vector3.forward * RealWallDepth / 2) + (Vector3.right * (RealWallWidth / 2 + 1f)));
-		lineWidth.SetPosition (0, (Vector3.forward * (RealWallDepth / 2 + 1f)) + (Vector3.right * -RealWallWidth / 2));
-		lineWidth.SetPosition (1, (Vector3.forward * (RealWallDepth / 2 + 1f)) + (Vector3.right * RealWallWidth / 2));
+		
+		float offset = 1f;
+		
+		lineDepth.SetPosition (0, (Vector3.forward * -(RealWallDepth - offset) / 2) + (Vector3.right * (RealWallWidth / 2 + 1f)));
+		lineDepth.SetPosition (1, (Vector3.forward * (RealWallDepth - offset) / 2) + (Vector3.right * (RealWallWidth / 2 + 1f)));
+		lineDepth.transform.GetChild(0).localPosition = new Vector3((RealWallWidth / 2) + 1f, 0, -RealWallDepth / 2);
+		lineDepth.transform.GetChild(1).localPosition = new Vector3((RealWallWidth / 2) + 1f, 0, RealWallDepth / 2);
+		
+		lineWidth.SetPosition (0, (Vector3.forward * (RealWallDepth / 2 + 1f)) + (Vector3.right * -(RealWallWidth - offset) / 2));
+		lineWidth.SetPosition (1, (Vector3.forward * (RealWallDepth / 2 + 1f)) + (Vector3.right * (RealWallWidth - offset) / 2));
+		lineWidth.transform.GetChild(0).localPosition = new Vector3(RealWallWidth / 2, 0, (RealWallDepth / 2) + 1f);
+		lineWidth.transform.GetChild(1).localPosition = new Vector3(-RealWallWidth / 2, 0, (RealWallDepth / 2) + 1f);
 		#endregion
 	}
 	

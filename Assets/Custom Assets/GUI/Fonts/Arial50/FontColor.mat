@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: FontColor
-  m_Shader: {fileID: 10101, guid: 0000000000000000e000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: d37fa7929f950fc4aa62f526651aee35, type: 3}
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:

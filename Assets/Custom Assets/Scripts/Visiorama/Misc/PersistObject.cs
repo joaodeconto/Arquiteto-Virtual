@@ -2,25 +2,23 @@ using UnityEngine;
 using System.Collections;
 
 public class PersistObject : MonoBehaviour {
-
-//	public int[] levels;
 	
-	// Use this for initialization
-	void Start () {
+	bool awake = false;
+	
+	void Awake ()
+	{
 		DontDestroyOnLoad(gameObject);
+		Invoke ("AwakeTrue", 0.5f);
 	}
 	
-	// 
-	void OnLevelWasLoaded (int level) {
-//		if (levels.Length != 0) {
-//			for (int i = 0; i < levels.Length; i++) {
-//				if (levels[i] == level) {
-//					Destroy(gameObject);
-//				}
-//			}
-//		}
-		if (level == 0) {
-			Destroy(gameObject);
+	void AwakeTrue () { awake = true; }
+	
+	void OnLevelWasLoaded (int level)
+	{
+		if (level == 0)
+		{
+			if (awake) Destroy(gameObject);
+			else awake = true;
 		}
 	}
 	

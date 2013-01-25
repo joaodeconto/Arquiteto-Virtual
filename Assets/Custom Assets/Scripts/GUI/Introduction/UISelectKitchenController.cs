@@ -38,6 +38,8 @@ public class UISelectKitchenController : MonoBehaviour
 					}
 				}
 				
+				//kitchens[index].GetComponentInChildren<OptimizedCombineChildren>().Combine ();
+				
 				iTween.MoveTo (	kitchens[index].gameObject,
 				iTween.Hash (iT.MoveTo.position, mainPosition.position,
 							 iT.MoveTo.time, time,
@@ -61,6 +63,9 @@ public class UISelectKitchenController : MonoBehaviour
 											 iT.MoveTo.easetype, easeType));
 				
 				kitchens[index].gameObject.SetActive (true);
+				
+				//if (kitchens[index].GetComponentInChildren<OptimizedCombineChildren>() != null) 
+				//	kitchens[index].GetComponentInChildren<OptimizedCombineChildren>().Combine ();
 			}
 			
 			CurrentIndex = index;

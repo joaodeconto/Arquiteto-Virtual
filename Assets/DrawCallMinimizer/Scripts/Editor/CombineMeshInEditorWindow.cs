@@ -44,7 +44,7 @@ public class CombineMeshInEditorWindow : EditorWindow
 		if(EditorGUI.EndChangeCheck())
 		{
 			m_textureAtlasInfo = new TextureAtlasInfo();
-			m_texPropArraySize = m_textureAtlasInfo.shaderPropertiesToLookFor.Length;
+			m_texPropArraySize = m_textureAtlasInfo.shaderPropertiesToLookFor.Count;
 			m_shaderFoldoutBools = new bool[m_texPropArraySize];
 		}
 		
@@ -56,13 +56,13 @@ public class CombineMeshInEditorWindow : EditorWindow
 			m_texPropArraySize = EditorGUILayout.IntSlider("# Of Shader Properties", m_texPropArraySize, 0, 20);
 			if(EditorGUI.EndChangeCheck())
 			{
-				if(m_texPropArraySize > m_textureAtlasInfo.shaderPropertiesToLookFor.Length)
+				if(m_texPropArraySize > m_textureAtlasInfo.shaderPropertiesToLookFor.Count)
 				{
-					ShaderProperties[] temp = new ShaderProperties[m_texPropArraySize];
+					List<ShaderProperties> temp = new List<ShaderProperties>(m_texPropArraySize);
 					
 					for(int i = 0; i < m_texPropArraySize; i++)
 					{
-						if(i < m_textureAtlasInfo.shaderPropertiesToLookFor.Length)
+						if(i < m_textureAtlasInfo.shaderPropertiesToLookFor.Count)
 						{
 							temp[i] = m_textureAtlasInfo.shaderPropertiesToLookFor[i];
 						}
@@ -74,9 +74,9 @@ public class CombineMeshInEditorWindow : EditorWindow
 					
 					m_textureAtlasInfo.shaderPropertiesToLookFor = temp;					
 				}
-				else if(m_texPropArraySize < m_textureAtlasInfo.shaderPropertiesToLookFor.Length)
+				else if(m_texPropArraySize < m_textureAtlasInfo.shaderPropertiesToLookFor.Count)
 				{
-					ShaderProperties[] temp = new ShaderProperties[m_texPropArraySize];
+					List<ShaderProperties> temp = new List<ShaderProperties>(m_texPropArraySize);
 					
 					for(int i = 0; i < m_texPropArraySize; i++)
 					{

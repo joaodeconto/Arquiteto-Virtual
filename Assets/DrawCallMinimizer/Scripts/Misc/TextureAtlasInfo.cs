@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class TextureAtlasInfo
@@ -8,7 +9,7 @@ public class TextureAtlasInfo
 	public FilterMode filterMode;
 	public bool ignoreAlpha;
 	public TextureWrapMode wrapMode;
-	public ShaderProperties[] shaderPropertiesToLookFor;
+	public List<ShaderProperties> shaderPropertiesToLookFor;
 	
 	public TextureAtlasInfo()
 	{
@@ -18,14 +19,13 @@ public class TextureAtlasInfo
 		ignoreAlpha = true;
 		wrapMode = TextureWrapMode.Clamp;	
 	
-		shaderPropertiesToLookFor = new ShaderProperties[]
-		{
-			new ShaderProperties(false, "_MainTex"), 
-			new ShaderProperties(true, "_BumpMap"), 
-			new ShaderProperties(false, "_Cube"), 
-			new ShaderProperties(false, "_DecalTex"), 
-			new ShaderProperties(false, "_Detail"), 
-			new ShaderProperties(false, "_ParallaxMap")
-		};
+		shaderPropertiesToLookFor = new List<ShaderProperties> ();
+		
+		shaderPropertiesToLookFor.Add(new ShaderProperties(false, "_MainTex")); 
+		shaderPropertiesToLookFor.Add(new ShaderProperties(true, "_BumpMap")); 
+		shaderPropertiesToLookFor.Add(new ShaderProperties(false, "_Cube"));
+		shaderPropertiesToLookFor.Add(new ShaderProperties(false, "_DecalTex"));
+		shaderPropertiesToLookFor.Add(new ShaderProperties(false, "_Detail"));
+		shaderPropertiesToLookFor.Add(new ShaderProperties(false, "_ParallaxMap"));
 	}
 }

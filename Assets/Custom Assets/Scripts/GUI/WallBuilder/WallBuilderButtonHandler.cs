@@ -18,7 +18,9 @@ public class WallBuilderButtonHandler : MonoBehaviour {
 		wallBuilder = GameObject.FindWithTag ("GameController").transform.FindChild ("WallBuilder").GetComponent<WallBuilder> ();
 	}
 	
-	void OnClick(){
+	
+	void OnClick()
+	{
 		if (this.enabled)
 		{
 			switch(wallBuilderButton){
@@ -26,7 +28,7 @@ public class WallBuilderButtonHandler : MonoBehaviour {
 	//				wallBuilder.BuildGround();
 	//				break;
 				case WallBuilderButtonEnum.BuildWalls:
-					wallBuilder.BuildWalls ();
+					GameObject.Find ("UI BlurInterface").GetComponentInChildren<TweenColor>().enabled = true;
 					foreach (MonoBehaviour component in transform.GetComponents(typeof(MonoBehaviour)))
 					{
 						component.enabled = false;
@@ -37,5 +39,10 @@ public class WallBuilderButtonHandler : MonoBehaviour {
 					break;
 			}
 		}
+	}
+	
+	void ChangeScene ()
+	{
+		wallBuilder.BuildWalls ();
 	}
 }

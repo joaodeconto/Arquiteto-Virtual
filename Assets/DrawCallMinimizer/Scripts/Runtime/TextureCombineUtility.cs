@@ -23,7 +23,7 @@ public class TextureCombineUtility
 			texturePositions = null;
 			return null;
 		}
-		if(atlasInfo.shaderPropertiesToLookFor.Length <= 0)
+		if(atlasInfo.shaderPropertiesToLookFor.Count <= 0)
 		{
 			Debug.LogError("You need to enter some shader properties to look for into Atlas Info. Cannot combine with 0 properties");
 			texturePositions = null;
@@ -31,7 +31,7 @@ public class TextureCombineUtility
 		}
 		List<ShaderProperties> properties = new List<ShaderProperties>();
 		
-		for(int i = 0; i < atlasInfo.shaderPropertiesToLookFor.Length; i++)
+		for(int i = 0; i < atlasInfo.shaderPropertiesToLookFor.Count; i++)
 		{
 			if(combines[0].HasProperty(atlasInfo.shaderPropertiesToLookFor[i].propertyName) == true)
 			{

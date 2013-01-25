@@ -331,8 +331,6 @@ class ChangeMaterial : EditorWindow {
 		}
 		
 		GUILayout.EndScrollView();
-		
-		EditorGUIUtility.ExitGUI();
     }
 	
 	void AddMaterials () {

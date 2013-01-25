@@ -152,7 +152,6 @@ public class UICheckbox3D : MonoBehaviour
 				}
 				isChecked = false;
 			}
-			Debug.Log ("teste");
 			gameObject.SendMessage ("OnDeschecked", SendMessageOptions.DontRequireReceiver);
 			tweenTarget.SendMessage ("OnDeschecked", SendMessageOptions.DontRequireReceiver);
 		}

@@ -25,6 +25,7 @@ public class StartBuilderHandler : MonoBehaviour
 		Destroy(mainCamera.GetComponent<PanWithMouse> ());
 		
 		scenario.SetActive (true);
+		rulers.SetActive (true);
 		
 		float timePosition = 0f;
 		iTweenEvent ite = iTweenEvent.GetEvent(GameObject.Find ("ButtonStartEvent"), "ButtonStartEvent");
@@ -65,7 +66,6 @@ public class StartBuilderHandler : MonoBehaviour
 	void EndAnimation ()
 	{
 		if (intro != null) intro.SetActive (false);
-		rulers.SetActive (true);
 		wallBuilder.SetActive (true);
 //		mainCamera.AddComponent<PanWithMouse> ();
 //		mainCamera.GetComponent<PanWithMouse> ().degrees = oldDegrees;

@@ -28,7 +28,19 @@ public class WallBuilderButtonHandler : MonoBehaviour {
 	//				wallBuilder.BuildGround();
 	//				break;
 				case WallBuilderButtonEnum.BuildWalls:
-					GameObject.Find ("UI BlurInterface").GetComponentInChildren<TweenColor>().enabled = true;
+					float time = 0;
+					foreach (TweenColor tc in GameObject.Find ("UI BlurInterface").GetComponentsInChildren<TweenColor>())
+					{
+						if (time < tc.duration)
+						{
+							time = tc.duration;
+						}
+						
+						if (tc.GetComponent<UILabel>() != null) tc.GetComponent<UILabel>().text = "Carregando";
+					
+						tc.Play (false);
+					}
+					Invoke ("ChangeScene", time);
 					foreach (MonoBehaviour component in transform.GetComponents(typeof(MonoBehaviour)))
 					{
 						component.enabled = false;

@@ -201,10 +201,10 @@ MonoBehaviour:
       height: 37
     inner:
       serializedVersion: 2
-      x: 339.840027
+      x: 340
       y: 79
       width: 151
-      height: 31.7999878
+      height: 32
     paddingLeft: .0126582282
     paddingRight: .0126582282
     paddingTop: .0270270277

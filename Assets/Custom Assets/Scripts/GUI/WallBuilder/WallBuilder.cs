@@ -58,6 +58,7 @@ public class WallBuilder : MonoBehaviour {
 	public static Vector3 ROOT { get; private set; }
 	#endregion
 	
+	// AsyncOperation to loading a scene
 	private AsyncOperation ao;
 	
 	#region Unty Methods
@@ -88,14 +89,30 @@ public class WallBuilder : MonoBehaviour {
 		
 		mov = transform.position;
 		zoom = GameObject.FindWithTag("MainCamera").camera.orthographicSize;
-		
 	}
 	
-	void OnGUI () {
-		if (ao != null) {
+	public float percentageLoaded = 0;
+	
+#if UNITY_WEBPLAYER	&& !UNITY_EDITOR
+    void Update()
+	{
+        if (Application.GetStreamProgressForLevel(1) != 1)
+		{
+            percentageLoaded = Application.GetStreamProgressForLevel(1);
+        }
+    }
+#endif
+#if !UNITY_WEBPLAYER || UNITY_EDITOR
+	
+	void OnGUI ()
+	{
+		if (ao != null)
+		{
 			GUI.Box(new Rect((Screen.width / 2) - 100f, (Screen.height / 2) - 12.5f, 200f, 25f), "Carregando: " + (int)(ao.progress * 100f) + "%");
 		}
 	}
+	
+#endif
 	#endregion
 		
 	public void BuildGround (){
@@ -218,8 +235,16 @@ public class WallBuilder : MonoBehaviour {
 				emptyFloor.transform.parent = parentFloor;
 			}
 		}
-
+		
+#if UNITY_WEBPLAYER	&& !UNITY_EDITOR
+		if (Application.CanStreamedLevelBeLoaded(1))
+		{
+			Application.LoadLevel(1);
+	    }
+#endif
+#if !UNITY_WEBPLAYER || UNITY_EDITOR
 		ao = Application.LoadLevelAsync(1);
+#endif		
 		
 	}
 	

@@ -1,37 +1,106 @@
 using UnityEngine;
+using UnityEditor;
 using System.Collections.Generic;
 
-/*
-Attach this script as a parent to some game objects. The script will then combine the meshes at startup.
-This is useful as a performance optimization since it is faster to render one big mesh than many small meshes. See the docs on graphics performance optimization for more info.
- 
- This is a modifed version of the CombineChildren script that unity supplies. This creates one mesh out of all objects childed underneath the game object
- and runs on one atlased texture. The old script the unity supplies really doesnt give you a performance boost whatsoever.
- 
- The way that would make the most sense for you to use it is to child all of the objects in one room at a time instead of everything in the level
- that way the GPU isn't drawing everything
-*/
+public class OptimizedCombineChildrenEditor : EditorWindow {
 
-[AddComponentMenu("Mesh/Optimized Combine Children")]
-public class OptimizedCombineChildren : MonoBehaviour
-{
-	
 	/// Usually rendering with triangle strips is faster.
 	/// However when combining objects with very low triangle counts, it can be faster to use triangles.
 	/// Best is to try out which value is faster in practice.
 	public TextureAtlasInfo textureAtlasProperties;// = new TextureCombineUtility.TextureAtlasInfo();
-	public bool onAwake = true;
 	
-	/// This option has a far longer preprocessing time at startup but leads to better runtime performance.
-	void Awake ()
+	SerializedObject m_Object;
+	SerializedProperty m_Property;
+	
+	[MenuItem("BlackBugio/Create Utils/Combine Children Mesh")]
+	static void Init ()
 	{
-		if (onAwake) Combine ();
+		OptimizedCombineChildrenEditor window = 
+			(OptimizedCombineChildrenEditor)EditorWindow.GetWindow (typeof (OptimizedCombineChildrenEditor));
+		
+		window.textureAtlasProperties = new TextureAtlasInfo();
+		
+//		m_Object = new SerializedObject(window.textureAtlasProperties);
 	}
 	
-	public void Combine ()
+	void OnGUI ()
 	{
-		MeshFilter[] filters = GetComponentsInChildren<MeshFilter>();
-		Matrix4x4 myTransform = transform.worldToLocalMatrix;
+		textureAtlasProperties.anisoLevel = EditorGUILayout.IntField("Ansio Level:", textureAtlasProperties.anisoLevel);
+		textureAtlasProperties.compressTexturesInMemory = EditorGUILayout.Toggle("Compress Texture?", textureAtlasProperties.compressTexturesInMemory);
+		textureAtlasProperties.filterMode = (FilterMode) EditorGUILayout.EnumPopup ("Filter Mode:", (System.Enum) textureAtlasProperties.filterMode);
+		textureAtlasProperties.ignoreAlpha = EditorGUILayout.Toggle("Ignore Alpha?", textureAtlasProperties.ignoreAlpha);
+		textureAtlasProperties.wrapMode = (TextureWrapMode) EditorGUILayout.EnumPopup ("Wrap Mode:", (System.Enum) textureAtlasProperties.wrapMode);
+		
+		EditorGUILayout.Space ();
+		
+		EditorGUILayout.LabelField ("Shader Porperties To Look For:");
+		if (GUILayout.Button ("Add Shader")) textureAtlasProperties.shaderPropertiesToLookFor.Add(new ShaderProperties(false, ""));
+		for (int i = 0; i != textureAtlasProperties.shaderPropertiesToLookFor.Count; i++)
+		{
+			ShaderProperties sp = textureAtlasProperties.shaderPropertiesToLookFor[i];
+			
+			EditorGUILayout.BeginHorizontal ("box");
+			EditorGUILayout.BeginVertical ();
+			sp.propertyName = EditorGUILayout.TextField("Property Name:", sp.propertyName);
+			sp.markAsNormal = EditorGUILayout.Toggle("Mark as Normal?", sp.markAsNormal);
+			EditorGUILayout.EndVertical ();
+			if (GUILayout.Button ("Remove"))
+			{
+				textureAtlasProperties.shaderPropertiesToLookFor.Remove(sp);
+				i--;
+			}
+			EditorGUILayout.EndHorizontal ();
+		}
+		
+		EditorGUILayout.Space ();
+		
+		if (Selection.transforms.Length != 0)
+		{
+//			EditorGUILayout.LabelField ("Selected objects:");
+//			foreach (Transform t in Selection.transforms)
+//			{
+//				EditorGUILayout.LabelField (t.name);
+//			}
+//			
+//			EditorGUILayout.Space ();
+//			EditorGUILayout.Space ();
+//			
+//			GUI.backgroundColor = Color.green;
+//			if (GUILayout.Button ("Combine"))
+//			{
+//				foreach (Transform t in Selection.transforms)
+//				{
+//					Combine (t);
+//				}
+//			}
+//			GUI.backgroundColor = Color.white;
+			
+			EditorGUILayout.LabelField ("Selected object:");
+			EditorGUILayout.LabelField (Selection.transforms[0].name);
+			
+			EditorGUILayout.Space ();
+			EditorGUILayout.Space ();
+			
+			GUI.backgroundColor = Color.green;
+			if (GUILayout.Button ("Combine"))
+			{
+				Combine (Selection.transforms[0]);
+			}
+			GUI.backgroundColor = Color.white;
+		}
+		else
+		{
+			EditorGUILayout.Space ();
+			GUI.color = Color.red;
+			EditorGUILayout.LabelField ("Don't have selected objects");
+			GUI.color = Color.white;
+		}
+	}
+	
+	public void Combine (Transform t)
+	{
+		MeshFilter[] filters = t.GetComponentsInChildren<MeshFilter>();
+		Matrix4x4 myTransform = t.worldToLocalMatrix;
 		
 		Dictionary<string, Dictionary<Material, List<MeshCombineUtilityDCM.MeshInstance>>> allMeshesAndMaterials = new Dictionary<string, Dictionary<Material, List<MeshCombineUtilityDCM.MeshInstance>>>();
 		for(int i = 0; i < filters.Length; i++)
@@ -138,16 +207,16 @@ public class OptimizedCombineChildren : MonoBehaviour
 				
 				Mesh[] combinedMeshes = MeshCombineUtilityDCM.Combine(meshIntermediates.ToArray());
 			
-				GameObject parent = new GameObject("Combined " + gameObject.name + " " + firstPass.Key + " Mesh Parent");
-				parent.transform.position = transform.position;
-				parent.transform.rotation = transform.rotation;
+				GameObject parent = new GameObject("Combined " + t.gameObject.name + " " + firstPass.Key + " Mesh Parent");
+				parent.transform.position = t.position;
+				parent.transform.rotation = t.rotation;
 	
 				for(int i = 0; i < combinedMeshes.Length; i++)
 				{
-					GameObject go = new GameObject("Combined " + gameObject.name + " Mesh");
+					GameObject go = new GameObject("Combined " + t.gameObject.name + " Mesh");
 					go.transform.parent = parent.transform;
-					go.tag = gameObject.tag;
-					go.layer = gameObject.layer;
+					go.tag = t.gameObject.tag;
+					go.layer = t.gameObject.layer;
 					go.transform.localScale = Vector3.one;
 					go.transform.localRotation = Quaternion.identity;
 					go.transform.localPosition = Vector3.zero;
@@ -158,10 +227,20 @@ public class OptimizedCombineChildren : MonoBehaviour
 					filter.mesh = combinedMeshes[i];
 				}
 				
-				if (transform.parent != null) parent.transform.parent = transform.parent.transform;
+				if (t.parent != null) parent.transform.parent = t.parent.transform;
 				parent.transform.localScale = Vector3.one;
 			}
 		}
-		Destroy(gameObject);
+		//Destroy(t.gameObject);
+		
+		ClearLog ();
+	}
+	
+	void ClearLog ()
+	{
+	    System.Reflection.Assembly assembly = System.Reflection.Assembly.GetAssembly(typeof(SceneView));
+	    System.Type type = assembly.GetType("UnityEditorInternal.LogEntries");
+	    System.Reflection.MethodInfo method = type.GetMethod("Clear");
+		method.Invoke (new Object (), null);
 	}
 }

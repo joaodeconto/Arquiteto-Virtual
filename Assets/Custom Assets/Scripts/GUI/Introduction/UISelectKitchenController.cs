@@ -38,6 +38,8 @@ public class UISelectKitchenController : MonoBehaviour
 					}
 				}
 				
+				//kitchens[index].GetComponentInChildren<OptimizedCombineChildren>().Combine ();
+				
 				iTween.MoveTo (	kitchens[index].gameObject,
 				iTween.Hash (iT.MoveTo.position, mainPosition.position,
 							 iT.MoveTo.time, time,
@@ -49,26 +51,32 @@ public class UISelectKitchenController : MonoBehaviour
 				
 				LastIndex = CurrentIndex;
 				
-				iTween.MoveTo (	kitchens[CurrentIndex].gameObject, 
-								iTween.Hash (iT.MoveTo.position, otherPosition.position,
-											 iT.MoveTo.time, time,
-											 iT.MoveTo.easetype, easeType,
-											 iT.MoveTo.oncomplete, "DisableKitchen"));
-				
-				iTween.MoveTo (	kitchens[index].gameObject,
-								iTween.Hash (iT.MoveTo.position, mainPosition.position,
-											 iT.MoveTo.time, time,
-											 iT.MoveTo.easetype, easeType));
+				StartCoroutine (TweenKitchens (index));
 				
 				kitchens[index].gameObject.SetActive (true);
+				
+				//if (kitchens[index].GetComponentInChildren<OptimizedCombineChildren>() != null) 
+				//	kitchens[index].GetComponentInChildren<OptimizedCombineChildren>().Combine ();
 			}
 			
 			CurrentIndex = index;
 		}
 	}
 	
-	void DisableKitchen ()
+	IEnumerator TweenKitchens (int index)
 	{
+		iTween.MoveTo (	kitchens[CurrentIndex].gameObject, 
+						iTween.Hash (iT.MoveTo.position, otherPosition.position,
+									 iT.MoveTo.time, time,
+									 iT.MoveTo.easetype, easeType));
+		
+		yield return new WaitForSeconds (time);
+		
 		kitchens[LastIndex].gameObject.SetActive (false);
+		
+		iTween.MoveTo (	kitchens[index].gameObject,
+						iTween.Hash (iT.MoveTo.position, mainPosition.position,
+									 iT.MoveTo.time, time,
+									 iT.MoveTo.easetype, easeType));
 	}
 }

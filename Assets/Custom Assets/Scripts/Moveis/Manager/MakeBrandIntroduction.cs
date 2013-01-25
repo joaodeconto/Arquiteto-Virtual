@@ -14,10 +14,8 @@ public class MakeBrandIntroduction : MonoBehaviour
 	public Texture2D normalMapPortaG;
 	public Material materialPortaVidro;
 	public Texture2D texturaVidro;
-	public Material materialFruteira;
-	public Texture2D texturaFruteira;
 
-	void Awake ()
+	void Start ()
 	{
 		foreach (Renderer r in transform.GetComponentsInChildren<Renderer> ())
 		{
@@ -26,46 +24,41 @@ public class MakeBrandIntroduction : MonoBehaviour
 				Regex regexType;
 				if (materialPortaP != null && normalMapPortaP != null)
 				{
-					regexType = new Regex(".*("+materialPortaP.name+").*", RegexOptions.IgnoreCase);
+					Debug.Log ("Teste");
+					regexType = new Regex("("+materialPortaP.name+").*", RegexOptions.IgnoreCase);
 					if (regexType.Match(m.name).Success)
 					{
+						materialPortaVidro.mainTexture = normalMapPortaP;
 						m.SetTexture("_BumpMap", normalMapPortaP);
 					}
 					continue;
 				}
 				if (materialPortaM != null && normalMapPortaM != null)
 				{
-					regexType = new Regex(".*("+materialPortaM.name+").*", RegexOptions.IgnoreCase);
+					regexType = new Regex("("+materialPortaM.name+").*", RegexOptions.IgnoreCase);
 					if (regexType.Match(m.name).Success)
 					{
+						materialPortaVidro.mainTexture = normalMapPortaM;
 						m.SetTexture("_BumpMap", normalMapPortaM);
 					}
 					continue;
 				}
 				if (materialPortaG != null && normalMapPortaG != null)
 				{
-					regexType = new Regex(".*("+materialPortaG.name+").*", RegexOptions.IgnoreCase);
+					regexType = new Regex("("+materialPortaG.name+").*", RegexOptions.IgnoreCase);
 					if (regexType.Match(m.name).Success)
 					{
+						materialPortaVidro.mainTexture = normalMapPortaG;
 						m.SetTexture("_BumpMap", normalMapPortaG);
 					}
 					continue;
 				}
 				if (materialPortaVidro != null && texturaVidro != null)
 				{
-					regexType = new Regex(".*("+materialPortaVidro.name+").*", RegexOptions.IgnoreCase);
+					regexType = new Regex("("+materialPortaVidro.name+").*", RegexOptions.IgnoreCase);
 					if (regexType.Match(m.name).Success)
 					{
 						materialPortaVidro.mainTexture = texturaVidro;
-					}
-					continue;
-				}
-				if (materialFruteira != null && texturaFruteira != null)
-				{
-					regexType = new Regex(".*("+materialFruteira.name+").*", RegexOptions.IgnoreCase);
-					if (regexType.Match(m.name).Success)
-					{
-						materialFruteira.SetTexture("_BumpMap", texturaFruteira);
 					}
 					continue;
 				}

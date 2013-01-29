@@ -24,34 +24,31 @@ public class MakeBrandIntroduction : MonoBehaviour
 				Regex regexType;
 				if (materialPortaP != null && normalMapPortaP != null)
 				{
-					Debug.Log ("Teste");
 					regexType = new Regex("("+materialPortaP.name+").*", RegexOptions.IgnoreCase);
 					if (regexType.Match(m.name).Success)
 					{
-						materialPortaVidro.mainTexture = normalMapPortaP;
 						m.SetTexture("_BumpMap", normalMapPortaP);
+						continue;
 					}
-					continue;
 				}
 				if (materialPortaM != null && normalMapPortaM != null)
 				{
 					regexType = new Regex("("+materialPortaM.name+").*", RegexOptions.IgnoreCase);
+					Debug.Log ("ALO");
 					if (regexType.Match(m.name).Success)
 					{
-						materialPortaVidro.mainTexture = normalMapPortaM;
 						m.SetTexture("_BumpMap", normalMapPortaM);
+						continue;
 					}
-					continue;
 				}
 				if (materialPortaG != null && normalMapPortaG != null)
 				{
 					regexType = new Regex("("+materialPortaG.name+").*", RegexOptions.IgnoreCase);
 					if (regexType.Match(m.name).Success)
 					{
-						materialPortaVidro.mainTexture = normalMapPortaG;
 						m.SetTexture("_BumpMap", normalMapPortaG);
+						continue;
 					}
-					continue;
 				}
 				if (materialPortaVidro != null && texturaVidro != null)
 				{
@@ -59,8 +56,8 @@ public class MakeBrandIntroduction : MonoBehaviour
 					if (regexType.Match(m.name).Success)
 					{
 						materialPortaVidro.mainTexture = texturaVidro;
+						continue;
 					}
-					continue;
 				}
 			}
 		}

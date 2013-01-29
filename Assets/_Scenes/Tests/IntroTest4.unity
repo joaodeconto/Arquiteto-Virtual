@@ -1468,9 +1468,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 56469792}
-  - 114: {fileID: 56469795}
-  - 54: {fileID: 56469794}
-  - 65: {fileID: 56469793}
   m_Layer: 16
   m_Name: Cantoneira
   m_TagString: Untagged
@@ -1485,64 +1482,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 56469791}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .785493374, y: .0740328133, z: -.727064073}
+  m_LocalPosition: {x: .341874927, y: .0740328133, z: -.727063835}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 271805331}
   m_Father: {fileID: 1187130440}
---- !u!65 &56469793
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6500576, guid: b6a0f536596a5fb4c8527189b262f49c,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 56469791}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: .270069122, y: 1.81363845, z: .269412041}
-  m_Center: {x: .130583763, y: 1.04092515, z: .127563953}
---- !u!54 &56469794
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 5400144, guid: b6a0f536596a5fb4c8527189b262f49c,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 56469791}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: .0500000007
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &56469795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400012, guid: b6a0f536596a5fb4c8527189b262f49c,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 56469791}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 3}
-  m_Name: 
-  Medidas: 260x1800x260
-  NomeP: Cantoneira inteira
-  NomeI: Corner shelf unit
-  NomeE: Modulo esquinero de 1800mm
-  Codigo: 86026A
-  PesoLiquido: 
-  PesoBruto: 
-  Volume: 
-  Cubagem: 
-  Imagem: {fileID: 2800000, guid: 2d4c34e74e3542a4db138cc0079333d0, type: 3}
-  top: 0
-  tipoMovel: 0
-  Categoria: Complementos
 --- !u!1 &56787143
 GameObject:
   m_ObjectHideFlags: 0
@@ -2326,8 +2270,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 92114967}
   m_LocalRotation: {x: 0, y: .382683486, z: 0, w: -.923879504}
-  m_LocalPosition: {x: 6.36306858, y: 5.02931881, z: -12.7311516}
-  m_LocalScale: {x: .393533856, y: .393533915, z: .393533915}
+  m_LocalPosition: {x: 5.65763187, y: 4.80639172, z: -9.99085522}
+  m_LocalScale: {x: .37616244, y: .376162499, z: .376162499}
   m_Children:
   - {fileID: 427870235}
   - {fileID: 1153650237}
@@ -5384,20 +5328,22 @@ MonoBehaviour:
   keys:
   - path
   - time
-  indexes: 0000000000000000
+  - easetype
+  indexes: 000000000000000000000000
   metadatas:
   - p
   - 
+  - 
   ints: 
   floats:
-  - 2
+  - 3
   bools: 
   strings:
   - Path Position
   vector3s: []
   colors: []
   spaces: 
-  easeTypes: 
+  easeTypes: 00000000
   loopTypes: 
   gameObjects: []
   transforms: []
@@ -6895,7 +6841,7 @@ MonoBehaviour:
   pathColor: {r: 0, g: 1, b: 1, a: 1}
   nodes:
   - {x: 0, y: 2.77220702, z: 3.18945694}
-  - {x: 1.70501697, y: 8.22619057, z: 5.94049501}
+  - {x: 1.5, y: 5.6537838, z: -19.6655273}
   nodeCount: 2
   initialized: 1
   initialName: New Path 1
@@ -7138,7 +7084,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 258242286}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.60611761, y: .0746831894, z: -.734368443}
+  m_LocalPosition: {x: -2.0497365, y: .0746831894, z: -.734368622}
   m_LocalScale: {x: 1.00999999, y: 1, z: 1}
   m_Children:
   - {fileID: 1671043026}
@@ -8929,7 +8875,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 317512611}
   m_LocalRotation: {x: 0, y: .457633883, z: 0, w: -.889140785}
-  m_LocalPosition: {x: 5.33183479, y: 0, z: 5.53805923}
+  m_LocalPosition: {x: 2.98381376, y: 0, z: 4.6327529}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1565512479}
@@ -10799,7 +10745,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 385380325}
   m_LocalRotation: {x: 0, y: .382684201, z: 0, w: -.923879266}
-  m_LocalPosition: {x: 9.61560059, y: 0, z: 4.41353226}
+  m_LocalPosition: {x: 7.31505775, y: 0, z: 2.11298203}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 343205578}
@@ -27080,9 +27026,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 981437479}
-  - 114: {fileID: 981437482}
-  - 65: {fileID: 981437481}
-  - 54: {fileID: 981437480}
   m_Layer: 16
   m_Name: "A\xE9reo triplo baixo"
   m_TagString: Untagged
@@ -27105,59 +27048,6 @@ Transform:
   - {fileID: 944168607}
   - {fileID: 1695992549}
   m_Father: {fileID: 878851313}
---- !u!54 &981437480
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 5400112, guid: e29ef0b1c3accb34bba84bdd41322893,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 981437478}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: .0500000007
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!65 &981437481
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6500478, guid: e29ef0b1c3accb34bba84bdd41322893,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 981437478}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.07000005, y: .389389038, z: .354138494}
-  m_Center: {x: 0, y: 1.75370002, z: .165245473}
---- !u!114 &981437482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400128, guid: e29ef0b1c3accb34bba84bdd41322893,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 981437478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c91d9c388029df447b5802b7b035363d, type: 3}
-  m_Name: 
-  Medidas: 1050x400x290
-  NomeP: "Arm\xE1rio triplo baixo"
-  NomeI: Low triple wall cabinet
-  NomeE: Triple bajo
-  Codigo: 81187
-  PesoLiquido: 7.95
-  PesoBruto: 8.95
-  Volume: 1
-  Cubagem: 0.042
-  Imagem: {fileID: 2800000, guid: 5aac3634c324df348b12d274b584f0ab, type: 3}
-  top: 0
-  tipoMovel: 0
-  Categoria: "Arm\xE1rios"
 --- !u!1 &981580707
 GameObject:
   m_ObjectHideFlags: 0
@@ -34572,9 +34462,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1288273793}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.2203293, y: 0, z: 7.77983904}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: .382683486, z: 0, w: -.923879504}
+  m_LocalPosition: {x: 1.25005507, y: .152588546, z: -25.6638927}
+  m_LocalScale: {x: .4422732, y: .44227314, z: .4422732}
   m_Children:
   - {fileID: 1625916874}
   - {fileID: 33252663}
@@ -38294,7 +38184,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1403665706}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.628170013, y: .0746831894, z: -.734368443}
+  m_LocalPosition: {x: -1.07178879, y: .0746831894, z: -.734368265}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1090913425}
@@ -38844,9 +38734,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1420492718}
-  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: -.707106829}
-  m_LocalPosition: {x: -12.2203293, y: 0, z: 7.77983904}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: .923879564, z: 0, w: .382683456}
+  m_LocalPosition: {x: 1.25005507, y: .152588546, z: -25.6638927}
+  m_LocalScale: {x: .44227311, y: .44227314, z: .44227311}
   m_Children:
   - {fileID: 1461165814}
   - {fileID: 1781128308}
@@ -39566,6 +39456,32 @@ Transform:
   - {fileID: 1051426002}
   - {fileID: 1317775435}
   m_Father: {fileID: 1420492719}
+--- !u!1 &1462062994
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1462062995}
+  m_Layer: 0
+  m_Name: Planta Baixa
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1462062995
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1462062994}
+  m_LocalRotation: {x: 0, y: .923879564, z: 0, w: .382683456}
+  m_LocalPosition: {x: 1.25004578, y: .273590088, z: -26.4457474}
+  m_LocalScale: {x: .44227314, y: .44227314, z: .44227314}
+  m_Children: []
+  m_Father: {fileID: 0}
 --- !u!1 &1462236283
 GameObject:
   m_ObjectHideFlags: 0
@@ -40443,7 +40359,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1491571007}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.273590088, y: .0746831894, z: -.734368443}
+  m_LocalPosition: {x: -.717208564, y: .0746831894, z: -.734368265}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1942708571}
@@ -45485,22 +45401,27 @@ MonoBehaviour:
   type: 25
   showIconInInspector: 1
   keys:
-  - rotation
   - time
-  indexes: 0000000000000000
+  - rotation
+  - easetype
+  - delay
+  indexes: 00000000000000000000000001000000
   metadatas:
+  - 
   - v
+  - 
   - 
   ints: 
   floats:
-  - 2
+  - 2.5
+  - .5
   bools: 
   strings: []
   vector3s:
-  - {x: 25, y: 270, z: 0}
+  - {x: 40, y: 173, z: 0}
   colors: []
   spaces: 
-  easeTypes: 
+  easeTypes: 02000000
   loopTypes: 
   gameObjects: []
   transforms: []
@@ -46378,41 +46299,6 @@ Transform:
   m_Children:
   - {fileID: 736523186}
   m_Father: {fileID: 1397414144}
---- !u!21 &1699594692
-Material:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: EstruturaDif (Instance) (Instance) (Instance) (Instance)
-  m_Shader: {fileID: 10, guid: 0000000000000000e000000000000000, type: 0}
-  m_SavedProperties:
-    serializedVersion: 2
-    m_TexEnvs:
-      data:
-        first:
-          name: _MainTex
-        second:
-          m_Texture: {fileID: 2800000, guid: cb8b12540aefa7d4d8dcbb9122e05465, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _Illum
-        second:
-          m_Texture: {fileID: 2800000, guid: dd1857320e514cd43af2ac9382f5ec08, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-    m_Floats:
-      data:
-        first:
-          name: _EmissionLM
-        second: 0
-    m_Colors:
-      data:
-        first:
-          name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1700209901
 GameObject:
   m_ObjectHideFlags: 0
@@ -50710,8 +50596,8 @@ Transform:
   m_PrefabParentObject: {fileID: 404052, guid: 3a202a54f1acbc140a35c37f3503eb2c, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1863639734}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: -4.37113883e-08}
-  m_LocalPosition: {x: 0, y: 0, z: 10.6112747}
+  m_LocalRotation: {x: .0136468923, y: .999184906, z: .0223381966, w: .0307314415}
+  m_LocalPosition: {x: .0398611873, y: .0552969798, z: 9.37435532}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1565512479}
@@ -54661,9 +54547,9 @@ Transform:
   m_PrefabParentObject: {fileID: 403130, guid: 3a202a54f1acbc140a35c37f3503eb2c, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2035692606}
-  m_LocalRotation: {x: 0, y: .382683933, z: 0, w: -.923879325}
-  m_LocalPosition: {x: 1.8641305, y: 0, z: -23.4716988}
-  m_LocalScale: {x: 16.1373482, y: 1, z: 16.1373482}
+  m_LocalRotation: {x: 1.24226773e-09, y: .382683933, z: 8.70905348e-10, w: -.923879385}
+  m_LocalPosition: {x: 1.28496814, y: 1.68054881e-09, z: -35.3613968}
+  m_LocalScale: {x: 16.1373463, y: 1.18093729, z: 16.1373463}
   m_Children: []
   m_Father: {fileID: 1565512479}
 --- !u!95 &2035692608
@@ -54921,7 +54807,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 1699594692}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0

@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Water4Example
-  m_Shader: {fileID: 4800000, guid: 475c4a4e617a8401b84ca7b32c7cc460, type: 3}
+  m_Shader: {fileID: 4800000, guid: 1cac2e0bcc34e4b3cbb4bd85982eba83, type: 3}
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -28,6 +28,13 @@ Material:
       data:
         first:
           name: _ReflectionTex
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _DecalTex
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -70,13 +77,6 @@ Material:
       data:
         first:
           name: _WavesTex
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _DecalTex
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -154,6 +154,14 @@ Material:
     m_Floats:
       data:
         first:
+          name: _Shininess
+        second: 313.218384
+      data:
+        first:
+          name: _InvFade
+        second: .628782988
+      data:
+        first:
           name: _WaveScale
         second: .0462896563
       data:
@@ -164,14 +172,6 @@ Material:
         first:
           name: _RefrDistort
         second: 1.43932855
-      data:
-        first:
-          name: _Shininess
-        second: 313.218384
-      data:
-        first:
-          name: _InvFade
-        second: .628782988
       data:
         first:
           name: _FresnelScale

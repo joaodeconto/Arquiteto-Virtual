@@ -19,6 +19,7 @@ public class ColorPickerNGUI : MonoBehaviour {
 	
 	public void Awake ()
 	{
+		uiRoot = transform.root.GetComponentInChildren<UIRoot> ();
 		lastColor = currentColor;
 	}
 	
@@ -54,6 +55,8 @@ public class ColorPickerNGUI : MonoBehaviour {
 			Rect bp = BoundsToScreenRect(collider.bounds);
 			Vector2 realPosition = new Vector2(bp.x, bp.y);
 			
+			Debug.Log (uiRoot.pixelSizeAdjustment);
+			
 			color = TesterColor (realPosition, bp.width, color);
 		}
 		
@@ -75,7 +78,7 @@ public class ColorPickerNGUI : MonoBehaviour {
 		GUI.color = Color.black;
 		GUI.Box( new Rect(bp.x, bp.y, bp.width, bp.height), "");
 		
-		GUI.color = Color.red;
+		GUI.backgroundColor = Color.red;
 		GUI.Box( new Rect(UICamera.lastTouchPosition.x, (Screen.height - UICamera.lastTouchPosition.y), 10f, 10f), "");
 	}
 	
@@ -90,19 +93,20 @@ public class ColorPickerNGUI : MonoBehaviour {
 		HSBColor hsb = new HSBColor (c);//It is much easier to work with HSB colours in this case
 		
 		Vector2 cp = new Vector2 (r.x+(r.width/2),r.y+(r.height/2));
+//		cp += (Vector2.one * uiRoot.pixelSizeAdjustment);
 		
 		Vector2 InputVector = Vector2.zero;
 		InputVector.x = cp.x - UICamera.lastTouchPosition.x;
 		InputVector.y = cp.y - (Screen.height - UICamera.lastTouchPosition.y);
 		
-		Debug.Log (InputVector + " : " + size);
+//		Debug.Log (InputVector + " : " + size);
 		
-//		if (!CheckSphere2d (InputVector, 0f, position, size)) return lastColor;
+//		if (!CheckSphere2d (InputVector, size*uiRoot.pixelSizeAdjustment, transform.localPosition, 0f)) return lastColor;
 		
-		if (Mathf.Abs(InputVector.x) > size/2 || Mathf.Abs(InputVector.y) > size/2) return lastColor;
+//		if (Mathf.Abs(InputVector.x) > size/2 || Mathf.Abs(InputVector.y) > size/2) return lastColor;
 		
 		float hyp = Mathf.Sqrt( (InputVector.x * InputVector.x) + (InputVector.y * InputVector.y) );
-		if (hyp <= r.width/2 + 5)
+		if (hyp <= r.width/2)
 		{
 			hyp = Mathf.Clamp (hyp,0,r.width/2);
 			float a = Vector3.Angle(new Vector3(-1,0,0), InputVector);
@@ -148,7 +152,7 @@ public class ColorPickerNGUI : MonoBehaviour {
 			
 		float distance = size1 + size2;
 		
-		Debug.Log ("Magnitude: " + magnitude + " - Distance: " + distance);
+//		Debug.Log ("Magnitude: " + magnitude + " - Distance: " + distance);
 			
 		if (magnitude <= distance)
 		{
@@ -158,11 +162,6 @@ public class ColorPickerNGUI : MonoBehaviour {
 		{
 			return false;
 		}
-	}
-	
-	void OnDrawGizmos ()
-	{
-		Gizmos.DrawWireSphere (collider.bounds.center, collider.bounds.extents.x);
 	}
 	
 	Rect BoundsToScreenRect(Bounds bounds)

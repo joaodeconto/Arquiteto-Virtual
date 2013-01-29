@@ -86,9 +86,10 @@ public class GUICameraController : MonoBehaviour {
 
 		//NGUI Monkey patch gonna patch...
 		mainCamera.transform.RotateAround(mainCamera.transform.right, 0.2f);//It's Rad measure
-		mainCamera.transform.position = new Vector3(WallBuilder.ROOT.x,
+		GameObject scenario = GameObject.Find ("Scenario");
+		mainCamera.transform.position = new Vector3(scenario.transform.position.x,
 													1.7f,
-													WallBuilder.ROOT.z - 3.6f);
+													scenario.transform.position.z - 3.6f);
 
 		ceilParent  = GameObject.Find ("ParentTeto");
 		floorParent = GameObject.Find ("ParentChao");

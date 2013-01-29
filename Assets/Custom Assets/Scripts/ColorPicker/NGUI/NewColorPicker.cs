@@ -19,7 +19,8 @@ public class NewColorPicker : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 		color = GUIControls.RGBCircle(camera, color, colorCircle, picker, slider);
 	}
 }

@@ -30,6 +30,8 @@ public class WallBuilder : MonoBehaviour {
 	#endregion
 	
 	#region Camera Data
+	private GameObject 	scenario;
+	
 	private bool 		wasInitialized = false;
 	private bool 		activeGrid = false;
 	
@@ -85,7 +87,9 @@ public class WallBuilder : MonoBehaviour {
 		
 		//ROOT = new Vector3(1000,0,1000);
 		
-		ROOT = GameObject.Find ("Scenario").transform.localPosition;
+		scenario = GameObject.Find ("Scenario");
+//		ROOT = scenario.transform.root != null ? scenario.transform.root.position : scenario.transform.position;
+		ROOT = scenario.transform.position;
 		
 		mov = transform.position;
 		zoom = GameObject.FindWithTag("MainCamera").camera.orthographicSize;
@@ -119,19 +123,22 @@ public class WallBuilder : MonoBehaviour {
 	
 		RemoveGround();
 
-		GameObject newTile = Instantiate (floor, Vector3.zero, floor.transform.rotation) as GameObject;
-		newTile.transform.position = WallBuilder.ROOT  + new Vector3 (- (RealWallDepth / 2) , 0.0f, (RealWallWidth / 2));/*+ new Vector3 ( (int)(- ( RealWallWidth / 2) ) - 0.5f ,0.0f, (int)( RealWallDepth / 2) + 0.5f );*/
+		GameObject newTile = Instantiate (floor, Vector3.zero, Quaternion.identity) as GameObject;
 		newTile.transform.parent   = parentFloor;
-		newTile.transform.localScale = new Vector3(RealWallDepth, RealWallWidth, 1);
+//		newTile.transform.localPosition = scenario.transform.position + new Vector3 (- (RealWallDepth / 2) , 0.0f, (RealWallWidth / 2));/*+ new Vector3 ( (int)(- ( RealWallWidth / 2) ) - 0.5f ,0.0f, (int)( RealWallDepth / 2) + 0.5f );*/
+		newTile.transform.localPosition = (transform.right * (- (RealWallWidth / 2)) + (transform.forward * (RealWallDepth / 2)));
+		newTile.transform.localEulerAngles = transform.eulerAngles;
+		newTile.transform.localEulerAngles += floor.transform.localEulerAngles;
+		newTile.transform.localScale = new Vector3(RealWallWidth, RealWallDepth, 1);
 		foreach (Material cMaterial in newTile.renderer.materials)
 		{
 //			Debug.LogWarning ("materials - cMaterial.name: " + cMaterial.name);
-			float a = Mathf.CeilToInt(RealWallDepth) - RealWallDepth;
-			float b = Mathf.CeilToInt(RealWallWidth) - RealWallWidth;
+			float a = Mathf.CeilToInt(RealWallWidth) - RealWallWidth;
+			float b = Mathf.CeilToInt(RealWallDepth) - RealWallDepth;
 
-			cMaterial.mainTextureScale  = new Vector2 (RealWallDepth, RealWallWidth);
+			cMaterial.mainTextureScale  = new Vector2 (RealWallWidth, RealWallDepth);
 			cMaterial.mainTextureOffset = new Vector2 (a, 0);
-			cMaterial.SetTextureScale  ("_BumpMap", new Vector2 (RealWallDepth, RealWallWidth));
+			cMaterial.SetTextureScale  ("_BumpMap", new Vector2 (RealWallWidth, RealWallDepth));
 			cMaterial.SetTextureOffset ("_BumpMap", new Vector2 (a, 0));
 		}
 		
@@ -155,6 +162,14 @@ public class WallBuilder : MonoBehaviour {
 		
 		RemoveRoof();
 		RemoveWalls();
+		
+		if (scenario.transform.parent != null)
+		{
+			scenario.transform.parent = null;
+			scenario.transform.localPosition = Vector3.zero;
+			scenario.transform.localRotation = Quaternion.identity;
+			scenario.transform.localScale = Vector3.one;
+		}
 		
 		//TODO Por enquanto só fazendo inversão dos valores
 		float temp = RealWallWidth;
@@ -351,10 +366,10 @@ public class WallBuilder : MonoBehaviour {
 		/*newCeil.transform.position = WallBuilder.ROOT + new Vector3 ( (int)(- ( RealWallWidth / 2) ) - 0.5f ,
 																				WallBuilder.WALL_HEIGHT ,
 																	  (int)(  RealWallDepth / 2)   + 0.5f );*/
-		newCeil.transform.position = WallBuilder.ROOT  + new Vector3 (- (RealWallWidth / 2) , 
-																		WallBuilder.WALL_HEIGHT, 
-																		(RealWallDepth / 2));
 		newCeil.transform.parent = parentCeil;
+		newCeil.transform.localPosition = new Vector3 (- (RealWallWidth / 2) , 
+													WallBuilder.WALL_HEIGHT, 
+													(RealWallDepth / 2));
 		newCeil.transform.localScale = new Vector3(RealWallWidth, RealWallDepth, 1);	
 		foreach (Material cMaterial in newCeil.renderer.materials)
 		{

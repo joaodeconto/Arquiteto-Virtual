@@ -34,7 +34,6 @@ public class MakeBrandIntroduction : MonoBehaviour
 				if (materialPortaM != null && normalMapPortaM != null)
 				{
 					regexType = new Regex("("+materialPortaM.name+").*", RegexOptions.IgnoreCase);
-					Debug.Log ("ALO");
 					if (regexType.Match(m.name).Success)
 					{
 						m.SetTexture("_BumpMap", normalMapPortaM);

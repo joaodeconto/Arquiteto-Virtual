@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Estrutura
-  m_Shader: {fileID: 4800000, guid: 9862276b871ea4448adc97fc88d49fb9, type: 3}
+  m_Shader: {fileID: 4800000, guid: 21de90c64874109439222c64fa998a0c, type: 3}
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -22,7 +22,7 @@ Material:
         first:
           name: _BumpMap
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 2800000, guid: 4ce0c5f068ab95b4c9c4c9b01fea6966, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -36,38 +36,42 @@ Material:
         first:
           name: _Cube
         second:
-          m_Texture: {fileID: 8900000, guid: 2050805fae8b203419aed58c9832e5cb, type: 3}
+          m_Texture: {fileID: 8900000, guid: 53e912a3c974cd745964006493b5162c, type: 2}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
           name: _Reflection
-        second: .238805979
-      data:
-        first:
-          name: _Shininess
-        second: .170161501
-      data:
-        first:
-          name: _Gloss
         second: 0
       data:
         first:
+          name: _Shininess
+        second: .0488623455
+      data:
+        first:
+          name: _Gloss
+        second: .194029853
+      data:
+        first:
           name: _FrezPow
-        second: 1024
+        second: 0
       data:
         first:
           name: _FrezFalloff
-        second: 7.16417885
+        second: 5.3846159
       data:
         first:
           name: _EdgeAlpha
-        second: 1
+        second: .269230783
       data:
         first:
           name: _Metalics
-        second: .776119351
+        second: .317164063
+      data:
+        first:
+          name: _Density
+        second: .00100000005
       data:
         first:
           name: _BumpAmt
@@ -76,11 +80,11 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: 1, g: 1, b: 1, a: .121568628}
       data:
         first:
           name: _SpecColor
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: .494358957, g: .696596682, b: .842657328, a: 1}
       data:
         first:
           name: _ReflectColor

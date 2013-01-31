@@ -183,12 +183,17 @@ public class iTweenEvent : MonoBehaviour{
 		if(playAutomatically) Play();
 	}
 	
-	public void Play() {
+	public void Play()
+	{
+		Play (true);
+	}
+	
+	public void Play(bool forward) {
 		if(!string.IsNullOrEmpty(internalName)) Stop();
 		
 		stopped = false;
 		if (go == null) go = gameObject;
-		StartCoroutine(StartEvent());
+		StartCoroutine(StartEvent(forward));
 	}
 	
 	/// <summary>
@@ -205,14 +210,24 @@ public class iTweenEvent : MonoBehaviour{
 		if(showIconInInspector) Gizmos.DrawIcon(transform.position, "iTweenIcon.tif");
 	}
 	
-	IEnumerator StartEvent() {
+	IEnumerator StartEvent(bool forward) {
 		if(delay > 0) yield return new WaitForSeconds(delay);
 		
 		if(stopped) yield return null;
 		
 		var optionsHash = new Hashtable();
 		foreach(var pair in Values) {
-			if("path" == pair.Key && pair.Value.GetType() == typeof(string)) optionsHash.Add(pair.Key, iTweenPath.GetPath((string)pair.Value));
+			if("path" == pair.Key && pair.Value.GetType() == typeof(string))
+			{
+				if (forward)
+				{
+					optionsHash.Add(pair.Key, iTweenPath.GetPath((string)pair.Value));
+				}
+				else
+				{
+					optionsHash.Add(pair.Key, iTweenPath.GetPathReversed((string)pair.Value));
+				}
+			}
 			else optionsHash.Add(pair.Key, pair.Value);
 		}
 		

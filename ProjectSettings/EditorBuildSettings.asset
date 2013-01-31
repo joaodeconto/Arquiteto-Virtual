@@ -13,7 +13,7 @@ EditorBuildSettings:
     path: Assets/_Scenes/Tests/IntroTest4.unity
   - enabled: 0
     path: Assets/_Scenes/Desktop/WallBuilder.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Desktop/MakeYourKitchen.unity
   - enabled: 0
     path: Assets/_Scenes/Android/MakeAndroid.unity

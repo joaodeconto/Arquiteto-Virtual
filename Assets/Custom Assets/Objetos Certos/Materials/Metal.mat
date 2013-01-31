@@ -16,7 +16,7 @@ Material:
           name: _MainTex
         second:
           m_Texture: {fileID: 0}
-          m_Scale: {x: 5, y: 5}
+          m_Scale: {x: 0, y: 5}
           m_Offset: {x: 0, y: 0}
       data:
         first:
@@ -47,7 +47,7 @@ Material:
       data:
         first:
           name: _Shininess
-        second: 1.70238805
+        second: .0661621913
       data:
         first:
           name: _Gloss
@@ -76,7 +76,7 @@ Material:
       data:
         first:
           name: _SpecColor
-        second: {r: .479020953, g: .479020953, b: .479020953, a: 1}
+        second: {r: .656716406, g: .656716406, b: .656716406, a: 1}
       data:
         first:
           name: _ReflectColor

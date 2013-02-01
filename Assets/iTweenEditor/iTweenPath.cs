@@ -34,5 +34,16 @@ public class iTweenPath : MonoBehaviour
 			return null;
 		}
 	}
+	
+//	public static Vector3[] GetPathReversed(string requestedName){
+//		requestedName = requestedName.ToLower();
+//		if(paths.ContainsKey(requestedName)){
+//			paths[requestedName].nodes.Reverse();
+//			return paths[requestedName].nodes.ToArray();
+//		}else{
+//			Debug.Log("No path with that name exists! Are you sure you wrote it correctly?");
+//			return null;
+//		}
+//	}
 }
 

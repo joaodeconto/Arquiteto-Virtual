@@ -31,6 +31,14 @@ public class WallBuilder : MonoBehaviour {
 	
 	#region Camera Data
 	private GameObject 	scenario;
+	private GameObject Scenario
+	{
+		get
+		{
+			if (scenario == null) scenario = GameObject.Find ("Scenario");
+			return scenario;
+		}
+	}
 	
 	private bool 		wasInitialized = false;
 	private bool 		activeGrid = false;
@@ -87,9 +95,8 @@ public class WallBuilder : MonoBehaviour {
 		
 		//ROOT = new Vector3(1000,0,1000);
 		
-		scenario = GameObject.Find ("Scenario");
 //		ROOT = scenario.transform.root != null ? scenario.transform.root.position : scenario.transform.position;
-		ROOT = scenario.transform.position;
+		ROOT = Scenario.transform.position;
 		
 		mov = transform.position;
 		zoom = GameObject.FindWithTag("MainCamera").camera.orthographicSize;
@@ -163,12 +170,12 @@ public class WallBuilder : MonoBehaviour {
 		RemoveRoof();
 		RemoveWalls();
 		
-		if (scenario.transform.parent != null)
+		if (Scenario.transform.parent != null)
 		{
-			scenario.transform.parent = null;
-			scenario.transform.localPosition = Vector3.zero;
-			scenario.transform.localRotation = Quaternion.identity;
-			scenario.transform.localScale = Vector3.one;
+			Scenario.transform.parent = null;
+			Scenario.transform.localPosition = Vector3.zero;
+			Scenario.transform.localRotation = Quaternion.identity;
+			Scenario.transform.localScale = Vector3.one;
 		}
 		
 		//TODO Por enquanto só fazendo inversão dos valores

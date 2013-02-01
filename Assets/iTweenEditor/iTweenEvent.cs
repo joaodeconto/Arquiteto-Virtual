@@ -212,7 +212,10 @@ public class iTweenEvent : MonoBehaviour{
 		
 		var optionsHash = new Hashtable();
 		foreach(var pair in Values) {
-			if("path" == pair.Key && pair.Value.GetType() == typeof(string)) optionsHash.Add(pair.Key, iTweenPath.GetPath((string)pair.Value));
+			if("path" == pair.Key && pair.Value.GetType() == typeof(string))
+			{
+				optionsHash.Add(pair.Key, iTweenPath.GetPath((string)pair.Value));
+			}
 			else optionsHash.Add(pair.Key, pair.Value);
 		}
 		

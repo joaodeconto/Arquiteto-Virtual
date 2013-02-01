@@ -6,11 +6,9 @@ using Visiorama.Utils;
 public class ColorPickerNGUI : MonoBehaviour {
 	
 	public Color color;
-	public Camera camera;
 	public UISlider slider;
 	public UITexture colorCircle;
 	public UITexture picker;
-//	public UIInput[] inputs; // tem de ser 3 Inputs
 	
 	private Color lastColor, currentColor;
 	private float whiteblack;
@@ -26,84 +24,49 @@ public class ColorPickerNGUI : MonoBehaviour {
 	//Call Color Picker when a object could be change color
 	public void CallColorPicker (GameObject gameObject)
 	{
+		this.gameObject.SetActive (true);
+	}
+	
+	//Call Color Picker when a object could be change color
+	public void CloseColorPicker ()
+	{
+		this.gameObject.SetActive (false);
+	}
+	
+	
+    void OnPress (bool isDown)
+    {
+		UpdateColor ();
+    }
 
-		this.gameObject.SetActiveRecursively(true);
-	}
-	
-	public void CloseColorPicker () {
-//		render = null;
-		this.gameObject.SetActiveRecursively(false);
-	}
-	
-	
-	// Update is called once per frame
-	void Update () {
-//		if (render == null) {
-//			CloseColorPicker();
-//			return;
-//		}
-		
-//		texture.material = color;
-//		colorCircle.color = new Color(slider.sliderValue, slider.sliderValue, slider.sliderValue, 1f);
-		
-	    // Only when we press the mouse
-//	    if (!Input.GetMouseButton (0))
-//	        return;
-		
-		if (Input.GetMouseButton (0))
-		{
-			Rect bp = BoundsToScreenRect(collider.bounds);
-			Vector2 realPosition = new Vector2(bp.x, bp.y);
-			
-			Debug.Log (uiRoot.pixelSizeAdjustment);
-			
-			color = TesterColor (realPosition, bp.width, color);
-		}
-		
-	    // Only if we hit something, do we continue
-//	    RaycastHit hit;
-//		Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-//	    if (!Physics.Raycast (ray, out hit))
-//	        return;
-//		
-//		if (UICamera.lastHit.transform != colorCircle.transform)
-//			return;
+    void OnDrag (Vector2 delta)
+    {
+		UpdateColor ();
+    }
 
-	}
-	
-	void OnGUI ()
+	void UpdateColor ()
 	{
 		Rect bp = BoundsToScreenRect(collider.bounds);
+		Vector2 realPosition = new Vector2(bp.x, bp.y);
 		
-		GUI.color = Color.black;
-		GUI.Box( new Rect(bp.x, bp.y, bp.width, bp.height), "");
-		
-		GUI.backgroundColor = Color.red;
-		GUI.Box( new Rect(UICamera.lastTouchPosition.x, (Screen.height - UICamera.lastTouchPosition.y), 10f, 10f), "");
+		color = ColorCalculation (realPosition, bp.width, color);
 	}
 	
-	Color TesterColor (Vector2 position, float size, Color c)
+	Color ColorCalculation (Vector2 position, float size, Color c)
 	{
-//		Rect r = BoundsToScreenRect (collider.bounds);
-//		Rect r2 = new Rect(position.x, position.y, size, size);
-		
 		Rect r = new Rect(position.x, position.y, size, size);
 		
-//		r.height = r.width -= 15;
 		HSBColor hsb = new HSBColor (c);//It is much easier to work with HSB colours in this case
 		
 		Vector2 cp = new Vector2 (r.x+(r.width/2),r.y+(r.height/2));
-//		cp += (Vector2.one * uiRoot.pixelSizeAdjustment);
 		
 		Vector2 InputVector = Vector2.zero;
 		InputVector.x = cp.x - UICamera.lastTouchPosition.x;
 		InputVector.y = cp.y - (Screen.height - UICamera.lastTouchPosition.y);
 		
-//		Debug.Log (InputVector + " : " + size);
+		InputVector *= uiRoot.pixelSizeAdjustment;
 		
-//		if (!CheckSphere2d (InputVector, size*uiRoot.pixelSizeAdjustment, transform.localPosition, 0f)) return lastColor;
-		
-//		if (Mathf.Abs(InputVector.x) > size/2 || Mathf.Abs(InputVector.y) > size/2) return lastColor;
+		if (!CheckSphere2d (transform.localPosition, (size/2)*uiRoot.pixelSizeAdjustment, InputVector, 0f)) return lastColor;
 		
 		float hyp = Mathf.Sqrt( (InputVector.x * InputVector.x) + (InputVector.y * InputVector.y) );
 		if (hyp <= r.width/2)
@@ -128,6 +91,11 @@ public class ColorPickerNGUI : MonoBehaviour {
 //		picker.transform.localPosition = new Vector3(pos.x-5+cp.x,pos.y-5+cp.y, -1f);
 //		picker.transform.localPosition = new Vector3(pos.x-5,-(pos.y-5), -1f);
 		
+//		if (CheckSphere2d (transform.localPosition, ((size-(picker.mainTexture.width/2))/2)*uiRoot.pixelSizeAdjustment, InputVector, 0f))
+//		{
+//			picker.transform.localPosition = new Vector3(-InputVector.x, InputVector.y, picker.transform.localPosition.z);
+//		}
+	
 		picker.transform.localPosition = new Vector3(-InputVector.x, InputVector.y, picker.transform.localPosition.z);
 		picker.color = c + new Color(0,0,0,1f);
 		
@@ -152,6 +120,7 @@ public class ColorPickerNGUI : MonoBehaviour {
 			
 		float distance = size1 + size2;
 		
+//		Debug.Log ("Distance: " + pos1 + " - " + pos2);
 //		Debug.Log ("Magnitude: " + magnitude + " - Distance: " + distance);
 			
 		if (magnitude <= distance)

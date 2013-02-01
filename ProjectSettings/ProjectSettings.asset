@@ -16,9 +16,9 @@ PlayerSettings:
   cursorHotspot: {x: 0, y: 0}
   defaultScreenWidth: 1280
   defaultScreenHeight: 720
-  defaultScreenWidthWeb: 1280
-  defaultScreenHeightWeb: 800
-  m_RenderingPath: 2
+  defaultScreenWidthWeb: 960
+  defaultScreenHeightWeb: 600
+  m_RenderingPath: 1
   m_ActiveColorSpace: 0
   m_MTRendering: 1
   m_UseDX11: 0
@@ -157,8 +157,14 @@ PlayerSettings:
   flashStrippingLevel: 2
   scriptingDefineSymbols:
     data:
+      first: 1
+      second: 
+    data:
       first: 2
-      second: 2
+      second: 
+    data:
+      first: 7
+      second: 
   metroPackageName: 
   metroPackageLogo: 
   metroPackageVersion: 

@@ -7745,6 +7745,8 @@ MonoBehaviour:
   normalMapPortaG: {fileID: 2800000, guid: f9afe97ebf03eb845aabebcca3c0161b, type: 3}
   materialPortaVidro: {fileID: 2100000, guid: 434f019f56092034bbe7bdbc6ec6522a, type: 2}
   texturaVidro: {fileID: 2800000, guid: c866b2d507936fc46afa03ea82899ab2, type: 3}
+  materialFruteira: {fileID: 0}
+  texturaFruteira: {fileID: 0}
 --- !u!1 &300289735
 GameObject:
   m_ObjectHideFlags: 0
@@ -22162,6 +22164,8 @@ MonoBehaviour:
   normalMapPortaG: {fileID: 0}
   materialPortaVidro: {fileID: 0}
   texturaVidro: {fileID: 0}
+  materialFruteira: {fileID: 0}
+  texturaFruteira: {fileID: 0}
 --- !u!1 &881328015
 GameObject:
   m_ObjectHideFlags: 0
@@ -24645,6 +24649,8 @@ MonoBehaviour:
   normalMapPortaG: {fileID: 0}
   materialPortaVidro: {fileID: 0}
   texturaVidro: {fileID: 0}
+  materialFruteira: {fileID: 0}
+  texturaFruteira: {fileID: 0}
 --- !u!1 &998400037
 GameObject:
   m_ObjectHideFlags: 0
@@ -28292,6 +28298,8 @@ MonoBehaviour:
   normalMapPortaG: {fileID: 0}
   materialPortaVidro: {fileID: 0}
   texturaVidro: {fileID: 0}
+  materialFruteira: {fileID: 0}
+  texturaFruteira: {fileID: 0}
 --- !u!1 &1153650236
 GameObject:
   m_ObjectHideFlags: 0
@@ -29084,6 +29092,8 @@ MonoBehaviour:
   normalMapPortaG: {fileID: 2800000, guid: 1d51da866130d4f49a6d0c7397597945, type: 3}
   materialPortaVidro: {fileID: 2100000, guid: 434f019f56092034bbe7bdbc6ec6522a, type: 2}
   texturaVidro: {fileID: 2800000, guid: 8920becf6b994f2458d7e57da3446a0a, type: 3}
+  materialFruteira: {fileID: 0}
+  texturaFruteira: {fileID: 0}
 --- !u!1 &1191219144
 GameObject:
   m_ObjectHideFlags: 0
@@ -46636,6 +46646,8 @@ MonoBehaviour:
   normalMapPortaG: {fileID: 0}
   materialPortaVidro: {fileID: 0}
   texturaVidro: {fileID: 0}
+  materialFruteira: {fileID: 0}
+  texturaFruteira: {fileID: 0}
 --- !u!1 &1863639734
 GameObject:
   m_ObjectHideFlags: 0

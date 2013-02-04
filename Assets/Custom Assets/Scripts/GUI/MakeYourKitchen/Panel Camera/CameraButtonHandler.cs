@@ -128,7 +128,7 @@ public class CameraButtonHandler : MonoBehaviour {
 				cameraController.PlayDoors ();
 				break;
 			#endregion
-		/*
+			/*
 			case CameraButtonHandlerEnum.CameraMoveUp:
 				break;
 			case CameraButtonHandlerEnum.CameraMoveUp:

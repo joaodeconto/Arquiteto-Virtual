@@ -201,7 +201,7 @@ public class SnapBehaviour : MonoBehaviour
 		Invoke ("VerifyGround", 0.2f);
 	}
 	
-	void VerifyGround ()
+	public void VerifyGround ()
 	{
 		uint foundGround = 0;
 		

@@ -64,29 +64,30 @@ public class GUICameraController : MonoBehaviour {
 	{
 		pause.Initialize();
 
+		GameObject scenario = GameObject.Find ("Scenario");
+		
 		//disable other cam
 		#if (UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR
 		GameObject.Find ("First Person Controller").SetActiveRecursively (false);
 
 		firstPersonCamera = GameObject.Find ("First Person Controller Mobile");
 		firstPersonCamera.SetActiveRecursively (false);
-		firstPersonCamera.transform.GetChild(0).localPosition = new Vector3(WallBuilder.ROOT.x,
+		firstPersonCamera.transform.GetChild(0).localPosition = new Vector3(scenario.transform.position.x,
 																			1.5f,
-																			WallBuilder.ROOT.z);
+																			scenario.transform.position.z);
 		#else
 		GameObject.Find ("First Person Controller Mobile").SetActiveRecursively (false);
 
 		firstPersonCamera = GameObject.Find ("First Person Controller");
 		firstPersonCamera.SetActiveRecursively (false);
-		firstPersonCamera.transform.localPosition = new Vector3 (WallBuilder.ROOT.x,
+		firstPersonCamera.transform.localPosition = new Vector3 (scenario.transform.position.x,
 																 1.5f,
-																 WallBuilder.ROOT.z);
+																 scenario.transform.position.z);
 		#endif
 		setFirstPerson = false;
 
 		//NGUI Monkey patch gonna patch...
 		mainCamera.transform.RotateAround(mainCamera.transform.right, 0.2f);//It's Rad measure
-		GameObject scenario = GameObject.Find ("Scenario");
 		mainCamera.transform.position = new Vector3(scenario.transform.position.x,
 													1.7f,
 													scenario.transform.position.z - 3.6f);
@@ -273,7 +274,8 @@ public class GUICameraController : MonoBehaviour {
 		mainCamera.transform.localPosition += cameraPos * Time.deltaTime * 10 * step;
 	}
 
-	public void PlayDoors () {
+	public void PlayDoors ()
+	{
 		List<GameObject> mobiles = new List<GameObject>();
 		mobiles.AddRange(GameObject.FindGameObjectsWithTag("Movel"));
 		if (GameObject.FindGameObjectWithTag("MovelSelecionado")) mobiles.Add(GameObject.FindGameObjectWithTag("MovelSelecionado"));
@@ -294,7 +296,8 @@ public class GUICameraController : MonoBehaviour {
 						anim[anim.clip.name].time = 0;
 						anim.Play();
 					}
-					else {
+					else
+					{
 						anim[anim.clip.name].speed = -1;
 						anim[anim.clip.name].time = anim[anim.clip.name].length;
 						anim.Play();

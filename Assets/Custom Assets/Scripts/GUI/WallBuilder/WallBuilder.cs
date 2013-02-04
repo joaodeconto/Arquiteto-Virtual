@@ -178,11 +178,6 @@ public class WallBuilder : MonoBehaviour {
 			Scenario.transform.localScale = Vector3.one;
 		}
 		
-		//TODO Por enquanto só fazendo inversão dos valores
-		float temp = RealWallWidth;
-		RealWallWidth = RealWallDepth;
-		RealWallDepth = temp;
-		
 		CreateRoof();
 		
 		GameObject floor = GameObject.FindWithTag ("Chao");
@@ -243,15 +238,17 @@ public class WallBuilder : MonoBehaviour {
 		int depth = (int)RealWallDepth;
 		int width = (int)RealWallWidth;
 		
-		for (int i = 0; i != depth; ++i)
+		for (int i = 1; i != depth; ++i)
 		{
-			for (int j = 0; j != width; ++j)
+			for (int j = 1; j != width; ++j)
 			{
 				GameObject emptyFloor = new GameObject();//GameObject.CreatePrimitive (PrimitiveType.Sphere);
 				emptyFloor.name = "EmptyFloor";
-				emptyFloor.transform.position = WallBuilder.ROOT
-											 + Vector3.forward * Mathf.Ceil(i - depth / 2.0f)
+				emptyFloor.transform.position = Vector3.forward * Mathf.Ceil(i - depth / 2.0f)
 											 + Vector3.right   * Mathf.Ceil(j - width / 2.0f);
+//				emptyFloor.transform.position = WallBuilder.ROOT
+//											 + Vector3.forward * Mathf.Ceil(i - depth / 2.0f)
+//											 + Vector3.right   * Mathf.Ceil(j - width / 2.0f);
 
 				emptyFloor.tag = "ChaoVazio";
 				emptyFloor.transform.parent = parentFloor;

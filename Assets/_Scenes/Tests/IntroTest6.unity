@@ -7413,6 +7413,8 @@ MonoBehaviour:
   normalMapPortaG: {fileID: 2800000, guid: f9afe97ebf03eb845aabebcca3c0161b, type: 3}
   materialPortaVidro: {fileID: 2100000, guid: 434f019f56092034bbe7bdbc6ec6522a, type: 2}
   texturaVidro: {fileID: 2800000, guid: c866b2d507936fc46afa03ea82899ab2, type: 3}
+  materialFruteira: {fileID: 0}
+  texturaFruteira: {fileID: 0}
 --- !u!1 &300289735
 GameObject:
   m_ObjectHideFlags: 0
@@ -10661,7 +10663,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 438632476}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -480.505371, y: 300.5, z: 0}
+  m_LocalPosition: {x: -600.975037, y: 375.97403, z: 0}
   m_LocalScale: {x: 1.00012505, y: 1.00012505, z: 1.00012505}
   m_Children:
   - {fileID: 1997995240}
@@ -13626,7 +13628,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 551214250}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.494384766, y: 300.5, z: 0}
+  m_LocalPosition: {x: -.984191895, y: 375.97403, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1097251407}
@@ -14925,7 +14927,7 @@ Transform:
   m_GameObject: {fileID: 599820601}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1000, y: 0, z: 1000}
-  m_LocalScale: {x: .00333333341, y: .00333333341, z: .00333333341}
+  m_LocalScale: {x: .00266666664, y: .00266666664, z: .00266666664}
   m_Children:
   - {fileID: 1532000765}
   - {fileID: 1241004984}
@@ -14940,7 +14942,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c5ecb5660b11414fb042fb826e03b73, type: 3}
   m_Name: 
-  automatic: 1
+  automatic: 0
   manualHeight: 750
   minimumHeight: 320
   maximumHeight: 1080
@@ -20996,6 +20998,8 @@ MonoBehaviour:
   normalMapPortaG: {fileID: 0}
   materialPortaVidro: {fileID: 0}
   texturaVidro: {fileID: 0}
+  materialFruteira: {fileID: 0}
+  texturaFruteira: {fileID: 0}
 --- !u!1 &881328015
 GameObject:
   m_ObjectHideFlags: 0
@@ -23336,6 +23340,8 @@ MonoBehaviour:
   normalMapPortaG: {fileID: 0}
   materialPortaVidro: {fileID: 0}
   texturaVidro: {fileID: 0}
+  materialFruteira: {fileID: 0}
+  texturaFruteira: {fileID: 0}
 --- !u!1 &998400037
 GameObject:
   m_ObjectHideFlags: 0
@@ -24043,7 +24049,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1035485828}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.494384766, y: .5, z: 0}
+  m_LocalPosition: {x: -.984191895, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 799354889}
@@ -26708,7 +26714,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1151312488}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18, y: -48.5, z: -60}
+  m_LocalPosition: {x: 18, y: -48.5, z: -49}
   m_LocalScale: {x: 36, y: 36, z: 1}
   m_Children: []
   m_Father: {fileID: 1997995240}
@@ -26846,6 +26852,8 @@ MonoBehaviour:
   normalMapPortaG: {fileID: 0}
   materialPortaVidro: {fileID: 0}
   texturaVidro: {fileID: 0}
+  materialFruteira: {fileID: 0}
+  texturaFruteira: {fileID: 0}
 --- !u!1 &1153650236
 GameObject:
   m_ObjectHideFlags: 0
@@ -27373,6 +27381,8 @@ MonoBehaviour:
   normalMapPortaG: {fileID: 2800000, guid: 1d51da866130d4f49a6d0c7397597945, type: 3}
   materialPortaVidro: {fileID: 2100000, guid: 434f019f56092034bbe7bdbc6ec6522a, type: 2}
   texturaVidro: {fileID: 2800000, guid: 8920becf6b994f2458d7e57da3446a0a, type: 3}
+  materialFruteira: {fileID: 0}
+  texturaFruteira: {fileID: 0}
 --- !u!1 &1187761812
 GameObject:
   m_ObjectHideFlags: 0
@@ -31510,7 +31520,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1359934522}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 479.498291, y: -299.5, z: 0}
+  m_LocalPosition: {x: 599.029541, y: -374.02597, z: 0}
   m_LocalScale: {x: 1.00012505, y: 1.00012505, z: 1.00012505}
   m_Children:
   - {fileID: 180351190}
@@ -32372,6 +32382,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1390317961}
   - 114: {fileID: 1390317962}
+  - 114: {fileID: 1390317963}
   m_Layer: 12
   m_Name: Label
   m_TagString: Untagged
@@ -32406,7 +32417,7 @@ MonoBehaviour:
   mPivot: 4
   mDepth: 2
   mFont: {fileID: 11400000, guid: 8ce196cc00c36ee458aa46db880d4d66, type: 2}
-  mText: 
+  mText: Carregando
   mMaxLineWidth: 0
   mEncoding: 1
   mMaxLineCount: 0
@@ -32418,6 +32429,27 @@ MonoBehaviour:
   mEffectDistance: {x: 1, y: 1}
   mLineWidth: 0
   mMultiline: 1
+--- !u!114 &1390317963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1390317960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfa4a4a103e4fed43a7e9e9df4a6915c, type: 3}
+  m_Name: 
+  method: 0
+  style: 0
+  ignoreTimeScale: 1
+  delay: 1
+  duration: 2
+  steeperCurves: 0
+  tweenGroup: 0
+  eventReceiver: {fileID: 0}
+  callWhenFinished: 
+  from: {r: .431372553, g: .431372553, b: .431372553, a: 1}
+  to: {r: .431372553, g: .431372553, b: .431372553, a: 0}
 --- !u!1 &1392511199
 GameObject:
   m_ObjectHideFlags: 0
@@ -37997,7 +38029,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1625916874}
-  - 114: {fileID: 1625916875}
+  - 114: {fileID: 1625916876}
   m_Layer: 0
   m_Name: ParentChao
   m_TagString: ChaoParent
@@ -38016,7 +38048,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1288273794}
---- !u!114 &1625916875
+--- !u!114 &1625916876
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -38024,8 +38056,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1625916873}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcb9c8509aa0df347b021f16c97fca84, type: 3}
+  m_Script: {fileID: 11500000, guid: 95ec6383586b8e844b827c82a4c61105, type: 3}
   m_Name: 
+  childName: Chao
+  destroyInOrder: 1
 --- !u!1 &1629166431
 GameObject:
   m_ObjectHideFlags: 0
@@ -42526,7 +42560,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1793491989}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 479.498291, y: 300.5, z: 0}
+  m_LocalPosition: {x: 599.029541, y: 375.97403, z: 0}
   m_LocalScale: {x: 1.00012505, y: 1.00012505, z: 1.00012505}
   m_Children:
   - {fileID: 576139981}
@@ -42794,7 +42828,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1805272753}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -480.505371, y: -299.5, z: 0}
+  m_LocalPosition: {x: -600.975037, y: -374.02597, z: 0}
   m_LocalScale: {x: 1.00012505, y: 1.00012505, z: 1.00012505}
   m_Children:
   - {fileID: 1187761813}
@@ -44175,6 +44209,8 @@ MonoBehaviour:
   normalMapPortaG: {fileID: 0}
   materialPortaVidro: {fileID: 0}
   texturaVidro: {fileID: 0}
+  materialFruteira: {fileID: 0}
+  texturaFruteira: {fileID: 0}
 --- !u!1 &1863639734
 GameObject:
   m_ObjectHideFlags: 0
@@ -49353,7 +49389,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2099811831}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.617980957, y: .625, z: 0}
+  m_LocalPosition: {x: -.984191895, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 543360417}

@@ -160,8 +160,8 @@ public class Painter: MonoBehaviour {
 			
 				//Testa se clicou dentro de alguma coisa da gui
 				//se clicou sai do método
-				if (NGUIUtils.ClickedInGUI (cameras, "GUI"))
-					return;
+				//if (NGUIUtils.ClickedInGUI (cameras, "GUI"))
+				//	return;
 						
 				if (!MouseUtils.MouseClickedInArea(rectWindow)) {
 					Ray ray = transform.parent.camera.ScreenPointToRay(Input.mousePosition);
@@ -205,8 +205,8 @@ public class Painter: MonoBehaviour {
 				
 				//Testa se clicou dentro de alguma coisa da gui
 				//se clicou sai do método
-				if (NGUIUtils.ClickedInGUI (cameras,"GUI"))
-					return;
+//				if (NGUIUtils.ClickedInGUI (cameras,"GUI"))
+//					return;
 					
 				if (!dropperBoolLast) {
 									

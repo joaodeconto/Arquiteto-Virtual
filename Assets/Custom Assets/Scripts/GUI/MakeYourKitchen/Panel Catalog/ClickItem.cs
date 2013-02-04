@@ -134,5 +134,7 @@ public class ClickItem : MonoBehaviour {
 		#endregion
 		
 		newModule.transform.parent = MoveisGO.transform;
+		
+		newModule.GetComponent<SnapBehaviour>().VerifyGround();
 	}
 }

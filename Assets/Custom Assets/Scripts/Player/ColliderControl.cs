@@ -7,6 +7,8 @@ public class ColliderControl : MonoBehaviour {
 	
 	private GameObject lastSelectedMobile;
 	public bool IsPanelFloor {get; set;}
+	
+	public Vector3 SizeOfRoom {get; set;}
 
 	void Start () {
 		cameraController = GameObject.FindWithTag("GameController").GetComponentInChildren<GUICameraController>();
@@ -37,6 +39,8 @@ public class ColliderControl : MonoBehaviour {
 		GameObject chao = GameObject.FindWithTag("Chao");
 		if  (chao != null && chao.renderer != null)
 			chao.renderer.enabled = chao.collider.enabled = true;
+		
+		SizeOfRoom = chao.transform.localScale;
 	}
 	
 	// Update is called once per frame
@@ -102,13 +106,23 @@ public class ColliderControl : MonoBehaviour {
 		#endif
 	}
 	
-	#if !UNITY_ANDROID && !UNITY_IPHONE
 	void Update () {
+		
+		transform.localPosition =
+			Vector3.right * Mathf.Clamp (transform.localPosition.x, -SizeOfRoom.x, SizeOfRoom.x) +
+			Vector3.up * transform.position.y +
+			//TODO Utilizando SizeOfRoom no Y em vez de Z, por causa do MODELO plano que está com o pivô Y como Z
+			Vector3.forward * Mathf.Clamp (transform.localPosition.z, -SizeOfRoom.y, SizeOfRoom.y);
+				
+	#if !UNITY_ANDROID && !UNITY_IPHONE
 		if (Input.GetKeyUp(KeyCode.Space)) {
 			Disable();
 		}
+	#endif
+		
 	}
-	#else
+	
+	#if UNITY_ANDROID || UNITY_IPHONE
 	void OnGUI () {
 		if (MouseUtils.GUIMouseButtonDoubleClick(0)) {
 			Disable ();

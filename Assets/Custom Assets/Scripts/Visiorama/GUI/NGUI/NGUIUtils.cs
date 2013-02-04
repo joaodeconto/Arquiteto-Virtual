@@ -1,9 +1,16 @@
 using UnityEngine;
 using System.Collections;
 
-namespace Visiorama {
-	public class NGUIUtils {
-				
+namespace Visiorama
+{
+	public class NGUIUtils
+	{
+		public static bool ClickedInGUI (GameObject camera, string nameLayer)
+		{
+			GameObject[] getCamera = new GameObject[1] { camera };
+			return ClickedInGUI (getCamera, nameLayer);
+		}
+		
 		public static bool ClickedInGUI (GameObject[] cameras, string nameLayer)
 		{
 			int layerGUI = LayerMask.NameToLayer (nameLayer);
@@ -24,6 +31,5 @@ namespace Visiorama {
 			}
 			return false;
 		}
-	
 	}
 }

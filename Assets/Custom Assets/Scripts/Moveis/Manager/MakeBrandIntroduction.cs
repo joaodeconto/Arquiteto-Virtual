@@ -14,6 +14,8 @@ public class MakeBrandIntroduction : MonoBehaviour
 	public Texture2D normalMapPortaG;
 	public Material materialPortaVidro;
 	public Texture2D texturaVidro;
+	public Material materialFruteira;
+	public Texture2D texturaFruteira;
 
 	void Start ()
 	{
@@ -55,6 +57,15 @@ public class MakeBrandIntroduction : MonoBehaviour
 					if (regexType.Match(m.name).Success)
 					{
 						materialPortaVidro.mainTexture = texturaVidro;
+						continue;
+					}
+				}
+				if (materialFruteira != null && texturaFruteira != null)
+				{
+					regexType = new Regex("("+materialFruteira.name+").*", RegexOptions.IgnoreCase);
+					if (regexType.Match(m.name).Success)
+					{
+						materialFruteira.SetTexture("_BumpMap", texturaFruteira);
 						continue;
 					}
 				}

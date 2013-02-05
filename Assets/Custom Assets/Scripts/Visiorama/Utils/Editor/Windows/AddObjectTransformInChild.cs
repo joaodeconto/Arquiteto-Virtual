@@ -132,8 +132,6 @@ class AddObjectTransformInChild : EditorWindow {
 		}
 		
 		GUILayout.EndScrollView();
-		
-		EditorGUIUtility.ExitGUI();
     }
 		
 	void Add () {

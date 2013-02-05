@@ -31,9 +31,9 @@ public class WallBuilderButtonHandler : MonoBehaviour {
 					float time = 0;
 					foreach (TweenColor tc in GameObject.Find ("UI BlurInterface").GetComponentsInChildren<TweenColor>())
 					{
-						if (time < tc.duration)
+						if (time < tc.duration + tc.delay)
 						{
-							time = tc.duration;
+							time = tc.duration + tc.delay;
 						}
 						
 						if (tc.GetComponent<UILabel>() != null) tc.GetComponent<UILabel>().text = "Carregando";

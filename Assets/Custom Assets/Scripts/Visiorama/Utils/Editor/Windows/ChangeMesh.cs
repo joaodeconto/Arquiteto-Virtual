@@ -94,8 +94,6 @@ class ChangeMesh : EditorWindow {
 //		}
 		
 		GUILayout.EndScrollView();
-		
-		EditorGUIUtility.ExitGUI();
     }
 	
 	void NewMesh (Transform transformMeshs) {

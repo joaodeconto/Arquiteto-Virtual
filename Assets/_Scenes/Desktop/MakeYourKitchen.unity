@@ -5025,7 +5025,7 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294938623
-  m_RenderingPath: 2
+  m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
 --- !u!54 &541163376
@@ -5584,7 +5584,7 @@ Transform:
   m_PrefabInternal: {fileID: 1240242074}
   m_GameObject: {fileID: 624608383}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -.660000026, z: 0}
+  m_LocalPosition: {x: 0, y: -.033203125, z: 0}
   m_LocalScale: {x: 1.18737364, y: 1.18737364, z: 1.18737364}
   m_Children:
   - {fileID: 167437552}
@@ -12840,11 +12840,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: 7a84657a959bb2146b47b8ab65da1b70, type: 2}
       propertyPath: orthographic size
-      value: 1.18408203
+      value: .839999974
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: 7a84657a959bb2146b47b8ab65da1b70, type: 2}
       propertyPath: m_CullingMask.m_Bits
-      value: 4294963199
+      value: 4096
       objectReference: {fileID: 0}
     - target: {fileID: 100024, guid: 7a84657a959bb2146b47b8ab65da1b70, type: 2}
       propertyPath: m_IsActive
@@ -12925,6 +12925,14 @@ Prefab:
     - target: {fileID: 100004, guid: 7a84657a959bb2146b47b8ab65da1b70, type: 2}
       propertyPath: m_Layer
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 400038, guid: 7a84657a959bb2146b47b8ab65da1b70, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -.033203125
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000000, guid: 7a84657a959bb2146b47b8ab65da1b70, type: 2}
+      propertyPath: m_NormalizedViewPortRect.x
+      value: .600000024
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a84657a959bb2146b47b8ab65da1b70, type: 2}
@@ -14833,6 +14841,10 @@ Prefab:
       propertyPath: ListPanelFloor
       value: 
       objectReference: {fileID: 1626414127}
+    - target: {fileID: 2000000, guid: 0ed8b97e110a3e848992d72c9f726f5e, type: 2}
+      propertyPath: m_RenderingPath
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0ed8b97e110a3e848992d72c9f726f5e, type: 2}
   m_RootGameObject: {fileID: 541163373}
@@ -21044,7 +21056,7 @@ Camera:
   m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: .649999976
+    x: .600000024
     y: .0500000007
     width: .319999993
     height: .159999996
@@ -21052,11 +21064,11 @@ Camera:
   far clip plane: 5.06412411
   field of view: 60
   orthographic: 1
-  orthographic size: 1.18408203
+  orthographic size: .839999974
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294963199
+    m_Bits: 4096
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_HDR: 0

@@ -15,6 +15,7 @@ public class FocarOrientacao : MonoBehaviour {
 	
 	private Vector3 newDirection = Vector3.zero;
 	private Vector3 newPosition = Vector3.zero;
+	private Vector3 scenarioPosition = Vector3.zero;
 	private float distanceFromMiddle = 0f; 
 	
 	private GameObject mainCamera;
@@ -33,6 +34,9 @@ public class FocarOrientacao : MonoBehaviour {
 		
 		distanceFromMiddle = (floor.collider.bounds.size.x + floor.collider.bounds.size.y) / 1.5f * distanceRate;
 		distanceFromMiddle /= Mathf.Sqrt(distanceFromMiddle); 
+		
+		scenarioPosition    = GameObject.Find("Scenario").transform.position;
+		scenarioPosition.y  = 1.7f;
 		
 		thisCamera = transform.parent.GetComponentInChildren<Camera>() != null ?
 					 transform.parent.GetComponentInChildren<Camera>() :
@@ -80,8 +84,8 @@ public class FocarOrientacao : MonoBehaviour {
 		
 		newDirection   = Vector3.zero;
 		newDirection.x = cameraInclination;
-		newPosition    = WallBuilder.ROOT;
-		newPosition.y  = 1.7f;
+		newPosition    = scenarioPosition;
+//		newPosition.y  = 1.7f;
 		
 		print("cameraInclination: " + cameraInclination);
 		

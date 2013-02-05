@@ -81,8 +81,6 @@ class CreateMesh : EditorWindow {
 		if (GUILayout.Button("Clear Log")) {
 			ClearLog();
 		}
-		
-		EditorGUIUtility.ExitGUI();
     }
 	
 	void ClearLog () {
